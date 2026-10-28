@@ -54,11 +54,11 @@ def errors(v):
     records={x["id"]:x for x in e["records"]}
     require(src["source_id"]==SRC and src["pdf_sha256"]==HASH and src["pdf_pages"]==476,"source PDF provenance")
     require(not src["original_pdf_committed"] and not src["external_independent_review_completed"],"source gate")
-    require(m["case_count"]==56 and m["evidence_count"]==74 and m["context_evidence_count"]==18,"manifest counts")
-    require(len(m["cases"])==56 and len(e["records"])==74 and len(records)==74,"evidence/case counts")
-    require(len(v["actors"])==26 and len(v["cases"])==56,"actor/case direct index")
-    require(len(rel["edges"])==15 and len(g["transitions"])==12,"rel/goal counts")
-    require(len(audit["records"])==160 and audit["counts"]["total"]==160,"audit totals")
+    require(m["case_count"]==59 and m["evidence_count"]==77 and m["context_evidence_count"]==18,"manifest counts")
+    require(len(m["cases"])==59 and len(e["records"])==77 and len(records)==77,"evidence/case counts")
+    require(len(v["actors"])==27 and len(v["cases"])==59,"actor/case direct index")
+    require(len(rel["edges"])==16 and len(g["transitions"])==13,"rel/goal counts")
+    require(len(audit["records"])==168 and audit["counts"]["total"]==168,"audit totals")
     require(audit["review_state"]["external_independent_reviewer"]=="NOT_PERFORMED" and audit["review_state"]["engine_memory_admission"] is False,"external review fake")
     require(m["independent_review_status"]=="NOT_PERFORMED" and not m["engine_memory_admission"] and not m["exam_executable"],"manifest promoted")
     for x in e["records"]:
@@ -84,10 +84,17 @@ def errors(v):
         p=v["actors"][r["primary_actor_id"]]
         require(any(c["id"] in d.get("behavioral_case_refs",[]) for d in p["domains"].values()),"case not in owner")
         for page in r["pdf_pages"]:require(c["id"] in px["pages"].get(str(page),{}).get("cases",[]),"case not indexed per page")
+    require(len({x["id"] for x in e["records"]})==77,"colliding evidence IDs")
+    require(v["actors"]["actor.mei-yu-wang"]["identity"]["alias_identity_evidence"]["pdf_pages"]==[58],"Mii-chan alias source")
+    require(all("semantic_detail" in c and len(c["semantic_detail"].get("chosen_plan_and_observed_actions", []))>0
+                and c["other_actors"] and not c["observed_result"].startswith("Historical episode only")
+                for c in v["cases"].values()),"generic behavioral case or empty actor roles")
+    require(all("temporal_phases" in x and len(x["temporal_phases"])>=1 for x in rel["edges"]), "relationship phases missing")
+    require(all("goal_update_condition" in z and "concrete_counterfactual_probe" in z for z in g["transitions"]), "goal changes not causal")
     for x in rel["edges"]:
         require(x["id"] in rx["edges"] and not x["verified"] and not x["engine_memory_admission"],"relation gate")
         require(all(a in v["actors"] for a in x["actors"]),"invented relation pack")
-    require(rel["excluded_unmodeled_relation"]["reason"].startswith("Mii-chan actor pack"),"unmodeled witness lost")
+    require(rel["excluded_unmodeled_relation"]["status"]=="RESOLVED" and rel["excluded_unmodeled_relation"]["canonical_actor_id"]=="actor.mei-yu-wang","Mii-chan identity unresolved")
     for z in g["transitions"]:
         require(z["id"] in v["actors"][z["actor_id"]].get("goal_transition_refs",[]),"missing actor goal")
         require(gx["transition_files"].get(z["id"])=="data/canon/consolidated/goal_transitions/y1-v11.json","goal path")
@@ -136,6 +143,18 @@ class V11Regression(unittest.TestCase):
     def mutation(self,f):
         d=copy.deepcopy(self.base);f(d)
         self.assertNotEqual([],errors(d))
+    def test_negative_case_reverts_to_generic(self):
+        self.mutation(lambda x:next(iter(x["cases"].values())).update(observed_result="Historical episode only"))
+    def test_negative_case_loses_participants(self):
+        self.mutation(lambda x:next(iter(x["cases"].values())).update(other_actors=[]))
+    def test_negative_mii_identity(self):
+        self.mutation(lambda x:x["actors"]["actor.mei-yu-wang"]["identity"]["alias_identity_evidence"].update(pdf_pages=[59]))
+    def test_negative_evidence_id_collision(self):
+        self.mutation(lambda x:x["evidence/y1-v11.json"]["records"][-1].update(id="y1v11.ev.057"))
+    def test_negative_relation_loses_temporal_phases(self):
+        self.mutation(lambda x:x["relationships/y1-v11.json"]["edges"][0].pop("temporal_phases"))
+    def test_negative_goal_without_causal_trigger(self):
+        self.mutation(lambda x:x["goal_transitions/y1-v11.json"]["transitions"][0].pop("goal_update_condition"))
     def test_negative_fake_external_review(self):self.mutation(lambda x:x["audits/y1-v11-review-register.json"]["review_state"].update(external_independent_reviewer="COMPLETE"))
     def test_negative_source_sha(self):self.mutation(lambda x:x["sources/y1-v11.json"].update(pdf_sha256="fake"))
     def test_negative_fake_actor(self):self.mutation(lambda x:next(iter(x["cases"].values())).update(primary_actor_id="actor.tsukishiro"))

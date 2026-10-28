@@ -2263,7 +2263,9 @@
         "actor.kiyotaka-ayanokoji",
         "actor.yosuke-hirata",
         "actor.kikyo-kushida",
-        "actor.haruki-yamauchi"
+        "actor.haruki-yamauchi",
+        "actor.ken-sudo",
+        "actor.kanji-ike"
       ],
       "mention_organization_ids": [
         "org.anhs"
@@ -2344,7 +2346,8 @@
         "actor.mio-ibuki",
         "actor.ishizaki",
         "actor.kakeru-ryuen",
-        "actor.manabe-shiho"
+        "actor.manabe-shiho",
+        "actor.kaneda"
       ],
       "mention_organization_ids": [
         "org.anhs"
@@ -2381,7 +2384,8 @@
       "source_mode": "OFFICIAL_RESULT",
       "mention_actor_ids": [
         "actor.honami-ichinose",
-        "actor.arisu-sakayanagi"
+        "actor.arisu-sakayanagi",
+        "actor.kaneda"
       ],
       "mention_organization_ids": [
         "org.anhs"

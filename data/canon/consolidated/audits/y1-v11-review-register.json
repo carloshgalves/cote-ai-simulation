@@ -12,7 +12,7 @@
     "total": 168
   },
   "review_state": {
-    "assistant_individual_deep_source_review": "NOT_CERTIFIED",
+    "assistant_individual_deep_source_review": "STRUCTURED_CASE_DEPTH_COMPLETE_SOURCE_CERTIFICATION_PENDING",
     "external_independent_reviewer": "NOT_PERFORMED",
     "operator_acceptance": "PENDING",
     "engine_memory_admission": false,
@@ -1684,7 +1684,8 @@
       "summary": "Observa Kiyotaka na White Room e formula tese sobre talento inato, contrapondo educação",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.tsukishiro.v11-c002",
@@ -1705,7 +1706,8 @@
       "summary": "Defende novos exames e desconsidera resistência dos professores",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.mashima.v11-c003",
@@ -1724,7 +1726,8 @@
       "summary": "Protesta contra prova suplementar que força expulsões",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.sae-chiyabashira.v11-c004",
@@ -1744,7 +1747,8 @@
       "summary": "Contém discussão e conversa com professores sobre risco institucional",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.chie-hoshinomiya.v11-c005",
@@ -1764,7 +1768,8 @@
       "summary": "Revive rivalidade com Chabashira e admite desejo de derrotar sua classe",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.suzune-horikita.v11-c006",
@@ -1782,7 +1787,8 @@
       "summary": "Registra regras, observa desigualdade entre probabilidades de eventos",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c007",
@@ -1802,7 +1808,8 @@
       "summary": "Voluntaria-se comandante e busca confronto com Arisu usando ponto de proteção",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.suzune-horikita.v11-c008",
@@ -1824,7 +1831,8 @@
       "summary": "Desfaz suspeitas contra Kiyotaka e articula sua escolha como comandante",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kaneda.v11-c009",
@@ -1842,7 +1850,8 @@
       "summary": "Ganha sorteio e formaliza escolha de Classe B como adversária",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c010",
@@ -1862,7 +1871,8 @@
       "summary": "Coordena previamente negociações com Ichinose e Ishizaki para pareamento C–A",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kei-karuizawa.v11-c011",
@@ -1887,7 +1897,8 @@
       "summary": "Fornece informações sobre sociabilidade e negocia limites da relação com Kiyotaka",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.miyake.v11-c012",
@@ -1906,7 +1917,8 @@
       "summary": "Propõe eventos de sorte para compensar diferença entre turmas",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.yukimura.v11-c013",
@@ -1924,7 +1936,8 @@
       "summary": "Avalia e questiona aposta estatística nos eventos de sorte",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.suzune-horikita.v11-c014",
@@ -1949,7 +1962,8 @@
       "summary": "Organiza catálogo de capacidades da turma e eventos propostos",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.yukimura.v11-c015",
@@ -1967,7 +1981,8 @@
       "summary": "Pede cautela sobre espionagem durante discussão dos eventos",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.yosuke-hirata.v11-c016",
@@ -1989,7 +2004,8 @@
       "summary": "Afasta-se da classe e repele apoio de Mii-chan e Kei",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kikyo-kushida.v11-c017",
@@ -2008,7 +2024,8 @@
       "summary": "Mobiliza rede de contatos e organiza comunicação interna",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.honami-ichinose.v11-c018",
@@ -2031,7 +2048,8 @@
       "summary": "Desencoraja retaliação contra provocações de estudantes da D",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.hasebe.v11-c019",
@@ -2048,7 +2066,8 @@
       "summary": "Observa sinais sociais de Ichinose e discute hipóteses com colegas",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kikyo-kushida.v11-c020",
@@ -2069,7 +2088,8 @@
       "summary": "Expõe a Kiyotaka seus limites políticos após a tentativa anterior de expulsá-lo",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c021",
@@ -2092,7 +2112,8 @@
       "summary": "Analisa a influência e credibilidade de Kushida sem confundir fala com intenção",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kei-karuizawa.v11-c022",
@@ -2115,7 +2136,8 @@
       "summary": "Interpreta presente de White Day e administra expectativas de reciprocidade",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.manabu-horikita.v11-c023",
@@ -2138,7 +2160,8 @@
       "summary": "Avalia progresso de Suzune e discute a própria graduação com Kiyotaka",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.suzune-horikita.v11-c024",
@@ -2162,7 +2185,8 @@
       "summary": "Confronta catálogo divulgado de Classe A e ajusta preparação",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.yukimura.v11-c025",
@@ -2190,7 +2214,8 @@
       "summary": "Busca explorar dissidência de Katsuragi por meio de negociação",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.katsuragi.v11-c026",
@@ -2216,7 +2241,8 @@
       "summary": "Enfrenta conflito entre ressentimento a Arisu e proteção dos colegas",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c027",
@@ -2239,7 +2265,8 @@
       "summary": "Avalia riscos do aliciamento de Katsuragi e ausência de cooperação garantida",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.yosuke-hirata.v11-c028",
@@ -2259,7 +2286,8 @@
       "summary": "Revela a Kiyotaka, já na ANHS, fatos biográficos sobre Sugimura, coma e coerção na escola anterior",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c029",
@@ -2285,7 +2313,8 @@
       "summary": "Confronta Hirata com responsabilização extrema antes de oferecer apoio",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.yosuke-hirata.v11-c030",
@@ -2307,7 +2336,8 @@
       "summary": "Consegue chorar e retomar cooperação na turma após conversa",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.suzune-horikita.v11-c031",
@@ -2325,7 +2355,8 @@
       "summary": "Prepara liberdade operacional do comandante para execução da prova",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.arisu-sakayanagi.v11-c032",
@@ -2349,7 +2380,8 @@
       "summary": "Dirige decisões de eventos e participantes da Classe A",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c033",
@@ -2372,7 +2404,8 @@
       "summary": "Escala participantes e intervém em basquete e digitação",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.ken-sudo.v11-c034",
@@ -2393,7 +2426,8 @@
       "summary": "Contribui à vitória da turma em basquete",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.sotomura.v11-c035",
@@ -2411,7 +2445,8 @@
       "summary": "Vence evento de digitação com especialidade própria",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.arisu-sakayanagi.v11-c036",
@@ -2433,7 +2468,8 @@
       "summary": "Usa vantagem acadêmica da classe nos testes",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.matsushita.v11-c037",
@@ -2453,7 +2489,8 @@
       "summary": "Participa como backup em cálculo mental até limite demonstrado",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.rokusuke-koenji.v11-c038",
@@ -2475,7 +2512,8 @@
       "summary": "Opta por não responder, embora identifique resposta final de cálculo mental",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.arisu-sakayanagi.v11-c039",
@@ -2493,7 +2531,8 @@
       "summary": "Prevê aliciamento de Katsuragi e o desestimula ameaçando colegas",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kakeru-ryuen.v11-c040",
@@ -2522,7 +2561,8 @@
       "summary": "Cria plano de pressão gradual sobre a Classe B e coleta de informações",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.ishizaki.v11-c041",
@@ -2544,7 +2584,8 @@
       "summary": "Solicita participação estratégica de Ryūen após recusa inicial",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.hiyori-shiina.v11-c042",
@@ -2567,7 +2608,8 @@
       "summary": "Convoca colegas para aproximar Ryūen, Ibuki e Ishizaki",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.mio-ibuki.v11-c043",
@@ -2591,7 +2633,8 @@
       "summary": "Questiona plano de Ryūen e aceita cooperar sob resistência",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.honami-ichinose.v11-c044",
@@ -2612,7 +2655,8 @@
       "summary": "Durante o sexto evento (judô), esgota o prazo de escalação diante de Albert; Mashima declara vitória de D por padrão",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kakeru-ryuen.v11-c045",
@@ -2638,7 +2682,8 @@
       "summary": "Usa o comando para explorar fraqueza de B e termina como vencedor",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.miyake.v11-c046",
@@ -2654,7 +2699,8 @@
       "summary": "Contribui para a vitória de C na prova de arco e flecha",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.suzune-horikita.v11-c047",
@@ -2685,7 +2731,8 @@
       "summary": "Joga xadrez após treinamento e segue instruções do comandante",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.hashimoto.v11-c048",
@@ -2707,7 +2754,8 @@
       "summary": "Joga xadrez contra Suzune e recebe instruções de Arisu",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c049",
@@ -2734,7 +2782,8 @@
       "summary": "Intervém na partida de xadrez e distingue entrada enviada de comando reproduzido",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.arisu-sakayanagi.v11-c050",
@@ -2762,7 +2811,8 @@
       "summary": "Orienta Hashimoto e reconhece força de Kiyotaka sem conhecer adulteração até revelação",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.tsukishiro.v11-c051",
@@ -2785,7 +2835,8 @@
       "summary": "Interfere em canal de comandos para mudar lance de Kiyotaka no xadrez",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.arisu-sakayanagi.v11-c052",
@@ -2809,7 +2860,8 @@
       "summary": "Contesta interferência e pede revanche privada a partir de lance alterado",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c053",
@@ -2829,7 +2881,8 @@
       "summary": "Aceita revanche e evita afirmar superioridade universal a partir de uma partida",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.arisu-sakayanagi.v11-c054",
@@ -2852,7 +2905,8 @@
       "summary": "Reconhece a habilidade de xadrez de Kiyotaka e redefine a rivalidade, sem comprovar abandono da teoria inatista",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.kakeru-ryuen.v11-c055",
@@ -2875,7 +2929,8 @@
       "summary": "Retorna ao comando de D e vence disputa contra Ichinose",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.case.honami-ichinose.v11-c056",
@@ -2895,7 +2950,8 @@
       "summary": "Sofre derrota apesar de sorteios favoráveis e enfrenta adversário proativo",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.rel.001",
@@ -2922,7 +2978,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.002",
@@ -2947,7 +3004,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.003",
@@ -2971,7 +3029,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.004",
@@ -2995,7 +3054,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.005",
@@ -3022,7 +3082,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.006",
@@ -3055,7 +3116,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.008",
@@ -3084,7 +3146,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.009",
@@ -3110,7 +3173,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.010",
@@ -3138,7 +3202,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.011",
@@ -3169,7 +3234,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.012",
@@ -3198,7 +3264,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.013",
@@ -3228,7 +3295,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.014",
@@ -3253,7 +3321,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.015",
@@ -3277,7 +3346,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.rel.016",
@@ -3303,7 +3373,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.goal.arisu-sakayanagi.v11-g001",
@@ -3328,7 +3399,8 @@
       "summary": "Acknowledges that White Room-educated Kiyotaka is a worthy chess peer",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.goal.yosuke-hirata.v11-g002",
@@ -3353,7 +3425,8 @@
       "summary": "Resumes cooperation, acknowledging limits and reliance on classmates",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.goal.suzune-horikita.v11-g003",
@@ -3369,7 +3442,8 @@
       "summary": "Leaves on-day selection discretion to Kiyotaka after preparation",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.goal.kiyotaka-ayanokoji.v11-g004",
@@ -3391,7 +3465,8 @@
       "summary": "Becomes commander; pursues direct chess contest with Arisu under protection",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.goal.kakeru-ryuen.v11-g005",
@@ -3417,7 +3492,8 @@
       "summary": "Plans indirect pressure to exploit Ichinose's unwillingness to confront; commands D",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.goal.honami-ichinose.v11-g006",
@@ -3437,7 +3513,8 @@
       "summary": "Struggles to counter protracted pressure; hesitates in event selection",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.goal.katsuragi.v11-g007",
@@ -3457,7 +3534,8 @@
       "summary": "Prioritizes classmates' safety and refuses to throw event",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.goal.kiyotaka-ayanokoji.v11-g008",
@@ -3480,7 +3558,8 @@
       "summary": "Recognizes channel tampering and accepts unofficial rematch without changing official standings",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.goal.arisu-sakayanagi.v11-g009",
@@ -3502,7 +3581,8 @@
       "summary": "Prefers uncontaminated contest, confronts official, requests private rematch",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.goal.ishizaki.v11-g010",
@@ -3521,7 +3601,8 @@
       "summary": "Seeks Ryūen's strategic contribution",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.goal.hiyori-shiina.v11-g011",
@@ -3542,7 +3623,8 @@
       "summary": "Arranges get-together for potential coordination",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.goal.suzune-horikita.v11-g012",
@@ -3566,7 +3648,8 @@
       "summary": "Trains for one week and contests school chess event with commander support",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     },
     {
       "item_id": "exam.y1.event-selection",
@@ -3691,7 +3774,8 @@
       "summary": "Mii-chan toma iniciativa de procurar Hirata quando ele se afasta das discussões",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.ev.076",
@@ -3766,7 +3850,8 @@
       "summary": "Mii-chan insiste em oferecer companhia mesmo após rejeição pública e explica sua decisão a Kiyotaka",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.ev.077",
@@ -3829,7 +3914,8 @@
       "summary": "Mii-chan confronta novamente o isolamento de Hirata, sofre rejeição física e recebe pedido posterior de desculpas",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "STRUCTURED_SOURCE_BOUND_NON_EXECUTABLE"
     },
     {
       "item_id": "y1v11.rel.007",
@@ -3879,7 +3965,8 @@
       ],
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "TEMPORALLY_PHASED_WITH_SOURCE_REFS"
     },
     {
       "item_id": "y1v11.goal.mei-yu-wang.v11-g013",
@@ -3906,7 +3993,8 @@
       "summary": "Persistir em abordar Hirata apesar da rejeição, sem garantia de eficácia; após nova rejeição, continua emocionalmente afetada.",
       "verified": false,
       "independent_review": "NOT_PERFORMED",
-      "engine_memory_admission": false
+      "engine_memory_admission": false,
+      "semantic_detail_status": "CAUSAL_CONDITIONAL_NON_EXECUTABLE"
     }
   ]
 }

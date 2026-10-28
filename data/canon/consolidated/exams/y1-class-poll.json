@@ -209,16 +209,15 @@
     },
     "numeric_reported": {
       "class_a": {
-        "top_praise_net": 36,
         "expelled_censure_votes": 36,
-        "runnerup_censure_votes_katsuragi": 30
+        "runnerup_censure_votes_katsuragi": 30,
+        "top_praise_votes_reported": 36
       },
       "class_b": {
-        "top_praise_net": 98,
-        "revocation_paid_private_points": 20000000
+        "revocation_paid_private_points": 20000000,
+        "top_reported_votes_ichinose": 98
       },
       "class_c": {
-        "top_praise_net_kiyotaka": 42,
         "expelled_censure_votes_yamauchi": 33,
         "runnerup_sudo_censure": 21,
         "third_ike_censure": 20,
@@ -226,12 +225,14 @@
           "actor.kiyotaka-ayanokoji",
           "actor.yosuke-hirata",
           "actor.kikyo-kushida"
-        ]
+        ],
+        "top_reported_votes_kiyotaka": 42
       },
       "class_d": {
-        "top_praise_net_kaneda": 27,
-        "ryuen_cross_class_positive_from_class_b": 40
-      }
+        "ryuen_cross_class_positive_from_class_b": 40,
+        "top_reported_votes_kaneda": 27
+      },
+      "source_interpretation_guard": "These are numeric totals reported in official/narrated result scenes; do not assume all are raw praise counts or all net votes without individual adjudication of the relevant passage."
     },
     "private_point_transfer_details": {
       "ichinose_nagumo_proposed_loan": 4043019,

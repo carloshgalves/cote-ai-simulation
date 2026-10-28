@@ -80,7 +80,7 @@ def errors(v):
         require(c["source"]["work_id"]==SRC and c["source"]["pdf_pages"]==r["pdf_pages"],"case provenance")
         require(c["evidence_refs"]==[r["evidence_id"]],"case evidence mismatch")
         require(c["verified"] is False and c["behavioral_policy"]=="NON_EXECUTABLE","case executable")
-        require(c["episode_scope"]==("PRE_ADMISSION_BIOGRAPHICAL_EVIDENCE" if r["candidate_id"] in ["V11-C001","V11-C028"] else "POST_ADMISSION_CANON_BEHAVIOR_ONLY"),"biography / post school boundary")
+        require(c["episode_scope"]==("PRE_ADMISSION_BIOGRAPHICAL_EVIDENCE" if r["candidate_id"]=="V11-C001" else ("POST_ADMISSION_PRIVATE_DISCLOSURE_OF_PRE_ADMISSION_BIOGRAPHY" if r["candidate_id"]=="V11-C028" else "POST_ADMISSION_CANON_BEHAVIOR_ONLY")),"biography / post school boundary")
         p=v["actors"][r["primary_actor_id"]]
         require(any(c["id"] in d.get("behavioral_case_refs",[]) for d in p["domains"].values()),"case not in owner")
         for page in r["pdf_pages"]:require(c["id"] in px["pages"].get(str(page),{}).get("cases",[]),"case not indexed per page")
@@ -115,7 +115,11 @@ def errors(v):
     require(chess["private_rematch"]["winner"]=="actor.kiyotaka-ayanokoji" and chess["private_rematch"]["official_exam_overturned"] is False,"private result changes official")
     b=ex["observed_events"]["class_b_vs_d"]
     require(b["official_winner"]=="CLASS_D" and b["reported_class_d_delta"]==190 and b["inferred_wins_from_delta"]=={"CLASS_D":5,"CLASS_B":2},"D/B outcome")
-    require(b["fifth_event_karate"]["result"].startswith("CLASS_B_FORFEIT"),"karate loss altered")
+    require(b["fifth_event_karate"]["result"]=="CLASS_D_WIN_ON_COMPLETED_CONTESTS" and b["fifth_event_karate"]["commander_ichinose_requested_rematch"],"fifth karate was played")
+    require(b["sixth_event_judo"]["result"]=="CLASS_B_LOSS_BY_OFFICIAL_DEFAULT_AFTER_SELECTION_TIMEOUT" and b["sixth_event_judo"]["selection_timeout_seconds"]==30 and b["sixth_event_judo"]["teacher"]=="Mashima","sixth judo default altered")
+    require(v["cases"]["y1v11.case.honami-ichinose.v11-c044"]["semantic_detail"]["event_time"]=="Y1_MARCH_22_SIXTH_EVENT","Ichinose event attribution")
+    require(v["cases"]["y1v11.case.yosuke-hirata.v11-c028"]["semantic_detail"]["event_time_of_disclosure"]=="Y1_V11_ANHS_PRIVATE_SCENE","Hirata private disclosure backdated")
+    require(v["cases"]["y1v11.case.arisu-sakayanagi.v11-c054"]["semantic_detail"]["not_observed"].startswith("Retratação científica explícita"),"Arisu belief overclaim")
     require(bi["initial_known_by"]==["actor.arisu-sakayanagi"] and bi["belief_record"]["assertion_status"]=="CHARACTER_BELIEF_NOT_SCIENTIFIC_PROOF","Arisu background/ideology leak")
     require(bi["baseline_gate"]["not_runtime_episodic_memory"] and not bi["engine_memory_admission"],"biography imported to runtime")
     require(hir["friend_identity"].startswith("Sugimura") and "coma" in hir["friend_condition_at_source_time"],"Hirata past erased")
@@ -147,6 +151,16 @@ class V11Regression(unittest.TestCase):
     def test_negative_change_official_winner(self):self.mutation(lambda x:x["exams/y1-event-selection.json"]["observed_events"]["class_a_vs_c"].update(official_winner="CLASS_C"))
     def test_negative_ignore_tampering(self):self.mutation(lambda x:x["exams/y1-event-selection.json"]["observed_events"]["class_a_vs_c"]["chess"]["authoritative_message_discrepancy"].update(channel_integrity_compromised=False))
     def test_negative_private_changes_official(self):self.mutation(lambda x:x["exams/y1-event-selection.json"]["observed_events"]["class_a_vs_c"]["chess"]["private_rematch"].update(official_exam_overturned=True))
+    def test_negative_sixth_judo_default_misassigned(self):
+        self.mutation(lambda x:x["exams/y1-event-selection.json"]["observed_events"]["class_b_vs_d"]["sixth_event_judo"].update(result="CLASS_B_WIN"))
+    def test_negative_wrong_karate_forfeit(self):
+        self.mutation(lambda x:x["exams/y1-event-selection.json"]["observed_events"]["class_b_vs_d"]["fifth_event_karate"].update(result="CLASS_B_FORFEIT"))
+    def test_negative_backdated_hirata_dialogue(self):
+        case_id="y1v11.case.yosuke-hirata.v11-c028"
+        self.mutation(lambda x:x["cases"][case_id].update(episode_scope="PRE_ADMISSION_BIOGRAPHICAL_EVIDENCE"))
+    def test_negative_arisu_genetics_concluded(self):
+        case_id="y1v11.case.arisu-sakayanagi.v11-c054"
+        self.mutation(lambda x:x["cases"][case_id]["semantic_detail"].update(not_observed="Theory scientifically disproven"))
     def test_negative_d_wins_absent(self):self.mutation(lambda x:x["exams/y1-event-selection.json"]["observed_events"]["class_b_vs_d"].update(reported_class_d_delta=-90))
     def test_negative_topic_index(self):self.mutation(lambda x:x["indexes/evidence-topic-map.json"]["evidence_by_topic"]["y1_v11"].clear())
     def test_negative_classroom_knowledge(self):self.mutation(lambda x:x["institutions/white_room.json"]["y1_v11_arisu_observation"].update(one_way_visual_observation=False))

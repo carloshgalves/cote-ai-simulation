@@ -80,6 +80,12 @@ def errors(v):
         require(c["source"]["work_id"]==SRC and c["source"]["pdf_pages"]==r["pdf_pages"],"case provenance")
         require(c["evidence_refs"]==[r["evidence_id"]],"case evidence mismatch")
         require(c["verified"] is False and c["behavioral_policy"]=="NON_EXECUTABLE","case executable")
+        require(all(a in ix["character_packs"] and a != c["primary_actor_id"] for a in c["other_actors"]), "unknown or self-attributed case participants")
+        require(bool(c["semantic_detail"].get("actor_objective_at_time")) and bool(c["semantic_detail"].get("trigger")) and
+                bool(c["semantic_detail"].get("counterfactual_probes")), "incomplete explanatory case")
+        require(any(z.get("evidence_ref") in c["evidence_refs"] for z in c["semantic_detail"].get("source_claims", [])) or
+                r["primary_actor_id"]=="actor.mei-yu-wang", "semantic detail without source evidence")
+
         require(c["episode_scope"]==("PRE_ADMISSION_BIOGRAPHICAL_EVIDENCE" if r["candidate_id"]=="V11-C001" else ("POST_ADMISSION_PRIVATE_DISCLOSURE_OF_PRE_ADMISSION_BIOGRAPHY" if r["candidate_id"]=="V11-C028" else "POST_ADMISSION_CANON_BEHAVIOR_ONLY")),"biography / post school boundary")
         p=v["actors"][r["primary_actor_id"]]
         require(any(c["id"] in d.get("behavioral_case_refs",[]) for d in p["domains"].values()),"case not in owner")
@@ -145,6 +151,8 @@ class V11Regression(unittest.TestCase):
         self.assertNotEqual([],errors(d))
     def test_negative_case_reverts_to_generic(self):
         self.mutation(lambda x:next(iter(x["cases"].values())).update(observed_result="Historical episode only"))
+    def test_negative_case_unknown_participant(self):
+        self.mutation(lambda x:next(iter(x["cases"].values()))["other_actors"].append("actor.not-a-character"))
     def test_negative_case_loses_participants(self):
         self.mutation(lambda x:next(iter(x["cases"].values())).update(other_actors=[]))
     def test_negative_mii_identity(self):

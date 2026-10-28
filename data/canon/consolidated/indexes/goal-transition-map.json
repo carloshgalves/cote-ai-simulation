@@ -63,12 +63,28 @@
       "y1v10.goal.kakeru-ryuen.v10-g009",
       "y1v10.goal.suzune-horikita.v10-g010",
       "y1v10.goal.kiyotaka-ayanokoji.v10-g011"
+    ],
+    "ln.y1.v11.en.operator-provided": [
+      "y1v11.goal.arisu-sakayanagi.v11-g001",
+      "y1v11.goal.yosuke-hirata.v11-g002",
+      "y1v11.goal.suzune-horikita.v11-g003",
+      "y1v11.goal.kiyotaka-ayanokoji.v11-g004",
+      "y1v11.goal.kakeru-ryuen.v11-g005",
+      "y1v11.goal.honami-ichinose.v11-g006",
+      "y1v11.goal.katsuragi.v11-g007",
+      "y1v11.goal.kiyotaka-ayanokoji.v11-g008",
+      "y1v11.goal.arisu-sakayanagi.v11-g009",
+      "y1v11.goal.ishizaki.v11-g010",
+      "y1v11.goal.hiyori-shiina.v11-g011",
+      "y1v11.goal.suzune-horikita.v11-g012"
     ]
   },
   "by_actor": {
     "actor.suzune-horikita": [
       "y1v10.goal.suzune-horikita.v10-g003",
       "y1v10.goal.suzune-horikita.v10-g010",
+      "y1v11.goal.suzune-horikita.v11-g003",
+      "y1v11.goal.suzune-horikita.v11-g012",
       "y1v5.goal.suzune-horikita.individual-excellence-to-reciprocal-alliance",
       "y1v5.goal.suzune-horikita.recognize-failure-as-learning-signal",
       "y1v6.goal.suzune-horikita.authorize-exam-papers-before-attack",
@@ -90,6 +106,7 @@
     ],
     "actor.kakeru-ryuen": [
       "y1v10.goal.kakeru-ryuen.v10-g009",
+      "y1v11.goal.kakeru-ryuen.v11-g005",
       "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent",
       "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score",
       "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum",
@@ -101,6 +118,8 @@
     "actor.kiyotaka-ayanokoji": [
       "y1v10.goal.kiyotaka-ayanokoji.v10-g008",
       "y1v10.goal.kiyotaka-ayanokoji.v10-g011",
+      "y1v11.goal.kiyotaka-ayanokoji.v11-g004",
+      "y1v11.goal.kiyotaka-ayanokoji.v11-g008",
       "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning",
       "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race",
       "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets",
@@ -117,9 +136,11 @@
     ],
     "actor.honami-ichinose": [
       "y1v10.goal.honami-ichinose.v10-g005",
+      "y1v11.goal.honami-ichinose.v11-g006",
       "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits"
     ],
     "actor.katsuragi": [
+      "y1v11.goal.katsuragi.v11-g007",
       "y1v6.goal.katsuragi.regret-cooperation-with-ryuen"
     ],
     "actor.nagumo": [
@@ -136,6 +157,7 @@
     ],
     "actor.ishizaki": [
       "y1v10.goal.ishizaki.v10-g007",
+      "y1v11.goal.ishizaki.v11-g010",
       "y1v7.goal.ishizaki.v7-g011"
     ],
     "actor.yamada-albert": [
@@ -148,6 +170,7 @@
       "y1v7.goal.manabu-horikita.v7-g015"
     ],
     "actor.hiyori-shiina": [
+      "y1v11.goal.hiyori-shiina.v11-g011",
       "y1v7.goal.hiyori-shiina.v7-g016"
     ],
     "actor.rokusuke-koenji": [
@@ -155,10 +178,13 @@
     ],
     "actor.yosuke-hirata": [
       "y1v10.goal.yosuke-hirata.v10-g001",
-      "y1v10.goal.yosuke-hirata.v10-g002"
+      "y1v10.goal.yosuke-hirata.v10-g002",
+      "y1v11.goal.yosuke-hirata.v11-g002"
     ],
     "actor.arisu-sakayanagi": [
-      "y1v10.goal.arisu-sakayanagi.v10-g004"
+      "y1v10.goal.arisu-sakayanagi.v10-g004",
+      "y1v11.goal.arisu-sakayanagi.v11-g001",
+      "y1v11.goal.arisu-sakayanagi.v11-g009"
     ]
   },
   "by_evidence": {
@@ -533,6 +559,66 @@
     ],
     "y1v10.ev.044": [
       "y1v10.goal.kiyotaka-ayanokoji.v10-g011"
+    ],
+    "y1v11.ev.001": [
+      "y1v11.goal.arisu-sakayanagi.v11-g001"
+    ],
+    "y1v11.ev.054": [
+      "y1v11.goal.arisu-sakayanagi.v11-g001"
+    ],
+    "y1v11.ev.028": [
+      "y1v11.goal.yosuke-hirata.v11-g002"
+    ],
+    "y1v11.ev.030": [
+      "y1v11.goal.yosuke-hirata.v11-g002"
+    ],
+    "y1v11.ev.031": [
+      "y1v11.goal.suzune-horikita.v11-g003"
+    ],
+    "y1v11.ev.007": [
+      "y1v11.goal.kiyotaka-ayanokoji.v11-g004"
+    ],
+    "y1v11.ev.010": [
+      "y1v11.goal.kiyotaka-ayanokoji.v11-g004"
+    ],
+    "y1v11.ev.040": [
+      "y1v11.goal.kakeru-ryuen.v11-g005"
+    ],
+    "y1v11.ev.045": [
+      "y1v11.goal.kakeru-ryuen.v11-g005"
+    ],
+    "y1v11.ev.055": [
+      "y1v11.goal.kakeru-ryuen.v11-g005"
+    ],
+    "y1v11.ev.018": [
+      "y1v11.goal.honami-ichinose.v11-g006"
+    ],
+    "y1v11.ev.044": [
+      "y1v11.goal.honami-ichinose.v11-g006"
+    ],
+    "y1v11.ev.026": [
+      "y1v11.goal.katsuragi.v11-g007"
+    ],
+    "y1v11.ev.049": [
+      "y1v11.goal.kiyotaka-ayanokoji.v11-g008"
+    ],
+    "y1v11.ev.053": [
+      "y1v11.goal.kiyotaka-ayanokoji.v11-g008"
+    ],
+    "y1v11.ev.051": [
+      "y1v11.goal.arisu-sakayanagi.v11-g009"
+    ],
+    "y1v11.ev.052": [
+      "y1v11.goal.arisu-sakayanagi.v11-g009"
+    ],
+    "y1v11.ev.041": [
+      "y1v11.goal.ishizaki.v11-g010"
+    ],
+    "y1v11.ev.042": [
+      "y1v11.goal.hiyori-shiina.v11-g011"
+    ],
+    "y1v11.ev.047": [
+      "y1v11.goal.suzune-horikita.v11-g012"
     ]
   },
   "transition_files": {
@@ -589,7 +675,19 @@
     "y1v10.goal.kiyotaka-ayanokoji.v10-g008": "data/canon/consolidated/goal_transitions/y1-v10.json",
     "y1v10.goal.kakeru-ryuen.v10-g009": "data/canon/consolidated/goal_transitions/y1-v10.json",
     "y1v10.goal.suzune-horikita.v10-g010": "data/canon/consolidated/goal_transitions/y1-v10.json",
-    "y1v10.goal.kiyotaka-ayanokoji.v10-g011": "data/canon/consolidated/goal_transitions/y1-v10.json"
+    "y1v10.goal.kiyotaka-ayanokoji.v10-g011": "data/canon/consolidated/goal_transitions/y1-v10.json",
+    "y1v11.goal.arisu-sakayanagi.v11-g001": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.yosuke-hirata.v11-g002": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.suzune-horikita.v11-g003": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.kiyotaka-ayanokoji.v11-g004": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.kakeru-ryuen.v11-g005": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.honami-ichinose.v11-g006": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.katsuragi.v11-g007": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.kiyotaka-ayanokoji.v11-g008": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.arisu-sakayanagi.v11-g009": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.ishizaki.v11-g010": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.hiyori-shiina.v11-g011": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.suzune-horikita.v11-g012": "data/canon/consolidated/goal_transitions/y1-v11.json"
   },
   "guard": "RETRIEVAL_ONLY_NOT_AUTOMATIC_RUNTIME_GOAL_UPDATE"
 }

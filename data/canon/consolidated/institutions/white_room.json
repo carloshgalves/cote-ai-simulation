@@ -6,7 +6,8 @@
     "ln.y1.v00.legacyemtls.v1.0.1",
     "ln.y1.v07.sevenseas.en.operator-provided",
     "ln.y1.v075.sevenseas.en.operator-provided",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "V0_PLUS_V7_ATTRIBUTED_REFERENCE_NOT_EXTERNAL_APPROVED",
   "source_documents": [],
@@ -116,7 +117,10 @@
     "y1v7.ev.038",
     "y1v075.ev.060",
     "y1v10.ev.043",
-    "y1v10.ev.062"
+    "y1v10.ev.062",
+    "y1v11.ev.001",
+    "y1v11.ev.057",
+    "y1v11.ev.049"
   ],
   "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
   "operational_migration": "Only user/operator-authorized claims may be promoted after review",
@@ -330,5 +334,32 @@
     "no_backdated_actor_knowledge": true,
     "engine_memory_admission": false,
     "verified": false
+  },
+  "y1_v11_arisu_observation": {
+    "source_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "source_evidence_refs": [
+      "y1v11.ev.001",
+      "y1v11.ev.057"
+    ],
+    "observer": "actor.arisu-sakayanagi",
+    "observed": "actor.kiyotaka-ayanokoji",
+    "one_way_visual_observation": true,
+    "knowledge_asymmetry": "Kiyotaka cannot see Arisu behind one-way screen",
+    "claims": [
+      "facility curriculum described by Sakayanagi father as genius training",
+      "Arisu's belief in innate genetics is subjective and not a verified property",
+      "Arisu observes repeated strong chess performance by Kiyotaka"
+    ],
+    "pre_enrollment_background_not_runtime_memory": true,
+    "verified": false,
+    "engine_memory_admission": false
   }
 }

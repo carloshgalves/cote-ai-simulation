@@ -1,0 +1,53 @@
+{
+  "id": "y1v10.case.arisu-sakayanagi.v10-c032",
+  "actor_id": "actor.arisu-sakayanagi",
+  "primary_actor_id": "actor.arisu-sakayanagi",
+  "title": "Finge escolher Katsuragi como alvo e direciona resultado contra Yahiko Totsuka",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Finge escolher Katsuragi como alvo e direciona resultado contra Yahiko Totsuka",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Não afirmar que o pacto secreto foi comunicado a Katsuragi.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      262,
+      263,
+      264,
+      265,
+      266,
+      292,
+      293,
+      294,
+      295
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "deception",
+    "politics"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "strategy",
+    "deception",
+    "politics",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.032"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "DIRECT_AND_RETROSPECTIVE_SCENE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

@@ -1,0 +1,845 @@
+{
+  "schema_version": "y1-v10-candidate-review-manifest-v1",
+  "source_id": "ln.y1.v10.en.operator-provided",
+  "source_sha256": "88831ad45cd7e0fdae3e5e1bdd4f288570ed4cef5bf807f196239fb4ae549fa7",
+  "case_count": 45,
+  "context_evidence_count": 23,
+  "evidence_count": 68,
+  "semantic_review_status": "SOURCE_BOUNDED_DRAFT_NOT_INDIVIDUALLY_CERTIFIED",
+  "independent_review_status": "NOT_PERFORMED",
+  "operator_release_status": "PENDING",
+  "engine_memory_admission": false,
+  "goal_runtime_auto_update": false,
+  "exam_executable": false,
+  "cases": [
+    {
+      "candidate_id": "V10-C001",
+      "case_id": "y1v10.case.yosuke-hirata.v10-c001",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "evidence_id": "y1v10.ev.001",
+      "pdf_pages": [
+        6,
+        7,
+        8
+      ],
+      "source_bound_title": "Ao relatar a tentativa de suicídio de amigo intimidado, Hirata associa proteção de colegas à necessidade de impedir novas agressões",
+      "do_not_infer": "Biografia anterior à matrícula; não impor controle autoritário como resposta universal.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C002",
+      "case_id": "y1v10.case.ken-sudo.v10-c002",
+      "primary_actor_id": "actor.ken-sudo",
+      "evidence_id": "y1v10.ev.002",
+      "pdf_pages": [
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "source_bound_title": "Demonstra melhora em provas acadêmicas após estudo prolongado, substituindo improvisação de véspera",
+      "do_not_infer": "Melhora situada, sem equivalência a notas futuras ou habilidade fixa.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C003",
+      "case_id": "y1v10.case.suzune-horikita.v10-c003",
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_id": "y1v10.ev.003",
+      "pdf_pages": [
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "source_bound_title": "Organiza explicação das dificuldades acadêmicas de Sudō e acompanha progressão dele",
+      "do_not_infer": "O aumento da nota é de Sudō, não êxito exclusivo de Suzune.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C004",
+      "case_id": "y1v10.case.nagumo.v10-c004",
+      "primary_actor_id": "actor.nagumo",
+      "evidence_id": "y1v10.ev.004",
+      "pdf_pages": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "source_bound_title": "Reúne os irmãos Horikita para testar vulnerabilidades políticas e propõe ingresso de Suzune no conselho",
+      "do_not_infer": "Objetivo de obter concessão de Manabu é avaliação dos observadores; não ato certificado.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C005",
+      "case_id": "y1v10.case.manabu-horikita.v10-c005",
+      "primary_actor_id": "actor.manabu-horikita",
+      "evidence_id": "y1v10.ev.005",
+      "pdf_pages": [
+        24,
+        25,
+        26
+      ],
+      "source_bound_title": "Adverte Nagumo a não explorar Suzune e resiste à avaliação por parentesco",
+      "do_not_infer": "O distanciamento entre irmãos não prova ausência de preocupação.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C006",
+      "case_id": "y1v10.case.suzune-horikita.v10-c006",
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_id": "y1v10.ev.006",
+      "pdf_pages": [
+        24,
+        25
+      ],
+      "source_bound_title": "Recusa convite de Nagumo ao conselho por insegurança e diante do irmão",
+      "do_not_infer": "Recusa neste momento não equivale à incapacidade institucional vitalícia.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C007",
+      "case_id": "y1v10.case.suzune-horikita.v10-c007",
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_id": "y1v10.ev.007",
+      "pdf_pages": [
+        42,
+        43,
+        44
+      ],
+      "source_bound_title": "Tenta neutralizar a votação com distribuição de votos e reconhece limite imposto pela revotação",
+      "do_not_infer": "Hipótese de empate não evita expulsão devido à regra de revotação.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C008",
+      "case_id": "y1v10.case.yosuke-hirata.v10-c008",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "evidence_id": "y1v10.ev.008",
+      "pdf_pages": [
+        48,
+        53,
+        54,
+        55,
+        56
+      ],
+      "source_bound_title": "Procura manter coesão e impedir indicação de colegas mesmo sem solução demonstrada",
+      "do_not_infer": "Não atribuir eficácia ao plano sem evidência; há conflito de valores.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C009",
+      "case_id": "y1v10.case.rokusuke-koenji.v10-c009",
+      "primary_actor_id": "actor.rokusuke-koenji",
+      "evidence_id": "y1v10.ev.009",
+      "pdf_pages": [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "source_bound_title": "Recusa ceder à pressão coletiva e apresenta visão utilitária da permanência na turma",
+      "do_not_infer": "Afirmação de potencial próprio não comprova desempenho não observado.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C010",
+      "case_id": "y1v10.case.yukimura.v10-c010",
+      "primary_actor_id": "actor.yukimura",
+      "evidence_id": "y1v10.ev.010",
+      "pdf_pages": [
+        57,
+        58,
+        59,
+        60,
+        61
+      ],
+      "source_bound_title": "Propõe proteção recíproca mediante distribuição de votos positivos no grupo de amigos",
+      "do_not_infer": "Cinco participantes e três votos não garantem sobrevivência individual.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C011",
+      "case_id": "y1v10.case.hasebe.v10-c011",
+      "primary_actor_id": "actor.hasebe",
+      "evidence_id": "y1v10.ev.011",
+      "pdf_pages": [
+        59,
+        60,
+        61,
+        63,
+        64,
+        65,
+        66
+      ],
+      "source_bound_title": "Discute distribuição de votos de censura e a segurança dos integrantes de seu grupo",
+      "do_not_infer": "Não transformar suspeitas sobre alvos em votos efetivamente dados.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C012",
+      "case_id": "y1v10.case.suzune-horikita.v10-c012",
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_id": "y1v10.ev.012",
+      "pdf_pages": [
+        70,
+        71,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79
+      ],
+      "source_bound_title": "Confronta Ryūen para entender suas escolhas e avalia custo de sacrificar colegas",
+      "do_not_infer": "Não presumir que a provocação convenceu Ryūen.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C013",
+      "case_id": "y1v10.case.kakeru-ryuen.v10-c013",
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "evidence_id": "y1v10.ev.013",
+      "pdf_pages": [
+        70,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79
+      ],
+      "source_bound_title": "Aceita o risco de expulsão sem pedir indulgência e critica apego de Horikita à classe",
+      "do_not_infer": "Declaração de resignação não é prova de que jamais voltará a competir.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C014",
+      "case_id": "y1v10.case.honami-ichinose.v10-c014",
+      "primary_actor_id": "actor.honami-ichinose",
+      "evidence_id": "y1v10.ev.014",
+      "pdf_pages": [
+        89,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96
+      ],
+      "source_bound_title": "Avalia alternativas para preservar todos da Classe B e restringe divulgação de negociações",
+      "do_not_infer": "Não adiantar conhecimento de terceiros sobre acordo com Nagumo.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C015",
+      "case_id": "y1v10.case.nazuna-asahina.v10-c015",
+      "primary_actor_id": "actor.nazuna-asahina",
+      "evidence_id": "y1v10.ev.015",
+      "pdf_pages": [
+        97,
+        98,
+        99,
+        100,
+        101,
+        102
+      ],
+      "source_bound_title": "Avisa Ayanokōji sobre proposta de Nagumo a Ichinose e seu custo pessoal",
+      "do_not_infer": "Termos são relatados por Asahina, não contrato já efetivado.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C016",
+      "case_id": "y1v10.case.hiyori-shiina.v10-c016",
+      "primary_actor_id": "actor.hiyori-shiina",
+      "evidence_id": "y1v10.ev.016",
+      "pdf_pages": [
+        104,
+        105,
+        106,
+        107,
+        108
+      ],
+      "source_bound_title": "Conversa com Ayanokōji na biblioteca e disponibiliza interação discreta entre classes",
+      "do_not_infer": "A conversa não autoriza atribuir conhecimento integral do plano posterior.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C017",
+      "case_id": "y1v10.case.arisu-sakayanagi.v10-c017",
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_id": "y1v10.ev.017",
+      "pdf_pages": [
+        118,
+        120,
+        121,
+        122,
+        123
+      ],
+      "source_bound_title": "Solicita adiamento do duelo direto com Ayanokōji, dada a natureza interna da votação",
+      "do_not_infer": "Trégua aparente não elimina intervenções indiretas posteriores.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C018",
+      "case_id": "y1v10.case.kiyotaka-ayanokoji.v10-c018",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_id": "y1v10.ev.018",
+      "pdf_pages": [
+        129,
+        130,
+        135,
+        136,
+        137,
+        138,
+        139
+      ],
+      "source_bound_title": "Questiona Hirata em privado e aconselha que forme juízo próprio sobre o sacrifício",
+      "do_not_infer": "Não concluir que tentou curar trauma ou controlar toda decisão de Hirata.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C019",
+      "case_id": "y1v10.case.honami-ichinose.v10-c019",
+      "primary_actor_id": "actor.honami-ichinose",
+      "evidence_id": "y1v10.ev.019",
+      "pdf_pages": [
+        142,
+        143,
+        144,
+        145,
+        146,
+        147
+      ],
+      "source_bound_title": "Considera aceitar namoro condicional com Nagumo por empréstimo e reconhece sofrimento pessoal",
+      "do_not_infer": "Aceitação não ocorreu; não inscrever romance como fato.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C020",
+      "case_id": "y1v10.case.kiyotaka-ayanokoji.v10-c020",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_id": "y1v10.ev.020",
+      "pdf_pages": [
+        142,
+        143,
+        144,
+        145,
+        146,
+        147
+      ],
+      "source_bound_title": "Convida Ichinose à noite, mede déficit de pontos e explora alternativas não coercitivas",
+      "do_not_infer": "Não presumir conclusão de plano só com esta reunião.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C021",
+      "case_id": "y1v10.case.kei-karuizawa.v10-c021",
+      "primary_actor_id": "actor.kei-karuizawa",
+      "evidence_id": "y1v10.ev.021",
+      "pdf_pages": [
+        150,
+        151,
+        152,
+        153,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173
+      ],
+      "source_bound_title": "Coleta informações sobre conspiração de votos e comunica indícios a Ayanokōji",
+      "do_not_infer": "Informações da rede precisam preservar quem efetivamente ouviu o quê.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C022",
+      "case_id": "y1v10.case.hasebe.v10-c022",
+      "primary_actor_id": "actor.hasebe",
+      "evidence_id": "y1v10.ev.022",
+      "pdf_pages": [
+        150,
+        152,
+        153,
+        154,
+        155,
+        156,
+        158,
+        160
+      ],
+      "source_bound_title": "Constrói contramedidas no grupo após suspeita de manipulação de votos de colegas",
+      "do_not_infer": "Suspeitas não identificam autoria de cada voto.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C023",
+      "case_id": "y1v10.case.kiyotaka-ayanokoji.v10-c023",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_id": "y1v10.ev.023",
+      "pdf_pages": [
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180
+      ],
+      "source_bound_title": "Mobiliza redes de Kei e Kushida, diferencia informação confirmada de cooptação no complô",
+      "do_not_infer": "Não atribuir ao ator conhecimento de conversas não ouvidas.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C024",
+      "case_id": "y1v10.case.kikyo-kushida.v10-c024",
+      "primary_actor_id": "actor.kikyo-kushida",
+      "evidence_id": "y1v10.ev.024",
+      "pdf_pages": [
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        197,
+        205,
+        206,
+        207,
+        208,
+        209
+      ],
+      "source_bound_title": "Usa redes de confiança para ampliar grupo de votação contra Ayanokōji mantendo imagem pública",
+      "do_not_infer": "Participação de Kushida não torna sua hostilidade pública universal.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C025",
+      "case_id": "y1v10.case.suzune-horikita.v10-c025",
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_id": "y1v10.ev.025",
+      "pdf_pages": [
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196
+      ],
+      "source_bound_title": "Procura Manabu, pede orientação para enfrentar o confronto e decide apresentar posição à turma",
+      "do_not_infer": "Apoio do irmão não significa que ele concebeu toda a argumentação.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C026",
+      "case_id": "y1v10.case.suzune-horikita.v10-c026",
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_id": "y1v10.ev.026",
+      "pdf_pages": [
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219
+      ],
+      "source_bound_title": "Expõe esquema de Yamauchi, contrapõe contribuição acadêmica e defende voto contra ele",
+      "do_not_infer": "A coerção grupal e a finalidade dos votos são históricas, não práticas obrigatórias.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C027",
+      "case_id": "y1v10.case.haruki-yamauchi.v10-c027",
+      "primary_actor_id": "actor.haruki-yamauchi",
+      "evidence_id": "y1v10.ev.027",
+      "pdf_pages": [
+        197,
+        203,
+        205,
+        206,
+        207,
+        210,
+        211,
+        212,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275
+      ],
+      "source_bound_title": "Colabora com Sakayanagi na tentativa de direcionar votos de censura contra Ayanokōji",
+      "do_not_infer": "Não converter promessa externa em votos realmente dados pela Classe A.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C028",
+      "case_id": "y1v10.case.yosuke-hirata.v10-c028",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "evidence_id": "y1v10.ev.028",
+      "pdf_pages": [
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226
+      ],
+      "source_bound_title": "Rejeita publicamente a seleção de Yamauchi e anuncia voto contra Horikita",
+      "do_not_infer": "Mudança momentânea não é caráter fixo nem agressão legitimada.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C029",
+      "case_id": "y1v10.case.kiyotaka-ayanokoji.v10-c029",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_id": "y1v10.ev.029",
+      "pdf_pages": [
+        227,
+        228,
+        229,
+        230,
+        314,
+        315
+      ],
+      "source_bound_title": "Fornece informação ao Manabu para chegar a Suzune sem ser o rosto da denúncia",
+      "do_not_infer": "Separar canal indireto do discurso executado por Suzune.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C030",
+      "case_id": "y1v10.case.honami-ichinose.v10-c030",
+      "primary_actor_id": "actor.honami-ichinose",
+      "evidence_id": "y1v10.ev.030",
+      "pdf_pages": [
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261
+      ],
+      "source_bound_title": "Organiza concentração coletiva de pontos e estuda crédito de Nagumo para impedir expulsão",
+      "do_not_infer": "Condições do empréstimo não provam acordo consumado.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C031",
+      "case_id": "y1v10.case.ryuji-kanzaki.v10-c031",
+      "primary_actor_id": "actor.ryuji-kanzaki",
+      "evidence_id": "y1v10.ev.031",
+      "pdf_pages": [
+        255,
+        256,
+        349
+      ],
+      "source_bound_title": "Questiona termos e oferece-se para receber votos de censura quando a classe dispõe de resgate",
+      "do_not_infer": "Voluntariado é relatado por Ichinose; falta ata nominal dos votos.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C032",
+      "case_id": "y1v10.case.arisu-sakayanagi.v10-c032",
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_id": "y1v10.ev.032",
+      "pdf_pages": [
+        262,
+        263,
+        264,
+        265,
+        266,
+        292,
+        293,
+        294,
+        295
+      ],
+      "source_bound_title": "Finge escolher Katsuragi como alvo e direciona resultado contra Yahiko Totsuka",
+      "do_not_infer": "Não afirmar que o pacto secreto foi comunicado a Katsuragi.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C033",
+      "case_id": "y1v10.case.arisu-sakayanagi.v10-c033",
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_id": "y1v10.ev.033",
+      "pdf_pages": [
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284
+      ],
+      "source_bound_title": "Usa interesse romântico de Yamauchi e acordo não documentado para encaminhá-lo contra Ayanokōji",
+      "do_not_infer": "A promessa de apoio não é comprovante de votos positivos para Yamauchi.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C034",
+      "case_id": "y1v10.case.arisu-sakayanagi.v10-c034",
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_id": "y1v10.ev.034",
+      "pdf_pages": [
+        304,
+        305,
+        306,
+        313,
+        314,
+        355,
+        356
+      ],
+      "source_bound_title": "Concentra votos positivos da Classe A em Ayanokōji para neutralizar tentativa de expulsão",
+      "do_not_infer": "Separar dedução de Kiyotaka, confissão de Arisu e boletim oficial.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C035",
+      "case_id": "y1v10.case.yosuke-hirata.v10-c035",
+      "primary_actor_id": "actor.yosuke-hirata",
+      "evidence_id": "y1v10.ev.035",
+      "pdf_pages": [
+        287,
+        288,
+        289,
+        290
+      ],
+      "source_bound_title": "Pede para receber votos negativos e aceitar expulsão em lugar de colega",
+      "do_not_infer": "Tentativa não resultou em sua expulsão.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C036",
+      "case_id": "y1v10.case.rokusuke-koenji.v10-c036",
+      "primary_actor_id": "actor.rokusuke-koenji",
+      "evidence_id": "y1v10.ev.036",
+      "pdf_pages": [
+        303,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313
+      ],
+      "source_bound_title": "Pressiona verbalmente Yamauchi após anúncio da expulsão e permanece indiferente à reação coletiva",
+      "do_not_infer": "Comportamento local não implica antagonismo permanente com todos.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C037",
+      "case_id": "y1v10.case.ishizaki.v10-c037",
+      "primary_actor_id": "actor.ishizaki",
+      "evidence_id": "y1v10.ev.037",
+      "pdf_pages": [
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329
+      ],
+      "source_bound_title": "Toma iniciativa de pedir ajuda para salvar Ryūen apesar de histórico de conflitos",
+      "do_not_infer": "Pedido de ajuda não é garantia de resgate.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C038",
+      "case_id": "y1v10.case.mio-ibuki.v10-c038",
+      "primary_actor_id": "actor.mio-ibuki",
+      "evidence_id": "y1v10.ev.038",
+      "pdf_pages": [
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        341
+      ],
+      "source_bound_title": "Obtém pontos de Ryūen, avalia custo de substituição e propõe Manabe como alvo",
+      "do_not_infer": "Proposta contra Manabe não foi endossada antecipadamente por todos.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C039",
+      "case_id": "y1v10.case.kiyotaka-ayanokoji.v10-c039",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_id": "y1v10.ev.039",
+      "pdf_pages": [
+        342,
+        343,
+        344,
+        345,
+        346
+      ],
+      "source_bound_title": "Intermedeia troca interclasses, organiza testemunho e grava compromissos com Ibuki e Ichinose",
+      "do_not_infer": "Uma negociação do cânone não deve ser reproduzida automaticamente em fork.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C040",
+      "case_id": "y1v10.case.honami-ichinose.v10-c040",
+      "primary_actor_id": "actor.honami-ichinose",
+      "evidence_id": "y1v10.ev.040",
+      "pdf_pages": [
+        342,
+        343,
+        344,
+        345,
+        346,
+        349,
+        350,
+        351,
+        352
+      ],
+      "source_bound_title": "Troca quarenta votos positivos para proteger Ryūen por pontos que completam vinte milhões",
+      "do_not_infer": "Não virar aliança permanente com Ryūen nem transferir voto sem atores consentirem.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C041",
+      "case_id": "y1v10.case.kakeru-ryuen.v10-c041",
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "evidence_id": "y1v10.ev.041",
+      "pdf_pages": [
+        316,
+        317,
+        318,
+        347,
+        348,
+        349
+      ],
+      "source_bound_title": "Reconsidera permanência após resgate e mantém contrato com Katsuragi sem declarar retomada de liderança",
+      "do_not_infer": "Retorno à liderança é possibilidade futura, não fato atual.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C042",
+      "case_id": "y1v10.case.arisu-sakayanagi.v10-c042",
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_id": "y1v10.ev.042",
+      "pdf_pages": [
+        354,
+        355,
+        356,
+        357,
+        358,
+        359
+      ],
+      "source_bound_title": "Antecipa tentativa de interferência, atrai Tsukishiro ao local observado e demonstra proteção a Kiyotaka",
+      "do_not_infer": "Acesso a todos os comandos internos de Tsukishiro não é provado.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C043",
+      "case_id": "y1v10.case.tsukishiro.v10-c043",
+      "primary_actor_id": "actor.tsukishiro",
+      "evidence_id": "y1v10.ev.043",
+      "pdf_pages": [
+        357,
+        358,
+        359,
+        360,
+        361
+      ],
+      "source_bound_title": "Aborda os estudantes, derruba a bengala de Arisu e imobiliza Kiyotaka, anunciando poder institucional futuro",
+      "do_not_infer": "Relato sobre câmeras adulteradas não é perícia independente.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C044",
+      "case_id": "y1v10.case.kiyotaka-ayanokoji.v10-c044",
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_id": "y1v10.ev.044",
+      "pdf_pages": [
+        358,
+        359,
+        360,
+        361
+      ],
+      "source_bound_title": "Ampara Sakayanagi e evita reagir à agressão de Tsukishiro ante riscos de manipulação institucional",
+      "do_not_infer": "Não inferir incapacidade física ou resultado de luta contra Tsukishiro.",
+      "verified": false
+    },
+    {
+      "candidate_id": "V10-C045",
+      "case_id": "y1v10.case.suzune-horikita.v10-c045",
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_id": "y1v10.ev.045",
+      "pdf_pages": [
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        224,
+        225
+      ],
+      "source_bound_title": "Aceita abrir confronto e reavaliar as relações com seu irmão após orientação dele",
+      "do_not_infer": "Afeto irmão-irmã não implica conciliação completada.",
+      "verified": false
+    }
+  ]
+}

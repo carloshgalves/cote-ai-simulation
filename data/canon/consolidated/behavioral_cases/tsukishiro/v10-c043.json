@@ -1,0 +1,49 @@
+{
+  "id": "y1v10.case.tsukishiro.v10-c043",
+  "actor_id": "actor.tsukishiro",
+  "primary_actor_id": "actor.tsukishiro",
+  "title": "Aborda os estudantes, derruba a bengala de Arisu e imobiliza Kiyotaka, anunciando poder institucional futuro",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Aborda os estudantes, derruba a bengala de Arisu e imobiliza Kiyotaka, anunciando poder institucional futuro",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Relato sobre câmeras adulteradas não é perícia independente.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      357,
+      358,
+      359,
+      360,
+      361
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "coercion",
+    "politics",
+    "combat"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "coercion",
+    "politics",
+    "combat",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.043"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "DIRECT_SCENE_AND_SELF_REPORT",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

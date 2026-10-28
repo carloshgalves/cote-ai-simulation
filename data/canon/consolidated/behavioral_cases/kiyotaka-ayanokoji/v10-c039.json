@@ -1,0 +1,49 @@
+{
+  "id": "y1v10.case.kiyotaka-ayanokoji.v10-c039",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Intermedeia troca interclasses, organiza testemunho e grava compromissos com Ibuki e Ichinose",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Intermedeia troca interclasses, organiza testemunho e grava compromissos com Ibuki e Ichinose",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Uma negociação do cânone não deve ser reproduzida automaticamente em fork.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      342,
+      343,
+      344,
+      345,
+      346
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "negotiation",
+    "proactivity"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "strategy",
+    "negotiation",
+    "proactivity",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.039"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "DIRECT_PRIVATE_SCENE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

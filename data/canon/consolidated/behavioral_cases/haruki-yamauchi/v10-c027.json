@@ -1,0 +1,58 @@
+{
+  "id": "y1v10.case.haruki-yamauchi.v10-c027",
+  "actor_id": "actor.haruki-yamauchi",
+  "primary_actor_id": "actor.haruki-yamauchi",
+  "title": "Colabora com Sakayanagi na tentativa de direcionar votos de censura contra Ayanokōji",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Colabora com Sakayanagi na tentativa de direcionar votos de censura contra Ayanokōji",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Não converter promessa externa em votos realmente dados pela Classe A.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      197,
+      203,
+      205,
+      206,
+      207,
+      210,
+      211,
+      212,
+      270,
+      271,
+      272,
+      273,
+      274,
+      275
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "deception",
+    "social",
+    "strategy"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "deception",
+    "social",
+    "strategy",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.027"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PRIVATE_AND_PUBLIC_ADMISSIONS",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

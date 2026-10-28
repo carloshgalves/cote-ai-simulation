@@ -1,0 +1,51 @@
+{
+  "id": "y1v10.case.honami-ichinose.v10-c014",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "Avalia alternativas para preservar todos da Classe B e restringe divulgação de negociações",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Avalia alternativas para preservar todos da Classe B e restringe divulgação de negociações",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Não adiantar conhecimento de terceiros sobre acordo com Nagumo.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      89,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "leadership",
+    "privacy",
+    "risk_management"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "leadership",
+    "privacy",
+    "risk_management",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.014"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PRIVATE_DIALOGUE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

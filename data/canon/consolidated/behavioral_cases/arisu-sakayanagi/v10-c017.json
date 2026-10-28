@@ -1,0 +1,49 @@
+{
+  "id": "y1v10.case.arisu-sakayanagi.v10-c017",
+  "actor_id": "actor.arisu-sakayanagi",
+  "primary_actor_id": "actor.arisu-sakayanagi",
+  "title": "Solicita adiamento do duelo direto com Ayanokōji, dada a natureza interna da votação",
+  "context": "Year 1 Volume 10 historical episode (Class Poll)",
+  "observed_actions": "Solicita adiamento do duelo direto com Ayanokōji, dada a natureza interna da votação",
+  "observed_result": "Historical source-context candidate; do not guarantee result in another timeline.",
+  "epistemic_limits": "Trégua aparente não elimina intervenções indiretas posteriores.",
+  "source": {
+    "work_id": "ln.y1.v10.en.operator-provided",
+    "pdf_pages": [
+      118,
+      120,
+      121,
+      122,
+      123
+    ],
+    "source_status": "INDEPENDENT_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "negotiation",
+    "motivation"
+  ],
+  "information_available": "Character-local perceived events and legitimate communications only",
+  "counterfactual_test": "Do not force canonical action, cooperation or outcome after divergence",
+  "topics": [
+    "behavior",
+    "strategy",
+    "negotiation",
+    "motivation",
+    "y1_v10"
+  ],
+  "evidence_refs": [
+    "y1v10.ev.017"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "PRIVATE_DIALOGUE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_ITEMIZED"
+  }
+}

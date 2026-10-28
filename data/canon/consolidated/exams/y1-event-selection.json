@@ -178,8 +178,13 @@
         },
         {
           "order": 3,
-          "name": "Math Exam",
+          "name": "English Test",
           "winner": "CLASS_A",
+          "participants_per_class": 8,
+          "score": {
+            "CLASS_C": 443,
+            "CLASS_A": 651
+          },
           "source_pages": [
             351,
             352,
@@ -190,8 +195,13 @@
         },
         {
           "order": 4,
-          "name": "UNRESOLVED_EVENT_ID",
+          "name": "Math Test",
           "winner": "CLASS_A",
+          "participants_per_class": 7,
+          "score": {
+            "CLASS_C": 631,
+            "CLASS_A": 655
+          },
           "source_pages": [
             355,
             356,
@@ -272,7 +282,8 @@
           ]
         },
         "chess_not_global_rating": "PRIVATE_RESUMPTION_NOT_INDEPENDENT_FULL_MATCH"
-      }
+      },
+      "source_precision_note": "Event 3 English and 4 Mathematics are distinct; neither is unresolved."
     },
     "class_b_vs_d": {
       "official_winner": "CLASS_D",

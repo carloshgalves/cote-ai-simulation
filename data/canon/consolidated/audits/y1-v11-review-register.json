@@ -1,0 +1,3655 @@
+{
+  "schema_version": "y1-v11-source-review-register-v1",
+  "source_id": "ln.y1.v11.en.operator-provided",
+  "source_sha256": "cd2c30f42da87a0a19c0666ba87777bc7242adf66a395e5aa9a426b720e7bec0",
+  "counts": {
+    "behavioral_cases": 56,
+    "evidence": 74,
+    "relationship_edges": 15,
+    "goal_transitions": 12,
+    "exam_references": 1,
+    "biography_events_or_extensions": 2,
+    "total": 160
+  },
+  "review_state": {
+    "assistant_individual_deep_source_review": "NOT_CERTIFIED",
+    "external_independent_reviewer": "NOT_PERFORMED",
+    "operator_acceptance": "PENDING",
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false,
+    "exam_executable": false,
+    "merge_authorization": "NOT_REQUESTED"
+  },
+  "records": [
+    {
+      "item_id": "y1v11.ev.001",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "mentioned_actors": [
+        "actor.arisu-sakayanagi"
+      ],
+      "source_mode": "PRE_ENROLLMENT_RETROSPECTIVE",
+      "summary": "Observa Kiyotaka na White Room e formula tese sobre talento inato, contrapondo educação",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.002",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "mentioned_actors": [
+        "actor.tsukishiro"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Defende novos exames e desconsidera resistência dos professores",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.003",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "mentioned_actors": [
+        "actor.mashima"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Protesta contra prova suplementar que força expulsões",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.004",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "mentioned_actors": [
+        "actor.sae-chiyabashira"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Contém discussão e conversa com professores sobre risco institucional",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.005",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "mentioned_actors": [
+        "actor.chie-hoshinomiya"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Revive rivalidade com Chabashira e admite desejo de derrotar sua classe",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.006",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        42,
+        43,
+        44,
+        45
+      ],
+      "mentioned_actors": [
+        "actor.suzune-horikita"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Registra regras, observa desigualdade entre probabilidades de eventos",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.007",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        47,
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "mentioned_actors": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Voluntaria-se comandante e busca confronto com Arisu usando ponto de proteção",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.008",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "mentioned_actors": [
+        "actor.suzune-horikita"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Desfaz suspeitas contra Kiyotaka e articula sua escolha como comandante",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.009",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        62,
+        63,
+        64,
+        65
+      ],
+      "mentioned_actors": [
+        "actor.kaneda"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Ganha sorteio e formaliza escolha de Classe B como adversária",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.010",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        55,
+        62,
+        63,
+        64,
+        65,
+        66
+      ],
+      "mentioned_actors": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Coordena previamente negociações com Ichinose e Ishizaki para pareamento C–A",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.011",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        72,
+        74,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        88,
+        89
+      ],
+      "mentioned_actors": [
+        "actor.kei-karuizawa"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Fornece informações sobre sociabilidade e negocia limites da relação com Kiyotaka",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.012",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        99,
+        100,
+        101,
+        102,
+        103
+      ],
+      "mentioned_actors": [
+        "actor.miyake"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Propõe eventos de sorte para compensar diferença entre turmas",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.013",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        100,
+        101,
+        102,
+        103
+      ],
+      "mentioned_actors": [
+        "actor.yukimura"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Avalia e questiona aposta estatística nos eventos de sorte",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.014",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        110,
+        112,
+        115,
+        118,
+        120,
+        125,
+        137,
+        140,
+        142,
+        155,
+        158
+      ],
+      "mentioned_actors": [
+        "actor.suzune-horikita"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Organiza catálogo de capacidades da turma e eventos propostos",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.015",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        137,
+        139,
+        140,
+        141
+      ],
+      "mentioned_actors": [
+        "actor.yukimura"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Pede cautela sobre espionagem durante discussão dos eventos",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.016",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        125,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135
+      ],
+      "mentioned_actors": [
+        "actor.yosuke-hirata"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Afasta-se da classe e repele apoio de Mii-chan e Kei",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.017",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        138,
+        139,
+        140,
+        141,
+        142
+      ],
+      "mentioned_actors": [
+        "actor.kikyo-kushida"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Mobiliza rede de contatos e organiza comunicação interna",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.018",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        178,
+        180
+      ],
+      "mentioned_actors": [
+        "actor.honami-ichinose"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Desencoraja retaliação contra provocações de estudantes da D",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.019",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        184,
+        185,
+        186
+      ],
+      "mentioned_actors": [
+        "actor.hasebe"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Observa sinais sociais de Ichinose e discute hipóteses com colegas",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.020",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        194,
+        195,
+        197,
+        198,
+        199,
+        200,
+        201
+      ],
+      "mentioned_actors": [
+        "actor.kikyo-kushida"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Expõe a Kiyotaka seus limites políticos após a tentativa anterior de expulsá-lo",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.021",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        192,
+        194,
+        195,
+        197,
+        199,
+        200,
+        203,
+        204,
+        205
+      ],
+      "mentioned_actors": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Analisa a influência e credibilidade de Kushida sem confundir fala com intenção",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.022",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        187,
+        188,
+        189,
+        190,
+        207,
+        208,
+        209,
+        210,
+        211
+      ],
+      "mentioned_actors": [
+        "actor.kei-karuizawa"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Interpreta presente de White Day e administra expectativas de reciprocidade",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.023",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        217,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226
+      ],
+      "mentioned_actors": [
+        "actor.manabu-horikita"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Avalia progresso de Suzune e discute a própria graduação com Kiyotaka",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.024",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239
+      ],
+      "mentioned_actors": [
+        "actor.suzune-horikita"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Confronta catálogo divulgado de Classe A e ajusta preparação",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.025",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278
+      ],
+      "mentioned_actors": [
+        "actor.yukimura"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Busca explorar dissidência de Katsuragi por meio de negociação",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.026",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        271,
+        273,
+        274,
+        276,
+        278,
+        279,
+        280,
+        359,
+        363,
+        364,
+        365,
+        366
+      ],
+      "mentioned_actors": [
+        "actor.katsuragi"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Enfrenta conflito entre ressentimento a Arisu e proteção dos colegas",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.027",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        240,
+        242,
+        271,
+        273,
+        276,
+        277,
+        278,
+        279,
+        280
+      ],
+      "mentioned_actors": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Avalia riscos do aliciamento de Katsuragi e ausência de cooperação garantida",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.028",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        299,
+        300,
+        301,
+        302,
+        303,
+        304
+      ],
+      "mentioned_actors": [
+        "actor.yosuke-hirata"
+      ],
+      "source_mode": "PRE_ENROLLMENT_RETROSPECTIVE",
+      "summary": "Explica nome Sugimura, coma e uso de coerção após bullying na antiga escola",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.029",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        295,
+        297,
+        298,
+        299,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311
+      ],
+      "mentioned_actors": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Confronta Hirata com responsabilização extrema antes de oferecer apoio",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.030",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        308,
+        309,
+        310,
+        311,
+        313,
+        314,
+        315,
+        316
+      ],
+      "mentioned_actors": [
+        "actor.yosuke-hirata"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Consegue chorar e retomar cooperação na turma após conversa",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.031",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        318,
+        319,
+        320,
+        321
+      ],
+      "mentioned_actors": [
+        "actor.suzune-horikita"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Prepara liberdade operacional do comandante para execução da prova",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.032",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        321,
+        322,
+        323,
+        330,
+        331,
+        334,
+        335,
+        338,
+        341,
+        348
+      ],
+      "mentioned_actors": [
+        "actor.arisu-sakayanagi"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Dirige decisões de eventos e participantes da Classe A",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.033",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        334,
+        335,
+        336,
+        338,
+        342,
+        348,
+        349,
+        350,
+        351
+      ],
+      "mentioned_actors": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Escala participantes e intervém em basquete e digitação",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.034",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        335,
+        338,
+        340,
+        343,
+        344,
+        345,
+        346
+      ],
+      "mentioned_actors": [
+        "actor.ken-sudo"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Contribui à vitória da turma em basquete",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.035",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        348,
+        349,
+        350,
+        351
+      ],
+      "mentioned_actors": [
+        "actor.sotomura"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Vence evento de digitação com especialidade própria",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.036",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        351,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358
+      ],
+      "mentioned_actors": [
+        "actor.arisu-sakayanagi"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Usa vantagem acadêmica da classe nos testes",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.037",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        359,
+        360,
+        361,
+        362,
+        363,
+        364
+      ],
+      "mentioned_actors": [
+        "actor.matsushita"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Participa como backup em cálculo mental até limite demonstrado",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.038",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        359,
+        360,
+        361,
+        362,
+        363,
+        364,
+        365,
+        366
+      ],
+      "mentioned_actors": [
+        "actor.rokusuke-koenji"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Opta por não responder, embora identifique resposta final de cálculo mental",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.039",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        363,
+        364,
+        365,
+        366
+      ],
+      "mentioned_actors": [
+        "actor.arisu-sakayanagi"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Prevê aliciamento de Katsuragi e o desestimula ameaçando colegas",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.040",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        375,
+        377,
+        379,
+        381,
+        387,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396,
+        397,
+        398
+      ],
+      "mentioned_actors": [
+        "actor.kakeru-ryuen"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Cria plano de pressão gradual sobre a Classe B e coleta de informações",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.041",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        383
+      ],
+      "mentioned_actors": [
+        "actor.ishizaki"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Solicita participação estratégica de Ryūen após recusa inicial",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.042",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389
+      ],
+      "mentioned_actors": [
+        "actor.hiyori-shiina"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Convoca colegas para aproximar Ryūen, Ibuki e Ishizaki",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.043",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        382,
+        383,
+        384,
+        385,
+        387,
+        388,
+        389,
+        392,
+        393,
+        398
+      ],
+      "mentioned_actors": [
+        "actor.mio-ibuki"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Questiona plano de Ryūen e aceita cooperar sob resistência",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.044",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374
+      ],
+      "mentioned_actors": [
+        "actor.honami-ichinose"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Hesita ao escolher participante de caratê e perde por decisão escolar",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.045",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        391,
+        392,
+        395,
+        396,
+        398
+      ],
+      "mentioned_actors": [
+        "actor.kakeru-ryuen"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Usa o comando para explorar fraqueza de B e termina como vencedor",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.046",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        399,
+        400
+      ],
+      "mentioned_actors": [
+        "actor.miyake"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Contribui para a vitória de C na prova de arco e flecha",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.047",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        319,
+        320,
+        402,
+        404,
+        405,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        425,
+        426
+      ],
+      "mentioned_actors": [
+        "actor.suzune-horikita"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Joga xadrez após treinamento e segue instruções do comandante",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.048",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        402,
+        405,
+        408,
+        410,
+        414,
+        415,
+        416,
+        420
+      ],
+      "mentioned_actors": [
+        "actor.hashimoto"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Joga xadrez contra Suzune e recebe instruções de Arisu",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.049",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        440,
+        441,
+        442
+      ],
+      "mentioned_actors": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Intervém na partida de xadrez e distingue entrada enviada de comando reproduzido",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.050",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        414,
+        415,
+        416,
+        417,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        438,
+        439,
+        440
+      ],
+      "mentioned_actors": [
+        "actor.arisu-sakayanagi"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Orienta Hashimoto e reconhece força de Kiyotaka sem conhecer adulteração até revelação",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.051",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        433,
+        434,
+        436,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444
+      ],
+      "mentioned_actors": [
+        "actor.tsukishiro"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Interfere em canal de comandos para mudar lance de Kiyotaka no xadrez",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.052",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        450
+      ],
+      "mentioned_actors": [
+        "actor.arisu-sakayanagi"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Contesta interferência e pede revanche privada a partir de lance alterado",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.053",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        445,
+        446,
+        447,
+        448,
+        449,
+        450
+      ],
+      "mentioned_actors": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Aceita revanche e evita afirmar superioridade universal a partir de uma partida",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.054",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453
+      ],
+      "mentioned_actors": [
+        "actor.arisu-sakayanagi"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Reavalia concepção de talento e reconsidera sua rivalidade com Kiyotaka",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.055",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        368,
+        370,
+        374,
+        393,
+        394,
+        395,
+        398,
+        436,
+        437
+      ],
+      "mentioned_actors": [
+        "actor.kakeru-ryuen"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Retorna ao comando de D e vence disputa contra Ichinose",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.056",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        368,
+        369,
+        370,
+        374,
+        436,
+        437
+      ],
+      "mentioned_actors": [
+        "actor.honami-ichinose"
+      ],
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "summary": "Sofre derrota apesar de sorteios favoráveis e enfrenta adversário proativo",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.057",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "mentioned_actors": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "White Room seen from one-way screen before enrollment; Arisu's belief not verified science",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.058",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "mentioned_actors": [
+        "actor.tsukishiro",
+        "actor.mashima"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Tsukishiro announces stricter first-year policy; Mashima objects; school authority not universal",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.059",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "mentioned_actors": [
+        "actor.sae-chiyabashira",
+        "actor.chie-hoshinomiya",
+        "actor.mashima"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Teachers disclose customary 20M + 300 class points expulsion rescue, waived class points for Class Poll",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.060",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "mentioned_actors": [
+        "actor.sae-chiyabashira"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Event Selection official rules: ten proposed events, five submitted priorities, seven school-drawn, participant and commander restrictions",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.061",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        40,
+        41
+      ],
+      "mentioned_actors": [
+        "actor.sae-chiyabashira"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Exam schedule March 8/15/22; event net ±30 class points, winner 100 bonus and commander risk",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.062",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        62,
+        63,
+        64,
+        65,
+        66
+      ],
+      "mentioned_actors": [
+        "actor.kaneda",
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.arisu-sakayanagi"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Raffle awards D choice B; C paired A; private earlier arrangement did not manipulate draw",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.063",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        67,
+        68,
+        69,
+        70,
+        71
+      ],
+      "mentioned_actors": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Commander touchscreen selection deadline and restricted text-to-speech intervention rules",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.064",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        299,
+        300,
+        301,
+        302,
+        303
+      ],
+      "mentioned_actors": [
+        "actor.yosuke-hirata"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Friend Sugimura survived suicide attempt in persistent coma; school redistributed class after Hirata coercion",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.065",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        318,
+        319,
+        320,
+        402,
+        404,
+        408,
+        414,
+        415,
+        416,
+        417,
+        425
+      ],
+      "mentioned_actors": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Chess Horikita versus Hashimoto with interventions; learner action distinct from commander's moves",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.066",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        335,
+        336,
+        348,
+        349,
+        350,
+        351,
+        355,
+        359,
+        365,
+        400
+      ],
+      "mentioned_actors": [
+        "actor.miyake",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Observed C versus A event sequence: basketball, typing, math, flash mental arithmetic, archery, chess; seven total",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.067",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        436,
+        437
+      ],
+      "mentioned_actors": [
+        "actor.honami-ichinose",
+        "actor.kakeru-ryuen"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "D defeats B with comeback; karate forfeited when Ichinose cannot select participant; D gains 190 reported",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.068",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444
+      ],
+      "mentioned_actors": [
+        "actor.tsukishiro",
+        "actor.kiyotaka-ayanokoji",
+        "actor.arisu-sakayanagi"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "School records A victory against C after chess channel substitution; pristine intent different from played move",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.069",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        445,
+        446,
+        447,
+        448,
+        449,
+        450
+      ],
+      "mentioned_actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.arisu-sakayanagi"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Private rematch of disputed move distinguishes informal result from official standings",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.070",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "mentioned_actors": [
+        "actor.chie-hoshinomiya"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Hoshinomiya recounts past change to shared dormitory rooms; oral account not independently certified",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.071",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        194,
+        195,
+        197,
+        198,
+        199,
+        200,
+        201,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469
+      ],
+      "mentioned_actors": [
+        "actor.kikyo-kushida"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Kushida's conflict between public helpful image and private resentment; short-story perspective is not shared knowledge",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.072",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        470,
+        471,
+        472,
+        473,
+        474,
+        475,
+        476
+      ],
+      "mentioned_actors": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "VR side story concerns game scenario, not physical combat feat in school",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.073",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        457,
+        458,
+        459,
+        460,
+        461,
+        462
+      ],
+      "mentioned_actors": [
+        "actor.arisu-sakayanagi"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Arisu short-story private feelings about Kiyotaka and pre-entry meeting; romance unconfirmed",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.ev.074",
+      "kind": "EVIDENCE",
+      "pdf_pages": [
+        455,
+        456,
+        457,
+        458,
+        459
+      ],
+      "mentioned_actors": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_mode": "AUTHORITATIVE_SCENE_OR_SCOPED_PRIVATE_REPORT",
+      "summary": "Kei's subjective response to present is not formal romantic commitment",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.arisu-sakayanagi.v11-c001",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_refs": [
+        "y1v11.ev.001"
+      ],
+      "summary": "Observa Kiyotaka na White Room e formula tese sobre talento inato, contrapondo educação",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.tsukishiro.v11-c002",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "primary_actor_id": "actor.tsukishiro",
+      "evidence_refs": [
+        "y1v11.ev.002"
+      ],
+      "summary": "Defende novos exames e desconsidera resistência dos professores",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.mashima.v11-c003",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "primary_actor_id": "actor.mashima",
+      "evidence_refs": [
+        "y1v11.ev.003"
+      ],
+      "summary": "Protesta contra prova suplementar que força expulsões",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.sae-chiyabashira.v11-c004",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "primary_actor_id": "actor.sae-chiyabashira",
+      "evidence_refs": [
+        "y1v11.ev.004"
+      ],
+      "summary": "Contém discussão e conversa com professores sobre risco institucional",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.chie-hoshinomiya.v11-c005",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "primary_actor_id": "actor.chie-hoshinomiya",
+      "evidence_refs": [
+        "y1v11.ev.005"
+      ],
+      "summary": "Revive rivalidade com Chabashira e admite desejo de derrotar sua classe",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.suzune-horikita.v11-c006",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        42,
+        43,
+        44,
+        45
+      ],
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_refs": [
+        "y1v11.ev.006"
+      ],
+      "summary": "Registra regras, observa desigualdade entre probabilidades de eventos",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c007",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        47,
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_refs": [
+        "y1v11.ev.007"
+      ],
+      "summary": "Voluntaria-se comandante e busca confronto com Arisu usando ponto de proteção",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.suzune-horikita.v11-c008",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_refs": [
+        "y1v11.ev.008"
+      ],
+      "summary": "Desfaz suspeitas contra Kiyotaka e articula sua escolha como comandante",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kaneda.v11-c009",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        62,
+        63,
+        64,
+        65
+      ],
+      "primary_actor_id": "actor.kaneda",
+      "evidence_refs": [
+        "y1v11.ev.009"
+      ],
+      "summary": "Ganha sorteio e formaliza escolha de Classe B como adversária",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c010",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        55,
+        62,
+        63,
+        64,
+        65,
+        66
+      ],
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_refs": [
+        "y1v11.ev.010"
+      ],
+      "summary": "Coordena previamente negociações com Ichinose e Ishizaki para pareamento C–A",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kei-karuizawa.v11-c011",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        72,
+        74,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        88,
+        89
+      ],
+      "primary_actor_id": "actor.kei-karuizawa",
+      "evidence_refs": [
+        "y1v11.ev.011"
+      ],
+      "summary": "Fornece informações sobre sociabilidade e negocia limites da relação com Kiyotaka",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.miyake.v11-c012",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        99,
+        100,
+        101,
+        102,
+        103
+      ],
+      "primary_actor_id": "actor.miyake",
+      "evidence_refs": [
+        "y1v11.ev.012"
+      ],
+      "summary": "Propõe eventos de sorte para compensar diferença entre turmas",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.yukimura.v11-c013",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        100,
+        101,
+        102,
+        103
+      ],
+      "primary_actor_id": "actor.yukimura",
+      "evidence_refs": [
+        "y1v11.ev.013"
+      ],
+      "summary": "Avalia e questiona aposta estatística nos eventos de sorte",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.suzune-horikita.v11-c014",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        110,
+        112,
+        115,
+        118,
+        120,
+        125,
+        137,
+        140,
+        142,
+        155,
+        158
+      ],
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_refs": [
+        "y1v11.ev.014"
+      ],
+      "summary": "Organiza catálogo de capacidades da turma e eventos propostos",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.yukimura.v11-c015",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        137,
+        139,
+        140,
+        141
+      ],
+      "primary_actor_id": "actor.yukimura",
+      "evidence_refs": [
+        "y1v11.ev.015"
+      ],
+      "summary": "Pede cautela sobre espionagem durante discussão dos eventos",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.yosuke-hirata.v11-c016",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        125,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135
+      ],
+      "primary_actor_id": "actor.yosuke-hirata",
+      "evidence_refs": [
+        "y1v11.ev.016"
+      ],
+      "summary": "Afasta-se da classe e repele apoio de Mii-chan e Kei",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kikyo-kushida.v11-c017",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        138,
+        139,
+        140,
+        141,
+        142
+      ],
+      "primary_actor_id": "actor.kikyo-kushida",
+      "evidence_refs": [
+        "y1v11.ev.017"
+      ],
+      "summary": "Mobiliza rede de contatos e organiza comunicação interna",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.honami-ichinose.v11-c018",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        178,
+        180
+      ],
+      "primary_actor_id": "actor.honami-ichinose",
+      "evidence_refs": [
+        "y1v11.ev.018"
+      ],
+      "summary": "Desencoraja retaliação contra provocações de estudantes da D",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.hasebe.v11-c019",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        184,
+        185,
+        186
+      ],
+      "primary_actor_id": "actor.hasebe",
+      "evidence_refs": [
+        "y1v11.ev.019"
+      ],
+      "summary": "Observa sinais sociais de Ichinose e discute hipóteses com colegas",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kikyo-kushida.v11-c020",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        194,
+        195,
+        197,
+        198,
+        199,
+        200,
+        201
+      ],
+      "primary_actor_id": "actor.kikyo-kushida",
+      "evidence_refs": [
+        "y1v11.ev.020"
+      ],
+      "summary": "Expõe a Kiyotaka seus limites políticos após a tentativa anterior de expulsá-lo",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c021",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        192,
+        194,
+        195,
+        197,
+        199,
+        200,
+        203,
+        204,
+        205
+      ],
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_refs": [
+        "y1v11.ev.021"
+      ],
+      "summary": "Analisa a influência e credibilidade de Kushida sem confundir fala com intenção",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kei-karuizawa.v11-c022",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        187,
+        188,
+        189,
+        190,
+        207,
+        208,
+        209,
+        210,
+        211
+      ],
+      "primary_actor_id": "actor.kei-karuizawa",
+      "evidence_refs": [
+        "y1v11.ev.022"
+      ],
+      "summary": "Interpreta presente de White Day e administra expectativas de reciprocidade",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.manabu-horikita.v11-c023",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        217,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226
+      ],
+      "primary_actor_id": "actor.manabu-horikita",
+      "evidence_refs": [
+        "y1v11.ev.023"
+      ],
+      "summary": "Avalia progresso de Suzune e discute a própria graduação com Kiyotaka",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.suzune-horikita.v11-c024",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239
+      ],
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_refs": [
+        "y1v11.ev.024"
+      ],
+      "summary": "Confronta catálogo divulgado de Classe A e ajusta preparação",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.yukimura.v11-c025",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278
+      ],
+      "primary_actor_id": "actor.yukimura",
+      "evidence_refs": [
+        "y1v11.ev.025"
+      ],
+      "summary": "Busca explorar dissidência de Katsuragi por meio de negociação",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.katsuragi.v11-c026",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        271,
+        273,
+        274,
+        276,
+        278,
+        279,
+        280,
+        359,
+        363,
+        364,
+        365,
+        366
+      ],
+      "primary_actor_id": "actor.katsuragi",
+      "evidence_refs": [
+        "y1v11.ev.026"
+      ],
+      "summary": "Enfrenta conflito entre ressentimento a Arisu e proteção dos colegas",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c027",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        240,
+        242,
+        271,
+        273,
+        276,
+        277,
+        278,
+        279,
+        280
+      ],
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_refs": [
+        "y1v11.ev.027"
+      ],
+      "summary": "Avalia riscos do aliciamento de Katsuragi e ausência de cooperação garantida",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.yosuke-hirata.v11-c028",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        299,
+        300,
+        301,
+        302,
+        303,
+        304
+      ],
+      "primary_actor_id": "actor.yosuke-hirata",
+      "evidence_refs": [
+        "y1v11.ev.028"
+      ],
+      "summary": "Explica nome Sugimura, coma e uso de coerção após bullying na antiga escola",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c029",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        295,
+        297,
+        298,
+        299,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311
+      ],
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_refs": [
+        "y1v11.ev.029"
+      ],
+      "summary": "Confronta Hirata com responsabilização extrema antes de oferecer apoio",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.yosuke-hirata.v11-c030",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        308,
+        309,
+        310,
+        311,
+        313,
+        314,
+        315,
+        316
+      ],
+      "primary_actor_id": "actor.yosuke-hirata",
+      "evidence_refs": [
+        "y1v11.ev.030"
+      ],
+      "summary": "Consegue chorar e retomar cooperação na turma após conversa",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.suzune-horikita.v11-c031",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        318,
+        319,
+        320,
+        321
+      ],
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_refs": [
+        "y1v11.ev.031"
+      ],
+      "summary": "Prepara liberdade operacional do comandante para execução da prova",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.arisu-sakayanagi.v11-c032",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        321,
+        322,
+        323,
+        330,
+        331,
+        334,
+        335,
+        338,
+        341,
+        348
+      ],
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_refs": [
+        "y1v11.ev.032"
+      ],
+      "summary": "Dirige decisões de eventos e participantes da Classe A",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c033",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        334,
+        335,
+        336,
+        338,
+        342,
+        348,
+        349,
+        350,
+        351
+      ],
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_refs": [
+        "y1v11.ev.033"
+      ],
+      "summary": "Escala participantes e intervém em basquete e digitação",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.ken-sudo.v11-c034",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        335,
+        338,
+        340,
+        343,
+        344,
+        345,
+        346
+      ],
+      "primary_actor_id": "actor.ken-sudo",
+      "evidence_refs": [
+        "y1v11.ev.034"
+      ],
+      "summary": "Contribui à vitória da turma em basquete",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.sotomura.v11-c035",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        348,
+        349,
+        350,
+        351
+      ],
+      "primary_actor_id": "actor.sotomura",
+      "evidence_refs": [
+        "y1v11.ev.035"
+      ],
+      "summary": "Vence evento de digitação com especialidade própria",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.arisu-sakayanagi.v11-c036",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        351,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358
+      ],
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_refs": [
+        "y1v11.ev.036"
+      ],
+      "summary": "Usa vantagem acadêmica da classe nos testes",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.matsushita.v11-c037",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        359,
+        360,
+        361,
+        362,
+        363,
+        364
+      ],
+      "primary_actor_id": "actor.matsushita",
+      "evidence_refs": [
+        "y1v11.ev.037"
+      ],
+      "summary": "Participa como backup em cálculo mental até limite demonstrado",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.rokusuke-koenji.v11-c038",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        359,
+        360,
+        361,
+        362,
+        363,
+        364,
+        365,
+        366
+      ],
+      "primary_actor_id": "actor.rokusuke-koenji",
+      "evidence_refs": [
+        "y1v11.ev.038"
+      ],
+      "summary": "Opta por não responder, embora identifique resposta final de cálculo mental",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.arisu-sakayanagi.v11-c039",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        363,
+        364,
+        365,
+        366
+      ],
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_refs": [
+        "y1v11.ev.039"
+      ],
+      "summary": "Prevê aliciamento de Katsuragi e o desestimula ameaçando colegas",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kakeru-ryuen.v11-c040",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        375,
+        377,
+        379,
+        381,
+        387,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396,
+        397,
+        398
+      ],
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "evidence_refs": [
+        "y1v11.ev.040"
+      ],
+      "summary": "Cria plano de pressão gradual sobre a Classe B e coleta de informações",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.ishizaki.v11-c041",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        375,
+        376,
+        377,
+        378,
+        379,
+        380,
+        381,
+        383
+      ],
+      "primary_actor_id": "actor.ishizaki",
+      "evidence_refs": [
+        "y1v11.ev.041"
+      ],
+      "summary": "Solicita participação estratégica de Ryūen após recusa inicial",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.hiyori-shiina.v11-c042",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387,
+        388,
+        389
+      ],
+      "primary_actor_id": "actor.hiyori-shiina",
+      "evidence_refs": [
+        "y1v11.ev.042"
+      ],
+      "summary": "Convoca colegas para aproximar Ryūen, Ibuki e Ishizaki",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.mio-ibuki.v11-c043",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        382,
+        383,
+        384,
+        385,
+        387,
+        388,
+        389,
+        392,
+        393,
+        398
+      ],
+      "primary_actor_id": "actor.mio-ibuki",
+      "evidence_refs": [
+        "y1v11.ev.043"
+      ],
+      "summary": "Questiona plano de Ryūen e aceita cooperar sob resistência",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.honami-ichinose.v11-c044",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374
+      ],
+      "primary_actor_id": "actor.honami-ichinose",
+      "evidence_refs": [
+        "y1v11.ev.044"
+      ],
+      "summary": "Hesita ao escolher participante de caratê e perde por decisão escolar",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kakeru-ryuen.v11-c045",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        391,
+        392,
+        395,
+        396,
+        398
+      ],
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "evidence_refs": [
+        "y1v11.ev.045"
+      ],
+      "summary": "Usa o comando para explorar fraqueza de B e termina como vencedor",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.miyake.v11-c046",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        399,
+        400
+      ],
+      "primary_actor_id": "actor.miyake",
+      "evidence_refs": [
+        "y1v11.ev.046"
+      ],
+      "summary": "Contribui para a vitória de C na prova de arco e flecha",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.suzune-horikita.v11-c047",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        319,
+        320,
+        402,
+        404,
+        405,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        425,
+        426
+      ],
+      "primary_actor_id": "actor.suzune-horikita",
+      "evidence_refs": [
+        "y1v11.ev.047"
+      ],
+      "summary": "Joga xadrez após treinamento e segue instruções do comandante",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.hashimoto.v11-c048",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        402,
+        405,
+        408,
+        410,
+        414,
+        415,
+        416,
+        420
+      ],
+      "primary_actor_id": "actor.hashimoto",
+      "evidence_refs": [
+        "y1v11.ev.048"
+      ],
+      "summary": "Joga xadrez contra Suzune e recebe instruções de Arisu",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c049",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        440,
+        441,
+        442
+      ],
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_refs": [
+        "y1v11.ev.049"
+      ],
+      "summary": "Intervém na partida de xadrez e distingue entrada enviada de comando reproduzido",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.arisu-sakayanagi.v11-c050",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        414,
+        415,
+        416,
+        417,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        438,
+        439,
+        440
+      ],
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_refs": [
+        "y1v11.ev.050"
+      ],
+      "summary": "Orienta Hashimoto e reconhece força de Kiyotaka sem conhecer adulteração até revelação",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.tsukishiro.v11-c051",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        433,
+        434,
+        436,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444
+      ],
+      "primary_actor_id": "actor.tsukishiro",
+      "evidence_refs": [
+        "y1v11.ev.051"
+      ],
+      "summary": "Interfere em canal de comandos para mudar lance de Kiyotaka no xadrez",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.arisu-sakayanagi.v11-c052",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        450
+      ],
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_refs": [
+        "y1v11.ev.052"
+      ],
+      "summary": "Contesta interferência e pede revanche privada a partir de lance alterado",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kiyotaka-ayanokoji.v11-c053",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        445,
+        446,
+        447,
+        448,
+        449,
+        450
+      ],
+      "primary_actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_refs": [
+        "y1v11.ev.053"
+      ],
+      "summary": "Aceita revanche e evita afirmar superioridade universal a partir de uma partida",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.arisu-sakayanagi.v11-c054",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453
+      ],
+      "primary_actor_id": "actor.arisu-sakayanagi",
+      "evidence_refs": [
+        "y1v11.ev.054"
+      ],
+      "summary": "Reavalia concepção de talento e reconsidera sua rivalidade com Kiyotaka",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.kakeru-ryuen.v11-c055",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        368,
+        370,
+        374,
+        393,
+        394,
+        395,
+        398,
+        436,
+        437
+      ],
+      "primary_actor_id": "actor.kakeru-ryuen",
+      "evidence_refs": [
+        "y1v11.ev.055"
+      ],
+      "summary": "Retorna ao comando de D e vence disputa contra Ichinose",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.case.honami-ichinose.v11-c056",
+      "kind": "BEHAVIORAL_CASE",
+      "pdf_pages": [
+        368,
+        369,
+        370,
+        374,
+        436,
+        437
+      ],
+      "primary_actor_id": "actor.honami-ichinose",
+      "evidence_refs": [
+        "y1v11.ev.056"
+      ],
+      "summary": "Sofre derrota apesar de sorteios favoráveis e enfrenta adversário proativo",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.001",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        445,
+        446,
+        449,
+        450
+      ],
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "summary": "Arisu's pre-school observation is one-way; later direct chess rivalry and acknowledgment do not backdate mutual familiarity",
+      "evidence_refs": [
+        "y1v11.ev.001"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.002",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "actors": [
+        "actor.tsukishiro",
+        "actor.mashima",
+        "actor.sae-chiyabashira"
+      ],
+      "summary": "Acting director imposes revised exam despite teacher resistance; different authority levels",
+      "evidence_refs": [
+        "y1v11.ev.002"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.003",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "actors": [
+        "actor.sae-chiyabashira",
+        "actor.chie-hoshinomiya",
+        "actor.mashima"
+      ],
+      "summary": "Old student rivalry survives as professional interpersonal tension, not automatically collusion",
+      "evidence_refs": [
+        "y1v11.ev.005"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.004",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        55,
+        62,
+        63,
+        64,
+        65,
+        66
+      ],
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.ishizaki"
+      ],
+      "summary": "Privately negotiated preferences align matchups; draw itself remains random",
+      "evidence_refs": [
+        "y1v11.ev.010"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.005",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        318,
+        319
+      ],
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "summary": "Suzune both deflects suspicion and delegates commander role; knows only classroom and actual messages",
+      "evidence_refs": [
+        "y1v11.ev.008"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.006",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        72,
+        78,
+        80,
+        82,
+        83,
+        84,
+        85,
+        88,
+        89,
+        187,
+        188,
+        189,
+        207,
+        208,
+        209,
+        210
+      ],
+      "actors": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "summary": "Private coordination and White Day ambiguities; no mandatory declared couple",
+      "evidence_refs": [
+        "y1v11.ev.011"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.008",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        295,
+        297,
+        299,
+        300,
+        301,
+        302,
+        303,
+        307,
+        308,
+        309,
+        310,
+        311
+      ],
+      "actors": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "summary": "Hirata reveals pre-enrollment history only in subsequent private conversation; boundaries of third-party knowledge",
+      "evidence_refs": [
+        "y1v11.ev.028"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.009",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        137,
+        139,
+        140,
+        141,
+        155,
+        158,
+        240,
+        241,
+        242
+      ],
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.yukimura"
+      ],
+      "summary": "Collaborate on event selection, security, and provisional Katsuragi maneuver",
+      "evidence_refs": [
+        "y1v11.ev.025"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.010",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        271,
+        273,
+        276,
+        278,
+        279,
+        280,
+        363,
+        364,
+        365,
+        366
+      ],
+      "actors": [
+        "actor.katsuragi",
+        "actor.arisu-sakayanagi",
+        "actor.yukimura"
+      ],
+      "summary": "Katsuragi's apparent willingness to throw is overridden by pressure from Arisu about other classmates",
+      "evidence_refs": [
+        "y1v11.ev.026"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.011",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        375,
+        377,
+        381,
+        383,
+        387,
+        389,
+        391,
+        392,
+        393,
+        395,
+        396,
+        398
+      ],
+      "actors": [
+        "actor.kakeru-ryuen",
+        "actor.ishizaki",
+        "actor.mio-ibuki",
+        "actor.hiyori-shiina"
+      ],
+      "summary": "Invitation and preparation revive Ryuen role; each participant has different motivations",
+      "evidence_refs": [
+        "y1v11.ev.040"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.012",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        170,
+        171,
+        172,
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        436,
+        437
+      ],
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.kakeru-ryuen"
+      ],
+      "summary": "Class D gradual pressure and Class B defense; success in source not universal",
+      "evidence_refs": [
+        "y1v11.ev.044"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.013",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        402,
+        404,
+        405,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417
+      ],
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.hashimoto"
+      ],
+      "summary": "Student chess match with external commander assistance",
+      "evidence_refs": [
+        "y1v11.ev.047"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.014",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        433,
+        434,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445
+      ],
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.tsukishiro"
+      ],
+      "summary": "Arisu confronts acting director when computer intervention is disclosed; not proof she knew beforehand",
+      "evidence_refs": [
+        "y1v11.ev.051"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.015",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        429,
+        433,
+        440,
+        441,
+        442,
+        443,
+        444
+      ],
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.tsukishiro"
+      ],
+      "summary": "Actor knows original command not reproduced; power to expose institution is limited",
+      "evidence_refs": [
+        "y1v11.ev.049"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.rel.016",
+      "kind": "RELATIONSHIP",
+      "pdf_pages": [
+        445,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453
+      ],
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "summary": "Private chess resumed from altered position; public result remains separate",
+      "evidence_refs": [
+        "y1v11.ev.052"
+      ],
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.arisu-sakayanagi.v11-g001",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        445,
+        446,
+        449,
+        450
+      ],
+      "actor_id": "actor.arisu-sakayanagi",
+      "evidence_refs": [
+        "y1v11.ev.001",
+        "y1v11.ev.054"
+      ],
+      "summary": "Acknowledges that White Room-educated Kiyotaka is a worthy chess peer",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.yosuke-hirata.v11-g002",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        299,
+        304,
+        306,
+        308,
+        309,
+        310,
+        311,
+        313,
+        314,
+        315
+      ],
+      "actor_id": "actor.yosuke-hirata",
+      "evidence_refs": [
+        "y1v11.ev.028",
+        "y1v11.ev.030"
+      ],
+      "summary": "Resumes cooperation, acknowledging limits and reliance on classmates",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.suzune-horikita.v11-g003",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        318,
+        319
+      ],
+      "actor_id": "actor.suzune-horikita",
+      "evidence_refs": [
+        "y1v11.ev.031"
+      ],
+      "summary": "Leaves on-day selection discretion to Kiyotaka after preparation",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.kiyotaka-ayanokoji.v11-g004",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        50,
+        51,
+        55,
+        63,
+        66,
+        318,
+        319
+      ],
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_refs": [
+        "y1v11.ev.007",
+        "y1v11.ev.010"
+      ],
+      "summary": "Becomes commander; pursues direct chess contest with Arisu under protection",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.kakeru-ryuen.v11-g005",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        375,
+        377,
+        381,
+        387,
+        389,
+        391,
+        392,
+        395,
+        396,
+        398
+      ],
+      "actor_id": "actor.kakeru-ryuen",
+      "evidence_refs": [
+        "y1v11.ev.040",
+        "y1v11.ev.045",
+        "y1v11.ev.055"
+      ],
+      "summary": "Plans indirect pressure to exploit Ichinose's unwillingness to confront; commands D",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.honami-ichinose.v11-g006",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        368,
+        370,
+        372,
+        373,
+        374
+      ],
+      "actor_id": "actor.honami-ichinose",
+      "evidence_refs": [
+        "y1v11.ev.018",
+        "y1v11.ev.044"
+      ],
+      "summary": "Struggles to counter protracted pressure; hesitates in event selection",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.katsuragi.v11-g007",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        271,
+        278,
+        359,
+        363,
+        365,
+        366
+      ],
+      "actor_id": "actor.katsuragi",
+      "evidence_refs": [
+        "y1v11.ev.026"
+      ],
+      "summary": "Prioritizes classmates' safety and refuses to throw event",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.kiyotaka-ayanokoji.v11-g008",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        419,
+        425,
+        429,
+        440,
+        441,
+        442,
+        445,
+        446
+      ],
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "evidence_refs": [
+        "y1v11.ev.049",
+        "y1v11.ev.053"
+      ],
+      "summary": "Recognizes channel tampering and accepts unofficial rematch without changing official standings",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.arisu-sakayanagi.v11-g009",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        440,
+        441,
+        443,
+        444,
+        445,
+        446,
+        449
+      ],
+      "actor_id": "actor.arisu-sakayanagi",
+      "evidence_refs": [
+        "y1v11.ev.051",
+        "y1v11.ev.052"
+      ],
+      "summary": "Prefers uncontaminated contest, confronts official, requests private rematch",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.ishizaki.v11-g010",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        375,
+        376,
+        377,
+        378,
+        379
+      ],
+      "actor_id": "actor.ishizaki",
+      "evidence_refs": [
+        "y1v11.ev.041"
+      ],
+      "summary": "Seeks Ryūen's strategic contribution",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.hiyori-shiina.v11-g011",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        381,
+        382,
+        383,
+        384,
+        385,
+        386,
+        387
+      ],
+      "actor_id": "actor.hiyori-shiina",
+      "evidence_refs": [
+        "y1v11.ev.042"
+      ],
+      "summary": "Arranges get-together for potential coordination",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "y1v11.goal.suzune-horikita.v11-g012",
+      "kind": "GOAL_TRANSITION",
+      "pdf_pages": [
+        319,
+        320,
+        404,
+        405,
+        408,
+        409,
+        414,
+        415,
+        416,
+        417
+      ],
+      "actor_id": "actor.suzune-horikita",
+      "evidence_refs": [
+        "y1v11.ev.047"
+      ],
+      "summary": "Trains for one week and contests school chess event with commander support",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "exam.y1.event-selection",
+      "kind": "EXAM_REFERENCE",
+      "pdf_pages": [
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        318,
+        319,
+        335,
+        348,
+        351,
+        355,
+        357,
+        359,
+        365,
+        368,
+        371,
+        374,
+        400,
+        429,
+        436,
+        440,
+        441,
+        442,
+        446
+      ],
+      "summary": "Normative school rules vs official contested result vs private chess continuation",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "evt.pre-y1.arisu-white-room-observation",
+      "kind": "BIOGRAPHY",
+      "pdf_pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "summary": "Arisu one-way childhood observation of White Room Kiyotaka; subjective genetics theory",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    },
+    {
+      "item_id": "evt.pre-y1.hirata-bullied-friend-attempted-suicide",
+      "kind": "BIOGRAPHY_EXTENSION",
+      "pdf_pages": [
+        299,
+        300,
+        301,
+        302,
+        303
+      ],
+      "summary": "Sugimura identity, ongoing coma, Hirata past coercion and school response",
+      "verified": false,
+      "independent_review": "NOT_PERFORMED",
+      "engine_memory_admission": false
+    }
+  ]
+}

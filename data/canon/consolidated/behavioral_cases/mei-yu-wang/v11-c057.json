@@ -1,0 +1,113 @@
+{
+  "id": "y1v11.case.mei-yu-wang.v11-c057",
+  "actor_id": "actor.mei-yu-wang",
+  "primary_actor_id": "actor.mei-yu-wang",
+  "title": "Mii-chan toma iniciativa de procurar Hirata quando ele se afasta das discussões",
+  "context": "Y1 V11 historical episode",
+  "observed_actions": "Disfarça a saída como ida ao banheiro e segue Hirata (p.58). Volta a se levantar quando ele abandona nova discussão, mas os colegas são convocados a permanecer (pp.110–111).",
+  "observed_result": "A tentativa inicial não reverte o isolamento; Mii-chan demonstra iniciativa anterior às conversas subsequentes.",
+  "epistemic_limits": "A atitude revela iniciativa local, não sucesso ou relação romântica confirmada.",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      58,
+      59,
+      110,
+      111
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.yosuke-hirata",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "initiative",
+    "social",
+    "emotion",
+    "relationship"
+  ],
+  "information_available": "Conhece o afastamento visível de Hirata e que a turma precisa organizar o exame. É colega dele e tem interesse em abordá-lo; não conhece ainda toda a biografia de Sugimura.",
+  "counterfactual_test": "Se Hirata aceitar conversar cedo, a necessidade de persistência diminui; caso a turma proíba sair, deve decidir entre atender ao pedido e seguir.",
+  "topics": [
+    "behavior",
+    "initiative",
+    "social",
+    "emotion",
+    "relationship",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.057"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_OBSERVED_AND_SELF_REPORTED",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "semantic_detail": {
+    "event_time": "Y1_V11_POST_ADMISSION",
+    "actor_objective_at_time": "Oferecer companhia e manter contato com Hirata sem esquecer sua própria participação nas atividades da turma.",
+    "trigger": "Hirata sai da sala após a votação anterior e evita os colegas, inclusive quando o comandante é chamado para atividade oficial.",
+    "actor_known_information": [
+      "Conhece o afastamento visível de Hirata e que a turma precisa organizar o exame.",
+      "É colega dele e tem interesse em abordá-lo; não conhece ainda toda a biografia de Sugimura."
+    ],
+    "beliefs_and_uncertainties": [
+      "Não sabe se Hirata quer ser procurado, se aceitará ajuda ou qual a causa completa do comportamento."
+    ],
+    "options_or_untaken_paths": [
+      "Dar espaço e não insistir imediatamente",
+      "Procurar outro colega/representante como intermediário",
+      "Se Hirata aceitar conversar cedo, a necessidade de persistência diminui; caso a turma proíba sair, deve decidir entre atender ao pedido e seguir."
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Disfarça a saída como ida ao banheiro e segue Hirata (p.58).",
+      "Volta a se levantar quando ele abandona nova discussão, mas os colegas são convocados a permanecer (pp.110–111)."
+    ],
+    "observed_outcome": "A tentativa inicial não reverte o isolamento; Mii-chan demonstra iniciativa anterior às conversas subsequentes.",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.yosuke-hirata",
+        "role": "pessoa procurada"
+      },
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "líder que prioriza a discussão"
+      }
+    ],
+    "causal_and_epistemic_limits": "A atitude revela iniciativa local, não sucesso ou relação romântica confirmada.",
+    "counterfactual_probes": [
+      "Se Hirata aceitar conversar cedo, a necessidade de persistência diminui; caso a turma proíba sair, deve decidir entre atender ao pedido e seguir."
+    ],
+    "source_claims": [
+      {
+        "pdf_page": 58,
+        "evidence_id": "y1v11.ev.057",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 59,
+        "evidence_id": "y1v11.ev.057",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 110,
+        "evidence_id": "y1v11.ev.057",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 111,
+        "evidence_id": "y1v11.ev.057",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      }
+    ],
+    "inference_flag": "Proações motivacionais inferidas da fala/ação quando não explicitamente declaradas",
+    "source_review": "SELF_REVIEW_DIRECT_PDF_P58_P129_TO_P151_P283_TO_P314"
+  },
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "DIRECT_PDF_WINDOWS_REVIEWED_NOT_INDEPENDENT"
+  }
+}

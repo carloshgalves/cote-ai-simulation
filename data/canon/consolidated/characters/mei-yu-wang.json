@@ -1,0 +1,137 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.mei-yu-wang",
+  "display_name": "Wang Mei-Yu (Mii-chan)",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "ln.y1.v11.en.operator-provided"
+  ],
+  "source_status": "SOURCE_BOUND_SELF_REVIEW_INDEPENDENT_REVIEW_PENDING",
+  "identity": {
+    "role_summary": "Aluna do primeiro ano da turma de Horikita; tenta apoiar Hirata após a expulsão de Yamauchi.",
+    "aliases": [
+      "Mei-Yu Wang",
+      "Wang Mei-Yu",
+      "Mii-chan"
+    ],
+    "alias_identity_evidence": {
+      "work_id": "ln.y1.v11.en.operator-provided",
+      "pdf_pages": [
+        58
+      ],
+      "source_mode": "NARRATOR_EXPLICIT_ALIAS"
+    }
+  },
+  "domains": {
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ]
+    },
+    "initiative": {
+      "behavioral_case_refs": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ]
+    },
+    "emotion": {
+      "behavioral_case_refs": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ]
+    },
+    "relationship": {
+      "behavioral_case_refs": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ]
+    }
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true,
+    "pre_enrollment_biography_not_assumed": true
+  },
+  "semantic_audit_notes": "Não atribuir a Mii-chan os motivos ou planos de Kiyotaka, nem tratar preocupação com Hirata como namoro recíproco. Atos são pós-matrícula.",
+  "retrieval_policy": {
+    "behavioral_demonstration": "ONLY_PRIMARY_ACTOR_CASES",
+    "contextual_facts": "MENTIONS_NOT_FEATS",
+    "post_divergence_memory": "NO_UNEARNED_KNOWLEDGE",
+    "verified_facts": "INDEPENDENT_AUDIT_REQUIRED"
+  },
+  "goal_transition_refs": [
+    "y1v11.goal.mei-yu-wang.v11-g013"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
+  "y1_v11_source_status": "SELF_SOURCE_REVIEW_NOT_INDEPENDENT",
+  "y1_v11_knowledge_gate": {
+    "post_admission_canon_not_simulation_memory": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.mei-yu-wang.v11-c057",
+    "y1v11.case.mei-yu-wang.v11-c058",
+    "y1v11.case.mei-yu-wang.v11-c059"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.057",
+    "y1v11.ev.058",
+    "y1v11.ev.059"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.007"
+  ],
+  "y1_v11_goal_transition_refs": [
+    "y1v11.goal.mei-yu-wang.v11-g013"
+  ]
+}

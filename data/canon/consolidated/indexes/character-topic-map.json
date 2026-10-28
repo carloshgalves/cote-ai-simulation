@@ -1826,6 +1826,18 @@
       "topics": [
         "exam"
       ]
+    },
+    "actor.mei-yu-wang": {
+      "path": "data/canon/consolidated/characters/mei-yu-wang.json",
+      "modeling_tier": "INTERMEDIATE_CANDIDATE",
+      "topics": [
+        "behavior",
+        "emotion",
+        "initiative",
+        "relationship",
+        "social",
+        "y1_v11"
+      ]
     }
   },
   "topics_by_actor": {
@@ -11635,6 +11647,56 @@
       "exam": [
         "y1v08.ev.069"
       ]
+    },
+    "actor.mei-yu-wang": {
+      "behavior": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059",
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ],
+      "emotion": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059",
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ],
+      "initiative": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059",
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ],
+      "relationship": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059",
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ],
+      "social": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059",
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ],
+      "y1_v11": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059",
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ]
     }
   },
   "retrieval": "Direct actor/domain map with separated action/context lanes; no sequential volume scans",
@@ -15213,6 +15275,38 @@
     },
     "actor.ninomiya": {
       "exam": []
+    },
+    "actor.mei-yu-wang": {
+      "behavior": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ],
+      "emotion": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ],
+      "initiative": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ],
+      "relationship": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ],
+      "social": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ],
+      "y1_v11": [
+        "y1v11.case.mei-yu-wang.v11-c057",
+        "y1v11.case.mei-yu-wang.v11-c058",
+        "y1v11.case.mei-yu-wang.v11-c059"
+      ]
     }
   },
   "context_mentions_by_actor_topic": {
@@ -23471,6 +23565,38 @@
       "exam": [
         "y1v08.ev.069"
       ]
+    },
+    "actor.mei-yu-wang": {
+      "behavior": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ],
+      "emotion": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ],
+      "initiative": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ],
+      "relationship": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ],
+      "social": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ],
+      "y1_v11": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059"
+      ]
     }
   },
   "gate_contract": {
@@ -24006,6 +24132,9 @@
     "y1v11.case.kiyotaka-ayanokoji.v11-c053": "data/canon/consolidated/behavioral_cases/kiyotaka-ayanokoji/v11-c053.json",
     "y1v11.case.arisu-sakayanagi.v11-c054": "data/canon/consolidated/behavioral_cases/arisu-sakayanagi/v11-c054.json",
     "y1v11.case.kakeru-ryuen.v11-c055": "data/canon/consolidated/behavioral_cases/kakeru-ryuen/v11-c055.json",
-    "y1v11.case.honami-ichinose.v11-c056": "data/canon/consolidated/behavioral_cases/honami-ichinose/v11-c056.json"
+    "y1v11.case.honami-ichinose.v11-c056": "data/canon/consolidated/behavioral_cases/honami-ichinose/v11-c056.json",
+    "y1v11.case.mei-yu-wang.v11-c057": "data/canon/consolidated/behavioral_cases/mei-yu-wang/v11-c057.json",
+    "y1v11.case.mei-yu-wang.v11-c058": "data/canon/consolidated/behavioral_cases/mei-yu-wang/v11-c058.json",
+    "y1v11.case.mei-yu-wang.v11-c059": "data/canon/consolidated/behavioral_cases/mei-yu-wang/v11-c059.json"
   }
 }

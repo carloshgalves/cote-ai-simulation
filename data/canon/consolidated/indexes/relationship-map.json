@@ -460,6 +460,14 @@
         "actor.arisu-sakayanagi",
         "actor.kiyotaka-ayanokoji"
       ]
+    },
+    "y1v11.rel.007": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.mei-yu-wang",
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ]
     }
   },
   "by_actor": {
@@ -491,6 +499,7 @@
       "y1v11.rel.004",
       "y1v11.rel.005",
       "y1v11.rel.006",
+      "y1v11.rel.007",
       "y1v11.rel.008",
       "y1v11.rel.015",
       "y1v11.rel.016"
@@ -499,6 +508,7 @@
       "y1v075.rel.kei-hirata",
       "y1v10.rel.001",
       "y1v10.rel.015",
+      "y1v11.rel.007",
       "y1v11.rel.008"
     ],
     "actor.maya-sato": [
@@ -652,6 +662,9 @@
     ],
     "actor.hiyori-shiina": [
       "y1v11.rel.011"
+    ],
+    "actor.mei-yu-wang": [
+      "y1v11.rel.007"
     ]
   },
   "engine_memory_admission": false,

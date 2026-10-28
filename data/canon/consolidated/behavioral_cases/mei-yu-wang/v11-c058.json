@@ -1,0 +1,231 @@
+{
+  "id": "y1v11.case.mei-yu-wang.v11-c058",
+  "actor_id": "actor.mei-yu-wang",
+  "primary_actor_id": "actor.mei-yu-wang",
+  "title": "Mii-chan insiste em oferecer companhia mesmo após rejeição pública e explica sua decisão a Kiyotaka",
+  "context": "Y1 V11 historical episode",
+  "observed_actions": "Cumprimenta Hirata apesar do clima e tenta convidá-lo ao almoço; recua ferida pela resposta (pp.129–135). Discorda da diretriz de Horikita, deixa a discussão e segue Hirata, mas hesita em falar (pp.142–149). Diz a Kiyotaka que se importa com o sofrimento alheio mesmo que passe a ser odiada; retoma a aproximação (pp.149–151).",
+  "observed_result": "Mantém a intenção e recomeça a procura; o retorno de Hirata ao convívio não acontece nesta cena e não deve ser creditado exclusivamente a ela.",
+  "epistemic_limits": "A hipótese de 'estar apaixonada' feita por Horikita/Kiyotaka não substitui a explicação expressa por ela nem prova relacionamento.",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.yosuke-hirata",
+    "actor.suzune-horikita",
+    "actor.kiyotaka-ayanokoji",
+    "actor.kikyo-kushida",
+    "actor.kei-karuizawa"
+  ],
+  "capabilities_supported": [
+    "initiative",
+    "social",
+    "emotion",
+    "relationship"
+  ],
+  "information_available": "Vê Hirata evitar o diálogo e ouvir sua recusa explícita. Horikita propõe deixá-lo sozinho e Kiyotaka a encontra no caminho para os dormitórios.",
+  "counterfactual_test": "Se Hirata solicitar privacidade por razão legítima, a agente deve pesar consentimento e riscos; persistência não se torna obrigação universal.",
+  "topics": [
+    "behavior",
+    "initiative",
+    "social",
+    "emotion",
+    "relationship",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.058"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_OBSERVED_AND_SELF_REPORTED",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "semantic_detail": {
+    "event_time": "Y1_V11_POST_ADMISSION",
+    "actor_objective_at_time": "Não abandonar alguém que julga estar em sofrimento, apesar de seu medo e vergonha após rejeição.",
+    "trigger": "Hirata a ignora, recusa almoço com agressividade verbal e afasta-se das atividades de classe.",
+    "actor_known_information": [
+      "Vê Hirata evitar o diálogo e ouvir sua recusa explícita.",
+      "Horikita propõe deixá-lo sozinho e Kiyotaka a encontra no caminho para os dormitórios."
+    ],
+    "beliefs_and_uncertainties": [
+      "Não consegue assegurar que a abordagem ajudará; teme ser odiada e pode estar confundindo afeto, culpa e dever de socorro."
+    ],
+    "options_or_untaken_paths": [
+      "Dar espaço e não insistir imediatamente",
+      "Procurar outro colega/representante como intermediário",
+      "Se Hirata solicitar privacidade por razão legítima, a agente deve pesar consentimento e riscos; persistência não se torna obrigação universal."
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Cumprimenta Hirata apesar do clima e tenta convidá-lo ao almoço; recua ferida pela resposta (pp.129–135).",
+      "Discorda da diretriz de Horikita, deixa a discussão e segue Hirata, mas hesita em falar (pp.142–149).",
+      "Diz a Kiyotaka que se importa com o sofrimento alheio mesmo que passe a ser odiada; retoma a aproximação (pp.149–151)."
+    ],
+    "observed_outcome": "Mantém a intenção e recomeça a procura; o retorno de Hirata ao convívio não acontece nesta cena e não deve ser creditado exclusivamente a ela.",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.yosuke-hirata",
+        "role": "destinatário que rejeita"
+      },
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "propositora de esperar"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "ouvinte/observador que encoraja"
+      },
+      {
+        "actor_id": "actor.kikyo-kushida",
+        "role": "colega que tenta acolher Mii-chan"
+      },
+      {
+        "actor_id": "actor.kei-karuizawa",
+        "role": "interventora após rejeição"
+      }
+    ],
+    "causal_and_epistemic_limits": "A hipótese de 'estar apaixonada' feita por Horikita/Kiyotaka não substitui a explicação expressa por ela nem prova relacionamento.",
+    "counterfactual_probes": [
+      "Se Hirata solicitar privacidade por razão legítima, a agente deve pesar consentimento e riscos; persistência não se torna obrigação universal."
+    ],
+    "source_claims": [
+      {
+        "pdf_page": 129,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 130,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 131,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 132,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 133,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 134,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 135,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 136,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 137,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 138,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 139,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 142,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 143,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 144,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 145,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 146,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 147,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 148,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 149,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 150,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      },
+      {
+        "pdf_page": 151,
+        "evidence_id": "y1v11.ev.058",
+        "review_status": "CANDIDATE_SOURCE_GROUNDED_NOT_INDEPENDENT"
+      }
+    ],
+    "inference_flag": "Proações motivacionais inferidas da fala/ação quando não explicitamente declaradas",
+    "source_review": "SELF_REVIEW_DIRECT_PDF_P58_P129_TO_P151_P283_TO_P314"
+  },
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "DIRECT_PDF_WINDOWS_REVIEWED_NOT_INDEPENDENT"
+  }
+}

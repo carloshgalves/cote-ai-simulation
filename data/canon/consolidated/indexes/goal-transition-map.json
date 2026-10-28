@@ -76,7 +76,8 @@
       "y1v11.goal.arisu-sakayanagi.v11-g009",
       "y1v11.goal.ishizaki.v11-g010",
       "y1v11.goal.hiyori-shiina.v11-g011",
-      "y1v11.goal.suzune-horikita.v11-g012"
+      "y1v11.goal.suzune-horikita.v11-g012",
+      "y1v11.goal.mei-yu-wang.v11-g013"
     ]
   },
   "by_actor": {
@@ -185,6 +186,9 @@
       "y1v10.goal.arisu-sakayanagi.v10-g004",
       "y1v11.goal.arisu-sakayanagi.v11-g001",
       "y1v11.goal.arisu-sakayanagi.v11-g009"
+    ],
+    "actor.mei-yu-wang": [
+      "y1v11.goal.mei-yu-wang.v11-g013"
     ]
   },
   "by_evidence": {
@@ -619,6 +623,15 @@
     ],
     "y1v11.ev.047": [
       "y1v11.goal.suzune-horikita.v11-g012"
+    ],
+    "y1v11.ev.057": [
+      "y1v11.goal.mei-yu-wang.v11-g013"
+    ],
+    "y1v11.ev.058": [
+      "y1v11.goal.mei-yu-wang.v11-g013"
+    ],
+    "y1v11.ev.059": [
+      "y1v11.goal.mei-yu-wang.v11-g013"
     ]
   },
   "transition_files": {
@@ -687,7 +700,8 @@
     "y1v11.goal.arisu-sakayanagi.v11-g009": "data/canon/consolidated/goal_transitions/y1-v11.json",
     "y1v11.goal.ishizaki.v11-g010": "data/canon/consolidated/goal_transitions/y1-v11.json",
     "y1v11.goal.hiyori-shiina.v11-g011": "data/canon/consolidated/goal_transitions/y1-v11.json",
-    "y1v11.goal.suzune-horikita.v11-g012": "data/canon/consolidated/goal_transitions/y1-v11.json"
+    "y1v11.goal.suzune-horikita.v11-g012": "data/canon/consolidated/goal_transitions/y1-v11.json",
+    "y1v11.goal.mei-yu-wang.v11-g013": "data/canon/consolidated/goal_transitions/y1-v11.json"
   },
   "guard": "RETRIEVAL_ONLY_NOT_AUTOMATIC_RUNTIME_GOAL_UPDATE"
 }

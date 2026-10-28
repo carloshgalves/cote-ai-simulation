@@ -403,21 +403,75 @@
       "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
       "verified": false,
       "engine_memory_admission": false
+    },
+    {
+      "id": "y1v11.rel.007",
+      "actors": [
+        "actor.mei-yu-wang",
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.057",
+        "y1v11.ev.058",
+        "y1v11.ev.059",
+        "y1v11.ev.016",
+        "y1v11.ev.030"
+      ],
+      "pdf_pages": [
+        58,
+        59,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        142,
+        143,
+        148,
+        149,
+        150,
+        151,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        313,
+        314
+      ],
+      "source_bound_change": "A iniciativa de Mii-chan precede o recuo de Hirata e seu pedido de desculpas; ações de Kiyotaka/Kōenji não são atribuídas a ela.",
+      "directional_knowledge": [
+        {
+          "actor_id": "actor.mei-yu-wang",
+          "known": "Percebe rejeição e sofrimento, não os detalhes completos do passado de Sugimura."
+        },
+        {
+          "actor_id": "actor.yosuke-hirata",
+          "known": "Sabe que Mii-chan tentou abordá-lo e depois pede desculpas."
+        },
+        {
+          "actor_id": "actor.kiyotaka-ayanokoji",
+          "known": "Testemunha e discute motivação de Mii-chan, interpretações privadas não são conhecimento dela."
+        }
+      ],
+      "relation_certainty": "OBSERVED_INTERACTIONS_AND_PRIVATE_DIALOGUE",
+      "verified": false,
+      "engine_memory_admission": false
     }
   ],
   "excluded_unmodeled_relation": {
     "candidate_id": "y1v11.rel.007",
-    "reason": "Mii-chan actor pack identity absent from current actor index; do not fabricate canonical ID",
-    "pdf_pages": [
-      129,
-      130,
-      131,
-      132,
-      133,
-      148,
-      149,
-      150,
-      151
-    ]
+    "status": "RESOLVED",
+    "canonical_actor_id": "actor.mei-yu-wang",
+    "identity_source": "Y1 V11 PDF physical p58 explicitly calls Mei-Yu Wang Mii-chan."
   }
 }

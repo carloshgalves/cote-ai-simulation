@@ -311,6 +311,7 @@
     "verified_facts": "RECORD_AUDIT_REQUIRED"
   },
   "goal_transition_refs": [
+    "y1v10.goal.mio-ibuki.v10-g006",
     "y1v7.goal.mio-ibuki.v7-g009",
     "y1v7.goal.mio-ibuki.v7-g010"
   ],

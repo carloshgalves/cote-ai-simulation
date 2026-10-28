@@ -588,10 +588,11 @@
     "quarantine_policy": "Only source-backed evidence re-reviewed at record level may be promoted; future references never seed memories."
   },
   "goal_transition_refs": [
-    "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score",
+    "y1v10.goal.kakeru-ryuen.v10-g009",
     "y1v5.goal.kakeru-ryuen.halt-coercion-and-investigate-anonymous-opponent",
-    "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation",
+    "y1v5.goal.kakeru-ryuen.prefer-horikita-humiliation-to-festival-score",
     "y1v6.goal.kakeru-ryuen.choose-false-answers-after-anonymous-ultimatum",
+    "y1v6.goal.kakeru-ryuen.seek-x-through-class-investigation",
     "y1v7.goal.kakeru-ryuen.v7-g001",
     "y1v7.goal.kakeru-ryuen.v7-g002",
     "y1v7.goal.kakeru-ryuen.v7-g003"

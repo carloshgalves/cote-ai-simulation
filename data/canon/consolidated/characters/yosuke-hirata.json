@@ -579,7 +579,10 @@
     "legacy_material_can_seed_agent": false,
     "quarantine_policy": "Only source-backed evidence re-reviewed at record level may be promoted; future references never seed memories."
   },
-  "goal_transition_refs": [],
+  "goal_transition_refs": [
+    "y1v10.goal.yosuke-hirata.v10-g001",
+    "y1v10.goal.yosuke-hirata.v10-g002"
+  ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",
   "y1_v075_source_status": "SOURCE_CANDIDATE_INDEPENDENT_REVIEW_NOT_PERFORMED",
   "y1_v075_actor_state_deltas": [

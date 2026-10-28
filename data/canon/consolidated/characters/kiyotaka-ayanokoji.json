@@ -1688,6 +1688,8 @@
     "quarantine_policy": "Only source-backed evidence re-reviewed at record level may be promoted; future references never seed memories."
   },
   "goal_transition_refs": [
+    "y1v10.goal.kiyotaka-ayanokoji.v10-g008",
+    "y1v10.goal.kiyotaka-ayanokoji.v10-g011",
     "y1v5.goal.kiyotaka-ayanokoji.allow-local-risk-for-horikita-learning",
     "y1v5.goal.kiyotaka-ayanokoji.predict-growth-and-choose-manabu-race",
     "y1v6.goal.kiyotaka-ayanokoji.join-group-without-revealing-secrets",

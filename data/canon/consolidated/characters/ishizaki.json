@@ -182,6 +182,7 @@
     "verified_facts": "RECORD_AUDIT_REQUIRED"
   },
   "goal_transition_refs": [
+    "y1v10.goal.ishizaki.v10-g007",
     "y1v7.goal.ishizaki.v7-g011"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",

@@ -517,6 +517,7 @@
     "quarantine_policy": "Only source-backed evidence re-reviewed at record level may be promoted; future references never seed memories."
   },
   "goal_transition_refs": [
+    "y1v10.goal.honami-ichinose.v10-g005",
     "y1v6.goal.honami-ichinose.help-across-classes-with-competitive-limits"
   ],
   "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE",

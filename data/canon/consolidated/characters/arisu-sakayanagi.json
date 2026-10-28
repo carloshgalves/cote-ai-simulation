@@ -418,5 +418,9 @@
       "y1v10.ev.061"
     ],
     "engine_memory_admission": false
-  }
+  },
+  "goal_transition_refs": [
+    "y1v10.goal.arisu-sakayanagi.v10-g004"
+  ],
+  "goal_transition_model": "EVIDENCE_REFERENCE_ONLY_NOT_RUNTIME_UPDATE"
 }

@@ -1,0 +1,53 @@
+{
+  "id": "y1v11.case.kakeru-ryuen.v11-c055",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "Retorna ao comando de D e vence disputa contra Ichinose",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Retorna ao comando de D e vence disputa contra Ichinose",
+  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
+  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      368,
+      370,
+      374,
+      393,
+      394,
+      395,
+      398,
+      436,
+      437
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "leadership",
+    "strategy",
+    "goal_change"
+  ],
+  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
+  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "topics": [
+    "behavior",
+    "leadership",
+    "strategy",
+    "goal_change",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.055"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  }
+}

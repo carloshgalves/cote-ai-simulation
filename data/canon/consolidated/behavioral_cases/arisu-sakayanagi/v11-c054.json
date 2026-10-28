@@ -1,0 +1,50 @@
+{
+  "id": "y1v11.case.arisu-sakayanagi.v11-c054",
+  "actor_id": "actor.arisu-sakayanagi",
+  "primary_actor_id": "actor.arisu-sakayanagi",
+  "title": "Reavalia concepção de talento e reconsidera sua rivalidade com Kiyotaka",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Reavalia concepção de talento e reconsidera sua rivalidade com Kiyotaka",
+  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
+  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      446,
+      447,
+      448,
+      449,
+      450,
+      451,
+      452,
+      453
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "belief_update",
+    "identity"
+  ],
+  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
+  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "topics": [
+    "behavior",
+    "belief_update",
+    "identity",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.054"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  }
+}

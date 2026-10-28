@@ -1,0 +1,56 @@
+{
+  "id": "y1v11.case.katsuragi.v11-c026",
+  "actor_id": "actor.katsuragi",
+  "primary_actor_id": "actor.katsuragi",
+  "title": "Enfrenta conflito entre ressentimento a Arisu e proteção dos colegas",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Enfrenta conflito entre ressentimento a Arisu e proteção dos colegas",
+  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
+  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      271,
+      273,
+      274,
+      276,
+      278,
+      279,
+      280,
+      359,
+      363,
+      364,
+      365,
+      366
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "ethics",
+    "loyalty",
+    "conflict"
+  ],
+  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
+  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "topics": [
+    "behavior",
+    "ethics",
+    "loyalty",
+    "conflict",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.026"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  }
+}

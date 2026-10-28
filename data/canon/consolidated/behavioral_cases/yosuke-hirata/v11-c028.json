@@ -1,0 +1,50 @@
+{
+  "id": "y1v11.case.yosuke-hirata.v11-c028",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "Explica nome Sugimura, coma e uso de coerção após bullying na antiga escola",
+  "context": "Pre-enrollment revelation, biographical example",
+  "observed_actions": "Explica nome Sugimura, coma e uso de coerção após bullying na antiga escola",
+  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
+  "epistemic_limits": "Past event is biographical, actor-scoped and not runtime-episodic; source's later disclosure is not its occurrence time",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      299,
+      300,
+      301,
+      302,
+      303,
+      304
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "biography",
+    "identity",
+    "ethics"
+  ],
+  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
+  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "topics": [
+    "behavior",
+    "biography",
+    "identity",
+    "ethics",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.028"
+  ],
+  "episode_scope": "PRE_ADMISSION_BIOGRAPHICAL_EVIDENCE",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  }
+}

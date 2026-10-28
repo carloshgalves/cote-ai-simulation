@@ -1,0 +1,55 @@
+{
+  "id": "y1v11.case.kei-karuizawa.v11-c011",
+  "actor_id": "actor.kei-karuizawa",
+  "primary_actor_id": "actor.kei-karuizawa",
+  "title": "Fornece informações sobre sociabilidade e negocia limites da relação com Kiyotaka",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Fornece informações sobre sociabilidade e negocia limites da relação com Kiyotaka",
+  "observed_result": "Historical episode only; source confirmation and independent assessment pending",
+  "epistemic_limits": "Do not treat narrator guesses as omniscient world truth; no guaranteed future script",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      72,
+      74,
+      78,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      88,
+      89
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "relationship",
+    "information",
+    "observation"
+  ],
+  "information_available": "Only actor-local perceptions and legitimate acquisition up to episode time",
+  "counterfactual_test": "Different fork need not execute this action or retain this outcome",
+  "topics": [
+    "behavior",
+    "relationship",
+    "information",
+    "observation",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.011"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  }
+}

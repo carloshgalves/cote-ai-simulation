@@ -1,0 +1,114 @@
+{
+  "id": "y1v11.case.arisu-sakayanagi.v11-c054",
+  "actor_id": "actor.arisu-sakayanagi",
+  "primary_actor_id": "actor.arisu-sakayanagi",
+  "title": "Reconhece a habilidade de xadrez de Kiyotaka e redefine a rivalidade, sem comprovar abandono da teoria inatista",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Reconhece habilidade excepcional do rival e revela que queria prolongar tempo junto a ele",
+  "observed_result": "Rivalidade permanece valorizada, sem refutação comprovada da tese genética nem casal declarado",
+  "epistemic_limits": "Crença sobre talento, reconhecimento de habilidade e proximidade emocional são dimensões distintas",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      446,
+      447,
+      448,
+      449,
+      450,
+      451,
+      452,
+      453,
+      454
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "belief_update",
+    "identity"
+  ],
+  "information_available": "Sabe de observação infantil, partida comprometida e continuação privada; não dispõe de conclusão científica geral",
+  "counterfactual_test": "Se experiência fosse diferente, avaliações da habilidade e sentimentos poderiam ser outros",
+  "topics": [
+    "behavior",
+    "belief_update",
+    "identity",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.054"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "source_pdf_pages": [
+      446,
+      447,
+      448,
+      449,
+      450,
+      451,
+      452,
+      453,
+      454
+    ],
+    "observed_belief_change": "Da expectativa de provar que a White Room não cria genialidade para reconhecer publicamente a si mesma a habilidade excepcional do jogador treinado ali.",
+    "not_observed": "Retratação científica explícita de hipótese genética ou aceitação de que educação por si só fabrica genialidade.",
+    "other_private_motive": "Ao final, Arisu retira sua justificativa inicial de ter evitado duelo direto para proteger a discrição de Kiyotaka e declara também o desejo pessoal de prolongar o tempo ao lado dele (pp. 453–454).",
+    "risk_of_overinterpretation": "Não presumir romance recíproco nem causalidade única para a escolha do evento.",
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Após revanche particular e conversa final com Kiyotaka",
+    "actor_objective_at_time": "Reavaliar evidência sobre rival e admitir motivos pessoais",
+    "actor_known_information": [
+      "Sabe de observação infantil, partida comprometida e continuação privada; não dispõe de conclusão científica geral"
+    ],
+    "beliefs_and_uncertainties": [
+      "Crença sobre talento, reconhecimento de habilidade e proximidade emocional são dimensões distintas"
+    ],
+    "available_alternatives": [
+      "Se experiência fosse diferente, avaliações da habilidade e sentimentos poderiam ser outros"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Reconhece habilidade excepcional do rival e revela que queria prolongar tempo junto a ele"
+    ],
+    "observed_outcome": "Rivalidade permanece valorizada, sem refutação comprovada da tese genética nem casal declarado",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "rival e ouvinte"
+      }
+    ],
+    "causal_and_epistemic_limits": "Crença sobre talento, reconhecimento de habilidade e proximidade emocional são dimensões distintas",
+    "counterfactual_probes": [
+      "Se experiência fosse diferente, avaliações da habilidade e sentimentos poderiam ser outros"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.054",
+        "pdf_pages": [
+          446,
+          447,
+          448,
+          449,
+          450,
+          451,
+          452,
+          453,
+          454
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

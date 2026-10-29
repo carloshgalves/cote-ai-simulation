@@ -1,0 +1,103 @@
+{
+  "id": "y1v11.case.sae-chiyabashira.v11-c004",
+  "actor_id": "actor.sae-chiyabashira",
+  "primary_actor_id": "actor.sae-chiyabashira",
+  "title": "Contém discussão e conversa com professores sobre risco institucional",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Observa protesto de Mashima e discute tensões posteriores com Hoshinomiya",
+  "observed_result": "Mantém posição cautelosa; tensão institucional não desaparece",
+  "epistemic_limits": "Discussão entre docentes não é conhecimento público automaticamente",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.mashima",
+    "actor.tsukishiro",
+    "actor.chie-hoshinomiya"
+  ],
+  "capabilities_supported": [
+    "institution",
+    "risk_management"
+  ],
+  "information_available": "Conhece custo normal de resgate e falta relativa de recursos das classes",
+  "counterfactual_test": "Se houver via de contestação autorizada, poderá optar por defendê-la",
+  "topics": [
+    "behavior",
+    "institution",
+    "risk_management",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.004"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Confronto entre diretor interino e docentes sobre novos exames",
+    "actor_objective_at_time": "Proteger a turma e administrar risco institucional",
+    "actor_known_information": [
+      "Conhece custo normal de resgate e falta relativa de recursos das classes"
+    ],
+    "beliefs_and_uncertainties": [
+      "Discussão entre docentes não é conhecimento público automaticamente"
+    ],
+    "available_alternatives": [
+      "Se houver via de contestação autorizada, poderá optar por defendê-la"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Observa protesto de Mashima e discute tensões posteriores com Hoshinomiya"
+    ],
+    "observed_outcome": "Mantém posição cautelosa; tensão institucional não desaparece",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.mashima",
+        "role": "professor contestador"
+      },
+      {
+        "actor_id": "actor.tsukishiro",
+        "role": "diretor interino"
+      },
+      {
+        "actor_id": "actor.chie-hoshinomiya",
+        "role": "interlocutora"
+      }
+    ],
+    "causal_and_epistemic_limits": "Discussão entre docentes não é conhecimento público automaticamente",
+    "counterfactual_probes": [
+      "Se houver via de contestação autorizada, poderá optar por defendê-la"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.004",
+        "pdf_pages": [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

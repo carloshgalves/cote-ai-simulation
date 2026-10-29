@@ -1,0 +1,103 @@
+{
+  "id": "y1v11.case.miyake.v11-c012",
+  "actor_id": "actor.miyake",
+  "primary_actor_id": "actor.miyake",
+  "title": "Propõe eventos de sorte para compensar diferença entre turmas",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Propõe modalidades de sorte como cartas e argumenta que adversário forte também pode perder",
+  "observed_result": "Colegas discutem proposta, mas probabilidade geral continua incerta",
+  "epistemic_limits": "50% em um evento não equivale a 50% na prova",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      99,
+      100,
+      101,
+      102,
+      103
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.yukimura",
+    "actor.hasebe",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "planning",
+    "reasoning",
+    "strategy"
+  ],
+  "information_available": "Lembra pedra-papel-tesoura citado por Ike; estima chance de jogo individual, não de conjunto",
+  "counterfactual_test": "Se eventos não forem sorteados ou quatro vitórias não ocorrerem, a estratégia falha",
+  "topics": [
+    "behavior",
+    "planning",
+    "reasoning",
+    "strategy",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.012"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Grupo considera classe A muito superior em competência",
+    "actor_objective_at_time": "Criar eventos de sorte capazes de reduzir vantagem do oponente",
+    "actor_known_information": [
+      "Lembra pedra-papel-tesoura citado por Ike; estima chance de jogo individual, não de conjunto"
+    ],
+    "beliefs_and_uncertainties": [
+      "50% em um evento não equivale a 50% na prova"
+    ],
+    "available_alternatives": [
+      "Se eventos não forem sorteados ou quatro vitórias não ocorrerem, a estratégia falha"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Propõe modalidades de sorte como cartas e argumenta que adversário forte também pode perder"
+    ],
+    "observed_outcome": "Colegas discutem proposta, mas probabilidade geral continua incerta",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.yukimura",
+        "role": "crítico do cálculo"
+      },
+      {
+        "actor_id": "actor.hasebe",
+        "role": "interlocutora"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante ouvinte"
+      }
+    ],
+    "causal_and_epistemic_limits": "50% em um evento não equivale a 50% na prova",
+    "counterfactual_probes": [
+      "Se eventos não forem sorteados ou quatro vitórias não ocorrerem, a estratégia falha"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.012",
+        "pdf_pages": [
+          99,
+          100,
+          101,
+          102,
+          103
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

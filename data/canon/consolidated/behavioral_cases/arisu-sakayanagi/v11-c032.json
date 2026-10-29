@@ -1,0 +1,106 @@
+{
+  "id": "y1v11.case.arisu-sakayanagi.v11-c032",
+  "actor_id": "actor.arisu-sakayanagi",
+  "primary_actor_id": "actor.arisu-sakayanagi",
+  "title": "Dirige decisões de eventos e participantes da Classe A",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Seleciona provas acadêmicas e prepara participantes, preservando espaço para comandos em eventos",
+  "observed_result": "Classe A consegue usar vantagem em provas acadêmicas e chega ao confronto decisivo",
+  "epistemic_limits": "A superioridade observada é por equipe e evento, não score absoluto da comandante",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      321,
+      322,
+      323,
+      330,
+      331,
+      334,
+      335,
+      338,
+      341,
+      348
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.hashimoto"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "planning"
+  ],
+  "information_available": "Conhece aptidões e eventos que submeteu; desconhece resultados do sorteio e todas as opções de Kiyotaka",
+  "counterfactual_test": "Sorteio com menos provas acadêmicas poderia comprometer estratégia",
+  "topics": [
+    "behavior",
+    "strategy",
+    "planning",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.032"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Classe A enfrenta C sob catálogo de eventos homologado",
+    "actor_objective_at_time": "Usar competência coletiva de A para vencer disputa contra comandante rival",
+    "actor_known_information": [
+      "Conhece aptidões e eventos que submeteu; desconhece resultados do sorteio e todas as opções de Kiyotaka"
+    ],
+    "beliefs_and_uncertainties": [
+      "A superioridade observada é por equipe e evento, não score absoluto da comandante"
+    ],
+    "available_alternatives": [
+      "Sorteio com menos provas acadêmicas poderia comprometer estratégia"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Seleciona provas acadêmicas e prepara participantes, preservando espaço para comandos em eventos"
+    ],
+    "observed_outcome": "Classe A consegue usar vantagem em provas acadêmicas e chega ao confronto decisivo",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante adversário"
+      },
+      {
+        "actor_id": "actor.hashimoto",
+        "role": "jogador mais tarde escalado"
+      }
+    ],
+    "causal_and_epistemic_limits": "A superioridade observada é por equipe e evento, não score absoluto da comandante",
+    "counterfactual_probes": [
+      "Sorteio com menos provas acadêmicas poderia comprometer estratégia"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.032",
+        "pdf_pages": [
+          321,
+          322,
+          323,
+          330,
+          331,
+          334,
+          335,
+          338,
+          341,
+          348
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

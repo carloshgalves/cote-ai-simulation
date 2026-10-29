@@ -1,0 +1,135 @@
+{
+  "id": "y1v11.case.honami-ichinose.v11-c044",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "Durante o sexto evento (judô), esgota o prazo de escalação diante de Albert; Mashima declara vitória de D por padrão",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Não realiza escalação até o prazo Mashima decide não sortear estudante e determina derrota por padrão",
+  "observed_result": "D conquista quarta vitória e assegura resultado geral; sétimo evento ainda deve ocorrer",
+  "epistemic_limits": "Não confundir com quinto evento de caratê, que foi disputado; prevalece decisão excepcional de Mashima",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      368,
+      369,
+      370,
+      371,
+      372,
+      373,
+      374
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kakeru-ryuen",
+    "actor.sae-chiyabashira",
+    "actor.kiyotaka-ayanokoji",
+    "actor.mashima"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "stress"
+  ],
+  "information_available": "Ichinose sabe do limite de trinta segundos e da diferença física de Albert, mas não escolhe adversário",
+  "counterfactual_test": "Se escolher antes do prazo ou houver autorização de substituição segura, o combate pode ocorrer com resultado desconhecido",
+  "topics": [
+    "behavior",
+    "leadership",
+    "stress",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.044"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ON_DAY_SIXTH_JUDO_EVENT_DIRECT_AND_TEACHER_RULING",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "source_pdf_pages": [
+      371,
+      372,
+      373,
+      374
+    ],
+    "event_time": "Y1_MARCH_22_SIXTH_EVENT",
+    "causal_preconditions": [
+      "A Classe B perdeu a quinta prova de caratê apesar de escalação e uma tentativa de revanche.",
+      "A Classe B estava sob pressão e precisava vencer a sexta prova."
+    ],
+    "known_inputs": [
+      "Evento de judô exige um participante por classe.",
+      "Ryūen seleciona Albert imediatamente.",
+      "O comandante deve escolher dentro de 30 segundos; na regra geral, faltas seriam supridas aleatoriamente."
+    ],
+    "local_decision": "Ichinose não conclui uma escalação antes do timeout, sem enunciar estratégia alternativa.",
+    "institutional_override": "Mashima avalia risco físico e decreta derrota da Classe B sem designação aleatória de substituto.",
+    "outcome": "Classe D atinge quatro vitórias e assegura a vitória geral, embora a prova final ainda deva ocorrer.",
+    "epistemic_limit": "Não implica incapacidade permanente de Ichinose; não converter forfait oficial por segurança em regra geral de todo timeout.",
+    "counterfactuals": [
+      "Se a comandante tivesse escolhido participante a tempo, o judô poderia ter sido disputado, resultado desconhecido.",
+      "Se Mashima aplicasse fallback aleatório, o participante escolhido e suas consequências dependeriam das regras e avaliação de segurança."
+    ],
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Na sexta prova, judô, D escala Albert imediatamente",
+    "actor_objective_at_time": "Evitar expor aluno de B a confronto potencialmente inseguro enquanto precisa vencer",
+    "actor_known_information": [
+      "Ichinose sabe do limite de trinta segundos e da diferença física de Albert, mas não escolhe adversário"
+    ],
+    "beliefs_and_uncertainties": [
+      "Não confundir com quinto evento de caratê, que foi disputado; prevalece decisão excepcional de Mashima"
+    ],
+    "available_alternatives": [
+      "Se escolher antes do prazo ou houver autorização de substituição segura, o combate pode ocorrer com resultado desconhecido"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Não realiza escalação até o prazo",
+      "Mashima decide não sortear estudante e determina derrota por padrão"
+    ],
+    "observed_outcome": "D conquista quarta vitória e assegura resultado geral; sétimo evento ainda deve ocorrer",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kakeru-ryuen",
+        "role": "comandante adversário"
+      },
+      {
+        "actor_id": "actor.sae-chiyabashira",
+        "role": "docente da outra classe"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "observador externo"
+      },
+      {
+        "actor_id": "actor.mashima",
+        "role": "professor e autoridade que determina o resultado por segurança no sexto evento (judô)"
+      }
+    ],
+    "causal_and_epistemic_limits": "Não confundir com quinto evento de caratê, que foi disputado; prevalece decisão excepcional de Mashima",
+    "counterfactual_probes": [
+      "Se escolher antes do prazo ou houver autorização de substituição segura, o combate pode ocorrer com resultado desconhecido"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.044",
+        "pdf_pages": [
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

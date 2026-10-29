@@ -1,0 +1,114 @@
+{
+  "id": "y1v11.case.yukimura.v11-c025",
+  "actor_id": "actor.yukimura",
+  "primary_actor_id": "actor.yukimura",
+  "title": "Busca explorar dissidência de Katsuragi por meio de negociação",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Procura Katsuragi, sugere vantagem mútua e recebe informações sobre escolhas previstas",
+  "observed_result": "O grupo obtém dados valiosos, mas promessas de sabotagem não são garantia de execução",
+  "epistemic_limits": "Acesso informativo não demonstra que Katsuragi sabotou efetivamente a própria classe",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      271,
+      272,
+      273,
+      274,
+      275,
+      276,
+      277,
+      278
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.katsuragi",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "negotiation"
+  ],
+  "information_available": "Sabe da divisão de facções de A e dos riscos de negociar com rival",
+  "counterfactual_test": "Se Katsuragi recuar sob ameaça a colegas, o plano de entregar eventos falha",
+  "topics": [
+    "behavior",
+    "strategy",
+    "negotiation",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.025"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Descontentamento de Katsuragi com Arisu abre possível brecha competitiva",
+    "actor_objective_at_time": "Obter dados ou cooperação para fortalecer classe C",
+    "actor_known_information": [
+      "Sabe da divisão de facções de A e dos riscos de negociar com rival"
+    ],
+    "beliefs_and_uncertainties": [
+      "Acesso informativo não demonstra que Katsuragi sabotou efetivamente a própria classe"
+    ],
+    "available_alternatives": [
+      "Se Katsuragi recuar sob ameaça a colegas, o plano de entregar eventos falha"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Procura Katsuragi, sugere vantagem mútua e recebe informações sobre escolhas previstas"
+    ],
+    "observed_outcome": "O grupo obtém dados valiosos, mas promessas de sabotagem não são garantia de execução",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.katsuragi",
+        "role": "interlocutor com interesses conflitantes"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "colega de Keisei"
+      }
+    ],
+    "causal_and_epistemic_limits": "Acesso informativo não demonstra que Katsuragi sabotou efetivamente a própria classe",
+    "counterfactual_probes": [
+      "Se Katsuragi recuar sob ameaça a colegas, o plano de entregar eventos falha"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.025",
+        "pdf_pages": [
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          271,
+          272,
+          273,
+          274,
+          275,
+          276,
+          277,
+          278
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

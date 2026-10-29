@@ -1,0 +1,109 @@
+{
+  "id": "y1v11.case.kiyotaka-ayanokoji.v11-c027",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Avalia riscos do aliciamento de Katsuragi e ausência de cooperação garantida",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Acompanha conversa, interpreta compromissos como condicionais e posterga repassar tudo a Suzune",
+  "observed_result": "Obtém informação útil, mas a estratégia pode falhar sem apoio real de Katsuragi",
+  "epistemic_limits": "A estratégia do colega e a decisão de reter notícia não devem ser confundidas",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      240,
+      242,
+      271,
+      273,
+      276,
+      277,
+      278,
+      279,
+      280
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.yukimura",
+    "actor.katsuragi",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "risk_management"
+  ],
+  "information_available": "Tem contexto da oposição interna de A, sabe que Suzune desconhece contato e que o plano pode não executar",
+  "counterfactual_test": "Se indiscrição revelar acordo, Arisu poderá mudar escalação ou retaliar",
+  "topics": [
+    "behavior",
+    "strategy",
+    "risk_management",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.027"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Keisei busca informação da facção de Katsuragi",
+    "actor_objective_at_time": "Avaliar valor da informação e risco da tentativa de cooptação",
+    "actor_known_information": [
+      "Tem contexto da oposição interna de A, sabe que Suzune desconhece contato e que o plano pode não executar"
+    ],
+    "beliefs_and_uncertainties": [
+      "A estratégia do colega e a decisão de reter notícia não devem ser confundidas"
+    ],
+    "available_alternatives": [
+      "Se indiscrição revelar acordo, Arisu poderá mudar escalação ou retaliar"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Acompanha conversa, interpreta compromissos como condicionais e posterga repassar tudo a Suzune"
+    ],
+    "observed_outcome": "Obtém informação útil, mas a estratégia pode falhar sem apoio real de Katsuragi",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.yukimura",
+        "role": "iniciador da aproximação"
+      },
+      {
+        "actor_id": "actor.katsuragi",
+        "role": "informante condicional"
+      },
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "líder não informada imediatamente"
+      }
+    ],
+    "causal_and_epistemic_limits": "A estratégia do colega e a decisão de reter notícia não devem ser confundidas",
+    "counterfactual_probes": [
+      "Se indiscrição revelar acordo, Arisu poderá mudar escalação ou retaliar"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.027",
+        "pdf_pages": [
+          240,
+          242,
+          271,
+          273,
+          276,
+          277,
+          278,
+          279,
+          280
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

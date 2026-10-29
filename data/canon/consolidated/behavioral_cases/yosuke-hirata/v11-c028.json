@@ -1,0 +1,111 @@
+{
+  "id": "y1v11.case.yosuke-hirata.v11-c028",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "Revela a Kiyotaka, já na ANHS, fatos biográficos sobre Sugimura, coma e coerção na escola anterior",
+  "context": "Pre-enrollment revelation, biographical example",
+  "observed_actions": "Relata coma de Sugimura e controle coercitivo na escola anterior conversa atual ocorre na ANHS",
+  "observed_result": "Kiyotaka obtém mais contexto da história e pode confrontar a crise atual",
+  "epistemic_limits": "O nome Sugimura já era conhecido ao interlocutor; não afirmar primeira revelação do nome nessa cena",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      299,
+      300,
+      301,
+      302,
+      303,
+      304
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "biography",
+    "identity",
+    "ethics"
+  ],
+  "information_available": "Hirata sabe sua história com Sugimura; Kiyotaka já recorda o nome ao iniciar a conversa",
+  "counterfactual_test": "Sem conversa equivalente em outro fork, Kiyotaka não recebe automaticamente todos os detalhes",
+  "topics": [
+    "behavior",
+    "biography",
+    "identity",
+    "ethics",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.028"
+  ],
+  "episode_scope": "POST_ADMISSION_PRIVATE_DISCLOSURE_OF_PRE_ADMISSION_BIOGRAPHY",
+  "source_mode": "PRIVATE_FIRST_PERSON_DISCLOSURE_WITH_DISTINCT_EVENT_TIMES",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_of_disclosure": "Y1_V11_ANHS_PRIVATE_SCENE",
+    "time_of_described_events": "PRE_Y1_MIDDLE_SCHOOL",
+    "recipient_actor_id": "actor.kiyotaka-ayanokoji",
+    "not_initially_public": true,
+    "source_pdf_pages": [
+      299,
+      300,
+      301,
+      302,
+      303,
+      304
+    ],
+    "knowledge_created": "Kiyotaka hears or recollects some details, including Sugimura's name and coma condition, through this dialogue; other students do not automatically know.",
+    "confidence": "Hirata self-report; Kiyotaka narration sometimes contains inference.",
+    "counterfactual": "In a divergent simulation, Kiyotaka learns the details only if an equivalent authorized disclosure occurs.",
+    "event_time_scope": "Y1_V11_PRIVATE_DISCLOSURE_OF_PRE_Y1_FACTS",
+    "trigger": "Kiyotaka encontra Hirata durante crise pós-expulsão",
+    "actor_objective_at_time": "Fazer compreender a origem de culpa e controle sem confundir passado e presente",
+    "actor_known_information": [
+      "Hirata sabe sua história com Sugimura; Kiyotaka já recorda o nome ao iniciar a conversa"
+    ],
+    "beliefs_and_uncertainties": [
+      "O nome Sugimura já era conhecido ao interlocutor; não afirmar primeira revelação do nome nessa cena"
+    ],
+    "available_alternatives": [
+      "Sem conversa equivalente em outro fork, Kiyotaka não recebe automaticamente todos os detalhes"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Relata coma de Sugimura e controle coercitivo na escola anterior",
+      "conversa atual ocorre na ANHS"
+    ],
+    "observed_outcome": "Kiyotaka obtém mais contexto da história e pode confrontar a crise atual",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "destinatário atual da divulgação"
+      }
+    ],
+    "causal_and_epistemic_limits": "O nome Sugimura já era conhecido ao interlocutor; não afirmar primeira revelação do nome nessa cena",
+    "counterfactual_probes": [
+      "Sem conversa equivalente em outro fork, Kiyotaka não recebe automaticamente todos os detalhes"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.028",
+        "pdf_pages": [
+          299,
+          300,
+          301,
+          302,
+          303,
+          304
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

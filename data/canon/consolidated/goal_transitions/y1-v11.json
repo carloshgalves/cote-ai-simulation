@@ -1,0 +1,639 @@
+{
+  "schema_version": "canon-actor-goal-transition-reference-v1",
+  "source_id": "ln.y1.v11.en.operator-provided",
+  "authority": "HISTORICAL_EXAMPLES_NOT_EXECUTABLE_GOAL_POLICY",
+  "purpose": "Evidence of initiative, perceived beliefs, retrospective identity, strategic reversal and leadership",
+  "truth_vs_belief_gate": "Actor speech, narrator interpretation and official results separate",
+  "future_divergence_gate": "Historical transition never seeds future runtime state",
+  "stability_gate": "No fixed character weights inferred",
+  "transitions": [
+    {
+      "id": "y1v11.goal.arisu-sakayanagi.v11-g001",
+      "actor_id": "actor.arisu-sakayanagi",
+      "kind": "BELIEF_EVIDENCE_REASSESSMENT",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          445,
+          446,
+          449,
+          450
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.001",
+        "y1v11.ev.054"
+      ],
+      "prior_goal_or_means": "Defender subjetivamente primazia genética e desafiar talento treinado na White Room.",
+      "observed_goal_or_means_after": "Reconhece Kiyotaka como jogador excepcional e rival digno, sem rejeição explícita da tese geral de talento inato.",
+      "trigger_or_new_information": "Arisu confronta evidência de desempenho excepcional de Kiyotaka no xadrez e aprende que o comando final foi adulterado.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "DIRECT_PRIVATE_ADMISSION_WITH_BELIEF_SCOPE_LIMIT",
+      "persistence_scope": "Crença de fundo pode persistir; atualização limitada à avaliação deste adversário.",
+      "contingent_alternatives": [
+        "Sem duelo direto ou revelação da fraude, pode manter avaliação anterior sem atualização comparável."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Crença de fundo pode persistir; atualização limitada à avaliação deste adversário.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "Arisu confronta evidência de desempenho excepcional de Kiyotaka no xadrez e aprende que o comando final foi adulterado.",
+        "actor_local_known_facts": "Conhece observação infantil unilateral, resultado oficial e continuação privada; não dispõe de prova genética.",
+        "update_action_or_belief": "Reavalia o rival, não uma lei científica; demonstra reconhecimento e mantém desejo competitivo.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Sem duelo direto ou revelação da fraude, pode manter avaliação anterior sem atualização comparável.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Conhece observação infantil unilateral, resultado oficial e continuação privada; não dispõe de prova genética.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.yosuke-hirata.v11-g002",
+      "actor_id": "actor.yosuke-hirata",
+      "kind": "RECOVERY_WITH_UNCERTAINTY",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          299,
+          304,
+          306,
+          308,
+          309,
+          310,
+          311,
+          313,
+          314,
+          315
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.028",
+        "y1v11.ev.030"
+      ],
+      "prior_goal_or_means": "Protect everyone and withdraw after forced loss",
+      "observed_goal_or_means_after": "Resumes cooperation, acknowledging limits and reliance on classmates",
+      "trigger_or_new_information": "Hirata sofre pela expulsão e conversa com Kiyotaka sobre bullying antigo.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "Recuperação local, não remoção permanente de culpa ou sofrimento.",
+      "contingent_alternatives": [
+        "Se a intervenção causar mais sofrimento ou faltar apoio da turma, pode não retornar naquele momento."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Recuperação local, não remoção permanente de culpa ou sofrimento.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "Hirata sofre pela expulsão e conversa com Kiyotaka sobre bullying antigo.",
+        "actor_local_known_facts": "Lembra o próprio passado e sabe da perda de Yamauchi; foi pressionado emocionalmente por Kiyotaka.",
+        "update_action_or_belief": "Chora, admite pedir ajuda e retorna ao convívio sem prometer salvar todos.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Se a intervenção causar mais sofrimento ou faltar apoio da turma, pode não retornar naquele momento.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Lembra o próprio passado e sabe da perda de Yamauchi; foi pressionado emocionalmente por Kiyotaka.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.suzune-horikita.v11-g003",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "DELEGATED_EXECUTION",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          318,
+          319
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.031"
+      ],
+      "prior_goal_or_means": "Plan most event choices and assignments",
+      "observed_goal_or_means_after": "Leaves on-day selection discretion to Kiyotaka after preparation",
+      "trigger_or_new_information": "Suzune completa preparação coletiva e autoriza comandante a decidir em tempo real.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "Delegação não transfere autoria nem conhecimento privado do comandante.",
+      "contingent_alternatives": [
+        "Com confiança menor no comandante, pode exigir outro processo de revisão, dentro da autoridade permitida."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Delegação não transfere autoria nem conhecimento privado do comandante.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "Suzune completa preparação coletiva e autoriza comandante a decidir em tempo real.",
+        "actor_local_known_facts": "Conhece fichas de treino e regras de escalação; não conhece a escolha final do sorteio.",
+        "update_action_or_belief": "Repassa informações a Kiyotaka e deixa opções de participantes para execução.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Com confiança menor no comandante, pode exigir outro processo de revisão, dentro da autoridade permitida.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Conhece fichas de treino e regras de escalação; não conhece a escolha final do sorteio.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.kiyotaka-ayanokoji.v11-g004",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "SITUATIONAL_PLAN",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          50,
+          51,
+          55,
+          63,
+          66,
+          318,
+          319
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.007",
+        "y1v11.ev.010"
+      ],
+      "prior_goal_or_means": "Avoid attention and unnecessary intervention",
+      "observed_goal_or_means_after": "Becomes commander; pursues direct chess contest with Arisu under protection",
+      "trigger_or_new_information": "O cargo de comandante surge com risco de expulsão e Kiyotaka tem ponto de proteção.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "Objetivo declarado difere de motivação pessoal; não repetir voluntariado automaticamente.",
+      "contingent_alternatives": [
+        "Se não houver proteção ou adversário esperado, pode buscar papel menos visível."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Objetivo declarado difere de motivação pessoal; não repetir voluntariado automaticamente.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "O cargo de comandante surge com risco de expulsão e Kiyotaka tem ponto de proteção.",
+        "actor_local_known_facts": "Sabe do interesse de Arisu no duelo e da situação social na turma; sorteio ainda desconhecido.",
+        "update_action_or_belief": "Voluntaria-se e negocia condições públicas para ganhar comando.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Se não houver proteção ou adversário esperado, pode buscar papel menos visível.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Sabe do interesse de Arisu no duelo e da situação social na turma; sorteio ainda desconhecido.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.kakeru-ryuen.v11-g005",
+      "actor_id": "actor.kakeru-ryuen",
+      "kind": "ACTIVE_RETURN",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          375,
+          377,
+          381,
+          387,
+          389,
+          391,
+          392,
+          395,
+          396,
+          398
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.040",
+        "y1v11.ev.045",
+        "y1v11.ev.055"
+      ],
+      "prior_goal_or_means": "Had relinquished Class D leadership following V7 conflict",
+      "observed_goal_or_means_after": "Plans indirect pressure to exploit Ichinose's unwillingness to confront; commands D",
+      "trigger_or_new_information": "Ishizaki e Hiyori convocam Ryūen depois de seu afastamento.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "Capacidade estratégica não legitima coerção nem garante êxito.",
+      "contingent_alternatives": [
+        "Se recusar convite ou escola barrar pressão, D pode não vencer."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Capacidade estratégica não legitima coerção nem garante êxito.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "Ishizaki e Hiyori convocam Ryūen depois de seu afastamento.",
+        "actor_local_known_facts": "Conhece circunstâncias da classe D e alternativas físicas, não respostas completas de B.",
+        "update_action_or_belief": "Volta à iniciativa e planeja campanha pré-exame, com resultado oficial favorável.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Se recusar convite ou escola barrar pressão, D pode não vencer.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Conhece circunstâncias da classe D e alternativas físicas, não respostas completas de B.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.honami-ichinose.v11-g006",
+      "actor_id": "actor.honami-ichinose",
+      "kind": "CONFLICT_EXPOSURE",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          368,
+          370,
+          372,
+          373,
+          374
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.018",
+        "y1v11.ev.044"
+      ],
+      "prior_goal_or_means": "Lead by cooperation and trust with class peers",
+      "observed_goal_or_means_after": "Struggles to counter protracted pressure; hesitates in event selection",
+      "trigger_or_new_information": "Pressões reportadas por B se acumulam e D escala Albert no judô.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "Hesitação situada não é incapacidade fixa de liderança.",
+      "contingent_alternatives": [
+        "Se segurança for resolvida e participante escolhido no tempo, o evento pode ocorrer com outro resultado."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Hesitação situada não é incapacidade fixa de liderança.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "Pressões reportadas por B se acumulam e D escala Albert no judô.",
+        "actor_local_known_facts": "Ichinose conhece relatos, regras de seleção e risco de combate; desconhece causalidade de todos os incidentes.",
+        "update_action_or_belief": "Contém retaliação, enfrenta impasse de escalação, perde por decisão escolar específica.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Se segurança for resolvida e participante escolhido no tempo, o evento pode ocorrer com outro resultado.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Ichinose conhece relatos, regras de seleção e risco de combate; desconhece causalidade de todos os incidentes.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.katsuragi.v11-g007",
+      "actor_id": "actor.katsuragi",
+      "kind": "PRIORITY_CLARIFICATION",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          271,
+          278,
+          359,
+          363,
+          365,
+          366
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.026"
+      ],
+      "prior_goal_or_means": "Resent Sakayanagi and contemplate helping opposing class",
+      "observed_goal_or_means_after": "Prioritizes classmates' safety and refuses to throw event",
+      "trigger_or_new_information": "Katsuragi negocia com C, mas Arisu ameaça consequências para colegas.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "Ressentimento e lealdade coexistem em graus não calibrados.",
+      "contingent_alternatives": [
+        "Se Arisu não puder retaliar, pode executar outra decisão; não impor traição."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Ressentimento e lealdade coexistem em graus não calibrados.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "Katsuragi negocia com C, mas Arisu ameaça consequências para colegas.",
+        "actor_local_known_facts": "Sabe quais provas A pode usar e que ameaça a alunos que deseja proteger pesa sobre sua escolha.",
+        "update_action_or_belief": "Fornece informação, mas deixa de sabotar efetivamente o cálculo mental.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Se Arisu não puder retaliar, pode executar outra decisão; não impor traição.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Sabe quais provas A pode usar e que ameaça a alunos que deseja proteger pesa sobre sua escolha.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.kiyotaka-ayanokoji.v11-g008",
+      "actor_id": "actor.kiyotaka-ayanokoji",
+      "kind": "PLAN_FAILURE_AND_REPLAN",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          419,
+          425,
+          429,
+          440,
+          441,
+          442,
+          445,
+          446
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.049",
+        "y1v11.ev.053"
+      ],
+      "prior_goal_or_means": "Reach chess victory through legal commands",
+      "observed_goal_or_means_after": "Recognizes channel tampering and accepts unofficial rematch without changing official standings",
+      "trigger_or_new_information": "Kiyotaka identifica diferença entre comando enviado e lance recebido.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "Falha do canal é evento institucional, não falha de habilidade de Kiyotaka.",
+      "contingent_alternatives": [
+        "Se comando íntegro fosse entregue, a partida escolar poderia terminar de outro modo."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Falha do canal é evento institucional, não falha de habilidade de Kiyotaka.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "Kiyotaka identifica diferença entre comando enviado e lance recebido.",
+        "actor_local_known_facts": "Conhece própria entrada, resultado da tela e, só depois, explicação de Tsukishiro.",
+        "update_action_or_belief": "Aceita que registro oficial continue, mas participa de revanche privada.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Se comando íntegro fosse entregue, a partida escolar poderia terminar de outro modo.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Conhece própria entrada, resultado da tela e, só depois, explicação de Tsukishiro.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.arisu-sakayanagi.v11-g009",
+      "actor_id": "actor.arisu-sakayanagi",
+      "kind": "FAIRNESS_PRIORITY",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          440,
+          441,
+          443,
+          444,
+          445,
+          446,
+          449
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.051",
+        "y1v11.ev.052"
+      ],
+      "prior_goal_or_means": "Seek victory over White Room rival",
+      "observed_goal_or_means_after": "Prefers uncontaminated contest, confronts official, requests private rematch",
+      "trigger_or_new_information": "Arisu suspeita de lance incoerente e recebe confirmação de intervenção externa.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "Desejo de jogo justo não autoriza alterar resultado oficial unilateralmente.",
+      "contingent_alternatives": [
+        "Se nenhuma fraude ocorrer, não há razão equivalente para esse tipo de revanche."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Desejo de jogo justo não autoriza alterar resultado oficial unilateralmente.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "Arisu suspeita de lance incoerente e recebe confirmação de intervenção externa.",
+        "actor_local_known_facts": "Conhece seus próprios comandos e depois declaração de Tsukishiro; não sabia do desvio no momento da partida.",
+        "update_action_or_belief": "Protesta e propõe revanche para avaliar duelo sem adulteração.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Se nenhuma fraude ocorrer, não há razão equivalente para esse tipo de revanche.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Conhece seus próprios comandos e depois declaração de Tsukishiro; não sabia do desvio no momento da partida.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.ishizaki.v11-g010",
+      "actor_id": "actor.ishizaki",
+      "kind": "INITIATIVE",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          375,
+          376,
+          377,
+          378,
+          379
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.041"
+      ],
+      "prior_goal_or_means": "Save class under Kaneda command despite low competitiveness",
+      "observed_goal_or_means_after": "Seeks Ryūen's strategic contribution",
+      "trigger_or_new_information": "Ishizaki percebe que Kaneda não dispõe de vantagem clara contra B.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "Pedido espontâneo não é ordem ou planejamento de Ryūen.",
+      "contingent_alternatives": [
+        "Se receber recusa definitiva, precisa reorganizar sem estrategista anterior."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Pedido espontâneo não é ordem ou planejamento de Ryūen.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "Ishizaki percebe que Kaneda não dispõe de vantagem clara contra B.",
+        "actor_local_known_facts": "Conhece habilidade histórica de Ryūen e sabe que ele se afastou do comando.",
+        "update_action_or_belief": "Procura Ryūen e solicita participação, iniciando caminho para a reunião.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Se receber recusa definitiva, precisa reorganizar sem estrategista anterior.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Conhece habilidade histórica de Ryūen e sabe que ele se afastou do comando.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.hiyori-shiina.v11-g011",
+      "actor_id": "actor.hiyori-shiina",
+      "kind": "INITIATIVE",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          381,
+          382,
+          383,
+          384,
+          385,
+          386,
+          387
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.042"
+      ],
+      "prior_goal_or_means": "Keep interpersonal peace while perceiving tense relations",
+      "observed_goal_or_means_after": "Arranges get-together for potential coordination",
+      "trigger_or_new_information": "Hiyori percebe tensão entre antigos aliados e necessidade de conversa.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "Ela não criou a pressão sobre B e não controla o plano final.",
+      "contingent_alternatives": [
+        "Se convidados não comparecerem, a mediação falha sem equivaler a falta de iniciativa."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Ela não criou a pressão sobre B e não controla o plano final.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "Hiyori percebe tensão entre antigos aliados e necessidade de conversa.",
+        "actor_local_known_facts": "Conhece distanciamento e consegue convidar membros, não suas decisões futuras.",
+        "update_action_or_belief": "Organiza encontro e aguarda chegada tardia de Ryūen.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Se convidados não comparecerem, a mediação falha sem equivaler a falta de iniciativa.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Conhece distanciamento e consegue convidar membros, não suas decisões futuras.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.suzune-horikita.v11-g012",
+      "actor_id": "actor.suzune-horikita",
+      "kind": "LEARNING",
+      "event_time_ref": "Y1_V11_SCENE_ONLY",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          319,
+          320,
+          404,
+          405,
+          408,
+          409,
+          414,
+          415,
+          416,
+          417
+        ],
+        "mode": "SOURCE_BOUNDED_REVIEW_PENDING"
+      },
+      "evidence_refs": [
+        "y1v11.ev.047"
+      ],
+      "prior_goal_or_means": "Has minimal chess experience",
+      "observed_goal_or_means_after": "Trains for one week and contests school chess event with commander support",
+      "trigger_or_new_information": "Chess aparece entre eventos e Kiyotaka compartilha preparação intensiva.",
+      "behavioral_evidence": "Specific observations; separate narrated internal states from observable actions.",
+      "epistemic_status": "SOURCE_BOUNDED_CANDIDATE",
+      "persistence_scope": "Treino de uma semana não torna jogadora de força universal ou garante resposta certa.",
+      "contingent_alternatives": [
+        "Sem treino, escolha do evento ou canal íntegro, seus lances e resultado seriam diferentes."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Treino de uma semana não torna jogadora de força universal ou garante resposta certa.",
+      "source_review": "INDEPENDENT_ADVERSARIAL_REVIEW_PENDING",
+      "goal_update_condition": {
+        "observation_required": "Chess aparece entre eventos e Kiyotaka compartilha preparação intensiva.",
+        "actor_local_known_facts": "Suzune sabe que tem experiência limitada e precisa de comandos específicos, sem acesso à estratégia inteira.",
+        "update_action_or_belief": "Treina e representa C em partida real, chegando ao confronto decisivo com Hashimoto.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Sem treino, escolha do evento ou canal íntegro, seus lances e resultado seriam diferentes.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Suzune sabe que tem experiência limitada e precisa de comandos específicos, sem acesso à estratégia inteira.",
+      "verified": false
+    },
+    {
+      "id": "y1v11.goal.mei-yu-wang.v11-g013",
+      "actor_id": "actor.mei-yu-wang",
+      "kind": "SELF_INITIATED_SOCIAL_PERSISTENCE",
+      "event_time_ref": "Y1_V11_SCENES_P58_TO_P314",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          58,
+          129,
+          132,
+          133,
+          142,
+          149,
+          150,
+          151,
+          283,
+          285,
+          314
+        ],
+        "mode": "DIRECT_DIALOGUE_AND_BEHAVIOR"
+      },
+      "evidence_refs": [
+        "y1v11.ev.075",
+        "y1v11.ev.076",
+        "y1v11.ev.077"
+      ],
+      "prior_goal_or_means": "Ajudar Hirata e preservar vínculo sem depender de ordem da turma.",
+      "observed_goal_or_means_after": "Persistir em abordar Hirata apesar da rejeição, sem garantia de eficácia; após nova rejeição, continua emocionalmente afetada.",
+      "trigger_or_new_information": "Mii-chan observa isolamento de Hirata e sofre recusas repetidas.",
+      "behavioral_evidence": "A própria personagem explica que não quer deixá-lo sozinho em sofrimento (pp.149–150); múltiplas tentativas e consequências pp.129–151, 283–314.",
+      "epistemic_status": "EXPLICIT_FIRST_PERSON_MOTIVE_AND_OBSERVED_ACTIONS",
+      "persistence_scope": "Perseverança observada não se torna imposição permanente contra consentimento.",
+      "contingent_alternatives": [
+        "Se risco aumentar, pode optar por apoio intermediado sem contato físico; se Hirata aceitar, persistência muda de forma."
+      ],
+      "simulation_guard": "Historical case is not runtime memory, no engine goal update without a local cause; Perseverança observada não se torna imposição permanente contra consentimento.",
+      "source_review": "SELF_DIRECT_PDF_REVIEW_INDEPENDENT_PENDING",
+      "verified": false,
+      "goal_update_condition": {
+        "observation_required": "Mii-chan observa isolamento de Hirata e sofre recusas repetidas.",
+        "actor_local_known_facts": "Sabe do sofrimento visível e das próprias emoções; desconhece biografia completa de Sugimura.",
+        "update_action_or_belief": "Escolhe insistir em contato e explica a Kiyotaka por que não quer abandonar colega.",
+        "causal_status": "SOURCE_BOUND_CANDIDATE_NOT_EXECUTABLE",
+        "requires_local_event": true
+      },
+      "concrete_counterfactual_probe": {
+        "divergence": "Se risco aumentar, pode optar por apoio intermediado sem contato físico; se Hirata aceitar, persistência muda de forma.",
+        "expected": "Re-evaluate action or goal, never replay the canon.",
+        "unchanged_core": "Actor identity and past biography persist without future knowledge."
+      },
+      "actor_knowledge_boundary": "Sabe do sofrimento visível e das próprias emoções; desconhece biografia completa de Sugimura."
+    }
+  ]
+}

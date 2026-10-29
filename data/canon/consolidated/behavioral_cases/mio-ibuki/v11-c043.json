@@ -1,0 +1,111 @@
+{
+  "id": "y1v11.case.mio-ibuki.v11-c043",
+  "actor_id": "actor.mio-ibuki",
+  "primary_actor_id": "actor.mio-ibuki",
+  "title": "Questiona plano de Ryūen e aceita cooperar sob resistência",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Contesta raciocínio e decisões dele, mas aceita acompanhar parte da execução",
+  "observed_result": "Cooperação contingente; mantém dissenso e liberdade de não obedecer adiante",
+  "epistemic_limits": "Cooperação pontual não transforma subordinação em traço permanente",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      382,
+      383,
+      384,
+      385,
+      387,
+      388,
+      389,
+      392,
+      393,
+      398
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kakeru-ryuen",
+    "actor.ishizaki",
+    "actor.hiyori-shiina"
+  ],
+  "capabilities_supported": [
+    "agency",
+    "conflict"
+  ],
+  "information_available": "Ibuki conhece histórico de Ryūen e riscos de pressão sobre B",
+  "counterfactual_test": "Se risco ou ordem se tornar inaceitável, Ibuki pode recusar ou retirar apoio",
+  "topics": [
+    "behavior",
+    "agency",
+    "conflict",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.043"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Após reencontro facilitado por Hiyori, Ryūen oferece caminho agressivo",
+    "actor_objective_at_time": "Avaliar participar sem renunciar à própria crítica",
+    "actor_known_information": [
+      "Ibuki conhece histórico de Ryūen e riscos de pressão sobre B"
+    ],
+    "beliefs_and_uncertainties": [
+      "Cooperação pontual não transforma subordinação em traço permanente"
+    ],
+    "available_alternatives": [
+      "Se risco ou ordem se tornar inaceitável, Ibuki pode recusar ou retirar apoio"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Contesta raciocínio e decisões dele, mas aceita acompanhar parte da execução"
+    ],
+    "observed_outcome": "Cooperação contingente; mantém dissenso e liberdade de não obedecer adiante",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kakeru-ryuen",
+        "role": "proponente"
+      },
+      {
+        "actor_id": "actor.ishizaki",
+        "role": "aliado"
+      },
+      {
+        "actor_id": "actor.hiyori-shiina",
+        "role": "facilitadora"
+      }
+    ],
+    "causal_and_epistemic_limits": "Cooperação pontual não transforma subordinação em traço permanente",
+    "counterfactual_probes": [
+      "Se risco ou ordem se tornar inaceitável, Ibuki pode recusar ou retirar apoio"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.043",
+        "pdf_pages": [
+          382,
+          383,
+          384,
+          385,
+          387,
+          388,
+          389,
+          392,
+          393,
+          398
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "id": "y1v11.case.kiyotaka-ayanokoji.v11-c049",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Intervém na partida de xadrez e distingue entrada enviada de comando reproduzido",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Intervém por interface, percebe jogada diferente da pretendida e depois confronta a explicação de Tsukishiro",
+  "observed_result": "A escola mantém vitória A, apesar de um canal com integridade comprometida",
+  "epistemic_limits": "Não atribuir a Kiyotaka decisão pelo lance adulterado, nem chamar prova oficial íntegra",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      417,
+      418,
+      419,
+      420,
+      421,
+      422,
+      423,
+      424,
+      425,
+      426,
+      440,
+      441,
+      442
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.suzune-horikita",
+    "actor.arisu-sakayanagi",
+    "actor.tsukishiro"
+  ],
+  "capabilities_supported": [
+    "chess",
+    "strategy",
+    "epistemics"
+  ],
+  "information_available": "Sabe texto que enviou; pode comparar com tela da partida; inicialmente desconhece autor da alteração",
+  "counterfactual_test": "Se canal entregasse a mensagem intacta, posição e placar poderiam divergir",
+  "topics": [
+    "behavior",
+    "chess",
+    "strategy",
+    "epistemics",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.049"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Em xadrez, Kiyotaka percebe diferença entre ordem enviada e lance executado",
+    "actor_objective_at_time": "Vencer legitimamente mantendo rastreabilidade da instrução",
+    "actor_known_information": [
+      "Sabe texto que enviou; pode comparar com tela da partida; inicialmente desconhece autor da alteração"
+    ],
+    "beliefs_and_uncertainties": [
+      "Não atribuir a Kiyotaka decisão pelo lance adulterado, nem chamar prova oficial íntegra"
+    ],
+    "available_alternatives": [
+      "Se canal entregasse a mensagem intacta, posição e placar poderiam divergir"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Intervém por interface, percebe jogada diferente da pretendida e depois confronta a explicação de Tsukishiro"
+    ],
+    "observed_outcome": "A escola mantém vitória A, apesar de um canal com integridade comprometida",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "receptora/jogadora"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "comandante oponente"
+      },
+      {
+        "actor_id": "actor.tsukishiro",
+        "role": "autor da interferência admitida"
+      }
+    ],
+    "causal_and_epistemic_limits": "Não atribuir a Kiyotaka decisão pelo lance adulterado, nem chamar prova oficial íntegra",
+    "counterfactual_probes": [
+      "Se canal entregasse a mensagem intacta, posição e placar poderiam divergir"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.049",
+        "pdf_pages": [
+          417,
+          418,
+          419,
+          420,
+          421,
+          422,
+          423,
+          424,
+          425,
+          426,
+          440,
+          441,
+          442
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

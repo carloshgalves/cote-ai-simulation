@@ -1,0 +1,104 @@
+{
+  "id": "y1v11.case.honami-ichinose.v11-c056",
+  "actor_id": "actor.honami-ichinose",
+  "primary_actor_id": "actor.honami-ichinose",
+  "title": "Sofre derrota apesar de sorteios favoráveis e enfrenta adversário proativo",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Tenta conter escalada no judô não escolhe participante em 30 segundos, e decisão escolar encerra a prova",
+  "observed_result": "Classe B perde por 2–5; sua liderança enfrenta consequência contextual",
+  "epistemic_limits": "Não atribuir incapacidade permanente nem diagnóstico psicológico a Ichinose; resultado não prova que toda pressão foi causada por Ryūen",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      368,
+      369,
+      370,
+      374,
+      436,
+      437
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kakeru-ryuen",
+    "actor.kiyotaka-ayanokoji",
+    "actor.mashima"
+  ],
+  "capabilities_supported": [
+    "emotion",
+    "leadership"
+  ],
+  "information_available": "Ichinose conhece relatos de assédio e percebe força dos participantes rivais, porém não detém prova de causalidade de todo incidente",
+  "counterfactual_test": "Se a escola coibir pressão, ou ela designar participante seguro antes do prazo, decisão específica pode mudar",
+  "topics": [
+    "behavior",
+    "emotion",
+    "leadership",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.056"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "D promove pressão e escolhe eventos que exploram hesitação de B",
+    "actor_objective_at_time": "Preservar cooperação da Classe B e vencer sem infligir risco aos colegas",
+    "actor_known_information": [
+      "Ichinose conhece relatos de assédio e percebe força dos participantes rivais, porém não detém prova de causalidade de todo incidente"
+    ],
+    "beliefs_and_uncertainties": [
+      "Não atribuir incapacidade permanente nem diagnóstico psicológico a Ichinose; resultado não prova que toda pressão foi causada por Ryūen"
+    ],
+    "available_alternatives": [
+      "Se a escola coibir pressão, ou ela designar participante seguro antes do prazo, decisão específica pode mudar"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Tenta conter escalada",
+      "no judô não escolhe participante em 30 segundos, e decisão escolar encerra a prova"
+    ],
+    "observed_outcome": "Classe B perde por 2–5; sua liderança enfrenta consequência contextual",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kakeru-ryuen",
+        "role": "comandante adversário"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "observador"
+      },
+      {
+        "actor_id": "actor.mashima",
+        "role": "professor e autoridade que determina o resultado por segurança no sexto evento (judô)"
+      }
+    ],
+    "causal_and_epistemic_limits": "Não atribuir incapacidade permanente nem diagnóstico psicológico a Ichinose; resultado não prova que toda pressão foi causada por Ryūen",
+    "counterfactual_probes": [
+      "Se a escola coibir pressão, ou ela designar participante seguro antes do prazo, decisão específica pode mudar"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.056",
+        "pdf_pages": [
+          368,
+          369,
+          370,
+          374,
+          436,
+          437
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

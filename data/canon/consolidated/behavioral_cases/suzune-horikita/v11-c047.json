@@ -1,0 +1,127 @@
+{
+  "id": "y1v11.case.suzune-horikita.v11-c047",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "Joga xadrez após treinamento e segue instruções do comandante",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Joga contra Hashimoto, executa lances e segue instruções legitimamente transmitidas",
+  "observed_result": "A escola declara vitória de A no xadrez, mas a instrução original de Kiyotaka foi adulterada antes da entrega",
+  "epistemic_limits": "Jogadora e comandante são agentes distintos; não atribuir lance alterado à vontade de Suzune",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      319,
+      320,
+      402,
+      404,
+      405,
+      408,
+      409,
+      410,
+      411,
+      412,
+      413,
+      414,
+      415,
+      416,
+      417,
+      425,
+      426
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.hashimoto",
+    "actor.arisu-sakayanagi"
+  ],
+  "capabilities_supported": [
+    "chess",
+    "learning",
+    "motivation"
+  ],
+  "information_available": "Suzune aprendeu fundamentos recentes; recebe comandos por canal permitido, não conhece todos os cálculos do comandante",
+  "counterfactual_test": "Se instrução recebida fosse íntegra, o desfecho poderia mudar sem que Suzune ganhe capacidade de mestre",
+  "topics": [
+    "behavior",
+    "chess",
+    "learning",
+    "motivation",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.047"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Chess aparece na sequência decisiva após semana de treinamento",
+    "actor_objective_at_time": "Representar C e aplicar ensinamentos de Kiyotaka dentro dos limites de comando",
+    "actor_known_information": [
+      "Suzune aprendeu fundamentos recentes; recebe comandos por canal permitido, não conhece todos os cálculos do comandante"
+    ],
+    "beliefs_and_uncertainties": [
+      "Jogadora e comandante são agentes distintos; não atribuir lance alterado à vontade de Suzune"
+    ],
+    "available_alternatives": [
+      "Se instrução recebida fosse íntegra, o desfecho poderia mudar sem que Suzune ganhe capacidade de mestre"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Joga contra Hashimoto, executa lances e segue instruções legitimamente transmitidas"
+    ],
+    "observed_outcome": "A escola declara vitória de A no xadrez, mas a instrução original de Kiyotaka foi adulterada antes da entrega",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante e treinador"
+      },
+      {
+        "actor_id": "actor.hashimoto",
+        "role": "adversário que joga"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "comandante rival"
+      }
+    ],
+    "causal_and_epistemic_limits": "Jogadora e comandante são agentes distintos; não atribuir lance alterado à vontade de Suzune",
+    "counterfactual_probes": [
+      "Se instrução recebida fosse íntegra, o desfecho poderia mudar sem que Suzune ganhe capacidade de mestre"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.047",
+        "pdf_pages": [
+          319,
+          320,
+          402,
+          404,
+          405,
+          408,
+          409,
+          410,
+          411,
+          412,
+          413,
+          414,
+          415,
+          416,
+          417,
+          425,
+          426
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

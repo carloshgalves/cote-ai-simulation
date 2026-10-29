@@ -349,6 +349,125 @@
         "actor.ryuji-kanzaki",
         "actor.honami-ichinose"
       ]
+    },
+    "y1v11.rel.001": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ]
+    },
+    "y1v11.rel.002": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.tsukishiro",
+        "actor.mashima",
+        "actor.sae-chiyabashira"
+      ]
+    },
+    "y1v11.rel.003": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.sae-chiyabashira",
+        "actor.chie-hoshinomiya",
+        "actor.mashima"
+      ]
+    },
+    "y1v11.rel.004": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.ishizaki"
+      ]
+    },
+    "y1v11.rel.005": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ]
+    },
+    "y1v11.rel.006": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ]
+    },
+    "y1v11.rel.008": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ]
+    },
+    "y1v11.rel.009": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.yukimura"
+      ]
+    },
+    "y1v11.rel.010": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.katsuragi",
+        "actor.arisu-sakayanagi",
+        "actor.yukimura"
+      ]
+    },
+    "y1v11.rel.011": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.kakeru-ryuen",
+        "actor.ishizaki",
+        "actor.mio-ibuki",
+        "actor.hiyori-shiina"
+      ]
+    },
+    "y1v11.rel.012": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.kakeru-ryuen"
+      ]
+    },
+    "y1v11.rel.013": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.hashimoto"
+      ]
+    },
+    "y1v11.rel.014": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.tsukishiro"
+      ]
+    },
+    "y1v11.rel.015": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.tsukishiro"
+      ]
+    },
+    "y1v11.rel.016": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ]
+    },
+    "y1v11.rel.007": {
+      "source_path": "data/canon/consolidated/relationships/y1-v11.json",
+      "actors": [
+        "actor.mei-yu-wang",
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ]
     }
   },
   "by_actor": {
@@ -356,7 +475,8 @@
       "y1v075.rel.kei-hirata",
       "y1v075.rel.kei-kiyotaka",
       "y1v08.rel.043",
-      "y1v10.rel.010"
+      "y1v10.rel.010",
+      "y1v11.rel.006"
     ],
     "actor.kiyotaka-ayanokoji": [
       "y1v075.rel.airi-kiyotaka",
@@ -374,12 +494,22 @@
       "y1v10.rel.010",
       "y1v10.rel.011",
       "y1v10.rel.014",
-      "y1v10.rel.015"
+      "y1v10.rel.015",
+      "y1v11.rel.001",
+      "y1v11.rel.004",
+      "y1v11.rel.005",
+      "y1v11.rel.006",
+      "y1v11.rel.007",
+      "y1v11.rel.008",
+      "y1v11.rel.015",
+      "y1v11.rel.016"
     ],
     "actor.yosuke-hirata": [
       "y1v075.rel.kei-hirata",
       "y1v10.rel.001",
-      "y1v10.rel.015"
+      "y1v10.rel.015",
+      "y1v11.rel.007",
+      "y1v11.rel.008"
     ],
     "actor.maya-sato": [
       "y1v075.rel.sato-kiyotaka"
@@ -427,26 +557,36 @@
     ],
     "actor.yukimura": [
       "y1v08.rel.049",
-      "y1v08.rel.053"
+      "y1v08.rel.053",
+      "y1v11.rel.009",
+      "y1v11.rel.010"
     ],
     "actor.ishizaki": [
       "y1v08.rel.049",
       "y1v10.rel.012",
-      "y1v10.rel.013"
+      "y1v10.rel.013",
+      "y1v11.rel.004",
+      "y1v11.rel.011"
     ],
     "actor.hashimoto": [
-      "y1v08.rel.050"
+      "y1v08.rel.050",
+      "y1v11.rel.013"
     ],
     "actor.kakeru-ryuen": [
       "y1v08.rel.050",
-      "y1v10.rel.013"
+      "y1v10.rel.013",
+      "y1v11.rel.011",
+      "y1v11.rel.012"
     ],
     "actor.suzune-horikita": [
       "y1v08.rel.051",
       "y1v10.rel.001",
       "y1v10.rel.002",
       "y1v10.rel.003",
-      "y1v10.rel.004"
+      "y1v10.rel.004",
+      "y1v11.rel.005",
+      "y1v11.rel.009",
+      "y1v11.rel.013"
     ],
     "actor.kikyo-kushida": [
       "y1v08.rel.051",
@@ -457,7 +597,9 @@
       "y1v10.rel.005",
       "y1v10.rel.006",
       "y1v10.rel.012",
-      "y1v10.rel.016"
+      "y1v10.rel.016",
+      "y1v11.rel.004",
+      "y1v11.rel.012"
     ],
     "actor.miyake": [
       "y1v08.rel.053"
@@ -467,7 +609,11 @@
       "y1v10.rel.007",
       "y1v10.rel.008",
       "y1v10.rel.009",
-      "y1v10.rel.014"
+      "y1v10.rel.014",
+      "y1v11.rel.001",
+      "y1v11.rel.010",
+      "y1v11.rel.014",
+      "y1v11.rel.016"
     ],
     "actor.haruki-yamauchi": [
       "y1v08.rel.054",
@@ -483,20 +629,42 @@
       "y1v08.rel.056"
     ],
     "actor.katsuragi": [
-      "y1v10.rel.009"
+      "y1v10.rel.009",
+      "y1v11.rel.010"
     ],
     "actor.yahiko": [
       "y1v10.rel.009"
     ],
     "actor.mio-ibuki": [
       "y1v10.rel.012",
-      "y1v10.rel.013"
+      "y1v10.rel.013",
+      "y1v11.rel.011"
     ],
     "actor.tsukishiro": [
-      "y1v10.rel.014"
+      "y1v10.rel.014",
+      "y1v11.rel.002",
+      "y1v11.rel.014",
+      "y1v11.rel.015"
     ],
     "actor.ryuji-kanzaki": [
       "y1v10.rel.016"
+    ],
+    "actor.mashima": [
+      "y1v11.rel.002",
+      "y1v11.rel.003"
+    ],
+    "actor.sae-chiyabashira": [
+      "y1v11.rel.002",
+      "y1v11.rel.003"
+    ],
+    "actor.chie-hoshinomiya": [
+      "y1v11.rel.003"
+    ],
+    "actor.hiyori-shiina": [
+      "y1v11.rel.011"
+    ],
+    "actor.mei-yu-wang": [
+      "y1v11.rel.007"
     ]
   },
   "engine_memory_admission": false,
@@ -504,6 +672,7 @@
     "data/canon/consolidated/relationships/y1-v075.json",
     "data/canon/consolidated/relationships/y1-v08.json",
     "data/canon/consolidated/relationships/y1-v09.json",
-    "data/canon/consolidated/relationships/y1-v10.json"
+    "data/canon/consolidated/relationships/y1-v10.json",
+    "data/canon/consolidated/relationships/y1-v11.json"
   ]
 }

@@ -1,0 +1,3208 @@
+{
+  "schema_version": "canon-evidence-v1",
+  "source_id": "ln.y1.v11.en.operator-provided",
+  "records": [
+    {
+      "id": "y1v11.ev.001",
+      "source_catalog_id": "V11-C001",
+      "domain": "behavior",
+      "summary": "Observa Kiyotaka na White Room e formula tese sobre talento inato, contrapondo educação",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRE_ENROLLMENT_RETROSPECTIVE",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "biography",
+        "identity",
+        "belief",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Past event is biographical, actor-scoped and not runtime-episodic; source's later disclosure is not its occurrence time",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.002",
+      "source_catalog_id": "V11-C002",
+      "domain": "behavior",
+      "summary": "Defende novos exames e desconsidera resistência dos professores",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.tsukishiro"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "institution",
+        "politics",
+        "authority",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.003",
+      "source_catalog_id": "V11-C003",
+      "domain": "behavior",
+      "summary": "Protesta contra prova suplementar que força expulsões",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "ethics",
+        "institution",
+        "initiative",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.004",
+      "source_catalog_id": "V11-C004",
+      "domain": "behavior",
+      "summary": "Contém discussão e conversa com professores sobre risco institucional",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "institution",
+        "risk_management",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.005",
+      "source_catalog_id": "V11-C005",
+      "domain": "behavior",
+      "summary": "Revive rivalidade com Chabashira e admite desejo de derrotar sua classe",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.chie-hoshinomiya"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "rivalry",
+        "social",
+        "motivation",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.006",
+      "source_catalog_id": "V11-C006",
+      "domain": "behavior",
+      "summary": "Registra regras, observa desigualdade entre probabilidades de eventos",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          42,
+          43,
+          44,
+          45
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "planning",
+        "reasoning",
+        "exams",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.007",
+      "source_catalog_id": "V11-C007",
+      "domain": "behavior",
+      "summary": "Voluntaria-se comandante e busca confronto com Arisu usando ponto de proteção",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          47,
+          50,
+          51,
+          52,
+          53,
+          54
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "initiative",
+        "strategy",
+        "planning",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.008",
+      "source_catalog_id": "V11-C008",
+      "domain": "behavior",
+      "summary": "Desfaz suspeitas contra Kiyotaka e articula sua escolha como comandante",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "leadership",
+        "politics",
+        "strategy",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.009",
+      "source_catalog_id": "V11-C009",
+      "domain": "behavior",
+      "summary": "Ganha sorteio e formaliza escolha de Classe B como adversária",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          62,
+          63,
+          64,
+          65
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kaneda"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "exams",
+        "leadership",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.010",
+      "source_catalog_id": "V11-C010",
+      "domain": "behavior",
+      "summary": "Coordena previamente negociações com Ichinose e Ishizaki para pareamento C–A",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          55,
+          62,
+          63,
+          64,
+          65,
+          66
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "initiative",
+        "negotiation",
+        "strategy",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.011",
+      "source_catalog_id": "V11-C011",
+      "domain": "behavior",
+      "summary": "Fornece informações sobre sociabilidade e negocia limites da relação com Kiyotaka",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          72,
+          74,
+          78,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          88,
+          89
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "relationship",
+        "information",
+        "observation",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.012",
+      "source_catalog_id": "V11-C012",
+      "domain": "behavior",
+      "summary": "Propõe eventos de sorte para compensar diferença entre turmas",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          99,
+          100,
+          101,
+          102,
+          103
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.miyake"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "planning",
+        "reasoning",
+        "strategy",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.013",
+      "source_catalog_id": "V11-C013",
+      "domain": "behavior",
+      "summary": "Avalia e questiona aposta estatística nos eventos de sorte",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          100,
+          101,
+          102,
+          103
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "reasoning",
+        "strategy",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.014",
+      "source_catalog_id": "V11-C014",
+      "domain": "behavior",
+      "summary": "Organiza catálogo de capacidades da turma e eventos propostos",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          110,
+          112,
+          115,
+          118,
+          120,
+          125,
+          137,
+          140,
+          142,
+          155,
+          158
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "planning",
+        "leadership",
+        "teamwork",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.015",
+      "source_catalog_id": "V11-C015",
+      "domain": "behavior",
+      "summary": "Pede cautela sobre espionagem durante discussão dos eventos",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          137,
+          139,
+          140,
+          141
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "security",
+        "information",
+        "planning",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.016",
+      "source_catalog_id": "V11-C016",
+      "domain": "behavior",
+      "summary": "Afasta-se da classe e repele apoio de Mii-chan e Kei",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          125,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.mei-yu-wang"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "emotion",
+        "conflict",
+        "relationship",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.017",
+      "source_catalog_id": "V11-C017",
+      "domain": "behavior",
+      "summary": "Mobiliza rede de contatos e organiza comunicação interna",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          138,
+          139,
+          140,
+          141,
+          142
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "information",
+        "social",
+        "teamwork",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.018",
+      "source_catalog_id": "V11-C018",
+      "domain": "behavior",
+      "summary": "Desencoraja retaliação contra provocações de estudantes da D",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          178,
+          180
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "ethics",
+        "leadership",
+        "risk_management",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.019",
+      "source_catalog_id": "V11-C019",
+      "domain": "behavior",
+      "summary": "Observa sinais sociais de Ichinose e discute hipóteses com colegas",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          184,
+          185,
+          186
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.hasebe"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "observation",
+        "social",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.020",
+      "source_catalog_id": "V11-C020",
+      "domain": "behavior",
+      "summary": "Expõe a Kiyotaka seus limites políticos após a tentativa anterior de expulsá-lo",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          194,
+          195,
+          197,
+          198,
+          199,
+          200,
+          201
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "politics",
+        "deception",
+        "motivation",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.021",
+      "source_catalog_id": "V11-C021",
+      "domain": "behavior",
+      "summary": "Analisa a influência e credibilidade de Kushida sem confundir fala com intenção",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          192,
+          194,
+          195,
+          197,
+          199,
+          200,
+          203,
+          204,
+          205
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "information",
+        "initiative",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.022",
+      "source_catalog_id": "V11-C022",
+      "domain": "behavior",
+      "summary": "Interpreta presente de White Day e administra expectativas de reciprocidade",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          187,
+          188,
+          189,
+          190,
+          207,
+          208,
+          209,
+          210,
+          211
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "relationship",
+        "emotion",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.023",
+      "source_catalog_id": "V11-C023",
+      "domain": "behavior",
+      "summary": "Avalia progresso de Suzune e discute a própria graduação com Kiyotaka",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          217,
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          225,
+          226
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.manabu-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "relationship",
+        "leadership",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.024",
+      "source_catalog_id": "V11-C024",
+      "domain": "behavior",
+      "summary": "Confronta catálogo divulgado de Classe A e ajusta preparação",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "planning",
+        "exams",
+        "teamwork",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.025",
+      "source_catalog_id": "V11-C025",
+      "domain": "behavior",
+      "summary": "Busca explorar dissidência de Katsuragi por meio de negociação",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          271,
+          272,
+          273,
+          274,
+          275,
+          276,
+          277,
+          278
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.yukimura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "negotiation",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.026",
+      "source_catalog_id": "V11-C026",
+      "domain": "behavior",
+      "summary": "Enfrenta conflito entre ressentimento a Arisu e proteção dos colegas",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          271,
+          273,
+          274,
+          276,
+          278,
+          279,
+          280,
+          359,
+          363,
+          364,
+          365,
+          366
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.katsuragi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "ethics",
+        "loyalty",
+        "conflict",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.027",
+      "source_catalog_id": "V11-C027",
+      "domain": "behavior",
+      "summary": "Avalia riscos do aliciamento de Katsuragi e ausência de cooperação garantida",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          240,
+          242,
+          271,
+          273,
+          276,
+          277,
+          278,
+          279,
+          280
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "risk_management",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.028",
+      "source_catalog_id": "V11-C028",
+      "domain": "behavior",
+      "summary": "Revela a Kiyotaka, já na ANHS, fatos biográficos sobre Sugimura, coma e coerção na escola anterior",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          299,
+          300,
+          301,
+          302,
+          303,
+          304
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "POST_ADMISSION_PRIVATE_DISCLOSURE_OF_PRE_ADMISSION_BIOGRAPHY",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "biography",
+        "identity",
+        "ethics",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Past event is biographical, actor-scoped and not runtime-episodic; source's later disclosure is not its occurrence time",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.029",
+      "source_catalog_id": "V11-C029",
+      "domain": "behavior",
+      "summary": "Confronta Hirata com responsabilização extrema antes de oferecer apoio",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          295,
+          297,
+          298,
+          299,
+          304,
+          305,
+          306,
+          307,
+          308,
+          309,
+          310,
+          311
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "social",
+        "emotion",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.030",
+      "source_catalog_id": "V11-C030",
+      "domain": "behavior",
+      "summary": "Consegue chorar e retomar cooperação na turma após conversa",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          308,
+          309,
+          310,
+          311,
+          313,
+          314,
+          315,
+          316
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata",
+        "actor.mei-yu-wang"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "emotion",
+        "leadership",
+        "goal_change",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.031",
+      "source_catalog_id": "V11-C031",
+      "domain": "behavior",
+      "summary": "Prepara liberdade operacional do comandante para execução da prova",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          318,
+          319,
+          320,
+          321
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "leadership",
+        "delegation",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.032",
+      "source_catalog_id": "V11-C032",
+      "domain": "behavior",
+      "summary": "Dirige decisões de eventos e participantes da Classe A",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          321,
+          322,
+          323,
+          330,
+          331,
+          334,
+          335,
+          338,
+          341,
+          348
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "planning",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.033",
+      "source_catalog_id": "V11-C033",
+      "domain": "behavior",
+      "summary": "Escala participantes e intervém em basquete e digitação",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          334,
+          335,
+          336,
+          338,
+          342,
+          348,
+          349,
+          350,
+          351
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "planning",
+        "teamwork",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.034",
+      "source_catalog_id": "V11-C034",
+      "domain": "behavior",
+      "summary": "Contribui à vitória da turma em basquete",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          335,
+          338,
+          340,
+          343,
+          344,
+          345,
+          346
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.ken-sudo"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "sports",
+        "teamwork",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.035",
+      "source_catalog_id": "V11-C035",
+      "domain": "behavior",
+      "summary": "Vence evento de digitação com especialidade própria",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          348,
+          349,
+          350,
+          351
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.sotomura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "typing",
+        "competence",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.036",
+      "source_catalog_id": "V11-C036",
+      "domain": "behavior",
+      "summary": "Usa vantagem acadêmica da classe nos testes",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          351,
+          352,
+          353,
+          354,
+          355,
+          356,
+          357,
+          358
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "academic_reasoning",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.037",
+      "source_catalog_id": "V11-C037",
+      "domain": "behavior",
+      "summary": "Participa como backup em cálculo mental até limite demonstrado",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          359,
+          360,
+          361,
+          362,
+          363,
+          364
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.matsushita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "academic_reasoning",
+        "teamwork",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.038",
+      "source_catalog_id": "V11-C038",
+      "domain": "behavior",
+      "summary": "Opta por não responder, embora identifique resposta final de cálculo mental",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          359,
+          360,
+          361,
+          362,
+          363,
+          364,
+          365,
+          366
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.rokusuke-koenji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "autonomy",
+        "competence",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.039",
+      "source_catalog_id": "V11-C039",
+      "domain": "behavior",
+      "summary": "Prevê aliciamento de Katsuragi e o desestimula ameaçando colegas",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          363,
+          364,
+          365,
+          366
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "coercion",
+        "politics",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.040",
+      "source_catalog_id": "V11-C040",
+      "domain": "behavior",
+      "summary": "Cria plano de pressão gradual sobre a Classe B e coleta de informações",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          375,
+          377,
+          379,
+          381,
+          387,
+          389,
+          390,
+          391,
+          392,
+          393,
+          394,
+          395,
+          396,
+          397,
+          398
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "initiative",
+        "coercion",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.041",
+      "source_catalog_id": "V11-C041",
+      "domain": "behavior",
+      "summary": "Solicita participação estratégica de Ryūen após recusa inicial",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          375,
+          376,
+          377,
+          378,
+          379,
+          380,
+          381,
+          383
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.ishizaki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "initiative",
+        "loyalty",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.042",
+      "source_catalog_id": "V11-C042",
+      "domain": "behavior",
+      "summary": "Convoca colegas para aproximar Ryūen, Ibuki e Ishizaki",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          381,
+          382,
+          383,
+          384,
+          385,
+          386,
+          387,
+          388,
+          389
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.hiyori-shiina"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "initiative",
+        "social",
+        "mediation",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.043",
+      "source_catalog_id": "V11-C043",
+      "domain": "behavior",
+      "summary": "Questiona plano de Ryūen e aceita cooperar sob resistência",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          382,
+          383,
+          384,
+          385,
+          387,
+          388,
+          389,
+          392,
+          393,
+          398
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.mio-ibuki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "agency",
+        "conflict",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.044",
+      "source_catalog_id": "V11-C044",
+      "domain": "behavior",
+      "summary": "Durante o sexto evento (judô), esgota o prazo de escalação diante de Albert; Mashima declara vitória de D por padrão",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "DIRECT_ON_DAY_SIXTH_EVENT_AND_TEACHER_ADJUDICATION",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "leadership",
+        "stress",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.045",
+      "source_catalog_id": "V11-C045",
+      "domain": "behavior",
+      "summary": "Usa o comando para explorar fraqueza de B e termina como vencedor",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374,
+          391,
+          392,
+          395,
+          396,
+          398
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "strategy",
+        "leadership",
+        "initiative",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.046",
+      "source_catalog_id": "V11-C046",
+      "domain": "behavior",
+      "summary": "Contribui para a vitória de C na prova de arco e flecha",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          399,
+          400
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.miyake"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "sports",
+        "teamwork",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.047",
+      "source_catalog_id": "V11-C047",
+      "domain": "behavior",
+      "summary": "Joga xadrez após treinamento e segue instruções do comandante",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          319,
+          320,
+          402,
+          404,
+          405,
+          408,
+          409,
+          410,
+          411,
+          412,
+          413,
+          414,
+          415,
+          416,
+          417,
+          425,
+          426
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "chess",
+        "learning",
+        "motivation",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.048",
+      "source_catalog_id": "V11-C048",
+      "domain": "behavior",
+      "summary": "Joga xadrez contra Suzune e recebe instruções de Arisu",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          402,
+          405,
+          408,
+          410,
+          414,
+          415,
+          416,
+          420
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.hashimoto"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "chess",
+        "competition",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.049",
+      "source_catalog_id": "V11-C049",
+      "domain": "behavior",
+      "summary": "Intervém na partida de xadrez e distingue entrada enviada de comando reproduzido",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          417,
+          418,
+          419,
+          420,
+          421,
+          422,
+          423,
+          424,
+          425,
+          426,
+          440,
+          441,
+          442
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "chess",
+        "strategy",
+        "epistemics",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.050",
+      "source_catalog_id": "V11-C050",
+      "domain": "behavior",
+      "summary": "Orienta Hashimoto e reconhece força de Kiyotaka sem conhecer adulteração até revelação",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          414,
+          415,
+          416,
+          417,
+          419,
+          420,
+          421,
+          422,
+          423,
+          424,
+          425,
+          438,
+          439,
+          440
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "chess",
+        "strategy",
+        "observation",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.051",
+      "source_catalog_id": "V11-C051",
+      "domain": "behavior",
+      "summary": "Interfere em canal de comandos para mudar lance de Kiyotaka no xadrez",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          433,
+          434,
+          436,
+          439,
+          440,
+          441,
+          442,
+          443,
+          444
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.tsukishiro"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "institution",
+        "interference",
+        "deception",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.052",
+      "source_catalog_id": "V11-C052",
+      "domain": "behavior",
+      "summary": "Contesta interferência e pede revanche privada a partir de lance alterado",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          441,
+          442,
+          443,
+          444,
+          445,
+          446,
+          447,
+          448,
+          449,
+          450
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "initiative",
+        "ethics",
+        "chess",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.053",
+      "source_catalog_id": "V11-C053",
+      "domain": "behavior",
+      "summary": "Aceita revanche e evita afirmar superioridade universal a partir de uma partida",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          445,
+          446,
+          447,
+          448,
+          449,
+          450
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "chess",
+        "reasoning",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.054",
+      "source_catalog_id": "V11-C054",
+      "domain": "behavior",
+      "summary": "Reconhece a habilidade de xadrez de Kiyotaka e redefine a rivalidade, sem comprovar abandono da teoria inatista",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          446,
+          447,
+          448,
+          449,
+          450,
+          451,
+          452,
+          453,
+          454
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_DIALOGUE_OBSERVED_BELIEF_EVALUATION",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "belief_update",
+        "identity",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.055",
+      "source_catalog_id": "V11-C055",
+      "domain": "behavior",
+      "summary": "Retorna ao comando de D e vence disputa contra Ichinose",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          368,
+          370,
+          374,
+          393,
+          394,
+          395,
+          398,
+          436,
+          437
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "leadership",
+        "strategy",
+        "goal_change",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.056",
+      "source_catalog_id": "V11-C056",
+      "domain": "behavior",
+      "summary": "Sofre derrota apesar de sorteios favoráveis e enfrenta adversário proativo",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          368,
+          369,
+          370,
+          374,
+          436,
+          437
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OR_NARRATED_HISTORICAL_SCENE",
+      "mention_actor_ids": [
+        "actor.honami-ichinose"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "emotion",
+        "leadership",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EPISODE_TIME_AND_LEGITIMATE_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "interpretation_limit": "Observed event does not establish inevitable recurrence or universal capability",
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.057",
+      "source_catalog_id": "V11-X057",
+      "domain": "biography",
+      "summary": "White Room seen from one-way screen before enrollment; Arisu's belief not verified science",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRE_Y1_ARISU_MEMORY",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.white_room"
+      ],
+      "topics": [
+        "biography",
+        "knowledge",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "PRE_Y1_ARISU_MEMORY",
+      "claim_provenance_guard": "Arisu a observadora, Kiyotaka não sabia da observação.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.058",
+      "source_catalog_id": "V11-X058",
+      "domain": "institution",
+      "summary": "Tsukishiro announces stricter first-year policy; Mashima objects; school authority not universal",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "DIRECT_PRIVATE_TEACHERS_MEETING",
+      "mention_actor_ids": [
+        "actor.tsukishiro",
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "politics",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "DIRECT_PRIVATE_TEACHERS_MEETING",
+      "claim_provenance_guard": "Professores presentes recebem informação; estudantes não têm acesso automático.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.059",
+      "source_catalog_id": "V11-X059",
+      "domain": "institution",
+      "summary": "Teachers disclose customary 20M + 300 class points expulsion rescue, waived class points for Class Poll",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "PRIVATE_TEACHER_EXPLANATION_OF_SCHOOL_RULE",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira",
+        "actor.chie-hoshinomiya",
+        "actor.mashima"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "economy",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "PRIVATE_TEACHER_EXPLANATION_OF_SCHOOL_RULE",
+      "claim_provenance_guard": "Norma ordinária e exceção Class Poll são relatadas por docentes; não aplicá-las retroativamente.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.060",
+      "source_catalog_id": "V11-X060",
+      "domain": "exams",
+      "summary": "Event Selection official rules: ten proposed events, five submitted priorities, seven school-drawn, participant and commander restrictions",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OFFICIAL_TEACHER_HANDOUT",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exams",
+        "institution",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "OFFICIAL_TEACHER_HANDOUT",
+      "claim_provenance_guard": "A regra é publicada por docente; não inventar campos não enunciados.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.061",
+      "source_catalog_id": "V11-X061",
+      "domain": "exams",
+      "summary": "Exam schedule March 8/15/22; event net ±30 class points, winner 100 bonus and commander risk",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          32,
+          33,
+          34,
+          35,
+          36,
+          40,
+          41
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OFFICIAL_TEACHER_HANDOUT",
+      "mention_actor_ids": [
+        "actor.sae-chiyabashira"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exams",
+        "institution",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "OFFICIAL_TEACHER_HANDOUT",
+      "claim_provenance_guard": "Cronograma e pontuação comunicados à turma na apresentação.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.062",
+      "source_catalog_id": "V11-X062",
+      "domain": "exams",
+      "summary": "Raffle awards D choice B; C paired A; private earlier arrangement did not manipulate draw",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          62,
+          63,
+          64,
+          65,
+          66
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_SCHOOL_LOTTERY_WITH_PRIVATE_PREPARATION",
+      "mention_actor_ids": [
+        "actor.kaneda",
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exams",
+        "strategy",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "OBSERVED_SCHOOL_LOTTERY_WITH_PRIVATE_PREPARATION",
+      "claim_provenance_guard": "A seleção de Kaneda é oficial; conversas anteriores não controlam o sorteio.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.063",
+      "source_catalog_id": "V11-X063",
+      "domain": "exams",
+      "summary": "Commander touchscreen selection deadline and restricted text-to-speech intervention rules",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          67,
+          68,
+          69,
+          70,
+          71
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OFFICIAL_SYSTEM_DEMONSTRATION",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exams",
+        "technology",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "OFFICIAL_SYSTEM_DEMONSTRATION",
+      "claim_provenance_guard": "O limite de comando é mostrado pela escola; não implicar acesso irrestrito ao sistema.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.064",
+      "source_catalog_id": "V11-X064",
+      "domain": "biography",
+      "summary": "Friend Sugimura survived suicide attempt in persistent coma; school redistributed class after Hirata coercion",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          299,
+          300,
+          301,
+          302,
+          303
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "HIRATA_PRIVATE_FIRST_PERSON_ACCOUNT",
+      "mention_actor_ids": [
+        "actor.yosuke-hirata"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "biography",
+        "knowledge",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "HIRATA_PRIVATE_FIRST_PERSON_ACCOUNT",
+      "claim_provenance_guard": "Kiyotaka recorda o nome Sugimura ao perguntar; detalhes adicionais vêm da conversa privada.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.065",
+      "source_catalog_id": "V11-X065",
+      "domain": "exams",
+      "summary": "Chess Horikita versus Hashimoto with interventions; learner action distinct from commander's moves",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          318,
+          319,
+          320,
+          402,
+          404,
+          408,
+          414,
+          415,
+          416,
+          417,
+          425
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "DIRECT_CHESS_SCENE_WITH_COMMAND_ASSISTANCE",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exams",
+        "chess",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "DIRECT_CHESS_SCENE_WITH_COMMAND_ASSISTANCE",
+      "claim_provenance_guard": "Jogadores e comandantes têm informações diferentes; o canal de C sofreu manipulação.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.066",
+      "source_catalog_id": "V11-X066",
+      "domain": "exams",
+      "summary": "Observed C versus A event sequence: basketball, typing, math, flash mental arithmetic, archery, chess; seven total",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          335,
+          336,
+          348,
+          349,
+          350,
+          351,
+          355,
+          359,
+          365,
+          400
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "SCHOOL_MATCH_ANNOUNCEMENT_AND_NARRATED_SEQUENCE",
+      "mention_actor_ids": [
+        "actor.miyake",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exams",
+        "results",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "SCHOOL_MATCH_ANNOUNCEMENT_AND_NARRATED_SEQUENCE",
+      "claim_provenance_guard": "Os resultados dos sete eventos têm autoridade escolar, não normatizam eventos em forks.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.067",
+      "source_catalog_id": "V11-X067",
+      "domain": "exams",
+      "summary": "A Classe D vence B por 5–2; o quinto evento (caratê) foi disputado e perdido por B, enquanto o sexto (judô) foi perdido por forfait após o timeout de escalação de Ichinose. D recebe +190 pontos de classe.",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374,
+          436,
+          437
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_FIFTH_KARATE_AND_SIXTH_JUDO_OFFICIAL_RULING",
+      "mention_actor_ids": [
+        "actor.honami-ichinose",
+        "actor.kakeru-ryuen"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "exams",
+        "results",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "OBSERVED_FIFTH_KARATE_AND_SIXTH_JUDO_OFFICIAL_RULING",
+      "claim_provenance_guard": "O caratê é jogado; no judô ocorre forfait por decisão de Mashima após timeout.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.068",
+      "source_catalog_id": "V11-X068",
+      "domain": "institution",
+      "summary": "School records A victory against C after chess channel substitution; pristine intent different from played move",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          429,
+          430,
+          431,
+          432,
+          433,
+          434,
+          439,
+          440,
+          441,
+          442,
+          443,
+          444
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "OBSERVED_OFFICIAL_CHESS_RESULT_AND_TSUKISHIRO_ADMISSION",
+      "mention_actor_ids": [
+        "actor.tsukishiro",
+        "actor.kiyotaka-ayanokoji",
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "integrity",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "OBSERVED_OFFICIAL_CHESS_RESULT_AND_TSUKISHIRO_ADMISSION",
+      "claim_provenance_guard": "A vitória é registrada, mas a confissão de adulteração não substitui toda a prova técnica do canal.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.069",
+      "source_catalog_id": "V11-X069",
+      "domain": "chess",
+      "summary": "Private rematch of disputed move distinguishes informal result from official standings",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          445,
+          446,
+          447,
+          448,
+          449,
+          450
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "DIRECT_PRIVATE_CHESS_REMATCH",
+      "mention_actor_ids": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "chess",
+        "epistemics",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "DIRECT_PRIVATE_CHESS_REMATCH",
+      "claim_provenance_guard": "A vitória da continuação privada não altera ata oficial.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.070",
+      "source_catalog_id": "V11-X070",
+      "domain": "institution",
+      "summary": "Hoshinomiya recounts past change to shared dormitory rooms; oral account not independently certified",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          159,
+          160,
+          161,
+          162,
+          163,
+          164
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "CHIE_PRIVATE_ORAL_SCHOOL_HISTORY",
+      "mention_actor_ids": [
+        "actor.chie-hoshinomiya"
+      ],
+      "mention_organization_ids": [
+        "org.anhs"
+      ],
+      "topics": [
+        "institution",
+        "history",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "CHIE_PRIVATE_ORAL_SCHOOL_HISTORY",
+      "claim_provenance_guard": "Relato de docente sobre dormitórios não é norma escolar vigente independentemente certificada.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.071",
+      "source_catalog_id": "V11-X071",
+      "domain": "identity",
+      "summary": "Kushida's conflict between public helpful image and private resentment; short-story perspective is not shared knowledge",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          194,
+          195,
+          197,
+          198,
+          199,
+          200,
+          201,
+          463,
+          464,
+          465,
+          466,
+          467,
+          468,
+          469
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "KUSHIDA_CHARACTER_FOCALIZED_SIDE_STORY",
+      "mention_actor_ids": [
+        "actor.kikyo-kushida"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity",
+        "privacy",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "KUSHIDA_CHARACTER_FOCALIZED_SIDE_STORY",
+      "claim_provenance_guard": "Monólogo de personagem não é conhecimento partilhado; status editorial da tradução de fãs continua pendente.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.072",
+      "source_catalog_id": "V11-X072",
+      "domain": "social",
+      "summary": "VR side story concerns game scenario, not physical combat feat in school",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          470,
+          471,
+          472,
+          473,
+          474,
+          475,
+          476
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "VIRTUAL_REALITY_SIDE_STORY",
+      "mention_actor_ids": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "virtual_simulation",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "VIRTUAL_REALITY_SIDE_STORY",
+      "claim_provenance_guard": "Ação em RPG/VR não demonstra proeza física equivalente fora do jogo.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.073",
+      "source_catalog_id": "V11-X073",
+      "domain": "relationship",
+      "summary": "Arisu short-story private feelings about Kiyotaka and pre-entry meeting; romance unconfirmed",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          457,
+          458,
+          459,
+          460,
+          461,
+          462
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "ARISU_CHARACTER_FOCALIZED_SIDE_STORY",
+      "mention_actor_ids": [
+        "actor.arisu-sakayanagi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "emotion",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "ARISU_CHARACTER_FOCALIZED_SIDE_STORY",
+      "claim_provenance_guard": "Sentimentos privados não comprovam relacionamento recíproco.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.074",
+      "source_catalog_id": "V11-X074",
+      "domain": "relationship",
+      "summary": "Kei's subjective response to present is not formal romantic commitment",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          455,
+          456,
+          457,
+          458,
+          459
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "KEI_CHARACTER_FOCALIZED_SIDE_STORY",
+      "mention_actor_ids": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "relationship",
+        "emotion",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "SCENE_TIME_AND_PERSONAL_ACQUISITION",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+      },
+      "epistemic_source_type": "KEI_CHARACTER_FOCALIZED_SIDE_STORY",
+      "claim_provenance_guard": "Interpretação privada de presente não confirma namoro formal.",
+      "source_assertion_status": "CANDIDATE_NOT_INDEPENDENTLY_CERTIFIED"
+    },
+    {
+      "id": "y1v11.ev.075",
+      "source_catalog_id": "V11-C057",
+      "domain": "behavior",
+      "summary": "Mii-chan toma iniciativa de procurar Hirata quando ele se afasta das discussões",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          58,
+          59,
+          110,
+          111
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "ACTOR_OBSERVED_AND_SELF_REPORTED",
+      "mention_actor_ids": [
+        "actor.mei-yu-wang",
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "initiative",
+        "social",
+        "emotion",
+        "relationship",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EVENT_TIME_AND_PERSONAL_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "DIRECT_PDF_SCENE_CHECK_NON_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.076",
+      "source_catalog_id": "V11-C058",
+      "domain": "behavior",
+      "summary": "Mii-chan insiste em oferecer companhia mesmo após rejeição pública e explica sua decisão a Kiyotaka",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "ACTOR_OBSERVED_AND_SELF_REPORTED",
+      "mention_actor_ids": [
+        "actor.mei-yu-wang",
+        "actor.yosuke-hirata",
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji",
+        "actor.kikyo-kushida",
+        "actor.kei-karuizawa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "initiative",
+        "social",
+        "emotion",
+        "relationship",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EVENT_TIME_AND_PERSONAL_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "DIRECT_PDF_SCENE_CHECK_NON_INDEPENDENT"
+      }
+    },
+    {
+      "id": "y1v11.ev.077",
+      "source_catalog_id": "V11-C059",
+      "domain": "behavior",
+      "summary": "Mii-chan confronta novamente o isolamento de Hirata, sofre rejeição física e recebe pedido posterior de desculpas",
+      "source": {
+        "work_id": "ln.y1.v11.en.operator-provided",
+        "pdf_pages": [
+          283,
+          284,
+          285,
+          286,
+          287,
+          288,
+          289,
+          290,
+          291,
+          292,
+          293,
+          304,
+          309,
+          313,
+          314,
+          315
+        ],
+        "verification": "UNVERIFIED"
+      },
+      "source_mode": "ACTOR_OBSERVED_AND_SELF_REPORTED",
+      "mention_actor_ids": [
+        "actor.mei-yu-wang",
+        "actor.yosuke-hirata",
+        "actor.rokusuke-koenji",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "behavior",
+        "initiative",
+        "social",
+        "emotion",
+        "relationship",
+        "y1_v11"
+      ],
+      "actor_knowledge_gate": "EVENT_TIME_AND_PERSONAL_ACQUISITION_ONLY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false,
+      "engine_admission": false,
+      "individual_review": {
+        "external_independent_review": "NOT_PERFORMED",
+        "assistant_semantic_review": "DIRECT_PDF_SCENE_CHECK_NON_INDEPENDENT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "id": "y1v11.case.kikyo-kushida.v11-c017",
+  "actor_id": "actor.kikyo-kushida",
+  "primary_actor_id": "actor.kikyo-kushida",
+  "title": "Mobiliza rede de contatos e organiza comunicação interna",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Convida Mii-chan a voltar para casa após reunião e oferece-se para organizar grupo de comunicação",
+  "observed_result": "Mii-chan recebe apoio imediato e turma ganha canal organizado, sem curar Hirata",
+  "epistemic_limits": "Cuidado social e acesso à agenda não equivalem a domínio absoluto da informação privada",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      138,
+      139,
+      140,
+      141,
+      142
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.mei-yu-wang",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "information",
+    "social",
+    "teamwork"
+  ],
+  "information_available": "Kushida observa abalo de Mii-chan e conhece contatos da classe",
+  "counterfactual_test": "Se Mii-chan recusar, ajuda não é imposta; canais podem ser administrados por outros",
+  "topics": [
+    "behavior",
+    "information",
+    "social",
+    "teamwork",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.017"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Durante o planejamento, Mii-chan fica abalada com a rejeição de Hirata",
+    "actor_objective_at_time": "Manter rede de apoio e comunicação coletiva",
+    "actor_known_information": [
+      "Kushida observa abalo de Mii-chan e conhece contatos da classe"
+    ],
+    "beliefs_and_uncertainties": [
+      "Cuidado social e acesso à agenda não equivalem a domínio absoluto da informação privada"
+    ],
+    "available_alternatives": [
+      "Se Mii-chan recusar, ajuda não é imposta; canais podem ser administrados por outros"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Convida Mii-chan a voltar para casa após reunião e oferece-se para organizar grupo de comunicação"
+    ],
+    "observed_outcome": "Mii-chan recebe apoio imediato e turma ganha canal organizado, sem curar Hirata",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.mei-yu-wang",
+        "role": "colega que recebe convite"
+      },
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "líder que autoriza grupo"
+      }
+    ],
+    "causal_and_epistemic_limits": "Cuidado social e acesso à agenda não equivalem a domínio absoluto da informação privada",
+    "counterfactual_probes": [
+      "Se Mii-chan recusar, ajuda não é imposta; canais podem ser administrados por outros"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.017",
+        "pdf_pages": [
+          138,
+          139,
+          140,
+          141,
+          142
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

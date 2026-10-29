@@ -1,0 +1,96 @@
+{
+  "id": "y1v11.case.suzune-horikita.v11-c006",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "Registra regras, observa desigualdade entre probabilidades de eventos",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Lê regras, observa que sorteio e competências conjuntas afetam as chances",
+  "observed_result": "Ajuda a turma a compreender que nenhuma seleção garante vantagem",
+  "epistemic_limits": "Não inferir probabilidade precisa sem modelo validado",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      42,
+      43,
+      44,
+      45
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.sae-chiyabashira",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "planning",
+    "reasoning",
+    "exams"
+  ],
+  "information_available": "Conhece requisitos de seleção, troca de pontos e limites de participantes; desconhece escolhas do adversário",
+  "counterfactual_test": "Se as propostas adversárias mudarem, deve recalcular estratégia",
+  "topics": [
+    "behavior",
+    "planning",
+    "reasoning",
+    "exams",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.006"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Divulgação do regulamento de sete eventos contra turmas rivais",
+    "actor_objective_at_time": "Planejar com base em regras e riscos probabilísticos",
+    "actor_known_information": [
+      "Conhece requisitos de seleção, troca de pontos e limites de participantes; desconhece escolhas do adversário"
+    ],
+    "beliefs_and_uncertainties": [
+      "Não inferir probabilidade precisa sem modelo validado"
+    ],
+    "available_alternatives": [
+      "Se as propostas adversárias mudarem, deve recalcular estratégia"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Lê regras, observa que sorteio e competências conjuntas afetam as chances"
+    ],
+    "observed_outcome": "Ajuda a turma a compreender que nenhuma seleção garante vantagem",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.sae-chiyabashira",
+        "role": "fonte de regulamento"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante potencial"
+      }
+    ],
+    "causal_and_epistemic_limits": "Não inferir probabilidade precisa sem modelo validado",
+    "counterfactual_probes": [
+      "Se as propostas adversárias mudarem, deve recalcular estratégia"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.006",
+        "pdf_pages": [
+          42,
+          43,
+          44,
+          45
+        ],
+        "assessment": "SOURCE_WINDOW_CANDIDATE_NEEDS_SECOND_REVIEW"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

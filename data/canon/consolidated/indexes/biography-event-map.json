@@ -26,6 +26,25 @@
         "actor.yosuke-hirata"
       ],
       "engine_memory_admission": false,
+      "verified": false,
+      "later_source_evidence_refs": [
+        "y1v11.ev.028",
+        "y1v11.ev.064"
+      ],
+      "friend_name_from_later_source": "Sugimura",
+      "no_backdated_disclosure": true
+    },
+    "evt.pre-y1.arisu-white-room-observation": {
+      "path": "data/canon/consolidated/biographies/evt.pre-y1.arisu-white-room-observation.json",
+      "source_id": "ln.y1.v11.en.operator-provided",
+      "evidence_refs": [
+        "y1v11.ev.001",
+        "y1v11.ev.057"
+      ],
+      "known_to_at_y1_start": [
+        "actor.arisu-sakayanagi"
+      ],
+      "engine_memory_admission": false,
       "verified": false
     }
   }

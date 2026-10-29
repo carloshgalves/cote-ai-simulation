@@ -1,0 +1,879 @@
+{
+  "schema_version": "canon-relationship-source-v1",
+  "source_id": "ln.y1.v11.en.operator-provided",
+  "phase": "Y1_V11_FINAL_SPECIAL_EXAM",
+  "verified": false,
+  "engine_memory_admission": false,
+  "epistemic_policy": {
+    "one_way_prior_observation_not_reciprocal": "TRUE",
+    "actor_cannot_read_narrator": "TRUE",
+    "private_claims_not_public": "TRUE",
+    "historical_not_sim_memory": "TRUE"
+  },
+  "edges": [
+    {
+      "id": "y1v11.rel.001",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.001",
+        "y1v11.ev.047",
+        "y1v11.ev.049",
+        "y1v11.ev.050",
+        "y1v11.ev.052",
+        "y1v11.ev.053",
+        "y1v11.ev.054",
+        "y1v11.ev.057",
+        "y1v11.ev.069"
+      ],
+      "pdf_pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        445,
+        446,
+        449,
+        450
+      ],
+      "source_bound_change": "Arisu's pre-school observation is one-way; later direct chess rivalry and acknowledgment do not backdate mutual familiarity",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "PRE_Y1_ONE_WAY_OBSERVATION",
+          "evidence_refs": [
+            "y1v11.ev.001",
+            "y1v11.ev.057"
+          ],
+          "observed_or_reported_change": "Arisu observa Kiyotaka na White Room; ele não percebe a observadora.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        },
+        {
+          "phase": "Y1_V11_CHESS_RIVALRY",
+          "evidence_refs": [
+            "y1v11.ev.047",
+            "y1v11.ev.049",
+            "y1v11.ev.050",
+            "y1v11.ev.052",
+            "y1v11.ev.053",
+            "y1v11.ev.054",
+            "y1v11.ev.069"
+          ],
+          "observed_or_reported_change": "Ambos passam a interagir diretamente no duelo; Arisu só descobre adulteração depois.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Não retroagir ciência da observação a Kiyotaka e não confundir crença genética com fato.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.002",
+      "actors": [
+        "actor.tsukishiro",
+        "actor.mashima",
+        "actor.sae-chiyabashira"
+      ],
+      "source_refs": [
+        "y1v11.ev.002",
+        "y1v11.ev.003",
+        "y1v11.ev.004",
+        "y1v11.ev.058"
+      ],
+      "pdf_pages": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "source_bound_change": "Acting director imposes revised exam despite teacher resistance; different authority levels",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "STAFF_PRIVATE_MEETING",
+          "evidence_refs": [
+            "y1v11.ev.002",
+            "y1v11.ev.003",
+            "y1v11.ev.004",
+            "y1v11.ev.058"
+          ],
+          "observed_or_reported_change": "Tsukishiro apresenta a política, Mashima protesta e Chabashira presencia; os alunos não estão presentes.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Reunião privada de funcionários não implica conhecimento estudantil ou poder de veto.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.003",
+      "actors": [
+        "actor.sae-chiyabashira",
+        "actor.chie-hoshinomiya",
+        "actor.mashima"
+      ],
+      "source_refs": [
+        "y1v11.ev.004",
+        "y1v11.ev.005",
+        "y1v11.ev.059"
+      ],
+      "pdf_pages": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "source_bound_change": "Old student rivalry survives as professional interpersonal tension, not automatically collusion",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "TEACHER_RIVALRY",
+          "evidence_refs": [
+            "y1v11.ev.004",
+            "y1v11.ev.005",
+            "y1v11.ev.059"
+          ],
+          "observed_or_reported_change": "Sae e Chie se provocam; Mashima tenta evitar mistura de disputa pessoal e avaliação escolar.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Relato sobre afeto antigo não é documento biográfico verificado.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.004",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.honami-ichinose",
+        "actor.ishizaki"
+      ],
+      "source_refs": [
+        "y1v11.ev.010",
+        "y1v11.ev.062"
+      ],
+      "pdf_pages": [
+        55,
+        62,
+        63,
+        64,
+        65,
+        66
+      ],
+      "source_bound_change": "Privately negotiated preferences align matchups; draw itself remains random",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "PRE_PAIRING_PRIVATE_NEGOTIATION",
+          "evidence_refs": [
+            "y1v11.ev.010",
+            "y1v11.ev.062"
+          ],
+          "observed_or_reported_change": "Kiyotaka aborda interlocutores antes da loteria; Kaneda realiza a escolha formal, não Kiyotaka.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Preferências negociadas não significam fraude da urna.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.005",
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.007",
+        "y1v11.ev.008",
+        "y1v11.ev.031",
+        "y1v11.ev.047"
+      ],
+      "pdf_pages": [
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        318,
+        319
+      ],
+      "source_bound_change": "Suzune both deflects suspicion and delegates commander role; knows only classroom and actual messages",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "CLASSROOM_COMMANDER_SELECTION",
+          "evidence_refs": [
+            "y1v11.ev.007",
+            "y1v11.ev.008"
+          ],
+          "observed_or_reported_change": "Suzune cobre Kiyotaka perante colegas, mas ele aceita comando por interesse próprio.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        },
+        {
+          "phase": "EXAM_DAY_DELEGATION",
+          "evidence_refs": [
+            "y1v11.ev.031",
+            "y1v11.ev.047"
+          ],
+          "observed_or_reported_change": "Suzune repassa preparação; decisões finais de escalação cabem ao comandante.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Autorias do plano coletivo e das decisões do comandante não são intercambiáveis.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.006",
+      "actors": [
+        "actor.kei-karuizawa",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.011",
+        "y1v11.ev.022",
+        "y1v11.ev.074"
+      ],
+      "pdf_pages": [
+        72,
+        78,
+        80,
+        82,
+        83,
+        84,
+        85,
+        88,
+        89,
+        187,
+        188,
+        189,
+        207,
+        208,
+        209,
+        210
+      ],
+      "source_bound_change": "Private coordination and White Day ambiguities; no mandatory declared couple",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "PRIVATE_RELATIONSHIP_AND_INFORMATION",
+          "evidence_refs": [
+            "y1v11.ev.011",
+            "y1v11.ev.022",
+            "y1v11.ev.074"
+          ],
+          "observed_or_reported_change": "Kei e Kiyotaka trocam informações sociais e gestos afetivos privados, sem casal oficialmente declarado.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Presente e conversas não confirmam romance recíproco.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.008",
+      "actors": [
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.028",
+        "y1v11.ev.029",
+        "y1v11.ev.030",
+        "y1v11.ev.064"
+      ],
+      "pdf_pages": [
+        295,
+        297,
+        299,
+        300,
+        301,
+        302,
+        303,
+        307,
+        308,
+        309,
+        310,
+        311
+      ],
+      "source_bound_change": "Hirata reveals pre-enrollment history only in subsequent private conversation; boundaries of third-party knowledge",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "PRIVATE_PAST_DISCLOSURE",
+          "evidence_refs": [
+            "y1v11.ev.028",
+            "y1v11.ev.029",
+            "y1v11.ev.064"
+          ],
+          "observed_or_reported_change": "Hirata relata passado; Kiyotaka já recorda nome Sugimura antes de ouvir outros detalhes.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        },
+        {
+          "phase": "POST_DISCLOSURE_RECOVERY",
+          "evidence_refs": [
+            "y1v11.ev.030"
+          ],
+          "observed_or_reported_change": "Hirata chora e retoma apoio aos colegas sem recuperação garantida em outro mundo.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Detalhes da infância são biografia; divulgação a Kiyotaka é evento escolar posterior.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.009",
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.yukimura"
+      ],
+      "source_refs": [
+        "y1v11.ev.014",
+        "y1v11.ev.015",
+        "y1v11.ev.024",
+        "y1v11.ev.025",
+        "y1v11.ev.027"
+      ],
+      "pdf_pages": [
+        137,
+        139,
+        140,
+        141,
+        155,
+        158,
+        240,
+        241,
+        242
+      ],
+      "source_bound_change": "Collaborate on event selection, security, and provisional Katsuragi maneuver",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "CLASS_PREPARATION",
+          "evidence_refs": [
+            "y1v11.ev.014",
+            "y1v11.ev.015",
+            "y1v11.ev.024"
+          ],
+          "observed_or_reported_change": "Suzune lidera planejamento; Keisei alerta sobre escuta clandestina.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        },
+        {
+          "phase": "UNAUTHORIZED_PRIVATE_KATSURAGI_CONTACT",
+          "evidence_refs": [
+            "y1v11.ev.025",
+            "y1v11.ev.027"
+          ],
+          "observed_or_reported_change": "Keisei procura Katsuragi com Kiyotaka sem conhecimento inicial de Suzune.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Informação de Keisei a Katsuragi não chega automaticamente a Suzune.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.010",
+      "actors": [
+        "actor.katsuragi",
+        "actor.arisu-sakayanagi",
+        "actor.yukimura"
+      ],
+      "source_refs": [
+        "y1v11.ev.025",
+        "y1v11.ev.026",
+        "y1v11.ev.027",
+        "y1v11.ev.037",
+        "y1v11.ev.038",
+        "y1v11.ev.039"
+      ],
+      "pdf_pages": [
+        271,
+        273,
+        276,
+        278,
+        279,
+        280,
+        363,
+        364,
+        365,
+        366
+      ],
+      "source_bound_change": "Katsuragi's apparent willingness to throw is overridden by pressure from Arisu about other classmates",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "PRIVATE_FACTION_CONTACT",
+          "evidence_refs": [
+            "y1v11.ev.025",
+            "y1v11.ev.026",
+            "y1v11.ev.027"
+          ],
+          "observed_or_reported_change": "Katsuragi oferece informação; promessa condicional não é sabotagem.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        },
+        {
+          "phase": "EXAM_DAY_PRESSURE",
+          "evidence_refs": [
+            "y1v11.ev.039",
+            "y1v11.ev.037",
+            "y1v11.ev.038"
+          ],
+          "observed_or_reported_change": "Arisu ameaça prejuízo a colegas; Katsuragi não entrega resultado planejado.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Katsuragi não sabotou o evento; ameaças de Arisu geram opção de recusa.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.011",
+      "actors": [
+        "actor.kakeru-ryuen",
+        "actor.ishizaki",
+        "actor.mio-ibuki",
+        "actor.hiyori-shiina"
+      ],
+      "source_refs": [
+        "y1v11.ev.040",
+        "y1v11.ev.041",
+        "y1v11.ev.042",
+        "y1v11.ev.043",
+        "y1v11.ev.045",
+        "y1v11.ev.055"
+      ],
+      "pdf_pages": [
+        375,
+        377,
+        381,
+        383,
+        387,
+        389,
+        391,
+        392,
+        393,
+        395,
+        396,
+        398
+      ],
+      "source_bound_change": "Invitation and preparation revive Ryuen role; each participant has different motivations",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "RECRUITMENT",
+          "evidence_refs": [
+            "y1v11.ev.041",
+            "y1v11.ev.042",
+            "y1v11.ev.043"
+          ],
+          "observed_or_reported_change": "Ishizaki pede ajuda, Hiyori reúne convidados, Ibuki questiona.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        },
+        {
+          "phase": "STRATEGIC_RETURN",
+          "evidence_refs": [
+            "y1v11.ev.040",
+            "y1v11.ev.045",
+            "y1v11.ev.055"
+          ],
+          "observed_or_reported_change": "Ryūen decide planejar pressão sobre B e comanda evento.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Hiyori apenas facilita encontro, Ishizaki inicia pedido, Ryūen cria plano.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.012",
+      "actors": [
+        "actor.honami-ichinose",
+        "actor.kakeru-ryuen"
+      ],
+      "source_refs": [
+        "y1v11.ev.018",
+        "y1v11.ev.040",
+        "y1v11.ev.044",
+        "y1v11.ev.045",
+        "y1v11.ev.056",
+        "y1v11.ev.067"
+      ],
+      "pdf_pages": [
+        170,
+        171,
+        172,
+        368,
+        369,
+        370,
+        371,
+        372,
+        373,
+        374,
+        436,
+        437
+      ],
+      "source_bound_change": "Class D gradual pressure and Class B defense; success in source not universal",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "PRE_EXAM_PRESSURE",
+          "evidence_refs": [
+            "y1v11.ev.018",
+            "y1v11.ev.040"
+          ],
+          "observed_or_reported_change": "Ichinose conhece relatos de incidentes, não as ordens privadas de Ryūen.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        },
+        {
+          "phase": "JUDO_ADJUDICATION",
+          "evidence_refs": [
+            "y1v11.ev.044",
+            "y1v11.ev.045",
+            "y1v11.ev.056",
+            "y1v11.ev.067"
+          ],
+          "observed_or_reported_change": "Judô sexto evento termina por prazo e decisão de segurança de Mashima; caratê quinto foi disputado.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Causalidade de todos os sintomas não é provada; judô é sexto e caratê quinto.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.013",
+      "actors": [
+        "actor.suzune-horikita",
+        "actor.hashimoto"
+      ],
+      "source_refs": [
+        "y1v11.ev.047",
+        "y1v11.ev.048",
+        "y1v11.ev.049",
+        "y1v11.ev.050",
+        "y1v11.ev.065"
+      ],
+      "pdf_pages": [
+        402,
+        404,
+        405,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417
+      ],
+      "source_bound_change": "Student chess match with external commander assistance",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "CHESS_PLAYERS_AND_COMMANDERS",
+          "evidence_refs": [
+            "y1v11.ev.047",
+            "y1v11.ev.048",
+            "y1v11.ev.049",
+            "y1v11.ev.050",
+            "y1v11.ev.065"
+          ],
+          "observed_or_reported_change": "Suzune e Hashimoto movem peças; comandos vêm de Kiyotaka e Arisu respectivamente.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Jogador não possui acesso aos dados privados do comandante.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.014",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.tsukishiro"
+      ],
+      "source_refs": [
+        "y1v11.ev.050",
+        "y1v11.ev.051",
+        "y1v11.ev.052",
+        "y1v11.ev.068"
+      ],
+      "pdf_pages": [
+        433,
+        434,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445
+      ],
+      "source_bound_change": "Arisu confronts acting director when computer intervention is disclosed; not proof she knew beforehand",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "POST_CHESS_DISCLOSURE",
+          "evidence_refs": [
+            "y1v11.ev.050",
+            "y1v11.ev.051",
+            "y1v11.ev.052",
+            "y1v11.ev.068"
+          ],
+          "observed_or_reported_change": "Arisu descobre interferência após a partida e protesta contra Tsukishiro.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Arisu não autorizou a adulteração e só a descobre após o lance.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.015",
+      "actors": [
+        "actor.kiyotaka-ayanokoji",
+        "actor.tsukishiro"
+      ],
+      "source_refs": [
+        "y1v11.ev.049",
+        "y1v11.ev.051",
+        "y1v11.ev.068"
+      ],
+      "pdf_pages": [
+        429,
+        433,
+        440,
+        441,
+        442,
+        443,
+        444
+      ],
+      "source_bound_change": "Actor knows original command not reproduced; power to expose institution is limited",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "ORIGINAL_VS_DELIVERED",
+          "evidence_refs": [
+            "y1v11.ev.049",
+            "y1v11.ev.051",
+            "y1v11.ev.068"
+          ],
+          "observed_or_reported_change": "Kiyotaka conhece comando enviado; Tsukishiro admite ter alterado a entrega.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Confissão do diretor interino não substitui logs criptográficos de todos os eventos.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.016",
+      "actors": [
+        "actor.arisu-sakayanagi",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.052",
+        "y1v11.ev.053",
+        "y1v11.ev.054",
+        "y1v11.ev.069"
+      ],
+      "pdf_pages": [
+        445,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453
+      ],
+      "source_bound_change": "Private chess resumed from altered position; public result remains separate",
+      "relation_certainty": "SOURCE_BOUNDED_NOT_GLOBAL",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "PRIVATE_REMATCH",
+          "evidence_refs": [
+            "y1v11.ev.052",
+            "y1v11.ev.053",
+            "y1v11.ev.054",
+            "y1v11.ev.069"
+          ],
+          "observed_or_reported_change": "Arisu e Kiyotaka retomam posição anterior e obtêm resultado particular sem substituir o oficial.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Vitória privada da continuação não altera resultado administrativo do xadrez.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    },
+    {
+      "id": "y1v11.rel.007",
+      "actors": [
+        "actor.mei-yu-wang",
+        "actor.yosuke-hirata",
+        "actor.kiyotaka-ayanokoji"
+      ],
+      "source_refs": [
+        "y1v11.ev.016",
+        "y1v11.ev.028",
+        "y1v11.ev.029",
+        "y1v11.ev.030",
+        "y1v11.ev.075",
+        "y1v11.ev.076",
+        "y1v11.ev.077"
+      ],
+      "pdf_pages": [
+        58,
+        59,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        142,
+        143,
+        148,
+        149,
+        150,
+        151,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        313,
+        314
+      ],
+      "source_bound_change": "A iniciativa de Mii-chan precede o recuo de Hirata e seu pedido de desculpas; ações de Kiyotaka/Kōenji não são atribuídas a ela.",
+      "directional_knowledge": [
+        {
+          "actor_id": "actor.mei-yu-wang",
+          "known": "Percebe rejeição e sofrimento, não os detalhes completos do passado de Sugimura."
+        },
+        {
+          "actor_id": "actor.yosuke-hirata",
+          "known": "Sabe que Mii-chan tentou abordá-lo e depois pede desculpas."
+        },
+        {
+          "actor_id": "actor.kiyotaka-ayanokoji",
+          "known": "Testemunha e discute motivação de Mii-chan, interpretações privadas não são conhecimento dela."
+        }
+      ],
+      "relation_certainty": "OBSERVED_INTERACTIONS_AND_PRIVATE_DIALOGUE",
+      "verified": false,
+      "engine_memory_admission": false,
+      "temporal_phases": [
+        {
+          "phase": "MIICHAN_INITIATIVE",
+          "evidence_refs": [
+            "y1v11.ev.075",
+            "y1v11.ev.076",
+            "y1v11.ev.016"
+          ],
+          "observed_or_reported_change": "Mii-chan procura Hirata e explica seu próprio motivo a Kiyotaka; ele rejeita a aproximação.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        },
+        {
+          "phase": "LATER_REJECTION_AND_APOLOGY",
+          "evidence_refs": [
+            "y1v11.ev.077",
+            "y1v11.ev.028",
+            "y1v11.ev.029",
+            "y1v11.ev.030"
+          ],
+          "observed_or_reported_change": "Rejeição se agrava e Hirata depois pede desculpas após conversa privada separada com Kiyotaka.",
+          "actor_local_knowledge_policy": "Only actors who witnessed, received, or privately remembered this phase may know it; do not use narrator omniscience.",
+          "verified": false
+        }
+      ],
+      "directed_knowledge_guard": "Motivação expressa por Mii-chan não equivale à inferência afetiva feita por terceiros.",
+      "uncertain_reciprocity": true,
+      "future_simulation_replay_prohibited": true
+    }
+  ],
+  "excluded_unmodeled_relation": {
+    "candidate_id": "y1v11.rel.007",
+    "status": "RESOLVED",
+    "canonical_actor_id": "actor.mei-yu-wang",
+    "identity_source": "PDF p.58"
+  }
+}

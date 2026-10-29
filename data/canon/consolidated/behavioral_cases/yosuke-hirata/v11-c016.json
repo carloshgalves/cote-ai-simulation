@@ -1,0 +1,110 @@
+{
+  "id": "y1v11.case.yosuke-hirata.v11-c016",
+  "actor_id": "actor.yosuke-hirata",
+  "primary_actor_id": "actor.yosuke-hirata",
+  "title": "Afasta-se da classe e repele apoio de Mii-chan e Kei",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Ignora tentativas de saudação rejeita o almoço de Mii-chan e ameaça expor fraquezas de Kei quando é contestado",
+  "observed_result": "A turma perde uma liderança social; Mii-chan sofre rejeição pública e Kei recua",
+  "epistemic_limits": "A hostilidade observada é crise situada; a reação de Kei tem contexto privado que não é conhecimento público",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      125,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.mei-yu-wang",
+    "actor.kei-karuizawa",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "emotion",
+    "conflict",
+    "relationship"
+  ],
+  "information_available": "Sabe das perdas do Class Poll e da preocupação visível dos colegas; não tem caminho pronto para reparar a expulsão",
+  "counterfactual_test": "Se alguém lhe der espaço ou apoio não confrontacional, suas reações podem diferir; não forçar isolamento eterno",
+  "topics": [
+    "behavior",
+    "emotion",
+    "conflict",
+    "relationship",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.016"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Após expulsão de Yamauchi, Hirata se isola e é cobrado por colegas",
+    "actor_objective_at_time": "Evitar contato e responsabilidade imediata, embora a classe dependa dele",
+    "actor_known_information": [
+      "Sabe das perdas do Class Poll e da preocupação visível dos colegas; não tem caminho pronto para reparar a expulsão"
+    ],
+    "beliefs_and_uncertainties": [
+      "A hostilidade observada é crise situada; a reação de Kei tem contexto privado que não é conhecimento público"
+    ],
+    "available_alternatives": [
+      "Se alguém lhe der espaço ou apoio não confrontacional, suas reações podem diferir; não forçar isolamento eterno"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Ignora tentativas de saudação",
+      "rejeita o almoço de Mii-chan e ameaça expor fraquezas de Kei quando é contestado"
+    ],
+    "observed_outcome": "A turma perde uma liderança social; Mii-chan sofre rejeição pública e Kei recua",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.mei-yu-wang",
+        "role": "colega que procura ajuda"
+      },
+      {
+        "actor_id": "actor.kei-karuizawa",
+        "role": "colega que contesta"
+      },
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "líder que tenta organizar a turma"
+      }
+    ],
+    "causal_and_epistemic_limits": "A hostilidade observada é crise situada; a reação de Kei tem contexto privado que não é conhecimento público",
+    "counterfactual_probes": [
+      "Se alguém lhe der espaço ou apoio não confrontacional, suas reações podem diferir; não forçar isolamento eterno"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.016",
+        "pdf_pages": [
+          125,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

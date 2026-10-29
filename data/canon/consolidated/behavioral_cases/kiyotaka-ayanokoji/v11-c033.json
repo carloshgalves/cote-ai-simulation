@@ -1,0 +1,117 @@
+{
+  "id": "y1v11.case.kiyotaka-ayanokoji.v11-c033",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Escala participantes e intervém em basquete e digitação",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "No basquete intervém substituindo Ike por Sudō no segundo tempo na digitação escala Sotomura",
+  "observed_result": "Classe C vence as duas provas e abre 2–0 no início do exame",
+  "epistemic_limits": "Comando não substitui as capacidades individuais dos participantes",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      334,
+      335,
+      336,
+      338,
+      342,
+      348,
+      349,
+      350,
+      351
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.ken-sudo",
+    "actor.kanji-ike",
+    "actor.sotomura",
+    "actor.arisu-sakayanagi"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "planning",
+    "teamwork"
+  ],
+  "information_available": "Conhece força de Sudō e de Sotomura; descobre escalações adversárias somente na execução",
+  "counterfactual_test": "Se Sudō não responder ao adversário ou Sotomura enfrentar especialista melhor, resultados podem inverter",
+  "topics": [
+    "behavior",
+    "strategy",
+    "planning",
+    "teamwork",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.033"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Primeiro evento sorteado é basquete, depois digitação",
+    "actor_objective_at_time": "Aproveitar aptidões específicas para abrir vantagem",
+    "actor_known_information": [
+      "Conhece força de Sudō e de Sotomura; descobre escalações adversárias somente na execução"
+    ],
+    "beliefs_and_uncertainties": [
+      "Comando não substitui as capacidades individuais dos participantes"
+    ],
+    "available_alternatives": [
+      "Se Sudō não responder ao adversário ou Sotomura enfrentar especialista melhor, resultados podem inverter"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "No basquete intervém substituindo Ike por Sudō no segundo tempo",
+      "na digitação escala Sotomura"
+    ],
+    "observed_outcome": "Classe C vence as duas provas e abre 2–0 no início do exame",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.ken-sudo",
+        "role": "atleta substituto"
+      },
+      {
+        "actor_id": "actor.kanji-ike",
+        "role": "jogador substituído"
+      },
+      {
+        "actor_id": "actor.sotomura",
+        "role": "participante de digitação"
+      },
+      {
+        "actor_id": "actor.arisu-sakayanagi",
+        "role": "comandante rival"
+      }
+    ],
+    "causal_and_epistemic_limits": "Comando não substitui as capacidades individuais dos participantes",
+    "counterfactual_probes": [
+      "Se Sudō não responder ao adversário ou Sotomura enfrentar especialista melhor, resultados podem inverter"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.033",
+        "pdf_pages": [
+          334,
+          335,
+          336,
+          338,
+          342,
+          348,
+          349,
+          350,
+          351
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

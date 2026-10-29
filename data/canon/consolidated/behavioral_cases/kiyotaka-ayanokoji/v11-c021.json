@@ -1,0 +1,106 @@
+{
+  "id": "y1v11.case.kiyotaka-ayanokoji.v11-c021",
+  "actor_id": "actor.kiyotaka-ayanokoji",
+  "primary_actor_id": "actor.kiyotaka-ayanokoji",
+  "title": "Analisa a influência e credibilidade de Kushida sem confundir fala com intenção",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Faz perguntas, compara negações com pistas e mantém suspeita sem revelar tudo que concluiu",
+  "observed_result": "Conserva possibilidade de negociação futura, sem declarar reconciliação",
+  "epistemic_limits": "Inferir motivo da fala é interpretação de Kiyotaka, não leitura mental autorizada",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      192,
+      194,
+      195,
+      197,
+      199,
+      200,
+      203,
+      204,
+      205
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kikyo-kushida",
+    "actor.suzune-horikita"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "information",
+    "initiative"
+  ],
+  "information_available": "Conhece o histórico de Kushida, a liderança de Horikita e a recusa recente de participar",
+  "counterfactual_test": "Se Kushida agir de modo verificável em favor da turma, confiança pode mudar gradualmente",
+  "topics": [
+    "behavior",
+    "strategy",
+    "information",
+    "initiative",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.021"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "A colaboração de Kushida é relevante mas politicamente instável",
+    "actor_objective_at_time": "Decidir quanto confiar em depoimento contraditório",
+    "actor_known_information": [
+      "Conhece o histórico de Kushida, a liderança de Horikita e a recusa recente de participar"
+    ],
+    "beliefs_and_uncertainties": [
+      "Inferir motivo da fala é interpretação de Kiyotaka, não leitura mental autorizada"
+    ],
+    "available_alternatives": [
+      "Se Kushida agir de modo verificável em favor da turma, confiança pode mudar gradualmente"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Faz perguntas, compara negações com pistas e mantém suspeita sem revelar tudo que concluiu"
+    ],
+    "observed_outcome": "Conserva possibilidade de negociação futura, sem declarar reconciliação",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kikyo-kushida",
+        "role": "informante ambivalente"
+      },
+      {
+        "actor_id": "actor.suzune-horikita",
+        "role": "terceira afetada"
+      }
+    ],
+    "causal_and_epistemic_limits": "Inferir motivo da fala é interpretação de Kiyotaka, não leitura mental autorizada",
+    "counterfactual_probes": [
+      "Se Kushida agir de modo verificável em favor da turma, confiança pode mudar gradualmente"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.021",
+        "pdf_pages": [
+          192,
+          194,
+          195,
+          197,
+          199,
+          200,
+          203,
+          204,
+          205
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

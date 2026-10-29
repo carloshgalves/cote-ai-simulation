@@ -1,0 +1,89 @@
+{
+  "id": "y1v11.case.suzune-horikita.v11-c031",
+  "actor_id": "actor.suzune-horikita",
+  "primary_actor_id": "actor.suzune-horikita",
+  "title": "Prepara liberdade operacional do comandante para execução da prova",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Repassa caderno de preparação a Kiyotaka e evita decidir de antemão cada participante",
+  "observed_result": "Kiyotaka recebe margem operacional para adaptar escalações à situação",
+  "epistemic_limits": "Delegar não transforma decisões futuras de Kiyotaka em autoria de Suzune",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      318,
+      319,
+      320,
+      321
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "leadership",
+    "delegation"
+  ],
+  "information_available": "Possui registros de treinamento, opções e riscos; não sabe quais eventos serão sorteados",
+  "counterfactual_test": "Se comandante agir sem usar dados preparados, o esforço da turma pode ter menor efeito",
+  "topics": [
+    "behavior",
+    "leadership",
+    "delegation",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.031"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Preparação concluída antes do início da prova contra A",
+    "actor_objective_at_time": "Delegar escalação final ao comandante preservando preparação coletiva",
+    "actor_known_information": [
+      "Possui registros de treinamento, opções e riscos; não sabe quais eventos serão sorteados"
+    ],
+    "beliefs_and_uncertainties": [
+      "Delegar não transforma decisões futuras de Kiyotaka em autoria de Suzune"
+    ],
+    "available_alternatives": [
+      "Se comandante agir sem usar dados preparados, o esforço da turma pode ter menor efeito"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Repassa caderno de preparação a Kiyotaka e evita decidir de antemão cada participante"
+    ],
+    "observed_outcome": "Kiyotaka recebe margem operacional para adaptar escalações à situação",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "comandante com discricionariedade"
+      }
+    ],
+    "causal_and_epistemic_limits": "Delegar não transforma decisões futuras de Kiyotaka em autoria de Suzune",
+    "counterfactual_probes": [
+      "Se comandante agir sem usar dados preparados, o esforço da turma pode ter menor efeito"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.031",
+        "pdf_pages": [
+          318,
+          319,
+          320,
+          321
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

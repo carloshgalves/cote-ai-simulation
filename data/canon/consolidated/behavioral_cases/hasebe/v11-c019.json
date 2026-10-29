@@ -1,0 +1,92 @@
+{
+  "id": "y1v11.case.hasebe.v11-c019",
+  "actor_id": "actor.hasebe",
+  "primary_actor_id": "actor.hasebe",
+  "title": "Observa sinais sociais de Ichinose e discute hipóteses com colegas",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Levanta hipótese de nova disposição e pergunta aos colegas",
+  "observed_result": "O grupo troca impressões, sem confirmar romance, estado psicológico ou causa",
+  "epistemic_limits": "Observação indireta de detalhe físico não prova estado íntimo",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      184,
+      185,
+      186
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.honami-ichinose",
+    "actor.kiyotaka-ayanokoji"
+  ],
+  "capabilities_supported": [
+    "observation",
+    "social"
+  ],
+  "information_available": "Nota perfume cítrico e comentários de outras estudantes; não sabe motivo real da mudança",
+  "counterfactual_test": "Se perfume for escolha casual, nenhuma atualização afetiva deve ocorrer",
+  "topics": [
+    "behavior",
+    "observation",
+    "social",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.019"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Grupo comenta mudança na apresentação de Ichinose durante período de tensão",
+    "actor_objective_at_time": "Avaliar sinais sociais sem conclusão precipitada",
+    "actor_known_information": [
+      "Nota perfume cítrico e comentários de outras estudantes; não sabe motivo real da mudança"
+    ],
+    "beliefs_and_uncertainties": [
+      "Observação indireta de detalhe físico não prova estado íntimo"
+    ],
+    "available_alternatives": [
+      "Se perfume for escolha casual, nenhuma atualização afetiva deve ocorrer"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Levanta hipótese de nova disposição e pergunta aos colegas"
+    ],
+    "observed_outcome": "O grupo troca impressões, sem confirmar romance, estado psicológico ou causa",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.honami-ichinose",
+        "role": "pessoa comentada"
+      },
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "interlocutor"
+      }
+    ],
+    "causal_and_epistemic_limits": "Observação indireta de detalhe físico não prova estado íntimo",
+    "counterfactual_probes": [
+      "Se perfume for escolha casual, nenhuma atualização afetiva deve ocorrer"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.019",
+        "pdf_pages": [
+          184,
+          185,
+          186
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

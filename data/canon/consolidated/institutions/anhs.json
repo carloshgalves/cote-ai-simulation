@@ -14,7 +14,8 @@
     "ln.y1.v075.sevenseas.en.operator-provided",
     "ln.y1.v08.sevenseas.en.operator-provided",
     "ln.y1.v09.en.operator-provided",
-    "ln.y1.v10.en.operator-provided"
+    "ln.y1.v10.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "V7_NEW_RECORDS_UNVERIFIED_EXTERNAL_REVIEW_PENDING",
   "source_documents": [],
@@ -251,7 +252,19 @@
     "y1v10.ev.059",
     "y1v10.ev.060",
     "y1v10.ev.061",
-    "y1v10.ev.062"
+    "y1v10.ev.062",
+    "y1v11.ev.058",
+    "y1v11.ev.059",
+    "y1v11.ev.060",
+    "y1v11.ev.061",
+    "y1v11.ev.062",
+    "y1v11.ev.063",
+    "y1v11.ev.065",
+    "y1v11.ev.066",
+    "y1v11.ev.067",
+    "y1v11.ev.068",
+    "y1v11.ev.069",
+    "y1v11.ev.070"
   ],
   "owner_truth_boundary": "Institutional goals and resources are not the knowledge of every actor",
   "operational_migration": "Only user/operator-authorized claims may be promoted after review",
@@ -1077,6 +1090,96 @@
       "source": "ARISU_PRIVATE_REPORT",
       "enacted": false,
       "official_revision_record_absent": true
+    }
+  },
+  "y1_v11_event_selection": {
+    "exam_id": "exam.y1.event-selection",
+    "reference_path": "data/canon/consolidated/exams/y1-event-selection.json",
+    "source_id": "ln.y1.v11.en.operator-provided",
+    "source_evidence_refs": [
+      "y1v11.ev.060",
+      "y1v11.ev.061",
+      "y1v11.ev.062",
+      "y1v11.ev.063",
+      "y1v11.ev.066",
+      "y1v11.ev.067",
+      "y1v11.ev.068"
+    ],
+    "timeline": {
+      "announcement": "MARCH_08",
+      "deadline_proposals": "MARCH_14",
+      "public_event_disclosure": "MARCH_15",
+      "exam": "MARCH_22"
+    },
+    "authority_boundary": "school approves event rules; commander has only event-specific sanctioned interventions",
+    "selection_rules": {
+      "proposed_event_count": 10,
+      "selected_per_class": 5,
+      "school_draw_count": 7,
+      "per_event_class_points_transfer": 30,
+      "overall_winner_bonus_from_school": 100
+    },
+    "class_poll_causality_confirmation": {
+      "acting_director_tsukishiro_announces_and_defends_forced_expulsion_policy_to_teachers": true,
+      "source_pdf_pages": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "teacher_mashima_objection": true,
+      "prior_source": "ln.y1.v10.en.operator-provided",
+      "knowledge_time": "STAFF_PRIVATE_MEETING_BEFORE_CLASS_POLL_NOT_PUBLIC_AUTOMATICALLY"
+    },
+    "financial_rule_clarification": {
+      "normal_expulsion_revocation_private_points": 20000000,
+      "normal_expulsion_revocation_class_points": 300,
+      "class_poll_class_point_charge_waived": true,
+      "source_pdf_pages": [
+        21,
+        22
+      ]
+    },
+    "security_exception": {
+      "actor": "actor.tsukishiro",
+      "formal_official_class_a_victory": true,
+      "admitted_chess_message_transformation": true,
+      "not_permitted_as_exam_resolution_algorithm": true,
+      "source_pdf_pages": [
+        439,
+        440,
+        441,
+        442,
+        443,
+        444
+      ]
+    },
+    "evidence_status": "CANDIDATE",
+    "executable": false,
+    "engine_memory_admission": false,
+    "verified": false,
+    "safety_adjudication": {
+      "fifth_event": "KARATE_CLASS_D_WIN_ON_PLAYED_MATCH",
+      "sixth_event": "JUDO_CLASS_B_DEFAULT_AFTER_30S_UNSELECTED_AND_SAFETY_ASSESSMENT",
+      "teacher": "Mashima",
+      "exception_to_default_fallback": true,
+      "source_pdf_pages": [
+        371,
+        372,
+        373,
+        374
+      ],
+      "not_generalized_rule": true
+    },
+    "participant_cardinality_detail": {
+      "distinct_proposal_sizes_exclude_substitutes": true,
+      "hard_max_twenty_includes_substitutes": true,
+      "source_pdf_pages": [
+        43
+      ]
     }
   }
 }

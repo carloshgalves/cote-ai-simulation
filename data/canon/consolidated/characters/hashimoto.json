@@ -5,7 +5,8 @@
   "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "ln.y1.v08.sevenseas.en.operator-provided",
-    "ln.y1.v09.en.operator-provided"
+    "ln.y1.v09.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "SOURCE_CANDIDATE_EXTERNAL_REVIEW_PENDING",
   "identity": {
@@ -22,13 +23,15 @@
         "y1v08.case.hashimoto.v08-c026",
         "y1v08.case.hashimoto.v08-c029",
         "y1v08.case.hashimoto.v08-c035",
-        "y1v09.case.hashimoto.v09-c07"
+        "y1v09.case.hashimoto.v09-c07",
+        "y1v11.case.hashimoto.v11-c048"
       ],
       "context_evidence_refs": [
         "y1v08.ev.026",
         "y1v08.ev.029",
         "y1v08.ev.035",
-        "y1v09.ev.07"
+        "y1v09.ev.07",
+        "y1v11.ev.048"
       ]
     },
     "cooperation": {
@@ -104,6 +107,30 @@
       "context_evidence_refs": [
         "y1v09.ev.07"
       ]
+    },
+    "chess": {
+      "behavioral_case_refs": [
+        "y1v11.case.hashimoto.v11-c048"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.048"
+      ]
+    },
+    "competition": {
+      "behavioral_case_refs": [
+        "y1v11.case.hashimoto.v11-c048"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.048"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.hashimoto.v11-c048"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.048"
+      ]
     }
   },
   "y1_v08_source_status": "UNVERIFIED_SOURCE_BOUNDED",
@@ -136,5 +163,24 @@
   ],
   "y1_v09_relationship_refs": [
     "y1v09.rel.010"
-  ]
+  ],
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_simulation_episodic_memory": true,
+    "private_disclosures_require_individual_acquisition": true,
+    "exam_results_not_replayed_automatically": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.hashimoto.v11-c048"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.048"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.013"
+  ],
+  "y1_v11_goal_transition_refs": []
 }

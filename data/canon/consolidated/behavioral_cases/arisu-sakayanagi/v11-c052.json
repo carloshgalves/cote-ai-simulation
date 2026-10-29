@@ -1,0 +1,108 @@
+{
+  "id": "y1v11.case.arisu-sakayanagi.v11-c052",
+  "actor_id": "actor.arisu-sakayanagi",
+  "primary_actor_id": "actor.arisu-sakayanagi",
+  "title": "Contesta interferência e pede revanche privada a partir de lance alterado",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Questiona Tsukishiro, dirige-se a Kiyotaka e propõe continuar posição anterior à adulteração na biblioteca",
+  "observed_result": "Realiza revanche particular; resultado não altera placar oficial",
+  "epistemic_limits": "Protesto pessoal não é autoridade de anulação do exame",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      441,
+      442,
+      443,
+      444,
+      445,
+      446,
+      447,
+      448,
+      449,
+      450
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.kiyotaka-ayanokoji",
+    "actor.tsukishiro"
+  ],
+  "capabilities_supported": [
+    "initiative",
+    "ethics",
+    "chess"
+  ],
+  "information_available": "Sabe que escola declarou vitória A e que Tsukishiro admite ter mudado a entrada de C",
+  "counterfactual_test": "Se Kiyotaka rejeitar o convite, ela não obtém revanche embora permaneça sua objeção",
+  "topics": [
+    "behavior",
+    "initiative",
+    "ethics",
+    "chess",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.052"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "Arisu descobre que o lance decisivo de Kiyotaka foi adulterado",
+    "actor_objective_at_time": "Restaurar sentido competitivo do duelo sem poder alterar ata oficial",
+    "actor_known_information": [
+      "Sabe que escola declarou vitória A e que Tsukishiro admite ter mudado a entrada de C"
+    ],
+    "beliefs_and_uncertainties": [
+      "Protesto pessoal não é autoridade de anulação do exame"
+    ],
+    "available_alternatives": [
+      "Se Kiyotaka rejeitar o convite, ela não obtém revanche embora permaneça sua objeção"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Questiona Tsukishiro, dirige-se a Kiyotaka e propõe continuar posição anterior à adulteração na biblioteca"
+    ],
+    "observed_outcome": "Realiza revanche particular; resultado não altera placar oficial",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.kiyotaka-ayanokoji",
+        "role": "rival convidado"
+      },
+      {
+        "actor_id": "actor.tsukishiro",
+        "role": "autor da interferência"
+      }
+    ],
+    "causal_and_epistemic_limits": "Protesto pessoal não é autoridade de anulação do exame",
+    "counterfactual_probes": [
+      "Se Kiyotaka rejeitar o convite, ela não obtém revanche embora permaneça sua objeção"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.052",
+        "pdf_pages": [
+          441,
+          442,
+          443,
+          444,
+          445,
+          446,
+          447,
+          448,
+          449,
+          450
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

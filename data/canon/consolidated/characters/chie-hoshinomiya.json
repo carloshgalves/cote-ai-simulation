@@ -6,7 +6,8 @@
   "source_coverage": [
     "ln.y1.v01.sevenseas.en.2019.operator-provided",
     "ln.y1.v03.sevenseas.en.2019.operator-provided",
-    "ln.y1.v04.sevenseas.en.operator-provided"
+    "ln.y1.v04.sevenseas.en.operator-provided",
+    "ln.y1.v11.en.operator-provided"
   ],
   "source_status": "OPERATOR_ACCEPTED_RECORD_AUDIT_PENDING",
   "identity": {
@@ -19,12 +20,15 @@
   },
   "domains": {
     "social": {
-      "behavioral_case_refs": [],
+      "behavioral_case_refs": [
+        "y1v11.case.chie-hoshinomiya.v11-c005"
+      ],
       "context_evidence_refs": [
         "y1v1.ev.066",
         "y1v1.ev.067",
         "y1v3.ev.025",
-        "y1v4.ev.087"
+        "y1v4.ev.087",
+        "y1v11.ev.005"
       ]
     },
     "institution": {
@@ -33,7 +37,9 @@
         "y1v1.ev.066",
         "y1v3.ev.025",
         "y1v4.ev.087",
-        "y1v4.ev.132"
+        "y1v4.ev.132",
+        "y1v11.ev.059",
+        "y1v11.ev.070"
       ]
     },
     "exam": {
@@ -46,6 +52,52 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "y1v4.ev.132"
+      ]
+    },
+    "behavior": {
+      "behavioral_case_refs": [
+        "y1v11.case.chie-hoshinomiya.v11-c005"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.005"
+      ]
+    },
+    "rivalry": {
+      "behavioral_case_refs": [
+        "y1v11.case.chie-hoshinomiya.v11-c005"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.005"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [
+        "y1v11.case.chie-hoshinomiya.v11-c005"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.005"
+      ]
+    },
+    "y1_v11": {
+      "behavioral_case_refs": [
+        "y1v11.case.chie-hoshinomiya.v11-c005"
+      ],
+      "context_evidence_refs": [
+        "y1v11.ev.005",
+        "y1v11.ev.059",
+        "y1v11.ev.070"
+      ]
+    },
+    "economy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v11.ev.059"
+      ]
+    },
+    "history": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "y1v11.ev.070"
       ]
     }
   },
@@ -62,5 +114,26 @@
     "contextual_facts": "MENTION_REFERENCES_ONLY",
     "post_divergence_memory": "NEVER_IMPORT_CANON_EPISODES",
     "verified_facts": "RECORD_AUDIT_REQUIRED"
-  }
+  },
+  "y1_v11_source_status": "UNVERIFIED_CANDIDATE_NO_INDEPENDENT_REVIEW",
+  "y1_v11_knowledge_gate": {
+    "pre_enrollment_biography_actor_scoped": true,
+    "post_admission_canon_not_simulation_episodic_memory": true,
+    "private_disclosures_require_individual_acquisition": true,
+    "exam_results_not_replayed_automatically": true,
+    "engine_memory_admission": false,
+    "goal_runtime_auto_update": false
+  },
+  "y1_v11_behavioral_case_refs": [
+    "y1v11.case.chie-hoshinomiya.v11-c005"
+  ],
+  "y1_v11_context_evidence_refs": [
+    "y1v11.ev.005",
+    "y1v11.ev.059",
+    "y1v11.ev.070"
+  ],
+  "y1_v11_relationship_refs": [
+    "y1v11.rel.003"
+  ],
+  "y1_v11_goal_transition_refs": []
 }

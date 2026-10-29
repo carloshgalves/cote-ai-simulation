@@ -1,0 +1,122 @@
+{
+  "id": "y1v11.case.kakeru-ryuen.v11-c045",
+  "actor_id": "actor.kakeru-ryuen",
+  "primary_actor_id": "actor.kakeru-ryuen",
+  "title": "Usa o comando para explorar fraqueza de B e termina como vencedor",
+  "context": "Y1 Volume 11 source-bound episode",
+  "observed_actions": "Assume papel de comando no planejamento e se beneficia de provas físicas e do forfait em judô",
+  "observed_result": "D vence B oficialmente por 5–2, recebendo +190 pontos de classe",
+  "epistemic_limits": "Resultado canônico não é implementação obrigatória da estratégia em forks",
+  "source": {
+    "work_id": "ln.y1.v11.en.operator-provided",
+    "pdf_pages": [
+      368,
+      369,
+      370,
+      371,
+      372,
+      373,
+      374,
+      391,
+      392,
+      395,
+      396,
+      398
+    ],
+    "source_status": "SOURCE_CANDIDATE_REVIEW_PENDING"
+  },
+  "other_actors": [
+    "actor.honami-ichinose",
+    "actor.ishizaki",
+    "actor.mio-ibuki",
+    "actor.hiyori-shiina"
+  ],
+  "capabilities_supported": [
+    "strategy",
+    "leadership",
+    "initiative"
+  ],
+  "information_available": "Conhece equipe D, repertório de eventos e efeitos das ações anteriores sobre os adversários",
+  "counterfactual_test": "Se B resistir à pressão, bloquear ações irregulares ou conseguir escalação no judô, resultado pode divergir",
+  "topics": [
+    "behavior",
+    "strategy",
+    "leadership",
+    "initiative",
+    "y1_v11"
+  ],
+  "evidence_refs": [
+    "y1v11.ev.045"
+  ],
+  "episode_scope": "POST_ADMISSION_CANON_BEHAVIOR_ONLY",
+  "source_mode": "ACTOR_SCOPED_HISTORICAL_CANDIDATE",
+  "case_kind": "BEHAVIORAL_DEMONSTRATION_CANDIDATE",
+  "epistemic_status": "UNVERIFIED",
+  "verified": false,
+  "behavioral_policy": "NON_EXECUTABLE",
+  "individual_review": {
+    "external_independent_review": "NOT_PERFORMED",
+    "assistant_semantic_review": "CANDIDATE_NOT_INDEPENDENT"
+  },
+  "semantic_detail": {
+    "event_time_scope": "Y1_V11_HISTORICAL_NOT_SIM_MEMORY",
+    "trigger": "D conseguiu recuperar planejamento competitivo por Ryūen antes da disputa com B",
+    "actor_objective_at_time": "Explorar fraquezas estratégicas de B via seleção e liderança durante confronto",
+    "actor_known_information": [
+      "Conhece equipe D, repertório de eventos e efeitos das ações anteriores sobre os adversários"
+    ],
+    "beliefs_and_uncertainties": [
+      "Resultado canônico não é implementação obrigatória da estratégia em forks"
+    ],
+    "available_alternatives": [
+      "Se B resistir à pressão, bloquear ações irregulares ou conseguir escalação no judô, resultado pode divergir"
+    ],
+    "chosen_plan_and_observed_actions": [
+      "Assume papel de comando no planejamento e se beneficia de provas físicas e do forfait em judô"
+    ],
+    "observed_outcome": "D vence B oficialmente por 5–2, recebendo +190 pontos de classe",
+    "other_actor_roles": [
+      {
+        "actor_id": "actor.honami-ichinose",
+        "role": "comandante oponente"
+      },
+      {
+        "actor_id": "actor.ishizaki",
+        "role": "aliado"
+      },
+      {
+        "actor_id": "actor.mio-ibuki",
+        "role": "aliada"
+      },
+      {
+        "actor_id": "actor.hiyori-shiina",
+        "role": "facilitadora prévia"
+      }
+    ],
+    "causal_and_epistemic_limits": "Resultado canônico não é implementação obrigatória da estratégia em forks",
+    "counterfactual_probes": [
+      "Se B resistir à pressão, bloquear ações irregulares ou conseguir escalação no judô, resultado pode divergir"
+    ],
+    "source_claims": [
+      {
+        "evidence_ref": "y1v11.ev.045",
+        "pdf_pages": [
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374,
+          391,
+          392,
+          395,
+          396,
+          398
+        ],
+        "assessment": "SOURCE_CANDIDATE_SECOND_REVIEW_REQUIRED"
+      }
+    ],
+    "independent_review": "NOT_PERFORMED"
+  }
+}

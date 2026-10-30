@@ -1,0 +1,37 @@
+{
+  "unicode_version": "15.1.0",
+  "normalization": {
+    "form": "NFC",
+    "process": "Normalization Process for Stabilized Strings",
+    "specification": "https://www.unicode.org/reports/tr15/tr15-54.html",
+    "specification_revision": 54,
+    "conformance_file": {
+      "url": "https://www.unicode.org/Public/15.1.0/ucd/NormalizationTest.txt",
+      "size": 2625136,
+      "sha256": "871238e37e3be0696ec2bd0891119a041b052da1a84485eda05a5438724b223e"
+    }
+  },
+  "unassigned_test": {
+    "property": "General_Category=Unassigned",
+    "property_alias": "Cn",
+    "data_file": {
+      "url": "https://www.unicode.org/Public/15.1.0/ucd/extracted/DerivedGeneralCategory.txt",
+      "size": 268498,
+      "sha256": "760720ac034f96b630a3055879a744e0907184e8aa811e89ba34583a7a487e85"
+    }
+  },
+  "algorithm": [
+    "Reject ill-formed input that is not a sequence of Unicode scalar values.",
+    "Reject any scalar whose Unicode 15.1.0 General_Category is Unassigned (Cn).",
+    "Apply NFC according to UAX #15 revision 54 and Unicode 15.1.0.",
+    "Recheck that the result contains no Unicode 15.1.0 Unassigned scalar.",
+    "Encode the result as shortest-form UTF-8 without BOM."
+  ],
+  "identifier_security": {
+    "policy": "Causal machine identifiers are ASCII-only under registries.json; Unicode security profiles do not apply to them.",
+    "informative_alternatives": [
+      "https://www.unicode.org/reports/tr31/tr31-39.html",
+      "https://www.unicode.org/reports/tr39/tr39-28.html"
+    ]
+  }
+}

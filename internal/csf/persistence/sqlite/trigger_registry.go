@@ -23,7 +23,7 @@ type definitionEntry struct{definition trigger.Definition;raw []byte;digest doma
 // No per-cycle caller may add, amend or replace definitions after this seal.
 func (s *Store) BootstrapGenesisTriggers(ctx context.Context,g *genesis.Genesis,bundle *policy.Bundle,defs []trigger.Definition)error{
  if g==nil||bundle==nil{return errors.New("trigger bootstrap requires genesis and verified bundle")}
- verified,err:=genesis.ValidateCanonical(g.CanonicalBytes,bundle)
+ verified,err:=s.ValidatedGenesis(ctx,[32]byte(g.RunID),bundle)
  if err!=nil{return err}
  if verified.ID!=g.ID||verified.Digest!=g.Digest||verified.RunID!=g.RunID{return errors.New("trigger registry genesis mismatch")}
  refs,err:=bundle.GenesisPolicyRefs();if err!=nil{return err}
@@ -124,8 +124,7 @@ func genesisActivation(bundle *policy.Bundle,g *genesis.Genesis,def trigger.Defi
 // definition digest, runtime version and the fixed predicate/handler contract.
 func (s *Store) LoadRegisteredTriggers(ctx context.Context,runID [32]byte,bundle *policy.Bundle)([]trigger.Registered,error){
  if bundle==nil{return nil,errors.New("bundle required")}
- genesisBytes,err:=s.LoadGenesis(ctx,runID);if err!=nil{return nil,err}
- g,err:=genesis.ValidateCanonical(genesisBytes,bundle);if err!=nil{return nil,err}
+ g,err:=s.ValidatedGenesis(ctx,runID,bundle);if err!=nil{return nil,err}
  if g.RunID!=domain.ID(runID){return nil,errors.New("registry genesis run mismatch")}
  refs,err:=bundle.GenesisPolicyRefs();if err!=nil{return nil,err}
  var boundID,boundDigest,root []byte

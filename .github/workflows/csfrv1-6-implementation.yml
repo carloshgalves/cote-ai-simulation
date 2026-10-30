@@ -11,6 +11,11 @@ on:
       - ".github/workflows/csfrv1-6-implementation.yml"
 permissions:
   contents: read
+
+# Cancel superseded SHA and duplicate push/PR checks for this branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 jobs:
   epistemic:
     runs-on: ubuntu-latest

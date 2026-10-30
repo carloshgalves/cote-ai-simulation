@@ -60,7 +60,7 @@ func TestReview6SameIdentityDifferentBytesFailsWithoutNewReceipt(t *testing.T){
  decoded,err:=codec.StrictDecodePayload(first.Canonical);if err!=nil{t.Fatal(err)}
  fields:=decoded.([]any)
  fields[7]=[]any{"mutated-payload"}
- dig,_,err:=identity.New(bundle).Sum("cote.csf.digest.exogenous-input-unit","cote.csf.schema.exogenous-input.body",1,[]any{fields[:12]})
+ dig,_,err:=identity.New(bundle).Sum("cote.csf.digest.exogenous-input-unit","cote.csf.schema.exogenous-input.body",1,fields[:12])
  if err!=nil{t.Fatal(err)}
  fields[12]=dig[:]
  raw,err:=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}

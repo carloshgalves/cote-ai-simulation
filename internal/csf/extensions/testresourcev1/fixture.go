@@ -33,7 +33,7 @@ func Proposal(bundle *policy.Bundle,run,cycle domain.ID,actor,slot string)(input
   []any{"school",actor},[]any{},[]any{"cote.csf.schema.typed-value",uint64(1),encoded,paramHash[:]},
   []any{[]any{"inventory","last.resource",uint64(1),int64(1)}},[]any{uint64(0)},int64(100),
   []any{uint64(0)},round[:],slot,uint64(7),[]any{uint64(0)},[]any{uint64(0)}}
- dig,_,err:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,[]any{fields})
+ dig,_,err:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,fields)
  if err!=nil{return empty,err}
  full:=append(append([]any(nil),fields...),dig[:])
  raw,err:=codec.CanonicalPayload(full);if err!=nil{return empty,err}
@@ -72,7 +72,7 @@ func ProposalForDispatch(bundle *policy.Bundle,dispatch inputledger.Dispatch)(in
  r.Body[13]=dispatch.RoundID[:]
  r.Body[14]=dispatch.SlotID
  r.Body[15]=uint64(dispatch.BaseRevision)
- dig,_,err:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,[]any{r.Body})
+ dig,_,err:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,r.Body)
  if err!=nil{return r,err}
  raw,err:=codec.CanonicalPayload(append(append([]any(nil),r.Body...),dig[:]))
  if err!=nil{return r,err}

@@ -11,6 +11,8 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
@@ -65,6 +67,20 @@ func (c *Coordinator) CommitCommunicationDue(ctx context.Context,ledger *inputle
  if err!=nil{return zero,err}
  plan:=communication.SendPlan{Run:run,Claim:pub.Claim,Transmission:pub.Transmission,Occurrence:pub.Occurrence}
  due,err:=communication.ValidateOccurrence(c.bundle,plan)
+ if err!=nil {
+  // Only a verified forked V2 Genesis can authorize the distinct
+  // migration-born due shape; a fabricated record is still rejected by
+  // the SQLite terminal's immutable import-proof validation.
+  id,version,_,_,bundleErr:=c.bundle.CodecIdentity()
+  if bundleErr!=nil||id!=policy.CodecPolicyV2ID||version!=2{return zero,errors.New("V1 due occurrence failed registered semantic validation")}
+  reader,ok:=c.store.(interface{
+   ValidatedGenesis(context.Context,[32]byte,*policy.Bundle)(*genesis.Genesis,error)
+  })
+  if !ok{return zero,errors.New("V2 due requires verified Genesis reader")}
+  root,verifyErr:=reader.ValidatedGenesis(ctx,[32]byte(run),c.bundle)
+  if verifyErr!=nil{return zero,verifyErr}
+  due,err=communication.ValidateMigratedOccurrenceV2(c.bundle,plan,root.ID,root.Digest)
+ }
  if err!=nil||due>state.Instant{return zero,errors.New("delivery before registered semantic due")}
  outcome,err:=communication.PlanDueDelivery(c.bundle,plan.Transmission,plan.Claim,id,due,state.Instant)
  if err!=nil{return zero,err}

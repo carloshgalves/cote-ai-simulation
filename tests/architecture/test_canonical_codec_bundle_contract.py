@@ -521,13 +521,53 @@ def test_registered_preimages_bind_all_causal_enum_and_role_fields() -> None:
     assert covered_paths >= expected_enum_bindings.keys() | expected_role_bindings.keys()
 
 
-def test_documentation_treats_two_language_conformance_as_future_gate() -> None:
+def test_documentation_preserves_two_language_conformance_acceptance_gate() -> None:
     contract = (BUNDLE.parent / "canonical-codec-v1.md").read_text(encoding="utf-8")
-    readme = (BUNDLE / "README.md").read_text(encoding="utf-8")
 
     assert "O CI de uma\nimplementação candidata deve executar" in contract
     assert "com auditores Go e TypeScript para os vínculos record → referência" in contract
-    assert "**Execução de conformidade do checkpoint arquitetural:** pendente" in readme
+    prose = " ".join(contract.split())
+    assert (
+        "os mesmos golden vectors em pelo menos duas implementações "
+        "independentes e linguagens diferentes como gate de aceitação" in prose
+    )
+    assert "os runners completos dos golden vectors seguem como um gate separado" in prose
+    assert (
+        "Ambas as implementações precisam provar valor tipado → bytes, "
+        "bytes → valor tipado estrito, re-encoding idêntico, digest e os vetores negativos."
+        in prose
+    )
+    assert "Comparar somente objetos decodificados não basta." in prose
+
+
+def test_documentation_records_v1_homologation_and_frozen_suite() -> None:
+    readme = (BUNDLE / "README.md").read_text(encoding="utf-8")
+    prose = " ".join(readme.split())
+    suite_hash = "05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd"
+
+    assert "**Status:** Normativo" in readme
+    assert (
+        "**Homologação integrada (2026-10-16):** concluída no checkpoint "
+        "`4273833cbe552d1cde6f8affb5b6c9e695dcf6bf`" in prose
+    )
+    assert (
+        "os runners completos Go e TypeScript passaram `621/621` e emitiram "
+        "relatórios byte a byte idênticos." in prose
+    )
+    assert (
+        "Os auditores independentes passaram `29` fixtures em `28` roots, "
+        "rejeitaram `32` mutações record-only e concordaram em seus relatórios." in prose
+    )
+    assert "O bundle V1 foi congelado após essa homologação integrada." in prose
+    assert f"`conformance_suite_hash={suite_hash}`" in readme
+    assert f"conformance_suite_hash {suite_hash}" in (BUNDLE / "BUNDLE.sha256").read_text(
+        encoding="utf-8"
+    )
+    assert "Mudanças futuras em fixtures exigem nova suíte e novo recibo" in prose
+    assert (
+        "A atualização dos hashes, por si só, não substitui as provas "
+        "independentes registradas nesta seção." in prose
+    )
 
 
 def test_typed_causal_refs_use_exact_reference_kind_subsets() -> None:

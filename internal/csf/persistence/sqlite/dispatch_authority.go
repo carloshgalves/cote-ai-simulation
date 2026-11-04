@@ -57,6 +57,11 @@ func verifyDispatchAuthority(ctx context.Context,tx *sql.Tx,fields []any)error{
  if state.LastOrdinal==math.MaxInt64{
   return errors.New("dispatch cycle ordinal exhausted")
  }
+ eligibleInstant,_:=decodedInstant(coord[0])
+ if eligibleInstant>int64(state.Instant)||
+  eligibleInstant==int64(state.Instant)&&coord[1].(uint64)>uint64(state.LastOrdinal+1){
+  return errors.New("dispatch round is not eligible in current WORK cohort")
+ }
  expectedCycle,err:=registeredDigest("cote.csf.id.cycle",
   "cote.csf.schema.cycle-id-preimage",
   []any{run[:],[]any{int64(state.Instant),uint64(state.LastOrdinal+1)}})

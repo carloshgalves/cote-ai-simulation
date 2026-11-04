@@ -85,7 +85,7 @@ func verifyHybridTerminal(ctx context.Context,q queryOne,b ports.WorkBatch,
    covered[round][slot]=true
    byRound[round]=append(byRound[round],hybridSlotProof{slot:slot,id:rawID,digest:digest})
    wantDigest,err:=registeredDigest("cote.csf.digest.no-proposal-unit",
-    "cote.csf.schema.no-proposal.body",[]any{response[:10]});if err!=nil{return err}
+    "cote.csf.schema.no-proposal.body",response[:10]);if err!=nil{return err}
    wantID,err:=registeredDigest("cote.csf.id.no-proposal",
     "cote.csf.schema.slot-response-id-preimage",[]any{response[1],uint64(1)});if err!=nil{return err}
    if !bytes.Equal(wantID[:],rawID)||!bytes.Equal(wantDigest[:],digest)||!equalBytes(response[10],digest){

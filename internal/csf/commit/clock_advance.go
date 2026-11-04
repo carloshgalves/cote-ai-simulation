@@ -11,9 +11,9 @@ import (
 
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
-    "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -33,6 +33,7 @@ type Store interface {
     PendingClock(context.Context,[32]byte)([]clock.Pending,error)
     LoadRegisteredTriggers(context.Context,[32]byte,*policy.Bundle)([]trigger.Registered,error)
     LoadGenesis(context.Context,[32]byte)([]byte,error)
+    ValidatedGenesis(context.Context,[32]byte,*policy.Bundle)(*genesis.Genesis,error)
     // LoadWorldState reads the verified persistent revision, not the genesis
     // fixture, for every WORK cycle after the first world transition.
     LoadWorldState(context.Context,uint64)([]any,[32]byte,error)
@@ -130,8 +131,7 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
     cycleID,_,err:=deriver.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,[]any{runID[:],[]any{int64(plan.From),uint64(plan.OriginOrdinal)}})
     if err!=nil{return result,err}
     clockPlan,err:=clock.EncodePlan(plan);if err!=nil{return result,err}
-    initial,err:=c.store.LoadGenesis(ctx,[32]byte(runID));if err!=nil{return result,err}
-    g,err:=genesis.ValidateCanonical(initial,c.bundle);if err!=nil{return result,err}
+    g,err:=c.store.ValidatedGenesis(ctx,[32]byte(runID),c.bundle);if err!=nil{return result,err}
     if g.RunID!=runID{return result,errors.New("clock run ID differs from persisted genesis")}
     typed,baseHash,err:=c.store.LoadWorldState(ctx,uint64(state.Revision))
     if err!=nil{return result,err}

@@ -9,7 +9,6 @@ import (
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/perception"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
@@ -133,9 +132,7 @@ func (s *Store) deliverRoundPerception(ctx context.Context,taskID [32]byte,bundl
  taskFields,ok:=parsed.([]any)
  if !ok||len(taskFields)!=10{return zero,errors.New("perception task shape invalid")}
  run,ok:=idField(taskFields[1]);if !ok{return zero,errors.New("perception run missing")}
- var genesisRaw []byte
- if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",run[:]).Scan(&genesisRaw);err!=nil{return zero,err}
- if _,err:=genesis.ValidateCanonical(genesisRaw,bundle);err!=nil{
+ if _,err:=validatedGenesisTx(ctx,tx,run,bundle);err!=nil{
   return zero,fmt.Errorf("perception delivery Genesis pin mismatch: %w",err)
  }
  p,err:=loadVerifiedRoundProjection(ctx,tx,taskID)

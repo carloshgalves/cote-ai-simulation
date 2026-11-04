@@ -115,7 +115,7 @@ func verifyPublishedCommunication(ctx context.Context,q queryOne,run,cycle,commi
    "cote.csf.schema.slot-response-id-preimage",[]any{response[1],uint64(0)})
   if err!=nil||sourceID!=domain.Digest(id){return zero,errors.New("historical communication ActionProposal ID forged")}
   sourceHash,err:=registeredDigest("cote.csf.digest.action-proposal-unit",
-   "cote.csf.schema.action-proposal.body",[]any{response[:18]})
+   "cote.csf.schema.action-proposal.body",response[:18])
   if err!=nil||sourceHash!=domain.Digest(sourceDigest)||!equalBytes(response[18],sourceDigest[:]){
    return zero,errors.New("historical ActionProposal body digest altered")
   }

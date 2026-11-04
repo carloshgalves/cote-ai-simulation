@@ -12,7 +12,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/decision"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
@@ -63,8 +62,7 @@ func (c *Coordinator) CommitTwoResourceContest(ctx context.Context,ledger *input
   actors[actor]=true;forbidden[actor]=false
  }
  if slotCount!=2{return empty,errors.New("contest requires exactly two authenticated school slot responses")}
- rawGenesis,err:=c.store.LoadGenesis(ctx,[32]byte(run));if err!=nil{return empty,err}
- manifest,err:=genesis.ValidateCanonical(rawGenesis,c.bundle);if err!=nil{return empty,err}
+ manifest,err:=c.store.ValidatedGenesis(ctx,[32]byte(run),c.bundle);if err!=nil{return empty,err}
  assemble:=decision.FromPersistedFence
  if len(units)>2{assemble=decision.FromPersistedFenceWithSystemHandlers}
  input,err:=assemble(ctx,c.bundle,view,cycle,c.admissionPolicies,fence,c.store,

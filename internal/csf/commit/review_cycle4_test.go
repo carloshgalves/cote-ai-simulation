@@ -41,7 +41,7 @@ func TestReview4GenericAppendCannotBypassSourceIngress(t *testing.T){
  d:=identity.New(bundle)
  newID,_,err:=d.Sum("cote.csf.id.exogenous-input","cote.csf.schema.exogenous-input-id-preimage",1,[]any{run[:],fields[2],fields[3]});if err!=nil{t.Fatal(err)}
  fields[0]=newID[:]
- sum,_,err:=d.Sum("cote.csf.digest.exogenous-input-unit","cote.csf.schema.exogenous-input.body",1,[]any{fields[:12]});if err!=nil{t.Fatal(err)}
+ sum,_,err:=d.Sum("cote.csf.digest.exogenous-input-unit","cote.csf.schema.exogenous-input.body",1,fields[:12]);if err!=nil{t.Fatal(err)}
  fields[12]=sum[:]
  raw,err:=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
  if err:=store.Append(ctx,ports.CanonicalRecord{Identity:newID,Canonical:raw});err==nil{

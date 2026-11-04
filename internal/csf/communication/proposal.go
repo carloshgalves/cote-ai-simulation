@@ -51,7 +51,7 @@ func AuthoredAction(bundle *policy.Bundle,response ports.CanonicalRecord)(Author
   "cote.csf.schema.slot-response-id-preimage",1,[]any{dispatch[:],uint64(0)})
  if err!=nil||domain.ID(id)!=domain.ID(response.Identity){return zero,errors.New("ActionProposal identity not derived from SlotDispatch")}
  digest,_,err:=identity.New(bundle).Sum("cote.csf.digest.action-proposal-unit",
-  "cote.csf.schema.action-proposal.body",1,[]any{f[:18]})
+  "cote.csf.schema.action-proposal.body",1,f[:18])
  if err!=nil||!bytes.Equal(rawBytes(f[18]),digest[:]){
   return zero,errors.New("ActionProposal body digest altered")
  }

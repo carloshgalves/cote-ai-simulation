@@ -9,7 +9,6 @@ import (
 
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
-    "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/perception"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
@@ -58,11 +57,8 @@ func (s *Store) CompleteInternalPerception(
         return zero, errors.New("unregistered perception resolver")
     }
 
-    var genesisRaw, eventRaw, journalRaw []byte
-    if err := tx.QueryRowContext(ctx, "SELECT canonical FROM genesis_records WHERE run_id=?", run[:]).Scan(&genesisRaw); err != nil {
-        return zero, fmt.Errorf("perception genesis missing: %w", err)
-    }
-    manifest, err := genesis.ValidateCanonical(genesisRaw, bundle)
+    var eventRaw, journalRaw []byte
+    manifest, err := validatedGenesisTx(ctx,tx,run,bundle)
     if err != nil { return zero, fmt.Errorf("perception genesis invalid: %w", err) }
     genesisFields := manifest.Payload
     if manifest.RunID != domain.ID(run) || len(genesisFields) != 18 {

@@ -39,7 +39,7 @@ func verifySingleResourceTerminal(ctx context.Context,tx queryOne,b ports.WorkBa
  refID,err:=registeredDigest("cote.csf.id.action-proposal","cote.csf.schema.slot-response-id-preimage",
   []any{proposal[1],uint64(0)});if err!=nil{return err}
  sourceHash,err:=registeredDigest("cote.csf.digest.action-proposal-unit",
-  "cote.csf.schema.action-proposal.body",[]any{proposal[:18]});if err!=nil{return err}
+  "cote.csf.schema.action-proposal.body",proposal[:18]);if err!=nil{return err}
  if !equalBytes(refID[:],sourceID)||!equalBytes(sourceHash[:],sourceDigest)||
   !equalBytes(proposal[18],sourceDigest){return errors.New("ActionProposal ID/digest not sealed")}
  actor,ok:=proposal[6].([]any)

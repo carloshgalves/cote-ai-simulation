@@ -138,7 +138,17 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  currentTyped:=genesisTyped
  var currentHash [32]byte;copy(currentHash[:],initialStateHash)
  runtime:=make(map[domain.ID]trigger.Runtime,len(definitions))
+ imported,hasImported,err:=s.triggerReplaySeedV2(ctx,genesisRoot,bundle)
+ if err!=nil{return report,err}
+ if hasImported {
+  for _,definition:=range imported.Definitions{
+   seed,err:=trigger.DecodeRuntime(definition.Runtime);if err!=nil{return report,err}
+   runtime[seed.DefinitionID]=seed
+  }
+  report.VerifiedActivations=len(imported.Activations)
+ }
  for _,registered:=range definitions{
+  if hasImported{continue}
   d:=registered.Definition
   seed:=trigger.Runtime{DefinitionID:d.ID,Version:d.Version,Armed:true}
   initial,err:=trigger.Evaluate(d,seed,genesisRoot.InitialInstant,0,trigger.PredicateValue(d,genesisRoot.InitialInstant),nil)

@@ -292,3 +292,49 @@ commits, seis transições, reopen e snapshot; corrupção da cadência no cache
 deve falhar na comparação final do runtime, preservando o planejamento histórico,
 e a restauração exata volta a passar. A migração V2 do runtime evoluído continua
 na próxima slice R21; esta correção isolada não fecha OPEN-02 nem OPEN-05.
+
+### R21b — seeds evoluídos e provas de trigger no bootstrap V2
+
+Continuação de `29f88cfe3f5887db7e01582e5ee0ad799454d5a8`, na mesma branch
+da PR #25. Contrato: `docs/architecture/fork-trigger-seeds-v2.md`.
+
+O bootstrap V2 agora deriva os seeds da projeção exata do snapshot verificado,
+arquiva o seal/definitions da origem e os births pendentes num manifesto de
+importação SQLite versionado, e rederiva as ativações sob o Genesis filho.
+Preserva último predicado, arming, exhaustion, contadores e instante absoluto
+de repeat; somente evaluated-through e coordenadas locais são rebaseados.
+O replay começa desse seed e dobra o journal filho antes de comparar o runtime
+vivo. A via V1 mantém a rejeição de runtime evoluído; a compatibilidade com
+forks V2 iniciais anteriores não permite remover a prova de um cut evoluído.
+
+Evidência local com **Go 1.27.2**, toolchain/cache em `runs/` ignorado:
+
+- RED: `go test -count=1 ./internal/csf/commit -run
+  '^TestCSFRV18R21V2ForkPreservesEvolvedTriggerSeed$'`, exit **1**,
+  rejeição esperada `fork advanced trigger runtime requires a versioned transition migrator`.
+- GREEN: o mesmo teste passou; suite `-run '^TestCSFRV18R21'`, exit **0**
+  (4.591s). Inclui três políticas/ativações simultâneas, consumo importado,
+  duas ativações repeat adicionais no filho, reopen, snapshots e replay.
+- Remoção do manifesto evoluído e cinco mutações de prova, inclusive
+  definition/activation alteradas com checksum do manifesto recalculado,
+  foram rejeitadas. Restauração exata recupera o replay.
+- Falha injetada em quatro inserts: manifesto, definition, runtime e activation.
+  Cada uma deixou todas as autoridades verificadas vazias; retry e replay passaram.
+- `go test -race -count=1 ./internal/csf/commit -run '^TestCSFRV18R21'`:
+  exit **0**, 49.318s.
+- `go test -count=1 -timeout=20m ./...`: exit **0**, todos os packages
+  aprovados; `commit` 58.498s, `sqlite` 0.436s.
+- Runners Go e TypeScript: **621/621** cada, exit **0**; `cmp` exit **0**.
+  SHA-256 dos relatórios: `509f61158ae599bfb817bc014401094ee1a94c0993dbc416100a9ebf7d237aa6`.
+- `git diff --check`: exit **0**. Bundle V1 sem alterações de bytes.
+
+Barreira de conhecimento: o nascimento não publica Event, Evidence nem Outbox;
+provas do pai não chegam a contextos de agentes. O checkpoint parental continua
+verificável depois do tail filho. Nenhum modelo, wall clock ou regeneração de
+memória participa.
+
+**Não é revisão independente nem conclusão do ticket.** R21 ainda exige sua
+matriz ampliada de cascades e composição com as outras autoridades; R22 exige
+fences/checkpoints cognitivos externos com protocolo durável aceito; R23 exige
+a matriz diferencial integrada completa. OPEN-02 e OPEN-05 permanecem OPEN.
+Manter Draft, sem merge ou transição automática para review/remediação.

@@ -12,6 +12,7 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/fork"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
@@ -33,7 +34,8 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
 // IDLE cuts supported by the registered causal migrators. Parent V1 history is preserved
 // byte-for-byte, while child Genesis, clock and future authorities are V2.
 // Pending communication, Event/Genesis occurrences and round history are
-// authenticated migration births; unsupported source classes still fail closed.
+// authenticated migration births. V2 also imports snapshot-time trigger seeds
+// and their pending activation proofs; unsupported source classes fail closed.
 func (s *Store) ForkIdleSnapshotV1ToV2(ctx context.Context,sourceRun,parentSnapshotID,childRun [32]byte,
  child *Store,origin,version2 *policy.Bundle)(*genesis.Genesis,error){
  if origin==nil||version2==nil{return nil,errors.New("cross-policy fork requires both installed bundles")}
@@ -279,8 +281,16 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   migratedRounds,err=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4].([]any),origin,childPolicy)
   if err!=nil{return nil,fmt.Errorf("fork Genesis round migration: %w",err)}
  }
- triggerMigration,err:=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,origin,childPolicy,
-  lists[1].([]any),lists[2].([]any))
+ var triggerMigration forkTriggerMigration
+ var triggerManifest []byte
+ if crossPolicy {
+  triggerManifest,err=prepareTriggerManifestV2(ctx,s,parent,snapshot,origin)
+  if err!=nil{return nil,err}
+  triggerMigration,err=migrateTriggerSeedsV2(parent,childGenesis,snapshot,triggerManifest,archive,origin,childPolicy)
+ }else{
+  triggerMigration,err=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,origin,childPolicy,
+   lists[1].([]any),lists[2].([]any))
+ }
  if err!=nil{return nil,fmt.Errorf("fork trigger migration: %w",err)}
  // The parent workspace must remain verifiably immutable: copy the exact
  // members under a read transaction instead of trusting a worker's proposal.
@@ -315,7 +325,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   "input_ledger","decision_ledger","event_store","evidence_ledger","causal_outbox",
   "input_source_cursors","source_ingress_receipts","input_slot_responses","round_integrity_seals",
   "cognitive_actor_registry","snapshot_cognitive_actors","evidence_routes",
-  "communication_claims","communication_transmissions","fork_communication_imports","fork_history_roots","fork_occurrence_imports","cycle_control_state",
+  "communication_claims","communication_transmissions","fork_communication_imports","fork_history_roots","fork_occurrence_imports","fork_trigger_imports","cycle_control_state",
   "committed_cycles","fork_lineage","fork_history_records","snapshots","snapshot_seals",
   "snapshot_prefix_members","genesis_schedule_seals","scheduled_occurrences",
   "trigger_registry_seals","trigger_definitions","trigger_runtime","trigger_activations"}{
@@ -386,6 +396,10 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  if _,err:=tx.ExecContext(ctx,"INSERT INTO world_revisions(revision,state_hash,canonical) VALUES(?,?,?)",
   0,hash,revisionZero);err!=nil{return nil,err}
  // All supported pending triggers are migrated and sealed atomically.
+ if triggerManifest!=nil{
+  seal:=identity.OpaqueContentHash(triggerManifest)
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO fork_trigger_imports(child_run,canonical,canonical_hash) VALUES(?,?,?)",childRun[:],triggerManifest,seal[:]);err!=nil{return nil,err}
+ }
  for _,def:=range triggerMigration.Definitions{
   if _,err:=tx.ExecContext(ctx,
    "INSERT INTO trigger_definitions(definition_id,run_id,genesis_id,genesis_digest,content_digest,canonical) VALUES(?,?,?,?,?,?)",

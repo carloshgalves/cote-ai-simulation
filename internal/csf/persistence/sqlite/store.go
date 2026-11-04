@@ -264,6 +264,12 @@ CREATE TABLE IF NOT EXISTS clock_states (
  run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
  canonical BLOB NOT NULL
 ) STRICT;
+CREATE TABLE IF NOT EXISTS fork_trigger_imports (
+ child_run BLOB PRIMARY KEY CHECK(length(child_run)=32),
+ canonical BLOB NOT NULL,
+ canonical_hash BLOB NOT NULL CHECK(length(canonical_hash)=32),
+ FOREIGN KEY(child_run) REFERENCES fork_lineage(child_run)
+) STRICT;
 CREATE TABLE IF NOT EXISTS genesis_schedule_seals (
  run_id BLOB PRIMARY KEY CHECK(length(run_id)=32),
  roster_digest BLOB NOT NULL CHECK(length(roster_digest)=32)

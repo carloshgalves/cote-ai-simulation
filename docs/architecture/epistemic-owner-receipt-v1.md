@@ -37,3 +37,9 @@ The V2 fork archive and owner key data live in SQLite migration authorities, not
 - R21/R23 integration must keep all five ledgers isolated; no model-generated replacement bytes.
 
 **Release gates outstanding:** human-approved owner durability obligations, final differential/failure matrix, independent review, and exactly-HEAD full-suite/race evidence. A green CI alone does not approve PR #25.
+
+## Snapshot signer-trust sealing (R22 security hardening)
+
+Each newly created snapshot transaction additionally seals the **exact owner public-key roster**, including the empty roster, in `snapshot_owner_key_seals`. Both `CreateSnapshotV1` on idempotent retry and `VerifySnapshotV1` on replay compare the current run's owner key set to the snapshotted count/hash. Removing a key and its signed receipt can no longer silently convert a historically authenticated snapshot into the compatibility fallback. Missing seal or corrupted key rejects replay. V2 fork destinations must likewise be empty of owner-trust seals before bootstrap.
+
+**Migration caveat:** SQLite database files containing snapshots created **before this trust-seal storage contract** have no `snapshot_owner_key_seals` records. They deliberately fail closed on the newer verifier; operator-reviewed migration or a compatible export must establish their prior unsigned/signed provenance. Do not silently synthesize trust seals for an existing snapshot.

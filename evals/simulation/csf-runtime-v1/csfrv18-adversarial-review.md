@@ -338,3 +338,11 @@ matriz ampliada de cascades e composição com as outras autoridades; R22 exige
 fences/checkpoints cognitivos externos com protocolo durável aceito; R23 exige
 a matriz diferencial integrada completa. OPEN-02 e OPEN-05 permanecem OPEN.
 Manter Draft, sem merge ou transição automática para review/remediação.
+
+## 2026-11-10 — R21/R22/R23 integrated acceptance candidate (still under review)
+
+- R21: evolved rising/repeat/once trigger state, pending Genesis rounds, sibling forks and source preservation; a separate scenario exercises the version-pinned 64-WORK cascade cap on a V2 fork with trigger registry and future round.
+- R22: versioned Ed25519 owner-attested opaque receipts, WAL/FULL escrow-before-snapshot, exact replay/open/restore, native child actor enrollment and separate new-run re-attestation, imported parent proof roster seal, snapshot owner trust roster seal to prevent key-deletion downgrades, and frozen terminal writer-lock CAS. Handoff supports crash after V1 terminal and after V2 child bootstrap with exact lineage-verified idempotent recovery. External owners remain accountable for their actual remote durable commit before signing; no claim of remote fsync verification is made.
+- R23: mixed resource contention + trigger + IN_TRANSIT communication, repeated resumes, all five literal ledgers against reopen/worker/crash variants, two divergent cross-policy forks with immutable parent, and independent per-ledger byte corruption/restoration.
+- Review findings R22-HANDOFF-01/02/03, R22-OWNER-DOWNGRADE-04 and R22-FORK-GUARD-05 were persisted in separate PR comments; correction evidence must still be reconciled against the exact final HEAD.
+- A second-party GitHub Copilot review was requested but **no external review was visible** at documentation checkpoint; this is NOT independent approval. Until full branch CI/race and actual reviewer findings are reconciled, PR #25 remains Draft/NO-GO.

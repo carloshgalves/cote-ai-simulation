@@ -74,7 +74,7 @@ func (s *Store) VerifyFrozenFenceCommittedOnce(
     // *current* clock/control of a potentially much later parent.
     value, err := codec.StrictDecodePayload(canonical)
     if err != nil { return err }
-    fields, ok := value.([]any)
+    fields, ok = value.([]any)
     if !ok || len(fields) != 24 || !equalBytes(fields[0], run[:]) ||
         !equalBytes(fields[1], cycle[:]) {
         return errors.New("historical frozen terminal does not match run/cycle")

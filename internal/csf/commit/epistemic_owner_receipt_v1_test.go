@@ -140,3 +140,61 @@ func TestCSFRV18R22CrashBetweenOwnerReceiptAndSnapshotPublication(t *testing.T) 
   t.Fatal("recovered snapshot not replayable:",err)
  }
 }
+
+func TestCSFRV18R22V2ForkPreservesPinnedOwnerProofAndRequiresChildReceipt(t *testing.T){
+ ctx:=context.Background()
+ v1,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,v1)
+ parent,err:=sqlite.Open(ctx,t.TempDir()+"/signed-parent.db");if err!=nil{t.Fatal(err)}
+ defer parent.Close()
+ if err:=parent.PersistGenesis(ctx,g,v1);err!=nil{t.Fatal(err)}
+ if err:=parent.BootstrapClock(ctx,g,v1);err!=nil{t.Fatal(err)}
+ if err:=parent.BootstrapGenesisTriggers(ctx,g,v1,nil);err!=nil{t.Fatal(err)}
+ srcRun:=[32]byte(g.RunID)
+ if err:=parent.RegisterCognitiveActor(ctx,srcRun,"cognition","agent",v1);err!=nil{t.Fatal(err)}
+ pub,key,err:=ed25519.GenerateKey(rand.Reader);if err!=nil{t.Fatal(err)}
+ if err:=parent.RegisterCognitiveOwnerKeyV1(ctx,srcRun,"cognition","agent",pub,v1);err!=nil{t.Fatal(err)}
+ state,err:=parent.LoadClock(ctx,srcRun);if err!=nil{t.Fatal(err)}
+ cp:=sqlite.SnapshotCheckpoint{
+  ActorNamespace:"cognition",ActorID:"agent",StoreID:"memory.v1",SchemaVersion:1,
+  Content:[]byte("source epistemic state"),Producer:"owner",ProducerVersion:1,
+  CoversInstant:int64(state.Instant),CoversRevision:uint64(state.Revision),
+ }
+ _,err=parent.PersistCognitiveCheckpointV1(ctx,srcRun,cp,"owner-source-cut",
+  r22Sign(t,srcRun,cp,"owner-source-cut",key),v1)
+ if err!=nil{t.Fatal(err)}
+ snap,err:=parent.CreateSnapshotV1(ctx,srcRun,v1,[]sqlite.SnapshotCheckpoint{cp})
+ if err!=nil{t.Fatal(err)}
+ v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+ if err!=nil{t.Fatal(err)}
+ childPath:=t.TempDir()+"/signed-v2-child.db"
+ child,err:=sqlite.Open(ctx,childPath);if err!=nil{t.Fatal(err)}
+ defer child.Close()
+ childRun:=srcRun;childRun[0]^=0x48
+ if _,err:=parent.ForkIdleSnapshotV1ToV2(ctx,srcRun,snap.ID,childRun,child,v1,v2);err!=nil{
+  t.Fatal("signed source checkpoint failed V2 migration:",err)
+ }
+ if _,err:=child.ReplayClock(ctx,childRun,v2);err!=nil{t.Fatal(err)}
+ // The historical parent's signature binds SOURCE run only. The child may
+ // re-use the exact opaque bytes but must first obtain an OWNER signature
+ // explicitly covering its new run identity.
+ if _,err:=child.CreateSnapshotV1(ctx,childRun,v2,[]sqlite.SnapshotCheckpoint{cp});err==nil{
+  t.Fatal("V2 child downgraded parent's signing requirement to legacy inline")
+ }
+ signedChild:=r22Sign(t,childRun,cp,"owner-child-cut",key)
+ if _,err:=child.PersistCognitiveCheckpointV1(ctx,childRun,cp,"owner-child-cut",signedChild,v2);err!=nil{
+  t.Fatal("new-run owner re-attestation rejected:",err)
+ }
+ childSnap,err:=child.CreateSnapshotV1(ctx,childRun,v2,[]sqlite.SnapshotCheckpoint{cp})
+ if err!=nil{t.Fatal(err)}
+ if _,err:=child.VerifySnapshotV1(ctx,childRun,childSnap.ID,v2);err!=nil{t.Fatal(err)}
+ probe,err:=sql.Open("sqlite",childPath);if err!=nil{t.Fatal(err)}
+ defer probe.Close()
+ if _,err:=probe.ExecContext(ctx,"UPDATE fork_cognitive_owner_proofs SET signature=zeroblob(64)");err!=nil{t.Fatal(err)}
+ if _,err:=child.ReplayClock(ctx,childRun,v2);err==nil{
+  t.Fatal("corrupted origin owner's imported proof accepted by child replay")
+ }
+ if _,err:=parent.VerifySnapshotV1(ctx,srcRun,snap.ID,v1);err!=nil{
+  t.Fatal("child signer tamper invalidated original source snapshot:",err)
+ }
+}

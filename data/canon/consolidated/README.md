@@ -1,5 +1,8 @@
 # Canon reference layout — global consolidated packs
 
+**Leitura de status em 2026-11-10:** as seções por volume abaixo preservam checkpoints históricos (muitas dizem *Draft*). PRs dos volumes Y1 V1–V11, inclusive #37 V6, #40 V7/V0 e #50 V11, foram integradas ao **corpus de referência**. Isso não concede aprovação por afirmação, verificação humana independente, admissão na memória, execução de exames ou atualização automática de objetivos. As issues #38/#39/#52 foram encerradas administrativamente (`not_planned`) a pedido do operador, mantendo os gates e a proveniência. Para status atual de produto e validação, consulte `docs/validation/product-readiness-2026-11-10.md`. Documentação histórica mais abaixo não deve ser interpretada como status de PR atual.
+
+
 **Authoritative consolidated reference:** `data/canon/consolidated/`. There is **one read-model pack per character** and **one per institution**, regardless of the number of source volumes.
 
 - `characters/<actor>.json`: cross-volume profile, topical summaries and stable references to behavioral cases and evidence.

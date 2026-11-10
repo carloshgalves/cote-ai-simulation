@@ -224,6 +224,11 @@ func verifySnapshotCheckpointRefs(ctx context.Context,tx *sql.Tx,run [32]byte,re
   storeID,storeOK:=f[1].(string);producer,producerOK:=f[5].(string)
   if !storeOK||!producerOK{return errors.New("checkpoint store or producer absent")}
   for _,name:=range []string{ns,id,storeID,producer}{if domain.ValidateMachineID(name)!=nil{return errors.New("invalid checkpoint machine ID")}}
+  if err:=verifyPreparedOwnerCheckpointTx(ctx,tx,run,SnapshotCheckpoint{
+   ActorNamespace:ns,ActorID:id,StoreID:storeID,SchemaVersion:uint32(ver),
+   Content:inline,Producer:producer,ProducerVersion:uint32(producerVer),
+   CoversInstant:at,CoversRevision:revision,CoversEvidenceCursor:evidence,
+  });err!=nil{return err}
  }
  if len(expected)!=len(got){return errors.New("missing or extra eligible cognitive checkpoint")}
  for k:=range expected{if !got[k]{return errors.New("missing checkpoint for eligible actor")}}

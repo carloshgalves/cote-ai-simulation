@@ -161,6 +161,27 @@ CREATE TABLE IF NOT EXISTS cognitive_actor_registry (
  PRIMARY KEY(run_id,actor_namespace,actor_id),
  FOREIGN KEY(run_id) REFERENCES genesis_records(run_id)
 ) STRICT;
+CREATE TABLE IF NOT EXISTS cognitive_owner_keys (
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ actor_namespace TEXT NOT NULL, actor_id TEXT NOT NULL,
+ public_key BLOB NOT NULL CHECK(length(public_key)=32),
+ PRIMARY KEY(run_id,actor_namespace,actor_id),
+ FOREIGN KEY(run_id) REFERENCES genesis_records(run_id)
+) STRICT;
+CREATE TABLE IF NOT EXISTS cognitive_owner_receipts (
+ receipt_id BLOB PRIMARY KEY CHECK(length(receipt_id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ actor_namespace TEXT NOT NULL, actor_id TEXT NOT NULL,
+ store_id TEXT NOT NULL, schema_version INTEGER NOT NULL CHECK(schema_version>0),
+ content BLOB NOT NULL, content_hash BLOB NOT NULL CHECK(length(content_hash)=32),
+ producer TEXT NOT NULL, producer_version INTEGER NOT NULL CHECK(producer_version>0),
+ covers_instant INTEGER NOT NULL, covers_revision INTEGER NOT NULL CHECK(covers_revision>=0),
+ covers_evidence_cursor INTEGER NOT NULL CHECK(covers_evidence_cursor>=0),
+ locator TEXT NOT NULL, signature BLOB NOT NULL CHECK(length(signature)=64),
+ UNIQUE(run_id,actor_namespace,actor_id,covers_instant,covers_revision,covers_evidence_cursor),
+ FOREIGN KEY(run_id,actor_namespace,actor_id)
+ REFERENCES cognitive_owner_keys(run_id,actor_namespace,actor_id)
+) STRICT;
 CREATE TABLE IF NOT EXISTS snapshot_cognitive_actors (
  snapshot_id BLOB NOT NULL CHECK(length(snapshot_id)=32),
  actor_namespace TEXT NOT NULL,

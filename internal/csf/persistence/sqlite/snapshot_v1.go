@@ -284,6 +284,18 @@ func snapshotCheckpointRefs(checkpoints []SnapshotCheckpoint,instant int64,rev,c
 // snapshot ID/hash and the exact five-ledger cursor order. A replay audit runs
 // before publication; a single SQLite writer lock freezes subsequent changes.
 func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bundle,checkpoints []SnapshotCheckpoint)(SnapshotV1,error){
+ return s.createSnapshotV1(ctx,run,b,checkpoints,nil)
+}
+
+// CreateSnapshotV1AtRevision atomically refuses another terminal's revision,
+// new in-flight WORK or a stale handoff request at the actual writer lock.
+func (s *Store) CreateSnapshotV1AtRevision(ctx context.Context,run [32]byte,b *policy.Bundle,
+ checkpoints []SnapshotCheckpoint,expected uint64)(SnapshotV1,error){
+ return s.createSnapshotV1(ctx,run,b,checkpoints,&expected)
+}
+
+func (s *Store) createSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bundle,
+ checkpoints []SnapshotCheckpoint,expectedRevision *uint64)(SnapshotV1,error){
  var zero SnapshotV1
  if s==nil||b==nil{return zero,errors.New("snapshot requires store and pinned policy")}
  clockBefore,err:=s.LoadClock(ctx,run);if err!=nil{return zero,err}
@@ -302,6 +314,9 @@ func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bund
  if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM clock_states WHERE run_id=?",run[:]).Scan(&clockRaw);err!=nil{return zero,err}
  state,err:=clock.Decode(clockRaw);if err!=nil{return zero,err}
  if state!=clockBefore{return zero,errors.New("clock changed between replay audit and snapshot writer lock")}
+ if expectedRevision!=nil&&uint64(state.Revision)!=*expectedRevision{
+  return zero,errors.New("snapshot revision differs from frozen handoff terminal")
+ }
  if err:=verifyPendingOutboxExact(ctx,tx,run);err!=nil{return zero,err}
  if err:=verifyEvidenceRegistryExact(ctx,tx);err!=nil{return zero,err}
  var revRaw,revHash []byte
@@ -328,6 +343,9 @@ func (s *Store) CreateSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bund
   control=c
  case sql.ErrNoRows:
  default:return zero,err
+ }
+ if expectedRevision!=nil&&control[0]!=uint64(0){
+  return zero,errors.New("frozen handoff snapshot requires IDLE under writer lock")
  }
  installedID,_,_,_,err:=b.CodecIdentity()
  if err!=nil{return zero,err}

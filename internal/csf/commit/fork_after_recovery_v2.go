@@ -126,7 +126,8 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
  }
  finalCheckpoints,err:=acquire()
  if err!=nil{return nil,err}
- idle,err:=origin.CreateSnapshotV1(ctx,sourceRun,c.bundle,finalCheckpoints)
+ idle,err:=origin.CreateSnapshotV1AtRevision(ctx,sourceRun,c.bundle,finalCheckpoints,
+  uint64(proof.SnapshotClock.Revision)+1)
  if err!=nil{return nil,err}
  verified,err:=origin.VerifySnapshotV1(ctx,sourceRun,idle.ID,c.bundle)
  if err!=nil{return nil,err}

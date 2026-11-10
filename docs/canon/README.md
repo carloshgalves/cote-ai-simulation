@@ -29,6 +29,8 @@ Base canônica do universo de *Classroom of the Elite* usada para reconstruir o 
 
 Decisão de arquitetura: [`docs/adr/0005-canon-knowledge-base.md`](../adr/0005-canon-knowledge-base.md).
 
-## Estado atual
+## Estado atual — 2026-11-10
 
-Todo o conteúdo hoje é `UNVERIFIED`. Foi localizado por fontes Tier 5 (wiki/comunidade) que apontam volume e capítulo da light novel, mas **nenhuma afirmação foi conferida diretamente em fonte Tier 0–1**. Nada compila para o engine neste estado.
+A frase anterior sobre *todo* o corpus provir exclusivamente de wiki/Tier 5 ficou obsoleta: há extrações com páginas e registros de revisão de PDFs fornecidos pelo operador, integradas ao corpus de referência até Y1 V11. **Extração e revisão pelo próprio autor/assistente não constituem auditoria independente nem validação de cada afirmação.** Ver as autorizações de edição e gates em `operator-source-acceptance.md`, os registros de revisão em `data/canon/consolidated/audits/` e os documentos de cada volume.
+
+As issues #38 (V6), #39 (V7/V0) e #52 (V11) foram encerradas administrativamente (`not_planned`) por instrução do operador, **não** porque seus pareceres de fonte externos tenham sido realizados. Persistem `verified:false`, `engine_memory_admission:false`, `goal_runtime_auto_update:false` e `exam_executable:false` onde aplicáveis. A promoção para dados executáveis exige análise de origem, cronologia, divergência, divulgação e aprovação específica por registro; CI estrutural não substitui esse processo.

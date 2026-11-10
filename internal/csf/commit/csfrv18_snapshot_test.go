@@ -1021,8 +1021,24 @@ func TestCSFRV18IntegratedResourceTriggerCommunicationInTransit(t *testing.T){
    }else{
     if _,err:=c.CommitCommunicationSend(ctx,ledger,messageCycle,messageFence);err!=nil{t.Fatal(err)}
    }
+   // R23: close the input source before taking the forkable cut. A pending
+   // communication send task must also be completed exactly once; later
+   // resume is a read of the same causal prefix, never a second send.
+   if _,err:=ledger.CloseSource(ctx,"driver",inputledger.Closure{
+    ProducerKey:"r23-final-source-close",
+    ClosedThrough:domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+1000},
+    Final:true,
+   });err!=nil{t.Fatal("final source close:",err)}
+   if _,err:=store.DrainPendingPerceptionV1(ctx,[32]byte(run),post.ID,c.bundle);err!=nil{
+    t.Fatal("post-transmission perception cannot be drained:",err)
+   }
    checkpoints:=csfrv18SyntheticActorCheckpoints(t,path,state.Instant,int64(state.Revision)+1)
    final,err:=store.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,checkpoints);if err!=nil{t.Fatal(err)}
+   for attempt:=0;attempt<2;attempt++{
+    resumed,err:=c.ResumeRegisteredWorkV1(ctx,ledger,[32]byte(run),final.ID)
+    if err!=nil{t.Fatalf("R23 repeated resume %d: %v",attempt,err)}
+    if resumed.Continued{t.Fatal("repeated resume dispatched an already committed communication terminal")}
+   }
    var status int
    q,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
    if err:=q.QueryRowContext(ctx,"SELECT status FROM communication_transmissions").Scan(&status);err!=nil{q.Close();t.Fatal(err)}
@@ -1033,6 +1049,52 @@ func TestCSFRV18IntegratedResourceTriggerCommunicationInTransit(t *testing.T){
    if variant.name=="continuous"{baseline=bytes.Clone(final.Canonical);allLedgers=bytes.Clone(all)}else if
     !bytes.Equal(baseline,final.Canonical)||!bytes.Equal(allLedgers,all){
     t.Fatal("mixed resource+trigger+in-transit communication diverged across restored routes")
+   }
+   if variant.name=="continuous"{
+    // Fork the integrated resource + trigger + in-transit communication cut.
+    // Both children receive independently reminted live IDs, but only the
+    // first may run its next terminal. Parent prefix remains immutable.
+    v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+    if err!=nil{t.Fatal(err)}
+    forkIDs:=make([][32]byte,2)
+    children:=make([]*sqlite.Store,2)
+    for sibling:=0;sibling<2;sibling++{
+     dest,err:=sqlite.Open(ctx,t.TempDir()+"/r23-child.db")
+     if err!=nil{t.Fatal(err)}
+     defer dest.Close()
+     children[sibling]=dest
+     forkIDs[sibling]=[32]byte(run)
+     forkIDs[sibling][0]^=byte(0x5a+sibling)
+     if _,err:=store.ForkIdleSnapshotV1ToV2(ctx,[32]byte(run),
+      final.ID,forkIDs[sibling],dest,c.bundle,v2);err!=nil{
+      t.Fatal("R23 mixed-timeline sibling fork:",err)
+     }
+     if _,err:=dest.ReplayClock(ctx,forkIDs[sibling],v2);err!=nil{
+      t.Fatal("R23 child initial replay:",err)
+     }
+    }
+    childLedger,err:=inputledger.Open(ctx,domain.ID(forkIDs[0]),v2,children[0])
+    if err!=nil{t.Fatal(err)}
+    childCoord:=New(children[0],v2,c.admissionPolicies)
+    cy,fr:=r20CurrentWork(t,childCoord,children[0],childLedger,domain.ID(forkIDs[0]))
+    if _,err:=childCoord.DispatchFencedWorkV1(ctx,childLedger,cy,fr);err!=nil{
+     t.Fatal("R23 divergent child terminal:",err)
+    }
+    a,err:=children[0].LoadClock(ctx,forkIDs[0]);if err!=nil{t.Fatal(err)}
+    b,err:=children[1].LoadClock(ctx,forkIDs[1]);if err!=nil{t.Fatal(err)}
+    if a.Revision!=b.Revision+1{t.Fatal("R23 siblings share mutable post-fork revision")}
+    for sibling,dest:=range children{
+     if _,err:=dest.ReplayClock(ctx,forkIDs[sibling],v2);err!=nil{
+      t.Fatal("R23 divergent child replay:",err)
+     }
+    }
+    parentLedger,err:=csfrv18ExactFiveLedgers(path);if err!=nil{t.Fatal(err)}
+    if !bytes.Equal(parentLedger,all){
+     t.Fatal("R23 child fork altered authoritative five-ledger parent prefix")
+    }
+    if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),final.ID,c.bundle);err!=nil{
+     t.Fatal("R23 parent frozen snapshot invalidated by children:",err)
+    }
    }
   })
  }

@@ -55,6 +55,13 @@ func TestCSFRV18R22SignedOwnerReceiptDurableBeforeSnapshot(t *testing.T) {
  if _,err:=reopened.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,bundle);err!=nil{
   t.Fatal("reopened owner receipt lost durability:",err)
  }
+ restored,locator,err:=reopened.LoadCognitiveCheckpointV1(ctx,[32]byte(run),first,ns,actor,bundle)
+ if err!=nil||locator!="owner-checkpoint-01"||!bytes.Equal(restored.Content,cp.Content){
+  t.Fatal("replay cannot rehydrate exact independently signed owner bytes:",err)
+ }
+ if _,_,err:=reopened.LoadCognitiveCheckpointV1(ctx,[32]byte(run),first,ns,"other-actor",bundle);err==nil{
+  t.Fatal("receipt of one actor was disclosed as another actor's checkpoint")
+ }
  db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
  defer db.Close()
  if _,err:=db.ExecContext(ctx,"UPDATE cognitive_owner_receipts SET content=? WHERE receipt_id=?",

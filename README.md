@@ -13,9 +13,15 @@ Simulação multiagente inspirada em *Classroom of the Elite*, com personagens p
 7. **O primeiro ano é o escopo inicial.** Ao final, fazemos snapshot/pause antes de introduzir o elenco do segundo ano.
 8. **A simulação pode divergir do cânone.** O cânone fornece pessoas, regras e antecedentes; não força resultados que já deixaram de ser causalmente possíveis.
 
-## Estado atual
+## Estado atual (verificado em 2026-11-10)
 
-Este bootstrap instala as Agent Skills e registra as primeiras decisões arquiteturais. Ainda não escolhe framework, provedor de LLM, banco vetorial ou stack de UI.
+**Fundação técnica real, produto não executável ponta a ponta.** A `main` integra CSFRV1-1–7 (Go/SQLite, tempo lógico, coortes, decisões, commits atômicos, evidência e comunicação), o Canon RAG V0, dados consolidados até Y1 V11 e as primeiras entregas físicas em Python. **CSFRV1-8 permanece em Draft na PR #25**; Observatory, adapter causal do Embodiment, cognição multiagente, economia executável e Examination Engine completo estão pendentes.
+
+Os 621 vetores do codec normativo V1 são prova de conformidade do protocolo, não de simulação integrada. Os dados canônicos integrados não são automaticamente `verified:true` nem autorizados para `engine_memory_admission`. Issues #38/#39/#52 foram encerradas administrativamente em 10/11, sem certificado de revisão externa.
+
+**Matriz de validação e critérios do First Real Run:** [`docs/validation/product-readiness-2026-11-10.md`](docs/validation/product-readiness-2026-11-10.md). Workflow manual de regressão (não libera produção): `.github/workflows/product-validation-on-demand.yml`.
+
+Framework de cognição, provedor de LLM, banco vetorial e stack de UI seguem em aberto.
 
 O primeiro código do repositório é o subdomínio `Embodiment` do motor, em `src/embodiment/` — amostragem de capacidade física e estado corporal que persiste no tempo, sem nenhuma chamada de LLM. **Python vale para esse subdomínio e só para ele** ([ADR 0007](docs/adr/0007-python-para-o-subdominio-embodiment.md)); framework de agentes, provedor de LLM, banco vetorial e UI seguem em aberto.
 

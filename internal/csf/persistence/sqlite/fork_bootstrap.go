@@ -352,8 +352,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
     "INSERT INTO cognitive_actor_registry(run_id,actor_namespace,actor_id,registered_revision) VALUES(?,?,?,0)",
     childRun[:],ns,id);err!=nil{return nil,err}
   }
- if err:=importCognitiveOwnerProofsV2(ctx,s,tx,sourceRun,childRun,epistemic,
-   uint64(resume.SnapshotClock.Revision));err!=nil{
+ if err:=importCognitiveOwnerProofsV2(ctx,s,tx,sourceRun,childRun,epistemic);err!=nil{
   return nil,fmt.Errorf("V2 signed cognitive owner migration: %w",err)
  }
  }

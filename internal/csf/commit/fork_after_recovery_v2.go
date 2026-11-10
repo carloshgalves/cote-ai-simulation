@@ -50,7 +50,16 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
  proof,err:=origin.VerifySnapshotV1(ctx,sourceRun,sourceSnapshot,c.bundle)
  if err!=nil{return nil,err}
  if proof.ControlStatus!=1&&proof.ControlStatus!=2{
-  return nil,errors.New("fence handoff requires a frozen WORK or retry checkpoint")
+  if proof.ControlStatus!=0 ||
+   (proof.SnapshotControlStatus!=1&&proof.SnapshotControlStatus!=2){
+   return nil,errors.New("fence handoff requires a frozen WORK or retry checkpoint")
+  }
+  // The source may already have committed the frozen terminal before a
+  // checkpoint-provider failure or crash. Authenticate that exact cycle,
+  // revision and terminal before resuming handoff; never execute it twice.
+  if err:=origin.VerifyFrozenFenceCommittedOnce(ctx,sourceRun,sourceSnapshot,c.bundle);err!=nil{
+   return nil,fmt.Errorf("frozen fence handoff retry not authenticated: %w",err)
+  }
  }
  // Cognitive actor history must never be dropped when taking the follow-up
  // checkpoint. The caller supplies signed snapshots for these owners.
@@ -72,10 +81,12 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
   if expectedActors[key]{return nil,errors.New("fence contains duplicate cognitive owner")}
   expectedActors[key]=true
  }
- recovered,err:=c.ResumeRegisteredWorkV1(ctx,ledger,sourceRun,sourceSnapshot)
- if err!=nil{return nil,fmt.Errorf("V1 fenced terminal recovery: %w",err)}
- if !recovered.Continued {
-  return nil,errors.New("frozen fence did not publish one verified V1 terminal")
+ if proof.ControlStatus==1||proof.ControlStatus==2 {
+  recovered,err:=c.ResumeRegisteredWorkV1(ctx,ledger,sourceRun,sourceSnapshot)
+  if err!=nil{return nil,fmt.Errorf("V1 fenced terminal recovery: %w",err)}
+  if !recovered.Continued {
+   return nil,errors.New("frozen fence did not publish one verified V1 terminal")
+  }
  }
  // The terminal may create new eligible actors, so these checkpoint
  // bytes must be supplied and validated AFTER V1 terminal publication.

@@ -125,3 +125,33 @@ func TestCSFRV18R22FencedHandoffRetryAfterCheckpointProviderFailure(t *testing.T
   t.Fatal("frozen source snapshot changed:",err)
  }
 }
+
+func TestCSFRV18R22HandoffSnapshotWriterLockRequiresFrozenRevisionAndIdle(t *testing.T){
+ ctx:=context.Background()
+ _,idle,ledger,run,bundle,_:=testFixture(t)
+ _=ledger
+ snapshotClock,err:=idle.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ if _,err:=idle.CreateSnapshotV1AtRevision(ctx,[32]byte(run),bundle,nil,
+  uint64(snapshotClock.Revision)+1);err==nil{
+  t.Fatal("frozen handoff accepted a different revision")
+ }
+ signed,err:=idle.CreateSnapshotV1AtRevision(ctx,[32]byte(run),bundle,nil,
+  uint64(snapshotClock.Revision))
+ if err!=nil{t.Fatal("exact IDLE revision rejected:",err)}
+ if _,err:=idle.VerifySnapshotV1(ctx,[32]byte(run),signed.ID,bundle);err!=nil{t.Fatal(err)}
+
+ coordinator,source,inFlight,_,_,_:=noProposalWorkFixture(t)
+ _,_,_,_,_,flightRun:=inFlight.Snapshot()
+ state,err:=source.LoadClock(ctx,[32]byte(flightRun));if err!=nil{t.Fatal(err)}
+ if _,err:=source.CreateSnapshotV1AtRevision(ctx,[32]byte(flightRun),
+  coordinator.bundle,nil,uint64(state.Revision));err==nil{
+  t.Fatal("handoff published new snapshot despite an in-flight WORK fence")
+ }
+ // The general V1 snapshot API deliberately retains WORK checkpoint support.
+ // Only a versioned handoff to a new run requires an IDLE writer-lock fence.
+ work,err:=source.CreateSnapshotV1(ctx,[32]byte(flightRun),coordinator.bundle,nil)
+ if err!=nil{t.Fatal("legacy frozen WORK checkpoint was regressed:",err)}
+ if _,err:=source.VerifySnapshotV1(ctx,[32]byte(flightRun),work.ID,coordinator.bundle);err!=nil{
+  t.Fatal("general frozen WORK snapshot no longer resumable:",err)
+ }
+}

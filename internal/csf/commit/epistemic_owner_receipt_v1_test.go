@@ -96,3 +96,47 @@ func TestCSFRV18R22OwnerTrustCannotBeRetrofittedAfterSnapshot(t *testing.T){
   t.Fatal("historical unsigned actor was retroactively promoted to trusted signer")
  }
 }
+
+func TestCSFRV18R22CrashBetweenOwnerReceiptAndSnapshotPublication(t *testing.T) {
+ ctx:=context.Background()
+ _,source,_,run,bundle,path:=testFixture(t)
+ ns,actor:="cognition","agent-retry"
+ if err:=source.RegisterCognitiveActor(ctx,[32]byte(run),ns,actor,bundle);err!=nil{t.Fatal(err)}
+ pub,key,err:=ed25519.GenerateKey(rand.Reader);if err!=nil{t.Fatal(err)}
+ if err:=source.RegisterCognitiveOwnerKeyV1(ctx,[32]byte(run),ns,actor,pub,bundle);err!=nil{t.Fatal(err)}
+ clock,err:=source.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ cp:=sqlite.SnapshotCheckpoint{
+  ActorNamespace:ns,ActorID:actor,StoreID:"memory.v1",SchemaVersion:1,
+  Content:[]byte("owner state persisted before snapshot crash"),
+  Producer:"memory-owner",ProducerVersion:1,
+  CoversInstant:int64(clock.Instant),CoversRevision:uint64(clock.Revision),
+ }
+ signed:=r22Sign(t,[32]byte(run),cp,"owner-cut-01",key)
+ receipt,err:=source.PersistCognitiveCheckpointV1(ctx,[32]byte(run),cp,"owner-cut-01",signed,bundle)
+ if err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ if _,err:=db.ExecContext(ctx,"CREATE TRIGGER stop_snapshot BEFORE INSERT ON snapshot_seals BEGIN SELECT RAISE(ABORT,'injected snapshot crash'); END");err!=nil{t.Fatal(err)}
+ if _,err:=source.CreateSnapshotV1(ctx,[32]byte(run),bundle,[]sqlite.SnapshotCheckpoint{cp});err==nil{
+  t.Fatal("injected snapshot publication crash was ignored")
+ }
+ var snapshots,seals,escrow int
+ for _,item:=range []struct{table string;out *int}{
+  {"snapshots",&snapshots},{"snapshot_seals",&seals},{"cognitive_owner_receipts",&escrow},
+ } {
+  if err:=db.QueryRowContext(ctx,"SELECT count(*) FROM "+item.table).Scan(item.out);err!=nil{t.Fatal(err)}
+ }
+ if snapshots!=0||seals!=0||escrow!=1{
+  t.Fatalf("owner-before-ref atomicity lost: snapshots=%d seals=%d escrow=%d",snapshots,seals,escrow)
+ }
+ if _,err:=db.ExecContext(ctx,"DROP TRIGGER stop_snapshot");err!=nil{t.Fatal(err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer reopened.Close()
+ restored,_,err:=reopened.LoadCognitiveCheckpointV1(ctx,[32]byte(run),receipt,ns,actor,bundle)
+ if err!=nil||!bytes.Equal(restored.Content,cp.Content){t.Fatal("owner exact restore after crash:",err)}
+ result,err:=reopened.CreateSnapshotV1(ctx,[32]byte(run),bundle,[]sqlite.SnapshotCheckpoint{restored})
+ if err!=nil{t.Fatal("post-crash retry of same signed cut:",err)}
+ if _,err:=reopened.VerifySnapshotV1(ctx,[32]byte(run),result.ID,bundle);err!=nil{
+  t.Fatal("recovered snapshot not replayable:",err)
+ }
+}

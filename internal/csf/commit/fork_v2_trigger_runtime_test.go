@@ -15,7 +15,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
 )
 
-func r21EvolvedTriggerSource(t *testing.T) (*Coordinator, *sqlite.Store, *inputledger.Ledger, domain.ID, *policy.Bundle, sqlite.SnapshotV1, string) {
+func r21EvolvedTriggerSource(t *testing.T, prepare ...func(*sqlite.Store,*inputledger.Ledger,domain.ID,*policy.Bundle)) (*Coordinator, *sqlite.Store, *inputledger.Ledger, domain.ID, *policy.Bundle, sqlite.SnapshotV1, string) {
 	t.Helper()
 	ctx := context.Background()
 	rising := activeTrigger()
@@ -70,6 +70,7 @@ func r21EvolvedTriggerSource(t *testing.T) (*Coordinator, *sqlite.Store, *inputl
 	if source[1].Runtime.ActivationCount != 2 || !source[2].Runtime.Exhausted {
 		t.Fatal("source did not evolve as required")
 	}
+	for _,install:=range prepare{install(parent,ledger,run,b)}
 	snapshot, err := parent.CreateSnapshotV1(ctx, [32]byte(run), b, nil)
 	if err != nil {
 		t.Fatal(err)
@@ -432,4 +433,72 @@ func TestCSFRV18R21V2TriggerImportRollbackAndRetry(t *testing.T) {
 	if _, err := parent.VerifySnapshotV1(ctx, [32]byte(run), checkpoint.ID, v1); err != nil {
 		t.Fatal(err)
 	}
+}
+
+func TestCSFRV18R21ComposedEvolvedTriggerAndPendingRoundForks(t *testing.T) {
+ ctx:=context.Background()
+ var sourceRound domain.ID
+ sourceCoordinator,parent,_,run,v1,snapshot,_:=r21EvolvedTriggerSource(t,
+  func(p *sqlite.Store,l *inputledger.Ledger,id domain.ID,b *policy.Bundle){
+   state,err:=p.LoadClock(ctx,[32]byte(id));if err!=nil{t.Fatal(err)}
+   genesis,err:=p.ValidatedGenesis(ctx,[32]byte(id),b);if err!=nil{t.Fatal(err)}
+   origin:=[]any{uint64(2),[]any{genesis.ID[:],genesis.Digest[:]}}
+   round,err:=l.DeclareRound(ctx,"genesis.schedule",
+    [2]string{"school","student-a"},[]string{"alpha","beta"},
+    domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+100,
+     NotBeforeCycleOrdinal:0},origin,1,0,0,[]any{uint64(0)})
+   if err!=nil{t.Fatal("mixed trigger and future round declaration:",err)}
+   sourceRound=round.ID
+  })
+ if sourceRound==([32]byte{}){t.Fatal("source pending round was not created")}
+ if _,err:=parent.VerifySnapshotV1(ctx,[32]byte(run),snapshot.ID,v1);err!=nil{t.Fatal(err)}
+ v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+ if err!=nil{t.Fatal(err)}
+ children:=make([]*sqlite.Store,2)
+ ids:=make([][32]byte,2)
+ paths:=make([]string,2)
+ for i:=0;i<2;i++{
+  paths[i]=t.TempDir()+"/child.db"
+  child,err:=sqlite.Open(ctx,paths[i]);if err!=nil{t.Fatal(err)}
+  defer child.Close()
+  children[i]=child
+  ids[i]=[32]byte(run);ids[i][0]^=byte(0x63+i)
+  if _,err:=parent.ForkIdleSnapshotV1ToV2(ctx,[32]byte(run),
+   snapshot.ID,ids[i],child,v1,v2);err!=nil{
+   t.Fatal("evolved triggers + pending round must compose:",err)
+  }
+  if _,err:=child.ReplayClock(ctx,ids[i],v2);err!=nil{t.Fatal(err)}
+  conn,err:=sql.Open("sqlite",paths[i]);if err!=nil{t.Fatal(err)}
+  var rounds,triggers int
+  err=conn.QueryRowContext(ctx,"SELECT count(*) FROM round_integrity_seals").Scan(&rounds)
+  if err==nil{err=conn.QueryRowContext(ctx,"SELECT count(*) FROM trigger_definitions").Scan(&triggers)}
+  conn.Close()
+  if err!=nil||rounds!=1||triggers!=3{
+   t.Fatalf("child %d lost composed authorities: rounds=%d triggers=%d err=%v",i,rounds,triggers,err)
+  }
+ }
+ for i,child:=range children{
+  current,err:=child.LoadRegisteredTriggers(ctx,ids[i],v2)
+  if err!=nil||len(current)!=3||current[1].Runtime.ActivationCount!=2{
+   t.Fatal("evolved repeat count changed by additional pending round:",err)
+  }
+ }
+ // Only one sibling consumes its next system WORK. The other sibling and
+ // the exact parent snapshot must remain independently replayable.
+ ledger,err:=inputledger.Open(ctx,domain.ID(ids[0]),v2,children[0])
+ if err!=nil{t.Fatal(err)}
+ actor:=New(children[0],v2,sourceCoordinator.admissionPolicies)
+ cycle,fence:=r20CurrentWork(t,actor,children[0],ledger,domain.ID(ids[0]))
+ if _,err:=actor.DispatchFencedWorkV1(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ afterA,err:=children[0].LoadClock(ctx,ids[0]);if err!=nil{t.Fatal(err)}
+ afterB,err:=children[1].LoadClock(ctx,ids[1]);if err!=nil{t.Fatal(err)}
+ if afterA.Revision!=afterB.Revision+1{
+  t.Fatal("fork siblings shared post-fork work or failed independent settlement")
+ }
+ for i,child:=range children{
+  if _,err:=child.ReplayClock(ctx,ids[i],v2);err!=nil{t.Fatalf("sibling %d replay: %v",i,err)}
+ }
+ if _,err:=parent.VerifySnapshotV1(ctx,[32]byte(run),snapshot.ID,v1);err!=nil{
+  t.Fatal("parent snapshot was modified by composed child tails:",err)
+ }
 }

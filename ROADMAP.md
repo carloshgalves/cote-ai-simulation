@@ -8,6 +8,12 @@ Princípio geral:
 
 O objetivo do projeto não é reproduzir a light novel. É construir uma ANHS causalmente executável, povoada por personagens persistentes, capaz de produzir uma timeline própria a partir das mesmas pressões, regras, capacidades e conhecimentos disponíveis.
 
+## Checkpoint de implementação — 2026-11-10
+
+Este roadmap descreve capacidades de produto e não significa que títulos com ✅ estejam homologados no runtime. O estado observado na `main` é: CSFRV1-1–7 integrados; CSFRV1-8 na [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25) (Draft/NO-GO; R21–R23 pendentes); CSFRV1-9, 9A e 10 sem integração; Embodiment PSV1-1/2 integrado, PSV1-3..8 pendentes; Canon RAG V0 e dados de referência Y1 V0–V11 integrados com gates; Zodiac/VIP somente spec/modelos/vetores; o primeiro exame e a cognição multiagente completos NÃO estão executáveis.
+
+As issues de auditoria #38/#39/#52 foram encerradas **administrativamente**, não homologadas; `verified:false` e bloqueios de admissão permanecem. Fonte de aceite de produto: [`docs/validation/product-readiness-2026-11-10.md`](docs/validation/product-readiness-2026-11-10.md).
+
 ## Legenda
 
 - ✅ estabelecido/modelado

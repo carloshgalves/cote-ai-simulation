@@ -109,10 +109,14 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
  // Therefore do not publish an intermediate snapshot and collide with the
  // eventual final checkpoint at the same revision. Recovery can inspect
  // the original frozen checkpoint plus its authenticated committed tail.
- drained,err:=c.ResumeRegisteredWorkV1(ctx,ledger,sourceRun,sourceSnapshot)
+ // Drain only previously committed perception work. Calling the generic
+ // resume/dispatcher here can execute an unrelated WORK cycle admitted by
+ // another actor after the first source terminal. A handoff must never
+ // perform that second, unrequested world mutation.
+ drained,err:=origin.DrainPendingPerceptionV1(ctx,sourceRun,sourceSnapshot,c.bundle)
  if err!=nil{return nil,fmt.Errorf("V1 terminal outbox drain: %w",err)}
- if drained.Continued {
-  return nil,errors.New("unexpected additional V1 WORK terminal during fence outbox drain")
+ if drained.ControlStatus!=0 || drained.Action.Kind!=sqlite.ResumeIdle {
+  return nil,errors.New("new V1 WORK appeared during handoff; refuse to dispatch it")
  }
  finalCheckpoints,err:=acquire()
  if err!=nil{return nil,err}

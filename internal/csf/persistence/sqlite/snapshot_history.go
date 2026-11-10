@@ -44,7 +44,8 @@ func sealSnapshot(ctx context.Context,tx *sql.Tx,checkpoint SnapshotV1,run [32]b
   "INSERT INTO snapshot_seals(snapshot_id,run_id,revision,digest) VALUES(?,?,?,?)",
   checkpoint.ID[:],run[:],checkpoint.Revision,checkpoint.Digest[:]);err!=nil{return err}
  if err:=sealSnapshotPrefix(ctx,tx,checkpoint.ID);err!=nil{return err}
- return sealSnapshotCognitiveActors(ctx,tx,run,checkpoint.ID)
+ if err:=sealSnapshotCognitiveActors(ctx,tx,run,checkpoint.ID);err!=nil{return err}
+ return sealSnapshotOwnerTrust(ctx,tx,run,checkpoint.ID)
 }
 
 // snapshotVerifiedPrefix proves every original member is still present with
@@ -96,7 +97,7 @@ func verifySnapshotSeal(ctx context.Context,tx *sql.Tx,id,run,digest [32]byte,re
  // An entirely empty five-ledger snapshot has zero membership rows. The
  // authoritative per-ledger cursors in the snapshot still prove five digests.
  if count>len(snapshotLedgerNames){return errors.New("extra ledger partition in snapshot membership")}
- return nil
+ return verifySnapshotOwnerTrust(ctx,tx,run,id)
 }
 
 // snapshotHistoricalClock derives the clock at an older revision from the

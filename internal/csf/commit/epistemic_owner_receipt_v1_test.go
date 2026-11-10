@@ -80,6 +80,15 @@ func TestCSFRV18R22SignedOwnerReceiptDurableBeforeSnapshot(t *testing.T) {
   "owner-checkpoint-01",r22Sign(t,[32]byte(run),mutated,"owner-checkpoint-01",private),bundle);err==nil{
   t.Fatal("same-coordinate conflicting owner state was accepted")
  }
+ // Deleting BOTH signed owner authority rows must not turn a previously
+ // signed snapshot into a valid legacy inline checkpoint.
+ if _,err:=db.ExecContext(ctx,"DELETE FROM cognitive_owner_receipts");err!=nil{t.Fatal(err)}
+ if _,err:=db.ExecContext(ctx,
+  "DELETE FROM cognitive_owner_keys WHERE run_id=? AND actor_namespace=? AND actor_id=?",
+  run[:],ns,actor);err!=nil{t.Fatal(err)}
+ if _,err:=reopened.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,bundle);err==nil{
+  t.Fatal("signed snapshot was downgraded to unsigned legacy by deleting owner key and receipt")
+ }
 }
 
 func TestCSFRV18R22OwnerTrustCannotBeRetrofittedAfterSnapshot(t *testing.T){

@@ -234,6 +234,13 @@ CREATE TABLE IF NOT EXISTS snapshot_seals (
  digest BLOB NOT NULL CHECK(length(digest)=32),
  FOREIGN KEY(snapshot_id) REFERENCES snapshots(id)
 ) STRICT;
+CREATE TABLE IF NOT EXISTS snapshot_owner_key_seals (
+ snapshot_id BLOB PRIMARY KEY CHECK(length(snapshot_id)=32),
+ run_id BLOB NOT NULL CHECK(length(run_id)=32),
+ owner_count INTEGER NOT NULL CHECK(owner_count>=0),
+ owner_roster_hash BLOB NOT NULL CHECK(length(owner_roster_hash)=32),
+ FOREIGN KEY(snapshot_id) REFERENCES snapshots(id)
+) STRICT;
 CREATE TABLE IF NOT EXISTS snapshot_prefix_members (
  snapshot_id BLOB NOT NULL CHECK(length(snapshot_id)=32),
  ledger_name TEXT NOT NULL CHECK(ledger_name IN ('input_ledger','decision_ledger','event_store','evidence_ledger','causal_outbox')),

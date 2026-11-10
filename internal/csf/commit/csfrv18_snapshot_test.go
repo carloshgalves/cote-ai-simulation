@@ -1076,9 +1076,11 @@ func TestCSFRV18IntegratedResourceTriggerCommunicationInTransit(t *testing.T){
     childLedger,err:=inputledger.Open(ctx,domain.ID(forkIDs[0]),v2,children[0])
     if err!=nil{t.Fatal(err)}
     childCoord:=New(children[0],v2,c.admissionPolicies)
-    cy,fr:=r20CurrentWork(t,childCoord,children[0],childLedger,domain.ID(forkIDs[0]))
-    if _,err:=childCoord.DispatchFencedWorkV1(ctx,childLedger,cy,fr);err!=nil{
-     t.Fatal("R23 divergent child terminal:",err)
+    // The fork's next canonical transition is a CLOCK_ADVANCE toward the
+    // pending in-transit delivery, not a synthetic empty WORK fence.
+    // Do not manufacture an empty admitted cohort to force divergence.
+    if _,err:=childCoord.Advance(ctx,childLedger,domain.ID(forkIDs[0]));err!=nil{
+     t.Fatal("R23 divergent child clock transition:",err)
     }
     a,err:=children[0].LoadClock(ctx,forkIDs[0]);if err!=nil{t.Fatal(err)}
     b,err:=children[1].LoadClock(ctx,forkIDs[1]);if err!=nil{t.Fatal(err)}

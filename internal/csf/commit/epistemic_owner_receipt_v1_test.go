@@ -9,6 +9,7 @@ import (
  "testing"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  _ "modernc.org/sqlite"
 )
 

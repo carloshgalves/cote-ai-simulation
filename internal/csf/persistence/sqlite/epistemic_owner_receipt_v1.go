@@ -4,7 +4,6 @@ import (
  "bytes"
  "context"
  "crypto/ed25519"
- "crypto/sha256"
  "database/sql"
  "errors"
  "fmt"
@@ -81,7 +80,7 @@ func (s *Store) PersistCognitiveCheckpointV1(ctx context.Context,run [32]byte,
  if len(key)!=ed25519.PublicKeySize||!ed25519.Verify(ed25519.PublicKey(key),payload,signature){
   return zero,errors.New("invalid cognitive owner receipt signature")
  }
- receipt:=sha256.Sum256(payload)
+ receipt:=identity.OpaqueContentHash(payload)
  digest:=identity.OpaqueContentHash(cp.Content)
  _,err=tx.ExecContext(ctx,
   "INSERT OR IGNORE INTO cognitive_owner_receipts("+
@@ -130,7 +129,7 @@ func verifyPreparedOwnerCheckpointTx(ctx context.Context,tx *sql.Tx,run [32]byte
   return errors.New("owner escrow differs from opaque snapshot bytes")
  }
  payload,err:=CognitiveCheckpointSigningBytesV1(run,cp,locator);if err!=nil{return err}
- expected:=sha256.Sum256(payload)
+ expected:=identity.OpaqueContentHash(payload)
  if !bytes.Equal(expected[:],receipt)||len(signature)!=ed25519.SignatureSize||
   !ed25519.Verify(ed25519.PublicKey(key),payload,signature){
   return errors.New("owner receipt identity or signature invalid")

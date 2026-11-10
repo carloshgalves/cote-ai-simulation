@@ -297,3 +297,90 @@ func TestCSFRV18R2401LateEnrolledActorCanSignWithoutRewritingOlderTrust(t *testi
   }
  }
 }
+
+func TestCSFRV18R2501EvidenceHolderSignedLaterKeepsHistoricalLegacySnapshot(t *testing.T) {
+ ctx:=context.Background()
+ // A real addressed round creates validated evidence_ledger and
+ // evidence_routes entries for school/a BEFORE cognitive enrollment.
+ c,store,ledger,cycle,fence,path:=singleResourceFixtureWithFuture(t,true)
+ _,_,_,_,_,runID:=ledger.Snapshot()
+ run:=[32]byte(runID)
+ frozen,err:=store.CreateSnapshotV1(ctx,run,c.bundle,nil)
+ if err!=nil{t.Fatal("initial in-flight snapshot:",err)}
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ if _,err:=store.DrainPendingPerceptionV1(ctx,run,frozen.ID,c.bundle);err!=nil{
+  t.Fatal("draining real addressed evidence:",err)
+ }
+ probe,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ defer probe.Close()
+ var routes,registered int
+ if err:=probe.QueryRowContext(ctx,
+  "SELECT count(*) FROM evidence_routes WHERE run_id=? AND holder_namespace=? AND holder_id=?",
+  run[:],"school","a").Scan(&routes);err!=nil{t.Fatal(err)}
+ if routes!=2{t.Fatalf("expected real observation and knowledge input for school/a, got %d",routes)}
+ if err:=probe.QueryRowContext(ctx,
+  "SELECT count(*) FROM cognitive_actor_registry WHERE run_id=? AND actor_namespace=? AND actor_id=?",
+  run[:],"school","a").Scan(&registered);err!=nil{t.Fatal(err)}
+ if registered!=0{t.Fatal("fixture already registered evidence-only holder")}
+ prior,err:=store.LoadClock(ctx,run);if err!=nil{t.Fatal(err)}
+ if prior.Revision!=1{t.Fatalf("expected evidence revision 1, got %d",prior.Revision)}
+ legacy:=csfrv18SyntheticActorCheckpoints(t,path,prior.Instant,int64(prior.Revision))
+ if len(legacy)!=1||legacy[0].ActorNamespace!="school"||legacy[0].ActorID!="a"{
+  t.Fatalf("expected a single legacy evidence holder: %+v",legacy)
+ }
+ historical,err:=store.CreateSnapshotV1(ctx,run,c.bundle,legacy)
+ if err!=nil{t.Fatal("persist legacy evidence snapshot:",err)}
+ if _,err:=store.VerifySnapshotV1(ctx,run,historical.ID,c.bundle);err!=nil{
+  t.Fatal("legacy evidence snapshot invalid before enrollment:",err)
+ }
+ advance,err:=c.Advance(ctx,ledger,runID)
+ if err!=nil{t.Fatal("advance from evidence R1 to R2:",err)}
+ if advance.ResultClock.Revision!=2{t.Fatal("future advance did not create revision 2")}
+ if err:=store.RegisterCognitiveActor(ctx,run,"school","a",c.bundle);err!=nil{
+  t.Fatal("register previously addressed holder at later revision:",err)
+ }
+ public,private,err:=ed25519.GenerateKey(rand.Reader);if err!=nil{t.Fatal(err)}
+ if err:=store.RegisterCognitiveOwnerKeyV1(ctx,run,"school","a",public,c.bundle);err!=nil{
+  t.Fatal("new evidence holder must be signable in R2:",err)
+ }
+ // R25-01: before this fix, VerifySnapshotV1 rejected this *authentic*
+ // historical legacy checkpoint for missing a non-existent old signature.
+ if _,err:=store.VerifySnapshotV1(ctx,run,historical.ID,c.bundle);err!=nil{
+  t.Fatal("historical unsigned evidence cut retroactively required new signature:",err)
+ }
+ later:=csfrv18SyntheticActorCheckpoints(t,path,advance.ResultClock.Instant,
+  int64(advance.ResultClock.Revision))
+ if len(later)!=1||later[0].ActorID!="a"{t.Fatal("late signed owner checkpoint missing")}
+ if _,err:=store.CreateSnapshotV1(ctx,run,c.bundle,later);err==nil{
+  t.Fatal("future signed snapshot accepted a legacy unsigned checkpoint")
+ }
+ receipt,err:=store.PersistCognitiveCheckpointV1(ctx,run,later[0],"later-evidence-owner",
+  r22Sign(t,run,later[0],"later-evidence-owner",private),c.bundle)
+ if err!=nil{t.Fatal("new owner signed receipt:",err)}
+ current,err:=store.CreateSnapshotV1(ctx,run,c.bundle,later)
+ if err!=nil{t.Fatal("publish newly authenticated R2:",err)}
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer reopened.Close()
+ for _,snap:=range []sqlite.SnapshotV1{historical,current}{
+  if _,err:=reopened.VerifySnapshotV1(ctx,run,snap.ID,c.bundle);err!=nil{
+   t.Fatalf("snapshot R%d not replayable after new signer: %v",snap.Revision,err)
+  }
+ }
+ if _,_,err:=reopened.LoadCognitiveCheckpointV1(ctx,run,receipt,"school","a",c.bundle);err!=nil{
+  t.Fatal("signed owner receipt cannot be restored:",err)
+ }
+ // Deleting a key that WAS part of the later snapshot's sealed authority
+ // must fail closed. The earlier legacy cut remains authentic.
+ if _,err:=probe.ExecContext(ctx,
+  "DELETE FROM cognitive_owner_receipts WHERE run_id=? AND actor_namespace=? AND actor_id=?",
+  run[:],"school","a");err!=nil{t.Fatal(err)}
+ if _,err:=probe.ExecContext(ctx,
+  "DELETE FROM cognitive_owner_keys WHERE run_id=? AND actor_namespace=? AND actor_id=?",
+  run[:],"school","a");err!=nil{t.Fatal(err)}
+ if _,err:=reopened.VerifySnapshotV1(ctx,run,current.ID,c.bundle);err==nil{
+  t.Fatal("late signed cut was downgraded after deleting its key and receipt")
+ }
+ if _,err:=reopened.VerifySnapshotV1(ctx,run,historical.ID,c.bundle);err!=nil{
+  t.Fatal("legitimate earlier legacy snapshot was invalidated by new-owner deletion:",err)
+ }
+}

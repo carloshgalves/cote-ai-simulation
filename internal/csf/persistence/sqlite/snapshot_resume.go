@@ -228,7 +228,7 @@ func verifySnapshotCheckpointRefs(ctx context.Context,tx *sql.Tx,run [32]byte,re
    ActorNamespace:ns,ActorID:id,StoreID:storeID,SchemaVersion:uint32(ver),
    Content:inline,Producer:producer,ProducerVersion:uint32(producerVer),
    CoversInstant:at,CoversRevision:revision,CoversEvidenceCursor:evidence,
-  });err!=nil{return err}
+  },snapshotID);err!=nil{return err}
  }
  if len(expected)!=len(got){return errors.New("missing or extra eligible cognitive checkpoint")}
  for k:=range expected{if !got[k]{return errors.New("missing checkpoint for eligible actor")}}

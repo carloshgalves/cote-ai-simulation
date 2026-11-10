@@ -112,10 +112,40 @@ func (s *Store) PersistCognitiveCheckpointV1(ctx context.Context,run [32]byte,
  return receipt,nil
 }
 
-// Called by both snapshot publication and VerifySnapshotV1. Legacy actors
-// without an enrolled signing owner retain existing inline V1 compatibility.
+// Called by snapshot publication, historical VerifySnapshotV1 and owner
+// restore. A sealed historical snapshot must apply the trust roster that was
+// authoritative at THAT cut, not a later actor's newly enrolled owner key.
+// The caller has already checked the historical snapshot owner roster seal;
+// deletion of a key from a previously signed cut must still fail closed.
 func verifyPreparedOwnerCheckpointTx(ctx context.Context,tx *sql.Tx,run [32]byte,
- cp SnapshotCheckpoint)error{
+ cp SnapshotCheckpoint,snapshotID *[32]byte)error{
+ if snapshotID!=nil{
+  var revision uint64
+  if err:=tx.QueryRowContext(ctx,
+   "SELECT revision FROM snapshot_seals WHERE run_id=? AND snapshot_id=?",
+   run[:],snapshotID[:]).Scan(&revision);err!=nil{
+   return fmt.Errorf("historical cognitive owner snapshot seal missing: %w",err)
+  }
+  var registeredRevision uint64
+  err:=tx.QueryRowContext(ctx,
+   "SELECT a.registered_revision FROM cognitive_owner_keys k "+
+   "JOIN cognitive_actor_registry a ON a.run_id=k.run_id "+
+   "AND a.actor_namespace=k.actor_namespace AND a.actor_id=k.actor_id "+
+   "WHERE k.run_id=? AND k.actor_namespace=? AND k.actor_id=?",
+   run[:],cp.ActorNamespace,cp.ActorID).Scan(&registeredRevision)
+  if err==sql.ErrNoRows{
+   // Only genuine unsigned legacy actors are eligible here. A key that
+   // belonged to the historical seal cannot disappear: VerifySnapshotV1
+   // authenticates the exact per-cut owner roster before reaching us.
+   return nil
+  }
+  if err!=nil{return err}
+  if registeredRevision>revision{
+   // An evidence recipient existed before its later formal enrollment.
+   // Its earlier snapshot remains inline/legacy and immutable.
+   return nil
+  }
+ }
  var key []byte
  err:=tx.QueryRowContext(ctx,
   "SELECT public_key FROM cognitive_owner_keys WHERE run_id=? AND actor_namespace=? AND actor_id=?",
@@ -169,7 +199,7 @@ func (s *Store) LoadCognitiveCheckpointV1(ctx context.Context,run,receiptID [32]
    &cp.StoreID,&cp.SchemaVersion,&cp.Content,&hash,&cp.Producer,&cp.ProducerVersion,
    &cp.CoversInstant,&cp.CoversRevision,&cp.CoversEvidenceCursor,&locator,&signature)
  if err!=nil{return zero,"",fmt.Errorf("cognitive restore receipt missing: %w",err)}
- if err:=verifyPreparedOwnerCheckpointTx(ctx,tx,run,cp);err!=nil{return zero,"",err}
+ if err:=verifyPreparedOwnerCheckpointTx(ctx,tx,run,cp,nil);err!=nil{return zero,"",err}
  payload,err:=CognitiveCheckpointSigningBytesV1(run,cp,locator);if err!=nil{return zero,"",err}
  expected:=identity.OpaqueContentHash(payload)
  if !bytes.Equal(expected[:],receiptID[:])||len(signature)!=ed25519.SignatureSize{

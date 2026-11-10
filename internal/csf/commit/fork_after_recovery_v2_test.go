@@ -132,8 +132,19 @@ func TestCSFRV18R22FencedHandoffRetryAfterCheckpointProviderFailure(t *testing.T
  reopened,err:=sqlite.Open(ctx,childPath)
  if err!=nil{t.Fatal("child reopen after injected result-loss:",err)}
  defer reopened.Close()
+ // The checkpoint owner is now OFFLINE: re-contacting it would fail
+ // even though an authenticated child has already durably committed.
+ unexpectedProviderCalls:=0
+ offlineProvider:=func(context.Context,*sqlite.Store)([]sqlite.SnapshotCheckpoint,error){
+  unexpectedProviderCalls++
+  return nil,errors.New("owner unavailable after child commit")
+ }
  repeated,err:=coordinator.SettleFencedThenForkV2(ctx,ledger,[32]byte(run),
-  frozen.ID,childRun,reopened,v2,provider)
+  frozen.ID,childRun,reopened,v2,offlineProvider)
+ if unexpectedProviderCalls!=0{
+  t.Fatalf("post-bootstrap recovery invoked unavailable external owner %d times",
+   unexpectedProviderCalls)
+ }
  if err!=nil{t.Fatal("post-bootstrap retry failed:",err)}
  if repeated.ID!=childGenesis.ID||repeated.Digest!=childGenesis.Digest{
   t.Fatal("post-bootstrap retry replaced the already published child")

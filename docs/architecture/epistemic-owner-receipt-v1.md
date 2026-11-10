@@ -47,3 +47,7 @@ Each newly created snapshot transaction additionally seals the **exact owner pub
 ## R24-01 — Late actor enrollment on later revisions
 
 Owner-key enrollment is tied to the actor's durable `registered_revision`, not a global run-wide first snapshot. A new actor registered after advancing from snapshot revision R to R+1 may register a new immutable Ed25519 owner key and publish a signed checkpoint at R+1. A key cannot be introduced after any snapshot at or beyond that actor's registered revision. Snapshot trust roster verification compares the subset of signed owners registered **by the historical revision**, so older snapshots keep their original count/hash even after subsequent agents enroll. No change to the canonical snapshot bytes or V1 codec is required.
+
+## R24-02 — Post-bootstrap retry without the external checkpoint provider
+
+After source terminal commit, a retry of `SettleFencedThenForkV2` first authenticates the original frozen cycle and computes the **unique expected V1 idle snapshot ID** from the original run and revision+1. If a V2 destination child already exists, it must authenticate its parent run and exact idle snapshot, complete child replay, and independently validate the persisted V1 idle cut before returning that existing Genesis. No second external checkpoint request is performed on this success path. A missing/invalid/mismatched child is not accepted, and a target without a published child follows the existing durable checkpoint acquisition and fork path. The recovery cannot perform a second V1 terminal.

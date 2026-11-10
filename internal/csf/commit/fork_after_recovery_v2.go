@@ -7,6 +7,7 @@ import (
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -49,6 +50,11 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
  }
  proof,err:=origin.VerifySnapshotV1(ctx,sourceRun,sourceSnapshot,c.bundle)
  if err!=nil{return nil,err}
+ // Once the frozen source cycle is terminal, an already-published child may
+ // be restored WITHOUT contacting the external checkpoint provider again.
+ // The original frozen cycle must first be authenticated as exactly-once.
+ committedRetry:=proof.ControlStatus==0 &&
+  (proof.SnapshotControlStatus==1||proof.SnapshotControlStatus==2)
  if proof.ControlStatus!=1&&proof.ControlStatus!=2{
   if proof.ControlStatus!=0 ||
    (proof.SnapshotControlStatus!=1&&proof.SnapshotControlStatus!=2){
@@ -80,6 +86,31 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
   key:=ns+"\\x00"+name
   if expectedActors[key]{return nil,errors.New("fence contains duplicate cognitive owner")}
   expectedActors[key]=true
+ }
+ // On a retry after both the V1 idle snapshot and the V2 child have
+ // already committed, short-circuit BEFORE re-calling buildCheckpoints.
+ // The expected post-terminal snapshot ID is deterministic from the
+ // authenticated frozen revision; it must not come from the child database.
+ if committedRetry {
+  expectedRevision:=uint64(proof.SnapshotClock.Revision)+1
+  expectedID,_,err:=identity.New(c.bundle).Sum(
+   "cote.csf.id.snapshot","cote.csf.schema.snapshot-id-preimage",1,
+   []any{sourceRun[:],uint64(1),expectedRevision})
+  if err!=nil{return nil,err}
+  idleID:=[32]byte(expectedID)
+  child,err:=destination.RecoverPublishedForkV1ToV2(
+   ctx,childRun,sourceRun,idleID,childPolicy)
+  if err!=nil{return nil,fmt.Errorf("V2 committed child recovery refused: %w",err)}
+  if child!=nil {
+   idle,err:=origin.VerifySnapshotV1(ctx,sourceRun,idleID,c.bundle)
+   if err!=nil{return nil,fmt.Errorf("V1 idle source checkpoint missing: %w",err)}
+   if idle.SnapshotControlStatus!=0||idle.ControlStatus!=0||
+    uint64(idle.SnapshotClock.Revision)!=expectedRevision||
+    uint64(idle.Clock.Revision)!=expectedRevision||idle.PendingTasks!=0 {
+    return nil,errors.New("committed child does not match the authenticated V1 idle source cut")
+   }
+   return child,nil
+  }
  }
  if proof.ControlStatus==1||proof.ControlStatus==2 {
   recovered,err:=c.ResumeRegisteredWorkV1(ctx,ledger,sourceRun,sourceSnapshot)

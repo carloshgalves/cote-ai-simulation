@@ -118,6 +118,12 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
  if drained.ControlStatus!=0 || drained.Action.Kind!=sqlite.ResumeIdle {
   return nil,errors.New("new V1 WORK appeared during handoff; refuse to dispatch it")
  }
+ // A second unrelated terminal can land while the parent is between
+ // transactions. Do not silently choose a later world cut for the V2 child.
+ // Only the one authenticated frozen CycleCommit may advance source revision.
+ if drained.Clock.Revision!=proof.SnapshotClock.Revision+1 {
+  return nil,errors.New("source revision changed after frozen terminal; cannot fork an unrequested later cut")
+ }
  finalCheckpoints,err:=acquire()
  if err!=nil{return nil,err}
  idle,err:=origin.CreateSnapshotV1(ctx,sourceRun,c.bundle,finalCheckpoints)

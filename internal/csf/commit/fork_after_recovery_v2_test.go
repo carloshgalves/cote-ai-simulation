@@ -312,6 +312,19 @@ func TestCSFRV18R2602PublishedForkRetryIgnoresLaterParentWorkAndRevision(t *test
  if _,err:=c.SettleFencedThenForkV2(ctx,ledger,[32]byte(run),frozen.ID,
   wrongChild,dest,v2,offline);err==nil{t.Fatal("occupied child destination accepted wrong child ID")}
  if commits()!=1||offlineCalls!=0{t.Fatal("wrong-child retry mutated parent/provider")}
+ // A lost/missing child cannot authorize running the unrelated live cycle.
+ // The target is genuinely empty, unlike the already published destination.
+ emptyTarget,err:=sqlite.Open(ctx,t.TempDir()+"/r26-empty-destination.db")
+ if err!=nil{t.Fatal(err)}
+ defer emptyTarget.Close()
+ if _,err:=c.SettleFencedThenForkV2(ctx,ledger,[32]byte(run),
+  frozen.ID,childRun,emptyTarget,v2,offline);err==nil||
+  !strings.Contains(err.Error(),"unrelated WORK"){
+  t.Fatalf("missing-child retry should refuse new unrelated WORK: %v",err)
+ }
+ if commits()!=1||offlineCalls!=0{
+  t.Fatal("failed missing-child retry dispatched a second terminal or contacted provider")
+ }
  // Independently complete the legitimate later WORK: parent is now R+2.
  if _,err:=c.CommitNoProposal(ctx,ledger,otherCycle,otherFence);err!=nil{
   t.Fatal("independent later WORK could not settle:",err)

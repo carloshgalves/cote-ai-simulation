@@ -4,9 +4,13 @@ import (
  "context"
  "errors"
  "strings"
+ "database/sql"
  "testing"
 
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -195,4 +199,133 @@ func TestCSFRV18R22HandoffSnapshotWriterLockRequiresFrozenRevisionAndIdle(t *tes
  if _,err:=source.VerifySnapshotV1(ctx,[32]byte(flightRun),work.ID,coordinator.bundle);err!=nil{
   t.Fatal("general frozen WORK snapshot no longer resumable:",err)
  }
+}
+
+ 
+// R26-02 exercises genuine post-fork V1 admission and a second legitimate
+// terminal; the retry must be read-only even while a newer WORK is live.
+func r26AdmitUnrelatedNoProposal(t *testing.T, c *Coordinator, store *sqlite.Store,
+ ledger *inputledger.Ledger, run domain.ID)(admission.Cycle,admission.Fence){
+ t.Helper()
+ ctx:=context.Background()
+ current,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ _,stateHash,err:=store.LoadWorldState(ctx,uint64(current.Revision));if err!=nil{t.Fatal(err)}
+ nextOrdinal:=domain.CycleOrdinal(current.LastOrdinal+1)
+ when:=domain.EligibilityCoordinate{NotBeforeInstant:current.Instant,
+  NotBeforeCycleOrdinal:nextOrdinal}
+ g:=validGenesis(t,c.bundle)
+ origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ round,err:=ledger.DeclareRound(ctx,"schedule",[2]string{"school","late-worker"},
+  []string{"act"},when,origin,0,2,0,[]any{uint64(0)})
+ if err!=nil{t.Fatal("declare independent later round:",err)}
+ d:=identity.New(c.bundle)
+ cycleID,_,err:=d.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(current.Instant),uint64(nextOrdinal)}})
+ if err!=nil{t.Fatal(err)}
+ dispatchID,_,err:=d.Sum("cote.csf.id.dispatch","cote.csf.schema.dispatch-id-preimage",1,
+  []any{run[:],cycleID[:],round.ID[:],"act",uint64(0)})
+ if err!=nil{t.Fatal(err)}
+ dispatch:=inputledger.Dispatch{ID:domain.ID(dispatchID),RunID:run,
+  CycleID:domain.ID(cycleID),RoundID:round.ID,SlotID:"act",Actor:round.Actor,
+  Eligibility:when,BaseRevision:current.Revision,EffectiveAt:current.Instant}
+ if err:=ledger.RegisterDispatch(ctx,dispatch,inputledger.CycleBinding{
+  ID:domain.ID(cycleID),BaseRevision:current.Revision,Instant:current.Instant,
+ });err!=nil{t.Fatal("later dispatch:",err)}
+ responseID,_,err:=d.Sum("cote.csf.id.no-proposal","cote.csf.schema.slot-response-id-preimage",1,
+  []any{dispatch.ID[:],uint64(1)})
+ if err!=nil{t.Fatal(err)}
+ body:=[]any{responseID[:],dispatch.ID[:],run[:],cycleID[:],round.ID[:],dispatch.SlotID,
+  []any{dispatch.Actor[0],dispatch.Actor[1]},int64(dispatch.EffectiveAt),
+  uint64(dispatch.BaseRevision),uint64(0)}
+ digest,_,err:=d.Sum("cote.csf.digest.no-proposal-unit","cote.csf.schema.no-proposal.body",1,body)
+ if err!=nil{t.Fatal(err)}
+ canonical,err:=codec.CanonicalPayload(append(cloneAny(body),digest[:]))
+ if err!=nil{t.Fatal(err)}
+ response:=inputledger.Response{Kind:1,ID:domain.ID(responseID),Digest:digest,
+  Canonical:canonical,Body:body,DispatchID:dispatch.ID,RunID:run,
+  CycleID:domain.ID(cycleID),RoundID:round.ID,SlotID:dispatch.SlotID,
+  Actor:dispatch.Actor,EffectiveAt:dispatch.EffectiveAt,
+  SubmittedAgainstRevision:dispatch.BaseRevision}
+ if err:=ledger.Respond(ctx,response);err!=nil{t.Fatal("later response:",err)}
+ cycle:=admission.Cycle{ID:domain.ID(cycleID),Attempt:0,Instant:current.Instant,
+  Ordinal:nextOrdinal,BaseRevision:current.Revision,
+  BaseStateHash:domain.Digest(stateHash),RetryRef:[]any{uint64(0)}}
+ fence,err:=admission.NewCoordinator(admission.NewFenceLog(store)).
+  AdmitThenEvaluate(ctx,c.bundle,ledger,cycle,c.admissionPolicies,nil)
+ if err!=nil{t.Fatal("admit independent later WORK:",err)}
+ return cycle,fence
+}
+
+func TestCSFRV18R2602PublishedForkRetryIgnoresLaterParentWorkAndRevision(t *testing.T){
+ ctx:=context.Background()
+ c,parent,ledger,_,_,sourcePath:=noProposalWorkFixture(t)
+ _,_,_,_,_,run:=ledger.Snapshot()
+ state,err:=parent.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ if _,err:=ledger.CloseSource(ctx,"driver",inputledger.Closure{
+  ProducerKey:"r26-final-source",
+  ClosedThrough:domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+1000},
+  Final:true,
+ });err!=nil{t.Fatal(err)}
+ frozen,err:=parent.CreateSnapshotV1(ctx,[32]byte(run),c.bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+ if err!=nil{t.Fatal(err)}
+ childRun:=[32]byte(run);childRun[0]^=0x67
+ dest,err:=sqlite.Open(ctx,t.TempDir()+"/r26-published-child.db")
+ if err!=nil{t.Fatal(err)}
+ defer dest.Close()
+ provider:=func(ctx context.Context,s *sqlite.Store)([]sqlite.SnapshotCheckpoint,error){
+  now,err:=s.LoadClock(ctx,[32]byte(run));if err!=nil{return nil,err}
+  return csfrv18SyntheticActorCheckpoints(t,sourcePath,now.Instant,int64(now.Revision)),nil
+ }
+ child,err:=c.SettleFencedThenForkV2(ctx,ledger,[32]byte(run),frozen.ID,childRun,dest,v2,provider)
+ if err!=nil{t.Fatal("publish original child:",err)}
+ if _,err:=dest.ReplayClock(ctx,childRun,v2);err!=nil{t.Fatal(err)}
+ offlineCalls:=0
+ offline:=func(context.Context,*sqlite.Store)([]sqlite.SnapshotCheckpoint,error){
+  offlineCalls++
+  return nil,errors.New("unexpected owner access after child publication")
+ }
+ db,err:=sql.Open("sqlite",sourcePath);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ commits:=func()int{
+  t.Helper()
+  var n int
+  if err:=db.QueryRowContext(ctx,"SELECT count(*) FROM committed_cycles").Scan(&n);err!=nil{t.Fatal(err)}
+  return n
+ }
+ if got:=commits();got!=1{t.Fatalf("initial handoff committed %d parent terminals",got)}
+ // A newly admitted, unrelated WORK must remain in-flight after retry.
+ otherCycle,otherFence:=r26AdmitUnrelatedNoProposal(t,c,parent,ledger,run)
+ blocked,err:=c.SettleFencedThenForkV2(ctx,ledger,[32]byte(run),frozen.ID,childRun,dest,v2,offline)
+ if err!=nil{t.Fatal("read-only child recovery with other live WORK:",err)}
+ if blocked.ID!=child.ID||blocked.Digest!=child.Digest||offlineCalls!=0{
+  t.Fatal("post-child retry contacted owner or replaced child")
+ }
+ current,err:=parent.LoadClock(ctx,[32]byte(run))
+ if err!=nil||current.Revision!=1||commits()!=1{
+  t.Fatal("retry dispatched unrelated WORK:",current,err)
+ }
+ ctl,err:=parent.LoadCycleControl(ctx,[32]byte(run))
+ if err!=nil||ctl[0]!=uint64(1){t.Fatal("unrelated new WORK was not left in-flight:",err)}
+ wrongChild:=childRun;wrongChild[0]^=0x14
+ if _,err:=c.SettleFencedThenForkV2(ctx,ledger,[32]byte(run),frozen.ID,
+  wrongChild,dest,v2,offline);err==nil{t.Fatal("occupied child destination accepted wrong child ID")}
+ if commits()!=1||offlineCalls!=0{t.Fatal("wrong-child retry mutated parent/provider")}
+ // Independently complete the legitimate later WORK: parent is now R+2.
+ if _,err:=c.CommitNoProposal(ctx,ledger,otherCycle,otherFence);err!=nil{
+  t.Fatal("independent later WORK could not settle:",err)
+ }
+ current,err=parent.LoadClock(ctx,[32]byte(run))
+ if err!=nil||current.Revision!=2||commits()!=2{
+  t.Fatal("independent R+2 parent state missing:",current,err)
+ }
+ recovered,err:=c.SettleFencedThenForkV2(ctx,ledger,[32]byte(run),
+  frozen.ID,childRun,dest,v2,offline)
+ if err!=nil{t.Fatal("R+2 parent must not invalidate already-published child:",err)}
+ if recovered.ID!=child.ID||recovered.Digest!=child.Digest||commits()!=2||offlineCalls!=0{
+  t.Fatal("R+2 retry changed child, mutated parent or called offline provider")
+ }
+ if _,err:=parent.ReplayClock(ctx,[32]byte(run),c.bundle);err!=nil{t.Fatal(err)}
+ if _,err:=dest.ReplayClock(ctx,childRun,v2);err!=nil{t.Fatal(err)}
 }

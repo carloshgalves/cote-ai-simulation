@@ -5,12 +5,14 @@ import (
  "errors"
  "fmt"
 
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
 // SettleFencedThenForkV2 is the versioned boundary for a V1 run that has a
@@ -50,22 +52,10 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
  }
  proof,err:=origin.VerifySnapshotV1(ctx,sourceRun,sourceSnapshot,c.bundle)
  if err!=nil{return nil,err}
- // Once the frozen source cycle is terminal, an already-published child may
- // be restored WITHOUT contacting the external checkpoint provider again.
- // The original frozen cycle must first be authenticated as exactly-once.
- committedRetry:=proof.ControlStatus==0 &&
-  (proof.SnapshotControlStatus==1||proof.SnapshotControlStatus==2)
- if proof.ControlStatus!=1&&proof.ControlStatus!=2{
-  if proof.ControlStatus!=0 ||
-   (proof.SnapshotControlStatus!=1&&proof.SnapshotControlStatus!=2){
-   return nil,errors.New("fence handoff requires a frozen WORK or retry checkpoint")
-  }
-  // The source may already have committed the frozen terminal before a
-  // checkpoint-provider failure or crash. Authenticate that exact cycle,
-  // revision and terminal before resuming handoff; never execute it twice.
-  if err:=origin.VerifyFrozenFenceCommittedOnce(ctx,sourceRun,sourceSnapshot,c.bundle);err!=nil{
-   return nil,fmt.Errorf("frozen fence handoff retry not authenticated: %w",err)
-  }
+ // A retry is always anchored in the FROZEN WORK/retry cut, never in
+ // the live control status: the parent may have admitted other WORK later.
+ if proof.SnapshotControlStatus!=1&&proof.SnapshotControlStatus!=2{
+  return nil,errors.New("fence handoff requires a frozen WORK or retry checkpoint")
  }
  // Cognitive actor history must never be dropped when taking the follow-up
  // checkpoint. The caller supplies signed snapshots for these owners.
@@ -87,37 +77,67 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
   if expectedActors[key]{return nil,errors.New("fence contains duplicate cognitive owner")}
   expectedActors[key]=true
  }
- // On a retry after both the V1 idle snapshot and the V2 child have
- // already committed, short-circuit BEFORE re-calling buildCheckpoints.
- // The expected post-terminal snapshot ID is deterministic from the
- // authenticated frozen revision; it must not come from the child database.
- if committedRetry {
-  expectedRevision:=uint64(proof.SnapshotClock.Revision)+1
-  expectedID,_,err:=identity.New(c.bundle).Sum(
-   "cote.csf.id.snapshot","cote.csf.schema.snapshot-id-preimage",1,
-   []any{sourceRun[:],uint64(1),expectedRevision})
-  if err!=nil{return nil,err}
-  idleID:=[32]byte(expectedID)
-  child,err:=destination.RecoverPublishedForkV1ToV2(
-   ctx,childRun,sourceRun,idleID,childPolicy)
-  if err!=nil{return nil,fmt.Errorf("V2 committed child recovery refused: %w",err)}
-  if child!=nil {
-   idle,err:=origin.VerifySnapshotV1(ctx,sourceRun,idleID,c.bundle)
-   if err!=nil{return nil,fmt.Errorf("V1 idle source checkpoint missing: %w",err)}
-   if idle.SnapshotControlStatus!=0||idle.ControlStatus!=0||
-    uint64(idle.SnapshotClock.Revision)!=expectedRevision||
-    uint64(idle.Clock.Revision)!=expectedRevision||idle.PendingTasks!=0 {
-    return nil,errors.New("committed child does not match the authenticated V1 idle source cut")
-   }
-   return child,nil
-  }
+ // The frozen cycle ID is immutable. Never dispatch a newer, unrelated
+ // live WORK after a crash or after another actor advances the parent.
+ frozenControl,ok:=fields[13].([]any)
+ if !ok||len(frozenControl)!=7{return nil,errors.New("frozen fence control malformed")}
+ frozenCycleRef,ok:=frozenControl[1].([]any)
+ if !ok||len(frozenCycleRef)!=2||frozenCycleRef[0]!=uint64(1){
+  return nil,errors.New("frozen fence cycle reference absent")
  }
- if proof.ControlStatus==1||proof.ControlStatus==2 {
-  recovered,err:=c.ResumeRegisteredWorkV1(ctx,ledger,sourceRun,sourceSnapshot)
-  if err!=nil{return nil,fmt.Errorf("V1 fenced terminal recovery: %w",err)}
-  if !recovered.Continued {
-   return nil,errors.New("frozen fence did not publish one verified V1 terminal")
+ frozenCycleBytes,ok:=frozenCycleRef[1].([]byte)
+ if !ok||len(frozenCycleBytes)!=32{return nil,errors.New("frozen fence cycle ID malformed")}
+ var frozenCycle [32]byte
+ copy(frozenCycle[:],frozenCycleBytes)
+ frozenRevision:=uint64(proof.SnapshotClock.Revision)
+ if frozenRevision==^uint64(0){return nil,errors.New("frozen world revision overflow")}
+ expectedRevision:=frozenRevision+1
+ expectedID,_,err:=identity.New(c.bundle).Sum(
+  "cote.csf.id.snapshot","cote.csf.schema.snapshot-id-preimage",1,
+  []any{sourceRun[:],uint64(1),expectedRevision})
+ if err!=nil{return nil,err}
+ idleID:=[32]byte(expectedID)
+ // An already committed V2 child is a READ-ONLY retry. Probe it before
+ // touching a provider or dispatching any live parent cycle, regardless
+ // of the current parent revision or control status.
+ child,err:=destination.RecoverPublishedForkV1ToV2(
+  ctx,childRun,sourceRun,idleID,childPolicy)
+ if err!=nil{return nil,fmt.Errorf("V2 committed child recovery refused: %w",err)}
+ if child!=nil {
+  if err:=origin.VerifyFrozenFenceCommittedOnce(ctx,sourceRun,sourceSnapshot,c.bundle);err!=nil{
+   return nil,fmt.Errorf("published child's frozen terminal not authenticated: %w",err)
   }
+  idle,err:=origin.VerifySnapshotV1(ctx,sourceRun,idleID,c.bundle)
+  if err!=nil{return nil,fmt.Errorf("V1 idle source checkpoint missing: %w",err)}
+  // Only the IMMUTABLE IDLE cut at R+1 is pertinent. Its live tip may
+  // legitimately be R+2 or an independent in-flight WORK.
+  if idle.SnapshotControlStatus!=0||
+   uint64(idle.SnapshotClock.Revision)!=expectedRevision {
+   return nil,errors.New("committed child does not match the authenticated V1 idle source cut")
+  }
+  return child,nil
+ }
+ // With no published child, only the original frozen cycle (at R) or
+ // its immediate settled IDLE successor (R+1) can make progress.
+ // An unrelated live WORK at R+1 must never be resumed by this retry.
+ switch {
+ case uint64(proof.Clock.Revision)==frozenRevision &&
+  (proof.ControlStatus==1||proof.ControlStatus==2):
+  recovered,err:=c.ResumeRunV1(ctx,ledger,sourceRun,sourceSnapshot,
+   func(ctx context.Context,l *inputledger.Ledger,cy admission.Cycle,f admission.Fence)(ports.CanonicalRecord,error){
+    if [32]byte(cy.ID)!=frozenCycle||uint64(cy.BaseRevision)!=frozenRevision{
+     return ports.CanonicalRecord{},errors.New("handoff refuses unrelated parent WORK after frozen cut")
+    }
+    return c.DispatchFencedWorkV1(ctx,l,cy,f)
+   })
+  if err!=nil{return nil,fmt.Errorf("V1 frozen terminal recovery: %w",err)}
+  if !recovered.Continued{return nil,errors.New("frozen fence did not publish one verified V1 terminal")}
+ case uint64(proof.Clock.Revision)==expectedRevision && proof.ControlStatus==0:
+  if err:=origin.VerifyFrozenFenceCommittedOnce(ctx,sourceRun,sourceSnapshot,c.bundle);err!=nil{
+   return nil,fmt.Errorf("frozen fence handoff retry not authenticated: %w",err)
+  }
+ default:
+  return nil,errors.New("handoff source has unrelated WORK or revision without a published child")
  }
  // The terminal may create new eligible actors, so these checkpoint
  // bytes must be supplied and validated AFTER V1 terminal publication.

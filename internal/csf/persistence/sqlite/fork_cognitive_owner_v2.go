@@ -38,17 +38,24 @@ func checkpointFromSnapshotRefV1(raw any)(SnapshotCheckpoint,error){
   CoversEvidenceCursor:cursor},nil
 }
 
-// Source owner keys are migrated with their signed SOURCE receipts. The child
-// still requires a fresh receipt over its NEW run ID before a child snapshot.
+// Only the owner keys that belonged to the authenticated PARENT SNAPSHOT
+// revision are migrated with signed SOURCE receipts. A later key for an
+// earlier legacy evidence holder must never retroactively require a receipt
+// or be transplanted into a historical child. The child requires fresh
+// receipts over its NEW run ID for every imported signed owner.
 // Historic signatures cannot authorize new, child-scoped memory contents.
 func importCognitiveOwnerProofsV2(ctx context.Context,source *Store,tx *sql.Tx,
- sourceRun,childRun [32]byte,refs []any)error{
+ sourceRun,childRun [32]byte,refs []any,parentRevision uint64)error{
  for _,raw:=range refs{
   cp,err:=checkpointFromSnapshotRefV1(raw);if err!=nil{return err}
   var key []byte
   err=source.db.QueryRowContext(ctx,
-   "SELECT public_key FROM cognitive_owner_keys WHERE run_id=? AND actor_namespace=? AND actor_id=?",
-   sourceRun[:],cp.ActorNamespace,cp.ActorID).Scan(&key)
+   "SELECT k.public_key FROM cognitive_owner_keys k "+
+   "JOIN cognitive_actor_registry a ON a.run_id=k.run_id "+
+   "AND a.actor_namespace=k.actor_namespace AND a.actor_id=k.actor_id "+
+   "WHERE k.run_id=? AND k.actor_namespace=? AND k.actor_id=? "+
+   "AND a.registered_revision<=?",
+   sourceRun[:],cp.ActorNamespace,cp.ActorID,parentRevision).Scan(&key)
   if err==sql.ErrNoRows{continue}
   if err!=nil{return err}
   if len(key)!=ed25519.PublicKeySize{return errors.New("source cognitive owner public key invalid")}

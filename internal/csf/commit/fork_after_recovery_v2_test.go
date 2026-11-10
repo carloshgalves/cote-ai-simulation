@@ -201,7 +201,7 @@ func TestCSFRV18R22HandoffSnapshotWriterLockRequiresFrozenRevisionAndIdle(t *tes
  }
 }
 
- 
+
 // R26-02 exercises genuine post-fork V1 admission and a second legitimate
 // terminal; the retry must be read-only even while a newer WORK is live.
 func r26AdmitUnrelatedNoProposal(t *testing.T, c *Coordinator, store *sqlite.Store,

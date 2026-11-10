@@ -8,6 +8,9 @@ import (
  "database/sql"
  "testing"
 
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
+
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  _ "modernc.org/sqlite"
@@ -382,5 +385,119 @@ func TestCSFRV18R2501EvidenceHolderSignedLaterKeepsHistoricalLegacySnapshot(t *t
  }
  if _,err:=reopened.VerifySnapshotV1(ctx,run,historical.ID,c.bundle);err!=nil{
   t.Fatal("legitimate earlier legacy snapshot was invalidated by new-owner deletion:",err)
+ }
+}
+
+
+func TestCSFRV18R2601ForkHistoricalLegacyHolderIgnoresFutureOwnerKey(t *testing.T){
+ ctx:=context.Background()
+ c,source,ledger,cycle,fence,path:=singleResourceFixtureWithFuture(t,true)
+ _,_,_,_,_,runID:=ledger.Snapshot()
+ run:=[32]byte(runID)
+ frozen,err:=source.CreateSnapshotV1(ctx,run,c.bundle,nil)
+ if err!=nil{t.Fatal("freeze initial WORK:",err)}
+ if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
+ if _,err:=source.DrainPendingPerceptionV1(ctx,run,frozen.ID,c.bundle);err!=nil{
+  t.Fatal("deliver real addressed evidence:",err)
+ }
+ // The parent R1 must be a forkable IDLE cut with final exogenous ingress;
+ // a future Genesis occurrence gives the parent a legitimate R2 transition.
+ state,err:=source.LoadClock(ctx,run);if err!=nil{t.Fatal(err)}
+ if state.Revision!=1{t.Fatalf("expected R1, got %d",state.Revision)}
+ if _,err:=ledger.CloseSource(ctx,"driver",inputledger.Closure{
+  ProducerKey:"r26-historical-source-final",
+  ClosedThrough:domain.EligibilityCoordinate{NotBeforeInstant:state.Instant+1000},
+  Final:true,
+ });err!=nil{t.Fatal("final exogenous closure:",err)}
+ probe,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ defer probe.Close()
+ var routes int
+ if err:=probe.QueryRowContext(ctx,
+  "SELECT count(*) FROM evidence_routes WHERE run_id=? AND holder_namespace=? AND holder_id=?",
+  run[:],"school","a").Scan(&routes);err!=nil{t.Fatal(err)}
+ if routes!=2{t.Fatalf("expected two authentic evidence routes, got %d",routes)}
+ legacy:=csfrv18SyntheticActorCheckpoints(t,path,state.Instant,int64(state.Revision))
+ if len(legacy)!=1||legacy[0].ActorID!="a"{t.Fatal("missing legacy holder checkpoint")}
+ historical,err:=source.CreateSnapshotV1(ctx,run,c.bundle,legacy)
+ if err!=nil{t.Fatal("freeze unsigned R1:",err)}
+ if _,err:=source.VerifySnapshotV1(ctx,run,historical.ID,c.bundle);err!=nil{t.Fatal(err)}
+ advanced,err:=c.Advance(ctx,ledger,runID)
+ if err!=nil{t.Fatal("advance legitimately to R2:",err)}
+ if advanced.ResultClock.Revision!=2{t.Fatal("expected later world revision R2")}
+ if err:=source.RegisterCognitiveActor(ctx,run,"school","a",c.bundle);err!=nil{t.Fatal(err)}
+ pub,key,err:=ed25519.GenerateKey(rand.Reader);if err!=nil{t.Fatal(err)}
+ if err:=source.RegisterCognitiveOwnerKeyV1(ctx,run,"school","a",pub,c.bundle);err!=nil{t.Fatal(err)}
+ late:=csfrv18SyntheticActorCheckpoints(t,path,advanced.ResultClock.Instant,2)
+ if len(late)!=1{t.Fatal("late signed holder missing")}
+ if _,err:=source.PersistCognitiveCheckpointV1(ctx,run,late[0],"r26-late-owner",
+  r22Sign(t,run,late[0],"r26-late-owner",key),c.bundle);err!=nil{t.Fatal(err)}
+ if _,err:=source.VerifySnapshotV1(ctx,run,historical.ID,c.bundle);err!=nil{
+  t.Fatal("later signer invalidated historical R1 snapshot:",err)
+ }
+ v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+ if err!=nil{t.Fatal(err)}
+ childID:=run;childID[0]^=0x63
+ childPath:=t.TempDir()+"/r26-historic-legacy.db"
+ child,err:=sqlite.Open(ctx,childPath)
+ if err!=nil{t.Fatal(err)}
+ defer child.Close()
+ genesis,err:=source.ForkIdleSnapshotV1ToV2(ctx,run,historical.ID,childID,child,c.bundle,v2)
+ if err!=nil{t.Fatal("historical unsigned holder must not acquire a future signer:",err)}
+ if _,err:=child.ReplayClock(ctx,childID,v2);err!=nil{t.Fatal("child replay:",err)}
+ if _,err:=child.ValidatedGenesis(ctx,childID,v2);err!=nil{t.Fatal("child lineage:",err)}
+ var keys,proofs int
+ // Inspect the child's independent file; future keys may not be inherited.
+ childDB,err:=sql.Open("sqlite",childPath);if err!=nil{t.Fatal(err)}
+ defer childDB.Close()
+ if err:=childDB.QueryRowContext(ctx,"SELECT count(*) FROM cognitive_owner_keys").Scan(&keys);err!=nil{t.Fatal(err)}
+ if err:=childDB.QueryRowContext(ctx,"SELECT count(*) FROM fork_cognitive_owner_proofs").Scan(&proofs);err!=nil{t.Fatal(err)}
+ if keys!=0||proofs!=0{
+  t.Fatalf("future owner authority leaked into historic child: keys=%d proofs=%d",keys,proofs)
+ }
+ refs,ok:=genesis.Payload[17].([]any)
+ if !ok||len(refs)!=1{t.Fatal("fork omitted historic opaque cognition")}
+ row,ok:=refs[0].([]any)
+ if !ok||len(row)!=8{t.Fatal("child genesis checkpoint malformed")}
+ inline,ok:=row[3].([]any)
+ if !ok||len(inline)!=2||inline[0]!=uint64(1){t.Fatal("child genesis lost inline checkpoint")}
+ bytesValue,ok:=inline[1].([]byte)
+ if !ok||!bytes.Equal(bytesValue,legacy[0].Content){
+  t.Fatal("child imported wrong opaque cognition bytes")
+ }
+}
+
+func TestCSFRV18R2601SignedParentDeletionCannotDowngradeFork(t *testing.T){
+ ctx:=context.Background()
+ _,source,_,runID,bundle,path:=testFixture(t)
+ run:=[32]byte(runID)
+ if err:=source.RegisterCognitiveActor(ctx,run,"school","signed-parent",bundle);err!=nil{t.Fatal(err)}
+ pub,key,err:=ed25519.GenerateKey(rand.Reader);if err!=nil{t.Fatal(err)}
+ if err:=source.RegisterCognitiveOwnerKeyV1(ctx,run,"school","signed-parent",pub,bundle);err!=nil{t.Fatal(err)}
+ state,err:=source.LoadClock(ctx,run);if err!=nil{t.Fatal(err)}
+ cp:=sqlite.SnapshotCheckpoint{
+  ActorNamespace:"school",ActorID:"signed-parent",StoreID:"owner-state",
+  SchemaVersion:1,Content:[]byte("parent signer"),Producer:"memory-owner",
+  ProducerVersion:1,CoversInstant:int64(state.Instant),CoversRevision:uint64(state.Revision),
+  CoversEvidenceCursor:0,
+ }
+ if _,err:=source.PersistCognitiveCheckpointV1(ctx,run,cp,"r26-signed",
+  r22Sign(t,run,cp,"r26-signed",key),bundle);err!=nil{t.Fatal(err)}
+ frozen,err:=source.CreateSnapshotV1(ctx,run,bundle,[]sqlite.SnapshotCheckpoint{cp})
+ if err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ if _,err:=db.ExecContext(ctx,"DELETE FROM cognitive_owner_keys WHERE run_id=? AND actor_namespace=? AND actor_id=?",
+  run[:],"school","signed-parent");err!=nil{t.Fatal(err)}
+ if _,err:=source.VerifySnapshotV1(ctx,run,frozen.ID,bundle);err==nil{
+  t.Fatal("deleting key in signed parent bypassed sealed snapshot")
+ }
+ v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+ if err!=nil{t.Fatal(err)}
+ childID:=run;childID[0]^=0x68
+ child,err:=sqlite.Open(ctx,t.TempDir()+"/r26-deleted-signer.db")
+ if err!=nil{t.Fatal(err)}
+ defer child.Close()
+ if _,err:=source.ForkIdleSnapshotV1ToV2(ctx,run,frozen.ID,childID,child,bundle,v2);err==nil{
+  t.Fatal("deleted historically signed owner was silently downgraded at fork")
  }
 }

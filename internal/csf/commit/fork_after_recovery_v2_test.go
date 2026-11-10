@@ -124,6 +124,31 @@ func TestCSFRV18R22FencedHandoffRetryAfterCheckpointProviderFailure(t *testing.T
  if _,err:=parent.VerifySnapshotV1(ctx,[32]byte(run),frozen.ID,coordinator.bundle);err!=nil{
   t.Fatal("frozen source snapshot changed:",err)
  }
+ // Simulate a crash AFTER child SQLite bootstrap committed, before its
+ // Genesis reached the orchestrator. The retry must reuse the exact child,
+ // not publish a second fork or advance the parent twice.
+ repeated,err:=coordinator.SettleFencedThenForkV2(ctx,ledger,[32]byte(run),
+  frozen.ID,childRun,child,v2,provider)
+ if err!=nil{t.Fatal("post-bootstrap retry failed:",err)}
+ if repeated.ID!=childGenesis.ID||repeated.Digest!=childGenesis.Digest{
+  t.Fatal("post-bootstrap retry replaced the already published child")
+ }
+ parentFinal,err:=parent.LoadClock(ctx,[32]byte(run))
+ if err!=nil||parentFinal.Revision!=after.Revision{
+  t.Fatal("post-bootstrap retry committed another source terminal:",err)
+ }
+ wrongParentSnapshot:=frozen.ID
+ wrongParentSnapshot[0]^=0x21
+ if _,err:=child.RecoverPublishedForkV1ToV2(ctx,childRun,[32]byte(run),
+  wrongParentSnapshot,v2);err==nil{
+  t.Fatal("fork recover treated unrelated parent cut as the same child")
+ }
+ wrongChildID:=childRun
+ wrongChildID[0]^=0x11
+ if _,err:=child.RecoverPublishedForkV1ToV2(ctx,wrongChildID,[32]byte(run),
+  frozen.ID,v2);err==nil{
+  t.Fatal("fork recover silently accepted an occupied destination under another child ID")
+ }
 }
 
 func TestCSFRV18R22HandoffSnapshotWriterLockRequiresFrozenRevisionAndIdle(t *testing.T){

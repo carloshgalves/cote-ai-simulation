@@ -134,6 +134,21 @@ func (c *Coordinator) SettleFencedThenForkV2(ctx context.Context,
  if verified.ControlStatus!=0{
   return nil,errors.New("recovered V1 fence did not produce an IDLE checkpoint")
  }
- return origin.ForkIdleSnapshotV1ToV2(ctx,sourceRun,idle.ID,childRun,
+ // A process may crash after the V2 bootstrap transaction commits but
+ // before the caller receives its Genesis. Authenticate an existing child
+ // against the EXACT parent snapshot, policy, lineage and replay; never
+ // treat a merely nonempty destination as an idempotent success.
+ existing,err:=destination.RecoverPublishedForkV1ToV2(ctx,childRun,sourceRun,idle.ID,childPolicy)
+ if err!=nil{return nil,fmt.Errorf("existing V2 child cannot be authenticated: %w",err)}
+ if existing!=nil{return existing,nil}
+ created,err:=origin.ForkIdleSnapshotV1ToV2(ctx,sourceRun,idle.ID,childRun,
   destination,c.bundle,childPolicy)
+ if err==nil{return created,nil}
+ // Another caller may have completed the same atomic bootstrap between our
+ // read-only probe and INSERT. Verify it rather than publishing twice.
+ verifiedChild,recoverErr:=destination.RecoverPublishedForkV1ToV2(
+  ctx,childRun,sourceRun,idle.ID,childPolicy)
+ if recoverErr==nil&&verifiedChild!=nil{return verifiedChild,nil}
+ if recoverErr!=nil{return nil,fmt.Errorf("V2 fork failed: %w; destination rejected: %v",err,recoverErr)}
+ return nil,err
 }

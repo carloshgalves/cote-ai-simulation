@@ -105,6 +105,7 @@ func validateForkLineageTx(ctx context.Context,tx *sql.Tx,child *genesis.Genesis
   if err!=nil{return err}
   if len(expected)!=len(actual){return errors.New("V2 cognitive owner roster differs from parent checkpoint")}
   for key:=range expected{if !actual[key]{return errors.New("V2 imported cognitive owner missing")}}
+  if err:=verifyCognitiveOwnerProofsV2(ctx,tx,run,parentRun,entries);err!=nil{return err}
  }
 
  rev,ok:=snap[3].(uint64);if !ok{return errors.New("fork origin revision invalid")}

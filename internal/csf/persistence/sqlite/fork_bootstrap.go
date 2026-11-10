@@ -324,7 +324,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  for _,name:=range []string{"genesis_records","world_revisions","clock_states",
   "input_ledger","decision_ledger","event_store","evidence_ledger","causal_outbox",
   "input_source_cursors","source_ingress_receipts","input_slot_responses","round_integrity_seals",
-  "cognitive_actor_registry","cognitive_owner_keys","cognitive_owner_receipts","snapshot_cognitive_actors","evidence_routes",
+  "cognitive_actor_registry","cognitive_owner_keys","cognitive_owner_receipts","fork_cognitive_owner_proofs","snapshot_cognitive_actors","evidence_routes",
   "communication_claims","communication_transmissions","fork_communication_imports","fork_history_roots","fork_occurrence_imports","fork_trigger_imports","cycle_control_state",
   "committed_cycles","fork_lineage","fork_history_records","snapshots","snapshot_seals",
   "snapshot_prefix_members","genesis_schedule_seals","scheduled_occurrences",
@@ -352,6 +352,9 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
     "INSERT INTO cognitive_actor_registry(run_id,actor_namespace,actor_id,registered_revision) VALUES(?,?,?,0)",
     childRun[:],ns,id);err!=nil{return nil,err}
   }
+ if err:=importCognitiveOwnerProofsV2(ctx,s,tx,sourceRun,childRun,epistemic);err!=nil{
+  return nil,fmt.Errorf("V2 signed cognitive owner migration: %w",err)
+ }
  }
  if _,err:=tx.ExecContext(ctx,
   "INSERT INTO fork_lineage(child_run,parent_run,parent_snapshot_id,origin_policy_hash,reference_canonical,parent_genesis_canonical,parent_snapshot_canonical) "+

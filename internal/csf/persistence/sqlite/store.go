@@ -245,6 +245,16 @@ CREATE TABLE IF NOT EXISTS snapshot_prefix_members (
 ) STRICT;
 CREATE UNIQUE INDEX IF NOT EXISTS idx_snapshot_prefix_member
  ON snapshot_prefix_members(snapshot_id,ledger_name,record_id);
+CREATE TABLE IF NOT EXISTS fork_cognitive_owner_proofs (
+ child_run BLOB NOT NULL CHECK(length(child_run)=32),
+ actor_namespace TEXT NOT NULL,actor_id TEXT NOT NULL,
+ source_run BLOB NOT NULL CHECK(length(source_run)=32),
+ receipt_id BLOB NOT NULL CHECK(length(receipt_id)=32),
+ public_key BLOB NOT NULL CHECK(length(public_key)=32),
+ locator TEXT NOT NULL,signature BLOB NOT NULL CHECK(length(signature)=64),
+ PRIMARY KEY(child_run,actor_namespace,actor_id),
+ FOREIGN KEY(child_run) REFERENCES genesis_records(run_id)
+) STRICT;
 CREATE TABLE IF NOT EXISTS fork_lineage (
  child_run BLOB PRIMARY KEY CHECK(length(child_run)=32),
  parent_run BLOB NOT NULL CHECK(length(parent_run)=32),

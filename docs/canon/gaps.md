@@ -1,5 +1,8 @@
 # Lacunas
 
+**Nota de estado (2026-11-10):** este inventário de 28 perguntas é um *baseline histórico* de lacunas, não uma afirmação atual de que nenhuma passagem foi consultada. Desde sua redação, foram incorporadas apurações de PDFs privados do Volume 0 até Y1 V11. Cada pergunta precisa ser reconciliada individualmente com registros de fonte, conflitos, vigência e decisões; não feche lacunas por mera existência da extração. O fechamento administrativo das issues #38/#39/#52 não equivale a verificação Tier 0–1 independente nem libera dados no runtime.
+
+
 Espelho humano de `data/canon/open_questions/`. Fonte de verdade são os arquivos YAML; esta tabela é para leitura e priorização.
 
 28 questões abertas. Nenhuma respondida — nada foi conferido em fonte Tier 0–1.

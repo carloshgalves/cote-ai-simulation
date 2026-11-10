@@ -130,10 +130,10 @@ func verifyCognitiveOwnerProofsV2(ctx context.Context,tx *sql.Tx,childRun [32]by
    return errors.New("migrated signed cognitive owner proof corrupted")
   }
  }
- var live int
- if err:=tx.QueryRowContext(ctx,
-  "SELECT count(*) FROM cognitive_owner_keys WHERE run_id=?",childRun[:]).Scan(&live);err!=nil{return err}
- if live!=len(proofs){return errors.New("migrated cognitive owner key/proof bijection broken")}
+ // The sealed historical roster authenticates the imported signer set.
+ // Additional child-native signer keys are legitimate new actors, not a
+ // forged imported proof. Each imported proof independently requires its
+ // exact live public key above; its deletion is caught by the roster seal.
  var sealedCount uint64
  var sealedDigest []byte
  if err:=tx.QueryRowContext(ctx,

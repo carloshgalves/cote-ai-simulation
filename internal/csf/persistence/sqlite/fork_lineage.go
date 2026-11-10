@@ -103,7 +103,9 @@ func validateForkLineageTx(ctx context.Context,tx *sql.Tx,child *genesis.Genesis
   }
   actual,err:=snapshotCognitiveActorRoster(ctx,tx,run,nil)
   if err!=nil{return err}
-  if len(expected)!=len(actual){return errors.New("V2 cognitive owner roster differs from parent checkpoint")}
+  // Every imported owner survives. Child-native owners may be enrolled
+  // later; their keys and checkpoint bytes are governed by the child-run
+  // authority and must NOT be mistaken for unimported parent records.
   for key:=range expected{if !actual[key]{return errors.New("V2 imported cognitive owner missing")}}
   if err:=verifyCognitiveOwnerProofsV2(ctx,tx,run,parentRun,entries);err!=nil{return err}
  }

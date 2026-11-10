@@ -186,7 +186,28 @@ func TestCSFRV18R22V2ForkPreservesPinnedOwnerProofAndRequiresChildReceipt(t *tes
  if _,err:=child.PersistCognitiveCheckpointV1(ctx,childRun,cp,"owner-child-cut",signedChild,v2);err!=nil{
   t.Fatal("new-run owner re-attestation rejected:",err)
  }
- childSnap,err:=child.CreateSnapshotV1(ctx,childRun,v2,[]sqlite.SnapshotCheckpoint{cp})
+ // R22 composition: after fork, an independently enrolled child-native
+ // cognitive actor must not be confused with the frozen parent's roster.
+ if err:=child.RegisterCognitiveActor(ctx,childRun,"cognition","new-agent",v2);err!=nil{
+  t.Fatal("V2 child could not enroll a new actor:",err)
+ }
+ newPub,newKey,err:=ed25519.GenerateKey(rand.Reader);if err!=nil{t.Fatal(err)}
+ if err:=child.RegisterCognitiveOwnerKeyV1(ctx,childRun,
+  "cognition","new-agent",newPub,v2);err!=nil{
+  t.Fatal("V2 child could not pin a new native signer:",err)
+ }
+ added:=cp
+ added.ActorID="new-agent"
+ added.Content=[]byte("child-native signed memory")
+ added.CoversRevision=0
+ if _,err:=child.PersistCognitiveCheckpointV1(ctx,childRun,added,
+  "new-agent-child-cut",r22Sign(t,childRun,added,"new-agent-child-cut",newKey),v2);err!=nil{
+  t.Fatal("child-native owner receipt missing:",err)
+ }
+ if _,err:=child.ReplayClock(ctx,childRun,v2);err!=nil{
+  t.Fatal("child-native owner broke authenticated historical fork lineage:",err)
+ }
+ childSnap,err:=child.CreateSnapshotV1(ctx,childRun,v2,[]sqlite.SnapshotCheckpoint{cp,added})
  if err!=nil{t.Fatal(err)}
  if _,err:=child.VerifySnapshotV1(ctx,childRun,childSnap.ID,v2);err!=nil{t.Fatal(err)}
  probe,err:=sql.Open("sqlite",childPath);if err!=nil{t.Fatal(err)}

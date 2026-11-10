@@ -1,0 +1,87 @@
+# Manual-only validation. Passing existing suites is NOT product release approval.
+name: COTE product validation (on demand)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  causal-and-conformance:
+    name: Causal regression and canonical conformance
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Record exact tested revision
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          go version
+          node --version
+      - name: Go full regression
+        run: go test -count=1 ./...
+      - name: PR25 continuity / race (only on refs containing these tests)
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f internal/csf/commit/csfrv18_snapshot_test.go ]]; then
+            go test -race -count=1 -timeout=30m ./internal/csf/commit -run '^TestCSFRV18'
+          else
+            echo "NOT_APPLICABLE: CSFRV1-8 tests absent from this ref; not evidence of completion."
+          fi
+      - name: Independent Go + TypeScript canonical contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          go run ./cmd/csf-harness --bundle docs/architecture/canonical-codec-v1-bundle --report /tmp/csf-go.json
+          node --no-warnings --experimental-loader ./tools/csf-conformance-ts/loader.mjs tools/csf-conformance-ts/runner.ts docs/architecture/canonical-codec-v1-bundle /tmp/csf-ts.json
+          cmp /tmp/csf-go.json /tmp/csf-ts.json
+          sha256sum /tmp/csf-go.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: csf-conformance-${{ github.sha }}
+          path: |
+            /tmp/csf-go.json
+            /tmp/csf-ts.json
+          if-no-files-found: ignore
+
+  python-and-canon:
+    name: Python embodiment, RAG and canon validations
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install project testing dependencies
+        run: |
+          python -m pip install --disable-pip-version-check -e '.[dev]'
+      - name: Record exact tested revision
+        run: |
+          git rev-parse HEAD
+          python --version
+      - name: Python regression
+        run: python -m pytest -q
+      - name: Canon schema and index determinism
+        run: |
+          python tools/validate_canon_consolidated_v2.py
+          python tools/rebuild_canon_indexes_v2.py --check
+
+# This workflow deliberately does NOT assert G2–G8 of the product readiness
+# matrix (docs/validation/product-readiness-2026-11-10.md). E2E release gate
+# must remain NO-GO until the missing subsystems and independent review exist.

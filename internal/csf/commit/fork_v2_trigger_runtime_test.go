@@ -3,9 +3,12 @@ package commit
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"strings"
 	"testing"
 
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -500,5 +503,97 @@ func TestCSFRV18R21ComposedEvolvedTriggerAndPendingRoundForks(t *testing.T) {
  }
  if _,err:=parent.VerifySnapshotV1(ctx,[32]byte(run),snapshot.ID,v1);err!=nil{
   t.Fatal("parent snapshot was modified by composed child tails:",err)
+ }
+}
+
+func TestCSFRV18R21V2CascadeCapWithTriggerAndPendingRound(t *testing.T){
+ ctx:=context.Background()
+ v1,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ g:=validGenesis(t,v1)
+ parent,err:=sqlite.Open(ctx,t.TempDir()+"/cascade-parent.db")
+ if err!=nil{t.Fatal(err)}
+ defer parent.Close()
+ if err:=parent.PersistGenesis(ctx,g,v1);err!=nil{t.Fatal(err)}
+ if err:=parent.BootstrapClock(ctx,g,v1);err!=nil{t.Fatal(err)}
+ // Pin the trigger registry, but keep this predicate false until well
+ // after the finite same-instant cascade. The future round similarly
+ // contributes a different pending authority without stealing WORK units.
+ waiting:=activeTrigger()
+ waiting.PredicateThreshold=g.InitialInstant+100000
+ waiting.FireOnInitialTrue=false
+ if err:=parent.BootstrapGenesisTriggers(ctx,g,v1,[]trigger.Definition{waiting});err!=nil{t.Fatal(err)}
+ derive:=identity.New(v1)
+ origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}
+ for ordinal:=uint64(0);ordinal<=clock.MaxSameInstantWorkV1;ordinal++{
+  id,_,err:=derive.Sum("cote.csf.id.occurrence","cote.csf.schema.occurrence-id-preimage",1,
+   []any{origin,uint64(0),ordinal});if err!=nil{t.Fatal(err)}
+  fields:=[]any{id[:],g.RunID[:],"schedule",int64(g.InitialInstant),
+   []any{int64(g.InitialInstant),ordinal},"test.occurrence",uint64(1),g.Payload[16],
+   uint64(0),origin,uint64(0),ordinal,[]any{uint64(0)},[]any{uint64(0)}}
+  dg,_,err:=derive.Sum("cote.csf.digest.occurrence-unit","cote.csf.schema.scheduled-occurrence.body",1,fields)
+  if err!=nil{t.Fatal(err)}
+  raw,err:=codec.CanonicalPayload(append(cloneAny(fields),dg[:]));if err!=nil{t.Fatal(err)}
+  if err:=parent.SeedGenesisOccurrence(ctx,domain.ID(id),g.RunID,
+   domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant,
+    NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)},raw);err!=nil{t.Fatal(err)}
+ }
+ sourceLedger,err:=inputledger.New(ctx,g.RunID,v1,parent);if err!=nil{t.Fatal(err)}
+ if _,err:=sourceLedger.DeclareRound(ctx,"genesis.schedule",
+  [2]string{"school","student-a"},[]string{"later"},
+  domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant+2500},
+  origin,1,0,0,[]any{uint64(0)});err!=nil{t.Fatal("future round:",err)}
+ sourceSnapshot,err:=parent.CreateSnapshotV1(ctx,[32]byte(g.RunID),v1,nil)
+ if err!=nil{t.Fatal(err)}
+ v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+ if err!=nil{t.Fatal(err)}
+ child,err:=sqlite.Open(ctx,t.TempDir()+"/cascade-child.db")
+ if err!=nil{t.Fatal(err)}
+ defer child.Close()
+ childRun:=[32]byte(g.RunID);childRun[0]^=0x59
+ if _,err:=parent.ForkIdleSnapshotV1ToV2(ctx,[32]byte(g.RunID),
+  sourceSnapshot.ID,childRun,child,v1,v2);err!=nil{
+  t.Fatal("V2 migration of cascade schedule and trigger registry:",err)
+ }
+ if _,err:=child.ReplayClock(ctx,childRun,v2);err!=nil{t.Fatal(err)}
+ registered,err:=child.LoadRegisteredTriggers(ctx,childRun,v2)
+ if err!=nil||len(registered)!=1{t.Fatal("fork lost pinned trigger registry:",err)}
+ childLedger,err:=inputledger.Open(ctx,domain.ID(childRun),v2,child)
+ if err!=nil{t.Fatal(err)}
+ roles,err:=policiesByRole(v2);if err!=nil{t.Fatal(err)}
+ policies:=admission.Policies{AdmissionOrder:roles["admission-order"],
+  CausalIdentity:roles["causal-identity"],Fence:roles["admission-fence"],Rules:[][]any{}}
+ coordinator:=New(child,v2,policies)
+ deriver:=identity.New(v2)
+ state,err:=child.LoadClock(ctx,childRun);if err!=nil{t.Fatal(err)}
+ for ordinal:=uint64(0);ordinal<=clock.MaxSameInstantWorkV1;ordinal++{
+  cyID,_,err:=deriver.Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+   []any{childRun[:],[]any{int64(state.Instant),ordinal}});if err!=nil{t.Fatal(err)}
+  _,hash,err:=child.LoadWorldState(ctx,uint64(state.Revision));if err!=nil{t.Fatal(err)}
+  cycle:=admission.Cycle{ID:domain.ID(cyID),Instant:state.Instant,
+   Ordinal:domain.CycleOrdinal(ordinal),BaseRevision:state.Revision,
+   BaseStateHash:domain.Digest(hash),RetryRef:[]any{uint64(0)}}
+  fence,err:=admission.NewCoordinator(admission.NewFenceLog(child)).
+   AdmitThenEvaluate(ctx,v2,childLedger,cycle,policies,nil)
+  if err!=nil{t.Fatalf("V2 fork cascade admission %d: %v",ordinal,err)}
+  if ordinal<clock.MaxSameInstantWorkV1{
+   if _,err:=coordinator.CommitSystemUnit(ctx,childLedger,cycle,fence);err!=nil{
+    t.Fatalf("V2 fork WORK %d failed before hard limit: %v",ordinal,err)
+   }
+   state,err=child.LoadClock(ctx,childRun);if err!=nil{t.Fatal(err)}
+   continue
+  }
+  frozen:=state
+  if abort,err:=coordinator.CommitSystemUnit(ctx,childLedger,cycle,fence);
+   !errors.Is(err,ErrCascadeLimit)||len(abort.Canonical)==0{
+   t.Fatalf("V2 fork's 65th WORK failed to publish CASCADE_LIMIT: %v",err)
+  }
+  now,err:=child.LoadClock(ctx,childRun)
+  if err!=nil||now!=frozen{t.Fatal("V2 cascade abort mutated world/clock",err)}
+ }
+ count,err:=child.CountSameInstantWork(ctx,childRun,int64(g.InitialInstant))
+ if err!=nil||count!=clock.MaxSameInstantWorkV1{t.Fatal("V2 counted wrong committed WORK cascade:",count,err)}
+ if _,err:=child.ReplayClock(ctx,childRun,v2);err!=nil{t.Fatal("V2 overflow replay:",err)}
+ if _,err:=parent.VerifySnapshotV1(ctx,[32]byte(g.RunID),sourceSnapshot.ID,v1);err!=nil{
+  t.Fatal("V2 cascade modified sealed V1 source:",err)
  }
 }

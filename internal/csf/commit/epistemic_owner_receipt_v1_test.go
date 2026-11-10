@@ -246,3 +246,54 @@ func TestCSFRV18R22V2ForkPreservesPinnedOwnerProofAndRequiresChildReceipt(t *tes
   t.Fatal("deleting both signer and proof bypassed child trust gate")
  }
 }
+
+func TestCSFRV18R2401LateEnrolledActorCanSignWithoutRewritingOlderTrust(t *testing.T) {
+ ctx:=context.Background()
+ coordinator,store,ledger,run,bundle,path:=testFixture(t,activeTrigger())
+ initial,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,nil)
+ if err!=nil{t.Fatal(err)}
+ if _,err:=coordinator.Advance(ctx,ledger,run);err!=nil{t.Fatal("advance to later revision:",err)}
+ state,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
+ if state.Revision!=1{t.Fatalf("unexpected post-snapshot revision: %d",state.Revision)}
+ if err:=store.RegisterCognitiveActor(ctx,[32]byte(run),"cognition","late-signer",bundle);err!=nil{
+  t.Fatal("new actor enrollment after old snapshot:",err)
+ }
+ pub,key,err:=ed25519.GenerateKey(rand.Reader);if err!=nil{t.Fatal(err)}
+ if err:=store.RegisterCognitiveOwnerKeyV1(ctx,[32]byte(run),"cognition","late-signer",pub,bundle);err!=nil{
+  t.Fatal("R24-01: later actor could not register a signed owner:",err)
+ }
+ cp:=sqlite.SnapshotCheckpoint{
+  ActorNamespace:"cognition",ActorID:"late-signer",StoreID:"memory.v1",
+  SchemaVersion:1,Content:[]byte("late but signed"),
+  Producer:"memory-owner",ProducerVersion:1,CoversInstant:int64(state.Instant),
+  CoversRevision:uint64(state.Revision),CoversEvidenceCursor:0,
+ }
+ if _,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,[]sqlite.SnapshotCheckpoint{cp});err==nil{
+  t.Fatal("newly enrolled signed actor was accepted without owner receipt")
+ }
+ signature:=r22Sign(t,[32]byte(run),cp,"late-actor-cut",key)
+ if _,err:=store.PersistCognitiveCheckpointV1(ctx,[32]byte(run),cp,
+  "late-actor-cut",signature,bundle);err!=nil{t.Fatal(err)}
+ later,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,[]sqlite.SnapshotCheckpoint{cp})
+ if err!=nil{t.Fatal("new snapshot rejected signed later actor:",err)}
+ if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),initial.ID,bundle);err!=nil{
+  t.Fatal("older snapshot trust roster changed after valid future enrollment:",err)
+ }
+ if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),later.ID,bundle);err!=nil{
+  t.Fatal("later signed actor checkpoint invalid:",err)
+ }
+ if err:=store.RegisterCognitiveOwnerKeyV1(ctx,[32]byte(run),
+  "cognition","late-signer",pub,bundle);err!=nil{t.Fatal("idempotent signer key changed:",err)}
+ another,_,err:=ed25519.GenerateKey(rand.Reader);if err!=nil{t.Fatal(err)}
+ if err:=store.RegisterCognitiveOwnerKeyV1(ctx,[32]byte(run),
+  "cognition","late-signer",another,bundle);err==nil{
+  t.Fatal("signed owner key was replaced after snapshot")
+ }
+ reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer reopened.Close()
+ for _,snap:=range []sqlite.SnapshotV1{initial,later}{
+  if _,err:=reopened.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,bundle);err!=nil{
+   t.Fatal("snapshot changed after reopen and future actor registration:",err)
+  }
+ }
+}

@@ -40,11 +40,13 @@ func (s *Store) RegisterCognitiveOwnerKeyV1(ctx context.Context,run [32]byte,
  if _,err:=s.ValidatedGenesis(ctx,run,b);err!=nil{return err}
  tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return err};defer tx.Rollback()
  if _,err:=tx.ExecContext(ctx,"UPDATE clock_states SET canonical=canonical WHERE run_id=?",run[:]);err!=nil{return err}
- var count int
+ var enrolledRevision uint64
  if err:=tx.QueryRowContext(ctx,
-  "SELECT count(*) FROM cognitive_actor_registry WHERE run_id=? AND actor_namespace=? AND actor_id=?",
-  run[:],namespace,actor).Scan(&count);err!=nil{return err}
- if count!=1{return errors.New("cognitive owner is not in durable actor registry")}
+  "SELECT registered_revision FROM cognitive_actor_registry WHERE run_id=? AND actor_namespace=? AND actor_id=?",
+  run[:],namespace,actor).Scan(&enrolledRevision);err!=nil{
+  if err==sql.ErrNoRows{return errors.New("cognitive owner is not in durable actor registry")}
+  return err
+ }
  var prev []byte
  err=tx.QueryRowContext(ctx,
   "SELECT public_key FROM cognitive_owner_keys WHERE run_id=? AND actor_namespace=? AND actor_id=?",
@@ -54,9 +56,17 @@ func (s *Store) RegisterCognitiveOwnerKeyV1(ctx context.Context,run [32]byte,
   return tx.Commit()
  }
  if err!=sql.ErrNoRows{return err}
+ // A newly registered actor at revision R may be signed even if
+ // snapshots exist at earlier revisions. The actor must NEVER acquire a
+ // signing key after a snapshot that already included it (revision >= R).
+ // This is checked under the same writer lock as key enrollment.
+ var alreadyPublished int
  if err:=tx.QueryRowContext(ctx,
-  "SELECT count(*) FROM snapshot_seals WHERE run_id=?",run[:]).Scan(&count);err!=nil{return err}
- if count!=0{return errors.New("cannot introduce owner trust after first snapshot")}
+  "SELECT count(*) FROM snapshot_seals WHERE run_id=? AND revision>=?",
+  run[:],enrolledRevision).Scan(&alreadyPublished);err!=nil{return err}
+ if alreadyPublished!=0{
+  return errors.New("cannot introduce owner trust after a snapshot covering this actor")
+ }
  if _,err:=tx.ExecContext(ctx,
   "INSERT INTO cognitive_owner_keys(run_id,actor_namespace,actor_id,public_key) VALUES(?,?,?,?)",
   run[:],namespace,actor,bytes.Clone(publicKey));err!=nil{return err}

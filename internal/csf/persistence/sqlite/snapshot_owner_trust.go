@@ -16,11 +16,17 @@ const snapshotOwnerTrustDomainV1="cote.csf.snapshot-owner-key-roster.v1"
 // This seal is a PRIVATE SQLite authority alongside snapshot_seals, not a new
 // field in the normative canonical snapshot V1. Both empty and nonempty
 // owner rosters have exact domain-separated digests.
-func snapshotOwnerRoster(ctx context.Context,tx *sql.Tx,run [32]byte)(uint64,[32]byte,error){
+// Owner keys are filtered by actor registration revision so enrolling a NEW
+// actor in a later revision does not alter an earlier snapshot's trust seal.
+// Re-keying an actor that belonged to an older snapshot is forbidden at write.
+func snapshotOwnerRoster(ctx context.Context,tx *sql.Tx,run [32]byte,revision uint64)(uint64,[32]byte,error){
  var zero [32]byte
  rows,err:=tx.QueryContext(ctx,
-  "SELECT actor_namespace,actor_id,public_key FROM cognitive_owner_keys "+
-  "WHERE run_id=? ORDER BY actor_namespace,actor_id",run[:])
+  "SELECT k.actor_namespace,k.actor_id,k.public_key FROM cognitive_owner_keys k "+
+  "JOIN cognitive_actor_registry a ON a.run_id=k.run_id "+
+  "AND a.actor_namespace=k.actor_namespace AND a.actor_id=k.actor_id "+
+  "WHERE k.run_id=? AND a.registered_revision<=? "+
+  "ORDER BY k.actor_namespace,k.actor_id",run[:],revision)
  if err!=nil{return 0,zero,err}
  records:=[]any{}
  for rows.Next(){
@@ -40,7 +46,11 @@ func snapshotOwnerRoster(ctx context.Context,tx *sql.Tx,run [32]byte)(uint64,[32
 }
 
 func sealSnapshotOwnerTrust(ctx context.Context,tx *sql.Tx,run,snapshotID [32]byte)error{
- count,digest,err:=snapshotOwnerRoster(ctx,tx,run)
+ var revision uint64
+ if err:=tx.QueryRowContext(ctx,
+  "SELECT revision FROM snapshot_seals WHERE snapshot_id=? AND run_id=?",
+  snapshotID[:],run[:]).Scan(&revision);err!=nil{return err}
+ count,digest,err:=snapshotOwnerRoster(ctx,tx,run,revision)
  if err!=nil{return err}
  _,err=tx.ExecContext(ctx,
   "INSERT INTO snapshot_owner_key_seals(snapshot_id,run_id,owner_count,owner_roster_hash) "+
@@ -55,7 +65,11 @@ func verifySnapshotOwnerTrust(ctx context.Context,tx *sql.Tx,run,snapshotID [32]
   "SELECT run_id,owner_count,owner_roster_hash FROM snapshot_owner_key_seals "+
   "WHERE snapshot_id=?",snapshotID[:]).Scan(&storedRun,&storedCount,&storedDigest)
  if err!=nil{return fmt.Errorf("snapshot owner trust seal absent: %w",err)}
- count,digest,err:=snapshotOwnerRoster(ctx,tx,run)
+ var revision uint64
+ if err:=tx.QueryRowContext(ctx,
+  "SELECT revision FROM snapshot_seals WHERE snapshot_id=? AND run_id=?",
+  snapshotID[:],run[:]).Scan(&revision);err!=nil{return err}
+ count,digest,err:=snapshotOwnerRoster(ctx,tx,run,revision)
  if err!=nil{return err}
  if !bytes.Equal(storedRun,run[:])||storedCount!=count||
   !bytes.Equal(storedDigest,digest[:]){

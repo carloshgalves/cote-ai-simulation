@@ -7,8 +7,7 @@
 **Stack:** [ADR 0010](../../adr/0010-csf-causal-engine-stack.md) — Go 1.27.2
 **Persistência:** [ADR 0011](../../adr/0011-csf-causal-persistence-atomicity.md) — SQLite/modernc,
 transação local única
-**Estado:** spec aceita; stack e persistência incorporadas; incrementos 1–9 liberados, enquanto
-CSFRV1-9A fecha somente o gate físico do CSFRV1-10.
+**Estado (2026-11-10):** spec aceita; stack e persistência incorporadas. CSFRV1-1–7 integrados; CSFRV1-8 [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25) em Draft/NO-GO; CSFRV1-9, 9A e 10 aguardam implementação. Os incrementos 1–9 estão autorizados **para implementação**, mas a autorização não certifica sua conclusão. CSFRV1-9A fecha o gate contratual físico necessário ao CSFRV1-10.
 
 Este conjunto entrega a fundação causal como dez slices executáveis e dois gates documentais.
 CSFRV1-0 incorporou na spec as decisões dos ADRs 0010/0011 sem repetir pesquisa e explicitou que a

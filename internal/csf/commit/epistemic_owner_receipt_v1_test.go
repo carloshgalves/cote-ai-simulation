@@ -198,4 +198,21 @@ func TestCSFRV18R22V2ForkPreservesPinnedOwnerProofAndRequiresChildReceipt(t *tes
  if _,err:=parent.VerifySnapshotV1(ctx,srcRun,snap.ID,v1);err!=nil{
   t.Fatal("child signer tamper invalidated original source snapshot:",err)
  }
+ // Restore signature and then DELETE BOTH live key and historical proof.
+ // The durable fork proof roster seal must detect this trust downgrade.
+ sourceSig:=r22Sign(t,srcRun,cp,"owner-source-cut",key)
+ if _,err:=probe.ExecContext(ctx,
+  "UPDATE fork_cognitive_owner_proofs SET signature=?",sourceSig);err!=nil{t.Fatal(err)}
+ if _,err:=child.ReplayClock(ctx,childRun,v2);err!=nil{
+  t.Fatal("restored exact source proof did not replay:",err)
+ }
+ if _,err:=probe.ExecContext(ctx,
+  "DELETE FROM fork_cognitive_owner_proofs");err!=nil{t.Fatal(err)}
+ if _,err:=probe.ExecContext(ctx,
+  "DELETE FROM cognitive_owner_receipts");err!=nil{t.Fatal(err)}
+ if _,err:=probe.ExecContext(ctx,
+  "DELETE FROM cognitive_owner_keys");err!=nil{t.Fatal(err)}
+ if _,err:=child.ReplayClock(ctx,childRun,v2);err==nil{
+  t.Fatal("deleting both signer and proof bypassed child trust gate")
+ }
 }

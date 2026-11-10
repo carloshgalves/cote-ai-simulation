@@ -255,6 +255,12 @@ CREATE TABLE IF NOT EXISTS fork_cognitive_owner_proofs (
  PRIMARY KEY(child_run,actor_namespace,actor_id),
  FOREIGN KEY(child_run) REFERENCES genesis_records(run_id)
 ) STRICT;
+CREATE TABLE IF NOT EXISTS fork_owner_proof_seals (
+ child_run BLOB PRIMARY KEY CHECK(length(child_run)=32),
+ proof_count INTEGER NOT NULL CHECK(proof_count>=0),
+ roster_digest BLOB NOT NULL CHECK(length(roster_digest)=32),
+ FOREIGN KEY(child_run) REFERENCES genesis_records(run_id)
+) STRICT;
 CREATE TABLE IF NOT EXISTS fork_lineage (
  child_run BLOB PRIMARY KEY CHECK(length(child_run)=32),
  parent_run BLOB NOT NULL CHECK(length(parent_run)=32),

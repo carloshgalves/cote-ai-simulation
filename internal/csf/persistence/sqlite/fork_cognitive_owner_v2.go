@@ -8,6 +8,7 @@ import (
  "errors"
  "fmt"
 
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 )
 
@@ -75,6 +76,11 @@ func importCognitiveOwnerProofsV2(ctx context.Context,source *Store,tx *sql.Tx,
    "source_run,receipt_id,public_key,locator,signature) VALUES(?,?,?,?,?,?,?,?)",
    childRun[:],cp.ActorNamespace,cp.ActorID,sourceRun[:],receipt,key,locator,signature);err!=nil{return err}
  }
+ count,digest,err:=ownerProofRosterSealV2(ctx,tx,childRun)
+ if err!=nil{return err}
+ if _,err:=tx.ExecContext(ctx,
+  "INSERT INTO fork_owner_proof_seals(child_run,proof_count,roster_digest) VALUES(?,?,?)",
+  childRun[:],count,digest[:]);err!=nil{return err}
  return nil
 }
 
@@ -128,5 +134,45 @@ func verifyCognitiveOwnerProofsV2(ctx context.Context,tx *sql.Tx,childRun [32]by
  if err:=tx.QueryRowContext(ctx,
   "SELECT count(*) FROM cognitive_owner_keys WHERE run_id=?",childRun[:]).Scan(&live);err!=nil{return err}
  if live!=len(proofs){return errors.New("migrated cognitive owner key/proof bijection broken")}
+ var sealedCount uint64
+ var sealedDigest []byte
+ if err:=tx.QueryRowContext(ctx,
+  "SELECT proof_count,roster_digest FROM fork_owner_proof_seals WHERE child_run=?",
+  childRun[:]).Scan(&sealedCount,&sealedDigest);err!=nil{
+  return fmt.Errorf("missing immutable fork owner proof roster seal: %w",err)
+ }
+ count,hash,err:=ownerProofRosterSealV2(ctx,tx,childRun)
+ if err!=nil{return err}
+ if count!=sealedCount||!bytes.Equal(hash[:],sealedDigest){
+  return errors.New("fork owner proof roster differs from signed bootstrap seal")
+ }
  return nil
+}
+
+// ownerProofRosterSealV2 seals the complete signer roster, including zero
+// entries, at bootstrap. A later deletion of BOTH proof and signer rows must
+// not silently downgrade a signed child to legacy unauthenticated memory.
+func ownerProofRosterSealV2(ctx context.Context,tx *sql.Tx,childRun [32]byte)(uint64,[32]byte,error){
+ var zero [32]byte
+ rows,err:=tx.QueryContext(ctx,
+  "SELECT actor_namespace,actor_id,source_run,receipt_id,public_key,locator,signature "+
+  "FROM fork_cognitive_owner_proofs WHERE child_run=? ORDER BY actor_namespace,actor_id",
+  childRun[:])
+ if err!=nil{return 0,zero,err}
+ records:=[]any{}
+ for rows.Next(){
+  var ns,actor,loc string
+  var origin,receipt,key,sig []byte
+  if err:=rows.Scan(&ns,&actor,&origin,&receipt,&key,&loc,&sig);err!=nil{
+   rows.Close();return 0,zero,err
+  }
+  records=append(records,[]any{ns,actor,origin,receipt,key,loc,sig})
+ }
+ if err:=rows.Err();err!=nil{rows.Close();return 0,zero,err}
+ if err:=rows.Close();err!=nil{return 0,zero,err}
+ serialized,err:=codec.CanonicalPayload([]any{
+  "cote.csf.fork-owner-proof-roster.v1",uint64(1),childRun[:],records,
+ })
+ if err!=nil{return 0,zero,err}
+ return uint64(len(records)),identity.OpaqueContentHash(serialized),nil
 }

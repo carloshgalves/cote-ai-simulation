@@ -6,11 +6,9 @@ import (
  "crypto/ed25519"
  "crypto/rand"
  "database/sql"
- "testing"
- "strings"
  "fmt"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
+ "strings"
+ "testing"
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"

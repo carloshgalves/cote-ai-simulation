@@ -1097,6 +1097,35 @@ func TestCSFRV18IntegratedResourceTriggerCommunicationInTransit(t *testing.T){
     if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),final.ID,c.bundle);err!=nil{
      t.Fatal("R23 parent frozen snapshot invalidated by children:",err)
     }
+    // R23 adversarial matrix: corrupt one literal canonical record in each
+    // authoritative ledger, independently. A valid digest of a different
+    // object is not enough; exact source cursor and snapshot seals must be
+    // rechecked. Restore each byte before the next mutation so the five
+    // negative controls are independent and the fixture remains pristine.
+    db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+    defer db.Close()
+    for _,name:=range []string{
+     "input_ledger","decision_ledger","event_store","evidence_ledger","causal_outbox",
+    }{
+     var id,original []byte
+     if err:=db.QueryRowContext(ctx,
+      "SELECT id,canonical FROM "+name+" ORDER BY id LIMIT 1").Scan(&id,&original);err!=nil{
+      t.Fatalf("R23 %s must contain at least one authoritative record: %v",name,err)
+     }
+     corrupted:=bytes.Clone(original)
+     if len(corrupted)==0{t.Fatalf("R23 %s has empty canonical record",name)}
+     corrupted[len(corrupted)-1]^=0x01
+     if _,err:=db.ExecContext(ctx,
+      "UPDATE "+name+" SET canonical=? WHERE id=?",corrupted,id);err!=nil{t.Fatal(err)}
+     if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),final.ID,c.bundle);err==nil{
+      t.Fatalf("R23 %s corruption silently passed replay/snapshot verification",name)
+     }
+     if _,err:=db.ExecContext(ctx,
+      "UPDATE "+name+" SET canonical=? WHERE id=?",original,id);err!=nil{t.Fatal(err)}
+     if _,err:=store.VerifySnapshotV1(ctx,[32]byte(run),final.ID,c.bundle);err!=nil{
+      t.Fatalf("R23 restored %s bytes still failed authoritative replay: %v",name,err)
+     }
+    }
    }
   })
  }

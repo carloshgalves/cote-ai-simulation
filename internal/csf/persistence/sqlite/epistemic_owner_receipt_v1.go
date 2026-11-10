@@ -136,3 +136,36 @@ func verifyPreparedOwnerCheckpointTx(ctx context.Context,tx *sql.Tx,run [32]byte
  }
  return nil
 }
+
+// LoadCognitiveCheckpointV1 rehydrates exact owner-attested bytes after a
+// process crash. It does not decode memory or invoke a model, and only the
+// requested actor's immutable receipt is eligible for restoration.
+func (s *Store) LoadCognitiveCheckpointV1(ctx context.Context,run,receiptID [32]byte,
+ namespace,actor string,b *policy.Bundle)(SnapshotCheckpoint,string,error){
+ var zero SnapshotCheckpoint
+ if s==nil||b==nil{return zero,"",errors.New("cognitive restore requires store and policy")}
+ for _,name:=range []string{namespace,actor}{if err:=domain.ValidateMachineID(name);err!=nil{return zero,"",err}}
+ if _,err:=s.ValidatedGenesis(ctx,run,b);err!=nil{return zero,"",err}
+ tx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true});if err!=nil{return zero,"",err}
+ defer tx.Rollback()
+ cp:=SnapshotCheckpoint{ActorNamespace:namespace,ActorID:actor}
+ var hash,signature []byte
+ var locator string
+ err=tx.QueryRowContext(ctx,
+  "SELECT store_id,schema_version,content,content_hash,producer,producer_version,"+
+  "covers_instant,covers_revision,covers_evidence_cursor,locator,signature "+
+  "FROM cognitive_owner_receipts WHERE receipt_id=? AND run_id=? AND actor_namespace=? AND actor_id=?",
+  receiptID[:],run[:],namespace,actor).Scan(
+   &cp.StoreID,&cp.SchemaVersion,&cp.Content,&hash,&cp.Producer,&cp.ProducerVersion,
+   &cp.CoversInstant,&cp.CoversRevision,&cp.CoversEvidenceCursor,&locator,&signature)
+ if err!=nil{return zero,"",fmt.Errorf("cognitive restore receipt missing: %w",err)}
+ if err:=verifyPreparedOwnerCheckpointTx(ctx,tx,run,cp);err!=nil{return zero,"",err}
+ payload,err:=CognitiveCheckpointSigningBytesV1(run,cp,locator);if err!=nil{return zero,"",err}
+ expected:=identity.OpaqueContentHash(payload)
+ if !bytes.Equal(expected[:],receiptID[:])||len(signature)!=ed25519.SignatureSize{
+  return zero,"",errors.New("cognitive restore receipt identity invalid")
+ }
+ if err:=tx.Commit();err!=nil{return zero,"",err}
+ cp.Content=bytes.Clone(cp.Content)
+ return cp,locator,nil
+}

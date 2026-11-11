@@ -17,21 +17,32 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 jobs:
-  # Short independent run exposes the canonical archive before the slower
-  # -race suite finishes. Remove after pinning golden bytes.
-  fork-p1-capture:
+  # Transient matched-runner comparison. Remove after collecting before/after
+  # evidence; only the exact-byte fixture remains as an ongoing regression.
+  fork-p1-performance:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-go@v6
         with:
           go-version: "1.27.2"
           cache: true
-      - name: Pre-refactor exact-byte archive
-        env:
-          CSFRV18_FORK_GOLDEN_CAPTURE: "1"
-        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18ForkP1GoldenBytes$'
+      - name: Compare P1 fork timings and stored canonical bytes on one runner
+        run: |
+          set -euo pipefail
+          current="$(git rev-parse HEAD)"
+          for version in baseline refactor baseline refactor; do
+            if [ "$version" = baseline ]; then
+              git checkout --quiet e8ceffc8344a68f9c1701dd13b97a8bf11d7b62c
+            else
+              git checkout --quiet "$current"
+            fi
+            echo "FORK_P1_VERSION=$version GIT_SHA=$(git rev-parse HEAD)"
+            go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18ForkP1GoldenBytes$' | grep -E 'FORK_P1_METRIC|PASS|FAIL'
+          done
   continuity:
     runs-on: ubuntu-latest
     # The R21 V1→V2 65-WORK cascade is intentionally exercised under -race;

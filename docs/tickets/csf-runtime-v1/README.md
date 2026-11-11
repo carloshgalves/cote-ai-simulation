@@ -42,6 +42,8 @@ estiverem concluídos.
 | [CSFRV1-9A](09a-contrato-adapter-fisico.md) | contrato físico versionado com schemas e fixtures | 0 |
 | [CSFRV1-10](10-adapter-fisico-e-cenario.md) | cenário de referência completo, adapter físico e evals finais | 9, 9A |
 
+Para a refatoração incremental do CSFRV1-8 (issue #56), consultar o [desenho P0 do bootstrap](../../architecture/csf-fork-bootstrap-phases-v1.md) e os [gates de regressão](../../validation/csfrv1-8-fork-refactor-gates.md). Cada fase requer PR própria; a documentação não certifica a conclusão da #56.
+
 ## Convenções comuns
 
 1. O runtime é Go 1.27.2 em `internal/csf/`, com comandos em `cmd/`, conforme ADR 0010. O adapter de

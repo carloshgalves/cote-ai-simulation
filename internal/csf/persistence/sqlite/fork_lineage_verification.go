@@ -112,8 +112,6 @@ func verifyForkCognitiveLineageTx(ctx context.Context,tx *sql.Tx,
   for key:=range expected{if !actual[key]{return errors.New("V2 imported cognitive owner missing")}}
   if err:=verifyCognitiveOwnerProofsV2(ctx,tx,run,parentRun,entries);err!=nil{return err}
  }
-
-
  return nil
 }
 
@@ -157,7 +155,6 @@ func verifyForkHistoricalPrefixesTx(ctx context.Context,tx *sql.Tx,
   actual:=[]any{name,uint64(len(records)),digest[:]}
   if !sameCanonical(cursors[i],actual){return fmt.Errorf("origin immutable %s prefix changed",name)}
  }
-
  return nil
 }
 

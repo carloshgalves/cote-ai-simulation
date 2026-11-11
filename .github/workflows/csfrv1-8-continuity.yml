@@ -17,31 +17,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 jobs:
-  # Transient P3/P4 same-runner cost comparison. Remove after evidence.
-  fork-p4-cost:
-    runs-on: ubuntu-latest
-    timeout-minutes: 12
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-go@v6
-        with:
-          go-version: "1.27.2"
-          cache: true
-      - name: Compare lineage verifier extraction with merged P3
-        run: |
-          set -euo pipefail
-          p4="$(git rev-parse HEAD)"
-          for version in P3 P4 P3 P4; do
-            if [ "$version" = P3 ]; then
-              git checkout --quiet 683f14a666abd364cc07dad890853c602278ca86
-            else
-              git checkout --quiet "$p4"
-            fi
-            echo "FORK_P4_VERSION=$version SHA=$(git rev-parse HEAD)"
-            go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18ForkP1GoldenBytes$' | grep -E 'FORK_P1_METRIC|PASS|FAIL'
-          done
   continuity:
     runs-on: ubuntu-latest
     # The R21 V1→V2 65-WORK cascade is intentionally exercised under -race;

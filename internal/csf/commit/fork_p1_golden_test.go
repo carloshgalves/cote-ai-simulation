@@ -10,6 +10,7 @@ import (
  "encoding/json"
  "errors"
  "fmt"
+ "io"
  "os"
  "path/filepath"
  "runtime"
@@ -163,6 +164,21 @@ func TestCSFRV18ForkP1GoldenBytes(t *testing.T){
    t.Logf("FORK_P1_METRIC sample=%d elapsed_ms=%d allocated_bytes=%d go=%s gomaxprocs=%d",
     sample,duration.Milliseconds(),m2.TotalAlloc-m1.TotalAlloc,runtime.Version(),runtime.GOMAXPROCS(0))
   }
+  // Mutation oracle: one changed persisted byte must be RED, restoration GREEN.
+  db,err:=sql.Open("sqlite",childPath);if err!=nil{t.Fatal(err)}
+  defer db.Close()
+  var definitionID,original []byte
+  if err:=db.QueryRowContext(ctx,
+   "SELECT definition_id,canonical FROM trigger_definitions ORDER BY definition_id LIMIT 1").
+   Scan(&definitionID,&original);err!=nil{t.Fatal(err)}
+  corrupt:=bytes.Clone(original)
+  corrupt[len(corrupt)-1]^=1
+  if _,err:=db.ExecContext(ctx,"UPDATE trigger_definitions SET canonical=? WHERE definition_id=?",corrupt,definitionID);err!=nil{t.Fatal(err)}
+  changed:=forkP1CaptureStore(t,childPath)
+  if equalGoldenRecords(gold["v2-evolved-triggers:child"]["trigger_definitions"],changed["trigger_definitions"]){t.Fatal("single-byte corruption bypassed golden oracle")}
+  if _,err:=db.ExecContext(ctx,"UPDATE trigger_definitions SET canonical=? WHERE definition_id=?",original,definitionID);err!=nil{t.Fatal(err)}
+  restored:=forkP1CaptureStore(t,childPath)
+  if !equalGoldenRecords(gold["v2-evolved-triggers:child"]["trigger_definitions"],restored["trigger_definitions"]){t.Fatal("restored record differs from golden")}
   gold["v2-evolved-triggers:parent"]=forkP1CaptureStore(t,sourcePath)
  })
 
@@ -185,15 +201,45 @@ func TestCSFRV18ForkP1GoldenBytes(t *testing.T){
   gold["v2-in-transit-claims:parent"]=forkP1CaptureStore(t,sourcePath)
   gold["v2-in-transit-claims:child"]=childBytes
  })
+ for scenario,required:=range map[string][]string{
+  "v1-same-policy:child":{"genesis_records","fork_lineage.reference_canonical"},
+  "v2-round-slots:child":{"input_slot_responses","fork_history_records"},
+  "v2-evolved-triggers:child":{"fork_trigger_imports","trigger_definitions","trigger_runtime"},
+  "v2-in-transit-claims:child":{"communication_claims","communication_transmissions","fork_communication_imports"},
+ }{
+  for _,table:=range required{
+   if len(gold[scenario][table])==0{t.Fatalf("P1 fixture lacks nonempty %s/%s",scenario,table)}
+  }
+ }
  got:=forkP1GoldenCompressed(t,gold)
  if os.Getenv("CSFRV18_FORK_GOLDEN_CAPTURE")=="1"{
   t.Log("FORK_P1_GOLDEN_B64="+got)
   return
  }
  raw,err:=os.ReadFile("testdata/csfrv18-fork-p1-golden.gz.b64")
- if errors.Is(err,os.ErrNotExist){t.Skip("P1 baseline capture not pinned yet");return}
+ if errors.Is(err,os.ErrNotExist){t.Fatal("P1 pre-refactor golden missing: fail closed")}
  if err!=nil{t.Fatal(err)}
- if strings.TrimSpace(string(raw))!=got{t.Fatal("fork P1 stored canonical bytes differ from pre-refactor golden")}
+ expectedZip,err:=base64.StdEncoding.DecodeString(strings.TrimSpace(string(raw)))
+ if err!=nil{t.Fatal("invalid golden encoding:",err)}
+ reader,err:=gzip.NewReader(bytes.NewReader(expectedZip))
+ if err!=nil{t.Fatal("invalid compressed golden:",err)}
+ expectedJSON,err:=io.ReadAll(reader)
+ if err!=nil{reader.Close();t.Fatal(err)}
+ if err:=reader.Close();err!=nil{t.Fatal(err)}
+ actualJSON,err:=json.Marshal(gold)
+ if err!=nil{t.Fatal(err)}
+ if !bytes.Equal(expectedJSON,actualJSON){
+  var expected forkP1Golden
+  if err:=json.Unmarshal(expectedJSON,&expected);err!=nil{t.Fatal(err)}
+  for scenario,tables:=range expected{
+   for name,records:=range tables{
+    if !equalGoldenRecords(records,gold[scenario][name]){
+     t.Fatalf("P1 fork golden drift %s/%s: %d vs %d records",scenario,name,len(records),len(gold[scenario][name]))
+    }
+   }
+  }
+  t.Fatal("P1 fork golden scenario or table inventory changed")
+ }
 }
 
 func equalGoldenRecords(a,b []string)bool{

@@ -40,7 +40,8 @@ func (s *Store) prepareVerifiedForkCut(ctx context.Context,sourceRun,parentSnaps
  if resume.SnapshotControlStatus!=0{return zero,errors.New("fork origin checkpoint must be IDLE")}
  parent,err:=s.ValidatedGenesis(ctx,sourceRun,origin)
  if err!=nil{return zero,err}
- if len(parent.Payload[4].([]any))!=1{
+ lineage,ok:=parent.Payload[4].([]any)
+ if !ok||len(lineage)!=1{
   return zero,errors.New("recursive fork origin requires a transitive lineage archive")
  }
  snapRaw,err:=codec.StrictDecodePayload(resume.Snapshot.Canonical)
@@ -63,7 +64,9 @@ func (s *Store) prepareVerifiedForkCut(ctx context.Context,sourceRun,parentSnaps
   }
  }
  typed,ok:=snapshot[11].([]any);if !ok||len(typed)!=4{return zero,errors.New("source pending envelope absent")}
- penv,err:=codec.StrictDecodeEnvelope(typed[2].([]byte));if err!=nil{return zero,err}
+ pendingEnvelope,ok:=typed[2].([]byte)
+ if !ok{return zero,errors.New("source pending envelope malformed")}
+ penv,err:=codec.StrictDecodeEnvelope(pendingEnvelope);if err!=nil{return zero,err}
  lists,ok:=penv.Value.([]any);if !ok||len(lists)!=10{return zero,errors.New("unsupported pending-state schema")}
  if crossPolicy {
   // These partitions are handled by typed migrators below. Incomplete

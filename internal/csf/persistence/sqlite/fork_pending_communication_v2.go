@@ -55,6 +55,15 @@ func (s *Store) PrepareV2CommunicationBirths(ctx context.Context, sourceRun,snap
  }
  sources,err:=s.PrepareInTransitDependenciesV1(ctx,sourceRun,snapshotID,originPolicy)
  if err!=nil{return nil,err}
+ return deriveV2CommunicationBirths(child,childPolicy,sources)
+}
+
+// deriveV2CommunicationBirths is deterministic over already authenticated
+// source dependencies. It never reads SQLite or mutates the parent; its
+// outputs are proposals until child publication verifies their proofs.
+func deriveV2CommunicationBirths(child *genesis.Genesis,childPolicy *policy.Bundle,
+ sources []InTransitDependencyV1)([]V2CommunicationBirth,error){
+ if child==nil||childPolicy==nil{return nil,errors.New("V2 communication derivation requires child and policy")}
  if uint64(len(sources))>uint64(^uint32(0)){return nil,errors.New("too many pending communication imports")}
  out:=make([]V2CommunicationBirth,0,len(sources))
  childOrigin:=communication.Origin{Kind:21,ID:child.ID,Digest:child.Digest}

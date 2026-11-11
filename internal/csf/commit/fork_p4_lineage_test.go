@@ -136,8 +136,15 @@ func TestCSFRV18P4PrecommitHistoryCorruptionRollsBackAndRetries(t *testing.T){
 // proof, and recovery rejection after tampering WITHOUT visiting the parent.
 func TestCSFRV18P4SignedCognitiveProofCannotBypassReplayOrRecovery(t *testing.T){
  ctx:=context.Background()
- _,parent,_,run,v1,_:=testFixture(t)
- sourceRun:=[32]byte(run)
+ v1,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+ root:=validGenesis(t,v1)
+ sourceRun:=[32]byte(root.RunID)
+ parent,err:=sqlite.Open(ctx,filepath.Join(t.TempDir(),"signed-parent.db"))
+ if err!=nil{t.Fatal(err)}
+ defer parent.Close()
+ if err:=parent.PersistGenesis(ctx,root,v1);err!=nil{t.Fatal(err)}
+ if err:=parent.BootstrapClock(ctx,root,v1);err!=nil{t.Fatal(err)}
+ if err:=parent.BootstrapGenesisTriggers(ctx,root,v1,nil);err!=nil{t.Fatal(err)}
  if err:=parent.RegisterCognitiveActor(ctx,sourceRun,"cognition","signed-owner",v1);err!=nil{
   t.Fatal(err)
  }

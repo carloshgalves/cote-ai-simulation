@@ -73,4 +73,18 @@ func TestCSFRV18ForkRejectsOrphanSignedSnapshotSealDestination(t *testing.T) {
  if count!=0{t.Fatal("rejected signer-seal workspace received a partial child Genesis")}
  if err:=tamper.QueryRowContext(ctx,"SELECT count(*) FROM snapshot_owner_key_seals").Scan(&count);err!=nil{t.Fatal(err)}
  if count!=1{t.Fatal("rejected fork mutated the preexisting trust authority")}
+ // After rejection, remove only the foreign authority and prove that the
+ // original destination can be bootstrapped, reopened, and causally replayed.
+ if _,err:=tamper.ExecContext(ctx,"DELETE FROM snapshot_owner_key_seals");err!=nil{t.Fatal(err)}
+ if _,err:=source.ForkIdleSnapshotV1(ctx,[32]byte(g.RunID),snapshot.ID,
+  childRun,dest,b);err!=nil{t.Fatalf("clean retry of rejected fork: %v",err)}
+ if err:=dest.Close();err!=nil{t.Fatal(err)}
+ reopened,err:=sqlite.Open(ctx,dstPath);if err!=nil{t.Fatal(err)}
+ defer reopened.Close()
+ if _,err:=reopened.ValidatedGenesis(ctx,childRun,b);err!=nil{
+  t.Fatalf("reopen of recovered fork lineage: %v",err)
+ }
+ if _,err:=reopened.ReplayClock(ctx,childRun,b);err!=nil{
+  t.Fatalf("replay of recovered fork after prior rejection: %v",err)
+ }
 }

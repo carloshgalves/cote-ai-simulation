@@ -321,18 +321,9 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  tx,err:=child.db.BeginTx(ctx,nil);if err!=nil{return nil,err}
  defer tx.Rollback()
  // A fork never shares mutable authority columns with the source run.
- for _,name:=range []string{"genesis_records","world_revisions","clock_states",
-  "input_ledger","decision_ledger","event_store","evidence_ledger","causal_outbox",
-  "input_source_cursors","source_ingress_receipts","input_slot_responses","round_integrity_seals",
-  "cognitive_actor_registry","cognitive_owner_keys","cognitive_owner_receipts","fork_cognitive_owner_proofs","fork_owner_proof_seals","snapshot_cognitive_actors","evidence_routes",
-  "communication_claims","communication_transmissions","fork_communication_imports","fork_history_roots","fork_occurrence_imports","fork_trigger_imports","cycle_control_state",
-  "committed_cycles","fork_lineage","fork_history_records","snapshots","snapshot_seals","snapshot_owner_key_seals",
-  "snapshot_prefix_members","genesis_schedule_seals","scheduled_occurrences",
-  "trigger_registry_seals","trigger_definitions","trigger_runtime","trigger_activations"}{
-  var count int
-  if err:=tx.QueryRowContext(ctx,"SELECT count(*) FROM "+name).Scan(&count);err!=nil{return nil,err}
-  if count!=0{return nil,fmt.Errorf("fork destination contains previous authority in %s",name)}
- }
+ // Validate the COMPLETE installed schema, then require every known authority
+ // to be empty before the first child write. Unknown tables fail closed.
+ if err:=ensureForkDestinationEmpty(ctx,tx);err!=nil{return nil,err}
  if _,err:=tx.ExecContext(ctx,"INSERT INTO genesis_records(run_id,genesis_id,digest,canonical) VALUES(?,?,?,?)",
   childRun[:],childGenesis.ID[:],childGenesis.Digest[:],childGenesis.CanonicalBytes);err!=nil{return nil,err}
  if crossPolicy{

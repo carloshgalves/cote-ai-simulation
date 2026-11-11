@@ -1,7 +1,6 @@
 package sqlite
 
 import (
- "bytes"
  "context"
  "errors"
  "fmt"
@@ -12,7 +11,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
 // ForkIdleSnapshotV1 starts a new run from a causally verified checkpoint in
@@ -50,101 +48,18 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  child *Store,origin,childPolicy *policy.Bundle,crossPolicy bool)(*genesis.Genesis,error){
  cut,err:=s.prepareVerifiedForkCut(ctx,sourceRun,parentSnapshotID,childRun,child,origin,childPolicy,crossPolicy)
  if err!=nil{return nil,err}
- resume,parent,snapshot,epistemic,lists,refRaw:=cut.resume,cut.parent,cut.snapshot,cut.epistemic,cut.pending,cut.reference
- payload:=append([]any(nil),parent.Payload...)
- payload[0]=bytes.Clone(childRun[:])
- payload[3]=int64(resume.SnapshotClock.Instant)
- payload[4]=[]any{uint64(1),refRaw}
- targetID,targetVersion,codecHash,schemaHash,err:=childPolicy.CodecIdentity()
+ resume,parent,snapshot,epistemic,refRaw:=cut.resume,cut.parent,cut.snapshot,cut.epistemic,cut.reference
+ draft,err:=s.prepareForkMigrationDraft(ctx,sourceRun,parentSnapshotID,childRun,cut,origin,childPolicy,crossPolicy)
  if err!=nil{return nil,err}
- payload[5]=targetID
- payload[6]=targetVersion
- payload[10]=codecHash[:]
- payload[11]=schemaHash[:]
- payload[16]=snapshot[6]
- payload[17]=snapshot[14]
- canonical,err:=codec.CanonicalBytes("cote.csf.digest.genesis-manifest","cote.csf.schema.genesis-manifest",1,payload)
- if err!=nil{return nil,err}
- childGenesis,err:=genesis.ValidateForkCanonical(canonical,childPolicy);if err!=nil{return nil,err}
- if [32]byte(childGenesis.RunID)!=childRun{return nil,errors.New("fork generated wrong run")}
- var migrated []forkGenesisOccurrence
- var importBirths []V2CommunicationBirth
- var occurrenceRoots []ports.CanonicalRecord
- archive:=forkHistoryArchive{}
- if crossPolicy{
-  for _,name:=range snapshotLedgerNames{
-   records,err:=s.snapshotRoundLedgerRecords(ctx,parentSnapshotID,name);if err!=nil{return nil,err}
-   archive[name]=records
-  }
-  if len(lists[0])>0{
-   importBirths,err=s.PrepareV2CommunicationBirths(ctx,sourceRun,parentSnapshotID,
-    childGenesis,origin,childPolicy)
-   if err!=nil{return nil,fmt.Errorf("V1-to-V2 pending transmission migration: %w",err)}
-  }
-  pendingRefs:=lists[0]
-  importedRefs:=map[string]bool{}
-  for _,birth:=range importBirths {
-   if importedRefs[string(birth.Parent.OccurrenceID[:])]{return nil,errors.New("duplicate V2 imported communication source")}
-   importedRefs[string(birth.Parent.OccurrenceID[:])]=true
-  }
-  ordinaryRefs:=make([]any,0,len(pendingRefs))
-  for _,raw:=range pendingRefs{
-   ref,ok:=raw.([]any)
-   if !ok||len(ref)!=3||ref[0]!=uint64(6){return nil,errors.New("invalid cross-policy pending occurrence ref")}
-   parentID,ok:=ref[1].([]byte)
-   if !ok||len(parentID)!=32{return nil,errors.New("invalid cross-policy pending occurrence ID")}
-   if importedRefs[string(parentID)]{delete(importedRefs,string(parentID));continue}
-   ordinaryRefs=append(ordinaryRefs,raw)
-  }
-  if len(importedRefs)!=0{return nil,errors.New("in-transit transmission is absent from source checkpoint")}
-  for _,birth:=range importBirths {
-   value,err:=codec.StrictDecodePayload(birth.ChildOccurrence.Canonical)
-   if err!=nil{return nil,err}
-   fields,ok:=value.([]any);if !ok||len(fields)!=15{return nil,errors.New("V2 imported occurrence malformed")}
-   coordinate,ok:=fields[4].([]any);if !ok||len(coordinate)!=2{return nil,errors.New("V2 migrated coordinate malformed")}
-   when,valid:=asSigned64(coordinate[0]);ordinal,validOrdinal:=coordinate[1].(uint64)
-   if !valid||!validOrdinal{return nil,errors.New("V2 migrated coordinate invalid")}
-   migrated=append(migrated,forkGenesisOccurrence{
-    ID:birth.ChildOccurrence.Identity,EligibilityInstant:when,
-    EligibilityOrdinal:ordinal,Canonical:birth.ChildOccurrence.Canonical,
-   })
-  }
-  occurrenceRoots,err=prepareForkOccurrenceRoots(ctx,s,parent,ordinaryRefs)
-  if err!=nil{return nil,err}
-  generated,err:=migrateOccurrenceBirthsV2(parent,childGenesis,snapshot,ordinaryRefs,occurrenceRoots,migrated,archive,origin,childPolicy)
-  if err!=nil{return nil,fmt.Errorf("V2 occurrence migration: %w",err)}
-  migrated=append(migrated,generated...)
- }else{
-  migrated,err=migrateGenesisPendingOccurrences(ctx,s,parent,childGenesis,lists[0],origin,childPolicy)
-  if err!=nil{return nil,err}
- }
- var migratedRounds []forkGenesisRound
- var migratedSlots []forkSlotRecord
- var historicalRoots []forkHistoricalRoot
- if crossPolicy{
-  historicalRoots,err=prepareNativeRoundIntentions(ctx,s,parent,snapshot,archive,origin)
-  if err!=nil{return nil,fmt.Errorf("V2 native intention history: %w",err)}
-  migratedRounds,migratedSlots,err=migrateRoundHistoryV2(parent,childGenesis,snapshot,archive,origin,childPolicy)
-  if err!=nil{return nil,fmt.Errorf("V2 round history migration: %w",err)}
- }else{
-  migratedRounds,err=migrateGenesisPendingRounds(ctx,s,parent,childGenesis,lists[4],origin,childPolicy)
-  if err!=nil{return nil,fmt.Errorf("fork Genesis round migration: %w",err)}
- }
- var triggerMigration forkTriggerMigration
- var triggerManifest []byte
- if crossPolicy {
-  triggerManifest,err=prepareTriggerManifestV2(ctx,s,parent,snapshot,origin)
-  if err!=nil{return nil,err}
-  triggerMigration,err=migrateTriggerSeedsV2(parent,childGenesis,snapshot,triggerManifest,archive,origin,childPolicy)
- }else{
-  triggerMigration,err=migrateGenesisPendingTriggers(ctx,s,parent,childGenesis,origin,childPolicy,
-   lists[1],lists[2])
- }
- if err!=nil{return nil,fmt.Errorf("fork trigger migration: %w",err)}
- // Re-verify and copy exact parent ledger prefixes at their original
- // read-transaction boundary; only after this succeeds may child SQL begin.
+ // Re-verify and copy the exact parent ledger prefixes at the ORIGINAL
+ // read-transaction boundary. Until it succeeds, only a draft exists:
+ // no complete plan may be supplied to the child SQL publisher.
  archived,err:=s.verifiedForkArchive(ctx,parentSnapshotID,snapshot,origin)
  if err!=nil{return nil,err}
+ plan:=forkMigrationPlan{forkMigrationDraft:draft,archived:archived}
+ childGenesis,migrated,importBirths,occurrenceRoots:=plan.childGenesis,plan.migrated,plan.importBirths,plan.occurrenceRoots
+ migratedRounds,migratedSlots,historicalRoots:=plan.migratedRounds,plan.migratedSlots,plan.historicalRoots
+ triggerMigration,triggerManifest:=plan.triggerMigration,plan.triggerManifest
  tx,err:=child.db.BeginTx(ctx,nil);if err!=nil{return nil,err}
  defer tx.Rollback()
  // A fork never shares mutable authority columns with the source run.
@@ -157,18 +72,10 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   // The signed parent snapshot carries the exact complete cognition roster.
   // Preserve membership under child run/revision zero, while the opaque
   // inline checkpoint itself stays a Genesis-pinned historical owner blob.
-  for _,raw:=range epistemic {
-   entry:=raw.([]any)
-   actor,ok:=entry[0].([]any)
-   if !ok||len(actor)!=2{return nil,errors.New("V2 cognition actor malformed")}
-   ns,okNS:=actor[0].(string);id,okID:=actor[1].(string)
-   if !okNS||!okID||domain.ValidateMachineID(ns)!=nil||
-    domain.ValidateMachineID(id)!=nil{
-    return nil,errors.New("V2 cognition actor identifier invalid")
-   }
+  for _,actor:=range plan.cognitiveActors {
    if _,err:=tx.ExecContext(ctx,
     "INSERT INTO cognitive_actor_registry(run_id,actor_namespace,actor_id,registered_revision) VALUES(?,?,?,0)",
-    childRun[:],ns,id);err!=nil{return nil,err}
+    childRun[:],actor.namespace,actor.id);err!=nil{return nil,err}
   }
  if err:=importCognitiveOwnerProofsV2(ctx,s,tx,sourceRun,childRun,epistemic);err!=nil{
   return nil,fmt.Errorf("V2 signed cognitive owner migration: %w",err)
@@ -179,7 +86,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   "VALUES(?,?,?,?,?,?,?)",childRun[:],sourceRun[:],parentSnapshotID[:],origin.CodecPolicyHash[:],
   refRaw,parent.CanonicalBytes,resume.Snapshot.Canonical);err!=nil{return nil,err}
  for i,name:=range snapshotLedgerNames{
-  for ordinal,record:=range archived[i]{
+  for ordinal,record:=range plan.archived[i]{
    if _,err:=tx.ExecContext(ctx,"INSERT INTO fork_history_records(child_run,ledger_name,ordinal,record_id,canonical) VALUES(?,?,?,?,?)",
     childRun[:],name,ordinal,record.id[:],record.canonical);err!=nil{return nil,err}
   }

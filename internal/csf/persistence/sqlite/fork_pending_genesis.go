@@ -44,33 +44,8 @@ func migrateGenesisPendingOccurrences(ctx context.Context, s *Store,
 			parentID, parent.RunID[:]).Scan(&original); err != nil {
 			return nil, err
 		}
-		parsed, err := codec.StrictDecodePayload(original)
-		if err != nil {
-			return nil, err
-		}
-		// A valid roster reference must match an authenticated parent birth
-		// before deriving a different child-owned identity.
-		if _, _, _, _, err := originPolicy.CodecIdentity(); err != nil {
-			return nil, err
-		}
-		f, ok := parsed.([]any)
-		if !ok || len(f) != 15 || !equalBytes(f[0], parentID) || !equalBytes(f[1], parent.RunID[:]) ||
-			!equalBytes(f[14], birthDigest) {
-			return nil, errors.New("fork schedule birth hash differs from checkpoint")
-		}
-		root, ok := f[9].([]any)
-		if !ok || len(root) != 2 || root[0] != uint64(2) {
-			return nil, errors.New("fork schedule has no supported genesis origin")
-		}
-		source, ok := root[1].([]any)
-		if !ok || len(source) != 2 || !equalBytes(source[0], parent.ID[:]) ||
-			!equalBytes(source[1], parent.Digest[:]) {
-			return nil, errors.New("fork genesis occurrence does not belong to verified parent")
-		}
-		birth, err := remintForkOccurrence(child, f, childPolicy)
-		if err != nil {
-			return nil, err
-		}
+		birth, err := deriveGenesisSourceOccurrence(parent,child,parentID,birthDigest,original,originPolicy,childPolicy)
+		if err != nil{return nil,err}
 		for _, prior := range result {
 			if prior.ID == birth.ID {
 				return nil, errors.New("two parent occurrences map to the same child ID")
@@ -79,6 +54,44 @@ func migrateGenesisPendingOccurrences(ctx context.Context, s *Store,
 		result = append(result, birth)
 	}
 	return result, nil
+}
+
+ // deriveGenesisSourceOccurrence authenticates raw bytes already fetched
+ // for ONE signed parent reference and remints a child-owned schedule.
+ // There are no DB calls; the caller deliberately preserves per-ref SQL
+ // read order and checks child identity collisions between iterations.
+func deriveGenesisSourceOccurrence(parent,child *genesis.Genesis,
+ parentID,birthDigest,original []byte,originPolicy,childPolicy *policy.Bundle)(forkGenesisOccurrence,error){
+ var zero forkGenesisOccurrence
+		parsed, err := codec.StrictDecodePayload(original)
+		if err != nil {
+			return zero, err
+		}
+		// A valid roster reference must match an authenticated parent birth
+		// before deriving a different child-owned identity.
+		if _, _, _, _, err := originPolicy.CodecIdentity(); err != nil {
+			return zero, err
+		}
+		f, ok := parsed.([]any)
+		if !ok || len(f) != 15 || !equalBytes(f[0], parentID) || !equalBytes(f[1], parent.RunID[:]) ||
+			!equalBytes(f[14], birthDigest) {
+			return zero, errors.New("fork schedule birth hash differs from checkpoint")
+		}
+		root, ok := f[9].([]any)
+		if !ok || len(root) != 2 || root[0] != uint64(2) {
+			return zero, errors.New("fork schedule has no supported genesis origin")
+		}
+		source, ok := root[1].([]any)
+		if !ok || len(source) != 2 || !equalBytes(source[0], parent.ID[:]) ||
+			!equalBytes(source[1], parent.Digest[:]) {
+			return zero, errors.New("fork genesis occurrence does not belong to verified parent")
+		}
+		birth, err := remintForkOccurrence(child, f, childPolicy)
+		if err != nil {
+			return zero, err
+		}
+
+ return birth,nil
 }
 
 // Reuse the established Genesis rekey/digest/validation path for each

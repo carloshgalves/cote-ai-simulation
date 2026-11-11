@@ -32,24 +32,11 @@ jobs:
         run: |
           git fetch --no-tags --depth=1 origin main
           git diff --check origin/main HEAD
-      # Temporary pre-refactor evidence: this runs BEFORE the golden assertion
-      # has been pinned. Remove capture mode once the exact bytes are committed.
+      # Pre-refactor record bytes from the exact parent SHA.
       - name: Capture fork P1 baseline before refactor
         env:
           CSFRV18_FORK_GOLDEN_CAPTURE: "1"
-        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18ForkP1GoldenBytes        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18'
-      - name: Cross-policy reference and negative vectors
-        run: go test -count=1 -v ./internal/csf/fork
-      - name: Snapshot and fork race regression
-        # Go's default 10m package timeout is insufficient for the 65-WORK
-        # cross-policy cascade with race instrumentation (issue #59 tracks cost).
-        # Keep the complete TestCSFRV18 race matrix, including the cascade.
-        run: go test -race -count=1 -timeout=30m ./internal/csf/commit -run '^TestCSFRV18'
-      - name: SQLite replay and terminal regression
-        run: go test -count=1 ./internal/csf/persistence/sqlite ./internal/csf/clock ./internal/csf/perception
-      - name: Full Go regression
-        run: go test -count=1 ./...
-
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18ForkP1GoldenBytes$'
       - name: Snapshot and resume negative tests
         run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18'
       - name: Cross-policy reference and negative vectors

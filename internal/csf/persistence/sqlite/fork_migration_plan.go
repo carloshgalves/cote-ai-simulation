@@ -13,10 +13,10 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
-// forkMigrationPlan is a proposed, uncommitted child authority set.
-// Producing a plan is NOT publication. Every generated record still has to
-// pass the unchanged destination guard, transaction and pre-commit lineage.
-type forkMigrationPlan struct {
+// forkMigrationDraft contains deterministic births and authenticated
+// read-adapter outputs, but NOT the final five-prefix cut. It cannot be
+// handed to the child publisher as a complete plan.
+type forkMigrationDraft struct {
  childGenesis *genesis.Genesis
  migrated []forkGenesisOccurrence
  importBirths []V2CommunicationBirth
@@ -30,16 +30,16 @@ type forkMigrationPlan struct {
  triggerManifest []byte
 }
 
-// prepareForkMigrationPlan is the read-aware P2 coordinator. The *pure*
+// prepareForkMigrationDraft is the read-aware P2 coordinator. The *pure*
 // derivations below deliberately accept no Store or context. Existing
 // authenticated readers (round history, source triggers and signed owner
 // sources) remain adapters for now: they are not mislabeled as pure, and
 // retain original read order until independently extracted/proven. Critically,
 // no child transaction is opened here and no source database is written.
-func (s *Store) prepareForkMigrationPlan(ctx context.Context,
+func (s *Store) prepareForkMigrationDraft(ctx context.Context,
  sourceRun,parentSnapshotID,childRun [32]byte,cut verifiedForkCut,
- origin,childPolicy *policy.Bundle,crossPolicy bool)(forkMigrationPlan,error){
- var zero forkMigrationPlan
+ origin,childPolicy *policy.Bundle,crossPolicy bool)(forkMigrationDraft,error){
+ var zero forkMigrationDraft
  parent,snapshot,lists:=cut.parent,cut.snapshot,cut.pending
  childGenesis,err:=deriveForkChildGenesis(cut,childRun,childPolicy)
  if err!=nil{return zero,err}
@@ -96,7 +96,7 @@ func (s *Store) prepareForkMigrationPlan(ctx context.Context,
 
  actors,err:=deriveForkCognitiveActors(cut.epistemic,crossPolicy)
  if err!=nil{return zero,err}
- return forkMigrationPlan{
+ return forkMigrationDraft{
   cognitiveActors:actors,
   childGenesis:childGenesis,migrated:migrated,importBirths:importBirths,
   occurrenceRoots:occurrenceRoots,migratedRounds:migratedRounds,migratedSlots:migratedSlots,

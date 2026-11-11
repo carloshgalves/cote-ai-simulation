@@ -49,15 +49,17 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  cut,err:=s.prepareVerifiedForkCut(ctx,sourceRun,parentSnapshotID,childRun,child,origin,childPolicy,crossPolicy)
  if err!=nil{return nil,err}
  resume,parent,snapshot,epistemic,refRaw:=cut.resume,cut.parent,cut.snapshot,cut.epistemic,cut.reference
- plan,err:=s.prepareForkMigrationPlan(ctx,sourceRun,parentSnapshotID,childRun,cut,origin,childPolicy,crossPolicy)
+ draft,err:=s.prepareForkMigrationDraft(ctx,sourceRun,parentSnapshotID,childRun,cut,origin,childPolicy,crossPolicy)
  if err!=nil{return nil,err}
+ // Re-verify and copy the exact parent ledger prefixes at the ORIGINAL
+ // read-transaction boundary. Until it succeeds, only a draft exists:
+ // no complete plan may be supplied to the child SQL publisher.
+ archived,err:=s.verifiedForkArchive(ctx,parentSnapshotID,snapshot,origin)
+ if err!=nil{return nil,err}
+ plan:=forkMigrationPlan{forkMigrationDraft:draft,archived:archived}
  childGenesis,migrated,importBirths,occurrenceRoots:=plan.childGenesis,plan.migrated,plan.importBirths,plan.occurrenceRoots
  migratedRounds,migratedSlots,historicalRoots:=plan.migratedRounds,plan.migratedSlots,plan.historicalRoots
  triggerMigration,triggerManifest:=plan.triggerMigration,plan.triggerManifest
- // Re-verify and copy exact parent ledger prefixes at their original
- // read-transaction boundary; only after this succeeds may child SQL begin.
- plan.archived,err=s.verifiedForkArchive(ctx,parentSnapshotID,snapshot,origin)
- if err!=nil{return nil,err}
  tx,err:=child.db.BeginTx(ctx,nil);if err!=nil{return nil,err}
  defer tx.Rollback()
  // A fork never shares mutable authority columns with the source run.

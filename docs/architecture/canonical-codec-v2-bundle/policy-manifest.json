@@ -1,0 +1,16 @@
+{
+  "bundle_id": "cote.csf.codec.cbor-det.v2",
+  "manifest_version": 1,
+  "artifacts": [
+    [
+      "profile.json",
+      2858,
+      "fd6017219b827e2ff173c14a74ea63e34a4775b5990c299fbb5f85d2a07a747b"
+    ],
+    [
+      "unicode.json",
+      1507,
+      "6d3cf5bd08fed2f0b98b9110c8703945d116f6ab5241ec2f870f4f5bc35f6825"
+    ]
+  ]
+}

@@ -10,7 +10,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/communication"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/settlement"
 )
@@ -33,10 +32,7 @@ func verifyCommunicationSendTerminal(ctx context.Context,tx *sql.Tx,
   b.ResultStateHash!=b.BaseStateHash{
   return errors.New("communication allegation cannot mutate authoritative WorldState")
  }
- var manifest []byte
- if err:=tx.QueryRowContext(ctx,
-  "SELECT canonical FROM genesis_records WHERE run_id=?",b.RunID[:]).Scan(&manifest);err!=nil{return err}
- root,err:=genesis.ValidateCanonical(manifest,b.CommunicationBundle)
+ root,err:=validatedGenesisTx(ctx,tx,b.RunID,b.CommunicationBundle)
  if err!=nil||[32]byte(root.RunID)!=b.RunID{return errors.New("communication policy not pinned by Genesis")}
  units,ok:=fence[11].([]any)
  if !ok||len(units)!=1{return errors.New("communication send requires one admitted slot")}

@@ -48,7 +48,18 @@ func NewDueEvent(bundle *policy.Bundle,ctx EventContext,plan SendPlan,result Del
   occurrence.ID!=domain.ID(plan.Occurrence.Identity){
   return zero,errors.New("delivery Event must consume its authenticated occurrence")
  }
- due,err:=ValidateOccurrence(bundle,plan);if err!=nil{return zero,err}
+ // Imported V2 transmissions originate at a verified child Genesis birth,
+ // not at a fictitious child ActionProposal. The terminal database gate
+ // must additionally authenticate the archived parent send birth receipt.
+ verifiedTX,err:=AuthenticateTransmission(bundle,plan.Transmission)
+ if err!=nil{return zero,err}
+ var due domain.SimulationInstant
+ if verifiedTX.Origin.Kind==21 {
+  due,err=ValidateMigratedOccurrenceV2(bundle,plan,verifiedTX.Origin.ID,verifiedTX.Origin.Digest)
+ }else{
+  due,err=ValidateOccurrence(bundle,plan)
+ }
+ if err!=nil{return zero,err}
  if ctx.At<due{return zero,errors.New("delivery Event cannot precede due date")}
  decodedOccurrence,err:=codec.StrictDecodePayload(plan.Occurrence.Canonical)
  if err!=nil{return zero,err}

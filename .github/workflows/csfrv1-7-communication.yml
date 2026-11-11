@@ -13,6 +13,11 @@ on:
       - ".github/workflows/csfrv1-7-communication.yml"
 permissions:
   contents: read
+
+# Cancel superseded SHA and duplicate push/PR checks for this branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 jobs:
   communication:
     runs-on: ubuntu-latest

@@ -256,7 +256,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
   coveredSlots[roundID][slot]=true
   eventSources[roundID]=append(eventSources[roundID],slotProof{slot:slot,id:sourceID,digest:sourceHash})
   responseDigest,err:=registeredDigest("cote.csf.digest.no-proposal-unit",
-   "cote.csf.schema.no-proposal.body",[]any{src[:10]});if err!=nil{return err}
+   "cote.csf.schema.no-proposal.body",src[:10]);if err!=nil{return err}
   responseID,err:=registeredDigest("cote.csf.id.no-proposal",
    "cote.csf.schema.slot-response-id-preimage",[]any{src[1],uint64(1)});if err!=nil{return err}
   if !bytes.Equal(responseID[:],sourceID)||!bytes.Equal(responseDigest[:],sourceHash)||

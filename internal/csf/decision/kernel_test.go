@@ -33,7 +33,7 @@ func fixture(t *testing.T,known bool)(Input,inputledger.Response,inputledger.Res
    []any{"cote.csf.schema.typed-value",uint64(1),v,h[:]},
    []any{[]any{"inventory","last.resource",uint64(1),int64(1)}},[]any{uint64(0)},int64(100),[]any{uint64(0)},
    round[:],slot,uint64(7),[]any{uint64(0)},[]any{uint64(0)}}
-  dg,_,e:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,[]any{fields})
+  dg,_,e:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,fields)
   if e!=nil{t.Fatal(e)}
   raw,e:=codec.CanonicalPayload(append(append([]any{},fields...),dg[:]))
   if e!=nil{t.Fatal(e)}
@@ -117,7 +117,7 @@ func TestIdempotentAliasWithoutRemovingDelivery(t *testing.T){
  b.Body[17]=[]any{uint64(1),"same-logical-operation"}
  d:=identity.New(in.Bundle)
  rebuild:=func(x *inputledger.Response){
-  dg,_,e:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,[]any{x.Body});if e!=nil{t.Fatal(e)}
+  dg,_,e:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,x.Body);if e!=nil{t.Fatal(e)}
   x.Digest=dg
   x.Canonical,e=codec.CanonicalPayload(append(append([]any{},x.Body...),dg[:]));if e!=nil{t.Fatal(e)}
  }
@@ -153,7 +153,7 @@ func TestNoProposalSettlesOnlyProvisionallyWithoutCandidate(t *testing.T){
  if e!=nil{t.Fatal(e)}
  body:=[]any{id[:],a.DispatchID[:],in.RunID[:],in.CycleID[:],a.RoundID[:],a.SlotID,
   []any{"school","a"},int64(a.EffectiveAt),uint64(a.SubmittedAgainstRevision),uint64(0)}
- dg,_,e:=d.Sum("cote.csf.digest.no-proposal-unit","cote.csf.schema.no-proposal.body",1,[]any{body})
+ dg,_,e:=d.Sum("cote.csf.digest.no-proposal-unit","cote.csf.schema.no-proposal.body",1,body)
  if e!=nil{t.Fatal(e)}
  raw,e:=codec.CanonicalPayload(append(append([]any{},body...),dg[:]))
  if e!=nil{t.Fatal(e)}
@@ -172,7 +172,7 @@ func TestNoProposalSettlesOnlyProvisionallyWithoutCandidate(t *testing.T){
   corrupted.Body=append([]any(nil),no.Body...)
   corrupted.Body[9]=bad
   badDigest,_,err:=d.Sum("cote.csf.digest.no-proposal-unit",
-   "cote.csf.schema.no-proposal.body",1,[]any{corrupted.Body})
+   "cote.csf.schema.no-proposal.body",1,corrupted.Body)
   if err!=nil{t.Fatal(err)}
   corrupted.Digest=badDigest
   corrupted.Canonical,err=codec.CanonicalPayload(
@@ -189,7 +189,7 @@ func TestNoProposalSettlesOnlyProvisionallyWithoutCandidate(t *testing.T){
  alternate.Body=append([]any(nil),no.Body...)
  alternate.Body[9]=uint64(1)
  different,_,err:=d.Sum("cote.csf.digest.no-proposal-unit",
-  "cote.csf.schema.no-proposal.body",1,[]any{alternate.Body})
+  "cote.csf.schema.no-proposal.body",1,alternate.Body)
  if err!=nil{t.Fatal(err)}
  alternate.Digest=different
  alternate.Canonical,err=codec.CanonicalPayload(
@@ -218,7 +218,7 @@ func TestHistoricalAliasKeepsIndependentSourceUnit(t *testing.T){
  b.Body[17]=[]any{uint64(1),"same-logical-operation"}
  d:=identity.New(in.Bundle)
  for _,resp:=range []*inputledger.Response{&a,&b}{
-  h,_,e:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,[]any{resp.Body})
+  h,_,e:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,resp.Body)
   if e!=nil{t.Fatal(e)}
   resp.Digest=h
   resp.Canonical,e=codec.CanonicalPayload(append(append([]any{},resp.Body...),h[:]))
@@ -246,7 +246,7 @@ func TestUnregisteredActionCannotSilentlyBecomeSatisfied(t *testing.T){
  in,a,_:=fixture(t,true)
  a.Body[4]="unknown.action"
  d:=identity.New(in.Bundle)
- h,_,e:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,[]any{a.Body})
+ h,_,e:=d.Sum("cote.csf.digest.action-proposal-unit","cote.csf.schema.action-proposal.body",1,a.Body)
  if e!=nil{t.Fatal(e)}
  a.Digest=h
  a.Canonical,e=codec.CanonicalPayload(append(append([]any{},a.Body...),h[:]))
@@ -341,7 +341,7 @@ func TestResourceAccumulatorOverflowProducesAttributedIndeterminate(t *testing.T
   r.Body=append([]any(nil),r.Body...)
   r.Body[9]=[]any{[]any{"inventory","last.resource",uint64(1),in.Snapshot.Available}}
   hash,_,err:=d.Sum("cote.csf.digest.action-proposal-unit",
-   "cote.csf.schema.action-proposal.body",1,[]any{r.Body})
+   "cote.csf.schema.action-proposal.body",1,r.Body)
   if err!=nil{t.Fatal(err)}
   r.Digest=hash
   r.Canonical,err=codec.CanonicalPayload(

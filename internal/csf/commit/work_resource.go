@@ -11,7 +11,6 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/decision"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
@@ -57,8 +56,7 @@ func (c *Coordinator) CommitSingleResource(ctx context.Context,ledger *inputledg
  if !matched||response.Kind!=0||response.Actor[0]!="school"{
   return empty,errors.New("resource source is not a school ActionProposal")
  }
- genRaw,err:=c.store.LoadGenesis(ctx,[32]byte(run));if err!=nil{return empty,err}
- manifest,err:=genesis.ValidateCanonical(genRaw,c.bundle);if err!=nil{return empty,err}
+ manifest,err:=c.store.ValidatedGenesis(ctx,[32]byte(run),c.bundle);if err!=nil{return empty,err}
  actor:=response.Actor[0]+":"+response.Actor[1]
  assemble:=decision.FromPersistedFence
  if len(units)>1{assemble=decision.FromPersistedFenceWithSystemHandlers}

@@ -293,6 +293,15 @@ func (l *Ledger) restore(records []ports.CanonicalRecord) error {
 			if l.providers[key] == nil {
 				l.providers[key] = map[string]*slotState{}
 			}
+			prior := l.providers[key][dispatch.SlotID]
+			if prior == nil {
+				if dispatch.Ordinal != 0 {
+					return errors.New("persisted first dispatch ordinal is not zero")
+				}
+			} else if prior.Dispatch == nil || prior.Response != nil || !prior.Revoked ||
+				prior.Dispatch.Ordinal == ^uint32(0) || dispatch.Ordinal != prior.Dispatch.Ordinal+1 {
+				return errors.New("persisted redispatch lacks immediate unfilled revocation")
+			}
 			l.providers[key][dispatch.SlotID] = &slotState{Dispatch: &dispatch}
 			continue
 		}
@@ -304,7 +313,11 @@ func (l *Ledger) restore(records []ports.CanonicalRecord) error {
 					if err != nil {
 						return err
 					}
-					l.providers[idKey(response.RoundID)][response.SlotID].Response = &response
+					state := l.providers[idKey(response.RoundID)][response.SlotID]
+					if state == nil || state.Dispatch == nil || state.Dispatch.ID != dispatchID || state.Revoked || state.Response != nil {
+						return errors.New("persisted response does not fill the current open slot exactly once")
+					}
+					state.Response = &response
 					continue
 				}
 			}
@@ -314,6 +327,10 @@ func (l *Ledger) restore(records []ports.CanonicalRecord) error {
 			if ok {
 				state := l.findDispatchState(dispatchID)
 				if state != nil {
+					reason, validReason := fields[1].(uint64)
+					if state.Revoked || state.Response != nil || !validReason || reason > 255 {
+						return errors.New("persisted revocation does not target an open unfilled dispatch")
+					}
 					if [32]byte(identity.OpaqueContentHash(record.Canonical)) != record.Identity {
 						return errors.New("persisted dispatch revocation identity mismatch")
 					}
@@ -397,7 +414,7 @@ func (l *Ledger) restoreInput(record ports.CanonicalRecord, fields []any) (Store
 	if err != nil || !matchesBytes(id[:], fields[0]) || !bytes.Equal(id[:], record.Identity[:]) {
 		return StoredInput{}, errors.New("persisted ExogenousInput identity mismatch")
 	}
-	digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, []any{fields[:12]})
+	digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, fields[:12])
 	if err != nil || !matchesBytes(digest[:], fields[12]) {
 		return StoredInput{}, errors.New("persisted ExogenousInput digest mismatch")
 	}
@@ -489,7 +506,10 @@ func (l *Ledger) restoreDispatch(record ports.CanonicalRecord, fields []any) (Di
 	var digestValue domain.Digest
 	copy(idValue[:], id[:])
 	copy(digestValue[:], digest[:])
-	ordinal, _ := fields[5].(uint64)
+	ordinal, ordinalOK := fields[5].(uint64)
+	if !ordinalOK || ordinal > uint64(^uint32(0)) {
+		return Dispatch{}, errors.New("persisted dispatch ordinal is outside uint32")
+	}
 	revision, _ := fields[8].(uint64)
 	instant, instantOK := signedInt64(fields[9])
 	requestDigest, ok3 := digestFrom(fields[10])
@@ -520,7 +540,7 @@ func (l *Ledger) restoreResponse(record ports.CanonicalRecord, fields []any, dis
 	if kind == 0 {
 		digestSchema, bodySchema = "cote.csf.digest.action-proposal-unit", "cote.csf.schema.action-proposal.body"
 	}
-	digest, _, err := l.deriver.Sum(digestSchema, bodySchema, 1, []any{body})
+	digest, _, err := l.deriver.Sum(digestSchema, bodySchema, 1, body)
 	if err != nil || !matchesBytes(digest[:], fields[len(fields)-1]) {
 		return Response{}, errors.New("persisted SlotResponse digest mismatch")
 	}
@@ -710,7 +730,7 @@ func (l *Ledger) AppendInput(ctx context.Context, sourceID string, input Input) 
 	copy(causalID[:], id[:])
 	if old, exists := l.inputByID[causalID]; exists {
 		body := []any{id[:], l.runID[:], sourceID, input.ProducerUnitKey, input.Kind, input.SchemaVersion, input.Actor, input.Payload, int64(input.DeclaredEffectiveAt), old.Fields[9], input.Provenance, input.IdempotencyKey}
-		digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, []any{body})
+		digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, body)
 		if err != nil {
 			return StoredInput{}, err
 		}
@@ -739,7 +759,7 @@ func (l *Ledger) AppendInput(ctx context.Context, sourceID string, input Input) 
 		}
 	}
 	body := []any{id[:], l.runID[:], sourceID, input.ProducerUnitKey, input.Kind, input.SchemaVersion, input.Actor, input.Payload, int64(input.DeclaredEffectiveAt), coordValue(eligibility), input.Provenance, input.IdempotencyKey}
-	digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, []any{body})
+	digest, _, err := l.deriver.Sum("cote.csf.digest.exogenous-input-unit", "cote.csf.schema.exogenous-input.body", 1, body)
 	if err != nil {
 		return StoredInput{}, err
 	}
@@ -974,7 +994,7 @@ func (l *Ledger) Respond(ctx context.Context, response Response) error {
 	} else {
 		digestSchema = "cote.csf.digest.no-proposal-unit"
 	}
-	digest, _, err := l.deriver.Sum(digestSchema, map[bool]string{true: "cote.csf.schema.action-proposal.body", false: "cote.csf.schema.no-proposal.body"}[response.Kind == 0], 1, []any{response.Body})
+	digest, _, err := l.deriver.Sum(digestSchema, map[bool]string{true: "cote.csf.schema.action-proposal.body", false: "cote.csf.schema.no-proposal.body"}[response.Kind == 0], 1, response.Body)
 	if err != nil {
 		return err
 	}

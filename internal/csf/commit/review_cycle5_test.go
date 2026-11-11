@@ -32,7 +32,7 @@ func review5RekeyInput(t *testing.T,bundle *policy.Bundle,original inputledger.S
  id,_,err:=d.Sum("cote.csf.id.exogenous-input","cote.csf.schema.exogenous-input-id-preimage",1,[]any{f[1],f[2],f[3]})
  if err!=nil{t.Fatal(err)}
  f[0]=id[:]
- dig,_,err:=d.Sum("cote.csf.digest.exogenous-input-unit","cote.csf.schema.exogenous-input.body",1,[]any{f[:12]})
+ dig,_,err:=d.Sum("cote.csf.digest.exogenous-input-unit","cote.csf.schema.exogenous-input.body",1,f[:12])
  if err!=nil{t.Fatal(err)}
  f[12]=dig[:]
  raw,err:=codec.CanonicalPayload(f);if err!=nil{t.Fatal(err)}

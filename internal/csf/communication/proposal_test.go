@@ -34,7 +34,7 @@ func signedCommunicationProposal(t *testing.T)(ports.CanonicalRecord,SendSpec,*p
  fields[9]=[]any{}
  fields[10]=[]any{uint64(0)}
  dig,_,err:=identity.New(bundle).Sum("cote.csf.digest.action-proposal-unit",
-  "cote.csf.schema.action-proposal.body",1,[]any{fields})
+  "cote.csf.schema.action-proposal.body",1,fields)
  if err!=nil{t.Fatal(err)}
  raw,err:=codec.CanonicalPayload(append(fields,dig[:]));if err!=nil{t.Fatal(err)}
  proposal.Digest=dig

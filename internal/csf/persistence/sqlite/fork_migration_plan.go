@@ -173,6 +173,8 @@ func partitionV2PendingOccurrenceRefs(pendingRefs []any, births []V2Communicatio
   if !ok||len(ref)!=3||ref[0]!=uint64(6){return nil,errors.New("invalid cross-policy pending occurrence ref")}
   parentID,ok:=ref[1].([]byte)
   if !ok||len(parentID)!=32{return nil,errors.New("invalid cross-policy pending occurrence ID")}
+  digest,ok:=ref[2].([]byte)
+  if !ok||len(digest)!=32{return nil,errors.New("invalid cross-policy pending occurrence digest")}
   if importedRefs[string(parentID)]{delete(importedRefs,string(parentID));continue}
   ordinaryRefs=append(ordinaryRefs,raw)
  }
@@ -188,6 +190,9 @@ func projectV2CommunicationOccurrences(births []V2CommunicationBirth)([]forkGene
   value,err:=codec.StrictDecodePayload(birth.ChildOccurrence.Canonical)
   if err!=nil{return nil,err}
   fields,ok:=value.([]any);if !ok||len(fields)!=15{return nil,errors.New("V2 imported occurrence malformed")}
+  if !equalBytes(fields[0],birth.ChildOccurrence.Identity[:]){
+   return nil,errors.New("V2 imported occurrence identity differs from canonical bytes")
+  }
   coordinate,ok:=fields[4].([]any);if !ok||len(coordinate)!=2{return nil,errors.New("V2 migrated coordinate malformed")}
   when,valid:=asSigned64(coordinate[0]);ordinal,validOrdinal:=coordinate[1].(uint64)
   if !valid||!validOrdinal{return nil,errors.New("V2 migrated coordinate invalid")}

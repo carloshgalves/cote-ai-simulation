@@ -41,6 +41,7 @@ func TestForkP2PartitionV2PendingOccurrences(t *testing.T){
   []any{uint64(7),a[:],bytes.Repeat([]byte{0x23},32)},
   []any{uint64(6),a[:]},
   []any{uint64(6),[]byte{0x11},bytes.Repeat([]byte{0x23},32)},
+  []any{uint64(6),a[:],[]byte{0x23}},
  }{
   if _,err:=partitionV2PendingOccurrenceRefs([]any{bad},nil);err==nil{
    t.Fatal("malformed pending occurrence escaped strict partition guard")
@@ -51,10 +52,11 @@ func TestForkP2PartitionV2PendingOccurrences(t *testing.T){
 func TestForkP2ProjectV2CommunicationBirths(t *testing.T){
  fields:=make([]any,15)
  for i:=range fields{fields[i]=uint64(0)}
+ var id [32]byte;id[0]=0x77
+ fields[0]=bytes.Clone(id[:])
  fields[4]=[]any{int64(30),uint64(9)}
  raw,err:=codec.CanonicalPayload(fields)
  if err!=nil{t.Fatal(err)}
- var id [32]byte;id[0]=0x77
  birth:=forkP2Import(id)
  birth.ChildOccurrence.Identity=id
  birth.ChildOccurrence.Canonical=raw
@@ -71,6 +73,7 @@ func TestForkP2ProjectV2CommunicationBirths(t *testing.T){
  }
  for _,broken:=range [][]any{
   fields[:14],
+  func()[]any{copyFields:=append([]any(nil),fields...);copyFields[0]=bytes.Repeat([]byte{0x66},32);return copyFields}(),
   func()[]any{copyFields:=append([]any(nil),fields...);copyFields[4]=uint64(0);return copyFields}(),
   func()[]any{copyFields:=append([]any(nil),fields...);copyFields[4]=[]any{int64(30),"nine"};return copyFields}(),
  }{

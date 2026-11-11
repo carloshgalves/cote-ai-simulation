@@ -19,6 +19,9 @@ concurrency:
 jobs:
   continuity:
     runs-on: ubuntu-latest
+    # The R21 V1→V2 65-WORK cascade is intentionally exercised under -race;
+    # this job must accommodate instrumentation without an unbounded CI run.
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v6
@@ -34,7 +37,10 @@ jobs:
       - name: Cross-policy reference and negative vectors
         run: go test -count=1 -v ./internal/csf/fork
       - name: Snapshot and fork race regression
-        run: go test -race -count=1 ./internal/csf/commit -run '^TestCSFRV18'
+        # Go's default 10m package timeout is insufficient for the 65-WORK
+        # cross-policy cascade with race instrumentation (issue #59 tracks cost).
+        # Keep the complete TestCSFRV18 race matrix, including the cascade.
+        run: go test -race -count=1 -timeout=30m ./internal/csf/commit -run '^TestCSFRV18'
       - name: SQLite replay and terminal regression
         run: go test -count=1 ./internal/csf/persistence/sqlite ./internal/csf/clock ./internal/csf/perception
       - name: Full Go regression

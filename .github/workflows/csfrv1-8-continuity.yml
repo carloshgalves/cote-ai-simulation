@@ -17,6 +17,31 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 jobs:
+  # Temporary same-runner cost comparison; remove after recording results.
+  fork-p2-cost:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Compare P2 with P1 on the exact same runner
+        run: |
+          set -euo pipefail
+          current="$(git rev-parse HEAD)"
+          for version in P1 P2 P1 P2; do
+            if [ "$version" = P1 ]; then
+              git checkout --quiet e8a07527e71e513a0f820a146d513b896819d437
+            else
+              git checkout --quiet "$current"
+            fi
+            echo "FORK_P2_VERSION=$version GIT_SHA=$(git rev-parse HEAD)"
+            go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18ForkP1GoldenBytes$' | grep -E 'FORK_P1_METRIC|PASS|FAIL'
+          done
   continuity:
     runs-on: ubuntu-latest
     # The R21 V1→V2 65-WORK cascade is intentionally exercised under -race;

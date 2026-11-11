@@ -59,7 +59,7 @@ func (s *Store) prepareForkMigrationPlan(ctx context.Context,
   }
   ordinaryRefs,err:=partitionV2PendingOccurrenceRefs(lists[0],importBirths)
   if err!=nil{return zero,err}
-  migrated,err=remintV2CommunicationOccurrences(importBirths)
+  migrated,err=projectV2CommunicationOccurrences(importBirths)
   if err!=nil{return zero,err}
   occurrenceRoots,err=prepareForkOccurrenceRoots(ctx,s,parent,ordinaryRefs)
   if err!=nil{return zero,err}
@@ -116,7 +116,7 @@ type forkCognitiveActor struct{
 func deriveForkCognitiveActors(refs []any,crossPolicy bool)([]forkCognitiveActor,error){
  if !crossPolicy{return nil,nil}
  actors:=make([]forkCognitiveActor,0,len(refs))
- seen:=map[string]bool{}
+ seen:=map[[2]string]bool{}
  for _,raw:=range refs{
   entry,ok:=raw.([]any)
   if !ok||len(entry)!=8{return nil,errors.New("V2 cognition checkpoint ref malformed")}
@@ -126,7 +126,7 @@ func deriveForkCognitiveActors(refs []any,crossPolicy bool)([]forkCognitiveActor
   if !okNS||!okID||domain.ValidateMachineID(ns)!=nil||domain.ValidateMachineID(id)!=nil{
    return nil,errors.New("V2 cognition actor identifier invalid")
   }
-  key:=ns+"\\x00"+id
+  key:=[2]string{ns,id}
   if seen[key]{return nil,errors.New("duplicate V2 cognitive actor")}
   seen[key]=true
   actors=append(actors,forkCognitiveActor{namespace:ns,id:id})
@@ -180,9 +180,9 @@ func partitionV2PendingOccurrenceRefs(pendingRefs []any, births []V2Communicatio
  return ordinaryRefs,nil
 }
 
-// remintV2CommunicationOccurrences turns already authenticated communication
+// projectV2CommunicationOccurrences turns already authenticated communication
 // births into typed pending occurrences. It has no Store, SQL, or side effects.
-func remintV2CommunicationOccurrences(births []V2CommunicationBirth)([]forkGenesisOccurrence,error){
+func projectV2CommunicationOccurrences(births []V2CommunicationBirth)([]forkGenesisOccurrence,error){
  result:=make([]forkGenesisOccurrence,0,len(births))
  for _,birth:=range births {
   value,err:=codec.StrictDecodePayload(birth.ChildOccurrence.Canonical)

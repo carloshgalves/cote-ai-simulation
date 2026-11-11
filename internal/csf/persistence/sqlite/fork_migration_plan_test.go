@@ -58,7 +58,7 @@ func TestForkP2ProjectV2CommunicationBirths(t *testing.T){
  birth:=forkP2Import(id)
  birth.ChildOccurrence.Identity=id
  birth.ChildOccurrence.Canonical=raw
- out,err:=remintV2CommunicationOccurrences([]V2CommunicationBirth{birth})
+ out,err:=projectV2CommunicationOccurrences([]V2CommunicationBirth{birth})
  if err!=nil{t.Fatal(err)}
  if len(out)!=1||out[0].ID!=id||out[0].EligibilityInstant!=30||out[0].EligibilityOrdinal!=9||
   !bytes.Equal(out[0].Canonical,raw){t.Fatal("pure projected occurrence changed authenticated bytes")}
@@ -78,7 +78,7 @@ func TestForkP2ProjectV2CommunicationBirths(t *testing.T){
   if err!=nil{t.Fatal(err)}
   invalid:=birth
   invalid.ChildOccurrence.Canonical=bad
-  if _,err:=remintV2CommunicationOccurrences([]V2CommunicationBirth{invalid});err==nil{
+  if _,err:=projectV2CommunicationOccurrences([]V2CommunicationBirth{invalid});err==nil{
    t.Fatal("invalid pending occurrence coordinate/body was accepted")
   }
  }

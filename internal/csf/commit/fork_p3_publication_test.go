@@ -107,3 +107,33 @@ func TestCSFRV18P3LineageTamperBeforeCommitRollsBackAllAuthorities(t *testing.T)
  }
  if _,err:=child.ReplayClock(ctx,id,b);err!=nil{t.Fatal("child not replayable after recovery:",err)}
 }
+
+// A populated parent ledger must be archived before a child transaction can
+// commit. This specifically aborts the history INSERT (not an empty-row case).
+func TestCSFRV18P3NonemptyHistoryArchiveFaultRollsBack(t *testing.T){
+ ctx:=context.Background()
+ _,parent,_,run,v1,snap,_:=r21EvolvedTriggerSource(t)
+ v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+ if err!=nil{t.Fatal(err)}
+ childPath:=filepath.Join(t.TempDir(),"history.db")
+ child,err:=sqlite.Open(ctx,childPath);if err!=nil{t.Fatal(err)}
+ defer child.Close()
+ inspector,err:=sql.Open("sqlite",childPath);if err!=nil{t.Fatal(err)}
+ defer inspector.Close()
+ if _,err:=inspector.ExecContext(ctx,`CREATE TRIGGER p3_fail_history
+ BEFORE INSERT ON fork_history_records
+ BEGIN SELECT RAISE(ABORT,'P3 history archive interruption'); END;`);err!=nil{t.Fatal(err)}
+ childRun:=[32]byte(run);childRun[0]^=0x4b
+ if _,err:=parent.ForkIdleSnapshotV1ToV2(ctx,[32]byte(run),snap.ID,childRun,child,v1,v2);
+  err==nil||!strings.Contains(err.Error(),"P3 history archive interruption"){
+  t.Fatalf("history fault not reached: %v",err)
+ }
+ assertCSFRV18EmptyRejectedFork(t,childPath)
+ if _,err:=inspector.ExecContext(ctx,"DROP TRIGGER p3_fail_history");err!=nil{t.Fatal(err)}
+ if _,err:=parent.ForkIdleSnapshotV1ToV2(ctx,[32]byte(run),snap.ID,childRun,child,v1,v2);
+  err!=nil{t.Fatal("clean retry after history failure:",err)}
+ if _,err:=child.ReplayClock(ctx,childRun,v2);err!=nil{t.Fatal("replay after history failure:",err)}
+ if _,err:=parent.VerifySnapshotV1(ctx,[32]byte(run),snap.ID,v1);err!=nil{
+  t.Fatal("history retry mutated authenticated parent:",err)
+ }
+}

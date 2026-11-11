@@ -87,7 +87,8 @@ func (child *Store) publishForkChildTransactional(ctx context.Context,source *St
    o.ID[:],childRun[:],o.EligibilityInstant,o.EligibilityOrdinal,o.Canonical);err!=nil{return err}
  }
  if err:=ensureGenesisScheduleSeal(ctx,tx,childRun);err!=nil{return err}
- world:=childGenesis.Payload[16].([]any)
+ world,ok:=childGenesis.Payload[16].([]any)
+ if !ok||len(world)!=4{return errors.New("fork world state projection malformed")}
  hash,ok:=world[3].([]byte);if !ok||len(hash)!=32{return errors.New("fork world state hash missing")}
  revisionZero,err:=codec.CanonicalPayload([]any{uint64(0),world,hash,uint64(0),world,hash})
  if err!=nil{return err}

@@ -1,7 +1,7 @@
 # Product readiness and integrated validation — COTE AI Simulation
 
-**As-of:** 2026-11-10. **Baseline:** `main@4f95c902b984418f186ef7d8e83cad36dbd2719c`; this document must be re-evaluated for any newer HEAD.  
-**Status:** TEST PLAN / NO-GO for First Real Run. This file does **not** assert that a test was run.
+**Original assessment:** 2026-11-10. **Reconciled:** 2026-11-11. **Engineering baseline:** `main@0e3f9665b9bbc33be93d9873751fc5a68cec450c`. Test evidence of the merged CSFRV1-8 is from PR HEAD `96daa15f35ad6840033ceb10ecde37e76f98377f`, **not** a fresh release run.
+**Status:** TEST PLAN / NO-GO for First Real Run. The [current V1-8 matrix](csfrv1-8-baseline-2026-11-11.md) reconciles continuity only; no tests were run for this documentation-only issue.
 
 ## 1. Distinct release gates
 
@@ -9,7 +9,7 @@
 | --- | --- | --- |
 | G0: historical policies | Go + TypeScript independent canonical 621-case conformance, exact bytes and manifest | Previously green (PR #53, main CI); re-run at release HEAD |
 | G1: causal core | exact admissibility/fence, deterministic settle, clock, triggers, claims, evidence and SQLite failure injection | CSFRV1-1..7 merged; full integrated scenario pending |
-| G2: continuity | PR #25 R21–R23, 5 ledger bytes, replay vs repeated resume vs fork branches, snapshots, corruption, crash points; independent review | **BLOCKED**: PR #25 Draft; not merged |
+| G2: continuity | CSFRV1-8 R21–R23, five ledgers, replay/resume/forks, corruption/crash, independent review | **BASELINE MERGED** via #25 (6/6 workflows green on PR HEAD); **RELEASE GATE OPEN**: independent review, release-HEAD validation and owner remoto #58. [Matriz C01–C10](csfrv1-8-baseline-2026-11-11.md). |
 | G3: observability | privileged/actor/public views, no read-side mutation or knowledge leakage | **NOT IMPLEMENTED**: CSFRV1-9 |
 | G4: physical integration | 9A versioned process/data protocol; 10 full Go↔Python causal adapter, calibrated test-only cohort, no physical telemetry in actor context | **NOT IMPLEMENTED** |
 | G5: exam and economic rules | deterministic micro-secret and Zodiac/VIP exam, PP/CP consistent ledgers, explicit unknown-rule failures, 15/8/7 declared vectors executed rather than merely present | **NOT IMPLEMENTED** |
@@ -27,7 +27,7 @@ The job runs:
 
 ```bash
 go test -count=1 ./...
-go test -race -count=1 ./internal/csf/commit -run '^TestCSFRV18'  # only if the PR #25 code is in the tested ref
+go test -race -count=1 ./internal/csf/commit -run '^TestCSFRV18'  # code merged; still record the exact tested SHA
 go run ./cmd/csf-harness --bundle docs/architecture/canonical-codec-v1-bundle --report /tmp/csf-go.json
 node --no-warnings --experimental-loader ./tools/csf-conformance-ts/loader.mjs tools/csf-conformance-ts/runner.ts docs/architecture/canonical-codec-v1-bundle /tmp/csf-ts.json
 cmp /tmp/csf-go.json /tmp/csf-ts.json
@@ -36,7 +36,7 @@ python tools/validate_canon_consolidated_v2.py
 python tools/rebuild_canon_indexes_v2.py --check
 ```
 
-For the unmerged PR #25, run the existing branch-specific `CSFRV1-8 Continuity Checkpoint`, inspect its exact merge/PR HEAD, then run a separate human-independent review of the full diff. No release/merge from partial R21B success.
+PR #25 merged on 2026-11-11. Its branch CI proves only the tested PR HEAD `96daa15`, not the merge or a later release SHA. Before G2 release approval, run the relevant suites on the actual release HEAD and obtain independent review of the integrated contract and external trust boundary. The cross-language 621-case comparison is for **bundle V1**, not V2 (#59).
 
 For canon content that uses private source PDFs, the public CI can check indexes, format and semantic invariants, **not** independent primary-text attribution; operators must use the private review packets, not upload protected text to Actions.
 
@@ -55,7 +55,7 @@ For canon content that uses private source PDFs, the public CI can check indexes
 | C09 | divergent V1/V2 policy and cross-policy replay | original policy remains pinned to parent; child must verify installed V2 and replay without rehashing V1 |
 | C10 | full-pr independent reviewer against ADR-0008/0009/0010/0011 and ticket 08 | zero new actionable OPEN findings, with review provenance |
 
-Current evidence in PR #25 covers *parts* of C01–C09; **C06/C07 and full combined C01–C10 are not certified**. Its description explicitly retains R21 composition and R22/R23 blockers. Closing C10 requires a genuinely distinct reviewer.
+**Reconciled:** R21–R23 were implemented and the six workflows succeeded on the exact PR SHA. C01–C05/C08–C09 have named representative tests; C06/C07 cover local signed escrow and crash recovery, **not** external owner durable flush/restore (#58). C10 formal independent review is still pending. The [current matrix](csfrv1-8-baseline-2026-11-11.md) provides exact test names and limitations, not blanket release certification.
 
 ## 4. First Real Run: acceptance scenario (future E2E)
 
@@ -72,7 +72,7 @@ Current evidence in PR #25 covers *parts* of C01–C09; **C06/C07 and full combi
 
 ## 5. Dependencies, governance and operational constraints
 
-- No merge of PR #25 until R21–R23 and final independent review. Its six workflow successes on `95e62db` are slice-level evidence only.
+- PR #25 **was merged** at `0e3f966` as a human-approved integration baseline with 6/6 workflows green on `96daa15`. The historical no-merge gate no longer describes PR state; independent release review, owner durability (#58) and release-SHA evidence remain mandatory.
 - External auditor issues #38 (Y1 V6), #39 (Y1 V7/V0) and #52 (Y1 V11) were closed **administratively (not planned)** at operator request; `verified:false`, `engine_memory_admission:false`, `goal_runtime_auto_update:false` and `exam_executable:false` remain as applicable. Reopen/create source-approval work before runtime promotion.
 - Issues #15/#16 distinguish already merged legacy packs/spec from their separate runtime and verification gates.
 - The repository is public; original novels/translations and private source windows must not be committed.
@@ -91,4 +91,4 @@ Current evidence in PR #25 covers *parts* of C01–C09; **C06/C07 and full combi
 | NOT RUN | tests or E2E not executed |
 | BLOCKED | required implementation, evidence or reviewer absent |
 
-**Product release verdict on 2026-11-10: NO-GO.** The on-demand workflow prepares reusable proof for existing modules; it cannot prove missing functionality.
+**Product release verdict after reconciliation on 2026-11-11: NO-GO.** Merging the engineering baseline did not close the other product gates. On-demand tests cannot establish missing functionality, external owner guarantees or independent approval.

@@ -1,5 +1,7 @@
 # CSFRV1-8 — Replay, snapshot/resume e fork verificáveis
 
+**Estado (2026-11-11):** [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25) mesclada como **baseline de engenharia** (`main@0e3f966`), R21–R23 implementados e cobertos por testes. Ainda **não há homologação de release** ou comprovação do owner externo. A [matriz C01–C10](../../validation/csfrv1-8-baseline-2026-11-11.md) é a fonte atual de aceite, limites e pendências; merge não substitui revisão independente.
+
 **Spec:** §6.6 · §7.8 · §9 (resume/versionamento) · §10.1 · §11.2 · §12  
 **ADR 0008:** invariantes 15, 27 e revalidação de 24/29/32/35–39  
 **Bloqueado por:** CSFRV1-7  

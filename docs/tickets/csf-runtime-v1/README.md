@@ -7,7 +7,7 @@
 **Stack:** [ADR 0010](../../adr/0010-csf-causal-engine-stack.md) — Go 1.27.2
 **Persistência:** [ADR 0011](../../adr/0011-csf-causal-persistence-atomicity.md) — SQLite/modernc,
 transação local única
-**Estado (2026-11-10):** spec aceita; stack e persistência incorporadas. CSFRV1-1–7 integrados; CSFRV1-8 [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25) em Draft/NO-GO; CSFRV1-9, 9A e 10 aguardam implementação. Os incrementos 1–9 estão autorizados **para implementação**, mas a autorização não certifica sua conclusão. CSFRV1-9A fecha o gate contratual físico necessário ao CSFRV1-10.
+**Estado (2026-11-11):** CSFRV1-1–7 integrados; CSFRV1-8 [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25) **mesclada como baseline de engenharia** (`main@0e3f966`). R21–R23 têm código/testes e 6/6 workflows verdes no HEAD `96daa15`, mas **não aprovação independente de release**. Consulte a [matriz atual C01–C10](../../validation/csfrv1-8-baseline-2026-11-11.md) e os resíduos #54–#60. CSFRV1-9, 9A e 10 não integrados; o contrato físico 9A segue necessário para 10.
 
 Este conjunto entrega a fundação causal como dez slices executáveis e dois gates documentais.
 CSFRV1-0 incorporou na spec as decisões dos ADRs 0010/0011 sem repetir pesquisa e explicitou que a
@@ -104,8 +104,8 @@ O primeiro ticket listado implementa; tickets posteriores podem reexercitar em i
 - **Evidência e isolamento:** CSFRV1-6 cobre segredo sem observador, papel secreto, partição privada,
   White Room/canon futuro, workers concorrentes e latência operacional.
 - **Comunicação:** CSFRV1-7 cobre falsidade, remetente apresentado, atraso e pausa antes da entrega.
-- **Continuidade:** CSFRV1-8 cobre todos os crash points, rumor como hipótese, comunicação em
-  trânsito, forks e paralelismo variável.
+- **Continuidade:** CSFRV1-8 possui testes de crash/retry, comunicação em trânsito, forks e
+  paralelismo, sem alegar cobertura exaustiva. Ver [rastreabilidade e limites](../../validation/csfrv1-8-baseline-2026-11-11.md).
 - **Observatory:** CSFRV1-9 cobre leitura privilegiada/POV/pública sem mudança de hash.
 - **Aceite integrado:** CSFRV1-10 roda o cenário visível da spec §1 e rastreia as 41 invariantes e
   todos os cenários do ADR em um relatório final.

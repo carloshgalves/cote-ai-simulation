@@ -36,7 +36,7 @@
 5. Medir, na mesma máquina e ferramenta, duração total, alocações e tamanho do arquivo em >=3 amostras sem race, e duração com `-race` separada; relatórios com SHA, CPU, `GOMAXPROCS` e flags. Comparar baseline e cada PR de fase, justificando regressão material com evidência. Não otimizar sem profiling (#60).
 6. Rodar `go test -count=1 ./internal/csf/persistence/sqlite ./internal/csf/commit`, `go test -count=1 ./...`, `go test -race -count=1 -timeout=30m ./internal/csf/commit -run '^TestCSFRV18'`, Go/TS V1 conformance e `git diff --check`. P0 regressões = **NO-GO**. Caso a CI não execute por runner, classificar `CI_NOT_RUN`, nunca PASS.
 
-**Status da captura completa de goldens do fork:** **PENDENTE / NÃO EXECUTADA nesta PR de desenho.** As suites existentes validam propriedades de bytes e corrupção, mas não substituem automaticamente um arquivo fixado de golden por fixture para a #56. Nenhuma PR de extração P1–P4 deverá ser aprovada sem a captura e comparação aplicáveis.
+**Status na entrega P0:** **PENDENTE / NÃO EXECUTADA nesta PR de desenho.** As suites existentes validam propriedades de bytes e corrupção, mas não substituem automaticamente um arquivo fixado de golden por fixture para a #56. Nenhuma PR de extração P1–P4 deverá ser aprovada sem a captura e comparação aplicáveis.
 
 ## Critério de passagem entre fases
 
@@ -47,3 +47,13 @@
 - **P4:** `validateForkLineageTx` permanece pré-commit; replay/recovery pós-commit, sem corrigir corrupções por escrita ou executar WORK não relacionado.
 
 A análise do diff deve ser limitada à fase e às dependências imediatas; nenhum PASS de P0 é prova de P1–P4. Bloqueios novos e não relacionados devem virar issues independentes.
+
+## Baseline pré-refactor materializada (P1, 2026-11-11)
+
+- **Commit de captura (sem alteração funcional):** `e3f325362e0920fb53afd21fcdc6e7046b14cf36`, antes da extração de `forkSnapshotWithInstalledPolicies`.
+- **Evidência:** [CI de captura #43071891494](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/43071891494), job `fork-p1-capture` SUCCESS, comando `CSFRV18_FORK_GOLDEN_CAPTURE=1 go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18ForkP1GoldenBytes$'`.
+- **Arquivo fixado:** `internal/csf/commit/testdata/csfrv18-fork-p1-golden.gz.b64`. Conteúdo: JSON com bytes SQL `canonical` em hex, comprimido com gzip e codificado em base64. O teste lê o arquivo e exige **igualdade de todos os bytes capturados** por cenário/tabela, incluindo listas vazias. Não é um resumo reconstruído do CBOR.
+- **Cenários:** V1 same-policy; V2 com round/slots/revocation; V2 com triggers evoluídos (três execuções independentes, mesma identidade causal); V2 com claims/transmissões `IN_TRANSIT` e snapshot parental.
+- **Ambiente:** Go 1.27.2, SQLite 3.53.4 (manifest versionado de source ID em `internal/csf/persistence/sqlite/store.go`), `GOMAXPROCS=4`, Linux Actions. Captura sem `-race`.
+- **Medições baseline da construção/fork/replay/SQL da filha (triggers evoluídos), n=3:** 183 / 205 / 182 ms; alocações 41.751.192 / 41.237.232 / 40.672.976 bytes. Comparações posteriores devem usar a mesma fixture e runner, com múltiplas amostras; flutuação do scheduler não é regressão causal.
+- **Limites:** hash/hex dos campos persistidos são comparados, mas operações negativas, race e custo completo exigem suites separadas. O artefato não demonstra owner externo durável (#58) nem é golden normativo da policy V2; é baseline de regressão do caminho de bootstrap.

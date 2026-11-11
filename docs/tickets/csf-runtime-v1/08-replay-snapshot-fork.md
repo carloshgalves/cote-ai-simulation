@@ -7,6 +7,8 @@
 **Bloqueado por:** CSFRV1-7  
 **Bloqueia:** CSFRV1-9
 
+**Evolução arquitetural (#56):** [plano de fases do bootstrap](../../architecture/csf-fork-bootstrap-phases-v1.md) e [gates de bytes/regressão](../../validation/csfrv1-8-fork-refactor-gates.md). A entrega P0 é desenho; extrair uma fase por PR futura, sem presumir fechamento do contrato.
+
 ## Resultado observável
 
 Um run que inclui conflito de recurso, trigger, evento perceptível e comunicação em trânsito é

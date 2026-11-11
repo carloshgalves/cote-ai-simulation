@@ -1,8 +1,8 @@
 # CSFRV1-8 — auditoria adversarial de implementação
 
 **Ticket:** [08 — replay, snapshot/resume e fork](../../../docs/tickets/csf-runtime-v1/08-replay-snapshot-fork.md)
-**PR de origem:** [#25](https://github.com/carloshgalves/cote-ai-simulation/pull/25), **MERGED** em 2026-11-11 (`main@0e3f966`).  
-**Base original da PR:** main @ `e3d0b18865e2eb4f2c37c4eb3a98321909d282f0`  
+**PR de origem:** [#25](https://github.com/carloshgalves/cote-ai-simulation/pull/25), **MERGED** em 2026-11-11 (`main@0e3f966`).
+**Base original da PR:** main @ `e3d0b18865e2eb4f2c37c4eb3a98321909d282f0`
 **Estado deste arquivo:** diário histórico de checkpoints; recomendações pré-merge não representam o status atual. Leia primeiro a [reconciliação C01–C10](../../../docs/validation/csfrv1-8-baseline-2026-11-11.md).
 
 ## Revisões e correções já incorporadas

@@ -1,6 +1,6 @@
 # Product readiness and integrated validation — COTE AI Simulation
 
-**Original assessment:** 2026-11-10. **Reconciled:** 2026-11-11. **Engineering baseline:** `main@0e3f9665b9bbc33be93d9873751fc5a68cec450c`. Test evidence of the merged CSFRV1-8 is from PR HEAD `96daa15f35ad6840033ceb10ecde37e76f98377f`, **not** a fresh release run.  
+**Original assessment:** 2026-11-10. **Reconciled:** 2026-11-11. **Engineering baseline:** `main@0e3f9665b9bbc33be93d9873751fc5a68cec450c`. Test evidence of the merged CSFRV1-8 is from PR HEAD `96daa15f35ad6840033ceb10ecde37e76f98377f`, **not** a fresh release run.
 **Status:** TEST PLAN / NO-GO for First Real Run. The [current V1-8 matrix](csfrv1-8-baseline-2026-11-11.md) reconciles continuity only; no tests were run for this documentation-only issue.
 
 ## 1. Distinct release gates

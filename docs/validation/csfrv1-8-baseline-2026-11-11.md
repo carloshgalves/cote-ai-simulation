@@ -1,9 +1,9 @@
 # CSFRV1-8 — reconciliação de aceite após PR #25
 
-**Apuração:** 2026-11-11 · [Issue #54](https://github.com/carloshgalves/cote-ai-simulation/issues/54)  
-**Origem:** [ticket 08](../tickets/csf-runtime-v1/08-replay-snapshot-fork.md), [spec CSF V1](../spec/causal-simulation-foundation-v1.md), [ADR 0008](../adr/0008-causal-simulation-foundation-v1.md)  
-**Implementação testada:** `96daa15f35ad6840033ceb10ecde37e76f98377f` (HEAD da [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25))  
-**Baseline integrada:** `main@0e3f9665b9bbc33be93d9873751fc5a68cec450c` (merge em 2026-11-11)  
+**Apuração:** 2026-11-11 · [Issue #54](https://github.com/carloshgalves/cote-ai-simulation/issues/54)
+**Origem:** [ticket 08](../tickets/csf-runtime-v1/08-replay-snapshot-fork.md), [spec CSF V1](../spec/causal-simulation-foundation-v1.md), [ADR 0008](../adr/0008-causal-simulation-foundation-v1.md)
+**Implementação testada:** `96daa15f35ad6840033ceb10ecde37e76f98377f` (HEAD da [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25))
+**Baseline integrada:** `main@0e3f9665b9bbc33be93d9873751fc5a68cec450c` (merge em 2026-11-11)
 **Classificação:** **MERGED AS ENGINEERING BASELINE**, não **INDEPENDENTLY REVIEWED**, não **PRODUCTION READY**, não **RELEASE APPROVED**.
 
 Este registro é a **fonte de status corrente** do CSFRV1-8. O [diário adversarial](../../evals/simulation/csf-runtime-v1/csfrv18-adversarial-review.md) conserva historicamente checkpoints R1–R26 com referências a `OPEN-01/02/04/05`, `Draft`, `NO-GO` e R21–R23 ainda pendentes. Esses enunciados refletem o momento de cada revisão; não devem ser usados como situação atual sem esta reconciliação. Os findings originais permanecem disponíveis.

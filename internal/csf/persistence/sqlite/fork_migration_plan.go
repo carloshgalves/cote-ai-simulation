@@ -8,6 +8,7 @@ import (
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
@@ -23,6 +24,8 @@ type forkMigrationPlan struct {
  migratedRounds []forkGenesisRound
  migratedSlots []forkSlotRecord
  historicalRoots []forkHistoricalRoot
+ cognitiveActors []forkCognitiveActor
+ archived [5][]forkArchiveRecord // populated at the existing post-migration read boundary
  triggerMigration forkTriggerMigration
  triggerManifest []byte
 }
@@ -91,12 +94,44 @@ func (s *Store) prepareForkMigrationPlan(ctx context.Context,
  }
  if err!=nil{return zero,fmt.Errorf("fork trigger migration: %w",err)}
 
+ actors,err:=deriveForkCognitiveActors(cut.epistemic,crossPolicy)
+ if err!=nil{return zero,err}
  return forkMigrationPlan{
+  cognitiveActors:actors,
   childGenesis:childGenesis,migrated:migrated,importBirths:importBirths,
   occurrenceRoots:occurrenceRoots,migratedRounds:migratedRounds,migratedSlots:migratedSlots,
   historicalRoots:historicalRoots,triggerMigration:triggerMigration,
   triggerManifest:triggerManifest,
  },nil
+}
+
+
+// forkCognitiveActor is an authenticated owner/recipient namespace pair.
+// Signed source receipts remain replay-verified in the atomic P3 publisher;
+// this P2 projection is only a roster, never owner signing authority.
+type forkCognitiveActor struct{
+ namespace,id string
+}
+
+func deriveForkCognitiveActors(refs []any,crossPolicy bool)([]forkCognitiveActor,error){
+ if !crossPolicy{return nil,nil}
+ actors:=make([]forkCognitiveActor,0,len(refs))
+ seen:=map[string]bool{}
+ for _,raw:=range refs{
+  entry,ok:=raw.([]any)
+  if !ok||len(entry)!=8{return nil,errors.New("V2 cognition checkpoint ref malformed")}
+  actor,ok:=entry[0].([]any)
+  if !ok||len(actor)!=2{return nil,errors.New("V2 cognition actor malformed")}
+  ns,okNS:=actor[0].(string);id,okID:=actor[1].(string)
+  if !okNS||!okID||domain.ValidateMachineID(ns)!=nil||domain.ValidateMachineID(id)!=nil{
+   return nil,errors.New("V2 cognition actor identifier invalid")
+  }
+  key:=ns+"\\x00"+id
+  if seen[key]{return nil,errors.New("duplicate V2 cognitive actor")}
+  seen[key]=true
+  actors=append(actors,forkCognitiveActor{namespace:ns,id:id})
+ }
+ return actors,nil
 }
 
 // deriveForkChildGenesis is deterministic: exact verified source bytes and

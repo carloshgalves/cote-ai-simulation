@@ -56,7 +56,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  triggerMigration,triggerManifest:=plan.triggerMigration,plan.triggerManifest
  // Re-verify and copy exact parent ledger prefixes at their original
  // read-transaction boundary; only after this succeeds may child SQL begin.
- archived,err:=s.verifiedForkArchive(ctx,parentSnapshotID,snapshot,origin)
+ plan.archived,err=s.verifiedForkArchive(ctx,parentSnapshotID,snapshot,origin)
  if err!=nil{return nil,err}
  tx,err:=child.db.BeginTx(ctx,nil);if err!=nil{return nil,err}
  defer tx.Rollback()
@@ -70,18 +70,10 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   // The signed parent snapshot carries the exact complete cognition roster.
   // Preserve membership under child run/revision zero, while the opaque
   // inline checkpoint itself stays a Genesis-pinned historical owner blob.
-  for _,raw:=range epistemic {
-   entry:=raw.([]any)
-   actor,ok:=entry[0].([]any)
-   if !ok||len(actor)!=2{return nil,errors.New("V2 cognition actor malformed")}
-   ns,okNS:=actor[0].(string);id,okID:=actor[1].(string)
-   if !okNS||!okID||domain.ValidateMachineID(ns)!=nil||
-    domain.ValidateMachineID(id)!=nil{
-    return nil,errors.New("V2 cognition actor identifier invalid")
-   }
+  for _,actor:=range plan.cognitiveActors {
    if _,err:=tx.ExecContext(ctx,
     "INSERT INTO cognitive_actor_registry(run_id,actor_namespace,actor_id,registered_revision) VALUES(?,?,?,0)",
-    childRun[:],ns,id);err!=nil{return nil,err}
+    childRun[:],actor.namespace,actor.id);err!=nil{return nil,err}
   }
  if err:=importCognitiveOwnerProofsV2(ctx,s,tx,sourceRun,childRun,epistemic);err!=nil{
   return nil,fmt.Errorf("V2 signed cognitive owner migration: %w",err)
@@ -92,7 +84,7 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
   "VALUES(?,?,?,?,?,?,?)",childRun[:],sourceRun[:],parentSnapshotID[:],origin.CodecPolicyHash[:],
   refRaw,parent.CanonicalBytes,resume.Snapshot.Canonical);err!=nil{return nil,err}
  for i,name:=range snapshotLedgerNames{
-  for ordinal,record:=range archived[i]{
+  for ordinal,record:=range plan.archived[i]{
    if _,err:=tx.ExecContext(ctx,"INSERT INTO fork_history_records(child_run,ledger_name,ordinal,record_id,canonical) VALUES(?,?,?,?,?)",
     childRun[:],name,ordinal,record.id[:],record.canonical);err!=nil{return nil,err}
   }

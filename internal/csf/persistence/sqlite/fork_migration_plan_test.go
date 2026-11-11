@@ -83,3 +83,28 @@ func TestForkP2ProjectV2CommunicationBirths(t *testing.T){
   }
  }
 }
+
+func TestForkP2PureCognitiveRoster(t *testing.T){
+ actor:=[]any{"school","agent-a"}
+ ref:=[]any{actor,uint64(0),uint64(0),uint64(0),uint64(0),uint64(0),uint64(0),uint64(0)}
+ out,err:=deriveForkCognitiveActors([]any{ref},true)
+ if err!=nil||len(out)!=1||out[0].namespace!="school"||out[0].id!="agent-a"{
+  t.Fatal("typed V2 cognitive roster failed",err)
+ }
+ if none,err:=deriveForkCognitiveActors([]any{ref},false);err!=nil||len(none)!=0{
+  t.Fatal("same-policy cognitive roster incorrectly imported",err)
+ }
+ invalid:=[]any{
+  []any{[]any{"school","bad space"},uint64(0),uint64(0),uint64(0),uint64(0),uint64(0),uint64(0),uint64(0)},
+  []any{[]any{"school"},uint64(0),uint64(0),uint64(0),uint64(0),uint64(0),uint64(0),uint64(0)},
+  []any{actor,uint64(0)},
+ }
+ for _,bad:=range invalid{
+  if _,err:=deriveForkCognitiveActors([]any{bad},true);err==nil{
+   t.Fatal("malformed cognitive actor accepted")
+  }
+ }
+ if _,err:=deriveForkCognitiveActors([]any{ref,ref},true);err==nil{
+  t.Fatal("duplicate cognitive actor accepted")
+ }
+}

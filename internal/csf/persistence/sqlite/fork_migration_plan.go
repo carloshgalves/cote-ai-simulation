@@ -158,9 +158,8 @@ func remintV2CommunicationOccurrences(births []V2CommunicationBirth)([]forkGenes
   if !valid||!validOrdinal{return nil,errors.New("V2 migrated coordinate invalid")}
   result=append(result,forkGenesisOccurrence{
    ID:birth.ChildOccurrence.Identity,EligibilityInstant:when,
-   EligibilityOrdinal:ordinal,Canonical:birth.ChildOccurrence.Canonical,
+   EligibilityOrdinal:ordinal,Canonical:bytes.Clone(birth.ChildOccurrence.Canonical),
   })
  }
  return result,nil
 }
-

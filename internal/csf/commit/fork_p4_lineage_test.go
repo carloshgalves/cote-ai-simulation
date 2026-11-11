@@ -3,6 +3,8 @@ package commit
 import (
  "bytes"
  "context"
+ "crypto/ed25519"
+ "crypto/rand"
  "database/sql"
  "fmt"
  "path/filepath"
@@ -126,5 +128,74 @@ func TestCSFRV18P4PrecommitHistoryCorruptionRollsBackAndRetries(t *testing.T){
  if _,err:=reopened.ReplayClock(ctx,id,v2);err!=nil{t.Fatal("P4 reopened replay after recovery:",err)}
  if _,err:=reopened.RecoverPublishedForkV1ToV2(ctx,id,[32]byte(run),snap.ID,v2);err!=nil{
   t.Fatal("P4 reopened recovery after retry:",err)
+ }
+}
+
+// The cognition phase is not covered by a fork with an empty owner roster.
+// Exercise a genuine durable Ed25519 source receipt, its migrated child
+// proof, and recovery rejection after tampering WITHOUT visiting the parent.
+func TestCSFRV18P4SignedCognitiveProofCannotBypassReplayOrRecovery(t *testing.T){
+ ctx:=context.Background()
+ _,parent,_,run,v1,_:=testFixture(t)
+ sourceRun:=[32]byte(run)
+ if err:=parent.RegisterCognitiveActor(ctx,sourceRun,"cognition","signed-owner",v1);err!=nil{
+  t.Fatal(err)
+ }
+ pub,private,err:=ed25519.GenerateKey(rand.Reader);if err!=nil{t.Fatal(err)}
+ if err:=parent.RegisterCognitiveOwnerKeyV1(ctx,sourceRun,"cognition","signed-owner",pub,v1);err!=nil{
+  t.Fatal(err)
+ }
+ state,err:=parent.LoadClock(ctx,sourceRun);if err!=nil{t.Fatal(err)}
+ cp:=sqlite.SnapshotCheckpoint{
+  ActorNamespace:"cognition",ActorID:"signed-owner",StoreID:"memory.v1",SchemaVersion:1,
+  Content:[]byte("opaque signed source cognition"),Producer:"memory-owner",ProducerVersion:1,
+  CoversInstant:int64(state.Instant),CoversRevision:uint64(state.Revision),
+ }
+ signature:=r22Sign(t,sourceRun,cp,"p4-frozen-source-cut",private)
+ if _,err:=parent.PersistCognitiveCheckpointV1(ctx,sourceRun,cp,
+  "p4-frozen-source-cut",signature,v1);err!=nil{t.Fatal(err)}
+ snap,err:=parent.CreateSnapshotV1(ctx,sourceRun,v1,[]sqlite.SnapshotCheckpoint{cp})
+ if err!=nil{t.Fatal(err)}
+ v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle");if err!=nil{t.Fatal(err)}
+ path:=filepath.Join(t.TempDir(),"signed-fork.db")
+ child,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+ defer child.Close()
+ childRun:=sourceRun;childRun[0]^=0x27
+ if _,err:=parent.ForkIdleSnapshotV1ToV2(ctx,sourceRun,snap.ID,childRun,child,v1,v2);err!=nil{
+  t.Fatal("P4 signed source fork:",err)
+ }
+ if _,err:=child.ReplayClock(ctx,childRun,v2);err!=nil{t.Fatal(err)}
+ db,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ defer db.Close()
+ var saved []byte
+ if err:=db.QueryRowContext(ctx,
+  "SELECT signature FROM fork_cognitive_owner_proofs WHERE child_run=? AND actor_namespace=? AND actor_id=?",
+  childRun[:],"cognition","signed-owner").Scan(&saved);err!=nil{t.Fatal(err)}
+ if len(saved)!=ed25519.SignatureSize{t.Fatal("P4 owner proof not durably signed")}
+ corrupt:=bytes.Clone(saved);corrupt[0]^=1
+ res,err:=db.ExecContext(ctx,
+  "UPDATE fork_cognitive_owner_proofs SET signature=? WHERE child_run=? AND actor_namespace=? AND actor_id=?",
+  corrupt,childRun[:],"cognition","signed-owner")
+ if err!=nil{t.Fatal(err)}
+ affected,err:=res.RowsAffected();if err!=nil||affected!=1{t.Fatal("owner tamper did not change one row:",err)}
+ if _,err:=child.ValidatedGenesis(ctx,childRun,v2);err==nil{
+  t.Fatal("P4 cognitive lineage accepted altered signature")
+ }
+ if _,err:=child.ReplayClock(ctx,childRun,v2);err==nil{
+  t.Fatal("P4 replay accepted altered signed owner")
+ }
+ if recovered,err:=child.RecoverPublishedForkV1ToV2(ctx,childRun,sourceRun,snap.ID,v2);err==nil||recovered!=nil{
+  t.Fatal("P4 recovered corrupted signed cognitive authority:",err)
+ }
+ if _,err:=db.ExecContext(ctx,
+  "UPDATE fork_cognitive_owner_proofs SET signature=? WHERE child_run=? AND actor_namespace=? AND actor_id=?",
+  saved,childRun[:],"cognition","signed-owner");err!=nil{t.Fatal(err)}
+ if _,err:=child.ValidatedGenesis(ctx,childRun,v2);err!=nil{t.Fatal("P4 restored cognitive lineage:",err)}
+ if _,err:=child.ReplayClock(ctx,childRun,v2);err!=nil{t.Fatal("P4 restored cognitive replay:",err)}
+ if _,err:=child.RecoverPublishedForkV1ToV2(ctx,childRun,sourceRun,snap.ID,v2);err!=nil{
+  t.Fatal("P4 restored cognitive recovery:",err)
+ }
+ if _,err:=parent.VerifySnapshotV1(ctx,sourceRun,snap.ID,v1);err!=nil{
+  t.Fatal("P4 signed child tamper changed parent:",err)
  }
 }

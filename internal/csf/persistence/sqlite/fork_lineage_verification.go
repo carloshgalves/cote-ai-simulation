@@ -15,12 +15,14 @@ import (
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
-// verifiedForkLineage is ephemeral, authenticated evidence—not a new
-// persistent authority. Its fields are only exposed after the exact archived
-// Genesis/snapshot and the installed historical origin policy agree.
-// Each subsequent verifier runs against the SAME *sql.Tx, including before
-// the publisher commits and whenever a child Genesis is read for replay.
-type verifiedForkLineage struct {
+// forkOriginEvidence is an EPHEMERAL, partially authenticated source cut.
+// The origin Genesis, snapshot bytes and installed historical policy have
+// been authenticated, but the snapshot ID, five archived prefixes, cognition
+// and migrated authorities have NOT YET been verified at this stage.
+// Only the complete validateForkLineageTx sequence authorizes child use.
+// All stages operate on the SAME *sql.Tx, including before publication COMMIT
+// and whenever a child Genesis is independently validated for replay.
+type forkOriginEvidence struct {
  run [32]byte
  parentRun,parentSnapshotID []byte
  parent,child *genesis.Genesis
@@ -31,8 +33,8 @@ type verifiedForkLineage struct {
 // verifyForkLineageOriginTx uses no live parent Store. All provenance is
 // authenticated from immutable rows of the CHILD SQLite transaction.
 func verifyForkLineageOriginTx(ctx context.Context,tx *sql.Tx,
- child *genesis.Genesis,bundle *policy.Bundle)(verifiedForkLineage,error){
- var zero verifiedForkLineage
+ child *genesis.Genesis,bundle *policy.Bundle)(forkOriginEvidence,error){
+ var zero forkOriginEvidence
  run:=[32]byte(child.RunID)
  var parentRun,parentSnapshotID,originHash,refRaw,parentGenesisRaw,parentSnapshotRaw []byte
  if err:=tx.QueryRowContext(ctx,
@@ -72,7 +74,7 @@ func verifyForkLineageOriginTx(ctx context.Context,tx *sql.Tx,
   return zero,errors.New("fork initial world, epistemic refs or instant differ from sealed parent")
  }
 
- return verifiedForkLineage{
+ return forkOriginEvidence{
   run:run,parentRun:bytes.Clone(parentRun),parentSnapshotID:bytes.Clone(parentSnapshotID),
   parent:parent,child:child,origin:origin,snapshot:snap,
  },nil
@@ -82,7 +84,7 @@ func verifyForkLineageOriginTx(ctx context.Context,tx *sql.Tx,
 // parent cognition roster and authentic signed source-owner receipts. It is a
 // no-op for a V1 child, preserving the old policy gate and query order.
 func verifyForkCognitiveLineageTx(ctx context.Context,tx *sql.Tx,
- proof verifiedForkLineage,bundle *policy.Bundle)error{
+ proof forkOriginEvidence,bundle *policy.Bundle)error{
  run,parentRun,snap:=proof.run,proof.parentRun,proof.snapshot
  if id,_,_,_,err:=bundle.CodecIdentity();err!=nil{return err}else if id==policy.CodecPolicyV2ID{
   // The exact signed parent checkpoint roster is the sole authority for
@@ -119,7 +121,7 @@ func verifyForkCognitiveLineageTx(ctx context.Context,tx *sql.Tx,
 // exactly the five canonical, ordered ledger prefixes without re-decoding or
 // re-encoding the source's archived bytes.
 func verifyForkHistoricalPrefixesTx(ctx context.Context,tx *sql.Tx,
- proof verifiedForkLineage)error{
+ proof forkOriginEvidence)error{
  run,parentRun,parentSnapshotID:=proof.run,proof.parentRun,proof.parentSnapshotID
  origin,snap:=proof.origin,proof.snapshot
  rev,ok:=snap[3].(uint64);if !ok{return errors.New("fork origin revision invalid")}
@@ -162,7 +164,7 @@ func verifyForkHistoricalPrefixesTx(ctx context.Context,tx *sql.Tx,
 // verifiers (round/slot, communication, occurrence, trigger), in their
 // unchanged order and on the SAME read/write transaction.
 func verifyForkMigratedAuthoritiesTx(ctx context.Context,tx *sql.Tx,
- proof verifiedForkLineage,bundle *policy.Bundle)error{
+ proof forkOriginEvidence,bundle *policy.Bundle)error{
  run,parent,child,snap,origin:=proof.run,proof.parent,proof.child,proof.snapshot,proof.origin
  if err:=verifyRoundHistoryV2(ctx,tx,parent,child,snap,origin,bundle);err!=nil{
   return fmt.Errorf("fork V2 round history verification: %w",err)

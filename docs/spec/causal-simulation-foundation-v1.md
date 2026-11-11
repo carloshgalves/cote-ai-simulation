@@ -1,6 +1,6 @@
 # Spec — Causal Simulation Foundation V1
 
-**Status:** Accepted como contrato — implementados na `main` os incrementos 1–7; CSFRV1-8 em Draft (PR #25, R21–R23 pendentes); CSFRV1-9, 9A e 10 não concluídos no checkpoint de 2026-11-10. `liberado para implementação` não significa `implementado` ou `homologado`.
+**Status (2026-11-11):** Accepted como contrato — CSFRV1-1–7 e baseline CSFRV1-8 integrados (`main@0e3f966`, PR #25). R21–R23 possuem testes e implementação sem revisão independente formal nem homologação; consulte a [matriz C01–C10](../validation/csfrv1-8-baseline-2026-11-11.md). CSFRV1-9, 9A e 10 não integrados. `Liberado`, `implementado`, `validado` e `aprovado para release` são estados distintos.
 
 **Decisão de origem:** [ADR 0008 — Fundação causal da simulação V1](../adr/0008-causal-simulation-foundation-v1.md)
 

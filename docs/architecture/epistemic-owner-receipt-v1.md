@@ -1,6 +1,6 @@
 # Epistemic Owner Receipt V1 — R22
 
-**Status:** Proposed integration on CSFRV1-8 / PR #25. The canonical V1/V2 bundle and frozen digest operations are unchanged. This note is not an independent approval.
+**Status (2026-11-11):** Integrated as an engineering baseline by [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25), **not independently release-approved**. Canonical V1/V2 bytes stay unchanged. See [C06/C07](../validation/csfrv1-8-baseline-2026-11-11.md).
 
 ## Ownership and trust
 
@@ -10,7 +10,7 @@
 
 ## Durable-before-reference protocol
 
-1. Register a cognitive actor under the authenticated Genesis. Before the first causal snapshot of that run, pin exactly one Ed25519 public key with RegisterCognitiveOwnerKeyV1. Key changes or late trust retrofits are rejected.
+1. Register a cognitive actor under the authenticated Genesis. Pin exactly one Ed25519 public key with RegisterCognitiveOwnerKeyV1 **before the first snapshot at or beyond that actor's registered revision**. R24-01 allows a new actor to enroll in a later revision, without retroactively altering earlier sealed snapshots. Key replacement or retroactive trust changes remain rejected.
 2. The owner commits opaque state durably in its own store, then signs the output of CognitiveCheckpointSigningBytesV1. The canonical payload binds a fixed domain/version, origin run ID, actor namespace/id, store ID + schema, producer + version, coverage instant/revision/evidence cursor, SHA-256 of exact owner bytes via the registered identity adapter, and an opaque stable locator ID. A receipt from another run or another actor cannot be replayed.
 3. PersistCognitiveCheckpointV1 verifies the owner signature and keeps the exact content bytes, digest, receipt ID, locator and signature in an immutable SQLite escrow. This happens **before** CreateSnapshotV1. Identical retries are idempotent; conflicting bytes for the same actor and coverage fail closed. SQLite runs under a verified WAL + synchronous FULL runtime.
 4. CreateSnapshotV1 rechecks the escrow/signature, eligible actor roster and coverage **under the same SQLite writer transaction** that publishes the new snapshot and prefix seals. It does not regenerate memory.
@@ -36,7 +36,7 @@ The V2 fork archive and owner key data live in SQLite migration authorities, not
 - Tampered fork signature or copied signing key fails lineage/replay.
 - R21/R23 integration must keep all five ledgers isolated; no model-generated replacement bytes.
 
-**Release gates outstanding:** human-approved owner durability obligations, final differential/failure matrix, independent review, and exactly-HEAD full-suite/race evidence. A green CI alone does not approve PR #25.
+**Release gates outstanding after PR #25 merge:** human-approved external owner persist/restore/ACK obligations (#58), independent review, exact release-HEAD regression and any remaining integrated E2E proof. A green branch CI is not a production authorization.
 
 ## Snapshot signer-trust sealing (R22 security hardening)
 

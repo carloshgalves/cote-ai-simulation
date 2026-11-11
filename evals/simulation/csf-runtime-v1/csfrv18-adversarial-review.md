@@ -1,9 +1,9 @@
 # CSFRV1-8 — auditoria adversarial de implementação
 
 **Ticket:** [08 — replay, snapshot/resume e fork](../../../docs/tickets/csf-runtime-v1/08-replay-snapshot-fork.md)
-**PR:** #25 (Draft; não mesclar enquanto houver blockers)
-**Base:** main @ `e3d0b18865e2eb4f2c37c4eb3a98321909d282f0`
-**Estado:** em implementação/review, **não concluído**.
+**PR de origem:** [#25](https://github.com/carloshgalves/cote-ai-simulation/pull/25), **MERGED** em 2026-11-11 (`main@0e3f966`).  
+**Base original da PR:** main @ `e3d0b18865e2eb4f2c37c4eb3a98321909d282f0`  
+**Estado deste arquivo:** diário histórico de checkpoints; recomendações pré-merge não representam o status atual. Leia primeiro a [reconciliação C01–C10](../../../docs/validation/csfrv1-8-baseline-2026-11-11.md).
 
 ## Revisões e correções já incorporadas
 
@@ -38,7 +38,7 @@
 
 **Critério de conclusão:** os cinco workflows verdes no HEAD exato **e** findings de contrato abaixo resolvidos, com matriz E2E tri-via e crash/fork.
 
-## Findings ainda abertos (não marcar Ready)
+## Histórico — findings OPEN naquele checkpoint (superados pela reconciliação posterior)
 
 1. **OPEN-01 — CROSS-POLICY:** suporte atual verifica framing/hashes da policy de origem, mas só executa fork V1→V1. Runtime de policy filha distinta, migrador versionado e policy-resolution V2 não estão implementados. Rejeição é fail-closed, não aceite positivo.
 2. **OPEN-02 — FORK NON-IDLE:** com triggers ativas, schedule/activation/round/dispatch pendentes ou tasks perceptivas incompletas, o bootstrap rejeita. Falta migração determinística dessas autoridades para novos IDs e replay do tail divergente, sem compartilhamento de estado filho/pai.
@@ -47,7 +47,7 @@
 5. **OPEN-05 — MATRIZ DIFERENCIAL COMPLETA:** estão presentes provas por componente e por cenários, mas falta o mesmo cenário integrado com conflito de recurso + trigger + comunicação em trânsito, comparando execução contínua, replay e múltiplos resumes para todos os cinco ledgers, hash/world e permutações/crash points.
 6. **RESOLVED-06 — SNAPSHOT V1 DE UMA REVISÃO:** preservada a identidade normativa [run, version, revision], sem reemitir um segundo snapshot diferente na mesma revisão. O checkpoint imutável mais os tails autenticados de fence/abort/retry/percepção reproduzem pontos de crash na mesma revisão; tentativa de sobrescrever o snapshot original falha fechado. Um futuro schema V2 é necessário somente para múltiplos snapshots físicos distintos da mesma revisão.
 
-Os findings ainda marcados OPEN (01, 02, 04 e 05) não podem ser mascarados por CI verde. Não é válido afirmar “zero findings”, concluir ticket ou realizar merge antes da resolução com evidência nova.
+**Regra válida naquele checkpoint:** OPEN-01/02/04/05 não podiam ser mascarados por CI verde. Este bloco documenta a avaliação temporal de R1–R14 e **não** uma lista de findings atualmente abertos; ver os avanços R17–R26 e a matriz pós-merge.
 
 
 ## R10 — continuidade adversarial: migradores, política histórica e destino limpo
@@ -346,3 +346,8 @@ Manter Draft, sem merge ou transição automática para review/remediação.
 - R23: mixed resource contention + trigger + IN_TRANSIT communication, repeated resumes, all five literal ledgers against reopen/worker/crash variants, two divergent cross-policy forks with immutable parent, and independent per-ledger byte corruption/restoration.
 - Review findings R22-HANDOFF-01/02/03, R22-OWNER-DOWNGRADE-04 and R22-FORK-GUARD-05 were persisted in separate PR comments; correction evidence must still be reconciled against the exact final HEAD.
 - A second-party GitHub Copilot review was requested but **no external review was visible** at documentation checkpoint; this is NOT independent approval. Until full branch CI/race and actual reviewer findings are reconciled, PR #25 remains Draft/NO-GO.
+
+
+## 2026-11-11 — fecho documental do ciclo de integração
+
+A [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25) foi mesclada em `main@0e3f966`, partindo de `96daa15` com seis workflows verdes no SHA da branch. R21–R23 constam da baseline e os findings individuais R19–R26 foram marcados `RESOLVED` ou `DISMISSED` (R26-01). **Isso não representa revisão independente formal, teste do merge resultante nem aceite de release/produção.** Este diário retém seus estados antigos como histórico, não como fila atual. O status, os links dos findings e a matriz de evidências encontram-se em [CSFRV1-8 — baseline 2026-11-11](../../../docs/validation/csfrv1-8-baseline-2026-11-11.md).

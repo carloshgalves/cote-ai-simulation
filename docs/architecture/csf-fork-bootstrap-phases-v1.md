@@ -1,11 +1,11 @@
 # CSFRV1-8 / #56 — arquitetura de fases do bootstrap de fork
 
-**Proposta de decomposição, fase 0 (sem mudança de comportamento):** 2026-11-11  
-**Código-base observado:** `main@badc48495f74b83ff7ad4dfe58a7f9ce91e78b2e` ([merge #62](https://github.com/carloshgalves/cote-ai-simulation/pull/62)).  
-**Orquestrador existente:** `internal/csf/persistence/sqlite/fork_bootstrap.go::forkSnapshotWithInstalledPolicies`.  
-**Contrato:** [ticket 08](../tickets/csf-runtime-v1/08-replay-snapshot-fork.md), [ADR 0008](../adr/0008-causal-simulation-foundation-v1.md), [ADR 0009](../adr/0009-canonical-causal-codec-and-digests.md), [ADR 0011](../adr/0011-csf-causal-persistence-atomicity.md).  
-**Gates verificáveis:** [protocolo de regressão](../validation/csfrv1-8-fork-refactor-gates.md).  
-**Issue:** [#56](https://github.com/carloshgalves/cote-ai-simulation/issues/56).
+- **Proposta de decomposição, fase 0 (sem mudança de comportamento):** 2026-11-11
+- **Código-base observado:** `main@badc48495f74b83ff7ad4dfe58a7f9ce91e78b2e` ([merge #62](https://github.com/carloshgalves/cote-ai-simulation/pull/62)).
+- **Orquestrador existente:** `internal/csf/persistence/sqlite/fork_bootstrap.go::forkSnapshotWithInstalledPolicies`.
+- **Contrato:** [ticket 08](../tickets/csf-runtime-v1/08-replay-snapshot-fork.md), [ADR 0008](../adr/0008-causal-simulation-foundation-v1.md), [ADR 0009](../adr/0009-canonical-causal-codec-and-digests.md), [ADR 0011](../adr/0011-csf-causal-persistence-atomicity.md).
+- **Gates verificáveis:** [protocolo de regressão](../validation/csfrv1-8-fork-refactor-gates.md).
+- **Issue:** [#56](https://github.com/carloshgalves/cote-ai-simulation/issues/56).
 
 Este documento **desenha** os tipos internos e as fronteiras de extração; **não** altera implementações, schemas SQL, bytes canônicos ou contratos públicos. As estruturas abaixo são *propostas*, não tipos compilados nem funcionalidades já implementadas. Não fazer todas as extrações na mesma PR. A #56 permanece aberta até as quatro fases terem sido implementadas/validadas.
 

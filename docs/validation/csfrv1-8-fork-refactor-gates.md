@@ -1,9 +1,9 @@
 # CSFRV1-8 / #56 — baseline e gates de regressão para o fork
 
-**Baseline de engenharia:** `main@badc48495f74b83ff7ad4dfe58a7f9ce91e78b2e` (PR #62 já integrada, checks 5/5).  
-**Propósito:** congelar uma referência **antes** da primeira mudança de fluxo em `forkSnapshotWithInstalledPolicies`.  
-**Escopo desta fase 0:** mapa de provas existentes e contrato da futura captura de bytes; **não há novo golden materializado nesta entrega documental**. Captura de golden binário (ver abaixo) é um **gate obrigatório antes da PR P1**, não algo a marcar como PASS sem execução.  
-**Plano de extração:** [fases do bootstrap](../architecture/csf-fork-bootstrap-phases-v1.md).
+- **Baseline de engenharia:** `main@badc48495f74b83ff7ad4dfe58a7f9ce91e78b2e` (PR #62 já integrada, checks 5/5).
+- **Propósito:** congelar uma referência **antes** da primeira mudança de fluxo em `forkSnapshotWithInstalledPolicies`.
+- **Escopo desta fase 0:** mapa de provas existentes e contrato da futura captura de bytes; **não há novo golden materializado nesta entrega documental**. Captura de golden binário (ver abaixo) é um **gate obrigatório antes da PR P1**, não algo a marcar como PASS sem execução.
+- **Plano de extração:** [fases do bootstrap](../architecture/csf-fork-bootstrap-phases-v1.md).
 
 ## Material já versionado
 

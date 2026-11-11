@@ -25,9 +25,16 @@ type forkMigrationDraft struct {
  migratedSlots []forkSlotRecord
  historicalRoots []forkHistoricalRoot
  cognitiveActors []forkCognitiveActor
- archived [5][]forkArchiveRecord // populated at the existing post-migration read boundary
  triggerMigration forkTriggerMigration
  triggerManifest []byte
+}
+
+// forkMigrationPlan is a complete, uncommitted set of child authority inputs.
+// It can only be constructed after verifiedForkArchive successfully proves
+// all five historical parent prefixes at the original read-only boundary.
+type forkMigrationPlan struct {
+ forkMigrationDraft
+ archived [5][]forkArchiveRecord
 }
 
 // prepareForkMigrationDraft is the read-aware P2 coordinator. The *pure*

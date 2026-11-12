@@ -7,7 +7,7 @@
 **Stack:** [ADR 0010](../../adr/0010-csf-causal-engine-stack.md) — Go 1.27.2
 **Persistência:** [ADR 0011](../../adr/0011-csf-causal-persistence-atomicity.md) — SQLite/modernc,
 transação local única
-**Estado (2026-11-11):** CSFRV1-1–7 integrados; CSFRV1-8 [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25) **mesclada como baseline de engenharia** (`main@0e3f966`). R21–R23 têm código/testes e 6/6 workflows verdes no HEAD `96daa15`, mas **não aprovação independente de release**. Consulte a [matriz atual C01–C10](../../validation/csfrv1-8-baseline-2026-11-11.md) e os resíduos #54–#60. CSFRV1-9, 9A e 10 não integrados; o contrato físico 9A segue necessário para 10.
+**Estado (2026-11-12):** CSFRV1-1–8 **integrados**; a [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25) é baseline de engenharia, e as PRs #61–#72 integraram refatorações de fork/snapshot e o contrato/gate S0 de owner cognitivo. Esses resultados não equivalem a homologação de release ou persistência externa certificada. [Issue #58](https://github.com/carloshgalves/cote-ai-simulation/issues/58) segue P0 para durabilidade/restore/ACK real; [#74](https://github.com/carloshgalves/cote-ai-simulation/issues/74) divide S1 em [proposta ADR 0013](../../adr/0013-cognitive-owner-durability-s1.md) e [inventário/planejamento S1a](../../validation/cognitive-owner-s1a-2026-11-12.md), **ainda não aceitos**. Consulte a [matriz C01–C10](../../validation/csfrv1-8-baseline-2026-11-11.md) e [prontidão do produto](../../validation/product-readiness-2026-11-10.md). CSFRV1-9, 9A e 10 não integrados; o contrato físico 9A segue necessário para 10.
 
 Este conjunto entrega a fundação causal como dez slices executáveis e dois gates documentais.
 CSFRV1-0 incorporou na spec as decisões dos ADRs 0010/0011 sem repetir pesquisa e explicitou que a
@@ -42,7 +42,7 @@ estiverem concluídos.
 | [CSFRV1-9A](09a-contrato-adapter-fisico.md) | contrato físico versionado com schemas e fixtures | 0 |
 | [CSFRV1-10](10-adapter-fisico-e-cenario.md) | cenário de referência completo, adapter físico e evals finais | 9, 9A |
 
-Para a refatoração incremental do CSFRV1-8 (issue #56), consultar o [desenho P0 do bootstrap](../../architecture/csf-fork-bootstrap-phases-v1.md) e os [gates de regressão](../../validation/csfrv1-8-fork-refactor-gates.md). Cada fase requer PR própria; a documentação não certifica a conclusão da #56.
+A refatoração incremental do bootstrap CSFRV1-8 (issue #56) foi integrada pelas PRs #63–#67; consultar o [desenho de fases](../../architecture/csf-fork-bootstrap-phases-v1.md) e os [gates de regressão](../../validation/csfrv1-8-fork-refactor-gates.md). Seu fechamento administrativo não substitui revisão de release. O novo trabalho cognitivo #74/S1 é uma frente separada: sua proposta não altera a ordem CSFRV1-9 → 9A/10 nem libera novo LLM.
 
 ## Convenções comuns
 

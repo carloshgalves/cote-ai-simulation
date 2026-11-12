@@ -6,7 +6,7 @@
 
 `snapshotPending` constrói os mesmos dez rosters canônicos de antes, no mesmo `*sql.Tx`. Simultaneamente, cada linha de autoridade consumida pelos três leitores (scheduled/trigger, `input_ledger` e `causal_outbox`) registra um **testemunho efêmero**: owner, RunID validado no ramo de leitura ou por SQL escopado, ID exato, digest de referência e, para trigger-runtime/completion, bytes canônicos originais.
 
-`snapshotPendingProvenance.verify` é um limite independente entre esses testemunhos e os valores que realmente irão para o snapshot. Rejeita referência sem fonte, associação ao owner errado, run divergente, ID ou digest trocado, registro canonical de runtime/completion diferente, duplicata na mesma partição e falta de vínculo entre os rosters 0/2/4 e os input-ref kinds 2/3/4 do roster 7. Input-ref kind 0 (slot-response), quando aplicável, exige testemunho próprio: a produção atual não o emite espontaneamente. IDs coincidentes entre partições distintas **não são proibidos**.
+`snapshotPendingProvenance.verify` é um limite independente entre esses testemunhos e os valores que realmente irão para o snapshot. Rejeita referência sem fonte, associação a owner/kind não registrado, run divergente, ID ou digest trocado/ausente, canonical de runtime/completion diferente, duplicata na mesma partição e falta de vínculo entre os rosters 0/2/4 e os input-ref kinds 2/3/4 do roster 7. Também exige as relações **response→dispatch** e **completion→task** usando IDs extraídos do registro fonte, com prova da mesma run, e rejeita uma autoridade simultaneamente pendente e liquidada ou liquidada duas vezes. Input-ref kind 0 (slot-response), quando aplicável, exige testemunho próprio: a produção atual não o emite espontaneamente. IDs coincidentes entre partições distintas **não são proibidos** quando os papéis e os vínculos são diferentes.
 
 A prova **não** transforma uma projeção em autoridade externa: os testemunhos são criados apenas a partir das linhas já escopadas e autenticadas no produtor, não saem da memória, e não substituem `ReplayClock`, `verifySnapshotSeal`, os cinco ledgers autenticados nem `validateForkLineageTx`. Não há nova tabela, SQL, migração, ponto de commit, autorização de runtime ou arquivo histórico.
 
@@ -20,19 +20,19 @@ A prova **não** transforma uma projeção em autoridade externa: os testemunhos
 | 3 source-closures | source-closures | input ledger, RunID, ID e digest `source-closure`; último seq por source |
 | 4 rounds | rounds | input ledger, RunID, ID e digest `round-declaration`, only pendingClock |
 | 5 dispatches | dispatches | input ledger, RunID, ID e digest `slot-dispatch`, ainda não respondido ou revogado |
-| 6 responses | responses | input ledger, RunID, ID, digest unitário e kind 5/23 |
+| 6 responses | responses | input ledger, RunID, ID e digest unitário, kind 5/23; vínculo ao dispatch histórico, sem dupla resposta nem dispatch ainda pendente |
 | 7 pending-units | exogenous/slot-response ou referência ao roster de origem | kinds 1/0 com testemunho próprio; 2↔0, 3↔2 e 4↔4 com ID/digest idênticos e cardinalidade exata |
 | 8 perception-tasks | perception-tasks | causal outbox, RunID, ID e digest `perception-task` |
-| 9 perception-completions | perception-completions | causal outbox, task origin validada e bytes canônicos da completion |
+| 9 perception-completions | perception-completions | causal outbox, task de origem vinculada e bytes canônicos da completion; não pode constar entre tasks ainda pendentes ou ser concluída duas vezes |
 
 **Limite importante:** a prova confirma vínculo à fonte lida e validação existente. Não recalcula todas as preimagens de ID, relógio e digest fora do replay autoritativo; não afirma ser um verificador alternativo de consenso ou um histórico reconstruído. No caso de snapshots antigos, o replay/verification existente continua usando os prefixos selados, e não o estado corrente.
 
 ## Gates de teste
 
-- 10/10 rosters em fixture positiva P1→P4: saída normativa idêntica, inputs relacionados e witness binding em cada owner.
+- 10/10 rosters em fixture positiva P1→P4: saída normativa idêntica, inputs relacionados e witness binding em cada owner; fixtures distinguem dispatches/tasks pendentes das já liquidadas.
 - Matriz negativa de **ausência de testemunho e origem cruzada em cada uma das dez partições**, com restauração positiva.
 - Matriz negativa de corrupção de digest/bytes canônicos em cada partição, source input órfão e ausência do par round/input.
-- Reject duplicate witness, run estrangeira, ID/digest com aridade incorreta.
+- Reject duplicate witness, owner/kind inesperado, run estrangeira, ID/digest ausente/incorreto, link response→dispatch ou completion→task órfão ou alterado, estados pendente/concluído simultâneos e liquidação duplicada.
 - Golden binário pré-P1 e regressão R19–R26; `go test ./...`, `-race` e os cinco GitHub Actions no SHA definitivo.
 - Revisão adversarial e remediações registradas; PR separada, Draft, sem merge automático.
 

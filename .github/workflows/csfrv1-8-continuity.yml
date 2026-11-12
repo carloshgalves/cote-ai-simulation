@@ -17,23 +17,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 jobs:
-  # Temporary final formatting proof. The job and its runner cost are
-  # removed from the final PR after the formatted artifact is recorded.
-  p57-provenance-final-gofmt:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v4
-      - name: Check final gofmt and emit normalized bytes
-        shell: bash
-        run: |
-          set -euo pipefail
-          for f in internal/csf/persistence/sqlite/snapshot_pending_provenance.go internal/csf/persistence/sqlite/snapshot_pending_provenance_test.go; do
-            echo "GOSOURCE:$f:$(gofmt -l "$f" | wc -l)"
-            printf 'FORMATTED-FINAL-P4:%s:' "$f"
-            gofmt "$f" | base64 -w0
-            printf '\\n'
-          done
   continuity:
     runs-on: ubuntu-latest
     # The R21 V1→V2 65-WORK cascade is intentionally exercised under -race;

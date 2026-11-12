@@ -83,6 +83,7 @@ type testEscrow struct {
 	snapshotID [32]byte
 	snapshotCanonical []byte
 	snapshotPublished bool
+	tailCommits uint64
 	failPersist bool
 	failLoad bool
 }
@@ -137,6 +138,7 @@ func (e *testEscrow) VerifySnapshotV1(_ context.Context,_ [32]byte,snapshot [32]
 	}
 	return sqlite.ResumeCheckpointV1{
 		Snapshot:sqlite.SnapshotV1{ID:e.snapshotID,Canonical:bytes.Clone(e.snapshotCanonical)},
+		TailCommits:e.tailCommits,
 	},nil
 }
 
@@ -460,5 +462,23 @@ func TestOwner58S0SupersededPersistCannotOverwriteNewerGeneration(t *testing.T){
 		}
 		assertNotPermitted(t,s,result.receipt)
 	case <-time.After(10*time.Second):t.Fatal("latest stage did not finish")
+	}
+}
+
+func TestOwner58S0HistoricalSnapshotCannotAuthorizeNewWORK(t *testing.T){
+	s:=setupOwnerGate(t)
+	receipt:=testStage(t,s)
+	s.publishSnapshot(t,s.cp)
+	s.escrow.tailCommits=1
+	if err:=s.gate.RestoreAndAcknowledge(context.Background(),s.scope,s.snapshot,receipt);err==nil{
+		t.Fatal("historical snapshot with later committed tail granted WORK")
+	}
+	assertNotPermitted(t,s,receipt)
+	if s.owner.acked!=0||s.owner.restored!=0{
+		t.Fatal("external owner contacted for stale WORK checkpoint")
+	}
+	s.escrow.tailCommits=0
+	if err:=s.gate.RestoreAndAcknowledge(context.Background(),s.scope,s.snapshot,receipt);err!=nil{
+		t.Fatal("current verified snapshot refused:",err)
 	}
 }

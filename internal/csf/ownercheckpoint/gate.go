@@ -264,6 +264,10 @@ func (g *Gate) RestoreAndAcknowledge(ctx context.Context, scope Scope,
 	if verified.Snapshot.ID != snapshotID {
 		return errors.New("snapshot verifier returned a different identity")
 	}
+	if verified.TailCommits != 0 ||
+		uint64(verified.Clock.Revision) != verified.Snapshot.Revision {
+		return errors.New("historical snapshot cannot authorize new cognitive WORK")
+	}
 	cp, locator, err := g.escrow.LoadCognitiveCheckpointV1(ctx, scope.Run,
 		receiptID, scope.Namespace, scope.Actor, g.bundle)
 	if err != nil {

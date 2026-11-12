@@ -108,7 +108,7 @@ func TestFork57RemintDispatchPreservesSourceAndRekeysChild(t *testing.T){
  fields,ok:=decoded.([]any)
  if !ok||len(fields)!=11||!bytes.Equal(fields[0].([]byte),result[0].Identity[:])||
   !bytes.Equal(fields[1].([]byte),newRun[:])||!bytes.Equal(fields[3].([]byte),newRound[:])||
-  fields[4]!="slot-a"||fields[5]!=uint64(0)||fields[8]!=uint64(0)||fields[9]!=int64(40){
+  fields[4]!="slot-a"||fields[5]!=uint64(0)||fields[8]!=uint64(0)||!sameCanonical(fields[9],int64(40)){
   t.Fatal("remint altered frozen round/slot semantics")
  }
  source:=fork57ID(0x90)

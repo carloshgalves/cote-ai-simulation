@@ -161,7 +161,10 @@ func attachForkSlotOutcomesV2(records []ports.CanonicalRecord,histories map[stri
 		if err != nil {
 			continue
 		}
-		f := v.([]any)
+		f, ok := v.([]any)
+		if !ok {
+			return errors.New("archived slot receipt must be canonical array")
+		}
 		if len(f) == 3 {
 			dispatch, ok := f[0].([]byte)
 			if !ok {

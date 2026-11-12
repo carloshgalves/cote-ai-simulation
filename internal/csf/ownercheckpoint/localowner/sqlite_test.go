@@ -301,13 +301,15 @@ func TestB1ConcurrentRetriesOneCheckpoint(t *testing.T) {
 func TestB1RejectExistingCausalSQLiteAuthority(t *testing.T) {
 	ctx := context.Background()
 	path, key, _ := fixture(t)
-	o := openFixture(t,path,key)
-	if _,err := o.conn.ExecContext(ctx,
-		`CREATE TABLE genesis_records (run_id BLOB PRIMARY KEY) STRICT;`);err!=nil {
+	o := openFixture(t, path, key)
+	if _, err := o.conn.ExecContext(ctx,
+		`CREATE TABLE genesis_records (run_id BLOB PRIMARY KEY) STRICT;`); err != nil {
 		t.Fatal(err)
 	}
-	if err:=o.Close();err!=nil {t.Fatal(err)}
-	if _,err:=Open(ctx,path,key);err==nil {
+	if err := o.Close(); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := Open(ctx, path, key); err == nil {
 		t.Fatal("owner attached to a causal authority file")
 	}
 }

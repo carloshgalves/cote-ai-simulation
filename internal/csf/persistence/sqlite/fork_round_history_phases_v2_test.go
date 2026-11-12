@@ -168,3 +168,52 @@ func TestFork57ForeignRunDispatchCannotPassAuthenticatedHistory(t *testing.T) {
 		t.Fatal("cross-run dispatch was authenticated under local source run")
 	}
 }
+
+// Pure helpers never drop unparseable canonical bytes. Valid ingress envelopes
+// are six-element CBOR arrays and stay classified as non-slot records.
+func TestFork57RejectsCorruptArchivedCBORButPermitsIngressEnvelope(t *testing.T){
+ broken:=ports.CanonicalRecord{Identity:fork57ID(0x55),Canonical:[]byte{0xff}}
+ if _,err:=authenticateForkSlotDispatchesV2(nil,[]ports.CanonicalRecord{broken},nil,nil,nil,nil);err==nil{
+  t.Fatal("invalid CBOR was silently skipped in source dispatch authentication")
+ }
+ if err:=attachForkSlotOutcomesV2([]ports.CanonicalRecord{broken},nil);err==nil{
+  t.Fatal("invalid CBOR was silently skipped during receipt linkage")
+ }
+ env,err:=codec.CanonicalBytes("cote.csf.record.source-ingress-receipt",
+  "cote.csf.schema.source-ingress-receipt",1,[]any{})
+ if err!=nil{t.Fatal(err)}
+ valid:=ports.CanonicalRecord{Canonical:env}
+ if histories,err:=authenticateForkSlotDispatchesV2(nil,[]ports.CanonicalRecord{valid},nil,nil,nil,nil);err!=nil||len(histories)!=0{
+  t.Fatal("legitimate ingress envelope was mistaken for an invalid dispatch:",err)
+ }
+ if err:=attachForkSlotOutcomesV2([]ports.CanonicalRecord{valid},nil);err!=nil{
+  t.Fatal("ingress envelope was not ignored by the slot receipt collector:",err)
+ }
+}
+
+func TestFork57DuplicateAuthenticDispatchMustNotOverwriteHistory(t *testing.T){
+ v1,err:=policy.Load("../../../../docs/architecture/canonical-codec-v1-bundle")
+ if err!=nil{t.Fatal(err)}
+ run,round:=fork57ID(0x61),fork57ID(0x62)
+ cycle,_,err:=identity.New(v1).Sum("cote.csf.id.cycle","cote.csf.schema.cycle-id-preimage",1,
+  []any{run[:],[]any{int64(40),uint64(0)}})
+ if err!=nil{t.Fatal(err)}
+ id,_,err:=identity.New(v1).Sum("cote.csf.id.dispatch","cote.csf.schema.dispatch-id-preimage",1,
+  []any{run[:],cycle[:],round[:],"slot-a",uint64(0)})
+ if err!=nil{t.Fatal(err)}
+ actor:=[]any{"school","agent-a"}
+ coordinate:=[]any{int64(40),uint64(0)}
+ f:=[]any{id[:],run[:],cycle[:],round[:],"slot-a",uint64(0),actor,coordinate,uint64(0),int64(40),[]any{uint64(0)}}
+ raw,err:=codec.CanonicalPayload(f);if err!=nil{t.Fatal(err)}
+ record:=ports.CanonicalRecord{Identity:[32]byte(id),Canonical:raw}
+ projectedRound:=[]any{round[:],run[:],"source",actor,[]any{"slot-a"},coordinate}
+ args:=[]ports.CanonicalRecord{record}
+ parent:=&genesis.Genesis{RunID:domain.ID(run),InitialInstant:40}
+ roster:=map[string][]any{string(round[:]):projectedRound}
+ coords:=map[string]any{string(round[:]):coordinate}
+ clocks:=map[uint64]snapshotClock{0:{Instant:40,LastOrdinal:-1}}
+ one,err:=authenticateForkSlotDispatchesV2(parent,args,roster,coords,clocks,v1)
+ if err!=nil||len(one)!=1{t.Fatal("valid historical dispatch rejected:",err)}
+ _,err=authenticateForkSlotDispatchesV2(parent,append(args,record),roster,coords,clocks,v1)
+ if err==nil{t.Fatal("duplicate historical dispatch overwritten without rejection")}
+}

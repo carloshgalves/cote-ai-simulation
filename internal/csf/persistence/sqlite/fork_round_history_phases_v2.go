@@ -96,8 +96,8 @@ func authenticateForkSlotDispatchesV2(parent *genesis.Genesis,
 	for _, record := range records {
 		v, err := codec.StrictDecodePayload(record.Canonical)
 		if err != nil {
-			continue
-		} // ingress envelopes
+			return nil, errors.New("corrupt archived input in dispatch authentication")
+		}
 		f, ok := v.([]any)
 		if !ok {
 			return nil, errors.New("round history has non-array input")
@@ -147,6 +147,9 @@ func authenticateForkSlotDispatchesV2(parent *genesis.Genesis,
 		if err != nil || !equalBytes(f[2], cycle[:]) || !sameCanonical(f[9], historical.Instant) {
 			return nil, errors.New("source dispatch differs from its authenticated historical clock")
 		}
+		if _, duplicate := histories[string(id[:])]; duplicate {
+			return nil, errors.New("duplicate authenticated historical dispatch")
+		}
 		histories[string(id[:])] = &forkSlotHistory{oldID: [32]byte(id), fields: f}
 	}
 
@@ -159,7 +162,7 @@ func attachForkSlotOutcomesV2(records []ports.CanonicalRecord, histories map[str
 	for _, record := range records {
 		v, err := codec.StrictDecodePayload(record.Canonical)
 		if err != nil {
-			continue
+			return errors.New("corrupt archived input in slot-receipt association")
 		}
 		f, ok := v.([]any)
 		if !ok {

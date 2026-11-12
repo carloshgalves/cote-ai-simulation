@@ -132,7 +132,17 @@ func (p *snapshotPendingProvenance) verify(parts snapshotPendingPartitions)error
    key:=snapshotPendingWitnessKey{owner:owner,id:id}
    witness,ok:=p.witnesses[key]
    if !ok{return fmt.Errorf("snapshot provenance %s source witness absent",pendingSnapshotPartSpecs[part].name)}
-   if witness.run!=p.run || witness.kind!=kind{return fmt.Errorf("snapshot provenance %s foreign source/kind",pendingSnapshotPartSpecs[part].name)}
+   sourceKind:=kind
+   if part==7 {
+    // The pending-units partition uses input-ref kinds, not the causal
+    // reference kind of its authenticated parent roster.
+    switch kind {
+    case 2:sourceKind=6
+    case 3:sourceKind=7
+    case 4:sourceKind=3
+    }
+   }
+   if witness.run!=p.run || witness.kind!=sourceKind{return fmt.Errorf("snapshot provenance %s foreign source/kind",pendingSnapshotPartSpecs[part].name)}
    if part==1||part==9{
     if !bytes.Equal(canonical,witness.canonical){
      return fmt.Errorf("snapshot provenance %s canonical source differs",pendingSnapshotPartSpecs[part].name)

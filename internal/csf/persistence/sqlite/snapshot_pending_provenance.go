@@ -56,7 +56,7 @@ func newSnapshotPendingProvenance(run [32]byte) *snapshotPendingProvenance {
 // or duplicate witness is a corruption error, never last-write-wins.
 func (p *snapshotPendingProvenance) bind(owner string,sourceRun [32]byte,
  rawID []byte,kind uint64,digest,canonical []byte)error{
- if p==nil{return errors.New("snapshot provenance missing")}
+ if p==nil||p.witnesses==nil{return errors.New("snapshot provenance index uninitialized")}
  id,err:=pendingSnapshotID(rawID);if err!=nil{return err}
  if sourceRun!=p.run{return errors.New("foreign-run snapshot source witness")}
  if !snapshotWitnessKindAllowed(owner,kind){
@@ -97,7 +97,7 @@ func snapshotWitnessKindAllowed(owner string,kind uint64)bool{
 // response/completion row. The target witness may arrive later in ID order;
 // verify requires the exact target after the source scan is complete.
 func (p *snapshotPendingProvenance) bindLink(owner string,rawID,targetID []byte)error{
- if p==nil{return errors.New("snapshot provenance missing")}
+ if p==nil||p.witnesses==nil||p.links==nil{return errors.New("snapshot provenance links uninitialized")}
  if owner!=snapshotOwnerResponse&&owner!=snapshotOwnerCompletion{
   return errors.New("snapshot provenance link owner unregistered")
  }

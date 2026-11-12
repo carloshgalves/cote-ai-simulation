@@ -294,3 +294,18 @@ func TestSnapshot57P4PendingAndSettledAuthoritiesAreExclusive(t *testing.T){
   })
  }
 }
+
+func TestSnapshot57P4ZeroValueProvenanceReturnsErrors(t *testing.T){
+ var zero snapshotPendingProvenance
+ id,digest:=pending57ID(0xa1),pending57ID(0xa2)
+ if err:=zero.bind(snapshotOwnerOccurrence,zero.run,id,6,digest,nil);err==nil{
+  t.Fatal("zero-value witness index caused silent acceptance")
+ }
+ if err:=zero.bindLink(snapshotOwnerResponse,id,id);err==nil{
+  t.Fatal("zero-value link index caused silent acceptance")
+ }
+ zero.witnesses=make(map[snapshotPendingWitnessKey]snapshotPendingWitness)
+ if err:=zero.bindLink(snapshotOwnerResponse,id,id);err==nil{
+  t.Fatal("missing links map caused silent acceptance")
+ }
+}

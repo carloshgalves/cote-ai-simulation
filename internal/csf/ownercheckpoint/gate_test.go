@@ -9,6 +9,7 @@ import (
 	"sync"
 	"testing"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -78,6 +79,7 @@ type testEscrow struct {
 	public ed25519.PublicKey
 	records map[[32]byte]testEscrowRecord
 	snapshotID [32]byte
+	snapshotCanonical []byte
 	snapshotPublished bool
 	failPersist bool
 	failLoad bool
@@ -131,7 +133,9 @@ func (e *testEscrow) VerifySnapshotV1(_ context.Context,_ [32]byte,snapshot [32]
 	if !e.snapshotPublished||snapshot!=e.snapshotID {
 		return sqlite.ResumeCheckpointV1{},errors.New("sealed snapshot absent")
 	}
-	return sqlite.ResumeCheckpointV1{},nil
+	return sqlite.ResumeCheckpointV1{
+		Snapshot:sqlite.SnapshotV1{ID:e.snapshotID,Canonical:bytes.Clone(e.snapshotCanonical)},
+	},nil
 }
 
 type testSetup struct{
@@ -162,6 +166,26 @@ func setupOwnerGate(t *testing.T)testSetup{
 	if err!=nil{t.Fatal(err)}
 	return testSetup{gate,owner,escrow,scope,cp,snapshot}
 }
+func (s testSetup) publishSnapshot(t *testing.T, cp sqlite.SnapshotCheckpoint) {
+	t.Helper()
+	digest:=identity.OpaqueContentHash(cp.Content)
+	ref:=[]any{
+		[]any{cp.ActorNamespace,cp.ActorID},cp.StoreID,uint64(cp.SchemaVersion),
+		[]any{uint64(1),bytes.Clone(cp.Content)},digest[:],
+		cp.Producer,uint64(cp.ProducerVersion),
+		[]any{cp.CoversInstant,cp.CoversRevision,cp.CoversEvidenceCursor},
+	}
+	fields:=make([]any,19)
+	fields[0]=s.scope.Run[:]
+	fields[14]=[]any{ref}
+	raw,err:=codec.CanonicalPayload(fields)
+	if err!=nil{t.Fatal(err)}
+	s.escrow.mu.Lock()
+	defer s.escrow.mu.Unlock()
+	s.escrow.snapshotCanonical=raw
+	s.escrow.snapshotPublished=true
+}
+
 func testStage(t *testing.T,s testSetup)[32]byte{
 	t.Helper()
 	id,err:=s.gate.Stage(context.Background(),s.scope,s.cp)
@@ -189,7 +213,7 @@ func TestOwner58S0PersistReceiptEscrowSnapshotRestoreACKWork(t *testing.T){
 		t.Fatal("owner restored without a published sealed snapshot")
 	}
 	assertNotPermitted(t,s,receipt)
-	s.escrow.snapshotPublished=true
+	s.publishSnapshot(t,s.cp)
 	if err:=s.gate.RestoreAndAcknowledge(ctx,s.scope,s.snapshot,receipt);err!=nil{t.Fatal(err)}
 	calls:=0
 	if err:=s.gate.RunWork(ctx,s.scope,s.snapshot,receipt,func(context.Context)error{
@@ -232,7 +256,7 @@ func TestOwner58S0FailureMatrixNeverInvokesModel(t *testing.T){
 		t.Run(fault,func(t *testing.T){
 			s:=setupOwnerGate(t)
 			ctx:=context.Background()
-			s.escrow.snapshotPublished=true
+			s.publishSnapshot(t,s.cp)
 			switch fault{
 			case "before-persist":s.owner.failPersist=true
 			case "after-durable-before-sign":s.owner.failPostDurable=true
@@ -284,7 +308,7 @@ func TestOwner58S0CrashAfterEscrowRetryNoModel(t *testing.T){
 	if err:=s.gate.RestoreAndAcknowledge(ctx,s.scope,s.snapshot,receipt);err==nil{
 		t.Fatal("restored before snapshot seal")
 	}
-	s.escrow.snapshotPublished=true
+	s.publishSnapshot(t,s.cp)
 	if err:=s.gate.RestoreAndAcknowledge(ctx,s.scope,s.snapshot,receipt);err!=nil{
 		t.Fatal("could not recover signed escrow after snapshot publication:",err)
 	}
@@ -305,7 +329,7 @@ func TestOwner58S0StageRevokesPermitBeforeNewCheckpoint(t *testing.T){
 	s:=setupOwnerGate(t)
 	ctx:=context.Background()
 	r:=testStage(t,s)
-	s.escrow.snapshotPublished=true
+	s.publishSnapshot(t,s.cp)
 	if err:=s.gate.RestoreAndAcknowledge(ctx,s.scope,s.snapshot,r);err!=nil{t.Fatal(err)}
 	modified:=cloneCheckpoint(s.cp)
 	modified.CoversRevision=1
@@ -316,4 +340,49 @@ func TestOwner58S0StageRevokesPermitBeforeNewCheckpoint(t *testing.T){
 		t.Fatal("same locator reused with conflicting private bytes")
 	}
 	assertNotPermitted(t,s,r)
+}
+
+func TestOwner58S0SnapshotMustContainExactSignedActorCheckpoint(t *testing.T) {
+	for _,variant:=range []string{"absent","other-actor","different-bytes","different-coverage","duplicated"}{
+		t.Run(variant,func(t *testing.T){
+			s:=setupOwnerGate(t)
+			receipt:=testStage(t,s)
+			ctx:=context.Background()
+			s.publishSnapshot(t,s.cp)
+			raw,err:=codec.StrictDecodePayload(s.escrow.snapshotCanonical)
+			if err!=nil{t.Fatal(err)}
+			fields:=raw.([]any)
+			ref:=fields[14].([]any)[0].([]any)
+			switch variant{
+			case "absent":fields[14]=[]any{}
+			case "other-actor":
+				name:=append([]any(nil),ref[0].([]any)...)
+				name[1]="other-agent"
+				ref[0]=name
+			case "different-bytes":
+				typed:=append([]any(nil),ref[3].([]any)...)
+				typed[1]=[]byte("substituted but structurally valid")
+				ref[3]=typed
+			case "different-coverage":
+				cover:=append([]any(nil),ref[7].([]any)...)
+				cover[1]=uint64(1)
+				ref[7]=cover
+			case "duplicated":fields[14]=[]any{ref,ref}
+			}
+			bad,err:=codec.CanonicalPayload(fields)
+			if err!=nil{t.Fatal(err)}
+			s.escrow.snapshotCanonical=bad
+			if err:=s.gate.RestoreAndAcknowledge(ctx,s.scope,s.snapshot,receipt);err==nil{
+				t.Fatal("individually valid receipt authorized under unrelated snapshot roster")
+			}
+			assertNotPermitted(t,s,receipt)
+			if s.owner.restored!=0||s.owner.acked!=0{
+				t.Fatal("external owner was contacted before snapshot binding passed")
+			}
+			s.publishSnapshot(t,s.cp)
+			if err:=s.gate.RestoreAndAcknowledge(ctx,s.scope,s.snapshot,receipt);err!=nil{
+				t.Fatal("exact signed checkpoint was not restorable:",err)
+			}
+		})
+	}
 }

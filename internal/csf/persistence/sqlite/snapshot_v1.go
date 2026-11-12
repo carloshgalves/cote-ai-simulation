@@ -67,15 +67,14 @@ func snapshotLedgerPrefix(ctx context.Context, tx *sql.Tx, name string, b *polic
 // pending-state model. Ref digests use the registered record operation or
 // the persisted unit digest, never a surrogate hash of arbitrary bytes.
 func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundle)([]any,error){
- var parts [10][]any
- for i:=range parts {parts[i]=[]any{}}
+ parts:=newSnapshotPendingPartitions()
  deriver:=identity.New(b)
  digestRef:=func(tag,schema string,fields []any)([]byte,error){
   d,_,err:=deriver.Sum(tag,schema,1,fields)
   if err!=nil{return nil,err}
   return d[:],nil
  }
- typed:=func(table,query string,index int,kind uint64,recordDigest func([]any)([]byte,error))error{
+ typed:=func(query string,target *[]any,kind uint64,recordDigest func([]any)([]byte,error))error{
   rows,err:=tx.QueryContext(ctx,query,run[:]);if err!=nil{return err}
   defer rows.Close()
   for rows.Next(){
@@ -85,11 +84,11 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return err}
    fields,ok:=decoded.([]any);if !ok||len(fields)==0||!equalBytes(fields[0],id){return errors.New("snapshot authority id and payload differ")}
    if recordDigest==nil {
-    parts[index]=append(parts[index],fields)
+    *target=append(*target,fields)
    }else{
     d,err:=recordDigest(fields);if err!=nil{return err}
     if len(d)!=32{return errors.New("snapshot reference digest invalid")}
-    parts[index]=append(parts[index],[]any{kind,bytes.Clone(id),d})
+    *target=append(*target,[]any{kind,bytes.Clone(id),d})
    }
   }
   return rows.Err()
@@ -101,9 +100,9 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
   if !ok||len(d)!=32{return nil,errors.New("invalid scheduled unit digest")}
   return bytes.Clone(d),nil
  }
- if err:=typed("scheduled_occurrences","SELECT id,canonical FROM scheduled_occurrences WHERE run_id=? AND lifecycle=0 ORDER BY id",0,6,lastDigest);err!=nil{return nil,err}
- if err:=typed("trigger_runtime","SELECT definition_id,canonical FROM trigger_runtime WHERE run_id=? ORDER BY definition_id",1,0,nil);err!=nil{return nil,err}
- if err:=typed("trigger_activations","SELECT id,canonical FROM trigger_activations WHERE run_id=? AND lifecycle=0 ORDER BY id",2,7,lastDigest);err!=nil{return nil,err}
+ if err:=typed("SELECT id,canonical FROM scheduled_occurrences WHERE run_id=? AND lifecycle=0 ORDER BY id",&parts.occurrences,6,lastDigest);err!=nil{return nil,err}
+ if err:=typed("SELECT definition_id,canonical FROM trigger_runtime WHERE run_id=? ORDER BY definition_id",&parts.triggerRuntime,0,nil);err!=nil{return nil,err}
+ if err:=typed("SELECT id,canonical FROM trigger_activations WHERE run_id=? AND lifecycle=0 ORDER BY id",&parts.triggerActivations,7,lastDigest);err!=nil{return nil,err}
  pending,err:=pendingClock(ctx,tx,run);if err!=nil{return nil,err}
  live:=map[[32]byte]bool{}
  for _,item:=range pending{live[[32]byte(item.ID)]=true}
@@ -148,8 +147,8 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
     if live[key]{
      d,err:=digestRef("cote.csf.digest.round-declaration","cote.csf.schema.round-declaration",f)
      if err!=nil{rows.Close();return nil,err}
-     parts[4]=append(parts[4],[]any{uint64(3),bytes.Clone(id),d})
-     parts[7]=append(parts[7],[]any{uint64(4),bytes.Clone(id),d})
+     parts.rounds=append(parts.rounds,[]any{uint64(3),bytes.Clone(id),d})
+     parts.pendingInputs=append(parts.pendingInputs,[]any{uint64(4),bytes.Clone(id),d})
     }
     _=source;continue
    }
@@ -163,7 +162,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    // NoProposal slot response (the final field is its unit digest).
    if !equalBytes(f[2],run[:]){rows.Close();return nil,errors.New("cross-run NoProposal")}
    d,err:=lastDigest(f);if err!=nil{rows.Close();return nil,err}
-   parts[6]=append(parts[6],[]any{uint64(23),bytes.Clone(id),d})
+   parts.responses=append(parts.responses,[]any{uint64(23),bytes.Clone(id),d})
    rawDispatch,ok:=f[1].([]byte);if !ok||len(rawDispatch)!=32{rows.Close();return nil,errors.New("NoProposal dispatch invalid")}
    var k [32]byte;copy(k[:],rawDispatch);answered[k]=true
    continue
@@ -171,7 +170,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
   if len(f)==19{
    if !equalBytes(f[2],run[:]){rows.Close();return nil,errors.New("cross-run proposal")}
    d,err:=lastDigest(f);if err!=nil{rows.Close();return nil,err}
-   parts[6]=append(parts[6],[]any{uint64(5),bytes.Clone(id),d})
+   parts.responses=append(parts.responses,[]any{uint64(5),bytes.Clone(id),d})
    rawDispatch,ok:=f[1].([]byte);if !ok||len(rawDispatch)!=32{rows.Close();return nil,errors.New("proposal dispatch invalid")}
    var k [32]byte;copy(k[:],rawDispatch);answered[k]=true
    continue
@@ -180,7 +179,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    if !equalBytes(f[1],run[:]){rows.Close();return nil,errors.New("cross-run exogenous input")}
    if live[key]{
     d,err:=lastDigest(f);if err!=nil{rows.Close();return nil,err}
-    parts[7]=append(parts[7],[]any{uint64(1),bytes.Clone(id),d})
+    parts.pendingInputs=append(parts.pendingInputs,[]any{uint64(1),bytes.Clone(id),d})
    }
    continue
   }
@@ -191,28 +190,23 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
  keys:=make([]string,0,len(closings))
  for key:=range closings{keys=append(keys,key)}
  sort.Strings(keys)
- for _,key:=range keys{parts[3]=append(parts[3],closings[key].ref)}
+ for _,key:=range keys{parts.sourceClosures=append(parts.sourceClosures,closings[key].ref)}
  dispatchKeys:=make([][32]byte,0,len(dispatches))
  for key:=range dispatches{dispatchKeys=append(dispatchKeys,key)}
  sort.Slice(dispatchKeys,func(i,j int)bool{return bytes.Compare(dispatchKeys[i][:],dispatchKeys[j][:])<0})
- for _,key:=range dispatchKeys{if !answered[key]&&!revoked[key]{parts[5]=append(parts[5],dispatches[key])}}
+ for _,key:=range dispatchKeys{if !answered[key]&&!revoked[key]{parts.dispatches=append(parts.dispatches,dispatches[key])}}
  // Scheduled and trigger index lifecycle fields are immutable birth-state
  // projections. A terminal source remains indexed as lifecycle=0 but is
  // not pending when a committed DecisionRecord has settled it. Never retain
  // consumed entries in the checkpoint's authoritative pending partitions.
- for _,p:=range []int{0,2}{
-  active:=make([]any,0,len(parts[p]))
-  for _,raw:=range parts[p]{
-   ref:=raw.([]any)
-   kind:=uint64(2);if p==2{kind=3}
-   id,ok:=idField(ref[1]);if !ok{return nil,errors.New("malformed pending source ref")}
-   if live[id]{
-    active=append(active,raw)
-    parts[7]=append(parts[7],[]any{kind,ref[1],ref[2]})
-   }
-  }
-  parts[p]=active
- }
+ occurrenceActive,occurrenceInputs,err:=retainLiveSnapshotSources(parts.occurrences,2,live)
+ if err!=nil{return nil,err}
+ parts.occurrences=occurrenceActive
+ parts.pendingInputs=append(parts.pendingInputs,occurrenceInputs...)
+ activationActive,activationInputs,err:=retainLiveSnapshotSources(parts.triggerActivations,3,live)
+ if err!=nil{return nil,err}
+ parts.triggerActivations=activationActive
+ parts.pendingInputs=append(parts.pendingInputs,activationInputs...)
  // Outbox tasks are not evidence. Only tasks without a committed completion
  // remain pending; completed receipts are included in full canonical form.
  out,err:=tx.QueryContext(ctx,"SELECT id,canonical FROM causal_outbox ORDER BY id")
@@ -236,7 +230,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    if err!=nil{out.Close();return nil,err}
    if !equalBytes(f[4],d){out.Close();return nil,errors.New("completion digest altered")}
    var k [32]byte;copy(k[:],rawTask);completed[k]=true
-   parts[9]=append(parts[9],f)
+   parts.perceptionCompletions=append(parts.perceptionCompletions,f)
   }else{out.Close();return nil,errors.New("unregistered outbox record")}
  }
  if err:=out.Err();err!=nil{out.Close();return nil,err}
@@ -244,10 +238,10 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
  orderedTaskIDs:=make([][32]byte,0,len(tasks))
  for k:=range tasks{orderedTaskIDs=append(orderedTaskIDs,k)}
  sort.Slice(orderedTaskIDs,func(i,j int)bool{return bytes.Compare(orderedTaskIDs[i][:],orderedTaskIDs[j][:])<0})
- for _,k:=range orderedTaskIDs{if !completed[k]{parts[8]=append(parts[8],tasks[k])}}
+ for _,k:=range orderedTaskIDs{if !completed[k]{parts.perceptionTasks=append(parts.perceptionTasks,tasks[k])}}
  for k:=range completed{if _,ok:=tasks[k];!ok{return nil,errors.New("orphan perception completion in snapshot")}}
- fields:=make([]any,len(parts))
- for i,v:=range parts {fields[i]=v}
+ fields,err:=parts.canonicalOrder()
+ if err!=nil{return nil,err}
  hash,encoded,err:=deriver.Sum("cote.csf.snapshot.pending-state","cote.csf.schema.snapshot-pending-state",1,fields)
  if err!=nil{return nil,err}
  return []any{"cote.csf.schema.snapshot-pending-state",uint64(1),encoded,hash[:]},nil

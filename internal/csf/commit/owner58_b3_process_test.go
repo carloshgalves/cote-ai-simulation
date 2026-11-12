@@ -3,6 +3,8 @@ package commit
 import (
 	"bytes"
 	"context"
+	"crypto/sha256"
+	"encoding/binary"
 	"crypto/ed25519"
 	"database/sql"
 	"encoding/hex"
@@ -193,6 +195,42 @@ func b3SubprocessCrash(t *testing.T, phase, causalPath, ownerPath string, run [3
 	}
 }
 
+// b3LedgerDigest is a read-only, length-delimited fingerprint of the five
+// canonical causal prefixes. It deliberately does not include private owner
+// bytes, ephemeral checkpoints or the snapshot/receipt/ACK authority tables.
+func b3LedgerDigest(t *testing.T, path string) [32]byte {
+	t.Helper()
+	db, err := sql.Open("sqlite", path)
+	if err != nil { t.Fatal(err) }
+	defer db.Close()
+	fingerprint := sha256.New()
+	for _, table := range [...]string{
+		"input_ledger", "decision_ledger", "event_store",
+		"evidence_ledger", "causal_outbox",
+	} {
+		// Table identifiers are a hard-coded allowlist, never user input.
+		rows, err := db.Query("SELECT canonical FROM " + table + " ORDER BY id")
+		if err != nil { t.Fatalf("canonical ledger %s query: %v", table, err) }
+		appendFramed := func(data []byte) {
+			var lenFrame [8]byte
+			binary.BigEndian.PutUint64(lenFrame[:], uint64(len(data)))
+			_, _ = fingerprint.Write(lenFrame[:])
+			_, _ = fingerprint.Write(data)
+		}
+		appendFramed([]byte(table))
+		for rows.Next() {
+			var canonical []byte
+			if err := rows.Scan(&canonical); err != nil { _ = rows.Close(); t.Fatal(err) }
+			appendFramed(canonical)
+		}
+		if err := rows.Err(); err != nil { _ = rows.Close(); t.Fatal(err) }
+		if err := rows.Close(); err != nil { t.Fatal(err) }
+	}
+	var result [32]byte
+	copy(result[:], fingerprint.Sum(nil))
+	return result
+}
+
 func b3Rows(t *testing.T, path, table string) int {
 	t.Helper()
 	// Allowlist only: table names cannot originate from untrusted input.
@@ -271,10 +309,14 @@ func TestCSFRV18R58B3ProcessCrashMatrix(t *testing.T) {
 					t.Fatal(err)
 				}
 			}
+			ledgerBefore := b3LedgerDigest(t, causalPath)
 			if err := causal.Close(); err != nil {
 				t.Fatal(err)
 			}
 			b3SubprocessCrash(t, tc.phase, causalPath, ownerPath, scope.Run)
+			if got := b3LedgerDigest(t, causalPath); got != ledgerBefore {
+				t.Fatal("crashed cognitive process changed authoritative five-ledger prefixes")
+			}
 			if got := b3Rows(t, ownerPath, "checkpoints"); got != tc.ownerRows {
 				t.Fatalf("owner rows after crash: got %d want %d", got, tc.ownerRows)
 			}
@@ -336,6 +378,9 @@ func TestCSFRV18R58B3ProcessCrashMatrix(t *testing.T) {
 			}
 			if got := b3Rows(t, ownerPath, "restore_acks"); got != 1 {
 				t.Fatalf("recovery ACK not idempotent: %d", got)
+			}
+			if got := b3LedgerDigest(t, causalPath); got != ledgerBefore {
+				t.Fatal("owner recovery or ACK altered the five causal ledgers")
 			}
 			verified, err := recovered.VerifySnapshotV1(ctx, scope.Run, ref.Snapshot, b)
 			if err != nil || verified.Snapshot.ID != ref.Snapshot || verified.TailCommits != 0 {

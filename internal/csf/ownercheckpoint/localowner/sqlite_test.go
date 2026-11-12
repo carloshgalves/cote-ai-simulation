@@ -93,8 +93,21 @@ func TestB1CommitSignReopenAndDurableACK(t *testing.T) {
 		t.Fatalf("duplicate ACK: %v", err)
 	}
 	var count int
-	if err := opened.conn.QueryRowContext(ctx, "SELECT count(*) FROM restore_acks").Scan(&count); err != nil || count != 1 {
-		t.Fatalf("ACK not durable/unique %d %v", count, err)
+	if err := opened.Close(); err != nil {
+		t.Fatal(err)
+	}
+	third := openFixture(t, path, key)
+	if err := third.conn.QueryRowContext(ctx, "SELECT count(*) FROM restore_acks").Scan(&count); err != nil || count != 1 {
+		t.Fatalf("ACK did not survive second reopen %d %v", count, err)
+	}
+	if err := third.Acknowledge(ctx, ack); err == nil {
+		t.Fatal("persisted ACK falsely proved restoration in a new process")
+	}
+	if _, err := third.Restore(ctx, req); err != nil {
+		t.Fatal(err)
+	}
+	if err := third.Acknowledge(ctx, ack); err != nil {
+		t.Fatalf("idempotent ACK after second restore: %v", err)
 	}
 	stat, err := os.Stat(path)
 	if err != nil || stat.Mode().Perm()&0077 != 0 {
@@ -179,6 +192,26 @@ func TestB1IsolationImmutabilityAndTamper(t *testing.T) {
 		t.Fatal("wrong owner key signed old checkpoint")
 	}
 }
+func TestB1CallerBufferAndReturnedRestoreAreNotOwnerMemory(t *testing.T) {
+    ctx := context.Background()
+    path, key, p := fixture(t)
+    o := openFixture(t,path,key)
+    original := bytes.Clone(p.Checkpoint.Content)
+    signed, err := o.PersistAndSign(ctx,p)
+    if err != nil {t.Fatal(err)}
+    p.Checkpoint.Content[0] ^= 0x31
+    p.Checkpoint.Content = original
+    req := makeRestore(p,signed)
+    restored, err := o.Restore(ctx,req)
+    if err != nil || !bytes.Equal(restored.Content,original) {t.Fatalf("mutable caller buffer changed committed bytes: %v",err)}
+    restored.Content[0] ^= 0x35
+    ack := makeACK(req)
+    if err:=o.Acknowledge(ctx,ack);err!=nil {t.Fatalf("caller-owned return mutated owner state: %v",err)}
+    if !bytes.Equal(original,p.Checkpoint.Content) {t.Fatal("test input unexpectedly mutated")}
+    if _,err:=o.conn.ExecContext(ctx,"UPDATE checkpoints SET content=? WHERE locator=?",[]byte("tampered"),signed.Locator);err!=nil {t.Fatal(err)}
+    if err:=o.Acknowledge(ctx,ack);err==nil {t.Fatal("ACK ignored post-restore durable corruption")}
+}
+
 func TestB1ConcurrentRetriesOneCheckpoint(t *testing.T) {
 	ctx := context.Background()
 	path, key, p := fixture(t)

@@ -304,6 +304,9 @@ func (s *Store) PersistAndSign(ctx context.Context, req ownercheckpoint.PersistR
 	if s.conn == nil {
 		return zero, errClosed
 	}
+	if err := s.rejectCausalSchema(ctx); err != nil {
+		return zero, fmt.Errorf("owner/CSF database separation: %w", err)
+	}
 	cp := req.Checkpoint
 	tx, err := s.conn.BeginTx(ctx, nil)
 	if err != nil {
@@ -418,6 +421,9 @@ func (s *Store) Restore(ctx context.Context, req ownercheckpoint.RestoreRequest)
 			delete(s.restored, k)
 		}
 	}
+	if err := s.rejectCausalSchema(ctx); err != nil {
+		return zero, fmt.Errorf("owner/CSF database separation: %w", err)
+	}
 	data, err := s.loadVerified(ctx, req)
 	if err != nil {
 		return zero, err
@@ -442,6 +448,9 @@ func (s *Store) Acknowledge(ctx context.Context, ack ownercheckpoint.RestoreAck)
 	defer s.mu.Unlock()
 	if s.conn == nil {
 		return errClosed
+	}
+	if err := s.rejectCausalSchema(ctx); err != nil {
+		return fmt.Errorf("owner/CSF database separation: %w", err)
 	}
 	restored, ok := s.restored[key]
 	if !ok {

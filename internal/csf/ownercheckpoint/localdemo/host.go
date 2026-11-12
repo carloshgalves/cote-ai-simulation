@@ -76,9 +76,6 @@ func (h *Host) StageSnapshot(ctx context.Context, checkpoint sqlite.SnapshotChec
 	if checkpoint.ActorNamespace != h.scope.Namespace || checkpoint.ActorID != h.scope.Actor {
 		return zero, errors.New("local host refuses another actor's checkpoint")
 	}
-	if err := h.owner.VerifyIndependent(ctx); err != nil {
-		return zero, fmt.Errorf("local host owner/CSF separation: %w", err)
-	}
 	// Freeze the caller-owned memory once for both sequential transactions.
 	// Mutation concurrent with the copy is outside the caller contract.
 	frozen := checkpoint
@@ -104,9 +101,6 @@ func (h *Host) StageSnapshot(ctx context.Context, checkpoint sqlite.SnapshotChec
 func (h *Host) Restore(ctx context.Context, ref Reference) error {
 	if h == nil || ctx == nil {
 		return errors.New("local host restore unconfigured")
-	}
-	if err := h.owner.VerifyIndependent(ctx); err != nil {
-		return fmt.Errorf("local host owner/CSF separation: %w", err)
 	}
 	return h.gate.RestoreAndAcknowledge(ctx, h.scope, ref.Snapshot, ref.Receipt)
 }

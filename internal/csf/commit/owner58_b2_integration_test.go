@@ -164,6 +164,28 @@ func TestCSFRV18R58B2OwnerLocalHostStageSnapshotRestartRestoreACKWork(t *testing
 	if err := crossRun.Run(ctx, ref); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || count != 1 {
 		t.Fatal("cross-run executed callback")
 	}
+	// The host must enter Gate.Stage and Gate.Restore even when context has
+	// already been canceled, so their revocation precedes every error.
+	canceled, cancel := context.WithCancel(ctx)
+	cancel()
+	if _, err := fresh.StageSnapshot(canceled, escrowed); !errors.Is(err, context.Canceled) {
+		t.Fatalf("cancelled stage did not fail as expected: %v", err)
+	}
+	if err := fresh.Run(ctx, ref); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || count != 1 {
+		t.Fatal("cancelled stage left old WORK permit active")
+	}
+	if err := fresh.Restore(ctx, ref); err != nil {
+		t.Fatal("fresh restore after cancelled stage:", err)
+	}
+	if err := fresh.Run(ctx, ref); err != nil || count != 2 {
+		t.Fatalf("fresh ACK did not restore permission: calls=%d err=%v", count, err)
+	}
+	if err := fresh.Restore(canceled, ref); !errors.Is(err, context.Canceled) {
+		t.Fatalf("cancelled restore did not fail as expected: %v", err)
+	}
+	if err := fresh.Run(ctx, ref); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || count != 2 {
+		t.Fatal("cancelled restore left old WORK permit active")
+	}
 }
 
 func TestCSFRV18R58B2RejectsCausalDatabaseOpenedAfterOwner(t *testing.T) {

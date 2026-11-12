@@ -17,26 +17,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 jobs:
-  # Temporary gofmt and focused real-SQLite integration evidence.
-  owner58-s0-sqlite-fmt:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v6
-        with:
-          go-version: "1.27.2"
-          cache: true
-      - name: Emit gofmt and test exact SQLite owner gate
-        shell: bash
-        run: |
-          set -euo pipefail
-          f=internal/csf/commit/owner58_s0_integration_test.go
-          echo "UNFORMATTED-SQLITE:$(gofmt -l "$f" | wc -l)"
-          printf 'OWNER58-SQLITE-GOFMT:%s:' "$f"
-          gofmt "$f" | base64 -w0
-          printf '\\n'
-          go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18R58S0'
   continuity:
     runs-on: ubuntu-latest
     # The R21 V1→V2 65-WORK cascade is intentionally exercised under -race;

@@ -1,0 +1,37 @@
+name: B2 local cognitive host gate
+on:
+  pull_request:
+    paths:
+      - "internal/csf/ownercheckpoint/localdemo/**"
+      - "internal/csf/commit/owner58_b2_integration_test.go"
+      - ".github/workflows/b2-owner-gate.yml"
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  b2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Format B2 source and emit reproducible formatter output
+        run: |
+          gofmt -w internal/csf/ownercheckpoint/localdemo/host.go internal/csf/commit/owner58_b2_integration_test.go
+          echo B2_HOST_GO_FMT_BEGIN
+          base64 -w0 internal/csf/ownercheckpoint/localdemo/host.go
+          echo
+          echo B2_HOST_GO_FMT_END
+          echo B2_TEST_GO_FMT_BEGIN
+          base64 -w0 internal/csf/commit/owner58_b2_integration_test.go
+          echo
+          echo B2_TEST_GO_FMT_END
+      - name: B2 focused real CSF and owner integration
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18R58B2'
+      - name: B2 focused race
+        run: go test -race -count=1 -timeout=10m ./internal/csf/commit -run '^TestCSFRV18R58B2'

@@ -130,6 +130,10 @@ func Open(ctx context.Context, path string, signer ed25519.PrivateKey) (*Store, 
 		_ = s.Close()
 		return nil, err
 	}
+	if err := s.rejectCausalSchema(ctx); err != nil {
+		_ = s.Close()
+		return nil, err
+	}
 	if _, err := conn.ExecContext(ctx, schema); err != nil {
 		_ = s.Close()
 		return nil, err
@@ -179,6 +183,24 @@ func (s *Store) verifyConnection(ctx context.Context) error {
 	}
 	if !strings.EqualFold(journal, "wal") || synchronous != 2 || foreignKeys != 1 {
 		return fmt.Errorf("owner SQLite requires WAL, FULL, foreign_keys ON: journal=%s synchronous=%d foreign_keys=%d", journal, synchronous, foreignKeys)
+	}
+	return nil
+}
+
+// rejectCausalSchema prevents accidental reuse of an existing CSF authority
+// file as the owner-owned store. The B2 host must also enforce distinct paths
+// if it opens the owner before its CSF file exists.
+func (s *Store) rejectCausalSchema(ctx context.Context) error {
+	var count int
+	err := s.conn.QueryRowContext(ctx, `SELECT count(*) FROM sqlite_master
+        WHERE type='table' AND name IN (
+          'genesis_records','input_ledger','world_revisions',
+          'snapshot_seals','cognitive_owner_receipts')`).Scan(&count)
+	if err != nil {
+		return err
+	}
+	if count != 0 {
+		return errors.New("refusing to reuse CSF causal SQLite file for cognitive owner")
 	}
 	return nil
 }

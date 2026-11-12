@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -145,7 +146,7 @@ func (g *Gate) Stage(ctx context.Context, scope Scope,
 	if cp.ActorNamespace != scope.Namespace || cp.ActorID != scope.Actor {
 		return zero, errors.New("owner checkpoint actor differs from requested scope")
 	}
-	g.invalidate(scope)
+	epoch := g.invalidate(scope)
 	if err := ctx.Err(); err != nil {
 		return zero, err
 	}
@@ -160,12 +161,85 @@ func (g *Gate) Stage(ctx context.Context, scope Scope,
 	if _, err := sqlite.CognitiveCheckpointSigningBytesV1(scope.Run, cp, signed.Locator); err != nil {
 		return zero, fmt.Errorf("external owner receipt binding: %w", err)
 	}
+	g.mu.RLock()
+	current := g.generation[scope] == epoch
+	g.mu.RUnlock()
+	if !current {
+		return zero, errors.New("superseded owner persist cannot enter escrow")
+	}
 	receipt, err := g.escrow.PersistCognitiveCheckpointV1(ctx, scope.Run,
 		cloneCheckpoint(cp), signed.Locator, bytes.Clone(signed.Signature), g.bundle)
 	if err != nil {
 		return zero, fmt.Errorf("signed owner checkpoint escrow: %w", err)
 	}
+	g.mu.RLock()
+	current = g.generation[scope] == epoch
+	g.mu.RUnlock()
+	if !current {
+		return zero, errors.New("superseded owner escrow cannot authorize checkpoint")
+	}
 	return receipt, nil
+}
+
+// snapshotIncludesCheckpoint proves the signed escrow checkpoint is exactly
+// the one committed into the validated snapshot's epistemic reference roster.
+// Two individually valid artifacts do not imply this binding.
+func snapshotIncludesCheckpoint(snapshot sqlite.SnapshotV1, scope Scope, cp sqlite.SnapshotCheckpoint) error {
+	if snapshot.ID == ([32]byte{}) || len(snapshot.Canonical) == 0 {
+		return errors.New("verified snapshot canonical bytes absent")
+	}
+	decoded, err := codec.StrictDecodePayload(snapshot.Canonical)
+	if err != nil {
+		return err
+	}
+	fields, ok := decoded.([]any)
+	if !ok || len(fields) != 19 {
+		return errors.New("verified snapshot schema incompatible")
+	}
+	runID, ok := fields[0].([]byte)
+	if !ok || !bytes.Equal(runID, scope.Run[:]) {
+		return errors.New("verified snapshot run differs from owner")
+	}
+	roster, ok := fields[14].([]any)
+	if !ok {
+		return errors.New("verified snapshot epistemic roster malformed")
+	}
+	digest := identity.OpaqueContentHash(cp.Content)
+	expected, err := codec.CanonicalPayload([]any{
+		[]any{cp.ActorNamespace, cp.ActorID}, cp.StoreID, uint64(cp.SchemaVersion),
+		[]any{uint64(1), cp.Content}, digest[:], cp.Producer,
+		uint64(cp.ProducerVersion),
+		[]any{cp.CoversInstant, cp.CoversRevision, cp.CoversEvidenceCursor},
+	})
+	if err != nil {
+		return err
+	}
+	found := 0
+	for _, raw := range roster {
+		value, ok := raw.([]any)
+		if !ok || len(value) != 8 {
+			return errors.New("verified epistemic reference malformed")
+		}
+		actor, ok := value[0].([]any)
+		if !ok || len(actor) != 2 {
+			return errors.New("verified epistemic actor malformed")
+		}
+		if actor[0] != scope.Namespace || actor[1] != scope.Actor {
+			continue
+		}
+		encoded, err := codec.CanonicalPayload(value)
+		if err != nil {
+			return err
+		}
+		if !bytes.Equal(encoded, expected) {
+			return errors.New("signed escrow checkpoint differs from snapshot actor reference")
+		}
+		found++
+	}
+	if found != 1 {
+		return errors.New("signed escrow checkpoint absent or duplicated in sealed snapshot")
+	}
+	return nil
 }
 
 // RestoreAndAcknowledge verifies a sealed snapshot and escrowed signature,
@@ -186,8 +260,12 @@ func (g *Gate) RestoreAndAcknowledge(ctx context.Context, scope Scope,
 	if err := ctx.Err(); err != nil {
 		return err
 	}
-	if _, err := g.escrow.VerifySnapshotV1(ctx, scope.Run, snapshotID, g.bundle); err != nil {
+	verified, err := g.escrow.VerifySnapshotV1(ctx, scope.Run, snapshotID, g.bundle)
+	if err != nil {
 		return fmt.Errorf("snapshot integrity before owner restore: %w", err)
+	}
+	if verified.Snapshot.ID != snapshotID {
+		return errors.New("snapshot verifier returned a different identity")
 	}
 	cp, locator, err := g.escrow.LoadCognitiveCheckpointV1(ctx, scope.Run,
 		receiptID, scope.Namespace, scope.Actor, g.bundle)
@@ -196,6 +274,9 @@ func (g *Gate) RestoreAndAcknowledge(ctx context.Context, scope Scope,
 	}
 	if cp.ActorNamespace != scope.Namespace || cp.ActorID != scope.Actor {
 		return errors.New("restored checkpoint actor differs from requested scope")
+	}
+	if err := snapshotIncludesCheckpoint(verified.Snapshot, scope, cp); err != nil {
+		return fmt.Errorf("signed escrow not bound to sealed snapshot: %w", err)
 	}
 	if _, err := sqlite.CognitiveCheckpointSigningBytesV1(scope.Run, cp, locator); err != nil {
 		return err

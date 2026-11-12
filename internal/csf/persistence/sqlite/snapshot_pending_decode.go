@@ -7,6 +7,7 @@ import (
 
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
 )
 
 // pendingSnapshotReference is a typed, owned copy of a normative causal-ref
@@ -144,11 +145,14 @@ func decodeSnapshotPendingRosters(snapshot []any)(pendingSnapshotRosters,error){
     if !ok||len(f)!=8{return out,errors.New("trigger-runtime snapshot projection malformed")}
     id,err:=pendingSnapshotID(f[0])
     if err!=nil{return out,fmt.Errorf("trigger-runtime definition: %w",err)}
-    version,ok:=f[1].(uint64)
-    if !ok||version==0{return out,errors.New("trigger-runtime version invalid")}
+    canonical,err:=codec.CanonicalPayload(f)
+    if err!=nil{return out,err}
+    runtimeValue,err:=trigger.DecodeRuntime(canonical)
+    if err!=nil{return out,fmt.Errorf("historical trigger-runtime invalid: %w",err)}
+    if [32]byte(runtimeValue.DefinitionID)!=id{return out,errors.New("trigger-runtime ID differs from typed representation")}
     if seen[id]{return out,errors.New("duplicate trigger-runtime definition")}
     seen[id]=true
-    out.TriggerRuntimes=append(out.TriggerRuntimes,pendingSnapshotTriggerRuntime{DefinitionID:id,Version:version})
+    out.TriggerRuntimes=append(out.TriggerRuntimes,pendingSnapshotTriggerRuntime{DefinitionID:id,Version:uint64(runtimeValue.Version)})
     continue
    }
    if part==9{
@@ -157,6 +161,13 @@ func decodeSnapshotPendingRosters(snapshot []any)(pendingSnapshotRosters,error){
     id,err:=pendingSnapshotID(f[0]);if err!=nil{return out,err}
     task,err:=pendingSnapshotID(f[1]);if err!=nil{return out,err}
     digest,err:=pendingSnapshotID(f[4]);if err!=nil{return out,err}
+    for _,index:=range []int{2,3}{
+     ids,ok:=f[index].([]any)
+     if !ok||len(ids)>65535{return out,errors.New("perception-completion linked ID roster malformed")}
+     for _,rawID:=range ids{
+      if _,err:=pendingSnapshotID(rawID);err!=nil{return out,fmt.Errorf("perception-completion linked ID: %w",err)}
+     }
+    }
     if seen[id]{return out,errors.New("duplicate perception completion")}
     seen[id]=true
     out.PerceptionCompletions=append(out.PerceptionCompletions,pendingSnapshotCompletion{id,task,digest})

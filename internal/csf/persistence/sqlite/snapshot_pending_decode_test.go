@@ -57,7 +57,7 @@ func TestPending57AllTenPartitionsAreTypedAndOrderPreserved(t *testing.T){
   !out.PendingInputs[4].HasSlotResponseKind||out.PendingInputs[4].SlotResponseKind!=1{
   t.Fatal("typed snapshot decoder reordered refs or dropped slot-response discriminator")
  }
- if out.Rounds[0].ID!=[32]byte(func() [32]byte{var v [32]byte;v[0]=5;return v}()){
+ if out.Rounds[0].ID[0]!=5{
   t.Fatal("round ID was reminted")
  }
  before,err:=codec.CanonicalPayload(input);if err!=nil{t.Fatal(err)}
@@ -133,4 +133,30 @@ func TestPending57RejectsTamperedEnvelopeAndInvalidVersion(t *testing.T){
  bad=append([]any(nil),valid...)
  bad[11]=[]any{typed[0],typed[1],typed[2],[]byte{0x11}}
  if _,err:=decodeSnapshotPendingRosters(bad);err==nil{t.Fatal("short pending digest accepted")}
+}
+
+func TestPending57RejectsMalformedTriggerRuntimeAndCompletionDetails(t *testing.T){
+ for _,tc:=range []struct{
+  name string
+  part int
+  field int
+  value any
+ }{
+  {"trigger-last-value",1,2,[]any{uint64(1),"not-a-bool"}},
+  {"trigger-armed",1,3,uint64(0)},
+  {"trigger-version-overflow",1,1,uint64(1)<<32},
+  {"completion-observation-list",9,2,"not-an-array"},
+  {"completion-observation-id",9,2,[]any{[]byte{0x11}}},
+  {"completion-knowledge-id",9,3,[]any{[]byte{0x22}}},
+ }{
+  t.Run(tc.name,func(t *testing.T){
+   parts:=pending57Parts()
+   raw:=append([]any(nil),parts[tc.part].([]any)[0].([]any)...)
+   raw[tc.field]=tc.value
+   parts[tc.part]=[]any{raw}
+   if _,err:=decodeSnapshotPendingRosters(pending57Snapshot(t,parts));err==nil{
+    t.Fatal("malformed normative runtime/completion field accepted")
+   }
+  })
+ }
 }

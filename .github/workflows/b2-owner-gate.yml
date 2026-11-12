@@ -20,17 +20,14 @@ jobs:
         with:
           go-version: "1.27.2"
           cache: true
-      - name: Format B2 source and emit reproducible formatter output
+      - name: Require committed gofmt output
         run: |
-          gofmt -w internal/csf/ownercheckpoint/localdemo/host.go internal/csf/commit/owner58_b2_integration_test.go
-          echo B2_HOST_GO_FMT_BEGIN
-          base64 -w0 internal/csf/ownercheckpoint/localdemo/host.go
-          echo
-          echo B2_HOST_GO_FMT_END
-          echo B2_TEST_GO_FMT_BEGIN
-          base64 -w0 internal/csf/commit/owner58_b2_integration_test.go
-          echo
-          echo B2_TEST_GO_FMT_END
+          files=$(gofmt -l internal/csf/ownercheckpoint/localdemo/host.go internal/csf/commit/owner58_b2_integration_test.go)
+          if [ -n "$files" ]; then
+            echo "Go files require gofmt:"
+            echo "$files"
+            exit 1
+          fi
       - name: B2 focused real CSF and owner integration
         run: go test -count=1 -v ./internal/csf/commit -run '^TestCSFRV18R58B2'
       - name: B2 focused race

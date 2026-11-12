@@ -8,9 +8,11 @@ Princípio geral:
 
 O objetivo do projeto não é reproduzir a light novel. É construir uma ANHS causalmente executável, povoada por personagens persistentes, capaz de produzir uma timeline própria a partir das mesmas pressões, regras, capacidades e conhecimentos disponíveis.
 
-## Checkpoint de implementação — 2026-11-11
+## Checkpoint de implementação — 2026-11-12
 
-Este roadmap descreve capacidades de produto e não significa que títulos com ✅ estejam homologados no runtime. Na `main`, CSFRV1-1–7 estão integrados, e a [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25) trouxe a baseline CSFRV1-8 (`0e3f966`). R21–R23 foram implementados/testados no HEAD `96daa15`, mas falta revisão independente formal e aceite de release; consultar a [matriz pós-merge](docs/validation/csfrv1-8-baseline-2026-11-11.md). CSFRV1-9, 9A e 10 sem integração; Embodiment PSV1-1/2 integrado, PSV1-3..8 pendentes; Canon RAG V0 e dados de referência Y1 V0–V11 integrados com gates; Zodiac/VIP somente spec/modelos/vetores; o primeiro exame e a cognição multiagente completos NÃO estão executáveis.
+Este roadmap descreve capacidades de produto; nenhum ✅ equivale automaticamente a homologação de runtime. Na `main@78bfd267`, **CSFRV1-1–8** estão integrados: baseline de replay/snapshot/fork da [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25), refactors de autoridade/partições das PRs #61–#71 e contrato/gate de owner cognitivo **S0** da [PR #72](https://github.com/carloshgalves/cote-ai-simulation/pull/72). Isso **não comprova** flush remoto, restauração de memória real ou uso obrigatório de gate em todo dispatch: [#58 P0](https://github.com/carloshgalves/cote-ai-simulation/issues/58) permanece aberta, assim como [#59 CI V2](https://github.com/carloshgalves/cote-ai-simulation/issues/59). A conformidade cruzada de 621 casos é **V1**. A [matriz pós-merge](docs/validation/csfrv1-8-baseline-2026-11-11.md) registra os limites da entrega original; o [checkpoint de 12/11](docs/validation/project-state-2026-11-12.md) registra as mudanças posteriores.
+
+**Próxima fatia prioritária:** #58/S1 — owner durável concreto, restore/ACK e integração verificada dos caminhos de WORK, começando com contrato e teste reprodutível, sem escolher infraestrutura remota sem decisão do operador. #59 pode avançar independentemente. CSFRV1-9 (Observatory), 9A e 10 não estão integrados; Embodiment PSV1-1/2 está integrado, PSV1-3–8 pendentes; Canon RAG V0 e dados de referência Y1 V0–V11 estão integrados com gates; Zodiac/VIP possui somente spec/modelos/vetores. O primeiro exame e a cognição multiagente completos **não estão executáveis**.
 
 As issues de auditoria #38/#39/#52 foram encerradas **administrativamente**, não homologadas; `verified:false` e bloqueios de admissão permanecem. Fonte de aceite de produto: [`docs/validation/product-readiness-2026-11-10.md`](docs/validation/product-readiness-2026-11-10.md).
 
@@ -82,9 +84,9 @@ Regras consolidadas em `PRIVATE_POINTS_ECONOMY.md`.
 
 ---
 
-# 1. Fundação causal da simulação ⏳
+# 1. Fundação causal da simulação 🔄
 
-Esta é a próxima fundação obrigatória depois do domínio físico. Nenhum domínio cognitivo/social deve depender de uma noção vaga de “cena”.
+A fundação causal já possui implementação parcial (CSFRV1-1–8), mas ainda depende de Observatory, adapter físico, gates do owner e validação integrada. Nenhum domínio cognitivo/social deve depender de uma noção vaga de “cena”.
 
 ## 1.1 Simulation Clock
 

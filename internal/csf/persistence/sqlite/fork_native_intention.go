@@ -23,9 +23,11 @@ func nativeArchiveKey(kind uint64) string { return fmt.Sprintf("native:%d", kind
 func nativeRefKey(ref []any) string       { return fmt.Sprintf("%d:%x", ref[0], ref[1]) }
 
 func forkPendingParts(snapshot []any) ([]any, error) {
- rosters,err:=decodeSnapshotPendingRosters(snapshot)
- if err!=nil{return nil,err}
- return rosters.legacyPartitions(),nil
+	rosters, err := decodeSnapshotPendingRosters(snapshot)
+	if err != nil {
+		return nil, err
+	}
+	return rosters.legacyPartitions(), nil
 }
 
 // Only intentions on responses belonging to migrated pending rounds require

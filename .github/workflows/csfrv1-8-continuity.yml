@@ -17,21 +17,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 jobs:
-  # Temporary formatting-only verification, removed before final gate.
-  p57-gofmt:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v4
-      - name: Print gofmt-owned source for all changed Go files
-        shell: bash
-        run: |
-          set -euo pipefail
-          for f in internal/csf/persistence/sqlite/snapshot_pending_decode.go internal/csf/persistence/sqlite/snapshot_pending_decode_test.go internal/csf/persistence/sqlite/fork_native_intention.go; do
-            printf 'FORMATTED:%s:' "$f"
-            gofmt "$f" | base64 -w0
-            printf '\\n'
-          done
   continuity:
     runs-on: ubuntu-latest
     # The R21 V1→V2 65-WORK cascade is intentionally exercised under -race;

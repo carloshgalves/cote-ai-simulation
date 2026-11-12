@@ -225,20 +225,34 @@ func TestB1CallerBufferAndReturnedRestoreAreNotOwnerMemory(t *testing.T) {
 }
 
 func TestB1PrivateRestoredBuffersWipedAtClose(t *testing.T) {
-    ctx := context.Background()
-    path, key, p := fixture(t)
-    owner := openFixture(t, path, key)
-    signed, err := owner.PersistAndSign(ctx, p)
-    if err != nil { t.Fatal(err) }
-    req := makeRestore(p,signed)
-    received, err := owner.Restore(ctx,req)
-    if err != nil { t.Fatal(err) }
-    k := restoreKey{Scope:req.Scope,Locator:req.Locator,ReceiptID:req.ReceiptID,ContentHash:req.ContentHash}
-    retained := owner.restored[k]
-    if len(retained)==0 || !bytes.Equal(received.Content, retained) {t.Fatal("restored checkpoint state not held by owner")}
-    if err := owner.Close();err!=nil {t.Fatal(err)}
-    for _, b := range retained {if b!=0 {t.Fatal("private owner buffer not erased on Close")}}
-    if !bytes.Equal(received.Content,p.Checkpoint.Content) {t.Fatal("caller buffer unexpectedly wiped")}
+	ctx := context.Background()
+	path, key, p := fixture(t)
+	owner := openFixture(t, path, key)
+	signed, err := owner.PersistAndSign(ctx, p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	req := makeRestore(p, signed)
+	received, err := owner.Restore(ctx, req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	k := restoreKey{Scope: req.Scope, Locator: req.Locator, ReceiptID: req.ReceiptID, ContentHash: req.ContentHash}
+	retained := owner.restored[k]
+	if len(retained) == 0 || !bytes.Equal(received.Content, retained) {
+		t.Fatal("restored checkpoint state not held by owner")
+	}
+	if err := owner.Close(); err != nil {
+		t.Fatal(err)
+	}
+	for _, b := range retained {
+		if b != 0 {
+			t.Fatal("private owner buffer not erased on Close")
+		}
+	}
+	if !bytes.Equal(received.Content, p.Checkpoint.Content) {
+		t.Fatal("caller buffer unexpectedly wiped")
+	}
 }
 
 func TestB1ConcurrentRetriesOneCheckpoint(t *testing.T) {

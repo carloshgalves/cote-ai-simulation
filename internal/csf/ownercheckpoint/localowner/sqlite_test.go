@@ -193,23 +193,52 @@ func TestB1IsolationImmutabilityAndTamper(t *testing.T) {
 	}
 }
 func TestB1CallerBufferAndReturnedRestoreAreNotOwnerMemory(t *testing.T) {
+	ctx := context.Background()
+	path, key, p := fixture(t)
+	o := openFixture(t, path, key)
+	original := bytes.Clone(p.Checkpoint.Content)
+	signed, err := o.PersistAndSign(ctx, p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	p.Checkpoint.Content[0] ^= 0x31
+	p.Checkpoint.Content = original
+	req := makeRestore(p, signed)
+	restored, err := o.Restore(ctx, req)
+	if err != nil || !bytes.Equal(restored.Content, original) {
+		t.Fatalf("mutable caller buffer changed committed bytes: %v", err)
+	}
+	restored.Content[0] ^= 0x35
+	ack := makeACK(req)
+	if err := o.Acknowledge(ctx, ack); err != nil {
+		t.Fatalf("caller-owned return mutated owner state: %v", err)
+	}
+	if !bytes.Equal(original, p.Checkpoint.Content) {
+		t.Fatal("test input unexpectedly mutated")
+	}
+	if _, err := o.conn.ExecContext(ctx, "UPDATE checkpoints SET content=? WHERE locator=?", []byte("tampered"), signed.Locator); err != nil {
+		t.Fatal(err)
+	}
+	if err := o.Acknowledge(ctx, ack); err == nil {
+		t.Fatal("ACK ignored post-restore durable corruption")
+	}
+}
+
+func TestB1PrivateRestoredBuffersWipedAtClose(t *testing.T) {
     ctx := context.Background()
     path, key, p := fixture(t)
-    o := openFixture(t,path,key)
-    original := bytes.Clone(p.Checkpoint.Content)
-    signed, err := o.PersistAndSign(ctx,p)
-    if err != nil {t.Fatal(err)}
-    p.Checkpoint.Content[0] ^= 0x31
-    p.Checkpoint.Content = original
+    owner := openFixture(t, path, key)
+    signed, err := owner.PersistAndSign(ctx, p)
+    if err != nil { t.Fatal(err) }
     req := makeRestore(p,signed)
-    restored, err := o.Restore(ctx,req)
-    if err != nil || !bytes.Equal(restored.Content,original) {t.Fatalf("mutable caller buffer changed committed bytes: %v",err)}
-    restored.Content[0] ^= 0x35
-    ack := makeACK(req)
-    if err:=o.Acknowledge(ctx,ack);err!=nil {t.Fatalf("caller-owned return mutated owner state: %v",err)}
-    if !bytes.Equal(original,p.Checkpoint.Content) {t.Fatal("test input unexpectedly mutated")}
-    if _,err:=o.conn.ExecContext(ctx,"UPDATE checkpoints SET content=? WHERE locator=?",[]byte("tampered"),signed.Locator);err!=nil {t.Fatal(err)}
-    if err:=o.Acknowledge(ctx,ack);err==nil {t.Fatal("ACK ignored post-restore durable corruption")}
+    received, err := owner.Restore(ctx,req)
+    if err != nil { t.Fatal(err) }
+    k := restoreKey{Scope:req.Scope,Locator:req.Locator,ReceiptID:req.ReceiptID,ContentHash:req.ContentHash}
+    retained := owner.restored[k]
+    if len(retained)==0 || !bytes.Equal(received.Content, retained) {t.Fatal("restored checkpoint state not held by owner")}
+    if err := owner.Close();err!=nil {t.Fatal(err)}
+    for _, b := range retained {if b!=0 {t.Fatal("private owner buffer not erased on Close")}}
+    if !bytes.Equal(received.Content,p.Checkpoint.Content) {t.Fatal("caller buffer unexpectedly wiped")}
 }
 
 func TestB1ConcurrentRetriesOneCheckpoint(t *testing.T) {

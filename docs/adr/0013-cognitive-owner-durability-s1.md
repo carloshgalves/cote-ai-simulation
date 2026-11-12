@@ -1,6 +1,6 @@
 # ADR 0013 — Owner cognitivo durável: fronteira de confiança e prova local S1
 
-**Status:** PROPOSED — **não aceito**, sem autorização de implementação/produção  
+**Status:** ACCEPTED for **local single-operator demonstrator** — aprovação do operador em 2026-11-12 após merge da PR #75. **Não** aprovado para produção, multi-tenant ou armazenamento remoto.  
 **Data:** 2026-11-12  
 **Issue:** [#74 (S1)](https://github.com/carloshgalves/cote-ai-simulation/issues/74), sob [#58 (P0-release)](https://github.com/carloshgalves/cote-ai-simulation/issues/58)  
 **Baseline inspecionada:** `main@5474413e4a2c43bdb3d89f7298b272d58342157e`  
@@ -13,10 +13,10 @@ S0 integrou `internal/csf/ownercheckpoint.Gate` e a interface `DurableOwner`; ce
 
 O repository possui executores **determinísticos** de WORK e retomada, mas não um processo de cognição/LLM integrado à superfície de `RunWork`. Não confundir um terminal `CommitWork` com geração de pensamento por um agente.
 
-## Decisão proposta para S1b (restrita e reversível)
+## Decisão aceita para a prova local S1b (restrita e reversível)
 
 1. **Ownership e limites:** CSF continua autoridade exclusiva de mundo, clock, evidência, journal, cinco ledgers, snapshot, publicação e lineage; owner da cognição, **fora** do core, controla o significado e a persistência de crenças/memória, seu estado privado, a chave privada Ed25519, restauração e confirmação de ACK. O host/orquestrador é responsável por autenticação, autorização, sequenciamento e passagem **obrigatória** pelo gate para cada trabalho cognitivo.
-2. **Prova local mínima:** sugerir um **segundo arquivo SQLite independente, pertencente ao owner** (não um segundo arquivo de ledger da CSF), com WAL, `synchronous=FULL` verificados na conexão e tabelas do próprio owner para checkpoints imutáveis e ACKs endereçados. Utilizar bytes sintéticos; não integrar provedor de LLM, conteúdo real de personagem, cloud nem armazenamento compartilhado. Um teste de fechamento/reabertura **em processo distinto**, com falhas entre as etapas, deve demonstrar a propriedade **sob as hipóteses do filesystem local**. A aceitação dessa escolha exige decisão humana antes da S1b.
+2. **Prova local mínima:** sugerir um **segundo arquivo SQLite independente, pertencente ao owner** (não um segundo arquivo de ledger da CSF), com WAL, `synchronous=FULL` verificados na conexão e tabelas do próprio owner para checkpoints imutáveis e ACKs endereçados. Utilizar bytes sintéticos; não integrar provedor de LLM, conteúdo real de personagem, cloud nem armazenamento compartilhado. Um teste de fechamento/reabertura **em processo distinto**, com falhas entre as etapas, deve demonstrar a propriedade **sob as hipóteses do filesystem local**. A escolha local foi aceita pelo operador antes da implementação B1; qualquer mudança de topologia exige nova decisão.
 3. **Fronteira entre dois bancos:** o owner persiste e confirma seu commit **antes** de assinar o recibo; CSF valida assinatura e escrows; snapshot CSF publica depois. Não há transação distribuída owner↔CSF. Checkpoint órfão após falha entre owner-commit e CSF-ref pode ser reutilizado por retry idempotente; não deve ganhar autoridade de mundo nem ser coletado sem prova de retenção/linhagem. Se falhar depois de snapshot, nova sessão restaura o checkpoint exato e exige ACK. Falha ou dúvida = **nenhum novo WORK cognitivo**.
 4. **Escopo/autorização:** `ownercheckpoint.Scope` atualmente contém `Run`, `Namespace` e `Actor`, **não** `Tenant`. Um tenant autenticado deve ser ligado à run pelo host usando registro/ACL verificáveis e permissão do ator antes de qualquer chamada a `Stage`, `RestoreAndAcknowledge`, `RunWork` ou leitura privilegiada de escrow. O tenant não é criado por simples string fornecida por cliente; nenhum recibo assinado deve ser confundido com autorização de acesso. **Sem host autenticado, S1b é apenas demonstrador single-operator**.
 5. **Locator e chaves:** `CognitiveCheckpointSigningBytesV1` exige locator não vazio compatível com `machine-id` ASCII. Locator é identificador **opaco**, nunca path livre, URL assinada ou credencial; resolverá internamente para um item imutável vinculado a `(run, actor namespace, actor, store, schema, producer, coverage, hash)`. Repetição com mesma identidade+bytes retorna mesmo locator/recibo/ACK; colisão de identidade com bytes diferentes é erro. Chave privada permanece sob owner, **fora do repositório, CSF e logs**; teste pode usar chave efêmera sintética, não prova gestão de chaves de produção. Chave pública é fixada pelo contrato existente e não rotaciona silenciosamente.
@@ -41,7 +41,7 @@ Host autenticado (ou demonstrador local sinalizado) verifica run/actor/ACL
 
 Qualquer falha entre as etapas é recuperável ou **fail-closed**. A operação owner-commit órfã **não** autoriza snapshot nem WORK.
 
-## Alternativas avaliadas (decisão ainda não aprovada)
+## Alternativas avaliadas (escolha local aceita; produção pendente)
 
 | Opção | Benefício | Limite para a #74 |
 | --- | --- | --- |
@@ -50,7 +50,7 @@ Qualquer falha entre as etapas é recuperável ou **fail-closed**. A operação 
 | PostgreSQL separado | Portas e transações robustas, expansão multiusuário possível | Serviço/segredos/manutenção antes de existir host de cognição; ainda sem atomicidade distribuída com CSF |
 | Object storage remoto + KMS | Pode atender persistência remota e isolamento na evolução de produção | Custos, autenticação, latência, semântica de durabilidade e restauração variam por provider; depende de contrato, credenciais, decisão operacional e drills reais |
 
-**Escolha proposta:** SQLite local do owner **para prova com dados sintéticos**; adiar provedor remoto de produção. A #58 **não** fecha com essa prova. Qualquer integração real de serviço, compra, deploy ou credencial exige autorização própria.
+**Escolha aceita para B1:** SQLite local do owner **para prova com dados sintéticos**; adiar provedor remoto de produção. A #58 **não** fecha com essa prova. Qualquer integração real de serviço, compra, deploy ou credencial exige autorização própria.
 
 ## Modelo de falhas e limites de garantia
 
@@ -69,7 +69,7 @@ Qualquer falha entre as etapas é recuperável ou **fail-closed**. A operação 
 
 ## Condições de aceite antes de S1b
 
-- [ ] Aprovação humana explícita da topologia de **owner SQLite separado, dados sintéticos**, ou escolha fundamentada de outra alternativa.
+- [x] Aprovação humana da topologia de **owner SQLite separado, dados sintéticos** (2026-11-12, por instrução do operador; PR #75 mesclada).
 - [ ] Delimitação do host/runner a criar (não existe host produtivo), responsabilização por ACL e escopo da prova single-operator.
 - [ ] Aprovação dos invariantes de commit, restore/ACK, crash, fork, concorrência e proteção de keys; lista de invariantes negativos na [matriz S1a](../validation/cognitive-owner-s1a-2026-11-12.md).
 - [ ] Confirmação de que S1b não promete durabilidade remota de produção e de que a #58 permanece aberta.

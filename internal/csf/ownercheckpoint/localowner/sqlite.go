@@ -205,6 +205,22 @@ func (s *Store) rejectCausalSchema(ctx context.Context) error {
 	return nil
 }
 
+// VerifyIndependent rechecks the live owner file, not only its state at Open.
+// A causal Store opened on the same path *after* owner.Open adds CSF tables;
+// that misconfiguration must fail closed before any B2 stage/restore/WORK.
+// The local host invokes this check at each privileged entry point.
+func (s *Store) VerifyIndependent(ctx context.Context) error {
+	if s == nil || ctx == nil {
+		return errors.New("owner independence check unconfigured")
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if s.conn == nil {
+		return errClosed
+	}
+	return s.rejectCausalSchema(ctx)
+}
+
 func (s *Store) Close() error {
 	if s == nil {
 		return nil
@@ -287,6 +303,9 @@ func (s *Store) PersistAndSign(ctx context.Context, req ownercheckpoint.PersistR
 	defer s.mu.Unlock()
 	if s.conn == nil {
 		return zero, errClosed
+	}
+	if err := s.rejectCausalSchema(ctx); err != nil {
+		return zero, fmt.Errorf("owner/CSF database separation: %w", err)
 	}
 	cp := req.Checkpoint
 	tx, err := s.conn.BeginTx(ctx, nil)
@@ -402,6 +421,9 @@ func (s *Store) Restore(ctx context.Context, req ownercheckpoint.RestoreRequest)
 			delete(s.restored, k)
 		}
 	}
+	if err := s.rejectCausalSchema(ctx); err != nil {
+		return zero, fmt.Errorf("owner/CSF database separation: %w", err)
+	}
 	data, err := s.loadVerified(ctx, req)
 	if err != nil {
 		return zero, err
@@ -426,6 +448,9 @@ func (s *Store) Acknowledge(ctx context.Context, ack ownercheckpoint.RestoreAck)
 	defer s.mu.Unlock()
 	if s.conn == nil {
 		return errClosed
+	}
+	if err := s.rejectCausalSchema(ctx); err != nil {
+		return fmt.Errorf("owner/CSF database separation: %w", err)
 	}
 	restored, ok := s.restored[key]
 	if !ok {

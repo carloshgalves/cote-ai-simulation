@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"sync"
 	"testing"
+	"time"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ownercheckpoint"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ownercheckpoint/localdemo"
@@ -258,6 +259,27 @@ func (o *b3BarrierOwner) Acknowledge(ctx context.Context, ack ownercheckpoint.Re
 	return nil
 }
 
+// Bound every barrier on a focused diagnostic, never the suite-wide timeout.
+func b3AwaitBarrier(t *testing.T, name string, ch <-chan struct{}) {
+	t.Helper()
+	select {
+	case <-ch:
+	case <-time.After(15 * time.Second):
+		t.Fatalf("B3 barrier %s was never reached", name)
+	}
+}
+
+func b3AwaitResult(t *testing.T, name string, ch <-chan error) error {
+	t.Helper()
+	select {
+	case err := <-ch:
+		return err
+	case <-time.After(15 * time.Second):
+		t.Fatalf("B3 stage/restore %s did not return", name)
+		return errors.New("unreachable timeout")
+	}
+}
+
 // Stage and restore/ACK interleavings must never let a superseded snapshot
 // permit execute WORK. Precise barriers avoid time.Sleep and flaky schedules.
 func TestCSFRV18R58B3ConcurrentStageAndRestoreRevocation(t *testing.T) {
@@ -299,12 +321,12 @@ func TestCSFRV18R58B3ConcurrentStageAndRestoreRevocation(t *testing.T) {
 	o.mu.Unlock()
 	staged := make(chan error, 1)
 	go func() { _, err := host.StageSnapshot(ctx, cp); staged <- err }()
-	<-enter
+	b3AwaitBarrier(t, "stage-owner-enter", enter)
 	if err := host.Run(ctx, ref); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || calls != 1 {
 		t.Fatalf("WORK while Stage waiting on owner: %d %v", calls, err)
 	}
 	close(release)
-	if err := <-staged; err != nil {
+	if err := b3AwaitResult(t, "stage", staged); err != nil {
 		t.Fatal("stage after gate revocation:", err)
 	}
 	if err := host.Run(ctx, ref); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || calls != 1 {
@@ -327,21 +349,13 @@ func TestCSFRV18R58B3ConcurrentStageAndRestoreRevocation(t *testing.T) {
 	o.mu.Unlock()
 	restored := make(chan error, 1)
 	go func() { restored <- host.Restore(ctx, ref) }()
-	<-restoreEnter
-	o.mu.Lock()
-	o.stageEntered = make(chan struct{})
-	o.stageRelease = make(chan struct{})
-	o.mu.Unlock()
-	// Allow stage to fully complete; its generation supersedes blocked restore.
-	o.mu.Lock()
-	o.stageEntered = nil
-	o.stageRelease = nil
-	o.mu.Unlock()
+	b3AwaitBarrier(t, "restore-owner-enter", restoreEnter)
+	// A newer Stage must supersede the in-flight Restore generation.
 	if _, err := host.StageSnapshot(ctx, cp); err != nil {
 		t.Fatal(err)
 	}
 	close(restoreRelease)
-	if err := <-restored; err == nil {
+	if err := b3AwaitResult(t, "superseded restore", restored); err == nil {
 		t.Fatal("superseded blocked restore granted permit")
 	}
 	if err := host.Run(ctx, ref); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || calls != 2 {
@@ -364,12 +378,12 @@ func TestCSFRV18R58B3ConcurrentStageAndRestoreRevocation(t *testing.T) {
 	o.mu.Unlock()
 	acknowledged := make(chan error, 1)
 	go func() { acknowledged <- host.Restore(ctx, ref) }()
-	<-ackEnter
+	b3AwaitBarrier(t, "ack-owner-enter", ackEnter)
 	if _, err := host.StageSnapshot(ctx, cp); err != nil {
 		t.Fatal(err)
 	}
 	close(ackRelease)
-	if err := <-acknowledged; err == nil {
+	if err := b3AwaitResult(t, "superseded ACK", acknowledged); err == nil {
 		t.Fatal("superseded ACK granted permit")
 	}
 	if err := host.Run(ctx, ref); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || calls != 3 {

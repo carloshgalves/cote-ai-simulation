@@ -1,6 +1,8 @@
 # CSFRV1-8 / #58 — S0 external cognitive owner handshake
 
-**State:** integration contract and fail-closed in-process work gate. **NOT a production integration, NOT remote-durability certification, NOT a new source of world truth.** The CSF V1/V2 canonical codec, hash contracts, owner-signer registration and SQLite escrow remain unchanged.
+**State:** integration contract and fail-closed in-process work gate. **NOT a production integration, NOT remote-durability certification, NOT a new source of world truth.**
+
+**Next architecture proposal (2026-11-12):** [ADR 0013](../adr/0013-cognitive-owner-durability-s1.md) and [S1a entrypoint/risks plan](../validation/cognitive-owner-s1a-2026-11-12.md) under [issue #74](https://github.com/carloshgalves/cote-ai-simulation/issues/74). Both are **planning artifacts pending human acceptance**, not implementation of an external owner. S0 evidence and limitations below remain unchanged. The CSF V1/V2 canonical codec, hash contracts, owner-signer registration and SQLite escrow remain unchanged.
 
 ## Who owns what
 

@@ -1,10 +1,10 @@
 # ADR 0013 — Owner cognitivo durável: fronteira de confiança e prova local S1
 
-**Status:** ACCEPTED for **local single-operator demonstrator** — aprovação do operador em 2026-11-12 após merge da PR #75. **Não** aprovado para produção, multi-tenant ou armazenamento remoto.  
-**Data:** 2026-11-12  
-**Issue:** [#74 (S1)](https://github.com/carloshgalves/cote-ai-simulation/issues/74), sob [#58 (P0-release)](https://github.com/carloshgalves/cote-ai-simulation/issues/58)  
-**Baseline inspecionada:** `main@5474413e4a2c43bdb3d89f7298b272d58342157e`  
-**Normas preservadas:** [ADR 0001](0001-world-truth-and-knowledge-boundaries.md), [ADR 0002](0002-character-canon-rag-and-memory.md), [ADR 0008](0008-causal-simulation-foundation-v1.md), [ADR 0009](0009-canonical-causal-codec-and-digests.md), [ADR 0010](0010-csf-causal-engine-stack.md), [ADR 0011](0011-csf-causal-persistence-atomicity.md), [owner S0](../architecture/cognitive-owner-durable-adapter-s0.md), [recibo R22](../architecture/epistemic-owner-receipt-v1.md).  
+**Status:** ACCEPTED for **local single-operator demonstrator** — aprovação do operador em 2026-11-12 após merge da PR #75. **Não** aprovado para produção, multi-tenant ou armazenamento remoto.
+**Data:** 2026-11-12
+**Issue:** [#74 (S1)](https://github.com/carloshgalves/cote-ai-simulation/issues/74), sob [#58 (P0-release)](https://github.com/carloshgalves/cote-ai-simulation/issues/58)
+**Baseline inspecionada:** `main@5474413e4a2c43bdb3d89f7298b272d58342157e`
+**Normas preservadas:** [ADR 0001](0001-world-truth-and-knowledge-boundaries.md), [ADR 0002](0002-character-canon-rag-and-memory.md), [ADR 0008](0008-causal-simulation-foundation-v1.md), [ADR 0009](0009-canonical-causal-codec-and-digests.md), [ADR 0010](0010-csf-causal-engine-stack.md), [ADR 0011](0011-csf-causal-persistence-atomicity.md), [owner S0](../architecture/cognitive-owner-durable-adapter-s0.md), [recibo R22](../architecture/epistemic-owner-receipt-v1.md).
 **Apuração e aceite proposto:** [S1a — inventário e plano](../validation/cognitive-owner-s1a-2026-11-12.md).
 
 ## Problema e fato já demonstrado
@@ -64,7 +64,7 @@ Qualquer falha entre as etapas é recuperável ou **fail-closed**. A operação 
 
 ### Metas operacionais
 
-**S1b demonstrador:** documentar comportamento medido em processo/reopen, sem prometer RPO/RTO temporal. Para commits locais confirmados, o teste deve exigir **nenhuma perda lógica de checkpoint sob crash de processo**; não generalizar para perda do host.  
+**S1b demonstrador:** documentar comportamento medido em processo/reopen, sem prometer RPO/RTO temporal. Para commits locais confirmados, o teste deve exigir **nenhuma perda lógica de checkpoint sob crash de processo**; não generalizar para perda do host.
 **Produção:** RPO, RTO, retenção de backups, periodicidade de restore drill, tenant isolation, distribuição de chaves, modo multi-host, regionalidade e custo **PENDENTES DE DECISÃO**. Não adotar números fictícios.
 
 ## Condições de aceite antes de S1b

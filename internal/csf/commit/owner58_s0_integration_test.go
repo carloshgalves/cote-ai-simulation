@@ -135,4 +135,3 @@ func TestCSFRV18R58S0RealSQLiteEscrowRestoreACKNoWorkBeforeRecovery(t *testing.T
 		t.Fatal("cross-actor owner gate reused signed checkpoint:",err)
 	}
 }
-

@@ -7,7 +7,6 @@ import (
     "database/sql"
     "encoding/hex"
     "errors"
-    "fmt"
     "os"
     "os/exec"
     "path/filepath"
@@ -155,7 +154,7 @@ func b3SubprocessCrash(t *testing.T, phase, causalPath, ownerPath string, run [3
 func b3Rows(t *testing.T, path, table string) int {
     t.Helper()
     // Allowlist only: table names cannot originate from untrusted input.
-    allowed:=map[string]bool{"checkpoints":true,"restore_acks":true,"cognitive_owner_receipts":true,"snapshot_seals":true}
+    allowed:=map[string]bool{"checkpoints":true,"restore_acks":true,"cognitive_owner_receipts":true,"snapshot_seals":true,"fork_cognitive_owner_proofs":true}
     if !allowed[table] {t.Fatal("invalid table name")}
     db,err:=sql.Open("sqlite",path)
     if err!=nil {t.Fatal(err)}
@@ -256,4 +255,3 @@ func TestCSFRV18R58B3ProcessCrashMatrix(t *testing.T) {
     }
 }
 
-var _ = fmt.Sprintf // keep imports stable for incremental test instrumentation

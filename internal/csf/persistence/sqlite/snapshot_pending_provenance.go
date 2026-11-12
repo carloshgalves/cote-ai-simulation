@@ -15,6 +15,7 @@ import (
 type snapshotPendingProvenance struct {
  run [32]byte
  witnesses map[snapshotPendingWitnessKey]snapshotPendingWitness
+ links map[snapshotPendingWitnessKey][32]byte
 }
 
 type snapshotPendingWitnessKey struct {
@@ -46,6 +47,7 @@ const (
 func newSnapshotPendingProvenance(run [32]byte) *snapshotPendingProvenance {
  return &snapshotPendingProvenance{
   run:run, witnesses:make(map[snapshotPendingWitnessKey]snapshotPendingWitness),
+  links:make(map[snapshotPendingWitnessKey][32]byte),
  }
 }
 
@@ -57,16 +59,54 @@ func (p *snapshotPendingProvenance) bind(owner string,sourceRun [32]byte,
  if p==nil{return errors.New("snapshot provenance missing")}
  id,err:=pendingSnapshotID(rawID);if err!=nil{return err}
  if sourceRun!=p.run{return errors.New("foreign-run snapshot source witness")}
- if owner==""{return errors.New("snapshot source owner absent")}
- if (owner==snapshotOwnerRuntime||owner==snapshotOwnerCompletion) && len(canonical)==0{
-  return errors.New("canonical source witness absent")
+ if !snapshotWitnessKindAllowed(owner,kind){
+  return errors.New("snapshot source owner/kind unregistered")
  }
- if len(digest)!=0 && len(digest)!=32{return errors.New("snapshot source witness digest malformed")}
+ canonicalOwner:=owner==snapshotOwnerRuntime||owner==snapshotOwnerCompletion
+ if canonicalOwner{
+  if len(canonical)==0||len(digest)!=0{return errors.New("canonical source witness malformed")}
+ }else if len(digest)!=32||len(canonical)!=0{
+  return errors.New("source reference witness requires exact digest")
+ }
  var d [32]byte
  copy(d[:],digest)
  key:=snapshotPendingWitnessKey{owner:owner,id:id}
  if _,exists:=p.witnesses[key];exists{return fmt.Errorf("duplicate snapshot source witness %s",owner)}
  p.witnesses[key]=snapshotPendingWitness{run:sourceRun,kind:kind,digest:d,canonical:bytes.Clone(canonical)}
+ return nil
+}
+
+func snapshotWitnessKindAllowed(owner string,kind uint64)bool{
+ switch owner{
+ case snapshotOwnerOccurrence:return kind==6
+ case snapshotOwnerRuntime:return kind==0
+ case snapshotOwnerActivation:return kind==7
+ case snapshotOwnerClosure:return kind==2
+ case snapshotOwnerRound:return kind==3
+ case snapshotOwnerDispatch:return kind==4
+ case snapshotOwnerResponse:return kind==5||kind==23
+ case snapshotOwnerExogenous:return kind==1
+ case snapshotOwnerSlotResponse:return kind==0
+ case snapshotOwnerTask:return kind==15
+ case snapshotOwnerCompletion:return kind==0
+ default:return false
+ }
+}
+
+// bindLink captures an immutable dependency decoded from an authoritative
+// response/completion row. The target witness may arrive later in ID order;
+// verify requires the exact target after the source scan is complete.
+func (p *snapshotPendingProvenance) bindLink(owner string,rawID,targetID []byte)error{
+ if p==nil{return errors.New("snapshot provenance missing")}
+ if owner!=snapshotOwnerResponse&&owner!=snapshotOwnerCompletion{
+  return errors.New("snapshot provenance link owner unregistered")
+ }
+ id,err:=pendingSnapshotID(rawID);if err!=nil{return err}
+ target,err:=pendingSnapshotID(targetID);if err!=nil{return err}
+ key:=snapshotPendingWitnessKey{owner:owner,id:id}
+ if _,ok:=p.witnesses[key];!ok{return errors.New("snapshot source link has no witness")}
+ if _,already:=p.links[key];already{return errors.New("duplicate snapshot source link")}
+ p.links[key]=target
  return nil
 }
 
@@ -149,6 +189,23 @@ func (p *snapshotPendingProvenance) verify(parts snapshotPendingPartitions)error
     }
    }else if witness.digest!=digest{
     return fmt.Errorf("snapshot provenance %s source digest differs",pendingSnapshotPartSpecs[part].name)
+   }
+   if part==6||part==9{
+    target,found:=p.links[key]
+    if !found{return fmt.Errorf("snapshot provenance %s source link missing",pendingSnapshotPartSpecs[part].name)}
+    targetOwner:=snapshotOwnerDispatch
+    if part==9{
+     targetOwner=snapshotOwnerTask
+     fields:=raw.([]any)
+     taskID,e:=pendingSnapshotID(fields[1])
+     if e!=nil||taskID!=target{
+      return errors.New("snapshot completion target differs from source task")
+     }
+    }
+    targetWitness,ok:=p.witnesses[snapshotPendingWitnessKey{owner:targetOwner,id:target}]
+    if !ok||targetWitness.run!=p.run{
+     return fmt.Errorf("snapshot provenance %s parent source absent/foreign",pendingSnapshotPartSpecs[part].name)
+    }
    }
    if part==0||part==2||part==4{
     required[key]=true

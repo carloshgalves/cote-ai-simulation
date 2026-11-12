@@ -147,6 +147,10 @@ func (p *snapshotPendingProvenance) verify(parts snapshotPendingPartitions)error
  rosters,err:=parts.canonicalOrder();if err!=nil{return err}
  linked:=map[snapshotPendingWitnessKey]bool{}
  required:=map[snapshotPendingWitnessKey]bool{}
+ pendingDispatches:=map[[32]byte]bool{}
+ pendingTasks:=map[[32]byte]bool{}
+ answeredDispatches:=map[[32]byte]bool{}
+ completedTasks:=map[[32]byte]bool{}
  for part,rawRoster:=range rosters{
   roster:=rawRoster.([]any)
   seen:=map[[32]byte]bool{}
@@ -190,9 +194,22 @@ func (p *snapshotPendingProvenance) verify(parts snapshotPendingPartitions)error
    }else if witness.digest!=digest{
     return fmt.Errorf("snapshot provenance %s source digest differs",pendingSnapshotPartSpecs[part].name)
    }
+   if part==5{pendingDispatches[id]=true}
+   if part==8{pendingTasks[id]=true}
    if part==6||part==9{
     target,found:=p.links[key]
     if !found{return fmt.Errorf("snapshot provenance %s source link missing",pendingSnapshotPartSpecs[part].name)}
+    if part==6{
+     if pendingDispatches[target]||answeredDispatches[target]{
+      return errors.New("snapshot response contradicts pending or already answered dispatch")
+     }
+     answeredDispatches[target]=true
+    }else{
+     if pendingTasks[target]||completedTasks[target]{
+      return errors.New("snapshot completion contradicts pending or completed task")
+     }
+     completedTasks[target]=true
+    }
     targetOwner:=snapshotOwnerDispatch
     if part==9{
      targetOwner=snapshotOwnerTask

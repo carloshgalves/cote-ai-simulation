@@ -110,6 +110,7 @@ func TestCSFRV18R58B3ProcessDiesAfterV2ForkCommit(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	ledgerBefore := b3LedgerDigest(t, sourcePath)
 	childRun := sourceRun
 	childRun[0] ^= 0x61
 	if childRun == sourceRun || childRun == ([32]byte{}) {
@@ -165,6 +166,10 @@ func TestCSFRV18R58B3ProcessDiesAfterV2ForkCommit(t *testing.T) {
 	if _, err := sourceReopen.VerifySnapshotV1(ctx, sourceRun, ref.Snapshot, v1); err != nil {
 		t.Fatal("fork changed source:", err)
 	}
+	if got := b3LedgerDigest(t, sourcePath); got != ledgerBefore {
+		t.Fatal("process-crashed fork altered parent five-ledger prefixes")
+	}
+	childLedgerBefore := b3LedgerDigest(t, childPath)
 	incorrectParent := ref.Snapshot
 	incorrectParent[0] ^= 0x14
 	if got, err := child.RecoverPublishedForkV1ToV2(ctx, childRun, sourceRun, incorrectParent, v2); err == nil || got != nil {
@@ -207,6 +212,12 @@ func TestCSFRV18R58B3ProcessDiesAfterV2ForkCommit(t *testing.T) {
 	}
 	if err := childHost.Run(ctx, childRef); err != nil || calls != 1 {
 		t.Fatalf("fork child failed after exact owner ACK: calls=%d err=%v", calls, err)
+	}
+	if got := b3LedgerDigest(t, childPath); got != childLedgerBefore {
+		t.Fatal("child owner re-attestation changed child world-truth ledgers")
+	}
+	if got := b3LedgerDigest(t, sourcePath); got != ledgerBefore {
+		t.Fatal("child cognition mutated parent world-truth ledgers")
 	}
 	parentBytes, _, err := sourceReopen.LoadCognitiveCheckpointV1(ctx, sourceRun, ref.Receipt, scope.Namespace, scope.Actor, v1)
 	if err != nil || !bytes.Equal(parentBytes.Content, cp.Content) {

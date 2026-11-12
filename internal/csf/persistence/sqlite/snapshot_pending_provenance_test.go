@@ -29,7 +29,7 @@ func test57ProvenanceFixture(t *testing.T)(snapshotPendingPartitions,*snapshotPe
  }
  parts.perceptionTasks=[]any{ref(15,10)}
  parts.perceptionCompletions=[]any{
-  []any{pending57ID(11),pending57ID(10),[]any{},[]any{},pending57ID(79)},
+  []any{pending57ID(11),pending57ID(14),[]any{},[]any{},pending57ID(79)},
  }
  for part,entries:=range []struct{owner string;kind uint64;items []any}{
   {snapshotOwnerOccurrence,6,parts.occurrences},
@@ -64,10 +64,15 @@ func test57ProvenanceFixture(t *testing.T)(snapshotPendingPartitions,*snapshotPe
    if err:=proof.bind(entries.owner,run,id,kind,digest,canonical);err!=nil{t.Fatal(err)}
   }
  }
- for _,response:=range []byte{6,7}{
-  if err:=proof.bindLink(snapshotOwnerResponse,pending57ID(response),pending57ID(5));err!=nil{t.Fatal(err)}
+ // IDs 12/13 are settled dispatches, while 5 is still outstanding.
+ // Task 14 has completed; task 10 remains outstanding.
+ for _,settled:=range []byte{12,13}{
+  if err:=proof.bind(snapshotOwnerDispatch,run,pending57ID(settled),4,pending57ID(settled+64),nil);err!=nil{t.Fatal(err)}
  }
- if err:=proof.bindLink(snapshotOwnerCompletion,pending57ID(11),pending57ID(10));err!=nil{t.Fatal(err)}
+ if err:=proof.bind(snapshotOwnerTask,run,pending57ID(14),15,pending57ID(14+64),nil);err!=nil{t.Fatal(err)}
+ if err:=proof.bindLink(snapshotOwnerResponse,pending57ID(6),pending57ID(12));err!=nil{t.Fatal(err)}
+ if err:=proof.bindLink(snapshotOwnerResponse,pending57ID(7),pending57ID(13));err!=nil{t.Fatal(err)}
+ if err:=proof.bindLink(snapshotOwnerCompletion,pending57ID(11),pending57ID(14));err!=nil{t.Fatal(err)}
  return parts,proof
 }
 
@@ -195,11 +200,11 @@ func TestSnapshot57P4ResponseAndCompletionLinksFailClosed(t *testing.T){
   targetOwner string
   mutateCompletion bool
  }{
-  {"response-link-missing",snapshotOwnerResponse,6,5,snapshotOwnerDispatch,false},
-  {"completion-link-missing",snapshotOwnerCompletion,11,10,snapshotOwnerTask,false},
-  {"response-parent-missing",snapshotOwnerResponse,6,5,snapshotOwnerDispatch,false},
-  {"completion-parent-missing",snapshotOwnerCompletion,11,10,snapshotOwnerTask,false},
-  {"completion-target-changed",snapshotOwnerCompletion,11,10,snapshotOwnerTask,true},
+  {"response-link-missing",snapshotOwnerResponse,6,12,snapshotOwnerDispatch,false},
+  {"completion-link-missing",snapshotOwnerCompletion,11,14,snapshotOwnerTask,false},
+  {"response-parent-missing",snapshotOwnerResponse,6,12,snapshotOwnerDispatch,false},
+  {"completion-parent-missing",snapshotOwnerCompletion,11,14,snapshotOwnerTask,false},
+  {"completion-target-changed",snapshotOwnerCompletion,11,14,snapshotOwnerTask,true},
  }{
   t.Run(tc.name,func(t *testing.T){
    p,proof:=test57ProvenanceFixture(t)
@@ -249,7 +254,43 @@ func TestSnapshot57P4WitnessKindAndLinkRegistrationAreStrict(t *testing.T){
  if err:=proof.bindLink(snapshotOwnerResponse,id,digest);err==nil{
   t.Fatal("source link registered without an authenticated owner witness")
  }
- if err:=proof.bindLink(snapshotOwnerResponse,pending57ID(6),pending57ID(5));err==nil{
+ if err:=proof.bindLink(snapshotOwnerResponse,pending57ID(6),pending57ID(12));err==nil{
   t.Fatal("duplicate response link overwrote first source target")
+ }
+}
+
+func TestSnapshot57P4PendingAndSettledAuthoritiesAreExclusive(t *testing.T){
+ for _,tc:=range []string{
+  "answered-dispatch-still-pending",
+  "two-responses-one-dispatch",
+  "completed-task-still-pending",
+  "two-completions-one-task",
+ }{
+  t.Run(tc,func(t *testing.T){
+   parts,proof:=test57ProvenanceFixture(t)
+   switch tc{
+   case "answered-dispatch-still-pending":
+    // Source 12 has a response; it must not be emitted in pending dispatches.
+    parts.dispatches=[]any{snapshot57Ref(4,12)}
+   case "two-responses-one-dispatch":
+    id,_:=pendingSnapshotID(pending57ID(7))
+    proof.links[snapshotPendingWitnessKey{owner:snapshotOwnerResponse,id:id}]=func()[32]byte{
+     target,_:=pendingSnapshotID(pending57ID(12));return target
+    }()
+   case "completed-task-still-pending":
+    parts.perceptionTasks=[]any{snapshot57Ref(15,14)}
+   case "two-completions-one-task":
+    original:=parts.perceptionCompletions[0].([]any)
+    second:=append([]any(nil),original...)
+    second[0]=pending57ID(15)
+    parts.perceptionCompletions=append(parts.perceptionCompletions,second)
+    raw,err:=codec.CanonicalPayload(second);if err!=nil{t.Fatal(err)}
+    if err:=proof.bind(snapshotOwnerCompletion,proof.run,pending57ID(15),0,nil,raw);err!=nil{t.Fatal(err)}
+    if err:=proof.bindLink(snapshotOwnerCompletion,pending57ID(15),pending57ID(14));err!=nil{t.Fatal(err)}
+   }
+   if err:=proof.verify(parts);err==nil{
+    t.Fatal("snapshot accepted contradictory pending/settled membership")
+   }
+  })
  }
 }

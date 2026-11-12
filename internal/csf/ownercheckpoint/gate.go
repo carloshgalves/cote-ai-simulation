@@ -110,8 +110,10 @@ func NewGate(owner DurableOwner, escrow Escrow, bundle *policy.Bundle) (*Gate, e
 }
 
 func validateScope(s Scope) error {
-	if s.Run == ([32]byte{}) || s.Namespace == "" || s.Actor == "" {
-		return errors.New("cognitive owner scope requires run, namespace and actor")
+	// A zero-valued 32-byte RunID is legal if the pinned Genesis and
+	// signature authenticate it; no extra run-ID policy is invented here.
+	if s.Namespace == "" || s.Actor == "" {
+		return errors.New("cognitive owner scope requires namespace and actor")
 	}
 	return nil
 }

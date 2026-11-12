@@ -64,6 +64,10 @@ func test57ProvenanceFixture(t *testing.T)(snapshotPendingPartitions,*snapshotPe
    if err:=proof.bind(entries.owner,run,id,kind,digest,canonical);err!=nil{t.Fatal(err)}
   }
  }
+ for _,response:=range []byte{6,7}{
+  if err:=proof.bindLink(snapshotOwnerResponse,pending57ID(response),pending57ID(5));err!=nil{t.Fatal(err)}
+ }
+ if err:=proof.bindLink(snapshotOwnerCompletion,pending57ID(11),pending57ID(10));err!=nil{t.Fatal(err)}
  return parts,proof
 }
 
@@ -179,5 +183,73 @@ func TestSnapshot57P4BindingRejectsForeignRunDuplicatesAndMalformedIDs(t *testin
  if err:=proof.bind(snapshotOwnerOccurrence,proof.run,id,6,digest,nil);err!=nil{t.Fatal(err)}
  if err:=proof.bind(snapshotOwnerOccurrence,proof.run,id,6,digest,nil);err==nil{
   t.Fatal("duplicate owner+identity overwrote first proof")
+ }
+}
+
+func TestSnapshot57P4ResponseAndCompletionLinksFailClosed(t *testing.T){
+ for _,tc:=range []struct{
+  name string
+  owner string
+  source byte
+  target byte
+  targetOwner string
+  mutateCompletion bool
+ }{
+  {"response-link-missing",snapshotOwnerResponse,6,5,snapshotOwnerDispatch,false},
+  {"completion-link-missing",snapshotOwnerCompletion,11,10,snapshotOwnerTask,false},
+  {"response-parent-missing",snapshotOwnerResponse,6,5,snapshotOwnerDispatch,false},
+  {"completion-parent-missing",snapshotOwnerCompletion,11,10,snapshotOwnerTask,false},
+  {"completion-target-changed",snapshotOwnerCompletion,11,10,snapshotOwnerTask,true},
+ }{
+  t.Run(tc.name,func(t *testing.T){
+   p,proof:=test57ProvenanceFixture(t)
+   childID,parID:=pending57ID(tc.source),pending57ID(tc.target)
+   child,_:=pendingSnapshotID(childID)
+   parent,_:=pendingSnapshotID(parID)
+   key:=snapshotPendingWitnessKey{tc.owner,child}
+   parentKey:=snapshotPendingWitnessKey{tc.targetOwner,parent}
+   switch tc.name{
+   case "response-link-missing","completion-link-missing":delete(proof.links,key)
+   case "response-parent-missing","completion-parent-missing":delete(proof.witnesses,parentKey)
+   case "completion-target-changed":
+    bad:=append([]any(nil),p.perceptionCompletions[0].([]any)...)
+    bad[1]=pending57ID(0xc2)
+    p.perceptionCompletions=[]any{bad}
+    proof.witnesses[key]=snapshotPendingWitness{
+     run:proof.run, kind:0, canonical:func()[]byte{
+      b,err:=codec.CanonicalPayload(bad);if err!=nil{t.Fatal(err)};return b
+     }(),
+    }
+   }
+   if err:=proof.verify(p);err==nil{
+    t.Fatal("orphan or mislinked historical response/completion accepted")
+   }
+  })
+ }
+}
+
+func TestSnapshot57P4WitnessKindAndLinkRegistrationAreStrict(t *testing.T){
+ _,proof:=test57ProvenanceFixture(t)
+ id,digest:=pending57ID(0xb2),pending57ID(0xc2)
+ for _,tc:=range []struct{owner string;kind uint64;digest,canonical []byte}{
+  {"unknown-owner",6,digest,nil},
+  {snapshotOwnerOccurrence,7,digest,nil},
+  {snapshotOwnerOccurrence,6,nil,nil},
+  {snapshotOwnerResponse,5,nil,nil},
+  {snapshotOwnerRuntime,0,digest,nil},
+  {snapshotOwnerCompletion,0,nil,nil},
+ }{
+  if err:=proof.bind(tc.owner,proof.run,id,tc.kind,tc.digest,tc.canonical);err==nil{
+   t.Fatalf("incomplete or unknown witness accepted: owner=%s kind=%d",tc.owner,tc.kind)
+  }
+ }
+ if err:=proof.bindLink(snapshotOwnerRound,id,digest);err==nil{
+  t.Fatal("unregistered link owner accepted")
+ }
+ if err:=proof.bindLink(snapshotOwnerResponse,id,digest);err==nil{
+  t.Fatal("source link registered without an authenticated owner witness")
+ }
+ if err:=proof.bindLink(snapshotOwnerResponse,pending57ID(6),pending57ID(5));err==nil{
+  t.Fatal("duplicate response link overwrote first source target")
  }
 }

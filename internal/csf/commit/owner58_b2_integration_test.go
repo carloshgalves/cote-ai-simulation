@@ -236,6 +236,142 @@ func TestCSFRV18R58B2RejectsCausalDatabaseOpenedAfterOwner(t *testing.T) {
 	}
 }
 
+// The callback still belongs to the real SQLite owner. Only the ACK return
+// value is fault-injected; no fake cognitive bytes are substituted.
+type b2FailACKOwner struct {
+	*localowner.Store
+	failACK bool
+}
+
+func (o *b2FailACKOwner) Acknowledge(ctx context.Context, ack ownercheckpoint.RestoreAck) error {
+	if o.failACK {
+		return errors.New("injected ACK failure before durable commit")
+	}
+	return o.Store.Acknowledge(ctx, ack)
+}
+
+func TestCSFRV18R58B2OwnerACKFailureNeverRunsCognition(t *testing.T) {
+	ctx := context.Background()
+	_, causal, _, run, bundle, _ := testFixture(t)
+	scope := ownercheckpoint.Scope{Run: [32]byte(run), Namespace: "cognition", Actor: "owner-b2-ack"}
+	public, private, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := causal.RegisterCognitiveActor(ctx, scope.Run, scope.Namespace, scope.Actor, bundle); err != nil {
+		t.Fatal(err)
+	}
+	if err := causal.RegisterCognitiveOwnerKeyV1(ctx, scope.Run, scope.Namespace, scope.Actor, public, bundle); err != nil {
+		t.Fatal(err)
+	}
+	clock, err := causal.LoadClock(ctx, scope.Run)
+	if err != nil {
+		t.Fatal(err)
+	}
+	cp := sqlite.SnapshotCheckpoint{ActorNamespace: scope.Namespace, ActorID: scope.Actor,
+		StoreID: "local-owner-b2", SchemaVersion: 1, Producer: "cognitive-host-b2",
+		ProducerVersion: 1, CoversInstant: int64(clock.Instant),
+		CoversRevision: uint64(clock.Revision), Content: []byte("synthetic ack-negative memory")}
+	dir := t.TempDir()
+	if err := os.Chmod(dir, 0700); err != nil {
+		t.Fatal(err)
+	}
+	realOwner, err := localowner.Open(ctx, filepath.Join(dir, "owner.db"), private)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer realOwner.Close()
+	owner := &b2FailACKOwner{Store: realOwner, failACK: true}
+	calls := 0
+	host, err := localdemo.New(owner, causal, bundle, scope, func(context.Context) error {
+		calls++
+		return nil
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	ref, err := host.StageSnapshot(ctx, cp)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := host.Restore(ctx, ref); err == nil {
+		t.Fatal("injected failed ACK authorized restore")
+	}
+	if err := host.Run(ctx, ref); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || calls != 0 {
+		t.Fatalf("failed ACK allowed cognitive callback: count=%d err=%v", calls, err)
+	}
+	owner.failACK = false
+	if err := host.Restore(ctx, ref); err != nil {
+		t.Fatal("new restore after restored ACK:", err)
+	}
+	if err := host.Run(ctx, ref); err != nil || calls != 1 {
+		t.Fatalf("valid second restore/ACK did not authorize one callback: calls=%d err=%v", calls, err)
+	}
+}
+
+func TestCSFRV18R58B2HistoricalSnapshotCannotAuthorizeWORK(t *testing.T) {
+	ctx := context.Background()
+	coordinator, causal, ledger, run, bundle, _ := testFixture(t, activeTrigger())
+	scope := ownercheckpoint.Scope{Run: [32]byte(run), Namespace: "cognition", Actor: "owner-b2-tip"}
+	public, private, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := causal.RegisterCognitiveActor(ctx, scope.Run, scope.Namespace, scope.Actor, bundle); err != nil {
+		t.Fatal(err)
+	}
+	if err := causal.RegisterCognitiveOwnerKeyV1(ctx, scope.Run, scope.Namespace, scope.Actor, public, bundle); err != nil {
+		t.Fatal(err)
+	}
+	clock, err := causal.LoadClock(ctx, scope.Run)
+	if err != nil {
+		t.Fatal(err)
+	}
+	cp := sqlite.SnapshotCheckpoint{ActorNamespace: scope.Namespace, ActorID: scope.Actor,
+		StoreID: "local-owner-b2", SchemaVersion: 1, Producer: "cognitive-host-b2",
+		ProducerVersion: 1, CoversInstant: int64(clock.Instant),
+		CoversRevision: uint64(clock.Revision), Content: []byte("synthetic historical-cut memory")}
+	dir := t.TempDir()
+	if err := os.Chmod(dir, 0700); err != nil {
+		t.Fatal(err)
+	}
+	owner, err := localowner.Open(ctx, filepath.Join(dir, "owner.db"), private)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer owner.Close()
+	calls := 0
+	host, err := localdemo.New(owner, causal, bundle, scope, func(context.Context) error {
+		calls++
+		return nil
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	ref, err := host.StageSnapshot(ctx, cp)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := host.Restore(ctx, ref); err != nil {
+		t.Fatal(err)
+	}
+	if err := host.Run(ctx, ref); err != nil || calls != 1 {
+		t.Fatalf("pre-advance work failed: calls=%d err=%v", calls, err)
+	}
+	if _, err := coordinator.Advance(ctx, ledger, run); err != nil {
+		t.Fatal("causal clock advance failed:", err)
+	}
+	if err := host.Run(ctx, ref); err == nil || calls != 1 {
+		t.Fatalf("historical snapshot permitted new WORK: calls=%d err=%v", calls, err)
+	}
+	if err := host.Restore(ctx, ref); err == nil {
+		t.Fatal("historical snapshot was restored as current")
+	}
+	if err := host.Run(ctx, ref); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || calls != 1 {
+		t.Fatalf("failed historical restore left valid permit: calls=%d err=%v", calls, err)
+	}
+}
+
 func TestCSFRV18R58B2LocalHostRejectsMissingDependencies(t *testing.T) {
 	ctx := context.Background()
 	_, csf, _, run, bundle, _ := testFixture(t)

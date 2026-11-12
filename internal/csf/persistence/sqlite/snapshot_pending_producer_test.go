@@ -143,7 +143,7 @@ func TestSnapshot57LiveSourceProjectionPreservesMembershipAndOrder(t *testing.T)
 			t.Fatal("pending source filter changed ID, digest or order")
 		}
 	}
-	activations := []any{snapshot57Ref(7, 5), snapshot57Ref(7, 1)}
+	activations := []any{snapshot57Ref(7, 1), snapshot57Ref(7, 5)}
 	active, inputs, err = retainLiveSnapshotSources(activations, 3, live)
 	if err != nil {
 		t.Fatal(err)
@@ -166,6 +166,8 @@ func TestSnapshot57LiveSourcesRejectWrongKindIdentityDigestAndShape(t *testing.T
 		{"short-identity", []any{[]any{uint64(6), []byte{1}, pending57ID(60)}}, 2},
 		{"short-digest", []any{[]any{uint64(6), pending57ID(2), []byte{1}}}, 2},
 		{"wrong-activation-kind", []any{snapshot57Ref(6, 2)}, 3},
+		{"duplicate-id", []any{snapshot57Ref(6, 2), snapshot57Ref(6, 2)}, 2},
+		{"out-of-order", []any{snapshot57Ref(6, 5), snapshot57Ref(6, 2)}, 2},
 		{"unsupported-input-kind", []any{snapshot57Ref(6, 2)}, 4},
 	} {
 		t.Run(tc.name, func(t *testing.T) {

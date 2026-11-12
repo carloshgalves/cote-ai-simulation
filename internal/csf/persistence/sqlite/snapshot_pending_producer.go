@@ -1,6 +1,7 @@
 package sqlite
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 )
@@ -69,6 +70,8 @@ func retainLiveSnapshotSources(refs []any, inputKind uint64,
 	}
 	active = make([]any, 0, len(refs))
 	pending = make([]any, 0, len(refs))
+	var last [32]byte
+	hasPrevious := false
 	for _, raw := range refs {
 		ref, ok := raw.([]any)
 		if !ok || len(ref) != 3 || ref[0] != wantCausalKind {
@@ -79,6 +82,10 @@ func retainLiveSnapshotSources(refs []any, inputKind uint64,
 		if !ok || !digestOK || len(digest) != 32 {
 			return nil, nil, errors.New("malformed pending source ID or digest")
 		}
+		if hasPrevious && bytes.Compare(last[:], id[:]) >= 0 {
+			return nil, nil, errors.New("duplicate or out-of-order pending source identity")
+		}
+		last, hasPrevious = id, true
 		if live[id] {
 			active = append(active, raw)
 			pending = append(pending, []any{inputKind, ref[1], ref[2]})

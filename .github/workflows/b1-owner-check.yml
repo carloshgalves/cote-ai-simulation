@@ -1,0 +1,33 @@
+name: B1 owner SQLite durability
+on:
+  pull_request:
+    paths:
+      - "internal/csf/ownercheckpoint/localowner/**"
+      - ".github/workflows/b1-owner-check.yml"
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  owner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Require committed gofmt output
+        run: |
+          files=$(gofmt -l internal/csf/ownercheckpoint/localowner/*.go)
+          if [ -n "$files" ]; then
+            echo "Go files require gofmt:"
+            echo "$files"
+            exit 1
+          fi
+      - name: Focused B1 tests
+        run: go test -count=1 ./internal/csf/ownercheckpoint/localowner
+      - name: Race and concurrency tests
+        run: go test -race -count=1 ./internal/csf/ownercheckpoint/localowner

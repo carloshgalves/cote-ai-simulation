@@ -210,21 +210,47 @@ func attachForkSlotOutcomesV2(records []ports.CanonicalRecord, histories map[str
 func validateAndOrderForkSlotHistoriesV2(pendingDispatchRefs []any,
 	histories map[string]*forkSlotHistory, snapshot []any, child *genesis.Genesis,
 	offset uint64, origin *policy.Bundle) ([]*forkSlotHistory, error) {
+	if child == nil || len(snapshot) != 19 {
+		return nil, errors.New("historical dispatch validation requires a snapshot and child")
+	}
 	// Every live source dispatch must be owned by one migrated round. Settled
 	// responses belonging to other rounds remain historical archive only.
 	live := map[string][]any{}
 	for _, raw := range pendingDispatchRefs {
-		ref := raw.([]any)
-		live[string(ref[1].([]byte))] = ref
+		ref, ok := raw.([]any)
+		if !ok || len(ref) != 3 || ref[0] != uint64(4) {
+			return nil, errors.New("pending dispatch reference malformed")
+		}
+		id, ok := ref[1].([]byte)
+		digest, okDigest := ref[2].([]byte)
+		if !ok || len(id) != 32 || !okDigest || len(digest) != 32 {
+			return nil, errors.New("pending dispatch ID/digest malformed")
+		}
+		if _, duplicate := live[string(id)]; duplicate {
+			return nil, errors.New("duplicate pending dispatch reference")
+		}
+		live[string(id)] = ref
 	}
 	ordered := make([]*forkSlotHistory, 0, len(histories))
 	for _, h := range histories {
+		if h == nil || len(h.fields) != 11 {
+			return nil, errors.New("historical dispatch body malformed")
+		}
+		f := h.fields
+		roundID, roundOK := f[3].([]byte)
+		slot, slotOK := f[4].(string)
+		ordinal, ordinalOK := f[5].(uint64)
+		if !roundOK || len(roundID) != 32 || !slotOK || slot == "" || !ordinalOK || ordinal > uint64(^uint32(0)) {
+			return nil, errors.New("historical dispatch sorting key malformed")
+		}
 		if h.revoked != nil && h.response != nil {
 			return nil, errors.New("source dispatch both revoked and answered")
 		}
 		if h.revoked == nil {
-			f := h.fields
-			eligible := f[7].([]any)
+			eligible, ok := f[7].([]any)
+			if !ok || len(eligible) != 2 {
+				return nil, errors.New("historical dispatch eligibility malformed")
+			}
 			when, valid := asSigned64(eligible[0])
 			atOrdinal, validOrdinal := eligible[1].(uint64)
 			if !sameCanonical(f[8], snapshot[3]) || !sameCanonical(f[9], snapshot[2]) ||
@@ -233,6 +259,9 @@ func validateAndOrderForkSlotHistoriesV2(pendingDispatchRefs []any,
 			}
 		}
 		if h.revoked == nil && h.response == nil {
+			if origin == nil {
+				return nil, errors.New("pending dispatch digest requires origin policy")
+			}
 			ref, ok := live[string(h.oldID[:])]
 			d, _, err := identity.New(origin).Sum("cote.csf.digest.slot-dispatch", "cote.csf.schema.slot-dispatch", 1, h.fields)
 			if !ok || err != nil || !equalBytes(ref[2], d[:]) {

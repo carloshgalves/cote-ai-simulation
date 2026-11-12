@@ -2,6 +2,7 @@ package sqlite
 
 import (
 	"bytes"
+	"strings"
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
@@ -231,4 +232,40 @@ func TestFork57DuplicateAuthenticDispatchMustNotOverwriteHistory(t *testing.T) {
 	if err == nil {
 		t.Fatal("duplicate historical dispatch overwritten without rejection")
 	}
+}
+
+func TestFork57OrderRejectsMalformedPureInputsWithoutPanic(t *testing.T) {
+ id, digest := fork57ID(0x71),fork57ID(0x72)
+ good := []any{uint64(4),id[:],digest[:]}
+ mk := func() map[string]*forkSlotHistory {
+  h := fork57Slot(id,fork57ID(0x73),"slot-a",0)
+  h.revoked=[]any{id[:],uint64(0),[]any{uint64(0)}}
+  return map[string]*forkSlotHistory{string(id[:]):h}
+ }
+ cases:=[]struct{name string;refs []any; histories map[string]*forkSlotHistory;want string}{
+  {"not-array",[]any{uint64(9)},nil,"pending dispatch reference"},
+  {"missing-ref-field",[]any{[]any{uint64(4),id[:]}},nil,"pending dispatch reference"},
+  {"wrong-kind",[]any{[]any{uint64(5),id[:],digest[:]}},nil,"pending dispatch reference"},
+  {"short-id",[]any{[]any{uint64(4),[]byte{1},digest[:]}},nil,"pending dispatch ID/digest"},
+  {"duplicate-refs",[]any{good,good},nil,"duplicate pending dispatch"},
+  {"nil-history",nil,map[string]*forkSlotHistory{string(id[:]):nil},"historical dispatch body"},
+  {"wrong-sort-key",nil,func()map[string]*forkSlotHistory{
+    m:=mk();m[string(id[:])].fields[4]=uint64(7);return m
+   }(),"historical dispatch sorting key"},
+  {"wrong-eligibility",nil,func()map[string]*forkSlotHistory{
+    m:=mk();m[string(id[:])].revoked=nil;m[string(id[:])].fields[7]=uint64(40);return m
+   }(),"historical dispatch eligibility"},
+ }
+ for _,tc:=range cases {
+  t.Run(tc.name,func(t *testing.T){
+   _,err:=validateAndOrderForkSlotHistoriesV2(tc.refs,tc.histories,make([]any,19),
+    &genesis.Genesis{InitialInstant:40},0,nil)
+   if err==nil||!strings.Contains(err.Error(),tc.want){
+    t.Fatalf("invalid projection not rejected safely: %v (wanted %s)",err,tc.want)
+   }
+  })
+ }
+ if _,err:=validateAndOrderForkSlotHistoriesV2(nil,nil,nil,nil,0,nil);err==nil{
+  t.Fatal("nil child/snapshot accepted")
+ }
 }

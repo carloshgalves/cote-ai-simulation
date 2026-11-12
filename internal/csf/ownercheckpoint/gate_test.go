@@ -7,7 +7,9 @@ import (
 	"crypto/rand"
 	"errors"
 	"sync"
+	"runtime"
 	"testing"
+	"time"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -384,5 +386,79 @@ func TestOwner58S0SnapshotMustContainExactSignedActorCheckpoint(t *testing.T) {
 				t.Fatal("exact signed checkpoint was not restorable:",err)
 			}
 		})
+	}
+}
+
+// A delayed owner persist must not publish a superseded receipt after a
+// newer actor-scoped stage has already advanced the local generation.
+type blockingFirstOwner struct {
+	DurableOwner
+	once    sync.Once
+	started chan struct{}
+	release chan struct{}
+}
+func (o *blockingFirstOwner) PersistAndSign(ctx context.Context,req PersistRequest)(SignedReceipt,error){
+	block:=false
+	o.once.Do(func(){block=true;close(o.started)})
+	if block {
+		select{
+		case <-o.release:
+		case <-ctx.Done():return SignedReceipt{},ctx.Err()
+		}
+	}
+	return o.DurableOwner.PersistAndSign(ctx,req)
+}
+
+func TestOwner58S0SupersededPersistCannotOverwriteNewerGeneration(t *testing.T){
+	s:=setupOwnerGate(t)
+	owner:=&blockingFirstOwner{
+		DurableOwner:s.owner,started:make(chan struct{}),release:make(chan struct{}),
+	}
+	gate,err:=NewGate(owner,s.escrow,&policy.Bundle{})
+	if err!=nil{t.Fatal(err)}
+	s.gate=gate
+	ctx:=context.Background()
+	first:=make(chan error,1)
+	go func(){
+		_,err:=gate.Stage(ctx,s.scope,s.cp)
+		first<-err
+	}()
+	select{
+	case <-owner.started:
+	case <-time.After(10*time.Second):t.Fatal("first durable persist did not start")
+	}
+	second:=make(chan struct{
+		receipt [32]byte
+		err error
+	},1)
+	go func(){
+		receipt,err:=gate.Stage(ctx,s.scope,s.cp)
+		second<-struct{receipt [32]byte;err error}{receipt,err}
+	}()
+	timeout:=time.NewTimer(10*time.Second)
+	defer timeout.Stop()
+	for {
+		gate.mu.RLock()
+		current:=gate.generation[s.scope]
+		gate.mu.RUnlock()
+		if current>=2{break}
+		select{
+		case <-timeout.C:t.Fatal("second stage never invalidated first generation")
+		default:runtime.Gosched()
+		}
+	}
+	close(owner.release)
+	select{
+	case err:=<-first:
+		if err==nil{t.Fatal("superseded owner persist returned a successful escrow")}
+	case <-time.After(10*time.Second):t.Fatal("superseded stage did not exit")
+	}
+	select{
+	case result:=<-second:
+		if result.err!=nil||result.receipt==([32]byte{}){
+			t.Fatal("latest stage rejected after superseding old generation:",result.err)
+		}
+		assertNotPermitted(t,s,result.receipt)
+	case <-time.After(10*time.Second):t.Fatal("latest stage did not finish")
 	}
 }

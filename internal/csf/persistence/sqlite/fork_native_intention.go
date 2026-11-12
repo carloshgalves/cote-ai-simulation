@@ -23,26 +23,11 @@ func nativeArchiveKey(kind uint64) string { return fmt.Sprintf("native:%d", kind
 func nativeRefKey(ref []any) string       { return fmt.Sprintf("%d:%x", ref[0], ref[1]) }
 
 func forkPendingParts(snapshot []any) ([]any, error) {
-	if len(snapshot) != 19 {
-		return nil, errors.New("historical snapshot malformed")
-	}
-	typed, ok := snapshot[11].([]any)
-	if !ok || len(typed) != 4 {
-		return nil, errors.New("historical pending state malformed")
-	}
-	raw, ok := typed[2].([]byte)
-	if !ok {
-		return nil, errors.New("historical pending envelope absent")
-	}
-	env, err := codec.StrictDecodeEnvelope(raw)
+	rosters, err := decodeSnapshotPendingRosters(snapshot)
 	if err != nil {
 		return nil, err
 	}
-	parts, ok := env.Value.([]any)
-	if !ok || len(parts) != 10 {
-		return nil, errors.New("historical pending partitions malformed")
-	}
-	return parts, nil
+	return rosters.legacyPartitions(), nil
 }
 
 // Only intentions on responses belonging to migrated pending rounds require

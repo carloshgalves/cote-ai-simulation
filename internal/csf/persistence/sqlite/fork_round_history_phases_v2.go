@@ -1,34 +1,34 @@
 package sqlite
 
 import (
- "bytes"
- "errors"
- "sort"
+	"bytes"
+	"errors"
+	"sort"
 
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
 // forkRoundHistoryProjection is ephemeral, read-free migration data. Its
 // pending snapshot is validated by P1, but archived cause/ID authentication
 // must also succeed before any child publication.
 type forkRoundHistoryProjection struct {
- records []ports.CanonicalRecord
- rounds []forkGenesisRound
- roundMap map[string][]any
- parentCoordinates map[string]any
- pendingDispatchRefs []any
- clocks map[uint64]snapshotClock
- offset uint64
+	records             []ports.CanonicalRecord
+	rounds              []forkGenesisRound
+	roundMap            map[string][]any
+	parentCoordinates   map[string]any
+	pendingDispatchRefs []any
+	clocks              map[uint64]snapshotClock
+	offset              uint64
 }
 
 // projectForkRoundHistoryV2 authenticates the pending rounds and freezes
 // their eligibility against the exact source clock, without any SQL.
-func projectForkRoundHistoryV2(parent, child *genesis.Genesis,snapshot []any,
- archive forkHistoryArchive,origin,target *policy.Bundle)(forkRoundHistoryProjection,error){
+func projectForkRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
+	archive forkHistoryArchive, origin, target *policy.Bundle) (forkRoundHistoryProjection, error) {
 	records, events, journals := archive["input_ledger"], archive["event_store"], archive["decision_ledger"]
 	lists, err := forkPendingParts(snapshot)
 	if err != nil {
@@ -79,19 +79,19 @@ func projectForkRoundHistoryV2(parent, child *genesis.Genesis,snapshot []any,
 		roundMap[oldKey] = fields
 	}
 
- return forkRoundHistoryProjection{
-  records:records,rounds:rounds,roundMap:roundMap,
-  parentCoordinates:parentCoordinates,pendingDispatchRefs:lists[5].([]any),
-  clocks:clocks,offset:offset,
- },nil
+	return forkRoundHistoryProjection{
+		records: records, rounds: rounds, roundMap: roundMap,
+		parentCoordinates: parentCoordinates, pendingDispatchRefs: lists[5].([]any),
+		clocks: clocks, offset: offset,
+	}, nil
 }
 
 // authenticateForkSlotDispatchesV2 checks carried dispatch identities, actor
 // roster/slot, and frozen historical clock before linking their receipts.
 func authenticateForkSlotDispatchesV2(parent *genesis.Genesis,
- records []ports.CanonicalRecord,roundMap map[string][]any,
- parentCoordinates map[string]any,clocks map[uint64]snapshotClock,
- origin *policy.Bundle)(map[string]*forkSlotHistory,error){
+	records []ports.CanonicalRecord, roundMap map[string][]any,
+	parentCoordinates map[string]any, clocks map[uint64]snapshotClock,
+	origin *policy.Bundle) (map[string]*forkSlotHistory, error) {
 	histories := map[string]*forkSlotHistory{}
 	for _, record := range records {
 		v, err := codec.StrictDecodePayload(record.Canonical)
@@ -150,12 +150,12 @@ func authenticateForkSlotDispatchesV2(parent *genesis.Genesis,
 		histories[string(id[:])] = &forkSlotHistory{oldID: [32]byte(id), fields: f}
 	}
 
- return histories,nil
+	return histories, nil
 }
 
 // attachForkSlotOutcomesV2 links revocations and responses from the immutable
 // input prefix. The history map is private to this invocation of the migrator.
-func attachForkSlotOutcomesV2(records []ports.CanonicalRecord,histories map[string]*forkSlotHistory)error{
+func attachForkSlotOutcomesV2(records []ports.CanonicalRecord, histories map[string]*forkSlotHistory) error {
 	for _, record := range records {
 		v, err := codec.StrictDecodePayload(record.Canonical)
 		if err != nil {
@@ -198,15 +198,15 @@ func attachForkSlotOutcomesV2(records []ports.CanonicalRecord,histories map[stri
 		}
 	}
 
- return nil
+	return nil
 }
 
 // validateAndOrderForkSlotHistoriesV2 enforces precise source-cut eligibility,
 // full pending-roster closure, contradictory-settlement rejection and stable
 // (round,slot,ordinal) order, independent of map iteration or record arrival.
 func validateAndOrderForkSlotHistoriesV2(pendingDispatchRefs []any,
- histories map[string]*forkSlotHistory,snapshot []any,child *genesis.Genesis,
- offset uint64,origin *policy.Bundle)([]*forkSlotHistory,error){
+	histories map[string]*forkSlotHistory, snapshot []any, child *genesis.Genesis,
+	offset uint64, origin *policy.Bundle) ([]*forkSlotHistory, error) {
 	// Every live source dispatch must be owned by one migrated round. Settled
 	// responses belonging to other rounds remain historical archive only.
 	live := map[string][]any{}
@@ -265,15 +265,15 @@ func validateAndOrderForkSlotHistoriesV2(pendingDispatchRefs []any,
 		}
 		previous = h
 	}
- return ordered,nil
+	return ordered, nil
 }
 
 // remintForkSlotHistoriesV2 changes child IDs and relative time/ordinal,
 // preserves historical intent and source bytes, and returns pure records
 // for later transactional P3 publication.
-func remintForkSlotHistoriesV2(parent,child *genesis.Genesis,snapshot []any,
- archive forkHistoryArchive,roundMap map[string][]any,ordered []*forkSlotHistory,
- origin,target *policy.Bundle)([]forkSlotRecord,error){
+func remintForkSlotHistoriesV2(parent, child *genesis.Genesis, snapshot []any,
+	archive forkHistoryArchive, roundMap map[string][]any, ordered []*forkSlotHistory,
+	origin, target *policy.Bundle) ([]forkSlotRecord, error) {
 	childCycle, _, err := identity.New(target).Sum("cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1,
 		[]any{child.RunID[:], []any{int64(child.InitialInstant), uint64(0)}})
 	if err != nil {
@@ -322,5 +322,5 @@ func remintForkSlotHistoriesV2(parent,child *genesis.Genesis,snapshot []any,
 		}
 	}
 
- return out,nil
+	return out, nil
 }

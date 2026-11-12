@@ -33,21 +33,31 @@ type forkSlotHistory struct {
 // migrateRoundHistoryV2 orchestrates four independent read-free stages:
 // round projection, authenticated dispatches, receipt linkage / ordering,
 // and new child IDs. All SQL publication remains in the fork publisher.
-func migrateRoundHistoryV2(parent,child *genesis.Genesis,snapshot []any,
- archive forkHistoryArchive,origin,target *policy.Bundle)([]forkGenesisRound,[]forkSlotRecord,error){
- projection,err:=projectForkRoundHistoryV2(parent,child,snapshot,archive,origin,target)
- if err!=nil{return nil,nil,err}
- histories,err:=authenticateForkSlotDispatchesV2(parent,projection.records,
-  projection.roundMap,projection.parentCoordinates,projection.clocks,origin)
- if err!=nil{return nil,nil,err}
- if err:=attachForkSlotOutcomesV2(projection.records,histories);err!=nil{return nil,nil,err}
- ordered,err:=validateAndOrderForkSlotHistoriesV2(projection.pendingDispatchRefs,
-  histories,snapshot,child,projection.offset,origin)
- if err!=nil{return nil,nil,err}
- slots,err:=remintForkSlotHistoriesV2(parent,child,snapshot,archive,
-  projection.roundMap,ordered,origin,target)
- if err!=nil{return nil,nil,err}
- return projection.rounds,slots,nil
+func migrateRoundHistoryV2(parent, child *genesis.Genesis, snapshot []any,
+	archive forkHistoryArchive, origin, target *policy.Bundle) ([]forkGenesisRound, []forkSlotRecord, error) {
+	projection, err := projectForkRoundHistoryV2(parent, child, snapshot, archive, origin, target)
+	if err != nil {
+		return nil, nil, err
+	}
+	histories, err := authenticateForkSlotDispatchesV2(parent, projection.records,
+		projection.roundMap, projection.parentCoordinates, projection.clocks, origin)
+	if err != nil {
+		return nil, nil, err
+	}
+	if err := attachForkSlotOutcomesV2(projection.records, histories); err != nil {
+		return nil, nil, err
+	}
+	ordered, err := validateAndOrderForkSlotHistoriesV2(projection.pendingDispatchRefs,
+		histories, snapshot, child, projection.offset, origin)
+	if err != nil {
+		return nil, nil, err
+	}
+	slots, err := remintForkSlotHistoriesV2(parent, child, snapshot, archive,
+		projection.roundMap, ordered, origin, target)
+	if err != nil {
+		return nil, nil, err
+	}
+	return projection.rounds, slots, nil
 }
 
 // Revoked receipts may predate the source checkpoint. Reconstruct their clock

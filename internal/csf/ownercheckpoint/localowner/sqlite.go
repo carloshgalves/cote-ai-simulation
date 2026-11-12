@@ -194,7 +194,10 @@ func (s *Store) Close() error {
 	}
 	conn := s.conn
 	s.conn = nil
-	s.restored = nil
+	for _, memory := range s.restored {
+        clear(memory)
+    }
+    s.restored = nil
 	for i := range s.signer {
 		s.signer[i] = 0
 	}
@@ -248,6 +251,8 @@ func (s *Store) PersistAndSign(ctx context.Context, req ownercheckpoint.PersistR
 	// any digest, SQL value or signing bytes. Concurrent mutation *during*
 	// this copy is a caller data race and remains explicitly unsupported.
 	req.Checkpoint.Content = bytes.Clone(req.Checkpoint.Content)
+    // Best-effort erasure of this method's private copy after commit/sign.
+    defer clear(req.Checkpoint.Content)
 	if err := validateCheckpoint(req); err != nil {
 		return zero, err
 	}
@@ -304,9 +309,10 @@ func (s *Store) PersistAndSign(ctx context.Context, req ownercheckpoint.PersistR
 	if err != nil {
 		return zero, err
 	}
-	for k := range s.restored {
-		if k.Scope == req.Scope {
-			delete(s.restored, k)
+	for k, memory := range s.restored {
+        if k.Scope == req.Scope {
+            clear(memory)
+            delete(s.restored, k)
 		}
 	}
 	return ownercheckpoint.SignedReceipt{Locator: locator, Signature: ed25519.Sign(s.signer, signedBytes)}, nil
@@ -351,7 +357,9 @@ func (s *Store) loadVerified(ctx context.Context, req ownercheckpoint.RestoreReq
 	if identity.OpaqueContentHash(signingBytes) != req.ReceiptID {
 		return nil, errors.New("owner receipt does not bind exact checkpoint")
 	}
-	return bytes.Clone(cp.Content), nil
+	owned := bytes.Clone(cp.Content)
+    clear(cp.Content)
+    return owned, nil
 }
 
 // Restore rehydrates the requested checkpoint from local durable storage.
@@ -366,9 +374,10 @@ func (s *Store) Restore(ctx context.Context, req ownercheckpoint.RestoreRequest)
 	if s.conn == nil {
 		return zero, errClosed
 	}
-	for k := range s.restored {
-		if k.Scope == req.Scope {
-			delete(s.restored, k)
+	for k, memory := range s.restored {
+        if k.Scope == req.Scope {
+            clear(memory)
+            delete(s.restored, k)
 		}
 	}
 	data, err := s.loadVerified(ctx, req)
@@ -404,11 +413,14 @@ func (s *Store) Acknowledge(ctx context.Context, ack ownercheckpoint.RestoreAck)
 		ReceiptID: ack.ReceiptID, ContentHash: ack.ContentHash}
 	current, err := s.loadVerified(ctx, req)
 	if err != nil {
-		delete(s.restored, key)
-		return err
-	}
-	if !bytes.Equal(restored, current) {
-		delete(s.restored, key)
+        clear(restored)
+        delete(s.restored, key)
+        return err
+    }
+    defer clear(current)
+    if !bytes.Equal(restored, current) {
+        clear(restored)
+        delete(s.restored, key)
 		return errors.New("owner restored memory differs from durable checkpoint")
 	}
 	tx, err := s.conn.BeginTx(ctx, nil)

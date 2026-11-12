@@ -1,0 +1,36 @@
+name: B1 local owner build and format evidence (temporary)
+on:
+  pull_request:
+    paths:
+      - "internal/csf/ownercheckpoint/localowner/**"
+      - ".github/workflows/b1-owner-check.yml"
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  owner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Format and emit source evidence
+        run: |
+          gofmt -w internal/csf/ownercheckpoint/localowner/sqlite.go internal/csf/ownercheckpoint/localowner/sqlite_test.go
+          echo B1_OWNER_FORMAT_BEGIN
+          base64 -w0 internal/csf/ownercheckpoint/localowner/sqlite.go
+          echo
+          echo B1_OWNER_FORMAT_END
+          echo B1_TEST_FORMAT_BEGIN
+          base64 -w0 internal/csf/ownercheckpoint/localowner/sqlite_test.go
+          echo
+          echo B1_TEST_FORMAT_END
+      - name: Focused B1 test
+        run: go test -count=1 ./internal/csf/ownercheckpoint/localowner
+      - name: B1 race test
+        run: go test -race -count=1 ./internal/csf/ownercheckpoint/localowner

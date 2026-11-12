@@ -26,21 +26,14 @@ jobs:
         with:
           go-version: "1.27.2"
           cache: true
-      - name: Format B3 test code and emit formatter evidence
+      - name: Require committed gofmt output
         run: |
-          gofmt -w internal/csf/commit/owner58_b3_process_test.go internal/csf/commit/owner58_b3_fork_test.go internal/csf/commit/owner58_b3_forkcrash_test.go
-          echo B3_PROCESS_FORMAT_BEGIN
-          base64 -w0 internal/csf/commit/owner58_b3_process_test.go
-          echo
-          echo B3_PROCESS_FORMAT_END
-          echo B3_FORK_FORMAT_BEGIN
-          base64 -w0 internal/csf/commit/owner58_b3_fork_test.go
-          echo
-          echo B3_FORK_FORMAT_END
-          echo B3_FORKCRASH_FORMAT_BEGIN
-          base64 -w0 internal/csf/commit/owner58_b3_forkcrash_test.go
-          echo
-          echo B3_FORKCRASH_FORMAT_END
+          files=$(gofmt -l internal/csf/commit/owner58_b3_process_test.go internal/csf/commit/owner58_b3_fork_test.go internal/csf/commit/owner58_b3_forkcrash_test.go)
+          if [ -n "$files" ]; then
+            echo "Unformatted B3 source:"
+            echo "$files"
+            exit 1
+          fi
       - name: B3 independent-process crash and fork integration
         run: go test -count=1 -v -timeout=12m ./internal/csf/commit -run '^TestCSFRV18R58B3'
       - name: B3 race and concurrency

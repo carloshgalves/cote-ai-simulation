@@ -3,10 +3,10 @@ package commit
 import (
 	"bytes"
 	"context"
-	"crypto/sha256"
-	"encoding/binary"
 	"crypto/ed25519"
+	"crypto/sha256"
 	"database/sql"
+	"encoding/binary"
 	"encoding/hex"
 	"errors"
 	"os"
@@ -201,7 +201,9 @@ func b3SubprocessCrash(t *testing.T, phase, causalPath, ownerPath string, run [3
 func b3LedgerDigest(t *testing.T, path string) [32]byte {
 	t.Helper()
 	db, err := sql.Open("sqlite", path)
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	defer db.Close()
 	fingerprint := sha256.New()
 	for _, table := range [...]string{
@@ -210,7 +212,9 @@ func b3LedgerDigest(t *testing.T, path string) [32]byte {
 	} {
 		// Table identifiers are a hard-coded allowlist, never user input.
 		rows, err := db.Query("SELECT canonical FROM " + table + " ORDER BY id")
-		if err != nil { t.Fatalf("canonical ledger %s query: %v", table, err) }
+		if err != nil {
+			t.Fatalf("canonical ledger %s query: %v", table, err)
+		}
 		appendFramed := func(data []byte) {
 			var lenFrame [8]byte
 			binary.BigEndian.PutUint64(lenFrame[:], uint64(len(data)))
@@ -220,11 +224,19 @@ func b3LedgerDigest(t *testing.T, path string) [32]byte {
 		appendFramed([]byte(table))
 		for rows.Next() {
 			var canonical []byte
-			if err := rows.Scan(&canonical); err != nil { _ = rows.Close(); t.Fatal(err) }
+			if err := rows.Scan(&canonical); err != nil {
+				_ = rows.Close()
+				t.Fatal(err)
+			}
 			appendFramed(canonical)
 		}
-		if err := rows.Err(); err != nil { _ = rows.Close(); t.Fatal(err) }
-		if err := rows.Close(); err != nil { t.Fatal(err) }
+		if err := rows.Err(); err != nil {
+			_ = rows.Close()
+			t.Fatal(err)
+		}
+		if err := rows.Close(); err != nil {
+			t.Fatal(err)
+		}
 	}
 	var result [32]byte
 	copy(result[:], fingerprint.Sum(nil))

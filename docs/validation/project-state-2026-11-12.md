@@ -35,7 +35,7 @@
 5. **P2 — issue #60:** benchmarks antes de qualquer otimização de replay, snapshot ou forks. Sem desempenho medido, não declarar defeito.
 6. **First Real Run:** atender G0–G8 da [matriz de prontidão](product-readiness-2026-11-10.md), inclusive cenário multiagente, regras, observabilidade, replay e ausência de vazamento.
 
-## Próxima tarefa recomendada — #58, slice S1
+## Próxima tarefa recomendada — [issue #74](https://github.com/carloshgalves/cote-ai-simulation/issues/74), slice S1 da #58
 
 **Objetivo:** obter um primeiro **fluxo concreto e recuperável de checkpoint cognitivo durável**, conectado à porta `DurableOwner` do S0, **sem** fingir que um fake de memória confirma infraestrutura remota. Esta entrega não deve escolher fornecedor/cloud unilateralmente nem ampliar o codec V1/V2.
 

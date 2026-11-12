@@ -171,6 +171,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    if err:=provenance.bind(snapshotOwnerResponse,run,id,23,d,nil);err!=nil{rows.Close();return nil,err}
    parts.responses=append(parts.responses,[]any{uint64(23),bytes.Clone(id),d})
    rawDispatch,ok:=f[1].([]byte);if !ok||len(rawDispatch)!=32{rows.Close();return nil,errors.New("NoProposal dispatch invalid")}
+   if err:=provenance.bindLink(snapshotOwnerResponse,id,rawDispatch);err!=nil{rows.Close();return nil,err}
    var k [32]byte;copy(k[:],rawDispatch);answered[k]=true
    continue
   }
@@ -180,6 +181,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    if err:=provenance.bind(snapshotOwnerResponse,run,id,5,d,nil);err!=nil{rows.Close();return nil,err}
    parts.responses=append(parts.responses,[]any{uint64(5),bytes.Clone(id),d})
    rawDispatch,ok:=f[1].([]byte);if !ok||len(rawDispatch)!=32{rows.Close();return nil,errors.New("proposal dispatch invalid")}
+   if err:=provenance.bindLink(snapshotOwnerResponse,id,rawDispatch);err!=nil{rows.Close();return nil,err}
    var k [32]byte;copy(k[:],rawDispatch);answered[k]=true
    continue
   }
@@ -241,6 +243,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    if !equalBytes(f[4],d){out.Close();return nil,errors.New("completion digest altered")}
    var k [32]byte;copy(k[:],rawTask);completed[k]=true
    if err:=provenance.bind(snapshotOwnerCompletion,run,id,0,nil,raw);err!=nil{out.Close();return nil,err}
+   if err:=provenance.bindLink(snapshotOwnerCompletion,id,rawTask);err!=nil{out.Close();return nil,err}
    parts.perceptionCompletions=append(parts.perceptionCompletions,f)
   }else{out.Close();return nil,errors.New("unregistered outbox record")}
  }

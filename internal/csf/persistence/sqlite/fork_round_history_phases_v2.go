@@ -252,7 +252,19 @@ func validateAndOrderForkSlotHistoriesV2(pendingDispatchRefs []any,
 		}
 		return a[5].(uint64) < b[5].(uint64)
 	})
-
+	// Validate causal redispatch sequence before assigning any child identity.
+	var previous *forkSlotHistory
+	for _, h := range ordered {
+		f := h.fields
+		if previous == nil || !sameCanonical(previous.fields[3], f[3]) || previous.fields[4] != f[4] {
+			if f[5] != uint64(0) {
+				return nil, errors.New("first source dispatch ordinal is not zero")
+			}
+		} else if previous.revoked == nil || f[5].(uint64) != previous.fields[5].(uint64)+1 {
+			return nil, errors.New("source redispatch lacks immediate durable revocation")
+		}
+		previous = h
+	}
  return ordered,nil
 }
 
@@ -268,17 +280,8 @@ func remintForkSlotHistoriesV2(parent,child *genesis.Genesis,snapshot []any,
 		return nil, err
 	}
 	var out []forkSlotRecord
-	var previous *forkSlotHistory
 	for _, h := range ordered {
 		f := h.fields
-		if previous == nil || !sameCanonical(previous.fields[3], f[3]) || previous.fields[4] != f[4] {
-			if f[5] != uint64(0) {
-				return nil, errors.New("first source dispatch ordinal is not zero")
-			}
-		} else if previous.revoked == nil || f[5].(uint64) != previous.fields[5].(uint64)+1 {
-			return nil, errors.New("source redispatch lacks immediate durable revocation")
-		}
-		previous = h
 		round := roundMap[string(f[3].([]byte))]
 		fields := append([]any(nil), f...)
 		fields[1] = child.RunID[:]

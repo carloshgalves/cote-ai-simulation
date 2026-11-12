@@ -90,9 +90,9 @@ func TestFork57SlotOrderingAndRevocationOrdinalInvariant(t *testing.T){
 }
 
 func TestFork57RemintDispatchPreservesSourceAndRekeysChild(t *testing.T){
- v1,err:=policy.Load("../../../docs/architecture/canonical-codec-v1-bundle")
+ v1,err:=policy.Load("../../../../docs/architecture/canonical-codec-v1-bundle")
  if err!=nil{t.Fatal(err)}
- v2,err:=policy.LoadV2("../../../docs/architecture/canonical-codec-v2-bundle")
+ v2,err:=policy.LoadV2("../../../../docs/architecture/canonical-codec-v2-bundle")
  if err!=nil{t.Fatal(err)}
  oldRun,newRun,oldRound,newRound,oldID:=fork57ID(0x20),fork57ID(0x21),fork57ID(0x30),fork57ID(0x31),fork57ID(0x32)
  parent:=&genesis.Genesis{RunID:domain.ID(oldRun),InitialInstant:40}
@@ -116,7 +116,7 @@ func TestFork57RemintDispatchPreservesSourceAndRekeysChild(t *testing.T){
 }
 
 func TestFork57ForeignRunDispatchCannotPassAuthenticatedHistory(t *testing.T){
- b,err:=policy.Load("../../../docs/architecture/canonical-codec-v1-bundle")
+ b,err:=policy.Load("../../../../docs/architecture/canonical-codec-v1-bundle")
  if err!=nil{t.Fatal(err)}
  own,foreign,roundID,cycleID:=fork57ID(0x41),fork57ID(0x42),fork57ID(0x43),fork57ID(0x44)
  id,_,err:=identity.New(b).Sum("cote.csf.id.dispatch","cote.csf.schema.dispatch-id-preimage",1,

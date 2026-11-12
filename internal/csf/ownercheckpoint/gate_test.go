@@ -482,3 +482,25 @@ func TestOwner58S0HistoricalSnapshotCannotAuthorizeNewWORK(t *testing.T){
 		t.Fatal("current verified snapshot refused:",err)
 	}
 }
+
+func TestOwner58S0ReadyPermitCannotOutliveSubsequentJournalCommits(t *testing.T){
+	s:=setupOwnerGate(t)
+	receipt:=testStage(t,s)
+	s.publishSnapshot(t,s.cp)
+	if err:=s.gate.RestoreAndAcknowledge(context.Background(),s.scope,s.snapshot,receipt);err!=nil{
+		t.Fatal(err)
+	}
+	called:=0
+	s.escrow.tailCommits=1
+	if err:=s.gate.RunWork(context.Background(),s.scope,s.snapshot,receipt,func(context.Context)error{
+		called++;return nil
+	});err==nil||called!=0{
+		t.Fatalf("stale in-memory ACK allowed post-commit model call: %v calls=%d",err,called)
+	}
+	s.escrow.tailCommits=0
+	if err:=s.gate.RunWork(context.Background(),s.scope,s.snapshot,receipt,func(context.Context)error{
+		called++;return nil
+	});err!=nil||called!=1{
+		t.Fatalf("current verified snapshot wrongly blocked: %v calls=%d",err,called)
+	}
+}

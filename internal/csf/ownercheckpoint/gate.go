@@ -317,7 +317,7 @@ func (g *Gate) RestoreAndAcknowledge(ctx context.Context, scope Scope,
 // the permit midway through a callback; callbacks must not re-enter Gate.
 func (g *Gate) RunWork(ctx context.Context, scope Scope,
 	snapshotID, receiptID [32]byte, work func(context.Context) error) error {
-	if g == nil || ctx == nil || work == nil {
+	if g == nil || ctx == nil || work == nil || g.escrow == nil || g.bundle == nil {
 		return errors.New("cognitive work gate unconfigured")
 	}
 	if err := validateScope(scope); err != nil {
@@ -327,6 +327,19 @@ func (g *Gate) RunWork(ctx context.Context, scope Scope,
 	defer g.mu.RUnlock()
 	if granted, ok := g.permits[scope]; !ok ||
 		granted.snapshot != snapshotID || granted.receipt != receiptID {
+		return ErrNotAcknowledged
+	}
+	if err := ctx.Err(); err != nil {
+		return err
+	}
+	// The model callback may happen long after restore. An old permit
+	// alone cannot establish that this snapshot is still the live run tip.
+	verified, err := g.escrow.VerifySnapshotV1(ctx, scope.Run, snapshotID, g.bundle)
+	if err != nil {
+		return fmt.Errorf("cognitive WORK snapshot revalidation: %w", err)
+	}
+	if verified.Snapshot.ID != snapshotID || verified.TailCommits != 0 ||
+		uint64(verified.Clock.Revision) != verified.Snapshot.Revision {
 		return ErrNotAcknowledged
 	}
 	if err := ctx.Err(); err != nil {

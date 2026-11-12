@@ -9,7 +9,7 @@
 
 **CI observado:** PR #72 HEAD `79198953` teve cinco workflows de CSF com `success`; a `main@78bfd267` teve [CSF canonical conformance `success`](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/43226400594). Não houve nesta apuração execução do `product-validation-on-demand` na baseline atual. Conformidade Go/TS de 621 casos continua **V1-only**; issue [#59](https://github.com/carloshgalves/cote-ai-simulation/issues/59) cobre CI V2. Nenhuma dessas evidências atende G3–G8 ou certifica durabilidade externa. **First Real Run: NO-GO.**
 
-Fonte detalhada de status e ordem de tarefas: [checkpoint de 12/11](project-state-2026-11-12.md). Próxima fatia proposta: **#58/S1** (owner concreto, recuperação e gate de WORK integrado), respeitando decisões de provedor, revisões e aceite humano; #59 pode seguir em paralelo e CSFRV1-9 é a sequência de observabilidade. Não alterar automaticamente as conclusões históricas das linhas C01–C10.
+Fonte detalhada de status e ordem de tarefas: [checkpoint de 12/11](project-state-2026-11-12.md). Próxima fatia proposta: **[#74 — #58/S1](https://github.com/carloshgalves/cote-ai-simulation/issues/74)** (owner concreto, recuperação e gate de WORK integrado), respeitando decisões de provedor, revisões e aceite humano; #59 pode seguir em paralelo e CSFRV1-9 é a sequência de observabilidade. Não alterar automaticamente as conclusões históricas das linhas C01–C10.
 
 ## 1. Distinct release gates
 

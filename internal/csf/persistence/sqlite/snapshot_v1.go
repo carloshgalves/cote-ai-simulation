@@ -68,13 +68,14 @@ func snapshotLedgerPrefix(ctx context.Context, tx *sql.Tx, name string, b *polic
 // the persisted unit digest, never a surrogate hash of arbitrary bytes.
 func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundle)([]any,error){
  parts:=newSnapshotPendingPartitions()
+ provenance:=newSnapshotPendingProvenance(run)
  deriver:=identity.New(b)
  digestRef:=func(tag,schema string,fields []any)([]byte,error){
   d,_,err:=deriver.Sum(tag,schema,1,fields)
   if err!=nil{return nil,err}
   return d[:],nil
  }
- typed:=func(query string,target *[]any,kind uint64,recordDigest func([]any)([]byte,error))error{
+ typed:=func(query string,target *[]any,owner string,kind uint64,recordDigest func([]any)([]byte,error))error{
   rows,err:=tx.QueryContext(ctx,query,run[:]);if err!=nil{return err}
   defer rows.Close()
   for rows.Next(){
@@ -84,10 +85,12 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    decoded,err:=codec.StrictDecodePayload(raw);if err!=nil{return err}
    fields,ok:=decoded.([]any);if !ok||len(fields)==0||!equalBytes(fields[0],id){return errors.New("snapshot authority id and payload differ")}
    if recordDigest==nil {
+    if err:=provenance.bind(owner,run,id,kind,nil,raw);err!=nil{return err}
     *target=append(*target,fields)
    }else{
     d,err:=recordDigest(fields);if err!=nil{return err}
     if len(d)!=32{return errors.New("snapshot reference digest invalid")}
+    if err:=provenance.bind(owner,run,id,kind,d,nil);err!=nil{return err}
     *target=append(*target,[]any{kind,bytes.Clone(id),d})
    }
   }
@@ -100,9 +103,9 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
   if !ok||len(d)!=32{return nil,errors.New("invalid scheduled unit digest")}
   return bytes.Clone(d),nil
  }
- if err:=typed("SELECT id,canonical FROM scheduled_occurrences WHERE run_id=? AND lifecycle=0 ORDER BY id",&parts.occurrences,6,lastDigest);err!=nil{return nil,err}
- if err:=typed("SELECT definition_id,canonical FROM trigger_runtime WHERE run_id=? ORDER BY definition_id",&parts.triggerRuntime,0,nil);err!=nil{return nil,err}
- if err:=typed("SELECT id,canonical FROM trigger_activations WHERE run_id=? AND lifecycle=0 ORDER BY id",&parts.triggerActivations,7,lastDigest);err!=nil{return nil,err}
+ if err:=typed("SELECT id,canonical FROM scheduled_occurrences WHERE run_id=? AND lifecycle=0 ORDER BY id",&parts.occurrences,snapshotOwnerOccurrence,6,lastDigest);err!=nil{return nil,err}
+ if err:=typed("SELECT definition_id,canonical FROM trigger_runtime WHERE run_id=? ORDER BY definition_id",&parts.triggerRuntime,snapshotOwnerRuntime,0,nil);err!=nil{return nil,err}
+ if err:=typed("SELECT id,canonical FROM trigger_activations WHERE run_id=? AND lifecycle=0 ORDER BY id",&parts.triggerActivations,snapshotOwnerActivation,7,lastDigest);err!=nil{return nil,err}
  pending,err:=pendingClock(ctx,tx,run);if err!=nil{return nil,err}
  live:=map[[32]byte]bool{}
  for _,item:=range pending{live[[32]byte(item.ID)]=true}
@@ -138,6 +141,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    if !ok||!okSeq||!equalBytes(f[1],run[:]){rows.Close();return nil,errors.New("source closure malformed")}
    d,err:=digestRef("cote.csf.digest.source-closure","cote.csf.schema.source-closure",f)
    if err!=nil{rows.Close();return nil,err}
+   if err:=provenance.bind(snapshotOwnerClosure,run,id,2,d,nil);err!=nil{rows.Close();return nil,err}
    if prev,exists:=closings[source];!exists||seq>prev.seq{closings[source]=closure{source,seq,[]any{uint64(2),bytes.Clone(id),d}}}
    continue
   }
@@ -147,6 +151,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
     if live[key]{
      d,err:=digestRef("cote.csf.digest.round-declaration","cote.csf.schema.round-declaration",f)
      if err!=nil{rows.Close();return nil,err}
+     if err:=provenance.bind(snapshotOwnerRound,run,id,3,d,nil);err!=nil{rows.Close();return nil,err}
      parts.rounds=append(parts.rounds,[]any{uint64(3),bytes.Clone(id),d})
      parts.pendingInputs=append(parts.pendingInputs,[]any{uint64(4),bytes.Clone(id),d})
     }
@@ -156,22 +161,27 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
     if !equalBytes(f[1],run[:]){rows.Close();return nil,errors.New("cross-run dispatch")}
     d,err:=digestRef("cote.csf.digest.slot-dispatch","cote.csf.schema.slot-dispatch",f)
     if err!=nil{rows.Close();return nil,err}
+    if err:=provenance.bind(snapshotOwnerDispatch,run,id,4,d,nil);err!=nil{rows.Close();return nil,err}
     dispatches[key]=[]any{uint64(4),bytes.Clone(id),d}
     continue
    }
    // NoProposal slot response (the final field is its unit digest).
    if !equalBytes(f[2],run[:]){rows.Close();return nil,errors.New("cross-run NoProposal")}
    d,err:=lastDigest(f);if err!=nil{rows.Close();return nil,err}
+   if err:=provenance.bind(snapshotOwnerResponse,run,id,23,d,nil);err!=nil{rows.Close();return nil,err}
    parts.responses=append(parts.responses,[]any{uint64(23),bytes.Clone(id),d})
    rawDispatch,ok:=f[1].([]byte);if !ok||len(rawDispatch)!=32{rows.Close();return nil,errors.New("NoProposal dispatch invalid")}
+   if err:=provenance.bindLink(snapshotOwnerResponse,id,rawDispatch);err!=nil{rows.Close();return nil,err}
    var k [32]byte;copy(k[:],rawDispatch);answered[k]=true
    continue
   }
   if len(f)==19{
    if !equalBytes(f[2],run[:]){rows.Close();return nil,errors.New("cross-run proposal")}
    d,err:=lastDigest(f);if err!=nil{rows.Close();return nil,err}
+   if err:=provenance.bind(snapshotOwnerResponse,run,id,5,d,nil);err!=nil{rows.Close();return nil,err}
    parts.responses=append(parts.responses,[]any{uint64(5),bytes.Clone(id),d})
    rawDispatch,ok:=f[1].([]byte);if !ok||len(rawDispatch)!=32{rows.Close();return nil,errors.New("proposal dispatch invalid")}
+   if err:=provenance.bindLink(snapshotOwnerResponse,id,rawDispatch);err!=nil{rows.Close();return nil,err}
    var k [32]byte;copy(k[:],rawDispatch);answered[k]=true
    continue
   }
@@ -179,6 +189,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    if !equalBytes(f[1],run[:]){rows.Close();return nil,errors.New("cross-run exogenous input")}
    if live[key]{
     d,err:=lastDigest(f);if err!=nil{rows.Close();return nil,err}
+    if err:=provenance.bind(snapshotOwnerExogenous,run,id,1,d,nil);err!=nil{rows.Close();return nil,err}
     parts.pendingInputs=append(parts.pendingInputs,[]any{uint64(1),bytes.Clone(id),d})
    }
    continue
@@ -223,6 +234,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    if !equalBytes(f[1],run[:]){out.Close();return nil,errors.New("foreign outbox task")}
    digest,err:=digestRef("cote.csf.digest.perception-task","cote.csf.schema.perception-task",f)
    if err!=nil{out.Close();return nil,err}
+   if err:=provenance.bind(snapshotOwnerTask,run,id,15,digest,nil);err!=nil{out.Close();return nil,err}
    var key [32]byte;copy(key[:],id);tasks[key]=[]any{uint64(15),bytes.Clone(id),digest}
   } else if len(f)==5 {
    rawTask,ok:=f[1].([]byte);if !ok||len(rawTask)!=32{out.Close();return nil,errors.New("completion task ref invalid")}
@@ -230,6 +242,8 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
    if err!=nil{out.Close();return nil,err}
    if !equalBytes(f[4],d){out.Close();return nil,errors.New("completion digest altered")}
    var k [32]byte;copy(k[:],rawTask);completed[k]=true
+   if err:=provenance.bind(snapshotOwnerCompletion,run,id,0,nil,raw);err!=nil{out.Close();return nil,err}
+   if err:=provenance.bindLink(snapshotOwnerCompletion,id,rawTask);err!=nil{out.Close();return nil,err}
    parts.perceptionCompletions=append(parts.perceptionCompletions,f)
   }else{out.Close();return nil,errors.New("unregistered outbox record")}
  }
@@ -242,6 +256,7 @@ func snapshotPending(ctx context.Context,tx *sql.Tx,run [32]byte,b *policy.Bundl
  for k:=range completed{if _,ok:=tasks[k];!ok{return nil,errors.New("orphan perception completion in snapshot")}}
  fields,err:=parts.canonicalOrder()
  if err!=nil{return nil,err}
+ if err:=provenance.verify(parts);err!=nil{return nil,err}
  hash,encoded,err:=deriver.Sum("cote.csf.snapshot.pending-state","cote.csf.schema.snapshot-pending-state",1,fields)
  if err!=nil{return nil,err}
  return []any{"cote.csf.schema.snapshot-pending-state",uint64(1),encoded,hash[:]},nil

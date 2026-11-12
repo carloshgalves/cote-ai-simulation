@@ -161,22 +161,19 @@ func (g *Gate) Stage(ctx context.Context, scope Scope,
 	if _, err := sqlite.CognitiveCheckpointSigningBytesV1(scope.Run, cp, signed.Locator); err != nil {
 		return zero, fmt.Errorf("external owner receipt binding: %w", err)
 	}
+	// Serialize the exact escrow publication against a newer Stage/Restore.
+	// Without this lock, another generation could begin between the check
+	// and SQL insertion and the superseded Stage could publish afterward.
 	g.mu.RLock()
-	current := g.generation[scope] == epoch
-	g.mu.RUnlock()
-	if !current {
+	if g.generation[scope] != epoch {
+		g.mu.RUnlock()
 		return zero, errors.New("superseded owner persist cannot enter escrow")
 	}
 	receipt, err := g.escrow.PersistCognitiveCheckpointV1(ctx, scope.Run,
 		cloneCheckpoint(cp), signed.Locator, bytes.Clone(signed.Signature), g.bundle)
+	g.mu.RUnlock()
 	if err != nil {
 		return zero, fmt.Errorf("signed owner checkpoint escrow: %w", err)
-	}
-	g.mu.RLock()
-	current = g.generation[scope] == epoch
-	g.mu.RUnlock()
-	if !current {
-		return zero, errors.New("superseded owner escrow cannot authorize checkpoint")
 	}
 	return receipt, nil
 }

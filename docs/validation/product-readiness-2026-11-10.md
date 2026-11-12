@@ -3,6 +3,14 @@
 **Original assessment:** 2026-11-10. **Reconciled:** 2026-11-11. **Engineering baseline:** `main@0e3f9665b9bbc33be93d9873751fc5a68cec450c`. Test evidence of the merged CSFRV1-8 is from PR HEAD `96daa15f35ad6840033ceb10ecde37e76f98377f`, **not** a fresh release run.
 **Status:** TEST PLAN / NO-GO for First Real Run. The [current V1-8 matrix](csfrv1-8-baseline-2026-11-11.md) reconciles continuity only; no tests were run for this documentation-only issue.
 
+## Atualização de escopo — 2026-11-12
+
+**Baseline atual examinada:** `main@78bfd267ba70a6d5f8acb36fdadf24c33407d8ad`. A documentação acima conserva o checkpoint de 11/11 como **evidência histórica**. Desde então foram integradas PRs #61–#72: guard de autoridades, decomposição do bootstrap, tipagem/proveniência do snapshot e [S0 do owner](../architecture/cognitive-owner-durable-adapter-s0.md). O gate P0 externo [#58](https://github.com/carloshgalves/cote-ai-simulation/issues/58) **não foi fechado**: S0 fornece interface e guard em processo com owner simulado, não provider remoto nem cobertura obrigatória de todos os entrypoints WORK/LLM.
+
+**CI observado:** PR #72 HEAD `79198953` teve cinco workflows de CSF com `success`; a `main@78bfd267` teve [CSF canonical conformance `success`](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/43226400594). Não houve nesta apuração execução do `product-validation-on-demand` na baseline atual. Conformidade Go/TS de 621 casos continua **V1-only**; issue [#59](https://github.com/carloshgalves/cote-ai-simulation/issues/59) cobre CI V2. Nenhuma dessas evidências atende G3–G8 ou certifica durabilidade externa. **First Real Run: NO-GO.**
+
+Fonte detalhada de status e ordem de tarefas: [checkpoint de 12/11](project-state-2026-11-12.md). Próxima fatia proposta: **[#74 — #58/S1](https://github.com/carloshgalves/cote-ai-simulation/issues/74)** (owner concreto, recuperação e gate de WORK integrado), respeitando decisões de provedor, revisões e aceite humano; #59 pode seguir em paralelo e CSFRV1-9 é a sequência de observabilidade. Não alterar automaticamente as conclusões históricas das linhas C01–C10.
+
 ## 1. Distinct release gates
 
 | Gate | Proof required | Baseline assessment |

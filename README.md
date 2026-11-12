@@ -13,15 +13,15 @@ Simulação multiagente inspirada em *Classroom of the Elite*, com personagens p
 7. **O primeiro ano é o escopo inicial.** Ao final, fazemos snapshot/pause antes de introduzir o elenco do segundo ano.
 8. **A simulação pode divergir do cânone.** O cânone fornece pessoas, regras e antecedentes; não força resultados que já deixaram de ser causalmente possíveis.
 
-## Estado atual (verificado em 2026-11-10)
+## Estado atual (apurado em 2026-11-12; `main@78bfd267`)
 
-**Fundação técnica real, produto não executável ponta a ponta.** A `main` integra CSFRV1-1–7 (Go/SQLite, tempo lógico, coortes, decisões, commits atômicos, evidência e comunicação), o Canon RAG V0, dados consolidados até Y1 V11 e as primeiras entregas físicas em Python. **CSFRV1-8 permanece em Draft na PR #25**; Observatory, adapter causal do Embodiment, cognição multiagente, economia executável e Examination Engine completo estão pendentes.
+**Fundação causal relevante integrada; First Real Run ainda NÃO executável.** A `main` contém CSFRV1-1–8 (incluindo replay/snapshot/resume/fork da PR #25), as melhorias de autoridade, bootstrap e snapshot das PRs #61–#71 e o contrato de checkpoint cognitivo S0 da [PR #72](https://github.com/carloshgalves/cote-ai-simulation/pull/72). S0 possui interface/gate `internal/csf/ownercheckpoint/` e testes com owner injetado, **não** um serviço de memória real nem prova de durabilidade remota; a [issue #58](https://github.com/carloshgalves/cote-ai-simulation/issues/58) segue aberta como gate P0.
 
-Os 621 vetores do codec normativo V1 são prova de conformidade do protocolo, não de simulação integrada. Os dados canônicos integrados não são automaticamente `verified:true` nem autorizados para `engine_memory_admission`. Issues #38/#39/#52 foram encerradas administrativamente em 10/11, sem certificado de revisão externa.
+O HEAD da PR #72 passou nos cinco workflows pertinentes. A `main@78bfd267` passou no [workflow de conformidade V1](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/43226400594). A igualdade Go/TypeScript dos 621 casos **só atesta o bundle V1**: a cobertura de CI para V2 continua pendente na [#59](https://github.com/carloshgalves/cote-ai-simulation/issues/59). Esses checks não substituem auditoria de release ou teste E2E do produto.
 
-**Matriz de validação e critérios do First Real Run:** [`docs/validation/product-readiness-2026-11-10.md`](docs/validation/product-readiness-2026-11-10.md). Workflow manual de regressão (não libera produção): `.github/workflows/product-validation-on-demand.yml`.
+Canon RAG V0 e dados consolidados de referência até Y1 V11 estão integrados com barreiras de admissão; presença no corpus não torna evidências `verified:true` nem as transforma em memória vivida, regras executáveis ou objetivos obrigatórios. Auditorias #38/#39/#52 foram encerradas administrativamente, não homologadas. Embodiment PSV1-1/2 está integrado; PSV1-3–8, Observatory (CSFRV1-9), adapter físico (9A/10), economia, Examination Engine e cognição multiagente permanecem pendentes.
 
-Framework de cognição, provedor de LLM, banco vetorial e stack de UI seguem em aberto.
+**Status e próxima fatia:** [auditoria e priorização de 12/11](docs/validation/project-state-2026-11-12.md). **Gates do primeiro run:** [matriz de prontidão](docs/validation/product-readiness-2026-11-10.md). O próximo trabalho recomendado é a [S1 da #58 (issue #74)](https://github.com/carloshgalves/cote-ai-simulation/issues/74), com planejamento de owner concreto e validação recuperável sem acesso a LLM real; em paralelo, a #59 é independente. Não há autorização automática de merge.
 
 O primeiro código do repositório é o subdomínio `Embodiment` do motor, em `src/embodiment/` — amostragem de capacidade física e estado corporal que persiste no tempo, sem nenhuma chamada de LLM. **Python vale para esse subdomínio e só para ele** ([ADR 0007](docs/adr/0007-python-para-o-subdominio-embodiment.md)); framework de agentes, provedor de LLM, banco vetorial e UI seguem em aberto.
 

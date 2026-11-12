@@ -17,6 +17,28 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 jobs:
+  # Temporary race / formatting proof for #58 S0. Removed from final CI.
+  owner58-s0-race-proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Require gofmt and run owner boundary under race detector
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(internal/csf/ownercheckpoint/gate.go internal/csf/ownercheckpoint/gate_test.go internal/csf/commit/owner58_s0_integration_test.go)
+          for f in "${files[@]}"; do
+            if [ -n "$(gofmt -l "$f")" ]; then
+              echo "::error file=$f::Go source not gofmt-formatted"
+              exit 1
+            fi
+          done
+          go test -race -count=1 -timeout=5m ./internal/csf/ownercheckpoint
   continuity:
     runs-on: ubuntu-latest
     # The R21 V1→V2 65-WORK cascade is intentionally exercised under -race;

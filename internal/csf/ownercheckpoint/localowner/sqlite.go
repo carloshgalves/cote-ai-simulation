@@ -37,7 +37,7 @@ type Store struct {
 	conn     *sql.Conn
 	signer   ed25519.PrivateKey
 	public   ed25519.PublicKey
-	restored map[restoreKey]struct{}
+	restored map[restoreKey][]byte
 }
 
 type restoreKey struct {
@@ -125,7 +125,7 @@ func Open(ctx context.Context, path string, signer ed25519.PrivateKey) (*Store, 
 		return nil, err
 	}
 	s := &Store{db: db, conn: conn, signer: bytes.Clone(signer), public: bytes.Clone(public),
-		restored: make(map[restoreKey]struct{})}
+		restored: make(map[restoreKey][]byte)}
 	if err := s.verifyConnection(ctx); err != nil {
 		_ = s.Close()
 		return nil, err
@@ -244,6 +244,10 @@ func (s *Store) PersistAndSign(ctx context.Context, req ownercheckpoint.PersistR
 	if ctx == nil || s == nil {
 		return zero, errors.New("owner persist unconfigured")
 	}
+	// Take a private immutable snapshot of the caller's buffer before computing
+	// any digest, SQL value or signing bytes. Concurrent mutation *during*
+	// this copy is a caller data race and remains explicitly unsupported.
+	req.Checkpoint.Content = bytes.Clone(req.Checkpoint.Content)
 	if err := validateCheckpoint(req); err != nil {
 		return zero, err
 	}
@@ -372,7 +376,7 @@ func (s *Store) Restore(ctx context.Context, req ownercheckpoint.RestoreRequest)
 		return zero, err
 	}
 	key := restoreKey{Scope: req.Scope, Locator: req.Locator, ReceiptID: req.ReceiptID, ContentHash: req.ContentHash}
-	s.restored[key] = struct{}{}
+	s.restored[key] = bytes.Clone(data)
 	return ownercheckpoint.RestoredContent{Locator: req.Locator, Content: data}, nil
 }
 
@@ -392,14 +396,20 @@ func (s *Store) Acknowledge(ctx context.Context, ack ownercheckpoint.RestoreAck)
 	if s.conn == nil {
 		return errClosed
 	}
-	if _, ok := s.restored[key]; !ok {
+	restored, ok := s.restored[key]
+	if !ok {
 		return errors.New("owner ACK requires restored checkpoint in current session")
 	}
 	req := ownercheckpoint.RestoreRequest{Scope: ack.Scope, Locator: ack.Locator,
 		ReceiptID: ack.ReceiptID, ContentHash: ack.ContentHash}
-	if _, err := s.loadVerified(ctx, req); err != nil {
+	current, err := s.loadVerified(ctx, req)
+	if err != nil {
 		delete(s.restored, key)
 		return err
+	}
+	if !bytes.Equal(restored, current) {
+		delete(s.restored, key)
+		return errors.New("owner restored memory differs from durable checkpoint")
 	}
 	tx, err := s.conn.BeginTx(ctx, nil)
 	if err != nil {

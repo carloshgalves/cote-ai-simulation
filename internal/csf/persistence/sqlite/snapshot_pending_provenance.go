@@ -204,6 +204,7 @@ func (p *snapshotPendingProvenance) verify(parts snapshotPendingPartitions) erro
 	}
 	linked := map[snapshotPendingWitnessKey]bool{}
 	required := map[snapshotPendingWitnessKey]bool{}
+	consumedLinks := map[snapshotPendingWitnessKey]bool{}
 	pendingDispatches := map[[32]byte]bool{}
 	pendingTasks := map[[32]byte]bool{}
 	answeredDispatches := map[[32]byte]bool{}
@@ -287,6 +288,7 @@ func (p *snapshotPendingProvenance) verify(parts snapshotPendingPartitions) erro
 				if !found {
 					return fmt.Errorf("snapshot provenance %s source link missing", pendingSnapshotPartSpecs[part].name)
 				}
+				consumedLinks[key] = true
 				if part == 6 {
 					if pendingDispatches[target] || answeredDispatches[target] {
 						return errors.New("snapshot response contradicts pending or already answered dispatch")
@@ -319,6 +321,9 @@ func (p *snapshotPendingProvenance) verify(parts snapshotPendingPartitions) erro
 				linked[key] = true
 			}
 		}
+	}
+	if len(consumedLinks) != len(p.links) {
+		return errors.New("orphan response/completion source link in snapshot")
 	}
 	if len(required) != len(linked) {
 		return errors.New("snapshot pending input source-link count mismatch")

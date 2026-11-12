@@ -375,3 +375,21 @@ func TestSnapshot57P4ZeroValueProvenanceReturnsErrors(t *testing.T) {
 		t.Fatal("missing links map caused silent acceptance")
 	}
 }
+
+func TestSnapshot57P4UnemittedOutcomesCannotHideSourceLinks(t *testing.T) {
+	for _, tc := range []struct {
+		name string
+		omit func(*snapshotPendingPartitions)
+	}{
+		{"missing-response", func(p *snapshotPendingPartitions) { p.responses = p.responses[:1] }},
+		{"missing-completion", func(p *snapshotPendingPartitions) { p.perceptionCompletions = []any{} }},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			parts, proof := test57ProvenanceFixture(t)
+			tc.omit(&parts)
+			if err := proof.verify(parts); err == nil {
+				t.Fatal("unemitted outcome left an unconsumed source link")
+			}
+		})
+	}
+}

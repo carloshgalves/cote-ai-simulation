@@ -79,6 +79,10 @@ func TestCSFRV18R58B2OwnerLocalHostStageSnapshotRestartRestoreACKWork(t *testing
     if err:=fresh.Run(ctx,ref);!errors.Is(err,ownercheckpoint.ErrNotAcknowledged)||count!=0{
         t.Fatal("foreign snapshot authorized work")
     }
+    escrowed,locator,err:=csfReopened.LoadCognitiveCheckpointV1(ctx,scope.Run,ref.Receipt,scope.Namespace,scope.Actor,bundle)
+    if err!=nil||locator==""||!bytes.Equal(escrowed.Content,original){
+        t.Fatalf("CSF escrow differs from original published bytes: %v",err)
+    }
     if err:=fresh.Restore(ctx,ref);err!=nil{t.Fatal("exact owner restore/ACK:",err)}
     if err:=fresh.Run(ctx,ref);err!=nil||count!=1{
         t.Fatalf("valid cognitive work did not run exactly once: calls=%d err=%v",count,err)
@@ -90,7 +94,6 @@ func TestCSFRV18R58B2OwnerLocalHostStageSnapshotRestartRestoreACKWork(t *testing
         t.Fatal("different receipt inherited permit")
     }
     if err:=fresh.Restore(ctx,ref);err!=nil{t.Fatal("idempotent restore:",err)}
-    if !bytes.Equal(original,append([]byte(nil),original...)){t.Fatal("test oracle corrupted")}
 
     foreignActor:=scope
     foreignActor.Actor="owner-other"
@@ -116,8 +119,16 @@ func TestCSFRV18R58B2LocalHostRejectsMissingDependencies(t *testing.T) {
     scope:=ownercheckpoint.Scope{Run:[32]byte(run),Namespace:"cognition",Actor:"owner-b2"}
     worker:=func(context.Context)error{return nil}
     if _,err:=localdemo.New(nil,csf,bundle,scope,worker);err==nil{t.Fatal("nil owner accepted")}
-    if _,err:=localdemo.New(nil,nil,bundle,scope,worker);err==nil{t.Fatal("nil store accepted")}
-    if _,err:=localdemo.New(nil,csf,nil,scope,worker);err==nil{t.Fatal("nil policy accepted")}
-    if _,err:=localdemo.New(nil,csf,bundle,scope,nil);err==nil{t.Fatal("nil cognitive callback accepted")}
-    _=ctx
+    _,private,err:=ed25519.GenerateKey(rand.Reader);if err!=nil{t.Fatal(err)}
+    dir:=t.TempDir()
+    if err:=os.Chmod(dir,0700);err!=nil{t.Fatal(err)}
+    owner,err:=localowner.Open(ctx,filepath.Join(dir,"owner.sqlite"),private);if err!=nil{t.Fatal(err)}
+    defer owner.Close()
+    if _,err:=localdemo.New(owner,nil,bundle,scope,worker);err==nil{t.Fatal("nil store accepted")}
+    if _,err:=localdemo.New(owner,csf,nil,scope,worker);err==nil{t.Fatal("nil policy accepted")}
+    if _,err:=localdemo.New(owner,csf,bundle,scope,nil);err==nil{t.Fatal("nil cognitive callback accepted")}
+    bad:=scope;bad.Actor=""
+    if _,err:=localdemo.New(owner,csf,bundle,bad,worker);err==nil{t.Fatal("empty actor accepted")}
+    bad=scope;bad.Namespace="not valid"
+    if _,err:=localdemo.New(owner,csf,bundle,bad,worker);err==nil{t.Fatal("invalid namespace accepted")}
 }

@@ -56,10 +56,10 @@ type SignedReceipt struct {
 }
 
 type RestoreRequest struct {
-	Scope        Scope
-	Locator      string
-	ReceiptID    [32]byte
-	ContentHash  [32]byte
+	Scope       Scope
+	Locator     string
+	ReceiptID   [32]byte
+	ContentHash [32]byte
 }
 
 type RestoredContent struct {
@@ -104,7 +104,7 @@ func NewGate(owner DurableOwner, escrow Escrow, bundle *policy.Bundle) (*Gate, e
 	}
 	return &Gate{
 		owner: owner, escrow: escrow, bundle: bundle,
-		permits: make(map[Scope]permit),
+		permits:    make(map[Scope]permit),
 		generation: make(map[Scope]uint64),
 	}, nil
 }

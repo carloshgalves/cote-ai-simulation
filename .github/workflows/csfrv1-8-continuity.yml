@@ -17,6 +17,21 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 jobs:
+  # Temporary formatting-only artifact; removed before final gates.
+  p57-round-fmt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Emit exact gofmt for remediated Go files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for f in internal/csf/persistence/sqlite/fork_round_history_phases_v2.go internal/csf/persistence/sqlite/fork_round_history_phases_v2_test.go; do
+            printf 'FORMATTED-R2:%s:' "$f"
+            gofmt "$f" | base64 -w0
+            printf '\\n'
+          done
   continuity:
     runs-on: ubuntu-latest
     # The R21 V1→V2 65-WORK cascade is intentionally exercised under -race;

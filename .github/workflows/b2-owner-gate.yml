@@ -3,7 +3,13 @@ on:
   pull_request:
     paths:
       - "internal/csf/ownercheckpoint/localdemo/**"
+      - "internal/csf/ownercheckpoint/localowner/**"
+      - "internal/csf/ownercheckpoint/gate.go"
+      - "internal/csf/persistence/sqlite/snapshot_v1.go"
+      - "internal/csf/persistence/sqlite/epistemic_owner_receipt_v1.go"
       - "internal/csf/commit/owner58_b2_integration_test.go"
+      - "go.mod"
+      - "go.sum"
       - ".github/workflows/b2-owner-gate.yml"
 permissions:
   contents: read

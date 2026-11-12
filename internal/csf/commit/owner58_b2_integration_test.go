@@ -166,6 +166,54 @@ func TestCSFRV18R58B2OwnerLocalHostStageSnapshotRestartRestoreACKWork(t *testing
 	}
 }
 
+func TestCSFRV18R58B2RejectsCausalDatabaseOpenedAfterOwner(t *testing.T) {
+	ctx := context.Background()
+	_, _, _, run, bundle, _ := testFixture(t)
+	_, private, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		t.Fatal(err)
+	}
+	dir := t.TempDir()
+	if err := os.Chmod(dir, 0700); err != nil {
+		t.Fatal(err)
+	}
+	path := filepath.Join(dir, "shared-incorrect.sqlite")
+	owner, err := localowner.Open(ctx, path, private)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer owner.Close()
+	// This order bypassed the owner.Open one-time check in the original B1.
+	// Only the B2 host's live guard can catch the later CSF schema.
+	causal, err := sqlite.Open(ctx, path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer causal.Close()
+	scope := ownercheckpoint.Scope{Run: [32]byte(run), Namespace: "cognition", Actor: "owner-b2"}
+	invocations := 0
+	h, err := localdemo.New(owner, causal, bundle, scope, func(context.Context) error {
+		invocations++
+		return nil
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	checkpoint := sqlite.SnapshotCheckpoint{ActorNamespace: scope.Namespace, ActorID: scope.Actor,
+		StoreID: "local-owner-b2", SchemaVersion: 1, Producer: "cognitive-host-b2",
+		ProducerVersion: 1, CoversInstant: 1, Content: []byte("no-world-truth")}
+	ref, err := h.StageSnapshot(ctx, checkpoint)
+	if err == nil || ref != (localdemo.Reference{}) {
+		t.Fatalf("owner/causal shared SQLite was accepted: ref=%+v err=%v", ref, err)
+	}
+	if err := h.Restore(ctx, ref); err == nil {
+		t.Fatal("shared storage allowed restore")
+	}
+	if err := h.Run(ctx, ref); err == nil || invocations != 0 {
+		t.Fatalf("shared storage allowed WORK: calls=%d err=%v", invocations, err)
+	}
+}
+
 func TestCSFRV18R58B2LocalHostRejectsMissingDependencies(t *testing.T) {
 	ctx := context.Background()
 	_, csf, _, run, bundle, _ := testFixture(t)

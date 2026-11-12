@@ -4,7 +4,7 @@ Este pacote implementa a **superfície de integração demonstrável** entre own
 
 ## Fluxo
 
-1. O operador inicializa Genesis/CSF, registra o ator e a chave pública Ed25519; mantém a chave privada somente no owner. Owner e CSF são **dois arquivos SQLite distintos**.
+1. O operador inicializa Genesis/CSF, registra o ator e a chave pública Ed25519; mantém a chave privada somente no owner. Owner e CSF são **dois arquivos SQLite distintos**. O host revalida essa fronteira em `StageSnapshot`, `Restore` e `Run`: se a CSF tiver sido aberta posteriormente sobre o banco do owner, os três caminhos falham fechados.
 2. `localdemo.New(owner, causal, bundle, scope, worker)` fixa o `run/namespace/actor` e recebe um callback de teste. O campo callback é privado; o host não exporta método que o invoca sem o gate.
 3. `Host.StageSnapshot(ctx, cp)` copia os bytes privados, executa `Gate.Stage` (commit owner → assinatura → escrow CSF), **depois** `CreateSnapshotV1` com a mesma cópia e retorna `Reference{Snapshot,Receipt}`. Resultado parcial/erro **não** concede permissão de WORK.
 4. Encerre os dois stores, reabra-os e construa um **novo** Host. `Host.Run` falha fechado antes de `Host.Restore(ctx, ref)`; o Restore valida o snapshot selado no tip e o recibo CSF, recupera os bytes exatos do owner e exige ACK persistente. Somente então `Host.Run(ctx,ref)` invoca o callback via `Gate.RunWork`.

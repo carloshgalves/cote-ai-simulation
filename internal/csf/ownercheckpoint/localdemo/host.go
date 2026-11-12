@@ -22,11 +22,19 @@ type Reference struct {
 	Receipt  [32]byte
 }
 
+// Owner is the B2-specific local adapter contract. Gate.DurableOwner alone
+// cannot prove that its SQLite file is distinct from the causal CSF file.
+type Owner interface {
+	ownercheckpoint.DurableOwner
+	VerifyIndependent(context.Context) error
+}
+
 // Host pins one actor and its synthetic cognitive callback for the lifetime
 // of this local session. It cannot issue cognitive WORK except via Gate.RunWork.
 // The caller must never invoke the underlying model/callback directly: only
 // work submitted to this demo host is protected by the Gate.
 type Host struct {
+	owner  Owner
 	scope  ownercheckpoint.Scope
 	gate   *ownercheckpoint.Gate
 	causal *sqlite.Store
@@ -38,7 +46,7 @@ type Host struct {
 // registers the actor and Ed25519 public key with CSF before publication.
 // The host doesn't own or close its two stores. To simulate restart, close
 // both stores and open new stores, then construct a new Host with New.
-func New(owner ownercheckpoint.DurableOwner, causal *sqlite.Store, bundle *policy.Bundle,
+func New(owner Owner, causal *sqlite.Store, bundle *policy.Bundle,
 	scope ownercheckpoint.Scope, cognitiveWork func(context.Context) error) (*Host, error) {
 	if owner == nil || causal == nil || bundle == nil || cognitiveWork == nil {
 		return nil, errors.New("local cognitive host needs owner, causal store, policy and callback")
@@ -53,7 +61,7 @@ func New(owner ownercheckpoint.DurableOwner, causal *sqlite.Store, bundle *polic
 	if err != nil {
 		return nil, err
 	}
-	return &Host{scope: scope, gate: gate, causal: causal, bundle: bundle, work: cognitiveWork}, nil
+	return &Host{owner: owner, scope: scope, gate: gate, causal: causal, bundle: bundle, work: cognitiveWork}, nil
 }
 
 // StageSnapshot publishes one actor's immutable synthetic checkpoint. Order is
@@ -67,6 +75,9 @@ func (h *Host) StageSnapshot(ctx context.Context, checkpoint sqlite.SnapshotChec
 	}
 	if checkpoint.ActorNamespace != h.scope.Namespace || checkpoint.ActorID != h.scope.Actor {
 		return zero, errors.New("local host refuses another actor's checkpoint")
+	}
+	if err := h.owner.VerifyIndependent(ctx); err != nil {
+		return zero, fmt.Errorf("local host owner/CSF separation: %w", err)
 	}
 	// Freeze the caller-owned memory once for both sequential transactions.
 	// Mutation concurrent with the copy is outside the caller contract.
@@ -94,6 +105,9 @@ func (h *Host) Restore(ctx context.Context, ref Reference) error {
 	if h == nil || ctx == nil {
 		return errors.New("local host restore unconfigured")
 	}
+	if err := h.owner.VerifyIndependent(ctx); err != nil {
+		return fmt.Errorf("local host owner/CSF separation: %w", err)
+	}
 	return h.gate.RestoreAndAcknowledge(ctx, h.scope, ref.Snapshot, ref.Receipt)
 }
 
@@ -103,6 +117,9 @@ func (h *Host) Restore(ctx context.Context, ref Reference) error {
 func (h *Host) Run(ctx context.Context, ref Reference) error {
 	if h == nil || ctx == nil {
 		return errors.New("local host work unconfigured")
+	}
+	if err := h.owner.VerifyIndependent(ctx); err != nil {
+		return fmt.Errorf("local host owner/CSF separation: %w", err)
 	}
 	return h.gate.RunWork(ctx, h.scope, ref.Snapshot, ref.Receipt, h.work)
 }

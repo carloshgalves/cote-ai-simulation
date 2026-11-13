@@ -1,0 +1,37 @@
+{
+  "protocol": "cote.embodiment.ipc.v1",
+  "process": {
+    "single_flight": true,
+    "direct_exec_no_shell": true,
+    "no_remote_transport": true
+  },
+  "source_view": {
+    "mode": "immutable_host_owned_view",
+    "child_cannot_modify": true,
+    "host_pins_absolute_root": true,
+    "reject_symlinks_and_non_regular_files": true,
+    "no_pre_post_hash_fallback": true,
+    "source_paths_are_not_protocol_fields": true,
+    "must_verify_raw_sha256_before_spawning": true,
+    "fail_if_os_read_only_isolation_missing": true
+  },
+  "io": {
+    "drain_stdout_and_stderr_concurrently": true,
+    "read_stdout_exactly_one_framed_message_then_eof": true,
+    "bounded_reads_before_allocating": true,
+    "kill_on_stdout_or_stderr_limit": true,
+    "kill_on_timeout_or_cancellation": true,
+    "redact_or_discard_stderr": true,
+    "nonzero_exit_always_fails": true
+  },
+  "limits": {
+    "frame_payload_bytes": 4194304,
+    "source_snapshot_bytes": 16777216,
+    "source_events_bytes": 67108864,
+    "source_event_line_bytes": 1048576,
+    "source_event_count": 100000,
+    "stderr_retained_bytes": 16384,
+    "end_to_end_process_budget_ms": 30000,
+    "termination_grace_ms": 2000
+  }
+}

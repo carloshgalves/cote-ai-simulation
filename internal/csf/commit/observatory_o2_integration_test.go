@@ -507,7 +507,6 @@ func TestCSFRV19O2AddressedEvidenceAndWorldRevisionAuthority(t *testing.T) {
 	}
 }
 
-
 func TestCSFRV19O2RejectsOrphanDecisionRecord(t *testing.T) {
 	ctx := context.Background()
 	c, _, ledger, cycle, fence, path := singleResourceFixture(t)

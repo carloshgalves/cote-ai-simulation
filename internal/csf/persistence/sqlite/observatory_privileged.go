@@ -143,7 +143,52 @@ func (q *PrivilegedReader) snapshot(ctx context.Context, run [32]byte) (o2Snapsh
 	if err := rows.Close(); err != nil {
 		return out, err
 	}
+	if err := o2VerifyCommitRoster(run, out); err != nil {
+		return out, err
+	}
 	return out, nil
+}
+
+// The decision ledger is authoritative. A terminal record outside its
+// committed_cycles membership must never disappear from an audit projection.
+// The canonical ID also has to match the indexed cycle/attempt preimage.
+func o2VerifyCommitRoster(run [32]byte, snapshot o2Snapshot) error {
+	indexed := make(map[[32]byte]o2CommitRow, len(snapshot.committed))
+	for _, entry := range snapshot.committed {
+		if _, exists := indexed[entry.commit]; exists {
+			return fmt.Errorf("duplicate indexed CycleCommit %x", entry.commit)
+		}
+		indexed[entry.commit] = entry
+	}
+	for id, record := range snapshot.decisions {
+		fields := record.fields
+		if len(fields) != 24 {
+			continue
+		}
+		indexedCycle, present := indexed[id]
+		if !present {
+			return fmt.Errorf("orphan CycleCommit %x in decision_ledger without committed_cycles membership", id)
+		}
+		root, err := o2Bytes(fields[0])
+		if err != nil || root != run {
+			return fmt.Errorf("CycleCommit %x carries foreign run identity", id)
+		}
+		cycle, err := o2Bytes(fields[1])
+		if err != nil || cycle != indexedCycle.cycle {
+			return fmt.Errorf("CycleCommit %x differs from committed_cycles cycle", id)
+		}
+		attempt, err := o2Uint(fields[2])
+		if err != nil {
+			return fmt.Errorf("CycleCommit %x attempt invalid: %w", id, err)
+		}
+		expected, err := registeredDigest("cote.csf.id.cycle-commit",
+			"cote.csf.schema.cycle-commit-id-preimage",
+			[]any{run[:], cycle[:], attempt})
+		if err != nil || [32]byte(expected) != id {
+			return fmt.Errorf("CycleCommit %x canonical identity does not match indexed authority", id)
+		}
+	}
+	return nil
 }
 
 // ReadPrivilegedReport is all-or-error. An incomplete/malformed historical

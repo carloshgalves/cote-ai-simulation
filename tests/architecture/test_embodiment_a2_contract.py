@@ -11,7 +11,7 @@ import jsonschema
 import pytest
 import yaml
 
-from embodiment.cli import seed_cohort_command
+from embodiment.cli import seed_cohort_command, advance_clock_command
 from embodiment.snapshot import snapshot_hash
 from tests.architecture.embodiment_a2_reference import (
     BUNDLE,
@@ -489,3 +489,37 @@ def test_correlation_pair_order_is_part_of_source_contract(tmp_path):
     pairs = records[-1]["payload"]["pairs"]
     pairs[0], pairs[1] = pairs[1], pairs[0]
     _assert_rejected(snap, _relog(records), "correlation pair")
+
+
+@pytest.mark.parametrize("where", ["record", "nested_payload"])
+def test_duplicate_json_key_in_otherwise_valid_seeding_log_rejected(tmp_path, where):
+    snap, log = _run(tmp_path)
+    rows = log.splitlines(keepends=True)
+    assert len(rows) == 5
+    row = rows[1]
+    if where == "record":
+        original = b'"event": "capacity.sampled"'
+    else:
+        original = b'"posterior_hash": '
+        # Use the first match in the nested payload and duplicate its entire scalar
+        parsed = json.loads(row)
+        digest = parsed["payload"]["posterior_hash"].encode()
+        original += b'"' + digest + b'"'
+    assert row.count(original) == 1
+    rows[1] = row.replace(original, original + b", " + original, 1)
+    corrupted = b"".join(rows)
+    # Removal of the strict duplicate-key hook must make this regression fail.
+    with pytest.raises(SourceRejected, match="duplicate JSON mapping key"):
+        _project(snap, corrupted)
+
+
+def test_real_advance_clock_cannot_be_promoted_from_frozen_seed_snapshot(tmp_path):
+    snap, log = _run(tmp_path)
+    run_dir = tmp_path / "run"
+    advance_clock_command(run_dir=run_dir, character_id="npc.0001", days=1)
+    new_snap = (run_dir / "snapshot.yaml").read_bytes()
+    new_log = (run_dir / "events.jsonl").read_bytes()
+    assert new_snap == snap
+    assert new_log != log
+    with pytest.raises(SourceRejected, match="unsupported history"):
+        _project(new_snap, new_log)

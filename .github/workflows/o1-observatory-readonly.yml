@@ -34,23 +34,18 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
           git rev-parse HEAD
-      - name: Stage gofmt outputs and print exact source files for checkpoint
+      - name: Require committed gofmt output
         run: |
-          paths=(
-            internal/csf/observatory/query.go
-            internal/csf/observatory/query_test.go
-            internal/csf/persistence/sqlite/observatory_readonly.go
-            internal/csf/persistence/sqlite/observatory_readonly_test.go
-            internal/csf/commit/observatory_o1_integration_test.go
-          )
-          keys=(O1_CONTRACT O1_ARCH O1_ADAPTER O1_PAGER O1_INTEGRATION)
-          gofmt -w "${paths[@]}"
-          for i in "${!paths[@]}"; do
-            echo "${keys[i]}_GOFMT_BEGIN"
-            base64 -w0 "${paths[i]}"
-            echo
-            echo "${keys[i]}_GOFMT_END"
-          done
+          files=$(gofmt -l internal/csf/observatory/query.go internal/csf/observatory/query_test.go internal/csf/persistence/sqlite/observatory_readonly.go internal/csf/persistence/sqlite/observatory_readonly_test.go internal/csf/commit/observatory_o1_integration_test.go)
+          if [ -n "$files" ]; then
+            echo "Unformatted source in O1 commit:"
+            echo "$files"
+            exit 1
+          fi
+      - name: Check exact-head diff whitespace
+        run: |
+          git fetch --no-tags --depth=1 origin main
+          git diff --check origin/main HEAD
       - name: O1 real-run integration and negative scenarios
         run: go test -count=1 -v -timeout=12m ./internal/csf/commit -run '^TestCSFRV19O1'
       - name: O1 SQLite pager guard and architecture checks

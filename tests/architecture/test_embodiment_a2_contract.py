@@ -540,3 +540,33 @@ def test_invalid_body_state_error_is_sanitized(tmp_path):
     doc["characters"]["npc.0001"]["body_state"]["hydration"]["deficit_pct_body_mass"] = -25
     with pytest.raises(SourceRejected, match="invalid physical BodyState"):
         _project(_signed_yaml(doc), log)
+
+
+def test_bool_world_seed_cannot_equal_integer_seed_via_python_coercion(tmp_path):
+    snap, log = _run(tmp_path)
+    doc = _yaml_document(snap)
+    records = _log_records(log)
+    doc["world_seed"] = 1
+    doc["run_metadata"]["world_seed"] = True  # bool == 1 in Python; provenance cannot coerce
+    records[0]["payload"]["run_metadata"] = copy.deepcopy(doc["run_metadata"])
+    with pytest.raises(SourceRejected, match="world_seed provenance mismatch"):
+        _project(_signed_yaml(doc), _relog(records))
+
+
+def test_giant_signed_integer_in_capacity_is_sanitized(tmp_path):
+    snap, log = _run(tmp_path)
+    doc = _yaml_document(snap)
+    records = _log_records(log)
+    giant = 10 ** 400
+    doc["characters"]["npc.0001"]["capacity_baseline"]["dimensions"]["body_mass"]["value"] = giant
+    records[1]["payload"]["dimensions"]["body_mass"]["value"] = giant
+    with pytest.raises(SourceRejected, match="capacity dimension value overflow"):
+        _project(_signed_yaml(doc), _relog(records))
+
+
+def test_giant_integer_in_telemetry_is_rejected_without_overflow(tmp_path):
+    snap, log = _run(tmp_path)
+    records = _log_records(log)
+    records[-1]["payload"]["pairs"][0]["expected_from_loadings"] = 10 ** 400
+    with pytest.raises(SourceRejected, match="correlation expected value invalid"):
+        _project(snap, _relog(records))

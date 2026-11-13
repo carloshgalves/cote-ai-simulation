@@ -337,3 +337,30 @@ func TestCSFRV19O2RejectsForeignFenceAuthority(t *testing.T) {
  if _,err:=admin.ExecContext(ctx,"DELETE FROM decision_ledger WHERE id=?",id[:]);err!=nil{t.Fatal(err)}
  if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil{t.Fatal("valid restored report:",err)}
 }
+
+func TestCSFRV19O2RejectsFalseIdleAfterUnrepairedAbort(t *testing.T) {
+ ctx:=context.Background()
+ c,_,_,fence,run,cycle,path:=abortFixture(t)
+ if _,err:=c.Abort(ctx,run,cycle,fence,4,nil);err!=nil{t.Fatal(err)}
+ bundle,err:=policy.Load(bundlePath)
+ if err!=nil{t.Fatal(err)}
+ q,err:=sqlite.OpenPrivilegedObservatory(ctx,path,bundle)
+ if err!=nil{t.Fatal(err)}
+ defer q.Close()
+ if report,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil||report.State.Control.Status!=observatory.HALTED_ON_ABORT{
+  t.Fatalf("real halted run not correctly audited: %+v %v",report.State.Control,err)
+ }
+ admin,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
+ defer admin.Close()
+ var original []byte
+ if err:=admin.QueryRowContext(ctx,"SELECT canonical FROM cycle_control_state WHERE run_id=?",run[:]).Scan(&original);err!=nil{t.Fatal(err)}
+ absent:=[]any{uint64(0)}
+ falselyIdle,err:=codec.CanonicalPayload([]any{uint64(0),absent,absent,absent,absent,absent,uint64(0)})
+ if err!=nil{t.Fatal(err)}
+ if _,err:=admin.ExecContext(ctx,"UPDATE cycle_control_state SET canonical=? WHERE run_id=?",falselyIdle,run[:]);err!=nil{t.Fatal(err)}
+ if report,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err==nil{
+  t.Fatalf("orphan abort without explicit retry was misreported as IDLE: %+v",report)
+ }
+ if _,err:=admin.ExecContext(ctx,"UPDATE cycle_control_state SET canonical=? WHERE run_id=?",original,run[:]);err!=nil{t.Fatal(err)}
+ if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil{t.Fatal("restored halt not reportable:",err)}
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "physical.seed-evidence.v1",
+  "status": "PROPOSED_NON_CANONICAL_NOT_REGISTERED",
+  "source_events": {
+    "run.started": "source_validation_only",
+    "capacity.sampled": "prepared_seed_evidence_subject",
+    "cohort.correlation_report": "telemetry_only_never_world_event",
+    "run.extended": "reject_unhandled_history",
+    "body.advanced": "reject_unhandled_history"
+  },
+  "go_only_pipeline": [
+    "genesis_pinned_source_id",
+    "exogenous_producer_unit_key_go",
+    "input_ledger_admission",
+    "fence",
+    "action_schema_registry",
+    "affordance_validator",
+    "conflict_resolver",
+    "candidate_event_draft",
+    "reducer_registry",
+    "commit_coordinator",
+    "cycle_commit_world_revision"
+  ],
+  "allowed_pre_go_fields": [
+    "kind",
+    "schema_version",
+    "authority",
+    "admission",
+    "source",
+    "subjects"
+  ],
+  "forbidden_pre_go_fields": [
+    "SimulationInstant",
+    "LogicalSequence",
+    "WorldRevision",
+    "EventOrderKey",
+    "CycleCommit",
+    "EventDraft",
+    "CommitCandidate",
+    "input_id",
+    "candidate_id",
+    "event_id",
+    "producer_unit_key",
+    "source_id",
+    "priority",
+    "global_time",
+    "global_sequence"
+  ],
+  "runtime_extension_registered": false,
+  "privacy": "ENGINE_ONLY_NO_EVIDENCE_CONTEXT_BEFORE_A3",
+  "requirements": [
+    "PSV1-8_for_advanced_history",
+    "A3_exhaustive_disclosure",
+    "A4_contract_conformance",
+    "CSFRV1-10_runtime_adapter"
+  ]
+}

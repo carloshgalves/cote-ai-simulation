@@ -98,8 +98,8 @@ Permanecem bloqueadores: PSV1-3 (estimador com constraints), PSV1-4 (ExertionInt
 
 ## 7. Gates da fatia
 
-- [ ] Runner CI no SHA da PR registra testes positivos/negativos sobre artefatos físicos reais.
-- [ ] Inspeção adversarial, findings documentados e remediações RED/GREEN re-revisadas.
-- [ ] Links, schemas, source provenance, unidades e permutações locais revisados.
-- [ ] Revisão humana de merge; não alegar avaliação independente se feita pelo próprio autor.
+- [x] CI focal da A2 em PR executa testes com artefatos físicos reais; baseline validada com 102 PASS e diff check, e a última revisão do documento exige novo check no HEAD.
+- [x] Revisão adversarial A2-R01–R10 com remediações e re-review sem findings acionáveis identificados neste escopo; comentários individuais na PR #104.
+- [x] Links relativos, 6 arquivos, schema/registry de autoridade, unidades, source provenance e testes de permutação/tamper conferidos.
+- [ ] Revisão formal independente e aceite/merge humano; autoverificação não é certificação de terceiro.
 - [ ] First Real Run continua NO-GO; A3/A4/#10 não foram substituídas por esta referência.

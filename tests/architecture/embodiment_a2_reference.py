@@ -170,7 +170,8 @@ def _source_log(raw: bytes, *, max_line: int, max_events: int):
         _object(record, {"seq", "event", "sim_time", "wall_time", "payload"}, "event keys not closed")
         _require(type(record["seq"]) is int and record["seq"] == position,
                  "source seq not contiguous zero-based")
-        _require(record["event"] in {"run.started", "capacity.sampled", "cohort.correlation_report"},
+        _require(type(record["event"]) is str and
+                 record["event"] in {"run.started", "capacity.sampled", "cohort.correlation_report"},
                  "unsupported history: physical event kind not yet admitted")
         _require(record["sim_time"] == Y1_START, "seed event sim_time mismatch")
         _require(type(record["wall_time"]) is str and len(record["wall_time"]) <= 64 and
@@ -372,8 +373,14 @@ def project_seed_source(
             _require(type(value["value"]) in (int, float) and math.isfinite(value["value"]),
                      "capacity dimension value invalid")
             _require(value == sample_dims[dim.value], "sample/snapshot capacity mismatch")
-            profile_values[dim] = DimensionValue(value=float(value["value"]), unit=value["unit"])
-        profile = CapacityProfile(dimensions=profile_values)  # read-side shape validation
+            try:
+                profile_values[dim] = DimensionValue(value=float(value["value"]), unit=value["unit"])
+            except ValueError as exc:
+                raise SourceRejected("invalid physical dimension value") from exc
+        try:
+            profile = CapacityProfile(dimensions=profile_values)  # read-side shape validation
+        except ValueError as exc:
+            raise SourceRejected("invalid physical capacity profile") from exc
         # A seed sample is a deterministic physical draw; verifying that the
         # installed prior and substream reproduce it catches self-signed edits.
         covariates = (CohortCovariates(sex=origin["cohort_sex"])
@@ -393,7 +400,10 @@ def project_seed_source(
         _require(body["character_id"] == subject and type(body["t_hours"]) in (float, int) and
                  body["t_hours"] == 0, "seed body id/time invalid")
         _require(body["illnesses"] == [], "PSV1-2 cannot write illness")
-        BodyState.model_validate(body)  # read-side validation
+        try:
+            BodyState.model_validate(body)  # read-side validation
+        except ValueError as exc:
+            raise SourceRejected("invalid physical BodyState") from exc
         expected_body = as_document(initial_body_state(subject, profile, params=params))
         _require(body == expected_body, "seed body cannot be reproduced from pinned dynamics")
         subjects.append({

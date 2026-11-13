@@ -87,15 +87,10 @@ func(q *PrivilegedReader) o2TaskEvidence(ctx context.Context,run [32]byte,
    if err:=rows.Scan(&idBytes,&routeHash,&kind);err!=nil{rows.Close();return nil,nil,err}
    id,err:=o2Bytes(idBytes)
    if err!=nil{rows.Close();return nil,nil,err}
-   if !hasCompletion||seen[id]||kind<0||kind>1||expected[id]!=kind{
-    // expected[id] defaults to zero; presence must be checked separately.
-    _,listed:=expected[id]
-    if !listed||!hasCompletion||seen[id]||kind<0||kind>1{
-     rows.Close();return nil,nil,fmt.Errorf("uncompleted/foreign evidence route %x for task %x",id,task.ID)
-    }
+   wanted,listed:=expected[id]
+   if !hasCompletion||seen[id]||kind<0||kind>1||!listed||wanted!=kind{
+    rows.Close();return nil,nil,fmt.Errorf("uncompleted/foreign evidence route %x for task %x",id,task.ID)
    }
-   wanted,ok:=expected[id]
-   if !ok||wanted!=kind{rows.Close();return nil,nil,errors.New("evidence route kind differs from completion roster")}
    rawEvidence,err:=q.raw(ctx,"evidence_ledger",id)
    if err!=nil{rows.Close();return nil,nil,err}
    seal:=identity.OpaqueContentHash(rawEvidence)

@@ -47,9 +47,10 @@ jobs:
             internal/csf/observatory/privileged.go
             internal/csf/persistence/sqlite/observatory_privileged.go
             internal/csf/persistence/sqlite/observatory_privileged_attempts.go
+            internal/csf/persistence/sqlite/observatory_privileged_diagnostics.go
             internal/csf/commit/observatory_o2_integration_test.go
           )
-          keys=(O2_API O2_READER O2_ATTEMPTS O2_TESTS)
+          keys=(O2_API O2_READER O2_ATTEMPTS O2_DIAGNOSTICS O2_TESTS)
           gofmt -w "${files[@]}"
           for i in "${!files[@]}"; do
             echo "${keys[i]}_GOFMT_BEGIN"

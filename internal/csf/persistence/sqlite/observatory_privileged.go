@@ -123,6 +123,10 @@ func(q *PrivilegedReader) ReadPrivilegedReport(ctx context.Context,run [32]byte)
  if err!=nil{return empty,err}
  pending,err:=q.base.store.PendingClock(ctx,run)
  if err!=nil{return empty,fmt.Errorf("privileged pending source proof: %w",err)}
+ missingClosures,err:=q.o2ClosureGaps(ctx,run,state,pending)
+ if err!=nil{return empty,err}
+ missingTasks,err:=q.o2PendingTasks(ctx,run,commits,uint64(state.Clock.Revision))
+ if err!=nil{return empty,err}
  // The initial ReadRun already performed a full causal replay. A
  // second replay is redundant when the SQLite data_version is unchanged.
  after,err:=q.base.loadReadRun(ctx,run)
@@ -134,7 +138,8 @@ func(q *PrivilegedReader) ReadPrivilegedReport(ctx context.Context,run [32]byte)
  }
  return observatory.PrivilegedReport{
   State:state, Commits:commits, Attempts:finalized,
-  PendingUnits:len(pending),RejectedIngress:"NOT_PERSISTED",
+  PendingUnits:len(pending),PendingClosureSources:missingClosures,
+  PendingPerceptionTasks:missingTasks,RejectedIngress:"NOT_PERSISTED",
  },nil
 }
 

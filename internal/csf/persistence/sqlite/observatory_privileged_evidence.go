@@ -76,43 +76,52 @@ func(q *PrivilegedReader) o2TaskEvidence(ctx context.Context,run [32]byte,
    }
    completions=append(completions,o2Ref("causal_outbox",[32]byte(completion),raw))
   }
+  // This reader has MaxOpenConns(1). Collect the bounded route index and
+  // CLOSE its cursor before resolving any evidence_ledger record by ID.
+  // Nested queries while rows is open would wait forever for the same conn.
+  type routeRef struct {id [32]byte; hash []byte; kind int}
   rows,err:=q.base.store.db.QueryContext(ctx,
    "SELECT record_id,canonical_hash,kind FROM evidence_routes WHERE run_id=? AND task_id=? ORDER BY kind,record_id",
    run[:],task.ID[:])
   if err!=nil{return nil,nil,err}
-  seen:=map[[32]byte]bool{}
+  routes:=make([]routeRef,0,len(expected))
   for rows.Next(){
    var idBytes,routeHash []byte
    var kind int
    if err:=rows.Scan(&idBytes,&routeHash,&kind);err!=nil{rows.Close();return nil,nil,err}
    id,err:=o2Bytes(idBytes)
    if err!=nil{rows.Close();return nil,nil,err}
+   routes=append(routes,routeRef{id:id,hash:bytes.Clone(routeHash),kind:kind})
+  }
+  if err:=rows.Err();err!=nil{rows.Close();return nil,nil,err}
+  if err:=rows.Close();err!=nil{return nil,nil,err}
+  seen:=map[[32]byte]bool{}
+  for _,route:=range routes {
+   id,kind:=route.id,route.kind
    wanted,listed:=expected[id]
    if !hasCompletion||seen[id]||kind<0||kind>1||!listed||wanted!=kind{
-    rows.Close();return nil,nil,fmt.Errorf("uncompleted/foreign evidence route %x for task %x",id,task.ID)
+    return nil,nil,fmt.Errorf("uncompleted/foreign evidence route %x for task %x",id,task.ID)
    }
    rawEvidence,err:=q.raw(ctx,"evidence_ledger",id)
-   if err!=nil{rows.Close();return nil,nil,err}
+   if err!=nil{return nil,nil,err}
    seal:=identity.OpaqueContentHash(rawEvidence)
-   if !bytes.Equal(routeHash,seal[:]){rows.Close();return nil,nil,fmt.Errorf("evidence route %x hash altered",id)}
+   if !bytes.Equal(route.hash,seal[:]){return nil,nil,fmt.Errorf("evidence route %x hash altered",id)}
    value,err:=codec.StrictDecodePayload(rawEvidence)
-   if err!=nil{rows.Close();return nil,nil,err}
+   if err!=nil{return nil,nil,err}
    fields,ok:=value.([]any)
    if !ok||len(fields)==0||!equalBytes(fields[0],id[:]){
-    rows.Close();return nil,nil,fmt.Errorf("evidence record %x identity mismatch",id)
+    return nil,nil,fmt.Errorf("evidence record %x identity mismatch",id)
    }
    if kind==0 {
     if len(fields)!=15||!equalBytes(fields[1],task.ID[:]){
-     rows.Close();return nil,nil,fmt.Errorf("Observation %x task identity mismatch",id)
+     return nil,nil,fmt.Errorf("Observation %x task identity mismatch",id)
     }
    } else if len(fields)!=11 {
-    rows.Close();return nil,nil,fmt.Errorf("KnowledgeInput %x schema wrong",id)
+    return nil,nil,fmt.Errorf("KnowledgeInput %x schema wrong",id)
    }
    seen[id]=true
    evidence=append(evidence,o2Ref("evidence_ledger",id,rawEvidence))
   }
-  if err:=rows.Err();err!=nil{rows.Close();return nil,nil,err}
-  if err:=rows.Close();err!=nil{return nil,nil,err}
   if len(seen)!=len(expected){return nil,nil,fmt.Errorf("completion evidence roster/route cardinality mismatch for task %x",task.ID)}
  }
  return completions,evidence,nil

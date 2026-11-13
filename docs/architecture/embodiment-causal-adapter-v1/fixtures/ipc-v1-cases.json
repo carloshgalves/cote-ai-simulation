@@ -1,0 +1,205 @@
+{
+  "contract": "cote.embodiment.ipc.v1",
+  "positive": {
+    "request": {
+      "kind": "request",
+      "protocol": "cote.embodiment.ipc.v1",
+      "correlation_id": "11111111111111111111111111111111",
+      "operation": "inspect_run",
+      "source": {
+        "snapshot_name": "snapshot.yaml",
+        "events_name": "events.jsonl",
+        "snapshot_raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "events_raw_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    },
+    "ok": {
+      "kind": "response",
+      "protocol": "cote.embodiment.ipc.v1",
+      "correlation_id": "11111111111111111111111111111111",
+      "operation": "inspect_run",
+      "status": "ok",
+      "result": {
+        "snapshot_raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "events_raw_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "snapshot_document_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "normalised_log_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "event_count": 43,
+        "snapshot_version": 1
+      }
+    },
+    "error": {
+      "kind": "response",
+      "protocol": "cote.embodiment.ipc.v1",
+      "correlation_id": "11111111111111111111111111111111",
+      "operation": "inspect_run",
+      "status": "error",
+      "error": {
+        "code": "SOURCE_CHANGED"
+      }
+    }
+  },
+  "negative": [
+    {
+      "name": "unknown_protocol",
+      "base": "request",
+      "op": "set",
+      "path": "/protocol",
+      "value": "cote.embodiment.ipc.v2"
+    },
+    {
+      "name": "missing_source",
+      "base": "request",
+      "op": "delete",
+      "path": "/source"
+    },
+    {
+      "name": "snapshot_filename_traversal",
+      "base": "request",
+      "op": "set",
+      "path": "/source/snapshot_name",
+      "value": "../../secret.yaml"
+    },
+    {
+      "name": "invalid_sha",
+      "base": "request",
+      "op": "set",
+      "path": "/source/snapshot_raw_sha256",
+      "value": "not-a-digest"
+    },
+    {
+      "name": "correlation_wrong_width",
+      "base": "request",
+      "op": "set",
+      "path": "/correlation_id",
+      "value": "aaa"
+    },
+    {
+      "name": "causal_commit_in_request",
+      "base": "request",
+      "op": "set",
+      "path": "/CycleCommit",
+      "value": {}
+    },
+    {
+      "name": "causal_clock_in_request",
+      "base": "request",
+      "op": "set",
+      "path": "/SimulationInstant",
+      "value": 2
+    },
+    {
+      "name": "causal_revision_in_request",
+      "base": "request",
+      "op": "set",
+      "path": "/WorldRevision",
+      "value": 1
+    },
+    {
+      "name": "store_handle_in_source",
+      "base": "request",
+      "op": "set",
+      "path": "/source/store_handle",
+      "value": "s"
+    },
+    {
+      "name": "unknown_operation",
+      "base": "request",
+      "op": "set",
+      "path": "/operation",
+      "value": "commit_world"
+    },
+    {
+      "name": "missing_ok_result",
+      "base": "ok",
+      "op": "delete",
+      "path": "/result"
+    },
+    {
+      "name": "unexpected_error_on_ok",
+      "base": "ok",
+      "op": "set",
+      "path": "/error",
+      "value": {
+        "code": "SOURCE_CHANGED"
+      }
+    },
+    {
+      "name": "unexpected_result_on_error",
+      "base": "error",
+      "op": "set",
+      "path": "/result",
+      "value": {
+        "snapshot_raw_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "events_raw_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "snapshot_document_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "normalised_log_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "event_count": 43,
+        "snapshot_version": 1
+      }
+    },
+    {
+      "name": "unknown_error_code",
+      "base": "error",
+      "op": "set",
+      "path": "/error/code",
+      "value": "OTHER"
+    },
+    {
+      "name": "snapshot_version_unknown",
+      "base": "ok",
+      "op": "set",
+      "path": "/result/snapshot_version",
+      "value": 2
+    },
+    {
+      "name": "negative_event_count",
+      "base": "ok",
+      "op": "set",
+      "path": "/result/event_count",
+      "value": -1
+    },
+    {
+      "name": "hidden_global_order",
+      "base": "ok",
+      "op": "set",
+      "path": "/result/LogicalSequence",
+      "value": 42
+    },
+    {
+      "name": "hidden_global_time",
+      "base": "ok",
+      "op": "set",
+      "path": "/result/SimulationInstant",
+      "value": 10
+    },
+    {
+      "name": "hidden_global_revision",
+      "base": "ok",
+      "op": "set",
+      "path": "/result/WorldRevision",
+      "value": 12
+    },
+    {
+      "name": "hidden_event_draft",
+      "base": "ok",
+      "op": "set",
+      "path": "/result/EventDraft",
+      "value": []
+    },
+    {
+      "name": "extra_status",
+      "base": "request",
+      "op": "set",
+      "path": "/status",
+      "value": "ok"
+    },
+    {
+      "name": "source_event_path_abuse",
+      "base": "request",
+      "op": "set",
+      "path": "/source/events_name",
+      "value": "/tmp/events.jsonl"
+    }
+  ]
+}

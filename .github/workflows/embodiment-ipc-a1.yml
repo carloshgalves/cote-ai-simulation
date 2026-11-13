@@ -1,0 +1,41 @@
+# Narrow contract gate for CSFRV1-9A/A1 (#98). No global product release claim.
+name: Embodiment IPC A1 contract
+
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "docs/architecture/embodiment-causal-adapter-v1.md"
+      - "docs/architecture/embodiment-causal-adapter-v1/**"
+      - "tests/architecture/test_embodiment_ipc_contract.py"
+      - ".github/workflows/embodiment-ipc-a1.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: embodiment-ipc-a1-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Install only IPC contract test dependencies
+        run: python -m pip install --disable-pip-version-check --no-input 'pytest==9.0.2' 'jsonschema==4.26.0'
+      - name: Record exact PR revision and Python
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          echo "PR HEAD: ${{ github.event.pull_request.head.sha }}"
+          python --version
+      - name: Validate A1 framing, schema, source policy and adversarial fixtures
+        run: python -m pytest -q tests/architecture/test_embodiment_ipc_contract.py

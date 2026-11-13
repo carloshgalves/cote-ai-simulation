@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/embodiment/ipc-v1.schema.json",
+  "title": "Embodiment local IPC control plane V1",
+  "description": "Strict control-plane messages. No global causal identity, time, revision, event, store or physical state; artifact mapping is a separate A2 contract.",
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot_name",
+        "events_name",
+        "snapshot_raw_sha256",
+        "events_raw_sha256"
+      ],
+      "properties": {
+        "snapshot_name": {
+          "const": "snapshot.yaml"
+        },
+        "events_name": {
+          "const": "events.jsonl"
+        },
+        "snapshot_raw_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "events_raw_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot_raw_sha256",
+        "events_raw_sha256",
+        "snapshot_document_sha256",
+        "normalised_log_sha256",
+        "event_count",
+        "snapshot_version"
+      ],
+      "properties": {
+        "snapshot_raw_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "events_raw_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "snapshot_document_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "normalised_log_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "event_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "snapshot_version": {
+          "type": "integer",
+          "const": 1
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "UNSUPPORTED_VERSION",
+            "SOURCE_NOT_FOUND",
+            "SOURCE_CHANGED",
+            "SOURCE_INVALID",
+            "LIMIT_EXCEEDED",
+            "INTERNAL_FAILURE"
+          ]
+        }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "protocol",
+        "correlation_id",
+        "operation",
+        "source"
+      ],
+      "properties": {
+        "kind": {
+          "const": "request"
+        },
+        "protocol": {
+          "const": "cote.embodiment.ipc.v1"
+        },
+        "correlation_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$",
+          "minLength": 32,
+          "maxLength": 32
+        },
+        "operation": {
+          "const": "inspect_run"
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "protocol",
+        "correlation_id",
+        "operation",
+        "status"
+      ],
+      "properties": {
+        "kind": {
+          "const": "response"
+        },
+        "protocol": {
+          "const": "cote.embodiment.ipc.v1"
+        },
+        "correlation_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$",
+          "minLength": 32,
+          "maxLength": 32
+        },
+        "operation": {
+          "const": "inspect_run"
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "error"
+          ]
+        },
+        "result": {
+          "$ref": "#/$defs/result"
+        },
+        "error": {
+          "$ref": "#/$defs/error"
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "status": {
+              "const": "ok"
+            }
+          },
+          "required": [
+            "result"
+          ],
+          "not": {
+            "required": [
+              "error"
+            ]
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "const": "error"
+            }
+          },
+          "required": [
+            "error"
+          ],
+          "not": {
+            "required": [
+              "result"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/request"
+    },
+    {
+      "$ref": "#/$defs/response"
+    }
+  ]
+}

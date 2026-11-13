@@ -526,9 +526,9 @@ def test_policy_requires_a_coherent_source_cut_and_fixed_failure_precedence():
 @pytest.mark.parametrize(
     ("path", "extra"),
     [
-        (("source", "snapshot_raw_sha256"), "\\n"),
-        (("source", "events_raw_sha256"), "\\n"),
-        (("correlation_id",), "\\n"),
+        (("source", "snapshot_raw_sha256"), "\n"),
+        (("source", "events_raw_sha256"), "\n"),
+        (("correlation_id",), "\n"),
     ],
 )
 def test_exact_width_sha_and_correlation_reject_trailing_newline(path, extra):

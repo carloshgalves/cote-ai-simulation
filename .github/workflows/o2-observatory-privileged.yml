@@ -41,13 +41,23 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
           git rev-parse HEAD
-      - name: Format O2 adversarial test checkpoint (temporary RED/format)
+      - name: Format O2 final evidence checkpoint
         run: |
-          gofmt -w internal/csf/commit/observatory_o2_integration_test.go
-          echo O2_TESTS_GOFMT_BEGIN
-          base64 -w0 internal/csf/commit/observatory_o2_integration_test.go
-          echo
-          echo O2_TESTS_GOFMT_END
+          files=(
+            internal/csf/observatory/privileged.go
+            internal/csf/persistence/sqlite/observatory_privileged.go
+            internal/csf/persistence/sqlite/observatory_privileged_attempts.go
+            internal/csf/persistence/sqlite/observatory_privileged_diagnostics.go
+            internal/csf/commit/observatory_o2_integration_test.go
+          )
+          keys=(O2_API O2_READER O2_ATTEMPTS O2_DIAGNOSTICS O2_TESTS)
+          gofmt -w "${files[@]}"
+          for i in "${!files[@]}"; do
+            echo "${keys[i]}_GOFMT_BEGIN"
+            base64 -w0 "${files[i]}"
+            echo
+            echo "${keys[i]}_GOFMT_END"
+          done
       - name: Check exact-head diff whitespace
         run: |
           git fetch --no-tags --depth=1 origin main

@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	_ "modernc.org/sqlite"
@@ -254,113 +254,180 @@ func TestCSFRV19O2RejectsForgedAbortAndRetryWithoutLeakingRows(t *testing.T) {
 }
 
 func TestCSFRV19O2RejectsOrphanTerminalJournal(t *testing.T) {
-    ctx:=context.Background()
-    c,_,ledger,run,bundle,path:=testFixture(t)
-    outcome,err:=c.Advance(ctx,ledger,run)
-    if err!=nil{t.Fatal(err)}
-    q,err:=sqlite.OpenPrivilegedObservatory(ctx,path,bundle)
-    if err!=nil{t.Fatal(err)}
-    defer q.Close()
-    db,err:=sql.Open("sqlite",path)
-    if err!=nil{t.Fatal(err)}
-    defer db.Close()
-    if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil{t.Fatal(err)}
-    invented:=outcome.Commit.Identity
-    invented[0]^=0x86
-    if _,err:=db.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",
-         invented[:],outcome.Commit.Canonical);err!=nil{t.Fatal(err)}
-    if got,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err==nil{
-        t.Fatalf("orphan CycleCommit without committed_cycles membership was accepted: %+v",got)
-    }
-    if _,err:=db.ExecContext(ctx,"DELETE FROM decision_ledger WHERE id=?",invented[:]);err!=nil{t.Fatal(err)}
-    if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil{t.Fatal("restored report:",err)}
+	ctx := context.Background()
+	c, _, ledger, run, bundle, path := testFixture(t)
+	outcome, err := c.Advance(ctx, ledger, run)
+	if err != nil {
+		t.Fatal(err)
+	}
+	q, err := sqlite.OpenPrivilegedObservatory(ctx, path, bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer q.Close()
+	db, err := sql.Open("sqlite", path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer db.Close()
+	if _, err := q.ReadPrivilegedReport(ctx, [32]byte(run)); err != nil {
+		t.Fatal(err)
+	}
+	invented := outcome.Commit.Identity
+	invented[0] ^= 0x86
+	if _, err := db.ExecContext(ctx, "INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",
+		invented[:], outcome.Commit.Canonical); err != nil {
+		t.Fatal(err)
+	}
+	if got, err := q.ReadPrivilegedReport(ctx, [32]byte(run)); err == nil {
+		t.Fatalf("orphan CycleCommit without committed_cycles membership was accepted: %+v", got)
+	}
+	if _, err := db.ExecContext(ctx, "DELETE FROM decision_ledger WHERE id=?", invented[:]); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := q.ReadPrivilegedReport(ctx, [32]byte(run)); err != nil {
+		t.Fatal("restored report:", err)
+	}
 }
 
 func TestCSFRV19O2ReportsExplicitSourceClosureGap(t *testing.T) {
-  ctx:=context.Background()
-  _,_,ledger,run,bundle,path:=testFixture(t)
-  if err:=ledger.DeclareSource(inputledger.Source{ID:"unclosed"});err!=nil{t.Fatal(err)}
-  q,err:=sqlite.OpenPrivilegedObservatory(ctx,path,bundle)
-  if err!=nil{t.Fatal(err)}
-  defer q.Close()
-  before:=o1WholeDatabaseDigest(t,path)
-  report,err:=q.ReadPrivilegedReport(ctx,[32]byte(run))
-  if err!=nil{t.Fatal(err)}
-  if len(report.PendingClosureSources)!=1||report.PendingClosureSources[0]!="unclosed"{
-    t.Fatalf("unclosed declared source was not diagnosed: %+v",report.PendingClosureSources)
-  }
-  if got:=o1WholeDatabaseDigest(t,path);got!=before{t.Fatal("closure-gaps query wrote to ledger")}
+	ctx := context.Background()
+	_, _, ledger, run, bundle, path := testFixture(t)
+	if err := ledger.DeclareSource(inputledger.Source{ID: "unclosed"}); err != nil {
+		t.Fatal(err)
+	}
+	q, err := sqlite.OpenPrivilegedObservatory(ctx, path, bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer q.Close()
+	before := o1WholeDatabaseDigest(t, path)
+	report, err := q.ReadPrivilegedReport(ctx, [32]byte(run))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(report.PendingClosureSources) != 1 || report.PendingClosureSources[0] != "unclosed" {
+		t.Fatalf("unclosed declared source was not diagnosed: %+v", report.PendingClosureSources)
+	}
+	if got := o1WholeDatabaseDigest(t, path); got != before {
+		t.Fatal("closure-gaps query wrote to ledger")
+	}
 }
 
 func TestCSFRV19O2ReportsPendingPerceptionTasks(t *testing.T) {
-  ctx:=context.Background()
-  c,_,ledger,run,bundle,path:=testFixture(t,activeTrigger())
-  if _,err:=c.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
-  q,err:=sqlite.OpenPrivilegedObservatory(ctx,path,bundle)
-  if err!=nil{t.Fatal(err)}
-  defer q.Close()
-  before:=o1WholeDatabaseDigest(t,path)
-  report,err:=q.ReadPrivilegedReport(ctx,[32]byte(run))
-  if err!=nil{t.Fatal(err)}
-  if report.PendingPerceptionTasks<1||report.RejectedIngress!="NOT_PERSISTED"{
-    t.Fatalf("pending work was misclassified as complete or fabricated rejected ingress: %+v",report)
-  }
-  if len(report.Commits)!=1||len(report.Commits[0].Tasks)<1{
-    t.Fatal("commit did not expose verified perception task refs")
-  }
-  if got:=o1WholeDatabaseDigest(t,path);got!=before{t.Fatal("pending-task query wrote to ledger")}
+	ctx := context.Background()
+	c, _, ledger, run, bundle, path := testFixture(t, activeTrigger())
+	if _, err := c.Advance(ctx, ledger, run); err != nil {
+		t.Fatal(err)
+	}
+	q, err := sqlite.OpenPrivilegedObservatory(ctx, path, bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer q.Close()
+	before := o1WholeDatabaseDigest(t, path)
+	report, err := q.ReadPrivilegedReport(ctx, [32]byte(run))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if report.PendingPerceptionTasks < 1 || report.RejectedIngress != "NOT_PERSISTED" {
+		t.Fatalf("pending work was misclassified as complete or fabricated rejected ingress: %+v", report)
+	}
+	if len(report.Commits) != 1 || len(report.Commits[0].Tasks) < 1 {
+		t.Fatal("commit did not expose verified perception task refs")
+	}
+	if got := o1WholeDatabaseDigest(t, path); got != before {
+		t.Fatal("pending-task query wrote to ledger")
+	}
 }
 
 func TestCSFRV19O2RejectsForeignFenceAuthority(t *testing.T) {
- ctx:=context.Background()
- c,_,ledger,run,bundle,path:=testFixture(t)
- result,err:=c.Advance(ctx,ledger,run)
- if err!=nil{t.Fatal(err)}
- q,err:=sqlite.OpenPrivilegedObservatory(ctx,path,bundle)
- if err!=nil{t.Fatal(err)}
- defer q.Close()
- admin,err:=sql.Open("sqlite",path)
- if err!=nil{t.Fatal(err)}
- defer admin.Close()
- decoded,err:=codec.StrictDecodePayload(result.Fence.Canonical)
- if err!=nil{t.Fatal(err)}
- fields:=decoded.([]any)
- foreign:=[32]byte(run);foreign[0]^=0x86
- fields[0]=foreign[:]
- forged,err:=codec.CanonicalPayload(fields)
- if err!=nil{t.Fatal(err)}
- id:=[32]byte(result.Fence.ID);id[0]^=0x86
- if _,err:=admin.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",id[:],forged);err!=nil{t.Fatal(err)}
- if report,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err==nil{
-  t.Fatalf("foreign-run fence in single-world ledger was ignored: %+v",report)
- }
- if _,err:=admin.ExecContext(ctx,"DELETE FROM decision_ledger WHERE id=?",id[:]);err!=nil{t.Fatal(err)}
- if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil{t.Fatal("valid restored report:",err)}
+	ctx := context.Background()
+	c, _, ledger, run, bundle, path := testFixture(t)
+	result, err := c.Advance(ctx, ledger, run)
+	if err != nil {
+		t.Fatal(err)
+	}
+	q, err := sqlite.OpenPrivilegedObservatory(ctx, path, bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer q.Close()
+	admin, err := sql.Open("sqlite", path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer admin.Close()
+	decoded, err := codec.StrictDecodePayload(result.Fence.Canonical)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fields := decoded.([]any)
+	foreign := [32]byte(run)
+	foreign[0] ^= 0x86
+	fields[0] = foreign[:]
+	forged, err := codec.CanonicalPayload(fields)
+	if err != nil {
+		t.Fatal(err)
+	}
+	id := [32]byte(result.Fence.ID)
+	id[0] ^= 0x86
+	if _, err := admin.ExecContext(ctx, "INSERT INTO decision_ledger(id,canonical) VALUES(?,?)", id[:], forged); err != nil {
+		t.Fatal(err)
+	}
+	if report, err := q.ReadPrivilegedReport(ctx, [32]byte(run)); err == nil {
+		t.Fatalf("foreign-run fence in single-world ledger was ignored: %+v", report)
+	}
+	if _, err := admin.ExecContext(ctx, "DELETE FROM decision_ledger WHERE id=?", id[:]); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := q.ReadPrivilegedReport(ctx, [32]byte(run)); err != nil {
+		t.Fatal("valid restored report:", err)
+	}
 }
 
 func TestCSFRV19O2RejectsFalseIdleAfterUnrepairedAbort(t *testing.T) {
- ctx:=context.Background()
- c,_,_,fence,run,cycle,path:=abortFixture(t)
- if _,err:=c.Abort(ctx,run,cycle,fence,4,nil);err!=nil{t.Fatal(err)}
- bundle,err:=policy.Load(bundlePath)
- if err!=nil{t.Fatal(err)}
- q,err:=sqlite.OpenPrivilegedObservatory(ctx,path,bundle)
- if err!=nil{t.Fatal(err)}
- defer q.Close()
- if report,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil||report.State.Control.Status!=observatory.HALTED_ON_ABORT{
-  t.Fatalf("real halted run not correctly audited: %+v %v",report.State.Control,err)
- }
- admin,err:=sql.Open("sqlite",path);if err!=nil{t.Fatal(err)}
- defer admin.Close()
- var original []byte
- if err:=admin.QueryRowContext(ctx,"SELECT canonical FROM cycle_control_state WHERE run_id=?",run[:]).Scan(&original);err!=nil{t.Fatal(err)}
- absent:=[]any{uint64(0)}
- falselyIdle,err:=codec.CanonicalPayload([]any{uint64(0),absent,absent,absent,absent,absent,uint64(0)})
- if err!=nil{t.Fatal(err)}
- if _,err:=admin.ExecContext(ctx,"UPDATE cycle_control_state SET canonical=? WHERE run_id=?",falselyIdle,run[:]);err!=nil{t.Fatal(err)}
- if report,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err==nil{
-  t.Fatalf("orphan abort without explicit retry was misreported as IDLE: %+v",report)
- }
- if _,err:=admin.ExecContext(ctx,"UPDATE cycle_control_state SET canonical=? WHERE run_id=?",original,run[:]);err!=nil{t.Fatal(err)}
- if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil{t.Fatal("restored halt not reportable:",err)}
+	ctx := context.Background()
+	c, _, _, fence, run, cycle, path := abortFixture(t)
+	if _, err := c.Abort(ctx, run, cycle, fence, 4, nil); err != nil {
+		t.Fatal(err)
+	}
+	bundle, err := policy.Load(bundlePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	q, err := sqlite.OpenPrivilegedObservatory(ctx, path, bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer q.Close()
+	if report, err := q.ReadPrivilegedReport(ctx, [32]byte(run)); err != nil || report.State.Control.Status != observatory.HALTED_ON_ABORT {
+		t.Fatalf("real halted run not correctly audited: %+v %v", report.State.Control, err)
+	}
+	admin, err := sql.Open("sqlite", path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer admin.Close()
+	var original []byte
+	if err := admin.QueryRowContext(ctx, "SELECT canonical FROM cycle_control_state WHERE run_id=?", run[:]).Scan(&original); err != nil {
+		t.Fatal(err)
+	}
+	absent := []any{uint64(0)}
+	falselyIdle, err := codec.CanonicalPayload([]any{uint64(0), absent, absent, absent, absent, absent, uint64(0)})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := admin.ExecContext(ctx, "UPDATE cycle_control_state SET canonical=? WHERE run_id=?", falselyIdle, run[:]); err != nil {
+		t.Fatal(err)
+	}
+	if report, err := q.ReadPrivilegedReport(ctx, [32]byte(run)); err == nil {
+		t.Fatalf("orphan abort without explicit retry was misreported as IDLE: %+v", report)
+	}
+	if _, err := admin.ExecContext(ctx, "UPDATE cycle_control_state SET canonical=? WHERE run_id=?", original, run[:]); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := q.ReadPrivilegedReport(ctx, [32]byte(run)); err != nil {
+		t.Fatal("restored halt not reportable:", err)
+	}
 }

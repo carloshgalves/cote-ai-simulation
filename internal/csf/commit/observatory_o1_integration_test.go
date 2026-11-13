@@ -1,6 +1,7 @@
 package commit
 
 import (
+	"bytes"
 	"context"
 	"crypto/sha256"
 	"database/sql"
@@ -14,6 +15,7 @@ import (
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
@@ -272,6 +274,65 @@ func TestCSFRV19O1RejectsForeignRunCorruptClockAndControl(t *testing.T) {
 	if _, err := reader.ReadRun(ctx, [32]byte(run)); err == nil {
 		t.Fatal("corrupted control state was displayed")
 	}
+	// Preserve CBOR well-formedness while inventing an in-flight fence ref.
+	// A parser-only Observatory would incorrectly present ATTEMPT_IN_FLIGHT.
+	var invented [32]byte
+	invented[0] = 0x85
+	noRef := []any{uint64(0)}
+	forged := []any{
+		uint64(1),
+		[]any{uint64(1), invented[:]},
+		[]any{uint64(1), uint64(0)},
+		[]any{uint64(1), []any{uint64(11), invented[:], invented[:]}},
+		noRef, noRef, uint64(0),
+	}
+	forgedCanonical, err := codec.CanonicalPayload(forged)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := admin.ExecContext(ctx,
+		"UPDATE cycle_control_state SET canonical=? WHERE run_id=?",
+		forgedCanonical, run[:]); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := reader.ReadRun(ctx, [32]byte(run)); err == nil {
+		t.Fatal("valid CBOR with unauthenticated fence reference was displayed")
+	}
+	if _, err := admin.ExecContext(ctx,
+		"DELETE FROM cycle_control_state WHERE run_id=?", run[:]); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := reader.ReadRun(ctx, [32]byte(run)); err != nil {
+		t.Fatal("valid genesis unreadable after restoring control:", err)
+	}
+	// Forging a 32-byte world hash also must not become trustworthy merely
+	// because it has the expected length and occupies a valid revision row.
+	var genuineWorldHash []byte
+	if err := admin.QueryRowContext(ctx,
+		"SELECT state_hash FROM world_revisions WHERE revision=?",
+		uint64(original.Revision)).Scan(&genuineWorldHash); err != nil {
+		t.Fatal(err)
+	}
+	adversarialHash := bytes.Repeat([]byte{0x85}, 32)
+	if bytes.Equal(genuineWorldHash, adversarialHash) {
+		t.Fatal("mutated world hash accidentally equals authoritative hash")
+	}
+	if _, err := admin.ExecContext(ctx,
+		"UPDATE world_revisions SET state_hash=? WHERE revision=?",
+		adversarialHash, uint64(original.Revision)); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := reader.ReadRun(ctx, [32]byte(run)); err == nil {
+		t.Fatal("forged world revision hash was presented as authoritative")
+	}
+	if _, err := admin.ExecContext(ctx,
+		"UPDATE world_revisions SET state_hash=? WHERE revision=?",
+		genuineWorldHash, uint64(original.Revision)); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := reader.ReadRun(ctx, [32]byte(run)); err != nil {
+		t.Fatal("world revision not readable after restoration:", err)
+	}
 }
 
 func TestCSFRV19O1RejectsAbsentSQLiteWithoutCreatingFiles(t *testing.T) {
@@ -289,9 +350,9 @@ func TestCSFRV19O1RejectsAbsentSQLiteWithoutCreatingFiles(t *testing.T) {
 	}
 }
 
-func TestCSFRV19O1ReaderRejectsWriteAtSQLBoundary(t *testing.T) {
-	// Run in package sqlite to inspect its private sql.DB; this fixture checks
-	// the externally observable absence of write APIs through the contract.
+func TestCSFRV19O1PublicReaderExposesNoWriteMethods(t *testing.T) {
+	// The package sqlite tests raw SQL denial; this test protects the public
+	// Reader method set against accidental exposure of write-capable methods.
 	_, _, _, run, bundle, path := testFixture(t)
 	reader, err := sqlite.OpenObservatory(context.Background(), path, bundle)
 	if err != nil {

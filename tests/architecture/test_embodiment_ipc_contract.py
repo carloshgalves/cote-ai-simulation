@@ -267,3 +267,41 @@ def test_source_hashes_are_echoed_without_global_identity_fields():
     assert "input_id" not in result
     assert "event_id" not in result
     assert "wall_time" not in result
+
+
+def _verify_exchange(request, response):
+    """Reference transaction guard: schema-valid is not the same as source-bound."""
+    validator = _validator()
+    validator.validate(request)
+    validator.validate(response)
+    if request["kind"] != "request" or response["kind"] != "response":
+        raise ValueError("invalid exchange roles")
+    for field in ("protocol", "correlation_id", "operation"):
+        if request[field] != response[field]:
+            raise ValueError(f"unbound response {field}")
+    if response["status"] == "ok":
+        for field in ("snapshot_raw_sha256", "events_raw_sha256"):
+            if response["result"][field] != request["source"][field]:
+                raise ValueError(f"unbound response {field}")
+    return response
+
+
+def test_reference_exchange_requires_matching_raw_source_hashes():
+    cases = _cases()["positive"]
+    assert _verify_exchange(cases["request"], cases["ok"]) == cases["ok"]
+    assert _verify_exchange(cases["request"], cases["error"]) == cases["error"]
+    for field in ("snapshot_raw_sha256", "events_raw_sha256"):
+        response = copy.deepcopy(cases["ok"])
+        response["result"][field] = "e" * 64  # syntactically valid, wrong source
+        assert not list(_validator().iter_errors(response))
+        with pytest.raises(ValueError, match="unbound response"):
+            _verify_exchange(cases["request"], response)
+
+
+def test_reference_exchange_rejects_a_response_from_another_request():
+    cases = _cases()["positive"]
+    response = copy.deepcopy(cases["ok"])
+    response["correlation_id"] = "f" * 32  # schema-valid, different invocation
+    assert not list(_validator().iter_errors(response))
+    with pytest.raises(ValueError, match="unbound response correlation_id"):
+        _verify_exchange(cases["request"], response)

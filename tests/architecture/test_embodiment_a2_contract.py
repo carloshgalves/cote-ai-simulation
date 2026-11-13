@@ -523,3 +523,20 @@ def test_real_advance_clock_cannot_be_promoted_from_frozen_seed_snapshot(tmp_pat
     assert new_log != log
     with pytest.raises(SourceRejected, match="unsupported history"):
         _project(new_snap, new_log)
+
+
+@pytest.mark.parametrize("kind", [None, [], {"event": "capacity.sampled"}, 1])
+def test_non_string_event_kind_has_closed_source_error(tmp_path, kind):
+    snap, log = _run(tmp_path)
+    events = _log_records(log)
+    events[1]["event"] = kind
+    with pytest.raises(SourceRejected, match="unsupported history"):
+        _project(snap, _relog(events))
+
+
+def test_invalid_body_state_error_is_sanitized(tmp_path):
+    snap, log = _run(tmp_path)
+    doc = _yaml_document(snap)
+    doc["characters"]["npc.0001"]["body_state"]["hydration"]["deficit_pct_body_mass"] = -25
+    with pytest.raises(SourceRejected, match="invalid physical BodyState"):
+        _project(_signed_yaml(doc), log)

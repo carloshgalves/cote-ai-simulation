@@ -227,3 +227,43 @@ def test_no_implicit_version_upgrade_or_source_path_parameter():
     assert schema["$defs"]["response"]["additionalProperties"] is False
     assert schema["$defs"]["result"]["additionalProperties"] is False
     assert schema["$defs"]["error"]["additionalProperties"] is False
+
+
+def test_all_version_one_properties_are_an_explicit_closed_allowlist():
+    """An added field requires a versioned decision, not just a new schema key."""
+    defs = _schema()["$defs"]
+    allowed = {
+        "sha256": None,
+        "source": {
+            "snapshot_name", "events_name", "snapshot_raw_sha256", "events_raw_sha256",
+        },
+        "result": {
+            "snapshot_raw_sha256", "events_raw_sha256",
+            "snapshot_document_sha256", "normalised_log_sha256",
+            "event_count", "snapshot_version",
+        },
+        "error": {"code"},
+        "request": {"kind", "protocol", "correlation_id", "operation", "source"},
+        "response": {
+            "kind", "protocol", "correlation_id", "operation",
+            "status", "result", "error",
+        },
+    }
+    assert set(defs) == set(allowed)
+    for name, keys in allowed.items():
+        if keys is None:
+            assert defs[name].get("properties") is None
+            continue
+        assert set(defs[name]["properties"]) == keys, name
+        assert defs[name]["additionalProperties"] is False, name
+
+
+def test_source_hashes_are_echoed_without_global_identity_fields():
+    request = _cases()["positive"]["request"]
+    result = _cases()["positive"]["ok"]["result"]
+    assert request["source"]["snapshot_raw_sha256"] == result["snapshot_raw_sha256"]
+    assert request["source"]["events_raw_sha256"] == result["events_raw_sha256"]
+    assert "producer_unit_key" not in result
+    assert "input_id" not in result
+    assert "event_id" not in result
+    assert "wall_time" not in result

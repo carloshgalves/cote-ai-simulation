@@ -1,0 +1,45 @@
+name: O1 Observatory read-only contract
+on:
+  pull_request:
+    paths:
+      - "internal/csf/observatory/**"
+      - "internal/csf/persistence/sqlite/observatory_**"
+      - "internal/csf/commit/observatory_o1_**"
+      - "internal/csf/persistence/sqlite/clock_replay.go"
+      - "internal/csf/persistence/sqlite/control_replay.go"
+      - "internal/csf/persistence/sqlite/store.go"
+      - ".github/workflows/o1-observatory-readonly.yml"
+      - "go.mod"
+      - "go.sum"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  o1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Verify exact source HEAD
+        run: |
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          git rev-parse HEAD
+      - name: Format O1 changes (initial TDD evidence; gate becomes nonmutating on final head)
+        run: |
+          gofmt -w internal/csf/commit/observatory_o1_integration_test.go
+          echo O1_TEST_GOFMT_BEGIN
+          base64 -w0 internal/csf/commit/observatory_o1_integration_test.go
+          echo
+          echo O1_TEST_GOFMT_END
+      - name: O1 tests initial RED / final GREEN
+        run: go test -count=1 -v -timeout=12m ./internal/csf/commit -run '^TestCSFRV19O1'

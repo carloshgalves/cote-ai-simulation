@@ -1,0 +1,54 @@
+name: O3 Observatory POV and public security boundary
+on:
+  pull_request:
+    paths:
+      - "internal/csf/observatory/**"
+      - "internal/csf/persistence/sqlite/observatory_pov_public**"
+      - "internal/csf/commit/observatory_o3_**"
+      - "internal/csf/persistence/sqlite/actor_inbox.go"
+      - "internal/csf/persistence/sqlite/round_delivery.go"
+      - "internal/csf/persistence/sqlite/evidence_registry_replay.go"
+      - "internal/csf/contextboundary/**"
+      - "internal/csf/perception/**"
+      - "internal/csf/persistence/sqlite/observatory_readonly.go"
+      - "internal/csf/persistence/sqlite/observatory_privileged**"
+      - "internal/csf/persistence/sqlite/clock_replay.go"
+      - "internal/csf/persistence/sqlite/communication_delivery.go"
+      - "internal/csf/persistence/sqlite/fork_communication_birth_v2.go"
+      - "internal/csf/policy/**"
+      - "docs/architecture/canonical-codec-v1-bundle/**"
+      - ".github/workflows/o3-observatory-views.yml"
+      - "go.mod"
+      - "go.sum"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Exact source HEAD
+        run: |
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          git rev-parse HEAD
+      - name: Format TDD test and emit exact reproducible bytes (temporary RED checkpoint)
+        run: |
+          gofmt -w internal/csf/commit/observatory_o3_integration_test.go
+          echo O3_TEST_GOFMT_BEGIN
+          base64 -w0 internal/csf/commit/observatory_o3_integration_test.go
+          echo
+          echo O3_TEST_GOFMT_END
+      - name: O3 RED then GREEN, exact-head test
+        run: go test -count=1 -v -timeout=12m ./internal/csf/commit -run '^TestCSFRV19O3'

@@ -1,0 +1,63 @@
+name: O1 Observatory read-only contract
+on:
+  pull_request:
+    paths:
+      - "internal/csf/observatory/**"
+      - "internal/csf/persistence/sqlite/observatory_**"
+      - "internal/csf/commit/observatory_o1_**"
+      - "internal/csf/clock/**"
+      - "internal/csf/policy/**"
+      - "internal/csf/persistence/sqlite/clock_advance.go"
+      - "internal/csf/persistence/sqlite/fence_terminal_guard.go"
+      - "internal/csf/persistence/sqlite/terminal_abort.go"
+      - "docs/architecture/canonical-codec-v1-bundle/**"
+      - "docs/architecture/canonical-codec-v2-bundle/**"
+      - "internal/csf/persistence/sqlite/clock_replay.go"
+      - "internal/csf/persistence/sqlite/control_replay.go"
+      - "internal/csf/persistence/sqlite/store.go"
+      - ".github/workflows/o1-observatory-readonly.yml"
+      - "go.mod"
+      - "go.sum"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  o1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Verify exact source HEAD
+        run: |
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          git rev-parse HEAD
+      - name: Require committed gofmt output
+        run: |
+          files=$(gofmt -l internal/csf/observatory/query.go internal/csf/observatory/query_test.go internal/csf/persistence/sqlite/observatory_readonly.go internal/csf/persistence/sqlite/observatory_readonly_test.go internal/csf/commit/observatory_o1_integration_test.go)
+          if [ -n "$files" ]; then
+            echo "Unformatted source in O1 commit:"
+            echo "$files"
+            exit 1
+          fi
+      - name: Check exact-head diff whitespace
+        run: |
+          git fetch --no-tags --depth=1 origin main
+          git diff --check origin/main HEAD
+      - name: O1 real-run integration and negative scenarios
+        run: go test -count=1 -v -timeout=12m ./internal/csf/commit -run '^TestCSFRV19O1'
+      - name: O1 SQLite pager guard and architecture checks
+        run: go test -count=1 -v -timeout=12m ./internal/csf/persistence/sqlite ./internal/csf/observatory -run '^TestCSFRV19O1'
+      - name: O1 race detector on all affected packages
+        run: go test -race -count=1 -timeout=14m ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/csf/observatory -run '^TestCSFRV19O1'
+      - name: O1 static analyzer
+        run: go vet ./internal/csf/observatory ./internal/csf/persistence/sqlite

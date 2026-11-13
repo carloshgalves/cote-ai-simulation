@@ -9,6 +9,7 @@ import (
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
@@ -577,6 +578,56 @@ func TestCSFRV19O2RejectsOrphanDecisionRecord(t *testing.T) {
 		t.Fatalf("orphan DecisionRecord bypassed membership audit: %+v", got)
 	}
 	if _, err := admin.ExecContext(ctx, "DELETE FROM decision_ledger WHERE id=?", orphan[:]); err != nil {
+		t.Fatal(err)
+	}
+	// A second orphan has a valid normative ID and body digest; checking
+	// only whether the SQL key equals the payload identity is insufficient.
+	parsed, err := codec.StrictDecodePayload(original)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fields := parsed.([]any)
+	fakeCycle, ok := fields[2].([]byte)
+	if !ok || len(fakeCycle) != 32 {
+		t.Fatal("DecisionRecord has no canonical cycle ID")
+	}
+	fakeCycle = bytes.Clone(fakeCycle)
+	fakeCycle[0] ^= 0x71
+	fields[2] = fakeCycle
+	source, ok := fields[4].([]any)
+	if !ok || len(source) < 3 {
+		t.Fatal("DecisionRecord lacks a canonical source ref")
+	}
+	sourceID, ok := source[2].([]byte)
+	if !ok || len(sourceID) != 32 {
+		t.Fatal("DecisionRecord source ID is malformed")
+	}
+	d := identity.New(c.bundle)
+	normativeID, _, err := d.Sum("cote.csf.id.decision",
+		"cote.csf.schema.decision-id-preimage", 1,
+		[]any{fakeCycle, fields[3], sourceID})
+	if err != nil {
+		t.Fatal(err)
+	}
+	fields[0] = normativeID[:]
+	digest, _, err := d.Sum("cote.csf.digest.decision-record",
+		"cote.csf.schema.decision-record.body", 1, fields[:15])
+	if err != nil {
+		t.Fatal(err)
+	}
+	fields[15] = digest[:]
+	forgedValid, err := codec.CanonicalPayload(fields)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := admin.ExecContext(ctx, "INSERT INTO decision_ledger(id, canonical) VALUES(?, ?)",
+		normativeID[:], forgedValid); err != nil {
+		t.Fatal(err)
+	}
+	if got, err := observer.ReadPrivilegedReport(ctx, [32]byte(run)); err == nil {
+		t.Fatalf("self-consistent orphan DecisionRecord without CycleCommit was accepted: %+v", got)
+	}
+	if _, err := admin.ExecContext(ctx, "DELETE FROM decision_ledger WHERE id=?", normativeID[:]); err != nil {
 		t.Fatal(err)
 	}
 	if _, err := observer.ReadPrivilegedReport(ctx, [32]byte(run)); err != nil {

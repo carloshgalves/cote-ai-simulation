@@ -3,7 +3,14 @@
   "process": {
     "single_flight": true,
     "direct_exec_no_shell": true,
-    "no_remote_transport": true
+    "no_remote_transport": true,
+    "operational_failure_precedence": [
+      "CANCELLED",
+      "TIMED_OUT",
+      "STDERR_LIMIT",
+      "FRAME_INVALID",
+      "PROCESS_FAILURE"
+    ]
   },
   "source_view": {
     "mode": "immutable_host_owned_view",
@@ -13,7 +20,10 @@
     "no_pre_post_hash_fallback": true,
     "source_paths_are_not_protocol_fields": true,
     "must_verify_raw_sha256_before_spawning": true,
-    "fail_if_os_read_only_isolation_missing": true
+    "fail_if_os_read_only_isolation_missing": true,
+    "producer_quiescence_required": true,
+    "coherent_snapshot_and_eventlog_cut": true,
+    "fail_if_coherence_unprovable": true
   },
   "io": {
     "drain_stdout_and_stderr_concurrently": true,

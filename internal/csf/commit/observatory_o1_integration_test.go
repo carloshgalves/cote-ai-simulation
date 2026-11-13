@@ -8,6 +8,7 @@ import (
     "os"
     "encoding/binary"
     "fmt"
+    "reflect"
     "sort"
     "strings"
     "testing"
@@ -156,7 +157,8 @@ func TestCSFRV19O1RejectsForeignRunCorruptClockAndControl(t *testing.T){
     defer reader.Close()
     other:=[32]byte(run);other[0]^=0x85
     if _,err:=reader.ReadRun(ctx,other);err==nil {t.Fatal("foreign run id read succeeded")}
-    if _,err:=reader.ReadRun(ctx,[32]byte{});err==nil {t.Fatal("zero run id read succeeded")}
+    another:=other;another[1]^=0x41
+    if _,err:=reader.ReadRun(ctx,another);err==nil{t.Fatal("second foreign run accepted")}
     original,err:=store.LoadClock(ctx,[32]byte(run))
     if err!=nil{t.Fatal(err)}
     broken:=original
@@ -195,4 +197,8 @@ func TestCSFRV19O1ReaderRejectsWriteAtSQLBoundary(t *testing.T) {
     defer reader.Close()
     _,err=reader.ReadRun(context.Background(),[32]byte(run))
     if err!=nil{t.Fatal(err)}
+    methods:=reflect.TypeOf(reader)
+    if methods.NumMethod()!=2||methods.Method(0).Name!="Close"||methods.Method(1).Name!="ReadRun"{
+        t.Fatalf("public Observatory Reader exposes unapproved method: %s",methods.String())
+    }
 }

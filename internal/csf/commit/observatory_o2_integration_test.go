@@ -250,3 +250,26 @@ func TestCSFRV19O2RejectsForgedAbortAndRetryWithoutLeakingRows(t *testing.T) {
 		})
 	}
 }
+
+func TestCSFRV19O2RejectsOrphanTerminalJournal(t *testing.T) {
+    ctx:=context.Background()
+    c,_,ledger,run,bundle,path:=testFixture(t)
+    outcome,err:=c.Advance(ctx,ledger,run)
+    if err!=nil{t.Fatal(err)}
+    q,err:=sqlite.OpenPrivilegedObservatory(ctx,path,bundle)
+    if err!=nil{t.Fatal(err)}
+    defer q.Close()
+    db,err:=sql.Open("sqlite",path)
+    if err!=nil{t.Fatal(err)}
+    defer db.Close()
+    if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil{t.Fatal(err)}
+    invented:=outcome.Commit.Identity
+    invented[0]^=0x86
+    if _,err:=db.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",
+         invented[:],outcome.Commit.Canonical);err!=nil{t.Fatal(err)}
+    if got,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err==nil{
+        t.Fatalf("orphan CycleCommit without committed_cycles membership was accepted: %+v",got)
+    }
+    if _,err:=db.ExecContext(ctx,"DELETE FROM decision_ledger WHERE id=?",invented[:]);err!=nil{t.Fatal(err)}
+    if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil{t.Fatal("restored report:",err)}
+}

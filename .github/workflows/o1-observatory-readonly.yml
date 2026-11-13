@@ -34,12 +34,28 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
           git rev-parse HEAD
-      - name: Format O1 changes (initial TDD evidence; gate becomes nonmutating on final head)
+      - name: Stage gofmt outputs and print exact source files for checkpoint
         run: |
-          gofmt -w internal/csf/commit/observatory_o1_integration_test.go
-          echo O1_TEST_GOFMT_BEGIN
-          base64 -w0 internal/csf/commit/observatory_o1_integration_test.go
-          echo
-          echo O1_TEST_GOFMT_END
-      - name: O1 tests initial RED / final GREEN
+          paths=(
+            internal/csf/observatory/query.go
+            internal/csf/observatory/query_test.go
+            internal/csf/persistence/sqlite/observatory_readonly.go
+            internal/csf/persistence/sqlite/observatory_readonly_test.go
+            internal/csf/commit/observatory_o1_integration_test.go
+          )
+          keys=(O1_CONTRACT O1_ARCH O1_ADAPTER O1_PAGER O1_INTEGRATION)
+          gofmt -w "${paths[@]}"
+          for i in "${!paths[@]}"; do
+            echo "${keys[i]}_GOFMT_BEGIN"
+            base64 -w0 "${paths[i]}"
+            echo
+            echo "${keys[i]}_GOFMT_END"
+          done
+      - name: O1 real-run integration and negative scenarios
         run: go test -count=1 -v -timeout=12m ./internal/csf/commit -run '^TestCSFRV19O1'
+      - name: O1 SQLite pager guard and architecture checks
+        run: go test -count=1 -v -timeout=12m ./internal/csf/persistence/sqlite ./internal/csf/observatory -run '^TestCSFRV19O1'
+      - name: O1 race detector on all affected packages
+        run: go test -race -count=1 -timeout=14m ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/csf/observatory -run '^TestCSFRV19O1'
+      - name: O1 static analyzer
+        run: go vet ./internal/csf/observatory ./internal/csf/persistence/sqlite

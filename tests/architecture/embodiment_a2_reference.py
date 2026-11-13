@@ -121,6 +121,15 @@ def _sha256(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
+def _finite_number(value) -> bool:
+    if type(value) not in (int, float):
+        return False
+    try:
+        return math.isfinite(value)
+    except (OverflowError, ValueError):
+        return False
+
+
 def _document_hash(value):
     """Local *reference* hash; not an ADR 0009 canonical CBOR digest."""
     encoded = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False)
@@ -273,8 +282,7 @@ def project_seed_source(
     _require(type(corr["scale"]) is str and type(corr["method"]) is str and
              type(corr["note"]) is str and len(corr["note"]) > 0,
              "correlation report descriptive fields invalid")
-    _require(type(corr["material_pairs_threshold"]) in (int, float) and
-             math.isfinite(corr["material_pairs_threshold"]) and
+    _require(_finite_number(corr["material_pairs_threshold"]) and
              0 <= corr["material_pairs_threshold"] <= 1,
              "correlation report threshold invalid")
     counts = _object(corr["material_pairs_sign_agreement"], {"agree", "disagree"},
@@ -302,10 +310,9 @@ def project_seed_source(
         expected = pair["expected_from_loadings"]
         observed = pair["observed"]
         agree = pair["sign_agrees"]
-        _require(type(expected) in (int, float) and math.isfinite(expected) and
+        _require(_finite_number(expected) and
                  -1 <= expected <= 1, "correlation expected value invalid")
-        _require(observed is None or (type(observed) in (int, float) and
-                 math.isfinite(observed) and -1 <= observed <= 1),
+        _require(observed is None or (_finite_number(observed) and -1 <= observed <= 1),
                  "correlation observed value invalid")
         _require((observed is None and agree is None) or
                  (observed is not None and type(agree) is bool and

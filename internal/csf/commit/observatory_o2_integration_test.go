@@ -9,6 +9,7 @@ import (
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	_ "modernc.org/sqlite"
@@ -272,4 +273,39 @@ func TestCSFRV19O2RejectsOrphanTerminalJournal(t *testing.T) {
     }
     if _,err:=db.ExecContext(ctx,"DELETE FROM decision_ledger WHERE id=?",invented[:]);err!=nil{t.Fatal(err)}
     if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil{t.Fatal("restored report:",err)}
+}
+
+func TestCSFRV19O2ReportsExplicitSourceClosureGap(t *testing.T) {
+  ctx:=context.Background()
+  _,_,ledger,run,bundle,path:=testFixture(t)
+  if err:=ledger.DeclareSource(inputledger.Source{ID:"unclosed"});err!=nil{t.Fatal(err)}
+  q,err:=sqlite.OpenPrivilegedObservatory(ctx,path,bundle)
+  if err!=nil{t.Fatal(err)}
+  defer q.Close()
+  before:=o1WholeDatabaseDigest(t,path)
+  report,err:=q.ReadPrivilegedReport(ctx,[32]byte(run))
+  if err!=nil{t.Fatal(err)}
+  if len(report.PendingClosureSources)!=1||report.PendingClosureSources[0]!="unclosed"{
+    t.Fatalf("unclosed declared source was not diagnosed: %+v",report.PendingClosureSources)
+  }
+  if got:=o1WholeDatabaseDigest(t,path);got!=before{t.Fatal("closure-gaps query wrote to ledger")}
+}
+
+func TestCSFRV19O2ReportsPendingPerceptionTasks(t *testing.T) {
+  ctx:=context.Background()
+  c,_,ledger,run,bundle,path:=testFixture(t,activeTrigger())
+  if _,err:=c.Advance(ctx,ledger,run);err!=nil{t.Fatal(err)}
+  q,err:=sqlite.OpenPrivilegedObservatory(ctx,path,bundle)
+  if err!=nil{t.Fatal(err)}
+  defer q.Close()
+  before:=o1WholeDatabaseDigest(t,path)
+  report,err:=q.ReadPrivilegedReport(ctx,[32]byte(run))
+  if err!=nil{t.Fatal(err)}
+  if report.PendingPerceptionTasks<1||report.RejectedIngress!="NOT_PERSISTED"{
+    t.Fatalf("pending work was misclassified as complete or fabricated rejected ingress: %+v",report)
+  }
+  if len(report.Commits)!=1||len(report.Commits[0].Tasks)<1{
+    t.Fatal("commit did not expose verified perception task refs")
+  }
+  if got:=o1WholeDatabaseDigest(t,path);got!=before{t.Fatal("pending-task query wrote to ledger")}
 }

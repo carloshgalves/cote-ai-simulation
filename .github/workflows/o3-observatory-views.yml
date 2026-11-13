@@ -1,0 +1,96 @@
+name: O3 Observatory POV and public security boundary
+on:
+  pull_request:
+    paths:
+      - "internal/csf/observatory/**"
+      - "internal/csf/persistence/sqlite/observatory_pov_public**"
+      - "internal/csf/commit/observatory_o3_**"
+      - "internal/csf/persistence/sqlite/actor_inbox.go"
+      - "internal/csf/persistence/sqlite/round_delivery.go"
+      - "internal/csf/persistence/sqlite/evidence_registry_replay.go"
+      - "internal/csf/contextboundary/**"
+      - "internal/csf/perception/**"
+      - "internal/csf/inputledger/**"
+      - "internal/csf/genesis/**"
+      - "internal/csf/communication/**"
+      - "internal/csf/fork/**"
+      - "internal/csf/commit/work_*.go"
+      - "internal/csf/commit/clock_perception.go"
+      - "internal/csf/persistence/sqlite/store.go"
+      - "internal/csf/persistence/sqlite/dispatch_epistemic_guard.go"
+      - "internal/csf/persistence/sqlite/epistemic_outbox.go"
+      - "internal/csf/persistence/sqlite/snapshot*.go"
+      - "internal/csf/persistence/sqlite/fork*.go"
+      - "internal/csf/perception/**"
+      - "internal/csf/persistence/sqlite/observatory_readonly.go"
+      - "internal/csf/persistence/sqlite/observatory_privileged**"
+      - "internal/csf/persistence/sqlite/clock_replay.go"
+      - "internal/csf/persistence/sqlite/communication_delivery.go"
+      - "internal/csf/persistence/sqlite/fork_communication_birth_v2.go"
+      - "internal/csf/policy/**"
+      - "docs/architecture/canonical-codec-v1-bundle/**"
+      - "docs/architecture/canonical-codec-v2-bundle/**"
+      - ".github/workflows/o3-observatory-views.yml"
+      - "go.mod"
+      - "go.sum"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Exact source HEAD
+        run: |
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          git rev-parse HEAD
+      - name: Enforce committed gofmt and diff whitespace
+        run: |
+          files=(
+            internal/csf/observatory/views.go
+            internal/csf/persistence/sqlite/observatory_pov_public.go
+            internal/csf/commit/observatory_o3_integration_test.go
+          )
+          remaining=$(gofmt -l "${files[@]}")
+          if [ -n "$remaining" ]; then
+            printf 'O3 files are not formatted in the exact commit:\n%s\n' "$remaining"
+            exit 1
+          fi
+          git fetch --no-tags --depth=1 origin main
+          git diff --check origin/main HEAD
+      - name: O3 focal actor/public authority and negative tests
+        run: go test -count=1 -v -timeout=12m ./internal/csf/commit -run '^TestCSFRV19O3'
+      - name: Regressed knowledge boundary tests (claim authenticity and temporal holder gates)
+        run: go test -count=1 -timeout=12m ./internal/csf/commit ./internal/csf/contextboundary ./internal/csf/persistence/sqlite -run '^TestCSFRV(16|17)'
+      - name: O3 race detector on affected packages
+        run: go test -race -count=1 -timeout=18m ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/csf/observatory ./internal/csf/contextboundary -run '^TestCSFRV19O3'
+      - name: Vet affected Go modules
+        run: go vet ./internal/csf/observatory ./internal/csf/persistence/sqlite ./internal/csf/commit ./internal/csf/contextboundary
+  full-go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Exact source HEAD
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+      - name: Complete fresh Go regression
+        run: go test -count=1 -timeout=30m ./...

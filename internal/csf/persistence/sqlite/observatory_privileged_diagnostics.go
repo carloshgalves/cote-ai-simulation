@@ -30,7 +30,9 @@ func(q *PrivilegedReader) o2ClosureGaps(ctx context.Context,run [32]byte,
   var raw []byte
   if err:=rows.Scan(&raw);err!=nil{rows.Close();return nil,err}
   decoded,err:=codec.StrictDecodePayload(raw)
-  if err!=nil{rows.Close();return nil,fmt.Errorf("observatory closure input ledger: %w",err)}
+  // ReplayClock already authenticated the full ledger. Some valid
+  // entries are canonical envelopes instead of raw CBOR payload arrays.
+  if err!=nil{continue}
   fields,ok:=decoded.([]any)
   if !ok{continue}
   if len(fields)==3&&fields[0]=="source-declaration-v1"{

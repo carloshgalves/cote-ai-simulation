@@ -15,6 +15,45 @@ type o2AttemptKey struct {
 	attempt uint64
 }
 
+// Recognize the structural envelope before applying the single-run scope.
+// A foreign fence/abort/retry must fail closed, but unrelated record shapes
+// in the heterogeneous decision ledger must not be misclassified.
+func o2ForeignCausalAttemptShape(f []any) bool {
+	if len(f) < 7 || !o2IsID(f[0]) || !o2IsID(f[1]) {
+		return false
+	}
+	if _, ok := f[2].(uint64); !ok {
+		return false
+	}
+	switch len(f) {
+	case 18: // AdmissionFence
+		_, order := f[5].(uint64)
+		_, base := f[7].(uint64)
+		_, plan := f[6].([]any)
+		_, retry := f[3].([]any)
+		_, instant := asSigned64(f[4])
+		return order && base && plan && retry && instant && o2IsID(f[8]) && o2IsID(f[17])
+	case 15: // CycleAbortRecord
+		_, ordinal := f[4].(uint64)
+		_, plan := f[5].([]any)
+		_, base := f[6].(uint64)
+		_, reason := f[10].(uint64)
+		return ordinal && plan && base && reason && o2IsID(f[7]) && o2IsID(f[8]) && o2IsID(f[14])
+	case 7: // AttemptRetryRecord
+		_, next := f[3].(uint64)
+		_, abort := f[4].([]any)
+		_, reason := f[5].(string)
+		_, policy := f[6].([]any)
+		return next && abort && reason && policy
+	}
+	return false
+}
+
+func o2IsID(v any) bool {
+	b, ok := v.([]byte)
+	return ok && len(b) == 32
+}
+
 // Authenticate every persisted fence/abort/retry root, including historical
 // aborts that are no longer projected by today's CycleControlState. These
 // records must never be counted merely by consulting the current status.
@@ -37,7 +76,10 @@ func o2ReadAttempts(run [32]byte, records map[[32]byte]o2Record) (
 		}
 		// DecisionLedger includes non-fence records. Classify only exact causal
 		// run/cycle/attempt shapes; nonmatching types are not falsely reported.
-		if len(f) < 3 || !equalBytes(f[0], run[:]) {
+		if !equalBytes(f[0], run[:]) {
+			if o2ForeignCausalAttemptShape(f) {
+				return nil, nil, fmt.Errorf("foreign-run causal attempt record %x in single-run decision_ledger", id)
+			}
 			continue
 		}
 		cycle, err := o2Bytes(f[1])

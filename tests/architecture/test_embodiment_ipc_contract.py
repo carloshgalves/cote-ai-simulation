@@ -71,6 +71,7 @@ def _frame(value):
     ).encode("utf-8")
     if not 0 < len(encoded) <= MAX_FRAME_BYTES:
         raise ValueError("frame size outside protocol bounds")
+    _validator().validate(value)
     return len(encoded).to_bytes(4, "big") + encoded
 
 
@@ -305,3 +306,96 @@ def test_reference_exchange_rejects_a_response_from_another_request():
     assert not list(_validator().iter_errors(response))
     with pytest.raises(ValueError, match="unbound response correlation_id"):
         _verify_exchange(cases["request"], response)
+
+# A1-R02/R03/R04/R05: adversarial RED controls. The policy file is a
+# versioned implementation contract, not an executable process adapter.
+POLICY_PATH = BUNDLE / "ipc-v1-operational-policy.json"
+
+
+def _policy():
+    return _strict_json(POLICY_PATH.read_bytes())
+
+
+def _validate_policy(policy):
+    """Reference contract guard: reject privilege/availability regressions."""
+    limits = policy["limits"]
+    process = policy["process"]
+    source = policy["source_view"]
+    io = policy["io"]
+    assert policy["protocol"] == "cote.embodiment.ipc.v1"
+    assert process["single_flight"] is True
+    assert process["direct_exec_no_shell"] is True
+    assert process["no_remote_transport"] is True
+    assert source["mode"] == "immutable_host_owned_view"
+    assert source["child_cannot_modify"] is True
+    assert source["host_pins_absolute_root"] is True
+    assert source["reject_symlinks_and_non_regular_files"] is True
+    assert source["no_pre_post_hash_fallback"] is True
+    assert source["source_paths_are_not_protocol_fields"] is True
+    assert source["must_verify_raw_sha256_before_spawning"] is True
+    assert source["fail_if_os_read_only_isolation_missing"] is True
+    assert io["drain_stdout_and_stderr_concurrently"] is True
+    assert io["read_stdout_exactly_one_framed_message_then_eof"] is True
+    assert io["bounded_reads_before_allocating"] is True
+    assert io["kill_on_stdout_or_stderr_limit"] is True
+    assert io["kill_on_timeout_or_cancellation"] is True
+    assert io["redact_or_discard_stderr"] is True
+    assert io["nonzero_exit_always_fails"] is True
+    assert limits["frame_payload_bytes"] == MAX_FRAME_BYTES
+    assert 0 < limits["source_snapshot_bytes"] <= 16 * 1024 * 1024
+    assert 0 < limits["source_events_bytes"] <= 64 * 1024 * 1024
+    assert 0 < limits["source_event_line_bytes"] <= 1024 * 1024
+    assert 0 < limits["source_event_count"] <= 100000
+    assert 0 < limits["stderr_retained_bytes"] <= 16384
+    assert 0 < limits["termination_grace_ms"] < limits["end_to_end_process_budget_ms"]
+    assert limits["end_to_end_process_budget_ms"] <= 30000
+    assert limits["source_event_line_bytes"] <= limits["source_events_bytes"]
+
+
+def test_encoder_rejects_invalid_envelopes_before_writing_any_frame():
+    cases = _cases()
+    for negative in cases["negative"]:
+        invalid = _mutate(cases["positive"][negative["base"]], negative)
+        with pytest.raises((ValueError, jsonschema.ValidationError)):
+            _frame(invalid)
+
+
+def test_encoder_rejects_invalid_operation_even_when_below_byte_limit():
+    request = copy.deepcopy(_cases()["positive"]["request"])
+    request["operation"] = "commit_world"
+    with pytest.raises(jsonschema.ValidationError):
+        _frame(request)
+
+
+def test_policy_requires_immutable_child_inaccessible_source_view():
+    _validate_policy(_policy())
+
+
+@pytest.mark.parametrize(
+    ("group", "key", "weak_value"),
+    [
+        ("source_view", "child_cannot_modify", False),
+        ("source_view", "no_pre_post_hash_fallback", False),
+        ("source_view", "reject_symlinks_and_non_regular_files", False),
+        ("source_view", "fail_if_os_read_only_isolation_missing", False),
+        ("io", "drain_stdout_and_stderr_concurrently", False),
+        ("io", "kill_on_timeout_or_cancellation", False),
+        ("io", "bounded_reads_before_allocating", False),
+        ("limits", "source_events_bytes", 2**40),
+        ("limits", "source_snapshot_bytes", 2**40),
+        ("limits", "source_event_line_bytes", 2**40),
+        ("limits", "termination_grace_ms", 32000),
+        ("limits", "end_to_end_process_budget_ms", 60000),
+    ],
+)
+def test_policy_mutants_are_rejected(group, key, weak_value):
+    config = copy.deepcopy(_policy())
+    config[group][key] = weak_value
+    with pytest.raises(AssertionError):
+        _validate_policy(config)
+
+
+def test_decoder_fails_closed_on_oversized_declared_payload_before_json():
+    for frame in ((MAX_FRAME_BYTES + 1).to_bytes(4, "big"), b"\xff\xff\xff\xff"):
+        with pytest.raises(ValueError, match="size"):
+            _unframe(frame)

@@ -344,7 +344,7 @@ def _validate_policy(policy):
         "limits": {
             "frame_payload_bytes", "source_snapshot_bytes", "source_events_bytes",
             "source_event_line_bytes", "source_event_count", "stderr_retained_bytes",
-            "end_to_end_process_budget_ms", "termination_grace_ms",
+            "end_to_end_process_budget_ms", "termination_grace_ms", "source_staging_budget_ms",
         },
     }
     assert set(policy) == {"protocol", *allowed}
@@ -387,6 +387,7 @@ def _validate_policy(policy):
     assert 0 < limits["stderr_retained_bytes"] <= 16384
     assert 0 < limits["termination_grace_ms"] < limits["end_to_end_process_budget_ms"]
     assert limits["end_to_end_process_budget_ms"] <= 30000
+    assert 0 < limits["source_staging_budget_ms"] <= 10000
     assert limits["source_event_line_bytes"] <= limits["source_events_bytes"]
 
 
@@ -428,6 +429,7 @@ def test_policy_requires_immutable_child_inaccessible_source_view():
         ("limits", "source_event_line_bytes", 2**40),
         ("limits", "termination_grace_ms", 32000),
         ("limits", "end_to_end_process_budget_ms", 60000),
+        ("limits", "source_staging_budget_ms", 60000),
     ],
 )
 def test_policy_mutants_are_rejected(group, key, weak_value):
@@ -519,3 +521,30 @@ def test_policy_requires_a_coherent_source_cut_and_fixed_failure_precedence():
     assert process["operational_failure_precedence"] == [
         "CANCELLED", "TIMED_OUT", "STDERR_LIMIT", "FRAME_INVALID", "PROCESS_FAILURE"
     ]
+
+
+@pytest.mark.parametrize(
+    ("path", "extra"),
+    [
+        (("source", "snapshot_raw_sha256"), "\\n"),
+        (("source", "events_raw_sha256"), "\\n"),
+        (("correlation_id",), "\\n"),
+    ],
+)
+def test_exact_width_sha_and_correlation_reject_trailing_newline(path, extra):
+    message = copy.deepcopy(_cases()["positive"]["request"])
+    current = message
+    for member in path[:-1]:
+        current = current[member]
+    current[path[-1]] += extra
+    assert list(_validator().iter_errors(message)), path
+    with pytest.raises((ValueError, jsonschema.ValidationError)):
+        _frame(message)
+    raw = json.dumps(message, separators=(",", ":")).encode()
+    with pytest.raises((ValueError, jsonschema.ValidationError)):
+        _unframe(len(raw).to_bytes(4, "big") + raw)
+
+
+def test_host_source_staging_has_an_independent_bounded_deadline():
+    limits = _policy()["limits"]
+    assert 0 < limits["source_staging_budget_ms"] <= 10000

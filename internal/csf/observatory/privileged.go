@@ -42,6 +42,8 @@ type CausalAttempt struct {
  Ordinal uint64
  Attempt uint64
  Fence AuthorityRef
+ Closures []AuthorityRef
+ Admitted []AuthorityRef
  Commit *AuthorityRef
  Abort *AuthorityRef
  Retry *AuthorityRef

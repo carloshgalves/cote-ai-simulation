@@ -200,6 +200,6 @@ func (q *PublicReader) ReadPublic(ctx context.Context, run [32]byte) (observator
 	return observatory.PublicView{
 		Run: run,
 		PublicationStatus: observatory.NoPublicRoute,
-		Publications: make([]observatory.AddressedEvidence, 0),
+		Publications: make([]observatory.PublicPublication, 0),
 	}, nil
 }

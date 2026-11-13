@@ -10,7 +10,6 @@ import (
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
@@ -55,8 +54,7 @@ func o3MintActorB(t *testing.T, ctx context.Context, store *sqlite.Store, ledger
 	state, err := store.LoadClock(ctx, [32]byte(run))
 	if err != nil { t.Fatal(err) }
 	root := validGenesis(t, bundle)
-	manifest, err := genesis.ValidateCanonical(root.Canonical, bundle)
-	if err != nil { t.Fatal(err) }
+	manifest := root
 	ordinal := uint64(state.LastOrdinal+1)
 	coordinate := domain.EligibilityCoordinate{NotBeforeInstant: state.Instant, NotBeforeCycleOrdinal: domain.CycleOrdinal(ordinal)}
 	origin := []any{uint64(2), []any{manifest.ID[:], manifest.Digest[:]}}

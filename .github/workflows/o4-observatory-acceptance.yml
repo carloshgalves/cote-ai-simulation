@@ -1,0 +1,166 @@
+name: O4 Observatory operational metrics and integrated acceptance
+on:
+  pull_request:
+    paths:
+      - "internal/csf/operationalmetrics/**"
+      - "internal/csf/observatory/**"
+      - "internal/csf/commit/observatory_o[1-4]**"
+      - "internal/csf/persistence/sqlite/observatory_**"
+      - "internal/csf/persistence/sqlite/actor_inbox.go"
+      - "internal/csf/persistence/sqlite/evidence_registry_replay.go"
+      - "internal/csf/persistence/sqlite/round_delivery.go"
+      - "internal/csf/persistence/sqlite/clock_replay.go"
+      - "internal/csf/persistence/sqlite/dispatch_epistemic_guard.go"
+      - "internal/csf/persistence/sqlite/store.go"
+      - "internal/csf/contextboundary/**"
+      - "internal/csf/inputledger/**"
+      - "internal/csf/commit/**"
+      - "internal/csf/persistence/sqlite/**"
+      - "internal/csf/clock/**"
+      - "internal/csf/admission/**"
+      - "internal/csf/communication/**"
+      - "internal/csf/perception/**"
+      - "internal/csf/ownercheckpoint/**"
+      - "internal/csf/codec/**"
+      - "internal/csf/identity/**"
+      - "internal/csf/genesis/**"
+      - "internal/csf/fork/**"
+      - "internal/csf/policy/**"
+      - "docs/architecture/canonical-codec-v1-bundle/**"
+      - "docs/architecture/canonical-codec-v2-bundle/**"
+      - "docs/architecture/operational-metrics.md"
+      - "docs/tickets/csf-runtime-v1/09-observatory-e-operacao.md"
+      - ".github/workflows/o4-observatory-acceptance.yml"
+      - "go.mod"
+      - "go.sum"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  red-evidence:
+    name: O4 historical expected RED on test-only checkpoint
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: 864d653cfa33d9a678a04788992bd07c031af347
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Prove initial O4 test checkpoint had no production API
+        run: |
+          test "$(git rev-parse HEAD)" = "864d653cfa33d9a678a04788992bd07c031af347"
+          set +e
+          output=$(go test -count=1 ./internal/csf/operationalmetrics -run '^TestCSFRV19O4' 2>&1)
+          code=$?
+          set -e
+          printf '%s\n' "$output"
+          if [ "$code" -eq 0 ]; then
+            echo "O4 RED checkpoint unexpectedly passed"
+            exit 1
+          fi
+          if ! grep -q 'undefined:' <<< "$output"; then
+            echo "O4 RED must be missing API, not unrelated infrastructure failure"
+            exit 1
+          fi
+          echo "Expected RED reproduced, no tests removed or weakened"
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Verify exact PR source HEAD
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+      - name: Check exact committed gofmt and source whitespace
+        run: |
+          files=(internal/csf/operationalmetrics/metrics.go internal/csf/operationalmetrics/metrics_test.go internal/csf/commit/observatory_o4_acceptance_test.go)
+          dirty=$(gofmt -l "${files[@]}")
+          if [ -n "$dirty" ]; then
+            printf 'O4 HEAD contains unformatted Go files:\n%s\n' "$dirty"
+            exit 1
+          fi
+          git fetch --no-tags --depth=1 origin main
+          git diff --check origin/main HEAD
+      - name: O4 focused metrics and integrated scenario tests
+        run: go test -count=1 -v -timeout=14m ./internal/csf/operationalmetrics ./internal/csf/commit -run '^TestCSFRV19O4'
+      - name: O1-O3 Observatory regression in same branch
+        run: go test -count=1 -timeout=12m ./internal/csf/observatory ./internal/csf/commit -run '^TestCSFRV19O[123]'
+      - name: O4 race detector
+        run: go test -race -count=1 -timeout=20m ./internal/csf/operationalmetrics ./internal/csf/commit -run '^TestCSFRV19O4'
+      - name: Vet O4 and all affected transitive adapters
+        run: go vet ./internal/csf/operationalmetrics ./internal/csf/observatory ./internal/csf/persistence/sqlite ./internal/csf/commit
+  all-go:
+    name: Full uncached Go regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Verify exact PR source HEAD
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+      - name: Full uncached test suite
+        run: go test -count=1 -timeout=30m ./...
+  causal-continuity:
+    name: V1/V2 negative fork and replay (race)
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Verify exact PR source HEAD
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+      - name: Cross-run fork negatives
+        run: go test -count=1 ./internal/csf/fork/...
+      - name: V1/V2 continuity with race
+        run: go test -race -count=1 -timeout=30m ./internal/csf/commit -run '^TestCSFRV18'
+  canonical:
+    name: Go and TypeScript independent 621-case conformance
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Verify exact PR source HEAD
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+      - name: Independent Go report
+        run: go run ./cmd/csf-harness --bundle docs/architecture/canonical-codec-v1-bundle --report /tmp/o4-go.json
+      - name: Independent TypeScript report
+        run: node --no-warnings --experimental-loader ./tools/csf-conformance-ts/loader.mjs tools/csf-conformance-ts/runner.ts docs/architecture/canonical-codec-v1-bundle /tmp/o4-ts.json
+      - name: Exact report equivalence
+        run: |
+          cmp /tmp/o4-go.json /tmp/o4-ts.json
+          sha256sum /tmp/o4-go.json

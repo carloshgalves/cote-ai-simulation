@@ -433,48 +433,76 @@ func TestCSFRV19O2RejectsFalseIdleAfterUnrepairedAbort(t *testing.T) {
 }
 
 func TestCSFRV19O2AddressedEvidenceAndWorldRevisionAuthority(t *testing.T) {
- ctx:=context.Background()
- c,store,ledger,cycle,fence,path:=singleResourceFixture(t)
- if _,err:=c.CommitSingleResource(ctx,ledger,cycle,fence);err!=nil{t.Fatal(err)}
- _,_,_,_,_,run:=ledger.Snapshot()
- db,err:=sql.Open("sqlite",path)
- if err!=nil{t.Fatal(err)}
- defer db.Close()
- task:=findTerminalRoundTask(t,ctx,db)
- delivered,err:=store.DeliverRoundPerception(ctx,task,c.bundle)
- if err!=nil{t.Fatal(err)}
- q,err:=sqlite.OpenPrivilegedObservatory(ctx,path,c.bundle)
- if err!=nil{t.Fatal(err)}
- defer q.Close()
- before:=o1WholeDatabaseDigest(t,path)
- report,err:=q.ReadPrivilegedReport(ctx,[32]byte(run))
- if err!=nil{t.Fatal(err)}
- if len(report.Commits)!=1{t.Fatalf("expected single resource commit: %+v",report)}
- item:=report.Commits[0]
- if item.Revision.Ledger!="world_revisions"||item.Revision.Revision!=1||
-    item.Revision.ContentHash==([32]byte{}){
-  t.Fatalf("world revision lacks authenticated owner: %+v",item.Revision)
- }
- if len(item.Evidence)!=2||len(item.Completions)!=1{
-  t.Fatalf("addressed perception did not resolve full durable refs: evidence=%d completions=%d",len(item.Evidence),len(item.Completions))
- }
- if item.Completions[0].ID!=delivered.Completion.Identity{
-  t.Fatal("wrong task-completion record was reported")
- }
- observed:=map[[32]byte]bool{}
- for _,ref:=range item.Evidence{
-  if ref.Ledger!="evidence_ledger"||ref.ContentHash==([32]byte{}){t.Fatal("invalid privileged evidence ref")}
-  observed[ref.ID]=true
- }
- if !observed[delivered.Observation.Identity]||!observed[delivered.Input.Identity]{
-  t.Fatal("Observation/KnowledgeInput identities were not reported exactly")
- }
- if report.PendingPerceptionTasks<1 {t.Fatal("uncompleted internal task was hidden by addressed evidence")}
- if o1WholeDatabaseDigest(t,path)!=before{t.Fatal("evidence audit mutated authoritative data")}
- var original []byte
- if err:=db.QueryRowContext(ctx,"SELECT canonical_hash FROM evidence_routes WHERE record_id=?",delivered.Observation.Identity[:]).Scan(&original);err!=nil{t.Fatal(err)}
- if _,err:=db.ExecContext(ctx,"UPDATE evidence_routes SET canonical_hash=zeroblob(32) WHERE record_id=?",delivered.Observation.Identity[:]);err!=nil{t.Fatal(err)}
- if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err==nil{t.Fatal("tampered addressed route was exposed as valid")}
- if _,err:=db.ExecContext(ctx,"UPDATE evidence_routes SET canonical_hash=? WHERE record_id=?",original,delivered.Observation.Identity[:]);err!=nil{t.Fatal(err)}
- if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil{t.Fatal("restored route failed:",err)}
+	ctx := context.Background()
+	c, store, ledger, cycle, fence, path := singleResourceFixture(t)
+	if _, err := c.CommitSingleResource(ctx, ledger, cycle, fence); err != nil {
+		t.Fatal(err)
+	}
+	_, _, _, _, _, run := ledger.Snapshot()
+	db, err := sql.Open("sqlite", path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer db.Close()
+	task := findTerminalRoundTask(t, ctx, db)
+	delivered, err := store.DeliverRoundPerception(ctx, task, c.bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
+	q, err := sqlite.OpenPrivilegedObservatory(ctx, path, c.bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer q.Close()
+	before := o1WholeDatabaseDigest(t, path)
+	report, err := q.ReadPrivilegedReport(ctx, [32]byte(run))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(report.Commits) != 1 {
+		t.Fatalf("expected single resource commit: %+v", report)
+	}
+	item := report.Commits[0]
+	if item.Revision.Ledger != "world_revisions" || item.Revision.Revision != 1 ||
+		item.Revision.ContentHash == ([32]byte{}) {
+		t.Fatalf("world revision lacks authenticated owner: %+v", item.Revision)
+	}
+	if len(item.Evidence) != 2 || len(item.Completions) != 1 {
+		t.Fatalf("addressed perception did not resolve full durable refs: evidence=%d completions=%d", len(item.Evidence), len(item.Completions))
+	}
+	if item.Completions[0].ID != delivered.Completion.Identity {
+		t.Fatal("wrong task-completion record was reported")
+	}
+	observed := map[[32]byte]bool{}
+	for _, ref := range item.Evidence {
+		if ref.Ledger != "evidence_ledger" || ref.ContentHash == ([32]byte{}) {
+			t.Fatal("invalid privileged evidence ref")
+		}
+		observed[ref.ID] = true
+	}
+	if !observed[delivered.Observation.Identity] || !observed[delivered.Input.Identity] {
+		t.Fatal("Observation/KnowledgeInput identities were not reported exactly")
+	}
+	if report.PendingPerceptionTasks < 1 {
+		t.Fatal("uncompleted internal task was hidden by addressed evidence")
+	}
+	if o1WholeDatabaseDigest(t, path) != before {
+		t.Fatal("evidence audit mutated authoritative data")
+	}
+	var original []byte
+	if err := db.QueryRowContext(ctx, "SELECT canonical_hash FROM evidence_routes WHERE record_id=?", delivered.Observation.Identity[:]).Scan(&original); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := db.ExecContext(ctx, "UPDATE evidence_routes SET canonical_hash=zeroblob(32) WHERE record_id=?", delivered.Observation.Identity[:]); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := q.ReadPrivilegedReport(ctx, [32]byte(run)); err == nil {
+		t.Fatal("tampered addressed route was exposed as valid")
+	}
+	if _, err := db.ExecContext(ctx, "UPDATE evidence_routes SET canonical_hash=? WHERE record_id=?", original, delivered.Observation.Identity[:]); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := q.ReadPrivilegedReport(ctx, [32]byte(run)); err != nil {
+		t.Fatal("restored route failed:", err)
+	}
 }

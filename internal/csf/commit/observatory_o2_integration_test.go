@@ -506,3 +506,81 @@ func TestCSFRV19O2AddressedEvidenceAndWorldRevisionAuthority(t *testing.T) {
 		t.Fatal("restored route failed:", err)
 	}
 }
+
+
+func TestCSFRV19O2RejectsOrphanDecisionRecord(t *testing.T) {
+	ctx := context.Background()
+	c, _, ledger, cycle, fence, path := singleResourceFixture(t)
+	if _, err := c.CommitSingleResource(ctx, ledger, cycle, fence); err != nil {
+		t.Fatal(err)
+	}
+	_, _, _, _, _, run := ledger.Snapshot()
+	observer, err := sqlite.OpenPrivilegedObservatory(ctx, path, c.bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer observer.Close()
+	if _, err := observer.ReadPrivilegedReport(ctx, [32]byte(run)); err != nil {
+		t.Fatal("baseline report:", err)
+	}
+	admin, err := sql.Open("sqlite", path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer admin.Close()
+	rows, err := admin.QueryContext(ctx, "SELECT id, canonical FROM decision_ledger ORDER BY id")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var decisionID [32]byte
+	var original []byte
+	for rows.Next() {
+		var id, raw []byte
+		if err := rows.Scan(&id, &raw); err != nil {
+			rows.Close()
+			t.Fatal(err)
+		}
+		decoded, err := codec.StrictDecodePayload(raw)
+		if err != nil {
+			rows.Close()
+			t.Fatal(err)
+		}
+		fields, ok := decoded.([]any)
+		if ok && len(fields) == 16 {
+			if len(id) != 32 {
+				rows.Close()
+				t.Fatal("decision id is not 32 bytes")
+			}
+			copy(decisionID[:], id)
+			original = bytes.Clone(raw)
+			break
+		}
+	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		t.Fatal(err)
+	}
+	if err := rows.Close(); err != nil {
+		t.Fatal(err)
+	}
+	if len(original) == 0 {
+		t.Fatal("single resource terminal fixture has no DecisionRecord")
+	}
+	// The inserted row is a recognizable DecisionRecord copied from a real
+	// committed cycle but indexed under an unreferenced SQL identity. The
+	// privileged report must reject it, not silently omit this corrupt row.
+	orphan := decisionID
+	orphan[0] ^= 0x86
+	if _, err := admin.ExecContext(ctx, "INSERT INTO decision_ledger(id, canonical) VALUES(?, ?)", orphan[:], original); err != nil {
+		t.Fatal(err)
+	}
+	if got, err := observer.ReadPrivilegedReport(ctx, [32]byte(run)); err == nil {
+		t.Fatalf("orphan DecisionRecord bypassed membership audit: %+v", got)
+	}
+	if _, err := admin.ExecContext(ctx, "DELETE FROM decision_ledger WHERE id=?", orphan[:]); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := observer.ReadPrivilegedReport(ctx, [32]byte(run)); err != nil {
+		t.Fatal("restored valid run no longer reportable:", err)
+	}
+}

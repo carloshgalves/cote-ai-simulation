@@ -11,6 +11,14 @@ type AuthorityRef struct {
 	ContentHash [32]byte
 }
 
+// RevisionAuthority points to the integer-keyed world_revisions table.
+// Revision is the actual PK; no synthetic 32-byte revision ID is invented.
+type RevisionAuthority struct {
+	Ledger      string
+	Revision    uint64
+	ContentHash [32]byte
+}
+
 // CausalCommit is a privileged, verified, immutable summary of one terminal
 // CycleCommit. It contains references and causal metadata, not actor context.
 type CausalCommit struct {
@@ -32,6 +40,9 @@ type CausalCommit struct {
 	Decisions       []AuthorityRef
 	Events          []AuthorityRef
 	Tasks           []AuthorityRef
+	Completions     []AuthorityRef
+	Evidence        []AuthorityRef
+	Revision        RevisionAuthority
 }
 
 // CausalAttempt preserves the durable fence/abort/retry chain even when the

@@ -275,6 +275,17 @@ func o2FinalizeAttempts(state observatory.RunState, attempts map[o2AttemptKey]*o
 	default:
 		return nil, errors.New("unknown privileged control status")
 	}
+	// A terminal abort is not a successful terminal completion of the run.
+	// Without an explicit retry, only HALTED_ON_ABORT at that exact
+	// cycle/attempt can retain it. A forged IDLE control is not a repair.
+	for _, a := range out {
+		if a.Abort != nil && a.Retry == nil {
+			if ctl.Status != observatory.HALTED_ON_ABORT || ctl.CycleID == nil ||
+				ctl.Attempt == nil || a.CycleID != *ctl.CycleID || a.Attempt != *ctl.Attempt {
+				return nil, errors.New("unrepaired historical abort cannot be reported as IDLE or another lifecycle")
+			}
+		}
+	}
 	// A successful committed retry may leave a historical abort/retry pair.
 	// Check each successor, never invent a second attempt automatically.
 	for _, a := range out {

@@ -12,6 +12,7 @@ import json
 import math
 import re
 from collections.abc import Mapping
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import jsonschema
@@ -170,8 +171,13 @@ def _source_log(raw: bytes, *, max_line: int, max_events: int):
         _require(type(record["seq"]) is int and record["seq"] == position,
                  "source seq not contiguous zero-based")
         _require(record["sim_time"] == Y1_START, "seed event sim_time mismatch")
-        _require(type(record["wall_time"]) is str and len(record["wall_time"]) <= 64,
-                 "wall_time invalid")
+        _require(type(record["wall_time"]) is str and len(record["wall_time"]) <= 64 and
+                 record["wall_time"].endswith("+00:00"), "wall_time invalid")
+        try:
+            utc_instant = datetime.fromisoformat(record["wall_time"])
+        except ValueError as exc:
+            raise SourceRejected("wall_time ISO instant invalid") from exc
+        _require(utc_instant.utcoffset() == timedelta(0), "wall_time must be UTC")
         _require(type(record["payload"]) is dict, "event payload invalid")
         normalized_record = dict(record, wall_time=_WALL_TIME)
         normalized.append(json.dumps(normalized_record, ensure_ascii=False, sort_keys=True))
@@ -273,8 +279,11 @@ def project_seed_source(
              "correlation sign counts invalid")
     pairs = corr["pairs"]
     _require(type(pairs) is list and len(pairs) == 5, "correlation pair count invalid")
+    from embodiment.cli import REPORTED_PAIRS
+    expected_pairs = [tuple(dim.value for dim in pair) for pair in REPORTED_PAIRS]
+    _require(len(expected_pairs) == 5, "reference correlation pair policy drift")
     seen_pairs = set()
-    for pair in pairs:
+    for offset, pair in enumerate(pairs):
         pair = _object(pair, {
             "dimensions", "expected_from_loadings", "observed", "sign_agrees",
         }, "correlation pair fields not closed")
@@ -284,6 +293,8 @@ def project_seed_source(
                  dims[0] != dims[1] and tuple(dims) not in seen_pairs,
                  "correlation pair dimension names invalid")
         seen_pairs.add(tuple(dims))
+        _require(tuple(dims) == expected_pairs[offset],
+                 "correlation pair not in the declared source ordering")
         expected = pair["expected_from_loadings"]
         observed = pair["observed"]
         agree = pair["sign_agrees"]
@@ -422,3 +433,35 @@ def project_seed_source(
 def reference_bytes(value: Mapping) -> bytes:
     """A2 stable *transport* JSON, explicitly NOT canonical CSF CBOR/digest."""
     return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"), allow_nan=False).encode("utf-8")
+
+
+def verify_prepared_evidence(
+    evidence: Mapping,
+    snapshot_bytes: bytes,
+    events_bytes: bytes,
+    *,
+    snapshot_raw_sha256: str,
+    events_raw_sha256: str,
+    snapshot_document_sha256: str,
+    normalised_log_sha256: str,
+) -> None:
+    """Reference re-verification for a possibly tampered engine-only projection.
+
+    A2 is not an authority for Go. Go must independently rederive/validate this
+    relationship, under a pinned source and runtime policy, before its own admission.
+    """
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    try:
+        jsonschema.Draft202012Validator(schema).validate(evidence)
+    except jsonschema.ValidationError as exc:
+        raise SourceRejected("prepared evidence violates closed schema") from exc
+    expected = project_seed_source(
+        snapshot_bytes,
+        events_bytes,
+        snapshot_raw_sha256=snapshot_raw_sha256,
+        events_raw_sha256=events_raw_sha256,
+        snapshot_document_sha256=snapshot_document_sha256,
+        normalised_log_sha256=normalised_log_sha256,
+    )
+    _require(reference_bytes(evidence) == reference_bytes(expected),
+             "prepared evidence does not bind to the sealed A1 source")

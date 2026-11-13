@@ -165,6 +165,7 @@ def _source_log(raw: bytes, *, max_line: int, max_events: int):
     for position, line in enumerate(lines):
         _require(0 < len(line) <= max_line, "source event line size invalid")
         record = _json_line(line)
+        _reject_non_json(record)  # rejects 1e400 -> Infinity, not just NaN literals
         _object(record, {"seq", "event", "sim_time", "wall_time", "payload"}, "event keys not closed")
         _require(type(record["seq"]) is int and record["seq"] == position,
                  "source seq not contiguous zero-based")
@@ -250,11 +251,51 @@ def project_seed_source(
 
     _require(records[-1]["event"] == "cohort.correlation_report",
              "missing terminal correlation report")
-    corr = records[-1]["payload"]
-    _require(type(corr.get("cohort_size")) is int and corr["cohort_size"] == len(ids),
+    corr = _object(records[-1]["payload"], {
+        "cohort_size", "scale", "method", "prior_version", "prior_status",
+        "pairs", "material_pairs_threshold", "material_pairs_sign_agreement", "note",
+    }, "correlation report fields not closed")
+    _require(type(corr["cohort_size"]) is int and corr["cohort_size"] == len(ids),
              "correlation report cohort mismatch")
-    _require(corr.get("prior_version") == meta["prior_version"],
+    _require(corr["prior_version"] == meta["prior_version"] and
+             corr["prior_status"] == prior.status,
              "correlation report prior mismatch")
+    _require(type(corr["scale"]) is str and type(corr["method"]) is str and
+             type(corr["note"]) is str and len(corr["note"]) > 0,
+             "correlation report descriptive fields invalid")
+    _require(type(corr["material_pairs_threshold"]) in (int, float) and
+             math.isfinite(corr["material_pairs_threshold"]) and
+             0 <= corr["material_pairs_threshold"] <= 1,
+             "correlation report threshold invalid")
+    counts = _object(corr["material_pairs_sign_agreement"], {"agree", "disagree"},
+                     "correlation report sign count keys invalid")
+    _require(all(type(value) is int and value >= 0 for value in counts.values()),
+             "correlation sign counts invalid")
+    pairs = corr["pairs"]
+    _require(type(pairs) is list and len(pairs) == 5, "correlation pair count invalid")
+    seen_pairs = set()
+    for pair in pairs:
+        pair = _object(pair, {
+            "dimensions", "expected_from_loadings", "observed", "sign_agrees",
+        }, "correlation pair fields not closed")
+        dims = pair["dimensions"]
+        _require(type(dims) is list and len(dims) == 2 and
+                 all(type(d) is str and d in {dim.value for dim in Dimension} for d in dims) and
+                 dims[0] != dims[1] and tuple(dims) not in seen_pairs,
+                 "correlation pair dimension names invalid")
+        seen_pairs.add(tuple(dims))
+        expected = pair["expected_from_loadings"]
+        observed = pair["observed"]
+        agree = pair["sign_agrees"]
+        _require(type(expected) in (int, float) and math.isfinite(expected) and
+                 -1 <= expected <= 1, "correlation expected value invalid")
+        _require(observed is None or (type(observed) in (int, float) and
+                 math.isfinite(observed) and -1 <= observed <= 1),
+                 "correlation observed value invalid")
+        _require((observed is None and agree is None) or
+                 (observed is not None and type(agree) is bool and
+                  agree == (observed * expected > 0)),
+                 "correlation sign inference invalid")
     _require(len(records) == len(ids) + 2, "unsupported history: only seed records are admissible")
 
     samples = {}

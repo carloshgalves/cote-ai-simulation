@@ -10,6 +10,7 @@ import (
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	_ "modernc.org/sqlite"
@@ -308,4 +309,31 @@ func TestCSFRV19O2ReportsPendingPerceptionTasks(t *testing.T) {
     t.Fatal("commit did not expose verified perception task refs")
   }
   if got:=o1WholeDatabaseDigest(t,path);got!=before{t.Fatal("pending-task query wrote to ledger")}
+}
+
+func TestCSFRV19O2RejectsForeignFenceAuthority(t *testing.T) {
+ ctx:=context.Background()
+ c,_,ledger,run,bundle,path:=testFixture(t)
+ result,err:=c.Advance(ctx,ledger,run)
+ if err!=nil{t.Fatal(err)}
+ q,err:=sqlite.OpenPrivilegedObservatory(ctx,path,bundle)
+ if err!=nil{t.Fatal(err)}
+ defer q.Close()
+ admin,err:=sql.Open("sqlite",path)
+ if err!=nil{t.Fatal(err)}
+ defer admin.Close()
+ decoded,err:=codec.StrictDecodePayload(result.Fence.Canonical)
+ if err!=nil{t.Fatal(err)}
+ fields:=decoded.([]any)
+ foreign:=[32]byte(run);foreign[0]^=0x86
+ fields[0]=foreign[:]
+ forged,err:=codec.CanonicalPayload(fields)
+ if err!=nil{t.Fatal(err)}
+ id:=[32]byte(result.Fence.ID);id[0]^=0x86
+ if _,err:=admin.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",id[:],forged);err!=nil{t.Fatal(err)}
+ if report,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err==nil{
+  t.Fatalf("foreign-run fence in single-world ledger was ignored: %+v",report)
+ }
+ if _,err:=admin.ExecContext(ctx,"DELETE FROM decision_ledger WHERE id=?",id[:]);err!=nil{t.Fatal(err)}
+ if _,err:=q.ReadPrivilegedReport(ctx,[32]byte(run));err!=nil{t.Fatal("valid restored report:",err)}
 }

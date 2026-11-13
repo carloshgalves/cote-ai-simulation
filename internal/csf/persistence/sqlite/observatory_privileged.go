@@ -110,13 +110,22 @@ func(q *PrivilegedReader) ReadPrivilegedReport(ctx context.Context,run [32]byte)
  if err!=nil{return empty,err}
  attempts,fences,err:=o2ReadAttempts(run,snap.decisions)
  if err!=nil{return empty,err}
+ for key,attempt:=range attempts {
+  fence:=fences[key]
+  attempt.Closures,err=q.o2Closures(ctx,run,fence.fields)
+  if err!=nil{return empty,fmt.Errorf("attempt %x/%d closure proof: %w",key.cycle,key.attempt,err)}
+  attempt.Admitted,err=q.o2Admitted(ctx,run,fence.fields)
+  if err!=nil{return empty,fmt.Errorf("attempt %x/%d admitted source: %w",key.cycle,key.attempt,err)}
+ }
  commits,err:=q.readCommits(ctx,run,snap.committed,snap.decisions,fences,attempts)
  if err!=nil{return empty,err}
  finalized,err:=o2FinalizeAttempts(state,attempts)
  if err!=nil{return empty,err}
  pending,err:=q.base.store.PendingClock(ctx,run)
  if err!=nil{return empty,fmt.Errorf("privileged pending source proof: %w",err)}
- after,err:=q.base.ReadRun(ctx,run)
+ // The initial ReadRun already performed a full causal replay. A
+ // second replay is redundant when the SQLite data_version is unchanged.
+ after,err:=q.base.loadReadRun(ctx,run)
  if err!=nil{return empty,err}
  versionNow,err:=q.base.dataVersion(ctx)
  if err!=nil{return empty,err}
@@ -234,9 +243,11 @@ func(q *PrivilegedReader) readCommits(ctx context.Context,run [32]byte,
   if !ok{return nil,fmt.Errorf("CycleCommit %x task list malformed",entry.commit)}
   for _,item:=range tasks{
    task,err:=o2Bytes(item);if err!=nil{return nil,err}
-   ref,_,err:=q.readRef(ctx,"causal_outbox",task)
+   raw,err:=q.raw(ctx,"causal_outbox",task)
    if err!=nil{return nil,fmt.Errorf("CycleCommit %x perception task: %w",entry.commit,err)}
-   c.Tasks=append(c.Tasks,ref)
+   // ReplayClock verified this outbox membership and canonical task
+   // earlier. Here we expose only the ledger ID and the opaque byte hash.
+   c.Tasks=append(c.Tasks,o2Ref("causal_outbox",task,raw))
   }
   var stateHash []byte
   if err:=q.base.store.db.QueryRowContext(ctx,"SELECT state_hash FROM world_revisions WHERE revision=?",next).Scan(&stateHash);err!=nil{return nil,err}

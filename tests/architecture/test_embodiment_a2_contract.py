@@ -20,6 +20,7 @@ from tests.architecture.embodiment_a2_reference import (
     SourceRejected,
     project_seed_source,
     reference_bytes,
+    verify_prepared_evidence,
 )
 
 HEX = lambda raw: hashlib.sha256(raw).hexdigest()
@@ -429,3 +430,62 @@ def test_no_unreviewed_correlation_fields_even_when_result_is_telemetry(tmp_path
     rec = _log_records(log)
     rec[-1]["payload"]["pairs"][0]["WorldRevision"] = 0
     _assert_rejected(snap, _relog(rec), "correlation pair fields")
+
+
+@pytest.mark.parametrize("mutation", [
+    "wrong_subject_pointer",
+    "wrong_posterior_hash",
+    "other_subject_seq",
+    "reversed_subject_list",
+    "missing_subject",
+    "forged_source_normalised_hash",
+    "extra_global_authority",
+])
+def test_schema_valid_but_unbound_prepared_evidence_is_rejected(tmp_path, mutation):
+    snap, log = _run(tmp_path)
+    expected = _project(snap, log)
+    changed = copy.deepcopy(expected)
+    a, b = changed["subjects"][:2]
+    if mutation == "wrong_subject_pointer":
+        a["source_body_pointer"] = b["source_body_pointer"]
+    elif mutation == "wrong_posterior_hash":
+        a["posterior_hash"] = "f" * 64
+    elif mutation == "other_subject_seq":
+        a["source_local_sample_seq"] = b["source_local_sample_seq"]
+    elif mutation == "reversed_subject_list":
+        changed["subjects"].reverse()
+    elif mutation == "missing_subject":
+        changed["subjects"].pop()
+    elif mutation == "forged_source_normalised_hash":
+        changed["source"]["normalised_log_sha256"] = "e" * 64
+    elif mutation == "extra_global_authority":
+        changed["WorldRevision"] = 1
+    if mutation != "extra_global_authority":
+        jsonschema.Draft202012Validator(json.loads(SCHEMA.read_text())).validate(changed)
+    with pytest.raises(SourceRejected):
+        verify_prepared_evidence(
+            changed, snap, log,
+            snapshot_raw_sha256=HEX(snap), events_raw_sha256=HEX(log),
+            **_a1_semantic_receipts(snap, log),
+        )
+
+
+@pytest.mark.parametrize("value", [
+    "not-a-timestamp",
+    "2026-01-01T00:00:00+03:00",
+    "2026-01-01T00:00:00Z",
+    "2026-01-01",
+])
+def test_wall_time_requires_original_utc_timestamp_form(tmp_path, value):
+    snap, log = _run(tmp_path)
+    records = _log_records(log)
+    records[1]["wall_time"] = value
+    _assert_rejected(snap, _relog(records), "wall_time")
+
+
+def test_correlation_pair_order_is_part_of_source_contract(tmp_path):
+    snap, log = _run(tmp_path)
+    records = _log_records(log)
+    pairs = records[-1]["payload"]["pairs"]
+    pairs[0], pairs[1] = pairs[1], pairs[0]
+    _assert_rejected(snap, _relog(records), "correlation pair")

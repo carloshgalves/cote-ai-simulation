@@ -128,3 +128,37 @@ func TestCSFRV19O4MetricsConcurrencyAndNoSecretFields(t *testing.T){
  for i:=0;i<fields.NumField();i++{name:=fields.Field(i).Name;if bytes.Contains([]byte(name),[]byte("Observation"))||bytes.Contains([]byte(name),[]byte("Knowledge"))||bytes.Contains([]byte(name),[]byte("World"))||bytes.Contains([]byte(name),[]byte("Canonical")){t.Fatal("operational payload carries causal or epistemic authority")}}
  assertCausalUntouched(t,causal)
 }
+
+
+func TestCSFRV19O4RejectsMissingCausalTargetThroughPendingLinks(t *testing.T){
+ ctx:=context.Background()
+ d:=t.TempDir()
+ causal:=filepath.Join(d,"causal-before-bootstrap.db")
+ sidecar:=filepath.Join(d,"metrics-link.db")
+ if err:=os.Symlink(causal,sidecar);err!=nil{t.Fatal(err)}
+ if _,err:=OpenRecorder(ctx,causal,sidecar);err==nil{
+  t.Fatal("dangling sidecar symlink created and targeted a future causal database")
+ }
+ if _,err:=os.Stat(causal);!os.IsNotExist(err){
+  t.Fatal("unsafe metrics open created the not-yet-existing causal database",err)
+ }
+ if err:=os.Remove(sidecar);err!=nil{t.Fatal(err)}
+ realDir:=filepath.Join(d,"real")
+ if err:=os.Mkdir(realDir,0700);err!=nil{t.Fatal(err)}
+ alias:=filepath.Join(d,"alias")
+ if err:=os.Symlink(realDir,alias);err!=nil{t.Fatal(err)}
+ causal=filepath.Join(realDir,"future.db")
+ sidecar=filepath.Join(alias,"future.db")
+ if _,err:=OpenRecorder(ctx,causal,sidecar);err==nil{
+  t.Fatal("aliased parent path permitted metrics to create a future causal DB")
+ }
+ if _,err:=os.Stat(causal);!os.IsNotExist(err){
+  t.Fatal("directory symlink created future causal file through sidecar",err)
+ }
+ // A truly distinct metrics path remains writable in the same workspace.
+ sidecar=filepath.Join(realDir,"operational.db")
+ writer,err:=OpenRecorder(ctx,causal,sidecar)
+ if err!=nil{t.Fatal("sidecar was over-restricted:",err)}
+ if err:=writer.Close();err!=nil{t.Fatal(err)}
+ if _,err:=os.Stat(causal);!os.IsNotExist(err){t.Fatal("causal file unexpectedly created")}
+}

@@ -325,12 +325,15 @@ def _policy():
 def _validate_policy(policy):
     """Reference contract guard: reject privilege/availability regressions."""
     allowed = {
-        "process": {"single_flight", "direct_exec_no_shell", "no_remote_transport"},
+        "process": {"single_flight", "direct_exec_no_shell", "no_remote_transport",
+                    "operational_failure_precedence"},
         "source_view": {
             "mode", "child_cannot_modify", "host_pins_absolute_root",
             "reject_symlinks_and_non_regular_files", "no_pre_post_hash_fallback",
             "source_paths_are_not_protocol_fields", "must_verify_raw_sha256_before_spawning",
             "fail_if_os_read_only_isolation_missing",
+            "producer_quiescence_required", "coherent_snapshot_and_eventlog_cut",
+            "fail_if_coherence_unprovable",
         },
         "io": {
             "drain_stdout_and_stderr_concurrently", "read_stdout_exactly_one_framed_message_then_eof",
@@ -355,6 +358,9 @@ def _validate_policy(policy):
     assert process["single_flight"] is True
     assert process["direct_exec_no_shell"] is True
     assert process["no_remote_transport"] is True
+    assert process["operational_failure_precedence"] == [
+        "CANCELLED", "TIMED_OUT", "STDERR_LIMIT", "FRAME_INVALID", "PROCESS_FAILURE",
+    ]
     assert source["mode"] == "immutable_host_owned_view"
     assert source["child_cannot_modify"] is True
     assert source["host_pins_absolute_root"] is True
@@ -363,6 +369,9 @@ def _validate_policy(policy):
     assert source["source_paths_are_not_protocol_fields"] is True
     assert source["must_verify_raw_sha256_before_spawning"] is True
     assert source["fail_if_os_read_only_isolation_missing"] is True
+    assert source["producer_quiescence_required"] is True
+    assert source["coherent_snapshot_and_eventlog_cut"] is True
+    assert source["fail_if_coherence_unprovable"] is True
     assert io["drain_stdout_and_stderr_concurrently"] is True
     assert io["read_stdout_exactly_one_framed_message_then_eof"] is True
     assert io["bounded_reads_before_allocating"] is True
@@ -453,3 +462,56 @@ def test_policy_rejects_added_unreviewed_fields(group):
     policy[group]["arbitrary_bypass"] = True
     with pytest.raises(AssertionError):
         _validate_policy(policy)
+
+
+def test_negative_fixtures_rejected_by_actual_frame_decoder():
+    cases = _cases()
+    for case in cases["negative"]:
+        invalid = _mutate(cases["positive"][case["base"]], case)
+        raw = json.dumps(invalid, separators=(",", ":"), allow_nan=False).encode()
+        wire = len(raw).to_bytes(4, "big") + raw
+        with pytest.raises((ValueError, jsonschema.ValidationError)):
+            _unframe(wire)
+
+
+@pytest.mark.parametrize("field", ["kind", "protocol"])
+def test_valid_envelope_with_duplicate_top_level_name_is_rejected(field):
+    request = _cases()["positive"]["request"]
+    raw = json.dumps(request, separators=(",", ":")).encode()
+    existing = f'"{field}":"{request[field]}"'.encode()
+    assert raw.count(existing) == 1
+    raw = raw.replace(existing, existing + b"," + existing)
+    with pytest.raises(ValueError, match="duplicate JSON object key"):
+        _unframe(len(raw).to_bytes(4, "big") + raw)
+
+
+def test_valid_envelope_with_nested_duplicate_name_is_rejected():
+    req = _cases()["positive"]["request"]
+    raw = json.dumps(req, separators=(",", ":")).encode()
+    existing = b'"snapshot_name":"snapshot.yaml"'
+    assert raw.count(existing) == 1
+    raw = raw.replace(existing, existing + b"," + existing)
+    with pytest.raises(ValueError, match="duplicate JSON object key"):
+        _unframe(len(raw).to_bytes(4, "big") + raw)
+
+
+@pytest.mark.parametrize("token", ["NaN", "Infinity", "-Infinity"])
+def test_valid_envelope_with_nonfinite_event_count_is_rejected(token):
+    valid = _cases()["positive"]["ok"]
+    raw = json.dumps(valid, separators=(",", ":")).encode()
+    assert b'"event_count":43' in raw
+    raw = raw.replace(b'"event_count":43', f'"event_count":{token}'.encode())
+    with pytest.raises(ValueError, match="non-finite JSON constant"):
+        _unframe(len(raw).to_bytes(4, "big") + raw)
+
+
+def test_policy_requires_a_coherent_source_cut_and_fixed_failure_precedence():
+    policy = _policy()
+    source = policy["source_view"]
+    process = policy["process"]
+    assert source["producer_quiescence_required"] is True
+    assert source["coherent_snapshot_and_eventlog_cut"] is True
+    assert source["fail_if_coherence_unprovable"] is True
+    assert process["operational_failure_precedence"] == [
+        "CANCELLED", "TIMED_OUT", "STDERR_LIMIT", "FRAME_INVALID", "PROCESS_FAILURE"
+    ]

@@ -1,0 +1,85 @@
+name: O2 privileged causal audit report
+on:
+  pull_request:
+    paths:
+      - "internal/csf/observatory/**"
+      - "internal/csf/persistence/sqlite/observatory_privileged**"
+      - "internal/csf/commit/observatory_o2_**"
+      - "internal/csf/persistence/sqlite/clock_replay.go"
+      - "internal/csf/persistence/sqlite/control_replay.go"
+      - "internal/csf/persistence/sqlite/terminal_abort.go"
+      - "internal/csf/persistence/sqlite/clock_advance.go"
+      - "internal/csf/persistence/sqlite/work_**"
+      - "internal/csf/admission/**"
+      - "internal/csf/inputledger/**"
+      - "internal/csf/policy/**"
+      - "docs/architecture/canonical-codec-v1-bundle/**"
+      - "docs/architecture/canonical-codec-v2-bundle/**"
+      - ".github/workflows/o2-observatory-privileged.yml"
+      - "go.mod"
+      - "go.sum"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Exact source HEAD
+        run: |
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          git rev-parse HEAD
+      - name: Require gofmt of the exact committed source
+        run: |
+          files=(
+            internal/csf/observatory/privileged.go
+            internal/csf/persistence/sqlite/observatory_privileged.go
+            internal/csf/persistence/sqlite/observatory_privileged_attempts.go
+            internal/csf/persistence/sqlite/observatory_privileged_diagnostics.go
+            internal/csf/persistence/sqlite/observatory_privileged_evidence.go
+            internal/csf/commit/observatory_o2_integration_test.go
+          )
+          if [ -n "$(gofmt -l "${files[@]}")" ]; then
+            echo "O2 sources are not gofmt-clean in HEAD"
+            gofmt -l "${files[@]}"
+            exit 1
+          fi
+      - name: Check exact-head diff whitespace
+        run: |
+          git fetch --no-tags --depth=1 origin main
+          git diff --check origin/main HEAD
+      - name: O2 focal real-run integration
+        run: go test -count=1 -v -timeout=12m ./internal/csf/commit -run '^TestCSFRV19O2'
+      - name: O2 race detector
+        run: go test -race -count=1 -timeout=16m ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/csf/observatory -run '^TestCSFRV19O2'
+      - name: Static analysis
+        run: go vet ./internal/csf/observatory ./internal/csf/persistence/sqlite ./internal/csf/commit
+  full-go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Exact source HEAD
+        run: |
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+      - name: Full Go regression
+        run: go test -count=1 -timeout=30m ./...

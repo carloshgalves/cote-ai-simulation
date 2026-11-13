@@ -85,7 +85,9 @@
     },
     "sha256": {
       "type": "string",
-      "pattern": "^[0-9a-f]{64}$"
+      "pattern": "^[0-9a-f]{64}$",
+      "minLength": 64,
+      "maxLength": 64
     },
     "request": {
       "type": "object",
@@ -106,7 +108,9 @@
         },
         "correlation_id": {
           "type": "string",
-          "pattern": "^[0-9a-f]{32}$"
+          "pattern": "^[0-9a-f]{32}$",
+          "minLength": 32,
+          "maxLength": 32
         },
         "operation": {
           "const": "inspect_run"
@@ -135,7 +139,9 @@
         },
         "correlation_id": {
           "type": "string",
-          "pattern": "^[0-9a-f]{32}$"
+          "pattern": "^[0-9a-f]{32}$",
+          "minLength": 32,
+          "maxLength": 32
         },
         "operation": {
           "const": "inspect_run"

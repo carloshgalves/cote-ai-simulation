@@ -20,7 +20,10 @@ from yaml.events import AliasEvent
 from yaml.tokens import AnchorToken, TagToken
 
 from embodiment.snapshot import snapshot_hash
-from embodiment.types import BodyState, CapacityProfile, DIMENSION_UNITS, Dimension, DimensionValue, Y1_START
+from embodiment.prior import PopulationPrior, POPULATION_PRIOR_PATH
+from embodiment.dynamics import initial_body_state, load_params
+from embodiment.seeding import seed_character, CohortCovariates
+from embodiment.types import BodyState, CapacityProfile, DIMENSION_UNITS, Dimension, DimensionValue, Y1_START, as_document
 
 ROOT = Path(__file__).resolve().parents[2]
 BUNDLE = ROOT / "docs" / "architecture" / "embodiment-causal-adapter-v1"
@@ -182,6 +185,8 @@ def project_seed_source(
     *,
     snapshot_raw_sha256: str,
     events_raw_sha256: str,
+    snapshot_document_sha256: str,
+    normalised_log_sha256: str,
 ) -> dict:
     """Fail closed; return a typed *evidence reference*, not an EventDraft.
 
@@ -199,18 +204,31 @@ def project_seed_source(
              "events expected SHA invalid")
     _require(_sha256(snapshot_bytes) == snapshot_raw_sha256, "snapshot raw SHA mismatch")
     _require(_sha256(events_bytes) == events_raw_sha256, "events raw SHA mismatch")
+    _require(type(snapshot_document_sha256) is str and bool(_HEX64.fullmatch(snapshot_document_sha256)),
+             "expected snapshot document digest invalid")
+    _require(type(normalised_log_sha256) is str and bool(_HEX64.fullmatch(normalised_log_sha256)),
+             "expected normalised log digest invalid")
     snapshot = _source_snapshot(snapshot_bytes)
+    _require(snapshot["snapshot_hash"] == snapshot_document_sha256,
+             "A1 snapshot document digest mismatch")
     records, normalized_hash = _source_log(
         events_bytes,
         max_line=lim["source_event_line_bytes"],
         max_events=lim["source_event_count"],
     )
 
+    _require(normalized_hash == normalised_log_sha256, "A1 normalised log digest mismatch")
     meta = _object(snapshot["run_metadata"], _META_KEYS, "run_metadata keys not closed")
     _require(meta["world_seed"] == snapshot["world_seed"], "world_seed provenance mismatch")
     for name in ("prior_version", "dynamics_version"):
         _require(type(meta[name]) is str and 0 < len(meta[name]) <= 96,
                  "missing/unbounded component version")
+    # The reference test version pins both physical parameter files as read-only
+    # sources, rather than treating self-declared run metadata as trusted proof.
+    prior = PopulationPrior.load(POPULATION_PRIOR_PATH)
+    params = load_params()
+    _require(meta["prior_version"] == prior.version, "unsupported installed prior version")
+    _require(meta["dynamics_version"] == params.model_version, "unsupported installed dynamics version")
     characters = snapshot["characters"]
     _require(type(characters) is dict and 0 < len(characters) <= 10000,
              "snapshot character count invalid")
@@ -274,6 +292,9 @@ def project_seed_source(
         _require(origin["cohort_sex"] in ("male", "female") and
                  origin["cohort_sex_source"] in ("KNOWN", "DRAWN"),
                  "covariate provenance invalid")
+        _require(type(sample["prior_content_hash"]) is str and
+                 sample["prior_content_hash"] == prior.content_hash,
+                 "prior model content hash mismatch")
         _require(sample["posterior_kind"] == "PRIOR_ZERO_EVIDENCE" and
                  type(sample["constraint_count"]) is int and sample["constraint_count"] == 0 and
                  sample["estimator_ess"] is None,
@@ -292,19 +313,35 @@ def project_seed_source(
         profile_values = {}
         for dim in Dimension:
             value = _object(dims[dim.value], {"value", "unit"}, "dimension value/unit keys invalid")
-            _require(value == sample_dims[dim.value], "sample/snapshot capacity mismatch")
             _require(type(value["unit"]) is str and value["unit"] == DIMENSION_UNITS[dim].unit,
                      "capacity dimension unit mismatch")
             _require(type(value["value"]) in (int, float) and math.isfinite(value["value"]),
                      "capacity dimension value invalid")
+            _require(value == sample_dims[dim.value], "sample/snapshot capacity mismatch")
             profile_values[dim] = DimensionValue(value=float(value["value"]), unit=value["unit"])
-        CapacityProfile(dimensions=profile_values)  # read-only validation; never writes sample
+        profile = CapacityProfile(dimensions=profile_values)  # read-side shape validation
+        # A seed sample is a deterministic physical draw; verifying that the
+        # installed prior and substream reproduce it catches self-signed edits.
+        covariates = (CohortCovariates(sex=origin["cohort_sex"])
+                      if origin["cohort_sex_source"] == "KNOWN" else None)
+        reference_seed = seed_character(snapshot["world_seed"], subject, prior,
+                                        covariates=covariates, store=None, log=None)
+        _require(reference_seed.posterior_hash == hashes[subject] and
+                 reference_seed.substream == origin["substream"] and
+                 reference_seed.cohort_sex == origin["cohort_sex"] and
+                 reference_seed.cohort_sex_source == origin["cohort_sex_source"],
+                 "deterministic seed provenance mismatch")
+        for dim in Dimension:
+            _require(profile.value(dim) == reference_seed.profile.value(dim),
+                     "seed capacity cannot be reproduced from pinned model")
 
         body = _object(section["body_state"], _BODY_KEYS, "body_state keys not closed")
         _require(body["character_id"] == subject and type(body["t_hours"]) in (float, int) and
                  body["t_hours"] == 0, "seed body id/time invalid")
         _require(body["illnesses"] == [], "PSV1-2 cannot write illness")
-        BodyState.model_validate(body)  # read-side only; do not construct a new baseline
+        BodyState.model_validate(body)  # read-side validation
+        expected_body = as_document(initial_body_state(subject, profile, params=params))
+        _require(body == expected_body, "seed body cannot be reproduced from pinned dynamics")
         subjects.append({
             "subject_id": subject,
             "engine_only": True,

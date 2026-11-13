@@ -191,6 +191,9 @@ def test_signed_snapshot_mutations_fail_closed(tmp_path, mutation):
     "duplicated_sample", "bad_correlation", "bad_prior",
     "advanced_history", "additional_run_started",
     "nonzero_evidence", "invented_ess", "missing_terminal",
+    "correlation_unknown_field", "correlation_nested_unknown",
+    "correlation_duplicate_pair", "correlation_invalid_sign",
+    "correlation_wrong_status", "correlation_bad_threshold",
 ])
 def test_jsonl_mutations_fail_closed(tmp_path, mutation):
     snap, log = _run(tmp_path)
@@ -237,6 +240,18 @@ def test_jsonl_mutations_fail_closed(tmp_path, mutation):
         rec[1]["payload"]["estimator_ess"] = 42
     elif mutation == "missing_terminal":
         rec.pop()
+    elif mutation == "correlation_unknown_field":
+        rec[-1]["payload"]["WorldRevision"] = 9
+    elif mutation == "correlation_nested_unknown":
+        rec[-1]["payload"]["pairs"][0]["EventOrderKey"] = "forged"
+    elif mutation == "correlation_duplicate_pair":
+        rec[-1]["payload"]["pairs"][1] = copy.deepcopy(rec[-1]["payload"]["pairs"][0])
+    elif mutation == "correlation_invalid_sign":
+        rec[-1]["payload"]["pairs"][0]["sign_agrees"] = 123
+    elif mutation == "correlation_wrong_status":
+        rec[-1]["payload"]["prior_status"] = "CALIBRATED"
+    elif mutation == "correlation_bad_threshold":
+        rec[-1]["payload"]["material_pairs_threshold"] = -10
     _assert_rejected(snap, _relog(rec))
 
 
@@ -400,3 +415,17 @@ def test_self_consistent_manipulated_seed_cannot_bypass_pinned_models(tmp_path, 
         meta["dynamics_version"] = "99.0"
         records[0]["payload"]["run_metadata"] = copy.deepcopy(meta)
     _assert_rejected(_signed_yaml(doc), _relog(records))
+
+
+def test_jsonl_exponent_overflow_is_not_accepted_as_infinite_statistic(tmp_path):
+    snap, log = _run(tmp_path)
+    assert b'"cohort_size": 3' in log
+    corrupted = log.replace(b'"cohort_size": 3', b'"cohort_size": 1e400')
+    _assert_rejected(snap, corrupted, "non-finite")
+
+
+def test_no_unreviewed_correlation_fields_even_when_result_is_telemetry(tmp_path):
+    snap, log = _run(tmp_path)
+    rec = _log_records(log)
+    rec[-1]["payload"]["pairs"][0]["WorldRevision"] = 0
+    _assert_rejected(snap, _relog(rec), "correlation pair fields")

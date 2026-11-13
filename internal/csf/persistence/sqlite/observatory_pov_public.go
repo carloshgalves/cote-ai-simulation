@@ -17,10 +17,10 @@ import (
 // causal cutoff are fixed by a persisted SlotDispatch; they cannot be replaced
 // by a caller at read time. Its SQL connection remains SQLite mode=ro.
 type POVReader struct {
-	base *ObservatoryReader
-	inbox *ActorInbox
-	run [32]byte
-	actor [2]string
+	base    *ObservatoryReader
+	inbox   *ActorInbox
+	run     [32]byte
+	actor   [2]string
 	through uint64
 }
 
@@ -112,12 +112,12 @@ func (q *POVReader) ReadPOV(ctx context.Context) (observatory.POVView, error) {
 			return zero, errors.New("POV evidence has an unregistered channel")
 		}
 		out.Entries = append(out.Entries, observatory.AddressedEvidence{
-			ObservationID: entry.Observation.Identity,
-			KnowledgeInputID: entry.Input.Identity,
+			ObservationID:        entry.Observation.Identity,
+			KnowledgeInputID:     entry.Input.Identity,
 			ObservationCanonical: bytes.Clone(entry.Observation.Canonical),
-			KnowledgeCanonical: bytes.Clone(entry.Input.Canonical),
-			ReceivedAt: entry.ReceivedAt,
-			Channel: channel,
+			KnowledgeCanonical:   bytes.Clone(entry.Input.Canonical),
+			ReceivedAt:           entry.ReceivedAt,
+			Channel:              channel,
 		})
 	}
 	// O1 already establishes immutable replay proof for the first snapshot.
@@ -198,8 +198,8 @@ func (q *PublicReader) ReadPublic(ctx context.Context, run [32]byte) (observator
 		return zero, errors.New("public source changed during verified query")
 	}
 	return observatory.PublicView{
-		Run: run,
+		Run:               run,
 		PublicationStatus: observatory.NoPublicRoute,
-		Publications: make([]observatory.PublicPublication, 0),
+		Publications:      make([]observatory.PublicPublication, 0),
 	}, nil
 }

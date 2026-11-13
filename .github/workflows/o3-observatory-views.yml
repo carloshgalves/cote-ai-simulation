@@ -43,12 +43,42 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
           git rev-parse HEAD
-      - name: Format TDD test and emit exact reproducible bytes (temporary RED checkpoint)
+      - name: Format O3 sources and emit exact bytes for commit checkpoint
         run: |
-          gofmt -w internal/csf/commit/observatory_o3_integration_test.go
-          echo O3_TEST_GOFMT_BEGIN
-          base64 -w0 internal/csf/commit/observatory_o3_integration_test.go
-          echo
-          echo O3_TEST_GOFMT_END
-      - name: O3 RED then GREEN, exact-head test
+          files=(
+            internal/csf/observatory/views.go
+            internal/csf/persistence/sqlite/observatory_pov_public.go
+            internal/csf/commit/observatory_o3_integration_test.go
+          )
+          keys=(O3_API O3_ADAPTER O3_TESTS)
+          gofmt -w "${files[@]}"
+          for i in "${!files[@]}"; do
+            echo "${keys[i]}_GOFMT_BEGIN"
+            base64 -w0 "${files[i]}"
+            echo
+            echo "${keys[i]}_GOFMT_END"
+          done
+      - name: O3 focal actor/public authority and negative tests
         run: go test -count=1 -v -timeout=12m ./internal/csf/commit -run '^TestCSFRV19O3'
+      - name: Regressed knowledge boundary tests (claim authenticity and temporal holder gates)
+        run: go test -count=1 -timeout=12m ./internal/csf/commit ./internal/csf/contextboundary ./internal/csf/persistence/sqlite -run '^TestCSFRV(16|17)'
+      - name: O3 race detector on affected packages
+        run: go test -race -count=1 -timeout=18m ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/csf/observatory ./internal/csf/contextboundary -run '^TestCSFRV19O3'
+      - name: Vet affected Go modules
+        run: go vet ./internal/csf/observatory ./internal/csf/persistence/sqlite ./internal/csf/commit ./internal/csf/contextboundary
+  full-go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Exact source HEAD
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+      - name: Complete fresh Go regression
+        run: go test -count=1 -timeout=30m ./...

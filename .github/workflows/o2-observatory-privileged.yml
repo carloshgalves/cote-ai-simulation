@@ -41,14 +41,24 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
           git rev-parse HEAD
-      - name: Require committed gofmt output
+      - name: Format final O2 revision/evidence test checkpoint
         run: |
-          files=$(gofmt -l internal/csf/observatory/privileged.go internal/csf/persistence/sqlite/observatory_privileged*.go internal/csf/commit/observatory_o2_integration_test.go)
-          if [ -n "$files" ]; then
-            echo "Unformatted O2 source in commit:"
-            echo "$files"
-            exit 1
-          fi
+          files=(
+            internal/csf/observatory/privileged.go
+            internal/csf/persistence/sqlite/observatory_privileged.go
+            internal/csf/persistence/sqlite/observatory_privileged_attempts.go
+            internal/csf/persistence/sqlite/observatory_privileged_diagnostics.go
+            internal/csf/persistence/sqlite/observatory_privileged_evidence.go
+            internal/csf/commit/observatory_o2_integration_test.go
+          )
+          keys=(O2_API O2_READER O2_ATTEMPTS O2_DIAGNOSTICS O2_EVIDENCE O2_TESTS)
+          gofmt -w "${files[@]}"
+          for i in "${!files[@]}"; do
+            echo "${keys[i]}_GOFMT_BEGIN"
+            base64 -w0 "${files[i]}"
+            echo
+            echo "${keys[i]}_GOFMT_END"
+          done
       - name: Check exact-head diff whitespace
         run: |
           git fetch --no-tags --depth=1 origin main

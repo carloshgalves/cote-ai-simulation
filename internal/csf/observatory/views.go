@@ -36,13 +36,23 @@ type POVQueries interface {
 // publication authority. Event.confidentiality=PUBLIC is not a publication.
 const NoPublicRoute = "NO_REGISTERED_PUBLIC_ROUTE"
 
+// PublicPublication deliberately cannot carry actor-private Observation or
+// KnowledgeInput bodies. A future public source must prove a publication ID,
+// authorized channel, publication time and public content digest separately.
+type PublicPublication struct {
+	PublicationID [32]byte
+	Channel       string
+	PublishedAt   int64
+	ContentHash   [32]byte
+}
+
 // PublicView does not contain implicit public EventStore data. A later
 // explicitly authorized public publication system must extend this contract
 // together with its independent source and tests; until then it fails closed.
 type PublicView struct {
 	Run               [32]byte
 	PublicationStatus string
-	Publications      []AddressedEvidence
+	Publications      []PublicPublication
 }
 
 type PublicQueries interface {

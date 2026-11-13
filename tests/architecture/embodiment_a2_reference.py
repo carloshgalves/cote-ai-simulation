@@ -170,6 +170,8 @@ def _source_log(raw: bytes, *, max_line: int, max_events: int):
         _object(record, {"seq", "event", "sim_time", "wall_time", "payload"}, "event keys not closed")
         _require(type(record["seq"]) is int and record["seq"] == position,
                  "source seq not contiguous zero-based")
+        _require(record["event"] in {"run.started", "capacity.sampled", "cohort.correlation_report"},
+                 "unsupported history: physical event kind not yet admitted")
         _require(record["sim_time"] == Y1_START, "seed event sim_time mismatch")
         _require(type(record["wall_time"]) is str and len(record["wall_time"]) <= 64 and
                  record["wall_time"].endswith("+00:00"), "wall_time invalid")

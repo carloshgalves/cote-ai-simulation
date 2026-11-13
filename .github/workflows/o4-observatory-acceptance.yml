@@ -84,17 +84,16 @@ jobs:
           cache: true
       - name: Verify exact PR source HEAD
         run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
-      - name: Checkpoint gofmt output for commit finalization
+      - name: Check exact committed gofmt and source whitespace
         run: |
           files=(internal/csf/operationalmetrics/metrics.go internal/csf/operationalmetrics/metrics_test.go internal/csf/commit/observatory_o4_acceptance_test.go)
-          keys=(O4_CODE O4_METRIC_TEST O4_INTEGRATION)
-          gofmt -w "${files[@]}"
-          for i in "${!files[@]}"; do
-            echo "${keys[i]}_GOFMT_BEGIN"
-            base64 -w0 "${files[i]}"
-            echo
-            echo "${keys[i]}_GOFMT_END"
-          done
+          dirty=$(gofmt -l "${files[@]}")
+          if [ -n "$dirty" ]; then
+            printf 'O4 HEAD contains unformatted Go files:\n%s\n' "$dirty"
+            exit 1
+          fi
+          git fetch --no-tags --depth=1 origin main
+          git diff --check origin/main HEAD
       - name: O4 focused metrics and integrated scenario tests
         run: go test -count=1 -v -timeout=14m ./internal/csf/operationalmetrics ./internal/csf/commit -run '^TestCSFRV19O4'
       - name: O1-O3 Observatory regression in same branch

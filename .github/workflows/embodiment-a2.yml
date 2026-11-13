@@ -1,0 +1,43 @@
+# Focused A2 regression. Does not certify CSFRV1-10, A3 disclosure or release.
+name: Embodiment A2 seed-evidence contract
+
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "docs/architecture/embodiment-causal-adapter-v1/schemas/seed-evidence-v1.schema.json"
+      - "docs/architecture/embodiment-causal-adapter-v1/seed-evidence-registry-proposal-v1.json"
+      - "docs/architecture/embodiment-causal-adapter-v1/physical-evidence-a2.md"
+      - "tests/architecture/embodiment_a2_reference.py"
+      - "tests/architecture/test_embodiment_a2_contract.py"
+      - ".github/workflows/embodiment-a2.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: embodiment-a2-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Install physical validation dependencies
+        run: python -m pip install --disable-pip-version-check --no-input -e '.[dev]'
+      - name: Record tested PR revision and environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          echo "PR HEAD: ${{ github.event.pull_request.head.sha }}"
+          python --version
+      - name: Run A2 reference projection and adversarial contracts
+        run: python -m pytest -q tests/architecture/test_embodiment_a2_contract.py

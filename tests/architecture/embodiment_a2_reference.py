@@ -229,7 +229,8 @@ def project_seed_source(
 
     _require(normalized_hash == normalised_log_sha256, "A1 normalised log digest mismatch")
     meta = _object(snapshot["run_metadata"], _META_KEYS, "run_metadata keys not closed")
-    _require(meta["world_seed"] == snapshot["world_seed"], "world_seed provenance mismatch")
+    _require(type(meta["world_seed"]) is int and
+             meta["world_seed"] == snapshot["world_seed"], "world_seed provenance mismatch")
     for name in ("prior_version", "dynamics_version"):
         _require(type(meta[name]) is str and 0 < len(meta[name]) <= 96,
                  "missing/unbounded component version")
@@ -370,11 +371,15 @@ def project_seed_source(
             value = _object(dims[dim.value], {"value", "unit"}, "dimension value/unit keys invalid")
             _require(type(value["unit"]) is str and value["unit"] == DIMENSION_UNITS[dim].unit,
                      "capacity dimension unit mismatch")
-            _require(type(value["value"]) in (int, float) and math.isfinite(value["value"]),
-                     "capacity dimension value invalid")
+            _require(type(value["value"]) in (int, float), "capacity dimension value invalid")
+            try:
+                numeric_value = float(value["value"])
+            except (OverflowError, ValueError) as exc:
+                raise SourceRejected("capacity dimension value overflow") from exc
+            _require(math.isfinite(numeric_value), "capacity dimension value invalid")
             _require(value == sample_dims[dim.value], "sample/snapshot capacity mismatch")
             try:
-                profile_values[dim] = DimensionValue(value=float(value["value"]), unit=value["unit"])
+                profile_values[dim] = DimensionValue(value=numeric_value, unit=value["unit"])
             except ValueError as exc:
                 raise SourceRejected("invalid physical dimension value") from exc
         try:

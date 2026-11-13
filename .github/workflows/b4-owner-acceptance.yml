@@ -1,0 +1,117 @@
+# B4 is a local-demo evidence gate, not product/LLM release authorization.
+name: B4 integrated cognitive owner acceptance
+on:
+  pull_request:
+    paths:
+      - "internal/csf/ownercheckpoint/**"
+      - "internal/csf/commit/owner58_**"
+      - "internal/csf/persistence/sqlite/**"
+      - "docs/validation/cognitive-owner-b4-**"
+      - ".github/workflows/b4-owner-acceptance.yml"
+      - "go.mod"
+      - "go.sum"
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  owner-integration:
+    name: S0 + B1/B2/B3 owner and host
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Record exact tested commit and toolchain
+        run: |
+          git rev-parse HEAD
+          go version
+      - name: Nonmutating format gate
+        run: |
+          files=$(gofmt -l internal/csf/ownercheckpoint/gate.go internal/csf/ownercheckpoint/localowner/*.go internal/csf/ownercheckpoint/localdemo/*.go internal/csf/commit/owner58_*.go)
+          if [ -n "$files" ]; then
+            echo "Unformatted cognitive owner source:"
+            echo "$files"
+            exit 1
+          fi
+      - name: Check diff whitespace
+        run: |
+          git fetch --no-tags --depth=1 origin main
+          git diff --check origin/main HEAD
+      - name: Owner interface and local SQLite tests
+        run: go test -count=1 ./internal/csf/ownercheckpoint/...
+      - name: S0 and B2/B3 real-CSF integrations
+        run: go test -count=1 -timeout=15m ./internal/csf/commit -run '^TestCSFRV18R58(S0|B[23])'
+      - name: Owner race suite
+        run: go test -race -count=1 -timeout=15m ./internal/csf/ownercheckpoint/...
+      - name: S0 and B2/B3 concurrency and fork race
+        run: go test -race -count=1 -timeout=18m ./internal/csf/commit -run '^TestCSFRV18R58(S0|B[23])'
+      - name: Static analysis of changed cognitive seams
+        run: go vet ./internal/csf/ownercheckpoint/... ./internal/csf/commit/...
+  full-go:
+    name: Complete fresh Go regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Complete uncached Go suite
+        run: go test -count=1 -timeout=30m ./...
+  v1-v2-continuity:
+    name: Exact-head causal V1/V2 fork and replay
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Fork negative vectors
+        run: go test -count=1 ./internal/csf/fork/...
+      - name: Full CSFRV18 continuity with race detector
+        run: go test -race -count=1 -timeout=30m ./internal/csf/commit -run '^TestCSFRV18'
+  canonical-contract:
+    name: Independent Go and TypeScript 621-case canonical conformance
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Go independent canonical implementation
+        run: go run ./cmd/csf-harness --bundle docs/architecture/canonical-codec-v1-bundle --report /tmp/b4-csf-go.json
+      - name: TypeScript independent canonical implementation
+        run: node --no-warnings --experimental-loader ./tools/csf-conformance-ts/loader.mjs tools/csf-conformance-ts/runner.ts docs/architecture/canonical-codec-v1-bundle /tmp/b4-csf-ts.json
+      - name: Exact report equivalence (621 V1 fixtures)
+        run: |
+          cmp /tmp/b4-csf-go.json /tmp/b4-csf-ts.json
+          sha256sum /tmp/b4-csf-go.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: b4-canonical-${{ github.sha }}
+          path: |
+            /tmp/b4-csf-go.json
+            /tmp/b4-csf-ts.json
+          if-no-files-found: ignore

@@ -269,7 +269,7 @@ func (q *PrivilegedReader) ReadPrivilegedReport(ctx context.Context, run [32]byt
 func (q *PrivilegedReader) raw(ctx context.Context, table string, id [32]byte) ([]byte, error) {
 	// The caller must select a table exclusively from this closed set.
 	switch table {
-	case "input_ledger", "event_store", "causal_outbox", "scheduled_occurrences", "trigger_activations":
+	case "input_ledger", "event_store", "causal_outbox", "scheduled_occurrences", "trigger_activations", "evidence_ledger":
 	default:
 		return nil, fmt.Errorf("unapproved Observatory authority table %q", table)
 	}
@@ -456,12 +456,13 @@ func (q *PrivilegedReader) readCommits(ctx context.Context, run [32]byte,
 			// earlier. Here we expose only the ledger ID and the opaque byte hash.
 			c.Tasks = append(c.Tasks, o2Ref("causal_outbox", task, raw))
 		}
-		var stateHash []byte
-		if err := q.base.store.db.QueryRowContext(ctx, "SELECT state_hash FROM world_revisions WHERE revision=?", next).Scan(&stateHash); err != nil {
-			return nil, err
+		c.Revision, err = q.o2RevisionAuthority(ctx, next, rh)
+		if err != nil {
+			return nil, fmt.Errorf("CycleCommit %x world revision: %w", entry.commit, err)
 		}
-		if !bytes.Equal(stateHash, rh[:]) {
-			return nil, fmt.Errorf("CycleCommit %x world revision hash differs", entry.commit)
+		c.Completions, c.Evidence, err = q.o2TaskEvidence(ctx, run, c.Tasks)
+		if err != nil {
+			return nil, fmt.Errorf("CycleCommit %x addressed evidence: %w", entry.commit, err)
 		}
 		if a := attempts[k]; a != nil {
 			if a.Commit != nil || a.Abort != nil {

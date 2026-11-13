@@ -1,0 +1,40 @@
+name: B3 cognitive owner process crash and fork evidence
+on:
+  pull_request:
+    paths:
+      - "internal/csf/commit/owner58_b3_**"
+      - "internal/csf/commit/fork_after_recovery_v2.go"
+      - "internal/csf/persistence/sqlite/fork_**"
+      - "internal/csf/persistence/sqlite/snapshot_v1.go"
+      - "internal/csf/persistence/sqlite/epistemic_owner_receipt_v1.go"
+      - "internal/csf/ownercheckpoint/**"
+      - ".github/workflows/b3-cognitive-owner-fault-matrix.yml"
+      - "go.mod"
+      - "go.sum"
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  crash:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Require committed gofmt output
+        run: |
+          files=$(gofmt -l internal/csf/commit/owner58_b3_process_test.go internal/csf/commit/owner58_b3_fork_test.go internal/csf/commit/owner58_b3_forkcrash_test.go)
+          if [ -n "$files" ]; then
+            echo "Unformatted B3 source:"
+            echo "$files"
+            exit 1
+          fi
+      - name: B3 independent-process crash and fork integration
+        run: go test -count=1 -v -timeout=12m ./internal/csf/commit -run '^TestCSFRV18R58B3'
+      - name: B3 race and concurrency
+        run: go test -race -count=1 -timeout=14m ./internal/csf/commit -run '^TestCSFRV18R58B3'

@@ -75,6 +75,24 @@ func sidecarPath(causal,sidecar string)(string,error){
  a,err:=filepath.Abs(causal);if err!=nil{return "",err}
  b,err:=filepath.Abs(sidecar);if err!=nil{return "",err}
  if a==b{return "",errors.New("operational database must not alias causal database")}
+ // Reject sidecar symlinks even when their targets are not yet created.
+ // os.Stat(dangling) looks like ENOENT; opening it with mode=rwc could
+ // otherwise CREATE the causal database at that target before our second
+ // alias check has a chance to run.
+ link,linkErr:=os.Lstat(b)
+ if linkErr!=nil&&!errors.Is(linkErr,os.ErrNotExist){return "",linkErr}
+ if linkErr==nil&&link.Mode()&os.ModeSymlink!=0{
+  return "",errors.New("operational sidecar must not be a symbolic link")
+ }
+ // Check both canonical parent directories *before* opening either file.
+ // A directory symlink can make distinct absent textual paths aliases.
+ parentA,err:=filepath.EvalSymlinks(filepath.Dir(a))
+ if err!=nil{return "",fmt.Errorf("causal parent not accessible: %w",err)}
+ parentB,err:=filepath.EvalSymlinks(filepath.Dir(b))
+ if err!=nil{return "",fmt.Errorf("operational parent not accessible: %w",err)}
+ if filepath.Join(parentA,filepath.Base(a))==filepath.Join(parentB,filepath.Base(b)){
+  return "",errors.New("operational file resolves to the future causal path")
+ }
  statA,errA:=os.Stat(a)
  if errA!=nil && !errors.Is(errA,os.ErrNotExist){return "",errA}
  statB,errB:=os.Stat(b)

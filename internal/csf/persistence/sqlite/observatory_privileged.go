@@ -160,8 +160,47 @@ func o2VerifyCommitRoster(run [32]byte, snapshot o2Snapshot) error {
 		}
 		indexed[entry.commit] = entry
 	}
+	// Every terminal DecisionRecord must be reachable from exactly one
+	// authoritative CycleCommit. Replay validates each referenced decision;
+	// this global roster additionally detects valid-looking orphan ledger rows.
+	decisions := make(map[[32]byte]bool)
+	for _, entry := range snapshot.committed {
+		record, ok := snapshot.decisions[entry.commit]
+		if !ok || len(record.fields) != 24 {
+			return fmt.Errorf("indexed CycleCommit %x is absent or malformed", entry.commit)
+		}
+		refs, ok := record.fields[16].([]any)
+		if !ok {
+			return fmt.Errorf("CycleCommit %x has malformed decision roster", entry.commit)
+		}
+		for _, rawID := range refs {
+			id, err := o2Bytes(rawID)
+			if err != nil {
+				return fmt.Errorf("CycleCommit %x decision ID: %w", entry.commit, err)
+			}
+			if decisions[id] {
+				return fmt.Errorf("DecisionRecord %x referenced by multiple CycleCommits", id)
+			}
+			decisions[id] = true
+		}
+	}
 	for id, record := range snapshot.decisions {
 		fields := record.fields
+		if len(fields) == 16 && o2IsID(fields[0]) && o2IsID(fields[1]) &&
+			o2IsID(fields[2]) && o2IsID(fields[15]) {
+			if !equalBytes(fields[0], id[:]) || !equalBytes(fields[1], run[:]) {
+				return fmt.Errorf("DecisionRecord %x has forged SQL identity or foreign run", id)
+			}
+			if !decisions[id] {
+				return fmt.Errorf("orphan DecisionRecord %x outside every CycleCommit", id)
+			}
+			digest, err := registeredDigest("cote.csf.digest.decision-record",
+				"cote.csf.schema.decision-record.body", fields[:15])
+			if err != nil || !equalBytes(fields[15], digest[:]) {
+				return fmt.Errorf("DecisionRecord %x canonical digest invalid", id)
+			}
+			continue
+		}
 		if len(fields) != 24 {
 			continue
 		}
@@ -186,6 +225,14 @@ func o2VerifyCommitRoster(run [32]byte, snapshot o2Snapshot) error {
 			[]any{run[:], cycle[:], attempt})
 		if err != nil || [32]byte(expected) != id {
 			return fmt.Errorf("CycleCommit %x canonical identity does not match indexed authority", id)
+		}
+	}
+	// The reverse direction is equally mandatory: missing or malformed
+	// referenced decisions cannot silently disappear from a report.
+	for id := range decisions {
+		record, ok := snapshot.decisions[id]
+		if !ok || len(record.fields) != 16 {
+			return fmt.Errorf("CycleCommit references absent DecisionRecord %x", id)
 		}
 	}
 	return nil

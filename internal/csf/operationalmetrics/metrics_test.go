@@ -4,6 +4,11 @@ import (
  "bytes"
  "context"
  "database/sql"
+ "encoding/json"
+ "go/parser"
+ "go/token"
+ "strings"
+ "strconv"
  "os"
  "path/filepath"
  "reflect"
@@ -93,6 +98,8 @@ func TestCSFRV19O4RejectsCorruptAndNoncausalPayloads(t *testing.T){
  writer,err:=OpenRecorder(ctx,causal,sidecar);if err!=nil{t.Fatal(err)}
  s:=metricSample(3,1700000000)
  if err:=writer.Record(ctx,s);err!=nil{t.Fatal(err)}
+ second:=metricSample(9,1700000001)
+ if err:=writer.Record(ctx,second);err!=nil{t.Fatal(err)}
  invalid:=s
  invalid.ID[0]++;invalid.DurationNanos=-1
  if err:=writer.Record(ctx,invalid);err==nil{t.Fatal("negative operational duration accepted")}
@@ -104,9 +111,15 @@ func TestCSFRV19O4RejectsCorruptAndNoncausalPayloads(t *testing.T){
  q,err:=OpenReader(ctx,causal,sidecar);if err!=nil{t.Fatal(err)}
  defer q.Close()
  db,err:=sql.Open("sqlite",sidecar);if err!=nil{t.Fatal(err)};defer db.Close()
- if _,err:=db.Exec("UPDATE operational_samples SET body=? WHERE id=?",[]byte("{\"unknown\":true}"),s.ID[:]);err!=nil{t.Fatal(err)}
- if rows,err:=q.Read(ctx,s.Run,10);err==nil{t.Fatalf("unknown operational payload accepted %+v",rows)}
- // Fail-closed must not leak partial output from earlier valid rows.
+ if _,err:=db.Exec("UPDATE operational_samples SET body=? WHERE id=?",[]byte("{\"unknown\":true}"),second.ID[:]);err!=nil{t.Fatal(err)}
+ if rows,err:=q.Read(ctx,s.Run,10);err==nil||len(rows)!=0{
+  t.Fatalf("partial operational report exposed after later corruption: %v %+v",err,rows)
+ }
+ // Restoration is read-only and deterministic, without touching the causal DB.
+ raw,err:=json.Marshal(second);if err!=nil{t.Fatal(err)}
+ if _,err:=db.Exec("UPDATE operational_samples SET body=? WHERE id=?",raw,second.ID[:]);err!=nil{t.Fatal(err)}
+ valid,err:=q.Read(ctx,s.Run,10)
+ if err!=nil||!reflect.DeepEqual(valid,[]Sample{s,second}){t.Fatal("restored sidecar rejected:",err,valid)}
  assertCausalUntouched(t,causal)
 }
 
@@ -161,4 +174,22 @@ func TestCSFRV19O4RejectsMissingCausalTargetThroughPendingLinks(t *testing.T){
  if err!=nil{t.Fatal("sidecar was over-restricted:",err)}
  if err:=writer.Close();err!=nil{t.Fatal(err)}
  if _,err:=os.Stat(causal);!os.IsNotExist(err){t.Fatal("causal file unexpectedly created")}
+}
+
+
+func TestCSFRV19O4MetricsArchitectureHasNoCausalWritePortDependency(t *testing.T){
+ f,err:=parser.ParseFile(token.NewFileSet(),"metrics.go",nil,parser.ImportsOnly)
+ if err!=nil{t.Fatal(err)}
+ for _,imp:=range f.Imports{
+  imported,err:=strconv.Unquote(imp.Path.Value);if err!=nil{t.Fatal(err)}
+  if strings.Contains(imported,"/csf/")||strings.Contains(imported,"/persistence/")||
+   strings.Contains(imported,"/commit/")||strings.Contains(imported,"/contextboundary/")||
+   strings.Contains(imported,"/observatory/"){
+   t.Fatalf("operational metric source gained a forbidden causal or actor import: %s",imported)
+  }
+ }
+ reader:=reflect.TypeOf(&Reader{})
+ if reader.NumMethod()!=2||reader.Method(0).Name!="Close"||reader.Method(1).Name!="Read"{
+  t.Fatalf("operational metrics reader exports a write capability: %v",reader)
+ }
 }

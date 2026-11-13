@@ -33,9 +33,30 @@ def _run(tmp_path, n=3):
     return snap, log
 
 
+def _a1_semantic_receipts(snap, log):
+    """Reference receipt generator for tests, not an authenticating A1 process."""
+    try:
+        doc = yaml.safe_load(snap)
+        doc_sha = doc.get("snapshot_hash", "0" * 64) if isinstance(doc, dict) else "0" * 64
+    except (yaml.YAMLError, UnicodeDecodeError):
+        doc_sha = "0" * 64
+    try:
+        lines = []
+        for line in log.decode("utf-8").splitlines():
+            item = json.loads(line)
+            item["wall_time"] = "1970-01-01T00:00:00+00:00"
+            lines.append(json.dumps(item, ensure_ascii=False, sort_keys=True))
+        log_sha = HEX(("\n".join(lines) + "\n").encode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError, TypeError, AttributeError):
+        log_sha = "0" * 64
+    return {"snapshot_document_sha256": doc_sha,
+            "normalised_log_sha256": log_sha}
+
+
 def _project(snap, log):
     return project_seed_source(
-        snap, log, snapshot_raw_sha256=HEX(snap), events_raw_sha256=HEX(log)
+        snap, log, snapshot_raw_sha256=HEX(snap), events_raw_sha256=HEX(log),
+        **_a1_semantic_receipts(snap, log)
     )
 
 
@@ -111,7 +132,7 @@ def test_mismatched_a1_sealed_raw_source_hash_fails(tmp_path, which):
     args = {"snapshot_raw_sha256": HEX(snap), "events_raw_sha256": HEX(log)}
     args["snapshot_raw_sha256" if which == "snapshot" else "events_raw_sha256"] = "f" * 64
     with pytest.raises(SourceRejected, match="raw SHA mismatch"):
-        project_seed_source(snap, log, **args)
+        project_seed_source(snap, log, **args, **_a1_semantic_receipts(snap, log))
 
 
 @pytest.mark.parametrize("mutation", [
@@ -300,8 +321,22 @@ def test_schema_has_no_open_top_level_or_subject_writes():
     assert set(schema["properties"]) == {
         "kind", "schema_version", "authority", "admission", "source", "subjects"
     }
-    for forbidden in ("WorldRevision", "LogicalSequence", "SimulationInstant", "EventOrderKey"):
-        assert forbidden not in json.dumps(schema)
+    def prop_names(node):
+        if isinstance(node, dict):
+            names = set(node.get("properties", {}))
+            for child in node.values():
+                names |= prop_names(child)
+            return names
+        if isinstance(node, list):
+            names = set()
+            for child in node:
+                names |= prop_names(child)
+            return names
+        return set()
+
+    forbidden = {"WorldRevision", "LogicalSequence", "SimulationInstant", "EventOrderKey",
+                 "CycleCommit", "producer_unit_key", "event_id", "candidate_id"}
+    assert prop_names(schema).isdisjoint(forbidden)
 
 
 def test_false_duplicate_key_guard_mutant_is_killed(tmp_path):
@@ -311,3 +346,57 @@ def test_false_duplicate_key_guard_mutant_is_killed(tmp_path):
     attack = _signed_yaml(data).replace(b"snapshot_version: 1\n",
                                           b"snapshot_version: 1\nsnapshot_version: 1\n", 1)
     _assert_rejected(attack, log, "duplicate YAML")
+
+
+@pytest.mark.parametrize("digest", ["snapshot_document_sha256", "normalised_log_sha256"])
+def test_a1_semantic_receipt_mismatch_is_rejected(tmp_path, digest):
+    snap, log = _run(tmp_path)
+    receipts = _a1_semantic_receipts(snap, log)
+    receipts[digest] = "e" * 64
+    with pytest.raises(SourceRejected, match="A1 .* digest mismatch"):
+        project_seed_source(snap, log, snapshot_raw_sha256=HEX(snap),
+                            events_raw_sha256=HEX(log), **receipts)
+
+
+@pytest.mark.parametrize("mutation", [
+    "forged_body_valid",
+    "forged_capacity_and_matching_log",
+    "forged_posterior_hash_everywhere",
+    "forged_world_seed_everywhere",
+    "forged_prior_hash",
+    "future_prior_version_both_files",
+    "future_dynamics_version_both_files",
+])
+def test_self_consistent_manipulated_seed_cannot_bypass_pinned_models(tmp_path, mutation):
+    snap, log = _run(tmp_path)
+    doc, records = _yaml_document(snap), _log_records(log)
+    subject = "npc.0001"
+    sec = doc["characters"][subject]
+    baseline = sec["capacity_baseline"]
+    meta = doc["run_metadata"]
+    if mutation == "forged_body_valid":
+        sec["body_state"]["hydration"]["deficit_pct_body_mass"] = 0.5
+    elif mutation == "forged_capacity_and_matching_log":
+        baseline["dimensions"]["body_mass"]["value"] += 5
+        records[1]["payload"]["dimensions"]["body_mass"]["value"] += 5
+    elif mutation == "forged_posterior_hash_everywhere":
+        meta["posterior_hash_by_character"][subject] = "f" * 64
+        baseline["sampled_from"]["posterior_hash"] = "f" * 64
+        records[1]["payload"]["posterior_hash"] = "f" * 64
+        records[0]["payload"]["run_metadata"] = copy.deepcopy(meta)
+    elif mutation == "forged_world_seed_everywhere":
+        doc["world_seed"] = 43
+        meta["world_seed"] = 43
+        records[0]["payload"]["run_metadata"] = copy.deepcopy(meta)
+    elif mutation == "forged_prior_hash":
+        records[1]["payload"]["prior_content_hash"] = "f" * 64
+    elif mutation == "future_prior_version_both_files":
+        meta["prior_version"] = "99.0"
+        baseline["sampled_from"]["prior_version"] = "99.0"
+        records[1]["payload"]["prior_version"] = "99.0"
+        records[-1]["payload"]["prior_version"] = "99.0"
+        records[0]["payload"]["run_metadata"] = copy.deepcopy(meta)
+    elif mutation == "future_dynamics_version_both_files":
+        meta["dynamics_version"] = "99.0"
+        records[0]["payload"]["run_metadata"] = copy.deepcopy(meta)
+    _assert_rejected(_signed_yaml(doc), _relog(records))

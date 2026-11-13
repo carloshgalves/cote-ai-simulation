@@ -101,6 +101,12 @@ func TestCSFRV19O3POVStrictlyRecipientScopedAndReadonly(t *testing.T) {
 	if err != nil { t.Fatal(err) }
 	defer povB.Close()
 	var _ observatory.POVQueries = povA
+	// The publicly visible method set is deliberately not a general reader
+	// capable of invoking ReadRun, ReadPrivilegedReport or write operations.
+	methods := reflect.TypeOf(povA)
+	if methods.NumMethod()!=2 || methods.Method(0).Name!="Close" || methods.Method(1).Name!="ReadPOV" {
+		t.Fatalf("POV adapter unexpectedly exposes additional capability: %s",methods)
+	}
 	viewA, err := povA.ReadPOV(ctx)
 	if err != nil { t.Fatal(err) }
 	viewB, err := povB.ReadPOV(ctx)
@@ -170,6 +176,17 @@ func TestCSFRV19O3PublicRequiresExplicitPublicationRoute(t *testing.T) {
 	if err!=nil{t.Fatal(err)}
 	defer reader.Close()
 	var _ observatory.PublicQueries = reader
+	methods:=reflect.TypeOf(reader)
+	if methods.NumMethod()!=2||methods.Method(0).Name!="Close"||methods.Method(1).Name!="ReadPublic"{
+		t.Fatalf("public adapter unexpectedly exposes privileged method: %s",methods)
+	}
+	publicType:=reflect.TypeOf(observatory.PublicPublication{})
+	for i:=0;i<publicType.NumField();i++{
+		name:=publicType.Field(i).Name
+		if strings.Contains(name,"Knowledge")||strings.Contains(name,"Observation")||strings.Contains(name,"Canonical")||strings.Contains(name,"Actor"){
+			t.Fatalf("public contract leaks actor-private evidence field %q",name)
+		}
+	}
 	before:=o1WholeDatabaseDigest(t,path)
 	first,err:=reader.ReadPublic(ctx,[32]byte(run))
 	if err!=nil{t.Fatal(err)}
@@ -224,4 +241,22 @@ func TestCSFRV19O3ActorDoesNotInheritPrivilegedEventTruth(t *testing.T) {
 	if strings.Contains(p.PublicationStatus,"PUBLIC") && p.PublicationStatus!=observatory.NoPublicRoute{
 		t.Fatal("unregistered public authority unexpectedly exposed")
 	}
+}
+
+func TestCSFRV19O3UnknownPublicationSchemaFailsClosed(t *testing.T) {
+	ctx := context.Background()
+	_, _, _, run, bundle, path := testFixture(t)
+	public, err := sqlite.OpenPublicObservatory(ctx, path, bundle)
+	if err != nil { t.Fatal(err) }
+	defer public.Close()
+	db, err := sql.Open("sqlite", path)
+	if err != nil { t.Fatal(err) }
+	defer db.Close()
+	if _, err := public.ReadPublic(ctx, [32]byte(run)); err != nil { t.Fatal(err) }
+	if _, err := db.ExecContext(ctx, "CREATE TABLE public_routes (id BLOB PRIMARY KEY)"); err != nil { t.Fatal(err) }
+	if data, err := public.ReadPublic(ctx, [32]byte(run)); err == nil {
+		t.Fatalf("unrecognized installed public authority silently fell back to an empty view: %+v", data)
+	}
+	if _, err := db.ExecContext(ctx, "DROP TABLE public_routes"); err != nil { t.Fatal(err) }
+	if _, err := public.ReadPublic(ctx, [32]byte(run)); err != nil { t.Fatal("restored registered V1 schema rejected:",err) }
 }

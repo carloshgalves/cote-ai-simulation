@@ -70,6 +70,12 @@ func TestCSFRV19O2AbortRetryLifecycleWithoutWorldMutation(t *testing.T){
  if live.State.Control.Status!=observatory.ATTEMPT_IN_FLIGHT||len(live.Commits)!=1||len(live.Attempts)!=2 {
   t.Fatalf("fenced attempt missing from report: %+v",live)
  }
+ active:=live.Attempts[len(live.Attempts)-1]
+ if len(active.Closures)==0||len(active.Admitted)==0 {
+  t.Fatalf("in-flight fence lost verified closure/admitted provenance: %+v",active)
+ }
+ for _,ref:=range active.Closures { if ref.Ledger!="input_ledger"||ref.ContentHash==([32]byte{}) {t.Fatal("closure proof lacks ledger authority")} }
+ for _,ref:=range active.Admitted { if ref.Ledger!="scheduled_occurrences"&&ref.Ledger!="input_ledger"&&ref.Ledger!="trigger_activations" {t.Fatal("unrecognized admitted source ledger")} }
  if got:=o1WholeDatabaseDigest(t,path);got!=before{t.Fatal("in-flight query mutated durable state")}
  abort,err:=c.Abort(ctx,run,cycle,fence,4,nil)
  if err!=nil{t.Fatal(err)}

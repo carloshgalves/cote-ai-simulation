@@ -42,11 +42,16 @@ def _reject_constant(value):
     raise ValueError(f"non-finite JSON constant: {value}")
 
 
+def _reject_float(value):
+    raise ValueError(f"forbidden JSON float token: {value[:24]}")
+
+
 def _strict_json(raw: bytes):
     return json.loads(
         raw.decode("utf-8", errors="strict"),
         object_pairs_hook=_unique_pairs,
         parse_constant=_reject_constant,
+        parse_float=_reject_float,
     )
 
 
@@ -71,7 +76,8 @@ def _frame(value):
     ).encode("utf-8")
     if not 0 < len(encoded) <= MAX_FRAME_BYTES:
         raise ValueError("frame size outside protocol bounds")
-    _validator().validate(value)
+    # Schema accepts 43.0 as mathematically integral; the A1 wire does not.
+    _validator().validate(_strict_json(encoded))
     return len(encoded).to_bytes(4, "big") + encoded
 
 
@@ -318,6 +324,29 @@ def _policy():
 
 def _validate_policy(policy):
     """Reference contract guard: reject privilege/availability regressions."""
+    allowed = {
+        "process": {"single_flight", "direct_exec_no_shell", "no_remote_transport"},
+        "source_view": {
+            "mode", "child_cannot_modify", "host_pins_absolute_root",
+            "reject_symlinks_and_non_regular_files", "no_pre_post_hash_fallback",
+            "source_paths_are_not_protocol_fields", "must_verify_raw_sha256_before_spawning",
+            "fail_if_os_read_only_isolation_missing",
+        },
+        "io": {
+            "drain_stdout_and_stderr_concurrently", "read_stdout_exactly_one_framed_message_then_eof",
+            "bounded_reads_before_allocating", "kill_on_stdout_or_stderr_limit",
+            "kill_on_timeout_or_cancellation", "redact_or_discard_stderr",
+            "nonzero_exit_always_fails",
+        },
+        "limits": {
+            "frame_payload_bytes", "source_snapshot_bytes", "source_events_bytes",
+            "source_event_line_bytes", "source_event_count", "stderr_retained_bytes",
+            "end_to_end_process_budget_ms", "termination_grace_ms",
+        },
+    }
+    assert set(policy) == {"protocol", *allowed}
+    for group, fields in allowed.items():
+        assert set(policy[group]) == fields, group
     limits = policy["limits"]
     process = policy["process"]
     source = policy["source_view"]
@@ -399,3 +428,28 @@ def test_decoder_fails_closed_on_oversized_declared_payload_before_json():
     for frame in ((MAX_FRAME_BYTES + 1).to_bytes(4, "big"), b"\xff\xff\xff\xff"):
         with pytest.raises(ValueError, match="size"):
             _unframe(frame)
+
+
+@pytest.mark.parametrize("numeric_token", ["43.0", "43e0", "1e400", "4.3E1"])
+def test_decoder_rejects_lexical_float_even_when_integral(numeric_token):
+    payload = _cases()["positive"]["ok"]
+    raw = json.dumps(payload, separators=(",", ":"), allow_nan=False).encode("utf-8")
+    assert b'"event_count":43' in raw
+    raw = raw.replace(b'"event_count":43', f'"event_count":{numeric_token}'.encode())
+    with pytest.raises(ValueError, match="forbidden JSON float"):
+        _unframe(len(raw).to_bytes(4, "big") + raw)
+
+
+def test_sender_rejects_float_lexeme_with_integral_value():
+    payload = copy.deepcopy(_cases()["positive"]["ok"])
+    payload["result"]["event_count"] = 43.0
+    with pytest.raises(ValueError, match="forbidden JSON float"):
+        _frame(payload)
+
+
+@pytest.mark.parametrize("group", ["process", "source_view", "io", "limits"])
+def test_policy_rejects_added_unreviewed_fields(group):
+    policy = copy.deepcopy(_policy())
+    policy[group]["arbitrary_bypass"] = True
+    with pytest.raises(AssertionError):
+        _validate_policy(policy)

@@ -57,6 +57,8 @@ type PrivilegedReport struct {
  Commits []CausalCommit
  Attempts []CausalAttempt
  PendingUnits int
+ PendingClosureSources []string
+ PendingPerceptionTasks int
  // There is no persisted authoritative rejected-ingress ledger in CSF V1.
  // A rejection count must not be inferred from accepted input absence.
  RejectedIngress string

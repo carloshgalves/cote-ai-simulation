@@ -75,7 +75,6 @@ func (r *ObservatoryReader) dataVersion(ctx context.Context)(int64,error) {
 func (r *ObservatoryReader) ReadRun(ctx context.Context,run [32]byte)(observatory.RunState,error) {
     var zero observatory.RunState
     if r==nil||r.store==nil||r.bundle==nil{return zero,errors.New("observatory reader is not initialized")}
-    if run==([32]byte{}) {return zero,errors.New("zero run identity forbidden")}
     if err:=r.bundle.VerifyInstalledBundle();err!=nil{return zero,err}
     versionBefore,err:=r.dataVersion(ctx)
     if err!=nil{return zero,err}

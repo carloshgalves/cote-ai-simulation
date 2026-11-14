@@ -6,6 +6,10 @@ name: Go physical source preflight (NOT CSF commit)
     paths:
       - "internal/csf/adapter/embodimentv1/**"
       - "internal/csf/reducer/physical*.go"
+      - "internal/csf/policy/physical_extension*.go"
+      - "internal/csf/policy/bundle.go"
+      - "internal/csf/genesis/genesis.go"
+      - "internal/csf/genesis/physical_genesis_test.go"
       - "tests/architecture/emit_go_physical_fixture.py"
       - ".github/workflows/embodiment-go-source-preflight.yml"
       - "src/embodiment/**"
@@ -55,10 +59,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          files="$(gofmt -l internal/csf/adapter/embodimentv1/*.go internal/csf/reducer/physical*.go)"
+          files="$(gofmt -l internal/csf/adapter/embodimentv1/*.go internal/csf/reducer/physical*.go internal/csf/policy/physical_extension*.go internal/csf/genesis/physical_genesis_test.go)"
           if [ -n "$files" ]; then
             echo "Go files are not formatted: $files"
-            gofmt -d internal/csf/reducer/physical*.go
+            gofmt -d internal/csf/reducer/physical*.go internal/csf/policy/physical_extension*.go internal/csf/genesis/physical_genesis_test.go
             exit 1
           fi
       - name: Produce actual PSV1-2 and A2 evidence for Go

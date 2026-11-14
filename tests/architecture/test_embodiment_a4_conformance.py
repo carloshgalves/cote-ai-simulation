@@ -80,8 +80,13 @@ def test_two_real_runs_repeat_semantically_without_host_wall_time_authority(corp
         assert len(source["command_receipts"]) == 2
     assert a["source"]["normalised_log_sha256"] == b["source"]["normalised_log_sha256"]
     assert a["transitions"] == b["transitions"]
+    assert a["command_receipts"] == b["command_receipts"]
     assert a["subject_tips"] == b["subject_tips"]
-    assert reference_bytes(a) != b"" and reference_bytes(a) == reference_bytes(a)
+    for key in ("snapshot_document_sha256", "normalised_log_sha256",
+                "verified_transition_count", "completed_phase_count",
+                "completed_transition_count"):
+        assert a["source"][key] == b["source"][key]
+    assert reference_bytes(a) and reference_bytes(b)
 
 
 @pytest.mark.parametrize("mutation", [

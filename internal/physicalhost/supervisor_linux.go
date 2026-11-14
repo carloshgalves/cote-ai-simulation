@@ -97,15 +97,20 @@ func securePinnedFile(path string, max int64) ([]byte, error) {
 		Resolve: uint64(unix.RESOLVE_NO_SYMLINKS | unix.RESOLVE_NO_MAGICLINKS),
 	})
 	if err != nil {
-		return nil, fmt.Errorf("%w: untrusted producer path", ErrUnadmitted)
+		class := "OPEN_DENIED"
+		if errors.Is(err, unix.ELOOP) { class = "SYMLINK_REJECTED" }
+		if errors.Is(err, unix.ENOSYS) { class = "OPENAT2_UNAVAILABLE" }
+		if errors.Is(err, unix.EXDEV) { class = "CROSS_DEVICE" }
+		if errors.Is(err, unix.EINVAL) { class = "INVALID_OPEN_FLAGS" }
+		return nil, fmt.Errorf("%w: A1_%s", ErrUnadmitted, class)
 	}
 	file := os.NewFile(uintptr(fd), "trusted-a1")
 	defer file.Close()
 	stat, err := file.Stat()
-	if err != nil || !stat.Mode().IsRegular() || stat.Size() <= 0 || stat.Size() > max ||
-		stat.Mode().Perm()&0o022 != 0 {
-		return nil, ErrUnadmitted
-	}
+	if err != nil { return nil, fmt.Errorf("%w: A1_FSTAT",ErrUnadmitted) }
+	if !stat.Mode().IsRegular() { return nil, fmt.Errorf("%w: A1_NOT_REGULAR",ErrUnadmitted) }
+	if stat.Size() <= 0 || stat.Size() > max { return nil, fmt.Errorf("%w: A1_FILE_SIZE",ErrUnadmitted) }
+	if stat.Mode().Perm()&0o022 != 0 { return nil, fmt.Errorf("%w: A1_FILE_PERMISSIONS",ErrUnadmitted) }
 	data, err := io.ReadAll(io.LimitReader(file, max+1))
 	if err != nil || len(data) == 0 || int64(len(data)) != stat.Size() {
 		return nil, ErrUnadmitted
@@ -185,7 +190,7 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 	}
 	executable, err := securePinnedFile(host.ExecutablePath, 128*1024*1024)
 	if err != nil {
-		return zero, fmt.Errorf("%w: A1_EXECUTABLE_OPEN", ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_EXECUTABLE_OPEN: %w", ErrUnadmitted, err)
 	}
 	if sha256.Sum256(executable) != reg.ExecutableSHA256 {
 		return zero, fmt.Errorf("%w: A1_EXECUTABLE_HASH", ErrUnadmitted)

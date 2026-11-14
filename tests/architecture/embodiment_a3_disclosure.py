@@ -148,6 +148,8 @@ def validate_policy(*, schema: dict | None = None, policy: dict | None = None) -
     stored_schema = _load_json(SCHEMA)
     schema = stored_schema if schema is None else schema
     policy = _load_json(POLICY) if policy is None else policy
+    if type(schema) is not dict or type(policy) is not dict:
+        _deny()
     # A field-only inventory misses changed numerical constraints, units,
     # enums or hidden additionalProperties. Pin ALL bytes of the A2 schema.
     raw = SCHEMA.read_bytes()

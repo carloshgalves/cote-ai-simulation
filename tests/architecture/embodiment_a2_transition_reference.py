@@ -145,7 +145,10 @@ def project_verified_transitions(
     tips = [{
         "subject_id": subject,
         "last_local_seq": last_seq[subject],
+        # The only numeric body materialization is ENGINE_ONLY, never an actor
+        # observation; A3 must classify every field before any disclosure.
         "verified_body_sha256": _doc_sha(as_document(prefix.bodies[subject])),
+        "verified_body": as_document(prefix.bodies[subject]),
         "verified_advance_count": counts[subject],
         "visibility": "ENGINE_ONLY",
     } for subject in sorted(counts)]

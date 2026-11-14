@@ -844,3 +844,21 @@ Os incrementos 1–9 estão liberados pelos ADRs 0010/0011. O incremento 10 come
 CSFRV1-9A e o incremento 9; até lá, a interface física permanece aberta. Nenhuma decisão desta seção
 altera a semântica causal do ADR 0008: alternativa que enfraqueça identidade, atomicidade,
 isolamento ou replay reabre o ADR em vez de ser resolvida localmente.
+
+**Checkpoint de implementação do gate 9A (sem aceitação antecipada):** A0/A1/A2 foram
+integradas; PSV1-2 emitiu recibos terminais versionados pela PR #109, já mesclada.
+A3 #100 foi implementada em [PR #111](https://github.com/carloshgalves/cote-ai-simulation/pull/111),
+com inventário completo de schema, política de disclosure fechada e testes contra
+vazamento; permanece sujeita à revisão independente e ao merge humano.
+A4 #101 executa testes de contrato cumulativos na
+[PR #112](https://github.com/carloshgalves/cote-ai-simulation/pull/112),
+**empilhada** sobre a A3. A aceitação definitiva do 9A permanece **PENDING** até
+todos os gates de CI, review independente, integração A3/A4 e aceite humano.
+
+A [PR #110](https://github.com/carloshgalves/cote-ai-simulation/pull/110)
+implementa **somente** preflight de fonte Go, não admissão causal; mesmo um
+prefixo físico concluído e uma matriz A3 aprovada **não** autorizam materializar
+`EventDraft` ou `WorldRevision`. O supervisor A1 pinado em Genesis, a
+origem imutável, o schema/reducer físico registrado e a transação do
+`CommitCoordinator` continuam obrigatórios na #108/CSFRV1-10. O
+First Real Run continua **NO-GO**.

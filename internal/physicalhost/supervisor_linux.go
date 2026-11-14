@@ -170,33 +170,33 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 	var zero ApprovedCut
 	if ctx == nil || host.Bundle == nil || host.Epoch == 0 ||
 		len(host.PrivateKey) != ed25519.PrivateKeySize || host.Plan.validate() != nil {
-		return zero, fmt.Errorf("%w: A1_CONFIGURATION",ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_CONFIGURATION", ErrUnadmitted)
 	}
 	reg, err := host.Bundle.PhysicalRegistration()
 	if err != nil || reg.ModuleSHA256 == ([32]byte{}) {
-		return zero, fmt.Errorf("%w: A1_MODULE_PIN",ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_MODULE_PIN", ErrUnadmitted)
 	}
 	g, err := genesis.ValidateCanonical(host.GenesisCanonical, host.Bundle)
 	if err != nil {
-		return zero, fmt.Errorf("%w: A1_GENESIS",ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_GENESIS", ErrUnadmitted)
 	}
 	if !bytes.Equal(host.PrivateKey.Public().(ed25519.PublicKey), reg.PublicKeyEd25519[:]) {
-		return zero, fmt.Errorf("%w: A1_SIGNER",ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_SIGNER", ErrUnadmitted)
 	}
 	executable, err := securePinnedFile(host.ExecutablePath, 128*1024*1024)
 	if err != nil || sha256.Sum256(executable) != reg.ExecutableSHA256 {
-		return zero, fmt.Errorf("%w: A1_EXECUTABLE_PIN",ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_EXECUTABLE_PIN", ErrUnadmitted)
 	}
 	if !filepath.IsAbs(host.ImportRoot) {
-		return zero, fmt.Errorf("%w: A1_IMPORT_ROOT",ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_IMPORT_ROOT", ErrUnadmitted)
 	}
 	modulePath := filepath.Join(host.ImportRoot, "embodiment", "a1_capture.py")
 	module, err := securePinnedFile(modulePath, 1024*1024)
 	if err != nil || sha256.Sum256(module) != reg.ModuleSHA256 {
-		return zero, fmt.Errorf("%w: A1_MODULE_HASH",ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_MODULE_HASH", ErrUnadmitted)
 	}
 	if err := checkedPrivateRoot(host.PrivateStagingRoot); err != nil {
-		return zero, fmt.Errorf("%w: A1_STAGING_ROOT",ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_STAGING_ROOT", ErrUnadmitted)
 	}
 	stage, err := os.MkdirTemp(host.PrivateStagingRoot, "a1-source-")
 	if err != nil {
@@ -229,7 +229,7 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 	cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true, Pdeathsig: syscall.SIGKILL}
 	cmd.WaitDelay = 1 * time.Second
 	if err := cmd.Start(); err != nil {
-		return zero, fmt.Errorf("%w: A1_LAUNCH",ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_LAUNCH", ErrUnadmitted)
 	}
 	pid := cmd.Process.Pid
 	err = cmd.Wait()
@@ -240,7 +240,7 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 		return zero, ErrUnadmitted
 	}
 	if err != nil || processCtx.Err() != nil {
-		return zero, fmt.Errorf("%w: A1_PROCESS_EXIT",ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_PROCESS_EXIT", ErrUnadmitted)
 	}
 
 	stagingCtx, stageCancel := context.WithTimeout(ctx, 10*time.Second)

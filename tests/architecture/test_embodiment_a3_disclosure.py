@@ -274,3 +274,24 @@ def test_trailing_schema_field_and_unknown_ref_are_both_denied():
     schema["properties"]["source"] = {"$ref": "#/$defs/unknown_physical_ref"}
     with pytest.raises(DisclosureRejected):
         validate_policy(schema=schema)
+
+
+
+@pytest.mark.parametrize(("path", "field", "bad"), [
+    ("central_fatigue", "maximum", 2.0),
+    ("central_fatigue", "minimum", -2.0),
+    ("central_fatigue", "type", "string"),
+])
+def test_same_schema_paths_but_changed_numeric_semantics_are_rejected(path, field, bad):
+    schema = _schema()
+    schema["$defs"]["body_state_psv1_2"]["properties"][path][field] = bad
+    assert all_terminal_schema_paths(schema) == all_terminal_schema_paths(_schema())
+    with pytest.raises(DisclosureRejected):
+        validate_policy(schema=schema)
+
+
+def test_same_schema_with_forged_blob_pin_is_rejected():
+    p = _policy()
+    p["source_schema_git_blob_sha"] = "0" * 40
+    with pytest.raises(DisclosureRejected):
+        validate_policy(policy=p)

@@ -1,0 +1,52 @@
+name: PSV1-2 verified physical continuity
+
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/embodiment/**"
+      - "tests/embodiment/**"
+      - "data/models/physical/**"
+      - "pyproject.toml"
+      - "docs/architecture/physical-continuity-psv1-2.md"
+      - ".github/workflows/physical-continuity-psv1-2.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: physical-continuity-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  continuity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Install pinned physical test dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+      - name: Verify patch and exact revision
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          echo "PR HEAD: ${{ github.event.pull_request.head.sha }}"
+          git diff --check HEAD^1 HEAD
+          python --version
+      - name: Replay physical history and check existing PSV1-2 regression
+        run: |
+          python -m pytest -q \
+            tests/embodiment/test_continuity.py \
+            tests/embodiment/test_cli.py \
+            tests/embodiment/test_snapshot.py \
+            tests/embodiment/invariants/test_invariant_05_only_the_engine_writes_body_state.py

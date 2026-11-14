@@ -287,6 +287,23 @@ func appendJSON(b *bytes.Buffer,v any,spaced bool,depth int)error{
 var wallClockPattern = regexp.MustCompile("^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,9})?\\+00:00$")
 var physicalSubjectPattern = regexp.MustCompile("^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$")
 
+func validWallClockUTC(value string)bool{
+ if !wallClockPattern.MatchString(value){return false}
+ // RFC3339 UTC calendar validation without reading a causal/system clock.
+ // The wall timestamp is only operational source telemetry.
+ year,errY:=strconv.Atoi(value[0:4])
+ month,errM:=strconv.Atoi(value[5:7])
+ day,errD:=strconv.Atoi(value[8:10])
+ hour,errH:=strconv.Atoi(value[11:13])
+ minute,errMinute:=strconv.Atoi(value[14:16])
+ second,errS:=strconv.Atoi(value[17:19])
+ if errY!=nil||errM!=nil||errD!=nil||errH!=nil||errMinute!=nil||errS!=nil||
+  year<1||month<1||month>12||hour>23||minute>59||second>59{return false}
+ days:=[]int{31,28,31,30,31,30,31,31,30,31,30,31}
+ if month==2&&year%4==0&&(year%100!=0||year%400==0){days[1]=29}
+ return day>=1&&day<=days[month-1]
+}
+
 func physicalRecords(raw []byte)([]map[string]any,error){
  if len(raw)==0||raw[len(raw)-1]!='\n'{return nil,ErrInvalidPhysical}
  lines:=bytes.Split(raw[:len(raw)-1],[]byte{'\n'})
@@ -300,7 +317,7 @@ func physicalRecords(raw []byte)([]map[string]any,error){
   if _,ok:=rec["payload"].(map[string]any);!ok{return nil,ErrInvalidPhysical}
   clock,ok:=rec["wall_time"].(string)
   if !ok||len(clock)>64{return nil,ErrInvalidPhysical}
-  if !wallClockPattern.MatchString(clock) {
+  if !validWallClockUTC(clock){
    return nil,ErrInvalidPhysical
   }
   recs=append(recs,rec)

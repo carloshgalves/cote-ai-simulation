@@ -150,6 +150,8 @@ def test_seed_only_replays_to_original_body_without_mutating_files(tmp_path):
     (2, "8h", SleepQuality.GOOD),
     (3, "0h", SleepQuality.FAIR),
     (2, "24h", SleepQuality.FAIR),
+    (2, "0.1h", SleepQuality.POOR),
+    (2, "7.3h", SleepQuality.FAIR),
 ])
 def test_real_advance_replays_exact_original_body_and_preserves_bytes(
     tmp_path, days, sleep, quality

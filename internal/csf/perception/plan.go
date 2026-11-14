@@ -102,6 +102,15 @@ func PlanPinned(genesisPins [][]any,run,cycle domain.ID,base,result domain.World
   id,err:=d("cote.csf.id.event","cote.csf.schema.event-id-preimage",
    []any{run[:],cycle[:],key})
   if err!=nil||id!=domain.Digest(event.Identity){return nil,errors.New("perception source EventOrderKey identity invalid")}
+  // The registered physical extension is private engine truth, with no
+  // observer-facing task even when its first EventOrderKey ordinal is zero.
+  // An attacker cannot exploit this exclusion in a different terminal:
+  // the physical SQLite mode independently authenticates producer, source,
+  // signed cut and reducer output before publication.
+  if fields[3]=="physical.advanced"&&fields[16]=="physical.a1"&&
+   fields[15]==uint64(2)&&key[0]==uint64(1)&&key[2]=="physical.a1"{
+   continue
+  }
   if ordinal!=0{continue}
   task,err:=d("cote.csf.id.perception-task","cote.csf.schema.perception-task-id-preimage",
    []any{run[:],event.Identity[:],pins.Classification,pins.Resolver,pins.Identity})

@@ -127,11 +127,25 @@ type CommunicationPublication struct {
  Transmission CanonicalRecord
  Occurrence CanonicalRecord
 }
+// PhysicalPublication is a prepared, never independently writable terminal
+// claim. The existing SQLite CommitWork transaction verifies each byte against
+// durable input, Genesis and the deterministic reducer before any insertion.
+type PhysicalPublication struct {
+	Bundle *policy.Bundle
+ Manifest []byte
+	SignedCut []byte
+	Signature []byte
+	CompletedTyped []any
+	Candidate CanonicalRecord
+}
+
 type WorkBatch struct {
  // 0: NoProposal; 1: single resource; 2: two contenders;
  // 3: authenticated system-only cohort; 4: NoProposal slots and system
  // sources atomically combined in the same AdmissionFence/WorldRevision.
  Mode uint8
+ // Mode 9: Genesis-pinned physical external input, one private event and one atomic WorldRevision.
+ Physical *PhysicalPublication
  // Mode 7: registered communication send, without world truth mutation.
  Communication *CommunicationPublication
  CommunicationStatus uint8 // terminal due only; SQL verifier recomputes

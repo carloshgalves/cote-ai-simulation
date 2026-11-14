@@ -20,7 +20,9 @@ import (
 // PerceptionTasks, WorldRevision, lifecycle, clock and CycleCommit. Unsupported
 // combinations fail closed rather than committing a strict subset.
 func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
- if b.Mode>8{return errors.New("unregistered WORK terminal variant")}
+ if b.Mode>9{return errors.New("unregistered WORK terminal variant")}
+ if b.Mode==9&&b.Physical==nil{return errors.New("physical terminal proof missing")}
+ if b.Mode!=9&&b.Physical!=nil{return errors.New("physical proof cannot enter another terminal mode")}
  if b.Mode!=7&&b.Mode!=8&&(b.Communication!=nil||b.CommunicationBundle!=nil){return errors.New("communication artefacts require verified registered terminal mode")}
  if len(b.ExpectedClock)==0||len(b.ResultClock)==0||len(b.Journal.Canonical)==0{
   return errors.New("incomplete WORK publication batch")
@@ -213,6 +215,8 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  }
  if b.Mode==8{
   if err:=verifyCommunicationDueTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,expectedSlots);err!=nil{return err}
+ }else if b.Mode==9{
+  if err:=verifyPhysicalTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,genesisFields,allowed,expectedSlots);err!=nil{return err}
  }else if b.Mode==7{
   if err:=verifyCommunicationSendTerminal(ctx,tx,b,prior,next,fence,journal,predecessor,revision,expectedSlots);err!=nil{return err}
  }else if b.Mode==5||b.Mode==6{
@@ -354,6 +358,9 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  }
  if b.Mode==1||b.Mode==5{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.ResourceCandidate.Identity[:],b.ResourceCandidate.Canonical);err!=nil{return err}
+ }
+ if b.Mode==9{
+  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.Physical.Candidate.Identity[:],b.Physical.Candidate.Canonical);err!=nil{return err}
  }
  if b.Mode==3||b.Mode==4||b.Mode==5||b.Mode==6{
   if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.SystemCandidate.Identity[:],b.SystemCandidate.Canonical);err!=nil{return err}

@@ -33,6 +33,8 @@ func registeredInvisibleEngineEvent(event []any) error {
   if phase==1&&originProducer=="communication.send"{return nil}
  case "communication.delivery_failed":
   if phase==1&&originProducer=="communication.delivery"{return nil}
+ case "physical.advanced":
+  if phase==1&&originProducer=="physical.a1"{return nil}
  case "resource.consumed":
   if phase==1&&originProducer=="resource.consume"{return nil}
  case "clock.advanced":

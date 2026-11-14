@@ -227,3 +227,23 @@ def test_seed_only_and_zero_days_have_no_completion_false_claim(tmp_path):
     assert not p.all_phases_complete and p.completed_phase_count == 0
     _advance(out, days=0)
     assert _files(out) == original
+
+
+
+@pytest.mark.parametrize("bad_days", [True, False, -1, 50001, 2.5, "2"])
+def test_invalid_day_plan_is_rejected_before_any_file_is_changed(tmp_path, bad_days):
+    out = _seed(tmp_path)
+    before = _files(out)
+    with pytest.raises(ValueError, match="days"):
+        _advance(out, days=bad_days)
+    assert _files(out) == before
+
+
+@pytest.mark.parametrize("bad_wbgt", [101.0, -101.0, float("nan"), float("inf")])
+def test_unsupported_temperature_cannot_create_unreplayable_footer(tmp_path, bad_wbgt):
+    out = _seed(tmp_path)
+    before = _files(out)
+    with pytest.raises(ValueError, match="wbgt"):
+        advance_clock_command(run_dir=out, character_id="npc.0001",
+                              days=1, wbgt_c=bad_wbgt)
+    assert _files(out) == before

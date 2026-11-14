@@ -50,6 +50,15 @@ jobs:
           git rev-parse HEAD
           echo "PR HEAD: ${{ github.event.pull_request.head.sha }}"
           go version
+      - name: Emit gofmt source preview for audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in internal/csf/adapter/embodimentv1/verify.go internal/csf/adapter/embodimentv1/verify_test.go; do
+            printf 'GOFMT_B64_BEGIN %s\\n' "$path"
+            gofmt "$path" | base64 -w0
+            printf '\\nGOFMT_B64_END %s\\n' "$path"
+          done
       - name: Produce actual PSV1-2 and A2 evidence for Go
         run: python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture
       - name: Validate completed physical source in Go without granting commit

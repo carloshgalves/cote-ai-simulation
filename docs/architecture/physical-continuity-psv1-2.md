@@ -32,7 +32,7 @@ O comando não passa números de \`BodyState\` para contexto dos agentes. Esta p
 
 \`tests/embodiment/test_continuity.py\` exercita \`seed_cohort_command\` e \`advance_clock_command\` reais, 0/4/8/24 h de sono, múltiplos personagens, reconstrução exata de corpos, e negativas para mudança de sequência/tempo/versão/ambiente/carga/diff/seed/snapshot, fragmento pós-crash, e evento inesperado. A CI também executa \`test_cli.py\`, \`test_snapshot.py\` e invariante de single-writer do corpo.
 
-- [ ] CI verde no SHA final.
-- [ ] Revisão adversarial independente, remediação e re-review até zero findings acionáveis do escopo.
-- [ ] Aprovação humana de merge.
+- [x] CI de continuidade e regressões PSV1-2: 150 testes aprovados em [Actions #43535989220](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/43535989220), SHA `c77781a3b367a8765e6669f77a603d437c0bcd7f`; nova rodada obrigatória após edição documental.
+- [x] Revisão adversarial realizada pelo executor, P2C-R01–R06 remediados com testes de regressão e re-review sem finding acionável identificado **no escopo**.
+- [ ] Revisão formal independente por revisor distinto e aprovação humana de merge.
 - [ ] A2 #99 permanece aberta; A3/A4/#10 e PSV1-8 completa ainda separadas.

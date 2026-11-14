@@ -247,3 +247,20 @@ def test_unsupported_temperature_cannot_create_unreplayable_footer(tmp_path, bad
         advance_clock_command(run_dir=out, character_id="npc.0001",
                               days=1, wbgt_c=bad_wbgt)
     assert _files(out) == before
+
+
+@pytest.mark.parametrize("bad_quality", ["good", "poor", "unknown", None, True])
+def test_untyped_quality_cannot_append_incomplete_intent(tmp_path, bad_quality):
+    out = _seed(tmp_path)
+    before = _files(out)
+    with pytest.raises(ValueError, match="quality"):
+        _advance(out, days=1, quality=bad_quality)
+    assert _files(out) == before
+
+
+def test_boolean_wbgt_cannot_be_interpreted_as_physical_temperature(tmp_path):
+    out = _seed(tmp_path)
+    before = _files(out)
+    with pytest.raises(ValueError, match="wbgt"):
+        advance_clock_command(run_dir=out, character_id="npc.0001", days=1, wbgt_c=True)
+    assert _files(out) == before

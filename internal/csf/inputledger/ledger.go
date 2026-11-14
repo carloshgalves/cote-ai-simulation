@@ -1294,6 +1294,14 @@ func (l *Ledger) projectSettledNoProposalRounds(ctx context.Context) error{
   }
   if complete{round.Lifecycle=2;l.rounds[id]=round}
  }
+ // The durable prefix retains every input and ingress receipt. Only the
+ // admission view excludes *terminally settled* exogenous sources, so
+ // replay and the next fence cannot re-admit the same signed physical epoch.
+ for source,items:=range l.inputs{
+  pending:=items[:0:0]
+  for _,item:=range items{if !settled[item.ID]{pending=append(pending,item)}}
+  l.inputs[source]=pending
+ }
  return nil
 }
 

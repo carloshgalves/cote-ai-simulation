@@ -12,6 +12,10 @@ name: Go physical source preflight (NOT CSF commit)
       - "internal/csf/genesis/physical_genesis_test.go"
       - "internal/csf/commit/work_physical.go"
       - "internal/csf/persistence/sqlite/work_physical.go"
+      - "internal/csf/persistence/sqlite/physical_replay.go"
+      - "internal/csf/persistence/sqlite/settled_no_proposal.go"
+      - "internal/csf/persistence/sqlite/clock_advance.go"
+      - "internal/csf/inputledger/ledger.go"
       - "internal/csf/persistence/sqlite/work_commit.go"
       - "internal/csf/ports/stores.go"
       - "internal/csf/settlement/physical_event.go"
@@ -65,10 +69,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          files="$(gofmt -l internal/csf/adapter/embodimentv1/*.go internal/csf/reducer/physical*.go internal/csf/policy/physical_extension*.go internal/csf/genesis/physical_genesis_test.go internal/csf/commit/work_physical.go internal/csf/persistence/sqlite/work_physical.go internal/csf/settlement/physical_event.go)"
+          files="$(gofmt -l internal/csf/adapter/embodimentv1/*.go internal/csf/reducer/physical*.go internal/csf/policy/physical_extension*.go internal/csf/genesis/physical_genesis_test.go internal/csf/commit/work_physical.go internal/csf/persistence/sqlite/work_physical.go internal/csf/persistence/sqlite/physical_replay.go internal/csf/settlement/physical_event.go)"
           if [ -n "$files" ]; then
             echo "Go files are not formatted: $files"
-            gofmt -d internal/csf/adapter/embodimentv1/*.go internal/csf/reducer/physical*.go internal/csf/policy/physical_extension*.go internal/csf/genesis/physical_genesis_test.go internal/csf/commit/work_physical.go internal/csf/persistence/sqlite/work_physical.go internal/csf/settlement/physical_event.go
+            gofmt -d internal/csf/adapter/embodimentv1/*.go internal/csf/reducer/physical*.go internal/csf/policy/physical_extension*.go internal/csf/genesis/physical_genesis_test.go internal/csf/commit/work_physical.go internal/csf/persistence/sqlite/work_physical.go internal/csf/persistence/sqlite/physical_replay.go internal/csf/settlement/physical_event.go
             exit 1
           fi
       - name: Produce actual PSV1-2 and A2 evidence for Go

@@ -321,7 +321,7 @@ def _non_cli_schedule(out, intervals):
     [
         ([(12.0, 21.0), (12.0, 21.0)], "day plan"),
         ([(24.0, 21.0), (24.0, 25.0)], "24-hour physical segment"),
-        ([(23.0, 21.0)], "day plan"),
+        ([(23.0, 21.0), (24.0, 21.0)], "day"),
     ],
 )
 def test_self_consistent_physical_receipts_cannot_forge_cli_day_plan(tmp_path, intervals, pattern):

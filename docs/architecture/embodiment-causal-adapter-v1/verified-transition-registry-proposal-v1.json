@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "physical.verified-transition-evidence.v1",
+  "status": "PROPOSED_NON_CANONICAL_NOT_REGISTERED",
+  "runtime_extension_registered": false,
+  "source_proof": "PSV1-2 VerifiedPhysicalPrefix, raw bytes supplied from A1 sealed/quiescent view",
+  "source_event_mapping": {
+    "run.started": "source_validation_only_not_csf_genesis",
+    "capacity.sampled": "seed_provenance_validation_only_not_csf_event",
+    "cohort.correlation_report": "physical_telemetry_only_not_csf_event",
+    "run.extended": "phase_validation_only",
+    "body.advanced": "engine_only_verified_transition_reference_pending_go",
+    "other": "unsupported_fail_closed"
+  },
+  "proposed_go_boundary": {
+    "typed_input": "physical.verified-transition-evidence.v1",
+    "authoritative_decision": "Go only, after source pinning, command completion attestation, A3 disclosure, and policy/reducer registration",
+    "forbidden_pre_go_fields": [
+      "SimulationInstant",
+      "LogicalSequence",
+      "EventOrderKey",
+      "WorldRevision",
+      "CycleCommit",
+      "EventDraft",
+      "CommitCandidate",
+      "event_id",
+      "candidate_id",
+      "producer_unit_key",
+      "input_id",
+      "global_sequence",
+      "source_id",
+      "priority"
+    ],
+    "go_only_pipeline": [
+      "genesis_source_pin_and_quiescence",
+      "command_completion_proof",
+      "typed_input_admission",
+      "input_ledger",
+      "admission_fence",
+      "action_schema_registry",
+      "affordance_validator",
+      "conflict_resolver",
+      "physical_world_reducer",
+      "commit_coordinator",
+      "cycle_commit",
+      "world_revision"
+    ]
+  },
+  "complete_physical_replay_psv1_8": false,
+  "run_command_completion_attested": false,
+  "disclosure_matrix_accepted": false,
+  "canonical_cbor_bundle_registered": false,
+  "runtime_adapter_implemented": false,
+  "privacy": "ENGINE_ONLY_NO_AGENT_CONTEXT",
+  "unknown": [
+    "physical_command_completion_marker",
+    "go_reducer_policy_and_identity",
+    "recipient_disclosure_A3",
+    "PSV1-3_8_new_event_types"
+  ]
+}

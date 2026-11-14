@@ -1,0 +1,58 @@
+# CSFRV1-9A/A2: typed transition evidence from the merged PSV1-2 continuation.
+# This does not certify the Go reducer, A3/A4 disclosure or First Real Run.
+name: Embodiment A2 verified transition contract
+
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "docs/architecture/embodiment-causal-adapter-v1/schemas/verified-transition-evidence-v1.schema.json"
+      - "docs/architecture/embodiment-causal-adapter-v1/verified-transition-registry-proposal-v1.json"
+      - "docs/architecture/embodiment-causal-adapter-v1/physical-evidence-a2.md"
+      - "tests/architecture/embodiment_a2_transition_reference.py"
+      - "tests/architecture/test_embodiment_a2_transitions.py"
+      - "src/embodiment/**"
+      - "tests/embodiment/test_continuity.py"
+      - "data/models/physical/**"
+      - "data/canon/schema/enums/capacity-dimensions.yaml"
+      - "pyproject.toml"
+      - ".github/workflows/embodiment-a2.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: embodiment-a2-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Install pinned A2 test toolchain
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+      - name: Check source revision and patch whitespace
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          echo "PR HEAD: ${{ github.event.pull_request.head.sha }}"
+          git diff --check HEAD^1 HEAD
+          python --version
+      - name: Run A2 transitions, merged physical continuation and A1 contracts
+        run: |
+          python -m pytest -q \
+            tests/architecture/test_embodiment_a2_transitions.py \
+            tests/embodiment/test_continuity.py \
+            tests/architecture/test_embodiment_ipc_contract.py

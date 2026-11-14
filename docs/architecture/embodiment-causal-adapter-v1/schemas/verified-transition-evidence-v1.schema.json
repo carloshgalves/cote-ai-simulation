@@ -1,0 +1,644 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cote-sim/embodiment/verified-transition-evidence-v1.schema.json",
+  "title": "A2 physical verified transition evidence (non-canonical; pending Go admission)",
+  "description": "Reference-only materialization from PSV1-2 verified local prefix; does not attest command completion or confer causal authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "schema_version",
+    "authority",
+    "admission",
+    "completion",
+    "source",
+    "transitions",
+    "subject_tips"
+  ],
+  "properties": {
+    "kind": {
+      "const": "physical.verified-transition-evidence.v1"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "authority": {
+      "const": "ENGINE_ONLY"
+    },
+    "admission": {
+      "const": "PENDING_GO_ADMISSION"
+    },
+    "completion": {
+      "const": "UNATTESTED_PREFIX"
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "transitions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100000,
+      "items": {
+        "$ref": "#/$defs/transition"
+      }
+    },
+    "subject_tips": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10000,
+      "items": {
+        "$ref": "#/$defs/tip"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "subject_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot_raw_sha256",
+        "events_raw_sha256",
+        "snapshot_document_sha256",
+        "normalised_log_sha256",
+        "snapshot_version",
+        "local_origin",
+        "prior_version",
+        "dynamics_version",
+        "log_record_count",
+        "verified_transition_count"
+      ],
+      "properties": {
+        "snapshot_raw_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "events_raw_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "snapshot_document_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "normalised_log_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "snapshot_version": {
+          "const": 1
+        },
+        "local_origin": {
+          "const": "Y1_START"
+        },
+        "prior_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 96
+        },
+        "dynamics_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 96
+        },
+        "log_record_count": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 100000
+        },
+        "verified_transition_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99997
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject_id",
+        "source_local_seq",
+        "source_local_sim_time",
+        "source_local_after_hours",
+        "source_local_delta_hours",
+        "source_segment",
+        "semantic_record_sha256",
+        "channel_diff_sha256"
+      ],
+      "properties": {
+        "subject_id": {
+          "$ref": "#/$defs/subject_id"
+        },
+        "source_local_seq": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99999
+        },
+        "source_local_sim_time": {
+          "type": "string",
+          "pattern": "^Y1_START\\+[0-9]{5}\\.[0-9]{3}h$",
+          "minLength": 19,
+          "maxLength": 19
+        },
+        "source_local_after_hours": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 99999
+        },
+        "source_local_delta_hours": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 24
+        },
+        "source_segment": {
+          "type": "string",
+          "enum": [
+            "awake",
+            "asleep"
+          ]
+        },
+        "semantic_record_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "channel_diff_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "tip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject_id",
+        "last_local_seq",
+        "verified_body_sha256",
+        "verified_advance_count",
+        "visibility",
+        "verified_body"
+      ],
+      "properties": {
+        "subject_id": {
+          "$ref": "#/$defs/subject_id"
+        },
+        "last_local_seq": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99999
+        },
+        "verified_body_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "verified_advance_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99997
+        },
+        "visibility": {
+          "const": "ENGINE_ONLY"
+        },
+        "verified_body": {
+          "$ref": "#/$defs/body_state_psv1_2"
+        }
+      }
+    },
+    "body_state_psv1_2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "character_id",
+        "t_hours",
+        "w_prime_balance",
+        "peripheral_fatigue",
+        "central_fatigue",
+        "cumulative_load",
+        "sleep",
+        "energy",
+        "hydration",
+        "thermal",
+        "soreness",
+        "injuries",
+        "illnesses",
+        "pain"
+      ],
+      "properties": {
+        "character_id": {
+          "$ref": "#/$defs/subject_id"
+        },
+        "t_hours": {
+          "type": "number",
+          "minimum": 0
+        },
+        "w_prime_balance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "remaining_j",
+            "capacity_j",
+            "tau_s"
+          ],
+          "properties": {
+            "remaining_j": {
+              "type": "number",
+              "minimum": 0
+            },
+            "capacity_j": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "tau_s": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        "peripheral_fatigue": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "legs",
+            "arms",
+            "grip",
+            "core"
+          ],
+          "properties": {
+            "legs": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "arms": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "grip": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "core": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        },
+        "central_fatigue": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "cumulative_load": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "acute_7d",
+            "chronic_28d"
+          ],
+          "properties": {
+            "acute_7d": {
+              "type": "number",
+              "minimum": 0
+            },
+            "chronic_28d": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "sleep": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "debt_hours",
+            "hours_since_wake",
+            "circadian_phase",
+            "last_sleep"
+          ],
+          "properties": {
+            "debt_hours": {
+              "type": "number",
+              "minimum": 0
+            },
+            "hours_since_wake": {
+              "type": "number",
+              "minimum": 0
+            },
+            "circadian_phase": {
+              "type": "number",
+              "minimum": 0,
+              "exclusiveMaximum": 24
+            },
+            "last_sleep": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "start_h",
+                    "end_h",
+                    "quality"
+                  ],
+                  "properties": {
+                    "start_h": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "end_h": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "quality": {
+                      "type": "string",
+                      "enum": [
+                        "good",
+                        "fair",
+                        "poor"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "energy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "substrate_availability",
+            "balance_kcal_24h",
+            "last_meal_at_h"
+          ],
+          "properties": {
+            "substrate_availability": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "balance_kcal_24h": {
+              "type": "number"
+            },
+            "last_meal_at_h": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        },
+        "hydration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "deficit_pct_body_mass"
+          ],
+          "properties": {
+            "deficit_pct_body_mass": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "thermal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "core_offset_c",
+            "wbgt",
+            "work_rest_ratio",
+            "clothing_insulation"
+          ],
+          "properties": {
+            "core_offset_c": {
+              "type": "number",
+              "minimum": 0
+            },
+            "wbgt": {
+              "type": "number"
+            },
+            "work_rest_ratio": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "clothing_insulation": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "soreness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "by_region",
+            "repeated_bout_adaptation"
+          ],
+          "properties": {
+            "by_region": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "legs",
+                "arms",
+                "grip",
+                "core"
+              ],
+              "properties": {
+                "legs": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "latency",
+                    "pending_onset",
+                    "expressed"
+                  ],
+                  "properties": {
+                    "latency": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 100,
+                      "items": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "pending_onset": {
+                      "const": []
+                    },
+                    "expressed": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  }
+                },
+                "arms": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "latency",
+                    "pending_onset",
+                    "expressed"
+                  ],
+                  "properties": {
+                    "latency": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 100,
+                      "items": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "pending_onset": {
+                      "const": []
+                    },
+                    "expressed": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  }
+                },
+                "grip": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "latency",
+                    "pending_onset",
+                    "expressed"
+                  ],
+                  "properties": {
+                    "latency": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 100,
+                      "items": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "pending_onset": {
+                      "const": []
+                    },
+                    "expressed": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  }
+                },
+                "core": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "latency",
+                    "pending_onset",
+                    "expressed"
+                  ],
+                  "properties": {
+                    "latency": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 100,
+                      "items": {
+                        "type": "number",
+                        "minimum": 0
+                      }
+                    },
+                    "pending_onset": {
+                      "const": []
+                    },
+                    "expressed": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  }
+                }
+              }
+            },
+            "repeated_bout_adaptation": {
+              "const": {}
+            }
+          }
+        },
+        "injuries": {
+          "const": []
+        },
+        "illnesses": {
+          "const": []
+        },
+        "pain": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "by_region",
+            "global_intensity",
+            "analgesia"
+          ],
+          "properties": {
+            "by_region": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "legs",
+                "arms",
+                "grip",
+                "core"
+              ],
+              "properties": {
+                "legs": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "arms": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "grip": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "core": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            },
+            "global_intensity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "analgesia": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

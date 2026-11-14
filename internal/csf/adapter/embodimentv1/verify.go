@@ -579,7 +579,10 @@ func checkBody(value any,subject string)error{
   if !ok{return fail}
   if _,ok:=number(r["expressed"]);!ok{return fail}
   lag,ok:=r["latency"].([]any);if !ok||len(lag)==0||len(lag)>100{return fail}
-  for _,v:=range lag{if _,ok:=number(v);!ok{return fail}}
+  for _,v:=range lag{
+   value,ok:=number(v)
+   if !ok||value<0{return fail}
+  }
   pending,ok:=r["pending_onset"].([]any)
   if !ok||len(pending)!=0{return fail}
  }

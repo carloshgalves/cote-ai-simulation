@@ -411,8 +411,6 @@ func scanCompletedSource(rows []map[string]any)([]map[string]any,[]map[string]an
    if !valid||math.Abs((start+dt)-end)>1e-8{return failed()}
    clock,err:=localInstant(end)
    if err!=nil||row["sim_time"]!=clock{return failed()}
-   env,ok:=payload["environment"].(map[string]any)
-   if !ok||!numberEq(env["wbgt_c"],intent["wbgt_c"]){return failed()}
    wantLabel,wantHours:="awake",24.0-segmentHours
    if segmentHours==24{wantLabel="asleep";wantHours=24}
    if segmentHours>0&&segmentHours<24 && advanceCount%2==1{
@@ -420,9 +418,8 @@ func scanCompletedSource(rows []map[string]any)([]map[string]any,[]map[string]an
    }
    if segmentHours==0{wantLabel="awake";wantHours=24}
    if payload["segment"]!=wantLabel||math.Abs(dt-wantHours)>1e-9{return failed()}
-   asleep,ok:=env["asleep"].(bool)
-   if !ok||asleep!=(wantLabel=="asleep"){return failed()}
-   if wantLabel=="asleep"&&env["sleep_quality"]!=intent["quality"]{return failed()}
+   if !validCLIInterval(payload["environment"],payload["load"],
+    wantLabel,intent["wbgt_c"],intent["quality"]){return failed()}
    if payload["dynamics_version"]!=intent["dynamics_version"]{return failed()}
    normalized:=cloneMap(row);normalized["wall_time"]="1970-01-01T00:00:00+00:00"
    semHash,err:=hashJSON(normalized,false);if err!=nil{return failed()}
@@ -476,6 +473,33 @@ func scanCompletedSource(rows []map[string]any)([]map[string]any,[]map[string]an
  }
  if phase!="completed"||len(commands)==0{return failed()}
  return transitions,commands,nil
+}
+
+// The only PSV1-2 CLI interval inputs are Environment with these declared
+// defaults and NO_LOAD. Go rejects unregistered fields instead of trusting
+// rehashed Python JSON as an admission schema.
+func validCLIInterval(environment, load any, segment string, wbgt, quality any)bool{
+ e,ok:=object(environment,"wbgt_c","work_rest_ratio","clothing_insulation",
+  "asleep","sleep_quality","fluid_access","carbohydrate_intake")
+ if !ok||!numberEq(e["wbgt_c"],wbgt)||
+  !numberEq(e["work_rest_ratio"],json.Number("1"))||
+  !numberEq(e["clothing_insulation"],json.Number("1"))||
+  !numberEq(e["fluid_access"],json.Number("1"))||
+  !numberEq(e["carbohydrate_intake"],json.Number("1")){return false}
+ wantQuality:="good"
+ if segment=="asleep"{
+  value,valid:=quality.(string)
+  if !valid{return false}
+  wantQuality=value
+ }
+ asleep,ok:=e["asleep"].(bool)
+ if !ok||asleep!=(segment=="asleep")||e["sleep_quality"]!=wantQuality{return false}
+ l,ok:=object(load,"intensity","by_region","eccentric_fraction","activity")
+ if !ok||!numberEq(l["intensity"],json.Number("0"))||
+  !numberEq(l["eccentric_fraction"],json.Number("0"))||
+  l["activity"]!="unspecified"{return false}
+ regions,ok:=l["by_region"].(map[string]any)
+ return ok&&len(regions)==0
 }
 
 func transitionMatches(received,actual map[string]any)bool{

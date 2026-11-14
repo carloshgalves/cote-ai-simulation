@@ -244,3 +244,35 @@ func TestGoRejectsInvalidSubjectIDGrammar(t *testing.T){
  rows[target]["payload"].(map[string]any)["character_id"]="npc/invalid"
  if _,_,err:=scanCompletedSource(rows);err==nil{t.Fatal("invalid physical actor ID passed")}
 }
+
+
+func TestGoRejectsImpossibleButLexicallyWellFormedUTCWallClock(t *testing.T){
+ s:=realSource(t)
+ rows,err:=physicalRecords(s.Events)
+ if err!=nil{t.Fatal(err)}
+ for _,calendar:=range []string{
+  "2026-13-14T01:44:15+00:00",
+  "2026-02-29T01:44:15+00:00",
+  "2026-11-31T01:44:15+00:00",
+  "2026-11-14T24:00:00+00:00",
+  "2026-11-14T01:60:00+00:00",
+  "2026-11-14T01:44:60+00:00",
+  "0000-01-01T01:44:15+00:00",
+ }{
+  if validWallClockUTC(calendar){t.Errorf("invalid UTC calendar accepted: %s",calendar)}
+  lines:=make([][]byte,0,len(rows))
+  for i,record:=range rows{
+   cloned:=cloneMap(record)
+   if i==0{cloned["wall_time"]=calendar}
+   bytes,err:=pyJSON(cloned,false);if err!=nil{t.Fatal(err)}
+   lines=append(lines,bytes)
+  }
+  invalid:=append(bytes.Join(lines,[]byte{10}),10)
+  if _,err:=physicalRecords(invalid);err==nil{
+   t.Fatalf("Go physical source parser accepted impossible UTC date: %s",calendar)
+  }
+ }
+ if !validWallClockUTC("2024-02-29T01:44:15.123456+00:00"){
+  t.Fatal("valid Gregorian leap day rejected")
+ }
+}

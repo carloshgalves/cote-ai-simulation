@@ -40,7 +40,7 @@ A2 projeta a conclusão com `completion=ATTESTED_COMPLETE` ou `UNATTESTED_PREFIX
 
 Fazer tests reais de `seed_cohort_command` seguido de `advance_clock_command`, alternando 0/24/4/8/0.1/7.3 h de sono, dias e atores; testar crash logo após intent, após uma transição, e antes de footer; manipular planos e recibos sem confiar em seus hashes. Um terminal falseado nunca torna prefixo concluído.
 
-- [ ] CI focal #107, continuidade PSV1-2 e A2 no commit final, com logs reais.
-- [ ] Revisão adversarial do executor, findings e remediações verificáveis, novo review até nenhum achado acionável.
-- [ ] Revisão independente por terceiro e merge humano, separados.
-- [ ] Admissão e CommitCoordinator físico em Go #108 ficam pendentes, sem shortcuts.
+- [x] CI focal #107 com 250 testes, continuidade PSV1-2 150, A2 182, A1 67 no SHA `65f8a4c5ad9a1714ad4c06b7862e921b5f88943c` (GitHub Actions #43542580771, #43542580847, #43542580808, #43542580862); warnings 0. Após edição documental, recheck no HEAD final.
+- [x] Revisão adversarial pelo executor: PHY-C01–C03 corrigidos/regressões verdes; PHY-C04 é dependência externa A1/Go, não licença para marcar world truth. Re-review sem outros achados acionáveis no escopo da conclusão PSV1-2.
+- [ ] Revisão formal independente por terceiro e merge humano, separados.
+- [ ] Admissão real e CommitCoordinator físico em Go #108 ficam pendentes; nenhum write SQLite alternativo.

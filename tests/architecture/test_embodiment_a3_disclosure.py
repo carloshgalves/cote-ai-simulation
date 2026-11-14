@@ -331,3 +331,26 @@ def test_reclassification_cannot_silently_broaden_a3_permissions(mutation):
         p["fields"]["subject_tips[].verified_body.central_fatigue"]["recipient_scope"] = "NONE"
     with pytest.raises(DisclosureRejected):
         validate_policy(policy=p)
+
+
+
+@pytest.mark.parametrize("attack", [
+    "unhashable_classification", "proposal_extra_field",
+    "proposal_wrong_kind", "forbidden_nonstring",
+    "labels_nonstring",
+])
+def test_bad_policy_types_and_qualitative_metadata_fail_sanitized(attack):
+    p = _policy()
+    field = "subject_tips[].verified_body.central_fatigue"
+    if attack == "unhashable_classification":
+        p["fields"][field]["classification"] = ["QUALITATIVE_DERIVATION_ONLY"]
+    elif attack == "proposal_extra_field":
+        p["future_qualitative_candidate"]["WorldRevision"] = 1
+    elif attack == "proposal_wrong_kind":
+        p["future_qualitative_candidate"]["kind"] = "Observation"
+    elif attack == "forbidden_nonstring":
+        p["forbidden_artifact_classes"].append({"RNG": True})
+    elif attack == "labels_nonstring":
+        p["future_qualitative_candidate"]["values"][0] = ["fatigue_low"]
+    with pytest.raises(DisclosureRejected, match="contract rejected"):
+        validate_policy(policy=p)

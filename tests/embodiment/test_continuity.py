@@ -351,3 +351,25 @@ def test_domain_invalid_but_self_signed_body_has_sanitized_error(tmp_path):
     doc["characters"]["npc.0001"]["body_state"]["hydration"]["deficit_pct_body_mass"] = -10.0
     with pytest.raises(PhysicalHistoryError, match="invalid stored physical body/capacity"):
         replay_body_history(_signed(doc), log)
+
+
+
+def test_nested_jsonl_and_integer_token_overflow_rejected_as_physical_errors(tmp_path):
+    out = _seed(tmp_path)
+    snap, log = _files(out)
+    old = b'"world_seed": 42'
+    assert old in log
+    deep = b"[" * 90 + b"0" + b"]" * 90
+    with pytest.raises(PhysicalHistoryError, match="nesting"):
+        replay_body_history(snap, log.replace(old, b'"world_seed": ' + deep, 1))
+    massive = b"1" * 5000
+    with pytest.raises(PhysicalHistoryError, match="invalid JSONL record"):
+        replay_body_history(snap, log.replace(old, b'"world_seed": ' + massive, 1))
+
+
+def test_nested_yaml_is_a_bounded_source_error(tmp_path):
+    out = _seed(tmp_path)
+    _, log = _files(out)
+    malicious = b"root: " + b"[" * 90 + b"0" + b"]" * 90 + b"\n"
+    with pytest.raises(PhysicalHistoryError, match="nesting"):
+        replay_body_history(malicious, log)

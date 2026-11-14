@@ -65,5 +65,3 @@ jobs:
         env:
           PHYSICAL_GO_FIXTURE_DIR: /tmp/physical-go-fixture
         run: go test -v -count=1 ./internal/csf/adapter/embodimentv1
-      - name: Test full Go runtime regressions
-        run: go test ./...

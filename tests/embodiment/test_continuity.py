@@ -11,7 +11,10 @@ import yaml
 
 from embodiment.cli import advance_clock_command, main, seed_cohort_command
 from embodiment.continuity import PhysicalHistoryError, replay_body_history, verify_body_history
-from embodiment.eventlog import EVENT_BODY_ADVANCED, EVENT_RUN_EXTENDED
+from embodiment.eventlog import (EVENT_BODY_ADVANCED, EVENT_RUN_EXTENDED, EventLog, logical_sim_time)
+from embodiment.dynamics import BodyTraits, Environment, Exposure, advance, channel_diff, load_params
+from embodiment.snapshot import body_state_of, capacity_profile_of, read_snapshot
+from embodiment.types import RunMetadata
 from embodiment.snapshot import snapshot_hash
 from embodiment.types import SleepQuality, as_document
 
@@ -255,3 +258,94 @@ def test_cli_inspector_is_read_only_and_does_not_print_body_truth(tmp_path, caps
     assert "central_fatigue" not in output
     assert "capacity_baseline" not in output
     assert _files(out) == original
+
+
+
+@pytest.mark.parametrize("mutation", ["bool_sample_count", "bool_body_zero", "int_environment", "bool_diff_zero"])
+def test_type_coercion_mutants_are_rejected_when_semantically_equal(tmp_path, mutation):
+    out = _seed(tmp_path)
+    advance_clock_command(run_dir=out, character_id="npc.0001", days=1, sleep="4h")
+    snap, log = _files(out)
+    doc, rec = yaml.safe_load(snap), _records(log)
+    index = next(i for i, item in enumerate(rec) if item["event"] == EVENT_BODY_ADVANCED)
+    if mutation == "bool_sample_count":
+        rec[1]["payload"]["constraint_count"] = False  # False == 0 in Python
+    elif mutation == "bool_body_zero":
+        doc["characters"]["npc.0001"]["body_state"]["central_fatigue"] = False
+        snap = _signed(doc)  # A valid self-signed YAML remains a forged original.
+    elif mutation == "int_environment":
+        rec[index]["payload"]["environment"]["wbgt_c"] = 21  # 21 == 21.0
+    elif mutation == "bool_diff_zero":
+        rec[index]["payload"]["channels_changed"]["sleep"]["before"]["debt_hours"] = False
+    with pytest.raises(PhysicalHistoryError):
+        replay_body_history(snap, _write_records(rec))
+
+
+def _non_cli_schedule(out, intervals):
+    snapshot = read_snapshot(out / "snapshot.yaml")
+    metadata = RunMetadata.from_document(snapshot["run_metadata"])
+    section = snapshot["characters"]["npc.0001"]
+    profile = capacity_profile_of(section)
+    state = body_state_of(section)
+    traits = BodyTraits.from_profile(profile)
+    params = load_params()
+    with EventLog.extend(
+        out / "events.jsonl",
+        metadata=metadata,
+        required_components=("prior", "dynamics"),
+    ) as event_log:
+        for hours, wbgt in intervals:
+            environment = Environment(wbgt_c=wbgt)
+            exposure = Exposure.of(environment=environment, traits=traits, params=params)
+            next_state = advance(state, hours, exposure)
+            event_log.append(
+                EVENT_BODY_ADVANCED,
+                {
+                    "character_id": "npc.0001",
+                    "dt_hours": hours,
+                    "segment": "awake",
+                    "t_hours_before": state.t_hours,
+                    "t_hours_after": next_state.t_hours,
+                    "environment": as_document(environment),
+                    "load": as_document(exposure.load),
+                    "dynamics_version": params.model_version,
+                    "channels_changed": channel_diff(state, next_state),
+                },
+                sim_time=logical_sim_time("Y1_START", next_state.t_hours),
+            )
+            state = next_state
+
+
+@pytest.mark.parametrize(
+    ("intervals", "pattern"),
+    [
+        ([(12.0, 21.0), (12.0, 21.0)], "day plan"),
+        ([(24.0, 21.0), (24.0, 25.0)], "24-hour physical segment"),
+        ([(23.0, 21.0)], "day plan"),
+    ],
+)
+def test_self_consistent_physical_receipts_cannot_forge_cli_day_plan(tmp_path, intervals, pattern):
+    out = _seed(tmp_path)
+    _non_cli_schedule(out, intervals)
+    with pytest.raises(PhysicalHistoryError, match=pattern):
+        verify_body_history(out)
+
+
+def test_large_json_integer_duration_fails_as_physical_error_not_overflow(tmp_path):
+    out = _seed(tmp_path)
+    advance_clock_command(run_dir=out, character_id="npc.0001", days=1)
+    snap, log = _files(out)
+    records = _records(log)
+    first = next(item for item in records if item["event"] == EVENT_BODY_ADVANCED)
+    first["payload"]["dt_hours"] = 10 ** 400
+    with pytest.raises(PhysicalHistoryError, match="dt_hours"):
+        replay_body_history(snap, _write_records(records))
+
+
+def test_domain_invalid_but_self_signed_body_has_sanitized_error(tmp_path):
+    out = _seed(tmp_path)
+    snap, log = _files(out)
+    doc = yaml.safe_load(snap)
+    doc["characters"]["npc.0001"]["body_state"]["hydration"]["deficit_pct_body_mass"] = -10.0
+    with pytest.raises(PhysicalHistoryError, match="invalid stored physical body/capacity"):
+        replay_body_history(_signed(doc), log)

@@ -286,10 +286,263 @@ func physicalRecords(raw []byte)([]map[string]any,error){
   if _,ok:=rec["payload"].(map[string]any);!ok{return nil,ErrInvalidPhysical}
   clock,ok:=rec["wall_time"].(string)
   if !ok||len(clock)>64{return nil,ErrInvalidPhysical}
-  wall,err:=time.Parse(time.RFC3339Nano,clock)
-  if err!=nil||wall.Location().String()!="Local" && wall.UTC()!=wall{ /* no-op; UTC by offset tested below */ }
-  if err!=nil||!strings.HasSuffix(clock,"+00:00"){return nil,ErrInvalidPhysical}
+  if _,err:=time.Parse(time.RFC3339Nano,clock);err!=nil||!strings.HasSuffix(clock,"+00:00"){
+   return nil,ErrInvalidPhysical
+  }
   recs=append(recs,rec)
  }
  return recs,nil
+}
+
+
+func hashJSON(value any, spaced bool) (string,error) {
+ b,err:=pyJSON(value,spaced);if err!=nil{return "",err}
+ dig:=sha256.Sum256(b);return hex.EncodeToString(dig[:]),nil
+}
+
+func strictRecordField(r map[string]any,k string)string {
+ s,_:=r[k].(string);return s
+}
+
+func localInstant(hours float64)(string,error) {
+ if hours<0||hours>=100000||math.IsNaN(hours)||math.IsInf(hours,0){return "",ErrInvalidPhysical}
+ if hours==0{return "Y1_START",nil}
+ return fmt.Sprintf("Y1_START+%09.3fh",hours),nil
+}
+
+func scanCompletedSource(rows []map[string]any)([]map[string]any,[]map[string]any,error){
+ failed:=func()([]map[string]any,[]map[string]any,error){return nil,nil,ErrInvalidPhysical}
+ if strictRecordField(rows[0],"event")!="run.started"||
+  strictRecordField(rows[0],"sim_time")!="Y1_START"{return failed()}
+ opening,ok:=rows[0]["payload"].(map[string]any);if !ok{return failed()}
+ originalMeta,ok:=opening["run_metadata"].(map[string]any);if !ok{return failed()}
+ if _,ok=object(opening,"run_metadata","required_components");!ok{return failed()}
+ originalMetaJSON,err:=pyJSON(originalMeta,false);if err!=nil{return failed()}
+ completedSeeds:=false
+ phase:="seed"
+ used:=map[string]bool{}
+ var intent map[string]any
+ var intentSeq,advanceCount,firstSeq,lastSeq int
+ var lastEnd float64
+ var segmentHours float64
+ var transitions,commands []map[string]any
+ sampled:=map[string]bool{}
+ for i:=1;i<len(rows);i++{
+  row:=rows[i];kind:=strictRecordField(row,"event")
+  payload:=row["payload"].(map[string]any)
+  switch kind {
+  case "capacity.sampled":
+   if phase!="seed"||completedSeeds||row["sim_time"]!="Y1_START"{return failed()}
+   subject,ok:=payload["character_id"].(string)
+   if !ok||subject==""||sampled[subject]{return failed()}
+   sampled[subject]=true
+  case "cohort.correlation_report":
+   if phase!="seed"||completedSeeds||len(sampled)==0||row["sim_time"]!="Y1_START"{return failed()}
+   completedSeeds=true
+  case "run.extended":
+   if !completedSeeds||(phase!="seed"&&phase!="completed")||row["sim_time"]!="Y1_START"{return failed()}
+   ext,ok:=object(payload,"run_metadata","required_components");if !ok{return failed()}
+   meta,err:=pyJSON(ext["run_metadata"],false)
+   if err!=nil||!bytes.Equal(meta,originalMetaJSON){return failed()}
+   phase="extended"
+   intent=nil
+   intentSeq=0;advanceCount=0;firstSeq=0;lastSeq=0;lastEnd=0
+  case "body.advance.intent.v1":
+   if phase!="extended"{return failed()}
+   intent,ok=object(payload,"protocol","character_id","planned_days",
+    "expected_event_count","sleep_hours","quality","wbgt_c",
+    "t_hours_before","dynamics_version")
+   if !ok||intent["protocol"]!="psv1-2.advance.v1"{return failed()}
+   subject,ok:=intent["character_id"].(string)
+   if !ok||subject==""||used[subject]||len(subject)>128{return failed()}
+   if !numberEq(intent["t_hours_before"],json.Number("0"))||
+    row["sim_time"]!="Y1_START"{return failed()}
+   days,valid:=intValue(intent["planned_days"])
+   if !valid||days<1||days>50000{return failed()}
+   n,valid:=intValue(intent["expected_event_count"])
+   if !valid||n<1||n>100000{return failed()}
+   sleep,valid:=number(intent["sleep_hours"])
+   if !valid||sleep<0||sleep>24{return failed()}
+   wbgt,valid:=number(intent["wbgt_c"])
+   if !valid||wbgt < -100||wbgt>100{return failed()}
+   if intent["quality"]!="poor"&&intent["quality"]!="fair"&&intent["quality"]!="good"{return failed()}
+   expected:=days*2
+   if sleep==0||sleep==24{expected=days}
+   if expected!=n{return failed()}
+   if intent["dynamics_version"]!=originalMeta["dynamics_version"]{return failed()}
+   segmentHours=sleep
+   intentSeq=i
+   phase="intent"
+   used[subject]=true
+  case "body.advanced":
+   if phase!="intent"&&phase!="advancing"{return failed()}
+   subject,ok:=payload["character_id"].(string)
+   if !ok||subject!=intent["character_id"]{return failed()}
+   expectedN,_:=intValue(intent["expected_event_count"])
+   if advanceCount>=expectedN{return failed()}
+   if _,ok=object(payload,"character_id","dt_hours","segment",
+    "t_hours_before","t_hours_after","environment","load",
+    "dynamics_version","channels_changed");!ok{return failed()}
+   dt,valid:=number(payload["dt_hours"]);if !valid||dt<=0||dt>24{return failed()}
+   start,valid:=number(payload["t_hours_before"]);if !valid||start!=lastEnd{return failed()}
+   end,valid:=number(payload["t_hours_after"])
+   if !valid||math.Abs((start+dt)-end)>1e-8{return failed()}
+   clock,err:=localInstant(end)
+   if err!=nil||row["sim_time"]!=clock{return failed()}
+   env,ok:=payload["environment"].(map[string]any)
+   if !ok||!numberEq(env["wbgt_c"],intent["wbgt_c"]){return failed()}
+   wantLabel,wantHours:="awake",24.0-segmentHours
+   if segmentHours==24{wantLabel="asleep";wantHours=24}
+   if segmentHours>0&&segmentHours<24 && advanceCount%2==1{
+    wantLabel="asleep";wantHours=segmentHours
+   }
+   if segmentHours==0{wantLabel="awake";wantHours=24}
+   if payload["segment"]!=wantLabel||math.Abs(dt-wantHours)>1e-9{return failed()}
+   asleep,ok:=env["asleep"].(bool)
+   if !ok||asleep!=(wantLabel=="asleep"){return failed()}
+   if wantLabel=="asleep"&&env["sleep_quality"]!=intent["quality"]{return failed()}
+   if payload["dynamics_version"]!=intent["dynamics_version"]{return failed()}
+   normalized:=cloneMap(row);normalized["wall_time"]="1970-01-01T00:00:00+00:00"
+   semHash,err:=hashJSON(normalized,false);if err!=nil{return failed()}
+   diffHash,err:=hashJSON(payload["channels_changed"],false);if err!=nil{return failed()}
+   transitions=append(transitions,map[string]any{
+    "subject_id":subject,"source_local_seq":row["seq"],
+    "source_local_sim_time":row["sim_time"],
+    "source_local_after_hours":payload["t_hours_after"],
+    "source_local_delta_hours":payload["dt_hours"],
+    "source_segment":payload["segment"],
+    "semantic_record_sha256":semHash,"channel_diff_sha256":diffHash,
+   })
+   advanceCount++
+   if advanceCount==1{firstSeq=i}
+   lastSeq=i;lastEnd=end
+   phase="advancing"
+  case "body.advance.complete.v1":
+   if phase!="advancing"{return failed()}
+   complete,ok:=object(payload,"protocol","character_id","intent_seq","first_advance_seq",
+    "last_advance_seq","planned_days","emitted_event_count","t_hours_after",
+    "final_body_sha256","dynamics_version")
+   if !ok||complete["protocol"]!="psv1-2.advance.v1"||
+    complete["character_id"]!=intent["character_id"]||
+    complete["dynamics_version"]!=intent["dynamics_version"]||
+    !numberEq(complete["planned_days"],intent["planned_days"])||
+    !integerEq(complete["intent_seq"],intentSeq)||
+    !integerEq(complete["first_advance_seq"],firstSeq)||
+    !integerEq(complete["last_advance_seq"],lastSeq)||
+    !integerEq(complete["emitted_event_count"],advanceCount)||
+    !numberEq(complete["t_hours_after"],json.Number(strconv.FormatFloat(lastEnd,'f',-1,64)))||
+    !hexDigest(complete["final_body_sha256"]){return failed()}
+   expectedN,_:=intValue(intent["expected_event_count"])
+   if advanceCount!=expectedN||i!=lastSeq+1{return failed()}
+   clock,err:=localInstant(lastEnd)
+   if err!=nil||row["sim_time"]!=clock{return failed()}
+   normalized:=cloneMap(row);normalized["wall_time"]="1970-01-01T00:00:00+00:00"
+   semHash,err:=hashJSON(normalized,false);if err!=nil{return failed()}
+   commands=append(commands,map[string]any{
+    "subject_id":intent["character_id"],"intent_seq":json.Number(strconv.Itoa(intentSeq)),
+    "complete_seq":row["seq"],"first_advance_seq":json.Number(strconv.Itoa(firstSeq)),
+    "last_advance_seq":json.Number(strconv.Itoa(lastSeq)),
+    "planned_days":intent["planned_days"],
+    "emitted_event_count":json.Number(strconv.Itoa(advanceCount)),
+    "t_hours_after":complete["t_hours_after"],
+    "final_body_sha256":complete["final_body_sha256"],
+    "semantic_completion_sha256":semHash,
+   })
+   phase="completed"
+  default:return failed()
+  }
+ }
+ if phase!="completed"||len(commands)==0{return failed()}
+ return transitions,commands,nil
+}
+
+func transitionMatches(received,actual map[string]any)bool{
+ for key,want:=range actual{
+  got,ok:=received[key];if !ok{return false}
+  switch key {
+  case "source_local_seq","source_local_after_hours","source_local_delta_hours":
+   if !numberEq(got,want){return false}
+  default:if got!=want{return false}
+  }
+ }
+ return true
+}
+func commandMatches(received,actual map[string]any)bool{
+ for key,want:=range actual{
+  got,ok:=received[key];if !ok{return false}
+  switch key {
+  case "intent_seq","complete_seq","first_advance_seq","last_advance_seq",
+   "planned_days","emitted_event_count","t_hours_after":
+   if !numberEq(got,want){return false}
+  default:if got!=want{return false}
+  }
+ }
+ return true
+}
+func checkBody(value any,subject string)error{
+ fail:=ErrInvalidPhysical
+ b,ok:=object(value,
+  "character_id","t_hours","w_prime_balance","peripheral_fatigue",
+  "central_fatigue","cumulative_load","sleep","energy","hydration",
+  "thermal","soreness","injuries","illnesses","pain")
+ if !ok||b["character_id"]!=subject{return fail}
+ for _,name:=range []string{"t_hours","central_fatigue"}{
+  if _,ok:=number(b[name]);!ok{return fail}
+ }
+ for _,entry:=range []struct{name string;fields []string}{
+  {"w_prime_balance",[]string{"remaining_j","capacity_j","tau_s"}},
+  {"cumulative_load",[]string{"acute_7d","chronic_28d"}},
+  {"sleep",[]string{"debt_hours","hours_since_wake","circadian_phase","last_sleep"}},
+  {"energy",[]string{"substrate_availability","balance_kcal_24h","last_meal_at_h"}},
+  {"hydration",[]string{"deficit_pct_body_mass"}},
+  {"thermal",[]string{"core_offset_c","wbgt","work_rest_ratio","clothing_insulation"}},
+  {"soreness",[]string{"by_region","repeated_bout_adaptation"}},
+  {"pain",[]string{"by_region","global_intensity","analgesia"}},
+ }{
+  m,ok:=object(b[entry.name],entry.fields...)
+  if !ok{return fail}
+  for k,v:=range m{
+   if k=="last_sleep"||k=="by_region"||k=="repeated_bout_adaptation"{continue}
+   if _,ok:=number(v);!ok{return fail}
+  }
+ }
+ sleep:=b["sleep"].(map[string]any)
+ if sleep["last_sleep"]!=nil{
+  last,ok:=object(sleep["last_sleep"],"start_h","end_h","quality")
+  if !ok{return fail}
+  for _,name:=range []string{"start_h","end_h"}{if _,ok:=number(last[name]);!ok{return fail}}
+  if last["quality"]!="good"&&last["quality"]!="fair"&&last["quality"]!="poor"{return fail}
+ }
+ for _,name:=range []string{"injuries","illnesses"}{
+  a,ok:=b[name].([]any)
+  if !ok||len(a)!=0{return fail}
+ }
+ for _,name:=range []string{"peripheral_fatigue","pain"}{
+  mapping:=b[name]
+  if name=="pain"{mapping=b["pain"].(map[string]any)["by_region"]}
+  if !checkRegions(mapping,false){return fail}
+ }
+ sore:=b["soreness"].(map[string]any)
+ regions,ok:=sore["by_region"].(map[string]any)
+ if !ok||len(regions)!=4{return fail}
+ for _,name:=range []string{"legs","arms","grip","core"}{
+  r,ok:=object(regions[name],"latency","pending_onset","expressed")
+  if !ok{return fail}
+  if _,ok:=number(r["expressed"]);!ok{return fail}
+  lag,ok:=r["latency"].([]any);if !ok||len(lag)==0||len(lag)>100{return fail}
+  for _,v:=range lag{if _,ok:=number(v);!ok{return fail}}
+  pending,ok:=r["pending_onset"].([]any)
+  if !ok||len(pending)!=0{return fail}
+ }
+ repeats,ok:=sore["repeated_bout_adaptation"].(map[string]any)
+ if !ok||len(repeats)!=0{return fail}
+ return nil
+}
+func checkRegions(value any,_ bool)bool{
+ m,ok:=object(value,"legs","arms","grip","core")
+ if !ok{return false}
+ for _,v:=range m{
+  n,ok:=number(v);if !ok||n<0||n>1{return false}
+ }
+ return true
 }

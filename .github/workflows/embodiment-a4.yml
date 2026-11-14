@@ -1,0 +1,51 @@
+name: CSFRV1-9A A4 physical adapter contract gate
+"on":
+  pull_request:
+    branches: [main, feat/100-a3-physical-disclosure-firewall]
+    paths:
+      - "tests/architecture/test_embodiment_a4_conformance.py"
+      - "tests/architecture/test_embodiment_a3_disclosure.py"
+      - "tests/architecture/embodiment_a3_disclosure.py"
+      - "tests/architecture/embodiment_a2_transition_reference.py"
+      - "docs/architecture/embodiment-causal-adapter-v1/**"
+      - "docs/spec/causal-simulation-foundation-v1.md"
+      - "internal/csf/contextboundary/**"
+      - ".github/workflows/embodiment-a4.yml"
+permissions:
+  contents: read
+concurrency:
+  group: a4-contract-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Install pinned Python toolchain
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+      - name: Verify changes and PR head SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check HEAD^1 HEAD
+          git rev-parse HEAD
+          echo "PR HEAD: ${{ github.event.pull_request.head.sha }}"
+      - name: Execute A1+A2+A3+A4 full contract tests
+        run: |
+          python -m pytest -q \
+            tests/architecture/test_embodiment_ipc_contract.py \
+            tests/architecture/test_embodiment_a2_transitions.py \
+            tests/architecture/test_embodiment_a3_disclosure.py \
+            tests/architecture/test_embodiment_a4_conformance.py
+      - name: Go strict agent-context boundary tests
+        run: go test -count=1 ./internal/csf/contextboundary

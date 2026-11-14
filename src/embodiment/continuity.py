@@ -153,6 +153,30 @@ def _sha(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+def _same_typed(actual: Any, expected: Any) -> bool:
+    """Never accept Python's True == 1 or 1 == 1.0 for source-contract fields."""
+    if type(actual) is not type(expected):
+        return False
+    if type(actual) is dict:
+        return set(actual) == set(expected) and all(
+            _same_typed(actual[k], expected[k]) for k in expected
+        )
+    if type(actual) in (list, tuple):
+        return len(actual) == len(expected) and all(
+            _same_typed(left, right) for left, right in zip(actual, expected)
+        )
+    return actual == expected
+
+
+def _finite_number(value: Any) -> bool:
+    if type(value) not in (int, float):
+        return False
+    try:
+        return math.isfinite(value)
+    except (OverflowError, ValueError):
+        return False
+
+
 def _snapshot(raw: bytes) -> dict:
     _valid(type(raw) is bytes and 0 < len(raw) <= _MAX_SNAPSHOT_BYTES,
            "snapshot bytes missing or over limit")
@@ -269,20 +293,23 @@ def _seed_reference(snapshot: dict) -> tuple[dict[str, BodyState], dict[str, dic
         _valid(type(baseline["schema_version"]) is int and
                baseline["schema_version"] == 1 and
                baseline["sim_time"] == Y1_START and
-               origin == expected_origin and
-               baseline["dimensions"] == expected_dims and
-               baseline["evidence_sufficiency"] == expected_suff,
+               _same_typed(origin, expected_origin) and
+               _same_typed(baseline["dimensions"], expected_dims) and
+               _same_typed(baseline["evidence_sufficiency"], expected_suff),
                "seed baseline does not reproduce pinned physical model")
         _valid(type(declared[subject]) is str and
                declared[subject] == record.posterior_hash and
-               suff[subject] == expected_suff,
+               _same_typed(suff[subject], expected_suff),
                "run provenance disagrees with seed")
-        profile = capacity_profile_of(section)
-        _valid(all(profile.value(d) == record.profile.value(d) for d in Dimension),
-               "stored capacity not equivalent to reconstructed capacity")
-        body = body_state_of(section)
+        try:
+            profile = capacity_profile_of(section)
+            _valid(all(profile.value(d) == record.profile.value(d) for d in Dimension),
+                   "stored capacity not equivalent to reconstructed capacity")
+            body = body_state_of(section)
+        except (ValueError, TypeError, KeyError, OverflowError) as exc:
+            raise PhysicalHistoryError("invalid stored physical body/capacity") from exc
         initial = initial_body_state(subject, profile, params=params)
-        _valid(section["body_state"] == as_document(initial),
+        _valid(_same_typed(section["body_state"], as_document(initial)),
                "initial physical body differs from pinned model")
         bodies[subject] = body
         expected_samples[subject] = capacity_sampled_payload(record, posterior)
@@ -302,10 +329,10 @@ def replay_body_history(snapshot_bytes: bytes, events_bytes: bytes) -> VerifiedP
     opening = records[0]
     _valid(opening["event"] == EVENT_RUN_STARTED and opening["sim_time"] == Y1_START,
            "local log missing run.started")
-    _valid(opening["payload"] == {
+    _valid(_same_typed(opening["payload"], {
         "run_metadata": snapshot["run_metadata"],
         "required_components": ["prior", "dynamics"],
-    }, "opening event provenance mismatch")
+    }), "opening event provenance mismatch")
 
     # capacity.sampled order is local provenance only, not a causal ordering key.
     sampled: set[str] = set()
@@ -317,7 +344,8 @@ def replay_body_history(snapshot_bytes: bytes, events_bytes: bytes) -> VerifiedP
         _valid(type(p) is dict and type(p.get("character_id")) is str,
                "invalid capacity.sampled subject")
         subject = p["character_id"]
-        _valid(subject in samples and subject not in sampled and p == samples[subject],
+        _valid(subject in samples and subject not in sampled and
+               _same_typed(p, samples[subject]),
                "capacity.sampled differs from independently reproduced seed")
         sampled.add(subject)
         i += 1
@@ -328,7 +356,7 @@ def replay_body_history(snapshot_bytes: bytes, events_bytes: bytes) -> VerifiedP
     # Verify the complete recorded correlation payload rather than accepting
     # an arbitrary telemetry record with a matching cohort size.
     from .cli import correlation_report  # lazy import: CLI imports this module for the command
-    _valid(records[i]["payload"] == correlation_report(prior, store, posteriors),
+    _valid(_same_typed(records[i]["payload"], correlation_report(prior, store, posteriors)),
            "cohort correlation report mismatch")
     i += 1
 
@@ -337,18 +365,22 @@ def replay_body_history(snapshot_bytes: bytes, events_bytes: bytes) -> VerifiedP
     active_count = 0
     used_subjects: set[str] = set()
     awaiting_extension = True
+    phase_records: list[dict] = []
     while i < len(records):
         item = records[i]
         kind = item["event"]
         if kind == EVENT_RUN_EXTENDED:
             _valid(awaiting_extension or active_count > 0,
                    "empty run.extended phase in physical log")
-            _valid(item["sim_time"] == Y1_START and item["payload"] == {
+            if phase_records:
+                _check_phase_schedule(phase_records)
+            _valid(item["sim_time"] == Y1_START and _same_typed(item["payload"], {
                 "run_metadata": snapshot["run_metadata"],
                 "required_components": ["prior", "dynamics"],
-            }, "run.extended metadata mismatch")
+            }), "run.extended metadata mismatch")
             active_subject = None
             active_count = 0
+            phase_records = []
             awaiting_extension = False
         elif kind == EVENT_BODY_ADVANCED:
             _valid(not awaiting_extension, "body.advanced without run.extended phase")
@@ -367,11 +399,14 @@ def replay_body_history(snapshot_bytes: bytes, events_bytes: bytes) -> VerifiedP
             _validate_transition(item, bodies, params, traits)
             counts[subject] += 1
             active_count += 1
+            phase_records.append(item)
         else:
             raise PhysicalHistoryError("unsupported physical history event kind")
         i += 1
     _valid(awaiting_extension or active_count > 0,
            "trailing run.extended phase has no verified transition")
+    if phase_records:
+        _check_phase_schedule(phase_records)
     return VerifiedPhysicalPrefix(
         bodies=MappingProxyType(dict(sorted(bodies.items()))),
         advances_by_character=MappingProxyType(counts),
@@ -396,7 +431,7 @@ def _validate_transition(
     _valid(payload["dynamics_version"] == params.model_version,
            "body.advanced dynamics version mismatch")
     dt = payload["dt_hours"]
-    _valid(type(dt) in (float, int) and math.isfinite(dt) and
+    _valid(_finite_number(dt) and
            0 < dt <= params.integration.max_interval_hours,
            "invalid physical dt_hours")
     segment = payload["segment"]
@@ -414,14 +449,14 @@ def _validate_transition(
         )
     except (ValueError, ValidationError) as exc:
         raise PhysicalHistoryError("recorded environment invalid") from exc
-    _valid(as_document(expected_env) == data,
+    _valid(_same_typed(as_document(expected_env), data),
            "recorded environment not supported by advance-clock")
     old = bodies[subject]
     _valid(type(payload["t_hours_before"]) in (float, int) and
            payload["t_hours_before"] == old.t_hours,
            "physical time continuity mismatch")
     exposure = Exposure.of(environment=expected_env, traits=traits, params=params)
-    _valid(payload["load"] == as_document(exposure.load),
+    _valid(_same_typed(payload["load"], as_document(exposure.load)),
            "unsupported PSV1-2 load")
     try:
         new = advance(old, dt, exposure)
@@ -432,9 +467,48 @@ def _validate_transition(
            "replayed end time mismatch")
     _valid(record["sim_time"] == logical_sim_time(Y1_START, new.t_hours),
            "replayed local sim_time mismatch")
-    _valid(payload["channels_changed"] == channel_diff(old, new),
+    _valid(_same_typed(payload["channels_changed"], channel_diff(old, new)),
            "replayed physical channel_diff mismatch")
     bodies[subject] = new
+
+
+def _check_phase_schedule(records: list[dict]) -> None:
+    """Each PSV1-2 CLI phase is a prefix of repeated identical 24h day segments.
+
+    This validates *the possible producer shape*, not that its intended day
+    count completed. A crash after the awake segment is a valid local prefix.
+    """
+    _valid(bool(records), "empty physical phase")
+    first = records[0]["payload"]
+    first_hours = first["dt_hours"]
+    first_kind = first["segment"]
+    first_env = first["environment"]
+    if first_kind == "asleep" or first_hours == 24:
+        _valid(first_hours == 24, "single-segment PSV1-2 days require 24 hours")
+        for record in records:
+            part = record["payload"]
+            _valid(part["segment"] == first_kind and part["dt_hours"] == 24 and
+                   _same_typed(part["environment"], first_env),
+                   "inconsistent repeated 24-hour physical segment")
+    else:
+        _valid(first_kind == "awake" and 0 < first_hours < 24,
+               "invalid first day-segment for PSV1-2 CLI")
+        sleep_env: dict | None = None
+        for index, record in enumerate(records):
+            part = record["payload"]
+            if index % 2 == 0:
+                _valid(part["segment"] == "awake" and part["dt_hours"] == first_hours and
+                       _same_typed(part["environment"], first_env),
+                       "awake segment differs from fixed PSV1-2 day plan")
+            else:
+                _valid(part["segment"] == "asleep" and
+                       part["dt_hours"] == 24 - first_hours and
+                       part["environment"]["wbgt_c"] == first_env["wbgt_c"],
+                       "asleep segment does not close PSV1-2 day")
+                if sleep_env is None:
+                    sleep_env = part["environment"]
+                _valid(_same_typed(part["environment"], sleep_env),
+                       "sleep conditions changed within PSV1-2 command")
 
 
 def verify_body_history(run_dir: str | Path) -> VerifiedPhysicalPrefix:

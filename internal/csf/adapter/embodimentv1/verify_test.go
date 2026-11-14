@@ -146,6 +146,11 @@ func TestGoPhysicalDomainRejectsSchemaShapedNumericViolations(t *testing.T){
   {"negative soreness",func(b map[string]any){
    b["soreness"].(map[string]any)["by_region"].(map[string]any)["legs"].(map[string]any)["expressed"]=json.Number("-1")
   }},
+  {"negative latency",func(b map[string]any){
+   by:=b["soreness"].(map[string]any)["by_region"].(map[string]any)
+   leg:=by["legs"].(map[string]any)
+   leg["latency"].([]any)[0]=json.Number("-1")
+  }},
   {"negative core thermal offset",func(b map[string]any){
    b["thermal"].(map[string]any)["core_offset_c"]=json.Number("-0.1")
   }},

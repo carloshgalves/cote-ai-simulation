@@ -98,19 +98,35 @@ func securePinnedFile(path string, max int64) ([]byte, error) {
 	})
 	if err != nil {
 		class := "OPEN_DENIED"
-		if errors.Is(err, unix.ELOOP) { class = "SYMLINK_REJECTED" }
-		if errors.Is(err, unix.ENOSYS) { class = "OPENAT2_UNAVAILABLE" }
-		if errors.Is(err, unix.EXDEV) { class = "CROSS_DEVICE" }
-		if errors.Is(err, unix.EINVAL) { class = "INVALID_OPEN_FLAGS" }
+		if errors.Is(err, unix.ELOOP) {
+			class = "SYMLINK_REJECTED"
+		}
+		if errors.Is(err, unix.ENOSYS) {
+			class = "OPENAT2_UNAVAILABLE"
+		}
+		if errors.Is(err, unix.EXDEV) {
+			class = "CROSS_DEVICE"
+		}
+		if errors.Is(err, unix.EINVAL) {
+			class = "INVALID_OPEN_FLAGS"
+		}
 		return nil, fmt.Errorf("%w: A1_%s", ErrUnadmitted, class)
 	}
 	file := os.NewFile(uintptr(fd), "trusted-a1")
 	defer file.Close()
 	stat, err := file.Stat()
-	if err != nil { return nil, fmt.Errorf("%w: A1_FSTAT",ErrUnadmitted) }
-	if !stat.Mode().IsRegular() { return nil, fmt.Errorf("%w: A1_NOT_REGULAR",ErrUnadmitted) }
-	if stat.Size() <= 0 || stat.Size() > max { return nil, fmt.Errorf("%w: A1_FILE_SIZE",ErrUnadmitted) }
-	if stat.Mode().Perm()&0o022 != 0 { return nil, fmt.Errorf("%w: A1_FILE_PERMISSIONS",ErrUnadmitted) }
+	if err != nil {
+		return nil, fmt.Errorf("%w: A1_FSTAT", ErrUnadmitted)
+	}
+	if !stat.Mode().IsRegular() {
+		return nil, fmt.Errorf("%w: A1_NOT_REGULAR", ErrUnadmitted)
+	}
+	if stat.Size() <= 0 || stat.Size() > max {
+		return nil, fmt.Errorf("%w: A1_FILE_SIZE", ErrUnadmitted)
+	}
+	if stat.Mode().Perm()&0o022 != 0 {
+		return nil, fmt.Errorf("%w: A1_FILE_PERMISSIONS", ErrUnadmitted)
+	}
 	data, err := io.ReadAll(io.LimitReader(file, max+1))
 	if err != nil || len(data) == 0 || int64(len(data)) != stat.Size() {
 		return nil, ErrUnadmitted

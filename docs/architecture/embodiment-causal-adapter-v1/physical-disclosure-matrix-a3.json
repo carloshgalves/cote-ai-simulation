@@ -2,7 +2,7 @@
   "policy_version": "csfrv1-9a-a3.v1",
   "source_schema": "verified-transition-evidence-v1.schema.json",
   "source_schema_id": "https://cote-sim/embodiment/verified-transition-evidence-v1.schema.json",
-  "schema_sha256_state": "validated_by_exact_tree_comparison_not_claimed_as_signed",
+  "schema_sha256_state": "source_git_blob_sha_pinned_and_verified",
   "exhaustive_schema_paths": true,
   "default_classification": "REJECT_UNKNOWN",
   "agent_context_direct_disclosure": false,
@@ -566,5 +566,6 @@
       "requires_go_authentication": false,
       "recipient_scope": "NONE"
     }
-  }
+  },
+  "source_schema_git_blob_sha": "85c6da4eb4fcf5366da93346dbc51b02c78dfa5e"
 }

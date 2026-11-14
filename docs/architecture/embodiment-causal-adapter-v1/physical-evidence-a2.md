@@ -66,8 +66,8 @@ A2 rejeita: hash raw/documental/normalizado diferente do A1, fonte incompleta, c
 
 ## Gates
 
-- [ ] CI A2 com schema, casos físicos novos, regressões #105 e A1 no SHA exato.
-- [ ] Revisão adversarial dos contratos/negativos de transições; remediação e novo review até zero achados acionáveis.
-- [ ] Provar remoção dos validadores de seed redundantes sem remoção de seeding real.
+- [x] CI A2 com schema e dados físicos reais, regressões #105 e A1: [Actions #43538769650](https://github.com/carloshgalves/cote-ai-simulation/actions/runs/43538769650), **175 PASS**, 0 warnings no checkpoint `444102386d03da5040209586e0825c128cc418dc`; novo check do HEAD após esta edição documental é obrigatório.
+- [x] Re-review adversarial do executor no contrato de referência (PR #104, comentário A2-T01–T05); cinco achados corrigidos, nenhum outro acionável identificado no escopo A2. **Não equivale a revisão formal independente.**
+- [x] Auditoria do diff: quatro arquivos seed-only redundantes retirados da PR, apenas seis arquivos novos/alterados, cinco links internos válidos; seeding original e continuidade permanecem na main.
 - [ ] Revisão independente, aceitação humana e merge.
 - [ ] A3/A4/CSFRV1-10 e First Real Run continuam NO-GO.

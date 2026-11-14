@@ -184,8 +184,11 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 		return zero, fmt.Errorf("%w: A1_SIGNER", ErrUnadmitted)
 	}
 	executable, err := securePinnedFile(host.ExecutablePath, 128*1024*1024)
-	if err != nil || sha256.Sum256(executable) != reg.ExecutableSHA256 {
-		return zero, fmt.Errorf("%w: A1_EXECUTABLE_PIN", ErrUnadmitted)
+	if err != nil {
+		return zero, fmt.Errorf("%w: A1_EXECUTABLE_OPEN", ErrUnadmitted)
+	}
+	if sha256.Sum256(executable) != reg.ExecutableSHA256 {
+		return zero, fmt.Errorf("%w: A1_EXECUTABLE_HASH", ErrUnadmitted)
 	}
 	if !filepath.IsAbs(host.ImportRoot) {
 		return zero, fmt.Errorf("%w: A1_IMPORT_ROOT", ErrUnadmitted)

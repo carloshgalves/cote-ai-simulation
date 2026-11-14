@@ -161,13 +161,23 @@ func makeSealedPhysicalFD(raw []byte) (*os.File, error) {
 	return file, nil
 }
 func checkedPrivateRoot(path string) error {
-	if !filepath.IsAbs(path) { return fmt.Errorf("%w: A1_ROOT_NOT_ABSOLUTE",ErrUnadmitted) }
-	fi,err:=os.Lstat(path)
-	if err!=nil {return fmt.Errorf("%w: A1_ROOT_NOT_FOUND",ErrUnadmitted)}
-	if !fi.IsDir()||fi.Mode()&os.ModeSymlink!=0{return fmt.Errorf("%w: A1_ROOT_TYPE",ErrUnadmitted)}
-	if fi.Mode().Perm()&0o077!=0{return fmt.Errorf("%w: A1_ROOT_PERMISSIONS",ErrUnadmitted)}
-	st,ok:=fi.Sys().(*syscall.Stat_t)
-	if !ok||st.Uid!=uint32(os.Geteuid()){return fmt.Errorf("%w: A1_ROOT_OWNER",ErrUnadmitted)}
+	if !filepath.IsAbs(path) {
+		return fmt.Errorf("%w: A1_ROOT_NOT_ABSOLUTE", ErrUnadmitted)
+	}
+	fi, err := os.Lstat(path)
+	if err != nil {
+		return fmt.Errorf("%w: A1_ROOT_NOT_FOUND", ErrUnadmitted)
+	}
+	if !fi.IsDir() || fi.Mode()&os.ModeSymlink != 0 {
+		return fmt.Errorf("%w: A1_ROOT_TYPE", ErrUnadmitted)
+	}
+	if fi.Mode().Perm()&0o077 != 0 {
+		return fmt.Errorf("%w: A1_ROOT_PERMISSIONS", ErrUnadmitted)
+	}
+	st, ok := fi.Sys().(*syscall.Stat_t)
+	if !ok || st.Uid != uint32(os.Geteuid()) {
+		return fmt.Errorf("%w: A1_ROOT_OWNER", ErrUnadmitted)
+	}
 	return nil
 }
 

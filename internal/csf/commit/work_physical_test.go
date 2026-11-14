@@ -149,10 +149,16 @@ func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledge
 		t.Fatal(err)
 	}
 	importRoot, err := filepath.Abs("../../../src")
-	if err != nil { t.Fatal(err) }
-	stagingRoot,err:=filepath.Abs(t.TempDir())
-	if err!=nil{t.Fatal(err)}
-	if err:=os.Chmod(stagingRoot,0o700);err!=nil{t.Fatal(err)}
+	if err != nil {
+		t.Fatal(err)
+	}
+	stagingRoot, err := filepath.Abs(t.TempDir())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Chmod(stagingRoot, 0o700); err != nil {
+		t.Fatal(err)
+	}
 	approved, err := physicalhost.RunSupervisedPhysical(ctx, physicalhost.ProducerHost{
 		Bundle: b, GenesisCanonical: g.CanonicalBytes, PrivateKey: key,
 		ExecutablePath: pinnedPython, PythonHome: pythonHome, ImportRoot: importRoot, PrivateStagingRoot: stagingRoot,

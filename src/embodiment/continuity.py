@@ -420,6 +420,17 @@ def replay_body_history(snapshot_bytes: bytes, events_bytes: bytes) -> VerifiedP
             _valid(p["protocol"] == "psv1-2.advance.v1" and
                    p["dynamics_version"] == params.model_version,
                    "unsupported physical command intent version")
+            _valid(type(p["planned_days"]) is int and
+                   1 <= p["planned_days"] <= 50000 and
+                   type(p["expected_event_count"]) is int and
+                   1 <= p["expected_event_count"] <= 100000 and
+                   _finite_number(p["sleep_hours"]) and
+                   0 <= p["sleep_hours"] <= 24 and
+                   _finite_number(p["wbgt_c"]) and
+                   -100 <= p["wbgt_c"] <= 100 and
+                   type(p["quality"]) is str and
+                   p["quality"] in ("good", "fair", "poor"),
+                   "invalid physical command intent fields")
             subject = p["character_id"]
             _valid(type(subject) is str and subject in bodies and
                    subject not in used_subjects,

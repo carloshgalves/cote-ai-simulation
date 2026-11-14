@@ -119,7 +119,9 @@ func (c *Coordinator) CommitPhysical(ctx context.Context, ledger *inputledger.Le
 		return zero, err
 	}
 	manifestRaw, err := c.bundle.PhysicalManifestCanonical()
-	if err != nil { return zero, err }
+	if err != nil {
+		return zero, err
+	}
 	cut, err := embodimentv1.DecodeSignedCut(cutRaw, signature)
 	if err != nil {
 		return zero, err

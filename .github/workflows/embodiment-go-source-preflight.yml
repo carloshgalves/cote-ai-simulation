@@ -73,7 +73,7 @@ jobs:
           files="$(gofmt -l internal/csf/adapter/embodimentv1/*.go internal/csf/reducer/physical*.go internal/csf/policy/physical_extension*.go internal/csf/genesis/physical_genesis_test.go internal/csf/commit/work_physical*.go internal/csf/persistence/sqlite/work_physical.go internal/csf/persistence/sqlite/physical_replay.go internal/csf/settlement/physical_event.go internal/physicalhost/*.go)"
           if [ -n "$files" ]; then
             echo "Go files are not formatted: $files"
-            gofmt -d internal/csf/adapter/embodimentv1/*.go internal/csf/reducer/physical*.go internal/csf/policy/physical_extension*.go internal/csf/genesis/physical_genesis_test.go internal/csf/commit/work_physical.go internal/csf/persistence/sqlite/work_physical.go internal/csf/persistence/sqlite/physical_replay.go internal/csf/settlement/physical_event.go internal/physicalhost/*.go
+            gofmt -d internal/csf/adapter/embodimentv1/*.go internal/csf/reducer/physical*.go internal/csf/policy/physical_extension*.go internal/csf/genesis/physical_genesis_test.go internal/csf/commit/work_physical*.go internal/csf/persistence/sqlite/work_physical.go internal/csf/persistence/sqlite/physical_replay.go internal/csf/settlement/physical_event.go internal/physicalhost/*.go
             exit 1
           fi
       - name: Produce actual PSV1-2 and A2 evidence for Go

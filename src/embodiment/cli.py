@@ -26,6 +26,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import itertools
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -333,8 +334,10 @@ def advance_clock_command(
     it would leave a snapshot whose bodies and whose `capacity.sampled` records
     came from different moments.
     """
-    if days < 0:
-        raise ValueError("the clock does not run backwards")
+    if type(days) is not int or days < 0 or days > 50000:
+        raise ValueError("days must be an integer in [0, 50000]")
+    if not math.isfinite(wbgt_c) or not -100 <= wbgt_c <= 100:
+        raise ValueError("wbgt_c must be finite and within supported [-100, 100] degC")
     run_dir = Path(run_dir)
     snapshot_path = run_dir / "snapshot.yaml"
     events_path = run_dir / "events.jsonl"
@@ -389,6 +392,10 @@ def advance_clock_command(
             raise RunContinuityError(
                 "physical run contains an incomplete or legacy/unattested advance; "
                 "refuse a new phase until the source is independently recovered"
+            )
+        if len(segments) + prefix.log_record_count + 3 > 100000:
+            raise RunContinuityError(
+                "physical completion exceeds the source contract's 100000-record limit"
             )
 
     #: The environment the report is read in, held fixed on both sides. The body

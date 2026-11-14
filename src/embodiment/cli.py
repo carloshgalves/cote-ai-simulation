@@ -529,6 +529,11 @@ def _build_parser() -> argparse.ArgumentParser:
         dest="wbgt_c",
         help="Ambient wet-bulb globe temperature in degrees C.",
     )
+    check = subcommands.add_parser(
+        "verify-history",
+        help="Read-only verification of seeded/advanced PSV1-2 physical prefix; no resume or CSF admission.",
+    )
+    check.add_argument("--run", required=True, dest="run_dir")
     return parser
 
 
@@ -561,6 +566,17 @@ def main(argv: Sequence[str] | None = None) -> int:
                 wbgt_c=args.wbgt_c,
             )
         )
+        return 0
+    if args.command == "verify-history":
+        from .continuity import verify_body_history
+
+        result = verify_body_history(args.run_dir)
+        print(f"status            {result.status}")
+        print(f"body.advanced     {result.body_advance_count} verified")
+        print(f"log_records       {result.log_record_count}")
+        print(f"snapshot_raw_sha256 {result.snapshot_raw_sha256}")
+        print(f"events_raw_sha256   {result.events_raw_sha256}")
+        print("Note: verified local prefix only; no completed command or CSF state admitted.")
         return 0
     parser.error(f"unknown command {args.command!r}")  # pragma: no cover
     return 2  # pragma: no cover

@@ -82,6 +82,7 @@ type ProducerHost struct {
 	GenesisCanonical   []byte
 	PrivateKey         ed25519.PrivateKey
 	ExecutablePath     string
+	PythonHome         string
 	ImportRoot         string
 	PrivateStagingRoot string
 	Epoch              uint64
@@ -211,7 +212,7 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 	if sha256.Sum256(executable) != reg.ExecutableSHA256 {
 		return zero, fmt.Errorf("%w: A1_EXECUTABLE_HASH", ErrUnadmitted)
 	}
-	if !filepath.IsAbs(host.ImportRoot) {
+	if !filepath.IsAbs(host.ImportRoot) || !filepath.IsAbs(host.PythonHome) {
 		return zero, fmt.Errorf("%w: A1_IMPORT_ROOT", ErrUnadmitted)
 	}
 	modulePath := filepath.Join(host.ImportRoot, "embodiment", "a1_capture.py")
@@ -246,8 +247,9 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 	cmd := exec.CommandContext(processCtx, host.ExecutablePath,
 		"-B", "-s", "-m", "embodiment.a1_capture", "--out", stage, "--plan", planPath)
 	cmd.Dir = stage
-	cmd.Env = []string{"PYTHONPATH=" + host.ImportRoot, "PYTHONNOUSERSITE=1",
-		"PYTHONSAFEPATH=1", "PYTHONDONTWRITEBYTECODE=1", "LC_ALL=C.UTF-8"}
+	cmd.Env = []string{"PYTHONPATH=" + host.ImportRoot, "PYTHONHOME=" + host.PythonHome,
+		"LD_LIBRARY_PATH=" + filepath.Join(host.PythonHome,"lib"),
+		"PYTHONNOUSERSITE=1", "PYTHONSAFEPATH=1", "PYTHONDONTWRITEBYTECODE=1", "LC_ALL=C.UTF-8"}
 	cmd.Stdout = io.Discard
 	cmd.Stderr = io.Discard
 	cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true, Pdeathsig: syscall.SIGKILL}

@@ -96,6 +96,13 @@ func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledge
 		t.Fatal(err)
 	}
 	executableHash := sha256.Sum256(executable)
+	// The Actions toolcache may be group-writable. A1 must never relax the
+	// producer executable invariant, so test with a privately staged, pinned
+	// read-only interpreter and the trusted original Python library home.
+	executableRoot := t.TempDir()
+	pinnedPython := filepath.Join(executableRoot,"python-a1-pinned")
+	if err := os.WriteFile(pinnedPython,executable,0o500);err!=nil{t.Fatal(err)}
+	pythonHome := filepath.Dir(filepath.Dir(py))
 	module, err := os.ReadFile("../../../src/embodiment/a1_capture.py")
 	if err != nil {
 		t.Fatal(err)
@@ -145,7 +152,7 @@ func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledge
 	}
 	approved, err := physicalhost.RunSupervisedPhysical(ctx, physicalhost.ProducerHost{
 		Bundle: b, GenesisCanonical: g.CanonicalBytes, PrivateKey: key,
-		ExecutablePath: py, ImportRoot: importRoot, PrivateStagingRoot: t.TempDir(),
+		ExecutablePath: pinnedPython, PythonHome:pythonHome, ImportRoot: importRoot, PrivateStagingRoot: t.TempDir(),
 		Epoch: 1, Plan: physicalhost.ProducerPlan{
 			WorldSeed: 42, Count: 3,
 			Advances: []physicalhost.ProducerAdvance{

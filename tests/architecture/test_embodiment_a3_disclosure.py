@@ -367,3 +367,38 @@ def test_nonobject_policy_is_denied_without_trace_of_private_data(invalid):
 def test_nonobject_schema_is_denied_without_untyped_crash(invalid):
     with pytest.raises(DisclosureRejected, match="contract rejected"):
         validate_policy(schema=invalid)
+
+
+@pytest.mark.parametrize("violation", [
+    "nan_body", "infinite_body", "opaque_body", "surrogate_in_body",
+])
+def test_non_json_numeric_and_opaque_evidence_fail_closed(physical_run, violation):
+    evidence, _ = physical_run
+    e = copy.deepcopy(evidence)
+    body = e["subject_tips"][0]["verified_body"]
+    if violation == "nan_body":
+        body["central_fatigue"] = float("nan")
+    elif violation == "infinite_body":
+        body["central_fatigue"] = float("inf")
+    elif violation == "opaque_body":
+        body["central_fatigue"] = object()
+    elif violation == "surrogate_in_body":
+        body["character_id"] = "\ud800"
+    with pytest.raises(DisclosureRejected, match="contract rejected"):
+        validate_source(e)
+
+
+@pytest.mark.parametrize("raw", [
+    '{"valid":1,"valid":2}',
+    '{"nested":{"value":"ok","value":"override"}}',
+    '{"classification":NaN}',
+    '{"classification":Infinity}',
+    '{"classification":1e400}',
+    '{"classification":}',
+])
+def test_a3_policy_parser_rejects_duplicate_and_nonfinite_json(tmp_path, raw):
+    from tests.architecture.embodiment_a3_disclosure import _load_json
+    path = tmp_path / "untrusted.json"
+    path.write_text(raw, encoding="utf-8")
+    with pytest.raises(DisclosureRejected, match="contract rejected"):
+        _load_json(path)

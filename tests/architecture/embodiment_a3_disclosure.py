@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -20,6 +21,7 @@ BASE = ROOT / "docs/architecture/embodiment-causal-adapter-v1"
 SCHEMA = BASE / "schemas/verified-transition-evidence-v1.schema.json"
 POLICY = BASE / "physical-disclosure-matrix-a3.json"
 MAX_CANDIDATE_BYTES = 4096
+MAX_SOURCE_EVIDENCE_BYTES = 4 * 1024 * 1024  # A1 framed-message ceiling
 CLASSIFICATIONS = frozenset({
     "ENGINE_ONLY", "FORBIDDEN_IN_CONTEXT", "QUALITATIVE_DERIVATION_ONLY",
 })
@@ -92,8 +94,32 @@ def _deny() -> None:
     raise DisclosureRejected("physical disclosure contract rejected")
 
 
+def _strict_pairs(pairs: list[tuple[str, Any]]) -> dict:
+    result: dict = {}
+    for key, value in pairs:
+        if key in result:
+            _deny()
+        result[key] = value
+    return result
+
+
+def _finite_float(raw: str) -> float:
+    value = float(raw)
+    if not math.isfinite(value):
+        _deny()
+    return value
+
+
 def _load_json(path: Path) -> dict:
-    return json.loads(path.read_text(encoding="utf-8"))
+    try:
+        return json.loads(
+            path.read_text(encoding="utf-8"),
+            object_pairs_hook=_strict_pairs,
+            parse_constant=lambda _: _deny(),
+            parse_float=_finite_float,
+        )
+    except (ValueError, UnicodeError, OverflowError, RecursionError):
+        _deny()
 
 
 def all_terminal_schema_paths(schema: Mapping[str, Any]) -> frozenset[str]:
@@ -236,6 +262,17 @@ def validate_source(evidence: Any, *, policy: dict | None = None) -> None:
     schema = _load_json(SCHEMA)
     validate_policy(schema=schema, policy=policy)
     if type(evidence) is not dict:
+        _deny()
+    # Enforce actual JSON wire semantics: jsonschema on Python values alone
+    # may accept NaN as a number and raise on opaque nested objects.
+    try:
+        payload = json.dumps(
+            evidence, ensure_ascii=False, sort_keys=True,
+            separators=(",", ":"), allow_nan=False,
+        ).encode("utf-8", errors="strict")
+    except (TypeError, ValueError, OverflowError, UnicodeError, RecursionError):
+        _deny()
+    if len(payload) > MAX_SOURCE_EVIDENCE_BYTES:
         _deny()
     try:
         jsonschema.Draft202012Validator(schema).validate(evidence)

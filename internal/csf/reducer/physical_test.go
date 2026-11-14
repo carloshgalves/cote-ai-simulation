@@ -58,7 +58,7 @@ func TestPhysicalStateRoundTripAndDeterministicCAS(t *testing.T) {
 	if err != nil || nextHash != repeatHash || !reflect.DeepEqual(next, repeat) {
 		t.Fatal("deterministic replay mismatch")
 	}
-	again, _, err := ApplyCompletedPhysical(next, []PhysicalBody{a})
+	_, _, err = ApplyCompletedPhysical(next, []PhysicalBody{a})
 	if !errors.Is(err, ErrInvalidPhysicalState) {
 		t.Fatal("stale re-application advanced world")
 	}

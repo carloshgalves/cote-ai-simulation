@@ -1,6 +1,6 @@
 //go:build linux
 
-package embodimentv1
+package physicalhost
 
 import (
 	"bytes"
@@ -18,6 +18,8 @@ import (
 	"time"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ embodimentv1 "github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
+ "regexp"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
@@ -38,6 +40,62 @@ type ProducerPlan struct {
 	Advances  []ProducerAdvance `json:"advances"`
 }
 
+type ApprovedCut = embodimentv1.ApprovedCut
+type SourcePins = embodimentv1.SourcePins
+type SignedCut = embodimentv1.SignedCut
+var ErrInvalidPhysical = embodimentv1.ErrInvalidPhysical
+var ErrUnadmitted = embodimentv1.ErrUnadmitted
+var InspectSealedUnadmitted = embodimentv1.InspectSealedUnadmitted
+var InspectSignedSealedAuthorized = embodimentv1.InspectSignedSealedAuthorized
+const maxSnapshot = 16 * 1024 * 1024
+const maxLog = 64 * 1024 * 1024
+const maxEnvelope = 4_194_304
+const requiredMemfdSeals = unix.F_SEAL_WRITE | unix.F_SEAL_SHRINK | unix.F_SEAL_GROW | unix.F_SEAL_SEAL
+var hostSubjectID = regexp.MustCompile(`^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*//go:build linux
+
+package physicalhost
+
+import (
+	"bytes"
+	"context"
+	"crypto/ed25519"
+	"crypto/sha256"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"syscall"
+	"time"
+
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+ embodimentv1 "github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
+ "regexp"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+	"golang.org/x/sys/unix"
+)
+
+// ProducerAdvance is a closed, bounded physical-engine instruction, never a
+// shell argument, source path or global simulation coordinate.
+type ProducerAdvance struct {
+	Subject string `json:"subject"`
+	Days    int    `json:"days"`
+	Sleep   string `json:"sleep"`
+	Quality string `json:"quality"`
+}
+type ProducerPlan struct {
+	WorldSeed int64             `json:"world_seed"`
+	Count     int               `json:"count"`
+	Advances  []ProducerAdvance `json:"advances"`
+}
+
+)
+func validSubjectID(subject string) bool {return hostSubjectID.MatchString(subject)}
+func signedCutPayload(c SignedCut)([]byte,error){return embodimentv1.SignableCutBytes(c)}
 func (p ProducerPlan) validate() error {
 	if p.Count < 1 || p.Count > 4096 || len(p.Advances) == 0 || len(p.Advances) > p.Count {
 		return ErrInvalidPhysical

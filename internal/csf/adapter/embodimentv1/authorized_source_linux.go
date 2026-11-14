@@ -228,3 +228,7 @@ func VerifySignedCut(c SignedCut, registration policy.PhysicalRegistration,
 	}
 	return nil
 }
+
+// SignableCutBytes yields the canonical signed record for a trusted host.
+// This exports no private key, token issuer or causal publication handle.
+func SignableCutBytes(c SignedCut)([]byte,error){return signedCutPayload(c)}

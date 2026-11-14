@@ -118,6 +118,8 @@ func (c *Coordinator) CommitPhysical(ctx context.Context, ledger *inputledger.Le
 	if err != nil {
 		return zero, err
 	}
+	manifestRaw, err := c.bundle.PhysicalManifestCanonical()
+	if err != nil { return zero, err }
 	cut, err := embodimentv1.DecodeSignedCut(cutRaw, signature)
 	if err != nil {
 		return zero, err
@@ -133,8 +135,8 @@ func (c *Coordinator) CommitPhysical(ctx context.Context, ledger *inputledger.Le
 	if err != nil || !bytes.Equal(persisted, fence.Canonical) {
 		return zero, errors.New("physical fence is not durably published")
 	}
-	_, inputs, _, rounds, _, run := view.Snapshot()
-	if cycle.Plan != nil || len(rounds) != 0 || uint64(cycle.Ordinal) > math.MaxInt64 {
+	_, inputs, _, _, _, run := view.Snapshot()
+	if cycle.Plan != nil || uint64(cycle.Ordinal) > math.MaxInt64 {
 		return zero, errors.New("physical terminal cannot skip a round or clock plan")
 	}
 	g, err := c.store.ValidatedGenesis(ctx, [32]byte(run), c.bundle)

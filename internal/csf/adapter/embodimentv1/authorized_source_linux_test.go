@@ -4,6 +4,8 @@ package embodimentv1
 
 import (
 	"crypto/ed25519"
+ "crypto/sha256"
+ "os/exec"
 	"crypto/rand"
 	"encoding/hex"
 	"encoding/json"
@@ -26,7 +28,23 @@ func signedCutFixture(t *testing.T) ([]byte, *policy.Bundle, SignedCut, ed25519.
 	if err != nil {
 		t.Fatal(err)
 	}
-	base, err := policy.Load(physicalBundlePath)
+	executablePin:=strings.Repeat("ab",32)
+ modulePin:=strings.Repeat("ef",32)
+ if os.Getenv("PHYSICAL_A1_PRODUCER_TEST")=="1"{
+  py,err:=exec.LookPath("python")
+  if err!=nil{t.Fatal(err)}
+  py,err=filepath.EvalSymlinks(py)
+  if err!=nil{t.Fatal(err)}
+  executable,err:=os.ReadFile(py)
+  if err!=nil{t.Fatal(err)}
+  hash:=sha256.Sum256(executable)
+  executablePin=hex.EncodeToString(hash[:])
+  module,err:=os.ReadFile("../../../../src/embodiment/a1_capture.py")
+  if err!=nil{t.Fatal(err)}
+  moduleHash:=sha256.Sum256(module)
+  modulePin=hex.EncodeToString(moduleHash[:])
+ }
+ base, err := policy.Load(physicalBundlePath)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35,7 +53,8 @@ func signedCutFixture(t *testing.T) ([]byte, *policy.Bundle, SignedCut, ed25519.
 		ExtensionID: "cote.embodiment.physical.v1",
 		StateSchema: reducer.PhysicalSchemaID, StateVersion: 1, StateVariant: reducer.PhysicalVariant,
 		ActionType: "physical.advance", ActionVersion: 1, ActionOperation: "physical.advance", ActionProducer: "physical.a1",
-		SourceID: "physical.a1", ProducerExecutableSHA256: strings.Repeat("ab", 32),
+		SourceID: "physical.a1", ProducerExecutableSHA256: executablePin,
+  ProducerModuleSHA256: modulePin,
 		ProducerPublicKeyEd25519: hex.EncodeToString(public), Disclosure: "ENGINE_ONLY",
 	}
 	raw, err := json.Marshal(contract)

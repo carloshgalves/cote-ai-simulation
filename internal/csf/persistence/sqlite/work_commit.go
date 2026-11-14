@@ -147,7 +147,15 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
  seenRounds:=map[domain.ID]bool{}
  for _,p:=range pending{
   if p.Eligibility.Compare(due)>0{continue}
-  if b.Mode==3||b.Mode==4||b.Mode==5||b.Mode==6||b.Mode==8{
+  if b.Mode==9{
+   units,ok:=fence[11].([]any)
+   if !ok||len(units)!=1{return errors.New("physical WORK source membership invalid")}
+   unit,ok:=units[0].([]any)
+   if !ok||len(unit)!=5||unit[1]!=uint64(1)||
+    !equalBytes(unit[3],p.ID[:]){
+    return errors.New("physical WORK cannot skip or invent another due unit")
+   }
+  }else if b.Mode==3||b.Mode==4||b.Mode==5||b.Mode==6||b.Mode==8{
    sys,ok:=fence[11].([]any)
    if !ok||len(sys)==0{return errors.New("system WORK source cardinality invalid")}
    matched:=false
@@ -159,7 +167,7 @@ func (s *Store) CommitWork(ctx context.Context,b ports.WorkBatch)error{
    if (b.Mode==4||b.Mode==5||b.Mode==6)&&admittedRounds[p.ID]{matched=true}
    if !matched{return errors.New("system WORK cannot skip another due unit")}
   }else if !admittedRounds[p.ID]{return errors.New("WORK has pending non-slot causal work without a source lifecycle handler")}
-  seenRounds[p.ID]=true
+  if b.Mode!=9{seenRounds[p.ID]=true}
  }
  if b.Mode!=3&&b.Mode!=4&&b.Mode!=5&&b.Mode!=6&&b.Mode!=8&&len(seenRounds)!=len(admittedRounds){return errors.New("WORK cohort does not equal due authoritative rounds")}
  if b.Mode==4||b.Mode==5||b.Mode==6{

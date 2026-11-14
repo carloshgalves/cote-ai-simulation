@@ -25,6 +25,65 @@ CLASSIFICATIONS = frozenset({
 })
 
 
+
+# Review-pinned approved provenance channels: editing JSON policy alone cannot
+# broaden what physiology may serve as a qualitative signal.
+APPROVED_QUALITATIVE_PATHS = frozenset({
+    "subject_tips[].verified_body.central_fatigue",
+    "subject_tips[].verified_body.energy.substrate_availability",
+    "subject_tips[].verified_body.hydration.deficit_pct_body_mass",
+    "subject_tips[].verified_body.pain.analgesia",
+    "subject_tips[].verified_body.pain.by_region.arms",
+    "subject_tips[].verified_body.pain.by_region.core",
+    "subject_tips[].verified_body.pain.by_region.grip",
+    "subject_tips[].verified_body.pain.by_region.legs",
+    "subject_tips[].verified_body.pain.global_intensity",
+    "subject_tips[].verified_body.peripheral_fatigue.arms",
+    "subject_tips[].verified_body.peripheral_fatigue.core",
+    "subject_tips[].verified_body.peripheral_fatigue.grip",
+    "subject_tips[].verified_body.peripheral_fatigue.legs",
+    "subject_tips[].verified_body.sleep.circadian_phase",
+    "subject_tips[].verified_body.sleep.debt_hours",
+    "subject_tips[].verified_body.sleep.hours_since_wake",
+    "subject_tips[].verified_body.sleep.last_sleep",
+    "subject_tips[].verified_body.sleep.last_sleep.end_h",
+    "subject_tips[].verified_body.sleep.last_sleep.quality",
+    "subject_tips[].verified_body.sleep.last_sleep.start_h",
+    "subject_tips[].verified_body.soreness.by_region.arms.expressed",
+    "subject_tips[].verified_body.soreness.by_region.arms.latency[]",
+    "subject_tips[].verified_body.soreness.by_region.arms.pending_onset",
+    "subject_tips[].verified_body.soreness.by_region.core.expressed",
+    "subject_tips[].verified_body.soreness.by_region.core.latency[]",
+    "subject_tips[].verified_body.soreness.by_region.core.pending_onset",
+    "subject_tips[].verified_body.soreness.by_region.grip.expressed",
+    "subject_tips[].verified_body.soreness.by_region.grip.latency[]",
+    "subject_tips[].verified_body.soreness.by_region.grip.pending_onset",
+    "subject_tips[].verified_body.soreness.by_region.legs.expressed",
+    "subject_tips[].verified_body.soreness.by_region.legs.latency[]",
+    "subject_tips[].verified_body.soreness.by_region.legs.pending_onset",
+    "subject_tips[].verified_body.soreness.repeated_bout_adaptation",
+    "subject_tips[].verified_body.thermal.core_offset_c",
+})
+APPROVED_QUALITATIVE_LABELS = frozenset({
+    "fatigue_low", "fatigue_moderate", "fatigue_high",
+    "thirst_low", "thirst_high", "pain_low", "pain_high",
+    "sleepiness_low", "sleepiness_high",
+})
+POLICY_FIELDS = frozenset({
+    "policy_version", "source_schema", "source_schema_id",
+    "schema_sha256_state", "source_schema_git_blob_sha",
+    "exhaustive_schema_paths", "default_classification",
+    "agent_context_direct_disclosure", "future_qualitative_candidate",
+    "forbidden_artifact_classes", "fields",
+})
+REQUIRED_FORBIDDEN_CLASSES = frozenset({
+    "BodyState", "CapacityProfile", "posterior", "capacity.sampled",
+    "cohort.correlation_report", "random_seed", "rng_state",
+    "third_party_body", "source_raw_bytes", "command_receipts",
+    "local_physical_clock_as_global",
+})
+
+
 class DisclosureRejected(ValueError):
     """Sanitized denial; never include source values, agent text or secrets."""
 
@@ -99,6 +158,14 @@ def validate_policy(*, schema: dict | None = None, policy: dict | None = None) -
         jsonschema.Draft202012Validator.check_schema(schema)
     except jsonschema.SchemaError:
         _deny()
+    if set(policy) != POLICY_FIELDS:
+        _deny()
+    if policy.get("source_schema") != "verified-transition-evidence-v1.schema.json":
+        _deny()
+    if policy.get("schema_sha256_state") != "source_git_blob_sha_pinned_and_verified":
+        _deny()
+    if policy.get("forbidden_artifact_classes") != sorted(REQUIRED_FORBIDDEN_CLASSES) and set(policy.get("forbidden_artifact_classes", [])) != REQUIRED_FORBIDDEN_CLASSES:
+        _deny()
     if policy.get("policy_version") != "csfrv1-9a-a3.v1":
         _deny()
     if policy.get("source_schema_id") != schema.get("$id"):
@@ -127,6 +194,10 @@ def validate_policy(*, schema: dict | None = None, policy: dict | None = None) -
             _deny()
         if rule["requires_go_authentication"] is not (classification == "QUALITATIVE_DERIVATION_ONLY"):
             _deny()
+        if classification == "QUALITATIVE_DERIVATION_ONLY" and path not in APPROVED_QUALITATIVE_PATHS:
+            _deny()
+        if path in APPROVED_QUALITATIVE_PATHS and classification != "QUALITATIVE_DERIVATION_ONLY":
+            _deny()
         if path.startswith("subject_tips[].verified_body.") and classification == "ENGINE_ONLY":
             _deny()
     proposal = policy.get("future_qualitative_candidate")
@@ -139,7 +210,8 @@ def validate_policy(*, schema: dict | None = None, policy: dict | None = None) -
     if proposal.get("subject_scope") != "SELF_ONLY":
         _deny()
     signals = proposal.get("values")
-    if not isinstance(signals, list) or not signals or len(signals) != len(set(signals)):
+    if (not isinstance(signals, list) or set(signals) != APPROVED_QUALITATIVE_LABELS
+            or len(signals) != len(APPROVED_QUALITATIVE_LABELS)):
         _deny()
     if not all(isinstance(x, str) and x.isascii() and x.replace("_", "").islower() for x in signals):
         _deny()

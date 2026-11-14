@@ -65,6 +65,10 @@ func TestForgedEvidenceNeverPassesGo(t *testing.T){
   "pretend admitted":func(m map[string]any){m["admission"]="ADMITTED"},
   "forged source":func(m map[string]any){m["source"].(map[string]any)["events_raw_sha256"]=strings.Repeat("f",64)},
   "wrong seq":func(m map[string]any){m["transitions"].([]any)[0].(map[string]any)["source_local_seq"]=json.Number("900")},
+  "float seq":func(m map[string]any){m["transitions"].([]any)[0].(map[string]any)["source_local_seq"]=json.Number("7.0")},
+  "exponent footer seq":func(m map[string]any){m["command_receipts"].([]any)[0].(map[string]any)["complete_seq"]=json.Number("11e0")},
+  "float tip count":func(m map[string]any){m["subject_tips"].([]any)[0].(map[string]any)["verified_advance_count"]=json.Number("4.0")},
+
   "wrong delta":func(m map[string]any){m["transitions"].([]any)[0].(map[string]any)["source_local_delta_hours"]=json.Number("3.0")},
   "swapped actor":func(m map[string]any){m["transitions"].([]any)[0].(map[string]any)["subject_id"]="npc.0002"},
   "wrong diff hash":func(m map[string]any){m["transitions"].([]any)[0].(map[string]any)["channel_diff_sha256"]=strings.Repeat("f",64)},
@@ -175,4 +179,63 @@ func TestGoRejectsUnknownPhysicalRequiredComponents(t *testing.T){
  if _,_,err:=scanCompletedSource(rows);err==nil{
   t.Fatal("unregistered physical component accepted by Go")
  }
+}
+
+
+func TestGoRequiresClosedPSV1TwoEnvironmentAndNoLoad(t *testing.T){
+ s:=realSource(t)
+ rows,err:=physicalRecords(s.Events)
+ if err!=nil{t.Fatal(err)}
+ for _,tt:=range []struct{name string; mutate func(map[string]any)}{
+  {"unknown env field",func(p map[string]any){
+   p["environment"].(map[string]any)["WorldRevision"]=json.Number("9")
+  }},
+  {"different fluid",func(p map[string]any){
+   p["environment"].(map[string]any)["fluid_access"]=json.Number("0.2")
+  }},
+  {"different carbohydrate",func(p map[string]any){
+   p["environment"].(map[string]any)["carbohydrate_intake"]=json.Number("0")
+  }},
+  {"hidden work",func(p map[string]any){
+   p["load"].(map[string]any)["intensity"]=json.Number("1")
+  }},
+  {"extra load field",func(p map[string]any){
+   p["load"].(map[string]any)["event_id"]="forged"
+  }},
+ }{
+  t.Run(tt.name,func(t *testing.T){
+   copied:=make([]map[string]any,len(rows))
+   for i,rec:=range rows{
+    encoded,err:=pyJSON(rec,false);if err!=nil{t.Fatal(err)}
+    value,err:=parseStrict(encoded);if err!=nil{t.Fatal(err)}
+    copied[i]=value.(map[string]any)
+   }
+   changed:=false
+   for _,rec:=range copied{
+    if rec["event"]=="body.advanced"{
+     tt.mutate(rec["payload"].(map[string]any))
+     changed=true;break
+    }
+   }
+   if !changed{t.Fatal("missing physical interval")}
+   if _,_,err:=scanCompletedSource(copied);err==nil{
+    t.Fatal("unregistered physical environment/load passed Go preflight")
+   }
+  })
+ }
+}
+
+func TestGoRejectsInvalidSubjectIDGrammar(t *testing.T){
+ src:=realSource(t)
+ rows,err:=physicalRecords(src.Events);if err!=nil{t.Fatal(err)}
+ for _,subject:=range []string{"NPC.0001","../escape","npc/0001","npc.0001\\u0000","npc.0001 ", ""}{
+  if validSubjectID(subject){t.Fatalf("unexpected subject accepted: %q",subject)}
+ }
+ target:=-1
+ for i,rec:=range rows{
+  if rec["event"]=="body.advance.intent.v1"{target=i;break}
+ }
+ if target<0{t.Fatal("no physical intent")}
+ rows[target]["payload"].(map[string]any)["character_id"]="npc/invalid"
+ if _,_,err:=scanCompletedSource(rows);err==nil{t.Fatal("invalid physical actor ID passed")}
 }

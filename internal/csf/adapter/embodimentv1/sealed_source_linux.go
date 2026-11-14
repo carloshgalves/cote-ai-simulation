@@ -73,10 +73,10 @@ func InspectSealedUnadmitted(
 		return zero, ErrInvalidPhysical
 	}
 	return InspectUnadmitted(Source{
-		Snapshot: rawSnapshot,
-		Events: rawEvents,
-		Evidence: evidence,
+		Snapshot:             rawSnapshot,
+		Events:               rawEvents,
+		Evidence:             evidence,
 		PinnedSnapshotSHA256: pins.SnapshotSHA256,
-		PinnedEventsSHA256: pins.EventsSHA256,
+		PinnedEventsSHA256:   pins.EventsSHA256,
 	})
 }

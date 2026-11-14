@@ -50,15 +50,6 @@ jobs:
           git rev-parse HEAD
           echo "PR HEAD: ${{ github.event.pull_request.head.sha }}"
           go version
-      - name: Temporary verified gofmt preview for sealed-source review
-        shell: bash
-        run: |
-          set -euo pipefail
-          for path in internal/csf/adapter/embodimentv1/sealed_source_linux.go internal/csf/adapter/embodimentv1/sealed_source_linux_test.go; do
-            printf 'GOFMT_B64_BEGIN %s\n' "$path"
-            gofmt "$path" | base64 -w0
-            printf '\nGOFMT_B64_END %s\n' "$path"
-          done
       - name: Enforce gofmt on new Go sources
         shell: bash
         run: |

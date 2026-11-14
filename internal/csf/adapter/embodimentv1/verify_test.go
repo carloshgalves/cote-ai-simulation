@@ -115,3 +115,64 @@ func TestGoRejectsDuplicateFieldsAndMalformedNumbers(t *testing.T){
   if _,err:=parseStrict(raw);err==nil{t.Errorf("invalid JSON passed: %s",raw)}
  }
 }
+
+
+func TestGoPhysicalDomainRejectsSchemaShapedNumericViolations(t *testing.T){
+ source:=realSource(t)
+ decoded,err:=parseStrict(source.Evidence)
+ if err!=nil{t.Fatal(err)}
+ obj:=decoded.(map[string]any)
+ tip:=obj["subject_tips"].([]any)[0].(map[string]any)
+ original:=tip["verified_body"].(map[string]any)
+ id:=tip["subject_id"].(string)
+ attacks:=[]struct{name string;alter func(map[string]any)}{
+  {"central fatigue >1",func(b map[string]any){b["central_fatigue"]=json.Number("1.1")}},
+  {"reserve above capacity",func(b map[string]any){
+   w:=b["w_prime_balance"].(map[string]any)
+   w["remaining_j"]=json.Number("9999999999")
+  }},
+  {"negative sleep debt",func(b map[string]any){b["sleep"].(map[string]any)["debt_hours"]=json.Number("-1")}},
+  {"invalid circadian phase",func(b map[string]any){b["sleep"].(map[string]any)["circadian_phase"]=json.Number("24")}},
+  {"negative hydration",func(b map[string]any){
+   b["hydration"].(map[string]any)["deficit_pct_body_mass"]=json.Number("-1")
+  }},
+  {"negative energy substrate",func(b map[string]any){
+   b["energy"].(map[string]any)["substrate_availability"]=json.Number("-0.1")
+  }},
+  {"negative soreness",func(b map[string]any){
+   b["soreness"].(map[string]any)["by_region"].(map[string]any)["legs"].(map[string]any)["expressed"]=json.Number("-1")
+  }},
+  {"negative core thermal offset",func(b map[string]any){
+   b["thermal"].(map[string]any)["core_offset_c"]=json.Number("-0.1")
+  }},
+  {"unbounded body time",func(b map[string]any){b["t_hours"]=json.Number("999999")}},
+ }
+ for _,attack:=range attacks{
+  t.Run(attack.name,func(t *testing.T){
+   raw,err:=pyJSON(original,false);if err!=nil{t.Fatal(err)}
+   duplicate,err:=parseStrict(raw);if err!=nil{t.Fatal(err)}
+   target:=duplicate.(map[string]any)
+   attack.alter(target)
+   if err:=checkBody(target,id);err==nil{
+    t.Fatal("forged domain-valid-looking numeric body passed Go P3 gate")
+   }
+  })
+ }
+}
+
+func TestGoRejectsUnknownPhysicalRequiredComponents(t *testing.T){
+ source:=realSource(t)
+ rows,err:=physicalRecords(source.Events);if err!=nil{t.Fatal(err)}
+ mutated:=false
+ for _,row:=range rows{
+  if row["event"]=="run.extended"{
+   row["payload"].(map[string]any)["required_components"]=[]any{"prior","unregistered"}
+   mutated=true
+   break
+  }
+ }
+ if !mutated{t.Fatal("actual fixture missing run.extended")}
+ if _,_,err:=scanCompletedSource(rows);err==nil{
+  t.Fatal("unregistered physical component accepted by Go")
+ }
+}

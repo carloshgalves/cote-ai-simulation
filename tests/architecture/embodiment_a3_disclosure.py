@@ -164,7 +164,11 @@ def validate_policy(*, schema: dict | None = None, policy: dict | None = None) -
         _deny()
     if policy.get("schema_sha256_state") != "source_git_blob_sha_pinned_and_verified":
         _deny()
-    if policy.get("forbidden_artifact_classes") != sorted(REQUIRED_FORBIDDEN_CLASSES) and set(policy.get("forbidden_artifact_classes", [])) != REQUIRED_FORBIDDEN_CLASSES:
+    forbidden = policy.get("forbidden_artifact_classes")
+    if (type(forbidden) is not list or
+            not all(type(x) is str for x in forbidden) or
+            len(forbidden) != len(REQUIRED_FORBIDDEN_CLASSES) or
+            set(forbidden) != REQUIRED_FORBIDDEN_CLASSES):
         _deny()
     if policy.get("policy_version") != "csfrv1-9a-a3.v1":
         _deny()
@@ -210,8 +214,9 @@ def validate_policy(*, schema: dict | None = None, policy: dict | None = None) -
     if proposal.get("subject_scope") != "SELF_ONLY":
         _deny()
     signals = proposal.get("values")
-    if (not isinstance(signals, list) or set(signals) != APPROVED_QUALITATIVE_LABELS
-            or len(signals) != len(APPROVED_QUALITATIVE_LABELS)):
+    if (type(signals) is not list or not all(type(x) is str for x in signals)
+            or len(signals) != len(APPROVED_QUALITATIVE_LABELS)
+            or set(signals) != APPROVED_QUALITATIVE_LABELS):
         _deny()
     if not all(isinstance(x, str) and x.isascii() and x.replace("_", "").islower() for x in signals):
         _deny()

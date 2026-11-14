@@ -153,9 +153,8 @@ func InspectUnadmitted(s Source) (Verified, error) {
   commandCount:len(sourceCommands),transitionCount:len(transitions)},nil
 }
 
-// There is no public Commit method: only the existing CSF CommitCoordinator
-// may publish a physical world revision after bundle registration/A3/A4.
-func (Verified) AdmitToWorld() error { return ErrUnadmitted }
+// Verified deliberately has no public commit/admission capability. Only
+// a future registered CSF CommitCoordinator path may publish WorldRevision.
 
 func hexDigest(v any)bool{
  s,ok:=v.(string);if !ok||len(s)!=64{return false}

@@ -321,7 +321,7 @@ def _non_cli_schedule(out, intervals):
 @pytest.mark.parametrize(
     ("intervals", "pattern"),
     [
-        ([(12.0, 21.0), (12.0, 21.0)], "day plan"),
+        ([(12.0, 21.0), (12.0, 21.0)], "asleep segment does not close"),
         ([(24.0, 21.0), (24.0, 25.0)], "24-hour physical segment"),
         ([(23.0, 21.0), (24.0, 21.0)], "day"),
     ],

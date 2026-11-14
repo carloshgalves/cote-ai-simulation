@@ -26,7 +26,7 @@ type PhysicalManifest struct {
 	ActionProducer           string `json:"action_producer"`
 	SourceID                 string `json:"source_id"`
 	ProducerExecutableSHA256 string `json:"producer_executable_sha256"`
- ProducerModuleSHA256 string `json:"producer_module_sha256"`
+	ProducerModuleSHA256     string `json:"producer_module_sha256"`
 	ProducerPublicKeyEd25519 string `json:"producer_public_key_ed25519"`
 	Disclosure               string `json:"disclosure"`
 }
@@ -45,7 +45,7 @@ type PhysicalRegistration struct {
 	ActionProducer   string
 	SourceID         string
 	ExecutableSHA256 [32]byte
- ModuleSHA256 [32]byte
+	ModuleSHA256     [32]byte
 	PublicKeyEd25519 [32]byte
 	Disclosure       string
 }
@@ -96,13 +96,17 @@ func PhysicalExtensionV1(base *Bundle, raw []byte) (*Bundle, error) {
 		return nil, errors.New("zero producer pin is forbidden")
 	}
 	var modulePin [32]byte
- if manifest.ProducerModuleSHA256!=""{
-  module,err:=hex.DecodeString(manifest.ProducerModuleSHA256)
-  if err!=nil||len(module)!=32||manifest.ProducerModuleSHA256!=hex.EncodeToString(module){return nil,errors.New("invalid producer module digest")}
-  copy(modulePin[:],module)
-  if modulePin==([32]byte{}){return nil,errors.New("zero producer module pin")}
- }
- var executablePin, publicKey [32]byte
+	if manifest.ProducerModuleSHA256 != "" {
+		module, err := hex.DecodeString(manifest.ProducerModuleSHA256)
+		if err != nil || len(module) != 32 || manifest.ProducerModuleSHA256 != hex.EncodeToString(module) {
+			return nil, errors.New("invalid producer module digest")
+		}
+		copy(modulePin[:], module)
+		if modulePin == ([32]byte{}) {
+			return nil, errors.New("zero producer module pin")
+		}
+	}
+	var executablePin, publicKey [32]byte
 	copy(executablePin[:], executable)
 	copy(publicKey[:], key)
 	extension := PhysicalRegistration{
@@ -117,13 +121,13 @@ func PhysicalExtensionV1(base *Bundle, raw []byte) (*Bundle, error) {
 		ActionProducer:   manifest.ActionProducer,
 		SourceID:         manifest.SourceID,
 		ExecutableSHA256: executablePin,
- ModuleSHA256: modulePin,
+		ModuleSHA256:     modulePin,
 		PublicKeyEd25519: publicKey,
 		Disclosure:       manifest.Disclosure,
 	}
 	derived := *base
 	derived.physical = &extension
- derived.physicalManifest=bytes.Clone(raw)
+	derived.physicalManifest = bytes.Clone(raw)
 	derived.loadedFingerprint = [32]byte{}
 	derived.loadedFingerprint, err = derived.RuntimeFingerprint()
 	if err != nil {
@@ -148,56 +152,80 @@ func (b *Bundle) PhysicalRegistration() (PhysicalRegistration, error) {
 // PhysicalManifestCanonical returns the complete pinned extension bytes.
 // InputLedger includes these so SQLite restore/fork can independently verify
 // the cryptographic producer key without reopening mutable host policy paths.
-func (b *Bundle) PhysicalManifestCanonical()([]byte,error){
-	if err:=b.VerifyInstalledBundle();err!=nil{return nil,err}
-	if b.physical==nil||len(b.physicalManifest)==0{return nil,errors.New("physical manifest not installed")}
-	if sha256.Sum256(b.physicalManifest)!=b.physical.BundleSHA256{return nil,errors.New("physical manifest changed")}
-	return bytes.Clone(b.physicalManifest),nil
+func (b *Bundle) PhysicalManifestCanonical() ([]byte, error) {
+	if err := b.VerifyInstalledBundle(); err != nil {
+		return nil, err
+	}
+	if b.physical == nil || len(b.physicalManifest) == 0 {
+		return nil, errors.New("physical manifest not installed")
+	}
+	if sha256.Sum256(b.physicalManifest) != b.physical.BundleSHA256 {
+		return nil, errors.New("physical manifest changed")
+	}
+	return bytes.Clone(b.physicalManifest), nil
 }
 
 // ParsePhysicalManifest is the independent replay parser. The durable
 // Genesis extension pin MUST be compared to BundleSHA256 by the caller;
 // parsing alone does not grant trust in a user-supplied JSON manifest.
-func ParsePhysicalManifest(raw []byte)(PhysicalRegistration,error){
+func ParsePhysicalManifest(raw []byte) (PhysicalRegistration, error) {
 	var zero PhysicalRegistration
-	if len(raw)==0||len(raw)>64*1024{return zero,errors.New("physical manifest size invalid")}
-	var m PhysicalManifest
-	decoder:=json.NewDecoder(bytes.NewReader(raw))
-	decoder.DisallowUnknownFields()
-	if err:=decoder.Decode(&m);err!=nil{return zero,err}
-	var extra any
-	if err:=decoder.Decode(&extra);err!=io.EOF{return zero,errors.New("physical manifest has trailing JSON")}
-	canonical,err:=json.Marshal(m)
-	if err!=nil||!bytes.Equal(canonical,raw){return zero,errors.New("physical manifest is not canonical")}
-	if m.Kind!="cote.embodiment.physical-registration.v1"||m.Version!=1||
-		m.ExtensionID!="cote.embodiment.physical.v1"||
-		m.StateSchema!="cote.csf.schema.typed-value"||m.StateVersion!=1||
-		m.StateVariant!="physical.body-state.v1"||m.ActionType!="physical.advance"||
-		m.ActionVersion!=1||m.ActionOperation!="physical.advance"||
-		m.ActionProducer!="physical.a1"||m.SourceID!="physical.a1"||
-		m.Disclosure!="ENGINE_ONLY"{return zero,errors.New("unregistered physical extension")}
-	getHex:=func(encoded string)([32]byte,error){
-		var hash [32]byte
-		decoded,err:=hex.DecodeString(encoded)
-		if err!=nil||len(decoded)!=32||encoded!=hex.EncodeToString(decoded){
-			return hash,errors.New("invalid physical extension digest")
-		}
-		copy(hash[:],decoded)
-		if hash==([32]byte{}){return hash,errors.New("zero physical extension digest")}
-		return hash,nil
+	if len(raw) == 0 || len(raw) > 64*1024 {
+		return zero, errors.New("physical manifest size invalid")
 	}
-	executable,err:=getHex(m.ProducerExecutableSHA256)
-	if err!=nil{return zero,err}
-	module,err:=getHex(m.ProducerModuleSHA256)
-	if err!=nil{return zero,err}
-	key,err:=getHex(m.ProducerPublicKeyEd25519)
-	if err!=nil{return zero,err}
+	var m PhysicalManifest
+	decoder := json.NewDecoder(bytes.NewReader(raw))
+	decoder.DisallowUnknownFields()
+	if err := decoder.Decode(&m); err != nil {
+		return zero, err
+	}
+	var extra any
+	if err := decoder.Decode(&extra); err != io.EOF {
+		return zero, errors.New("physical manifest has trailing JSON")
+	}
+	canonical, err := json.Marshal(m)
+	if err != nil || !bytes.Equal(canonical, raw) {
+		return zero, errors.New("physical manifest is not canonical")
+	}
+	if m.Kind != "cote.embodiment.physical-registration.v1" || m.Version != 1 ||
+		m.ExtensionID != "cote.embodiment.physical.v1" ||
+		m.StateSchema != "cote.csf.schema.typed-value" || m.StateVersion != 1 ||
+		m.StateVariant != "physical.body-state.v1" || m.ActionType != "physical.advance" ||
+		m.ActionVersion != 1 || m.ActionOperation != "physical.advance" ||
+		m.ActionProducer != "physical.a1" || m.SourceID != "physical.a1" ||
+		m.Disclosure != "ENGINE_ONLY" {
+		return zero, errors.New("unregistered physical extension")
+	}
+	getHex := func(encoded string) ([32]byte, error) {
+		var hash [32]byte
+		decoded, err := hex.DecodeString(encoded)
+		if err != nil || len(decoded) != 32 || encoded != hex.EncodeToString(decoded) {
+			return hash, errors.New("invalid physical extension digest")
+		}
+		copy(hash[:], decoded)
+		if hash == ([32]byte{}) {
+			return hash, errors.New("zero physical extension digest")
+		}
+		return hash, nil
+	}
+	executable, err := getHex(m.ProducerExecutableSHA256)
+	if err != nil {
+		return zero, err
+	}
+	module, err := getHex(m.ProducerModuleSHA256)
+	if err != nil {
+		return zero, err
+	}
+	key, err := getHex(m.ProducerPublicKeyEd25519)
+	if err != nil {
+		return zero, err
+	}
 	return PhysicalRegistration{
-		ExtensionID:m.ExtensionID,BundleSHA256:sha256.Sum256(raw),
-		StateSchema:m.StateSchema,StateVersion:m.StateVersion,StateVariant:m.StateVariant,
-		ActionType:m.ActionType,ActionVersion:m.ActionVersion,
-		ActionOperation:m.ActionOperation,ActionProducer:m.ActionProducer,
-		SourceID:m.SourceID,ExecutableSHA256:executable,ModuleSHA256:module,
-		PublicKeyEd25519:key,Disclosure:m.Disclosure,
-	},nil
+		ExtensionID: m.ExtensionID, BundleSHA256: sha256.Sum256(raw),
+		StateSchema: m.StateSchema, StateVersion: m.StateVersion, StateVariant: m.StateVariant,
+		ActionType: m.ActionType, ActionVersion: m.ActionVersion,
+		ActionOperation: m.ActionOperation, ActionProducer: m.ActionProducer,
+		SourceID: m.SourceID, ExecutableSHA256: executable, ModuleSHA256: module,
+		PublicKeyEd25519: key, Disclosure: m.Disclosure,
+	}, nil
 }

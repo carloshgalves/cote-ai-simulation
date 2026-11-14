@@ -57,7 +57,7 @@ func (c *Coordinator) StagePhysicalInput(ctx context.Context,ledger *inputledger
 	eligibility:=domain.EligibilityCoordinate{
 		NotBeforeInstant:cycle.Instant,NotBeforeCycleOrdinal:cycle.Ordinal,
 	}
-	
+
 	// Epoch is a producer unit identity, never a Python local sim_time or seq.
 	epoch:=strconv.FormatUint(cut.Epoch,10)
 	value:=[]any{"physical.source-cut.v1",manifestRaw,cutRaw,signature,completed}

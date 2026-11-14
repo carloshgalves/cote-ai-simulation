@@ -15,7 +15,10 @@ import jsonschema
 import yaml
 
 from embodiment.continuity import PhysicalHistoryError, replay_body_history
-from embodiment.eventlog import EVENT_BODY_ADVANCED, NORMALISED_WALL_TIME
+from embodiment.eventlog import (
+    EVENT_BODY_ADVANCED, EVENT_BODY_ADVANCE_INTENT,
+    EVENT_BODY_ADVANCE_COMPLETE, NORMALISED_WALL_TIME,
+)
 from embodiment.types import as_document
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -110,9 +113,31 @@ def project_verified_transitions(
     transitions = []
     last_seq: dict[str, int] = {}
     counts: dict[str, int] = {}
+    command_receipts: list[dict] = []
+    open_intent: dict | None = None
     for record in records:
         semantic = dict(record, wall_time=NORMALISED_WALL_TIME)
         normalized.append(json.dumps(semantic, ensure_ascii=False, sort_keys=True))
+        if record["event"] == EVENT_BODY_ADVANCE_INTENT:
+            open_intent = record
+            continue
+        if record["event"] == EVENT_BODY_ADVANCE_COMPLETE:
+            _require(open_intent is not None, "physical completion has no validated intent")
+            p = record["payload"]
+            command_receipts.append({
+                "subject_id": p["character_id"],
+                "intent_seq": open_intent["seq"],
+                "complete_seq": record["seq"],
+                "first_advance_seq": p["first_advance_seq"],
+                "last_advance_seq": p["last_advance_seq"],
+                "planned_days": p["planned_days"],
+                "emitted_event_count": p["emitted_event_count"],
+                "t_hours_after": p["t_hours_after"],
+                "final_body_sha256": p["final_body_sha256"],
+                "semantic_completion_sha256": _doc_sha(semantic),
+            })
+            open_intent = None
+            continue
         if record["event"] != EVENT_BODY_ADVANCED:
             continue
         payload = record["payload"]
@@ -157,7 +182,11 @@ def project_verified_transitions(
         "schema_version": 1,
         "authority": "ENGINE_ONLY",
         "admission": "PENDING_GO_ADMISSION",
-        "completion": "UNATTESTED_PREFIX",
+        "completion": (
+            "ATTESTED_COMPLETE" if prefix.all_phases_complete
+            else "UNATTESTED_PREFIX"
+        ),
+        "command_receipts": command_receipts,
         "source": {
             "snapshot_raw_sha256": snapshot_raw_sha256,
             "events_raw_sha256": events_raw_sha256,
@@ -169,10 +198,16 @@ def project_verified_transitions(
             "dynamics_version": meta["dynamics_version"],
             "log_record_count": prefix.log_record_count,
             "verified_transition_count": len(transitions),
+            "completed_phase_count": prefix.completed_phase_count,
+            "completed_transition_count": prefix.completed_transition_count,
         },
         "transitions": transitions,
         "subject_tips": tips,
     }
+    _require(len(command_receipts) == prefix.completed_phase_count and
+             sum(x["emitted_event_count"] for x in command_receipts)
+             == prefix.completed_transition_count,
+             "completion receipts differ from verified physical phases")
     _schema_validate(evidence)
     reference_bytes(evidence)
     return evidence

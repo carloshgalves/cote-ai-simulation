@@ -13,6 +13,7 @@ came from has produced numbers nobody can interpret afterwards.
 from __future__ import annotations
 
 import json
+import os
 from collections.abc import Mapping
 from datetime import UTC, datetime
 from pathlib import Path
@@ -28,6 +29,8 @@ __all__ = [
     "EVENT_CAPACITY_SAMPLED",
     "EVENT_COHORT_CORRELATION_REPORT",
     "EVENT_BODY_ADVANCED",
+    "EVENT_BODY_ADVANCE_INTENT",
+    "EVENT_BODY_ADVANCE_COMPLETE",
     "NORMALISED_WALL_TIME",
     "normalised_bytes",
     "normalised_digest",
@@ -45,6 +48,8 @@ EVENT_RUN_EXTENDED = "run.extended"
 EVENT_CAPACITY_SAMPLED = "capacity.sampled"
 EVENT_COHORT_CORRELATION_REPORT = "cohort.correlation_report"
 EVENT_BODY_ADVANCED = "body.advanced"
+EVENT_BODY_ADVANCE_INTENT = "body.advance.intent.v1"
+EVENT_BODY_ADVANCE_COMPLETE = "body.advance.complete.v1"
 
 #: Wall time is the one field that legitimately differs between two runs of the
 #: same seed, so determinism is stated over the log with wall clocks replaced.
@@ -142,6 +147,15 @@ class EventLog:
         self._handle.flush()
         self._sequence += 1
         return record
+
+    def sync(self) -> None:
+        """Durably flush terminal completion proof before declaring success.
+
+        Does not certify immutable ownership of snapshot/events: that is A1's
+        privileged source-cut gate, not this writer's responsibility.
+        """
+        self._handle.flush()
+        os.fsync(self._handle.fileno())
 
     def close(self) -> None:
         if not self._handle.closed:

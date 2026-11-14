@@ -102,9 +102,15 @@ def test_multi_day_transition_evidence_follows_real_verified_prefix(tmp_path):
     jsonschema.Draft202012Validator.check_schema(schema)
     jsonschema.Draft202012Validator(schema).validate(result)
     assert result["kind"] == "physical.verified-transition-evidence.v1"
+    assert result["source"]["completed_phase_count"] == 1
+    assert result["source"]["completed_transition_count"] == 4
+    assert len(result["command_receipts"]) == 1
+    assert result["command_receipts"][0]["complete_seq"] == 11
+    assert result["command_receipts"][0]["emitted_event_count"] == 4
+    assert result["command_receipts"][0]["final_body_sha256"] == result["subject_tips"][0]["verified_body_sha256"]
     assert result["authority"] == "ENGINE_ONLY"
     assert result["admission"] == "PENDING_GO_ADMISSION"
-    assert result["completion"] == "UNATTESTED_PREFIX"
+    assert result["completion"] == "ATTESTED_COMPLETE"
     assert result["source"]["verified_transition_count"] == prefix.body_advance_count == 4
     assert len(result["subject_tips"]) == 1
     assert result["subject_tips"][0]["verified_advance_count"] == 4
@@ -112,7 +118,7 @@ def test_multi_day_transition_evidence_follows_real_verified_prefix(tmp_path):
     assert result["subject_tips"][0]["verified_body"]["t_hours"] == 48.0
     assert result["subject_tips"][0]["visibility"] == "ENGINE_ONLY"
     assert result["subject_tips"][0]["verified_body"]["sleep"]["debt_hours"] >= 0
-    assert [x["source_local_seq"] for x in result["transitions"]] == [6, 7, 8, 9]
+    assert [x["source_local_seq"] for x in result["transitions"]] == [7, 8, 9, 10]
     assert [x["source_segment"] for x in result["transitions"]] == [
         "awake", "asleep", "awake", "asleep"
     ]
@@ -142,7 +148,7 @@ def test_multiple_independent_subjects_have_distinct_tips(tmp_path):
     tips = result["subject_tips"]
     assert [x["subject_id"] for x in tips] == ["npc.0001", "npc.0002"]
     assert [x["verified_advance_count"] for x in tips] == [4, 2]
-    assert [x["last_local_seq"] for x in tips] == [9, 12]
+    assert [x["last_local_seq"] for x in tips] == [10, 15]
     assert result["source"]["verified_transition_count"] == 6
     _verify(out, result)
 
@@ -199,6 +205,7 @@ def test_untrusted_a1_digest_types_and_widths_are_rejected(tmp_path, invalid):
     "semantic_record_sha256", "channel_diff_sha256", "source_raw",
     "source_normalised", "tip_actor", "tip_hash", "tip_count", "tip_seq",
     "reverse_order", "drop_transition", "duplicate_transition", "drop_tip",
+    "command_digest", "command_seq", "command_actor", "command_count", "command_drop",
     "tip_body", "tip_body_id",
 ])
 def test_schema_valid_but_forged_evidence_is_rejected_by_binding(tmp_path, mutation):
@@ -238,6 +245,16 @@ def test_schema_valid_but_forged_evidence_is_rejected_by_binding(tmp_path, mutat
         tip["verified_advance_count"] += 1
     elif mutation == "tip_seq":
         tip["last_local_seq"] += 1
+    elif mutation == "command_digest":
+        changed["command_receipts"][0]["final_body_sha256"] = "f" * 64
+    elif mutation == "command_seq":
+        changed["command_receipts"][0]["complete_seq"] += 1
+    elif mutation == "command_actor":
+        changed["command_receipts"][0]["subject_id"] = "npc.0002"
+    elif mutation == "command_count":
+        changed["command_receipts"][0]["emitted_event_count"] += 1
+    elif mutation == "command_drop":
+        changed["command_receipts"].pop()
     elif mutation == "reverse_order":
         changed["transitions"].reverse()
     elif mutation == "drop_transition":
@@ -370,7 +387,7 @@ def test_engine_only_materialization_cannot_be_used_as_agent_context(tmp_path):
     evidence = _project(out)
     assert evidence["authority"] == "ENGINE_ONLY"
     assert evidence["admission"] == "PENDING_GO_ADMISSION"
-    assert evidence["completion"] == "UNATTESTED_PREFIX"
+    assert evidence["completion"] == "ATTESTED_COMPLETE"
     assert "context" not in evidence
     assert "observations" not in evidence
     assert "knowledge_input" not in evidence
@@ -380,3 +397,34 @@ def test_engine_only_materialization_cannot_be_used_as_agent_context(tmp_path):
         assert "posterior" not in tip
         assert "rng" not in tip
     _verify(out, evidence)
+
+
+
+@pytest.mark.parametrize("cut", ["partial_after_first", "before_footer"])
+def test_a2_never_claims_complete_for_a_sealed_but_interrupted_physical_prefix(
+    tmp_path, cut
+):
+    out = _run(tmp_path)
+    snapshot = (out / "snapshot.yaml").read_bytes()
+    records = _records((out / "events.jsonl").read_bytes())
+    if cut == "partial_after_first":
+        first = next(i for i, r in enumerate(records) if r["event"] == "body.advanced")
+        records = records[:first + 1]
+    else:
+        records = records[:-1]
+    log = _jsonl(records)
+    normalised = []
+    for rec in copy.deepcopy(records):
+        rec["wall_time"] = "1970-01-01T00:00:00+00:00"
+        normalised.append(json.dumps(rec, sort_keys=True, ensure_ascii=False))
+    receipts = {
+        "snapshot_raw_sha256": HEX(snapshot),
+        "events_raw_sha256": HEX(log),
+        "snapshot_document_sha256": yaml.safe_load(snapshot)["snapshot_hash"],
+        "normalised_log_sha256": HEX(("\n".join(normalised) + "\n").encode()),
+    }
+    result = project_verified_transitions(snapshot, log, **receipts)
+    assert result["completion"] == "UNATTESTED_PREFIX"
+    assert result["source"]["completed_phase_count"] == 0
+    assert result["command_receipts"] == []
+    _has_no_csf_authority(result)

@@ -29,7 +29,7 @@ from .dynamics import (
 from .eventlog import (
     EVENT_BODY_ADVANCED, EVENT_CAPACITY_SAMPLED,
     EVENT_COHORT_CORRELATION_REPORT, EVENT_RUN_EXTENDED, EVENT_RUN_STARTED,
-    logical_sim_time,
+    EVENT_BODY_ADVANCE_INTENT, EVENT_BODY_ADVANCE_COMPLETE, logical_sim_time,
 )
 from .prior import POPULATION_PRIOR_PATH, PopulationPrior
 from .seeding import (
@@ -71,6 +71,15 @@ _ADVANCE_KEYS = {
     "character_id", "dt_hours", "segment", "t_hours_before", "t_hours_after",
     "environment", "load", "dynamics_version", "channels_changed",
 }
+_INTENT_KEYS = {
+    "protocol", "character_id", "planned_days", "expected_event_count",
+    "sleep_hours", "quality", "wbgt_c", "t_hours_before", "dynamics_version",
+}
+_COMPLETION_KEYS = {
+    "protocol", "character_id", "intent_seq", "first_advance_seq",
+    "last_advance_seq", "planned_days", "emitted_event_count",
+    "t_hours_after", "final_body_sha256", "dynamics_version",
+}
 
 
 class PhysicalHistoryError(ValueError):
@@ -88,6 +97,9 @@ class VerifiedPhysicalPrefix:
     snapshot_document_sha256: str
     log_record_count: int
     body_advance_count: int
+    completed_phase_count: int = 0
+    completed_transition_count: int = 0
+    all_phases_complete: bool = False
     status: str = "VERIFIED_LOCAL_PREFIX_ONLY"
 
 
@@ -372,14 +384,23 @@ def replay_body_history(snapshot_bytes: bytes, events_bytes: bytes) -> VerifiedP
     used_subjects: set[str] = set()
     awaiting_extension = True
     phase_records: list[dict] = []
+    phase_intent: dict | None = None
+    intent_record: dict | None = None
+    phase_closed = False
+    completed_phases = 0
+    completed_advances = 0
+    saw_legacy_phase = False
     while i < len(records):
         item = records[i]
         kind = item["event"]
         if kind == EVENT_RUN_EXTENDED:
             _valid(awaiting_extension or active_count > 0,
                    "empty run.extended phase in physical log")
-            if phase_records:
+            _valid(phase_intent is None or phase_closed,
+                   "new physical phase cannot follow an incomplete intent")
+            if phase_records and phase_intent is None:
                 _check_phase_schedule(phase_records)
+                saw_legacy_phase = True
             _valid(item["sim_time"] == Y1_START and _same_typed(item["payload"], {
                 "run_metadata": snapshot["run_metadata"],
                 "required_components": ["prior", "dynamics"],
@@ -387,9 +408,42 @@ def replay_body_history(snapshot_bytes: bytes, events_bytes: bytes) -> VerifiedP
             active_subject = None
             active_count = 0
             phase_records = []
+            phase_intent = None
+            intent_record = None
+            phase_closed = False
             awaiting_extension = False
+        elif kind == EVENT_BODY_ADVANCE_INTENT:
+            _valid(not awaiting_extension and not phase_records and
+                   phase_intent is None and not phase_closed,
+                   "physical advance intent must start its phase once")
+            p = _closed(item["payload"], _INTENT_KEYS, "physical intent shape invalid")
+            _valid(p["protocol"] == "psv1-2.advance.v1" and
+                   p["dynamics_version"] == params.model_version,
+                   "unsupported physical command intent version")
+            _valid(type(p["planned_days"]) is int and
+                   1 <= p["planned_days"] <= 50000 and
+                   type(p["expected_event_count"]) is int and
+                   1 <= p["expected_event_count"] <= 100000 and
+                   _finite_number(p["sleep_hours"]) and
+                   0 <= p["sleep_hours"] <= 24 and
+                   _finite_number(p["wbgt_c"]) and
+                   -100 <= p["wbgt_c"] <= 100 and
+                   type(p["quality"]) is str and
+                   p["quality"] in ("good", "fair", "poor"),
+                   "invalid physical command intent fields")
+            subject = p["character_id"]
+            _valid(type(subject) is str and subject in bodies and
+                   subject not in used_subjects,
+                   "unknown/repeated physical intent subject")
+            _valid(_finite_number(p["t_hours_before"]) and
+                   p["t_hours_before"] == bodies[subject].t_hours and
+                   item["sim_time"] == logical_sim_time(Y1_START, bodies[subject].t_hours),
+                   "physical intent starts from different verified state")
+            phase_intent = p
+            intent_record = item
         elif kind == EVENT_BODY_ADVANCED:
-            _valid(not awaiting_extension, "body.advanced without run.extended phase")
+            _valid(not awaiting_extension and not phase_closed,
+                   "body.advanced outside an open physical phase")
             subject = item["payload"].get("character_id")
             _valid(type(subject) is str and subject in bodies,
                    "unknown body.advanced character")
@@ -403,16 +457,35 @@ def replay_body_history(snapshot_bytes: bytes, events_bytes: bytes) -> VerifiedP
             p = capacity_profile_of(snapshot["characters"][subject])
             traits = BodyTraits.from_profile(p)
             _validate_transition(item, bodies, params, traits)
+            if phase_intent is not None:
+                _valid(subject == phase_intent["character_id"],
+                       "physical body differs from advance intent")
+                _valid(active_count < phase_intent["expected_event_count"],
+                       "physical body.advanced exceeds declared intent")
             counts[subject] += 1
             active_count += 1
             phase_records.append(item)
+        elif kind == EVENT_BODY_ADVANCE_COMPLETE:
+            _valid(not awaiting_extension and phase_intent is not None and
+                   intent_record is not None and not phase_closed and
+                   bool(phase_records),
+                   "completion without an active physical intent")
+            _verify_completed_phase(phase_intent, intent_record, phase_records,
+                                    item, bodies, params)
+            completed_phases += 1
+            completed_advances += len(phase_records)
+            phase_closed = True
         else:
             raise PhysicalHistoryError("unsupported physical history event kind")
         i += 1
     _valid(awaiting_extension or active_count > 0,
            "trailing run.extended phase has no verified transition")
-    if phase_records:
+    if phase_records and phase_intent is None:
         _check_phase_schedule(phase_records)
+        saw_legacy_phase = True
+    complete = completed_phases > 0 and not saw_legacy_phase and (
+        awaiting_extension or phase_closed
+    )
     return VerifiedPhysicalPrefix(
         bodies=MappingProxyType(dict(sorted(bodies.items()))),
         advances_by_character=MappingProxyType(counts),
@@ -421,7 +494,73 @@ def replay_body_history(snapshot_bytes: bytes, events_bytes: bytes) -> VerifiedP
         snapshot_document_sha256=snapshot["snapshot_hash"],
         log_record_count=len(records),
         body_advance_count=sum(counts.values()),
+        completed_phase_count=completed_phases,
+        completed_transition_count=completed_advances,
+        all_phases_complete=complete,
     )
+
+
+def _verify_completed_phase(intent: dict, start: dict, records: list[dict],
+                            terminal: dict, bodies: dict[str, BodyState],
+                            params: Any) -> None:
+    """Validate an entire declared operation from its intent to terminal receipt.
+
+    Honest conclusion proof is relative to the *sealed source bytes*. A hash
+    cannot authenticate the filesystem owner or solve A1 staging.
+    """
+    p = _closed(terminal["payload"], _COMPLETION_KEYS, "completion shape invalid")
+    _valid(p["protocol"] == "psv1-2.advance.v1" and
+           p["dynamics_version"] == params.model_version and
+           p["character_id"] == intent["character_id"],
+           "completion disagrees with physical intent version or subject")
+    days = intent["planned_days"]
+    sleep = intent["sleep_hours"]
+    wbgt = intent["wbgt_c"]
+    expected_n = intent["expected_event_count"]
+    _valid(type(days) is int and 1 <= days <= 50000 and
+           _finite_number(sleep) and 0 <= sleep <= 24 and
+           _finite_number(wbgt) and -100 <= wbgt <= 100 and
+           type(expected_n) is int and 1 <= expected_n <= 100000,
+           "invalid physical command intent bounds")
+    from .cli import day_segments
+    from .types import SleepQuality
+    try:
+        _valid(type(intent["quality"]) is str, "invalid physical sleep quality type")
+        quality = SleepQuality(intent["quality"])
+        expected_segments = day_segments(sleep, quality, wbgt) * days
+    except (ValueError, OverflowError) as exc:
+        raise PhysicalHistoryError("invalid physical command plan") from exc
+    _valid(len(expected_segments) == expected_n == len(records),
+           "physical phase is not a complete declared plan")
+    for original, (label, hours, env) in zip(records, expected_segments):
+        actual = original["payload"]
+        _valid(actual["segment"] == label and actual["dt_hours"] == hours and
+               _same_typed(actual["environment"], as_document(env)),
+               "physical event does not match declared command schedule")
+    _valid(type(p["planned_days"]) is int and
+           type(p["emitted_event_count"]) is int and
+           type(p["intent_seq"]) is int and
+           type(p["first_advance_seq"]) is int and
+           type(p["last_advance_seq"]) is int and
+           p["planned_days"] == days and
+           p["emitted_event_count"] == expected_n and
+           p["intent_seq"] == start["seq"] and
+           p["first_advance_seq"] == records[0]["seq"] == start["seq"]+1 and
+           p["last_advance_seq"] == records[-1]["seq"] and
+           terminal["seq"] == records[-1]["seq"]+1,
+           "physical terminal sequence/command cardinality mismatch")
+    final = bodies[intent["character_id"]]
+    _valid(type(p["t_hours_after"]) in (int, float) and
+           p["t_hours_after"] == final.t_hours and
+           terminal["sim_time"] == logical_sim_time(Y1_START, final.t_hours),
+           "physical terminal body clock mismatch")
+    digest = _sha(json.dumps(
+        as_document(final), sort_keys=True, ensure_ascii=False,
+        separators=(",", ":"), allow_nan=False,
+    ).encode("utf-8"))
+    _valid(type(p["final_body_sha256"]) is str and
+           p["final_body_sha256"] == digest,
+           "physical terminal BodyState digest mismatch")
 
 
 def _validate_transition(

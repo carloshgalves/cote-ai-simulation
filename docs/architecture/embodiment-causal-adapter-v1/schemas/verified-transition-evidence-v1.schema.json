@@ -13,7 +13,8 @@
     "completion",
     "source",
     "transitions",
-    "subject_tips"
+    "subject_tips",
+    "command_receipts"
   ],
   "properties": {
     "kind": {
@@ -29,7 +30,11 @@
       "const": "PENDING_GO_ADMISSION"
     },
     "completion": {
-      "const": "UNATTESTED_PREFIX"
+      "type": "string",
+      "enum": [
+        "UNATTESTED_PREFIX",
+        "ATTESTED_COMPLETE"
+      ]
     },
     "source": {
       "$ref": "#/$defs/source"
@@ -48,6 +53,14 @@
       "maxItems": 10000,
       "items": {
         "$ref": "#/$defs/tip"
+      }
+    },
+    "command_receipts": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 10000,
+      "items": {
+        "$ref": "#/$defs/command_receipt"
       }
     }
   },
@@ -77,7 +90,9 @@
         "prior_version",
         "dynamics_version",
         "log_record_count",
-        "verified_transition_count"
+        "verified_transition_count",
+        "completed_phase_count",
+        "completed_transition_count"
       ],
       "properties": {
         "snapshot_raw_sha256": {
@@ -117,6 +132,16 @@
           "type": "integer",
           "minimum": 1,
           "maximum": 99997
+        },
+        "completed_phase_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000
+        },
+        "completed_transition_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000
         }
       }
     },
@@ -637,6 +662,68 @@
               "maximum": 1
             }
           }
+        }
+      }
+    },
+    "command_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject_id",
+        "intent_seq",
+        "complete_seq",
+        "first_advance_seq",
+        "last_advance_seq",
+        "planned_days",
+        "emitted_event_count",
+        "t_hours_after",
+        "final_body_sha256",
+        "semantic_completion_sha256"
+      ],
+      "properties": {
+        "subject_id": {
+          "$ref": "#/$defs/subject_id"
+        },
+        "intent_seq": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "complete_seq": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "first_advance_seq": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "last_advance_seq": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "planned_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50000
+        },
+        "emitted_event_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "t_hours_after": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 99999
+        },
+        "final_body_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "semantic_completion_sha256": {
+          "$ref": "#/$defs/sha256"
         }
       }
     }

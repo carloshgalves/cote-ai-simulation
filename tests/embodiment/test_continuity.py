@@ -54,7 +54,7 @@ def _mutated(root: Path, name: str) -> tuple[bytes, bytes]:
     data, rec = yaml.safe_load(snap), _records(log)
     first = next(i for i, r in enumerate(rec) if r["event"] == EVENT_BODY_ADVANCED)
     advance = rec[first]
-    phase = rec[first - 1]
+    phase = next(record for record in rec if record["event"] == EVENT_RUN_EXTENDED)
     p = advance["payload"]
     if name == "seq_gap":
         advance["seq"] = 900

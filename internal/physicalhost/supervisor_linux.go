@@ -161,18 +161,13 @@ func makeSealedPhysicalFD(raw []byte) (*os.File, error) {
 	return file, nil
 }
 func checkedPrivateRoot(path string) error {
-	if !filepath.IsAbs(path) {
-		return ErrUnadmitted
-	}
-	fi, err := os.Lstat(path)
-	if err != nil || !fi.IsDir() || fi.Mode()&os.ModeSymlink != 0 ||
-		fi.Mode().Perm()&0o077 != 0 {
-		return ErrUnadmitted
-	}
-	st, ok := fi.Sys().(*syscall.Stat_t)
-	if !ok || st.Uid != uint32(os.Geteuid()) {
-		return ErrUnadmitted
-	}
+	if !filepath.IsAbs(path) { return fmt.Errorf("%w: A1_ROOT_NOT_ABSOLUTE",ErrUnadmitted) }
+	fi,err:=os.Lstat(path)
+	if err!=nil {return fmt.Errorf("%w: A1_ROOT_NOT_FOUND",ErrUnadmitted)}
+	if !fi.IsDir()||fi.Mode()&os.ModeSymlink!=0{return fmt.Errorf("%w: A1_ROOT_TYPE",ErrUnadmitted)}
+	if fi.Mode().Perm()&0o077!=0{return fmt.Errorf("%w: A1_ROOT_PERMISSIONS",ErrUnadmitted)}
+	st,ok:=fi.Sys().(*syscall.Stat_t)
+	if !ok||st.Uid!=uint32(os.Geteuid()){return fmt.Errorf("%w: A1_ROOT_OWNER",ErrUnadmitted)}
 	return nil
 }
 
@@ -221,7 +216,7 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 		return zero, fmt.Errorf("%w: A1_MODULE_HASH", ErrUnadmitted)
 	}
 	if err := checkedPrivateRoot(host.PrivateStagingRoot); err != nil {
-		return zero, fmt.Errorf("%w: A1_STAGING_ROOT", ErrUnadmitted)
+		return zero, fmt.Errorf("%w: A1_STAGING_ROOT: %w", ErrUnadmitted, err)
 	}
 	stage, err := os.MkdirTemp(host.PrivateStagingRoot, "a1-source-")
 	if err != nil {

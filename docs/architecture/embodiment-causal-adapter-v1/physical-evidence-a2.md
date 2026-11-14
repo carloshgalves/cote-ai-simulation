@@ -1,105 +1,72 @@
-# CSFRV1-9A/A2 — contrato de evidência física semeada e mapeamento para CSF
+# CSFRV1-9A/A2 — transições físicas verificadas → contrato tipado, pendente do Go
 
-Status: contrato A2 e validador de referência, ainda sem adapter Go/Python, reducer ou registro no bundle causal canônico. Esta entrega não autoriza First Real Run nem criação direta de world truth.
+**Status:** contrato A2 executável com dados de `body.advanced` reconstituídos pela PSV1-2 (#105, PR #106 já integrada). **Não admite nem publica eventos causais.** Schema e proposta de registro não pertencem ao bundle Go; A3/A4/CSFRV1-10 e gate humano continuam obrigatórios. First Real Run: NO-GO.
 
-Referências: issue #99, issue-mãe #94, A0 #97, A1 #98, ADRs 0006–0011, spec physical-simulation-v1 e causal-simulation-foundation-v1.
+**Revisão de escopo:** PR #104 foi inicialmente A2.0 (seed-only). Agora que a PSV1-2 executável foi integrada, o segundo parser/validador de seed da A2.0 e seu schema/registro/testes são retirados **da PR #104**, pois são redundantes. **O seeding físico real em src/embodiment/seeding.py e a validação de seed pela continuidade não foram removidos**: o corpo avançado exige um estado anterior confiável.
 
-Arquivos:
-- Schema: [seed-evidence-v1.schema.json](schemas/seed-evidence-v1.schema.json)
-- Registry proposto NÃO REGISTRADO: [seed-evidence-registry-proposal-v1.json](seed-evidence-registry-proposal-v1.json)
-- Validador: [embodiment_a2_reference.py](../../../tests/architecture/embodiment_a2_reference.py)
-- Testes: [test_embodiment_a2_contract.py](../../../tests/architecture/test_embodiment_a2_contract.py)
-- Fronteira de transporte A1: [embodiment-causal-adapter-v1.md](../embodiment-causal-adapter-v1.md)
+## 1. Entregas e arquivos
 
-## 1. Escopo implementado e suportado
+- [Schema fechado de transições](schemas/verified-transition-evidence-v1.schema.json): `physical.verified-transition-evidence.v1`, com `ENGINE_ONLY`, `PENDING_GO_ADMISSION` e `UNATTESTED_PREFIX`.
+- [Registry proposto, não registrado](verified-transition-registry-proposal-v1.json): traz campos/estágios de Go que **não podem ser derivados no Python**.
+- [Projetor de referência](../../../tests/architecture/embodiment_a2_transition_reference.py): usa `replay_body_history(snapshot_bytes, events_bytes)` da PSV1-2 como **único verificador físico**. Confere os quatro recibos A1; não reimplementa `seed_character`, posterior, parser YAML ou o integrador do corpo.
+- [Testes físicos e negativos](../../../tests/architecture/test_embodiment_a2_transitions.py): geram runs verdadeiros por `seed_cohort_command` e `advance_clock_command`. Corrupção/alteração de recibos, sequências, tempo, sujeito, hash, canais e saída schema-valid precisa falhar.
+- [Protocolo A1](../embodiment-causal-adapter-v1.md): `inspect_run` permanece a única operação IPC v1. A2 **não** adiciona operação escondida, canal de commit ou extensão CBOR.
 
-A2 aceita somente um par previamente selado e coerente de snapshot.yaml e events.jsonl gerados por seed-cohort no PSV1-1/2; recebe os dois como bytes, não como path externo. Prova de isolamento físico, cópia imutável, permissão de source e prazo pré-spawn pertencem à A1/#10. Um par válido tem snapshot_version=1, origem Y1_START, componente prior e dynamics, um run.started inicial, um capacity.sampled por personagem e um cohort.correlation_report terminal. O snapshot de seed inclui capacity_baseline completo e BodyState inicial, cujo valor local t_hours=0.
+**Fonte:** bytes de snapshot.yaml e events.jsonl provenientes de um corte **coerente, quiescente, imutável e autorizado** pelo host Go. Conferir SHA raw/documental/normalizado não autentica o produtor nem demonstra que o processo não escreveu no intervalo. A1 deve fornecer essa garantia na implementação do host.
 
-A saída physical.seed-evidence.v1 é exclusivamente ENGINE_ONLY e PENDING_GO_ADMISSION. Sua lista de subjects é ordenada pelo identificador de personagem, sem usar a ordem do JSONL como prioridade causal. Cada subject tem ponteiros JSON fechados às duas secções da origem e SHA-256 locais de suas secções. O corpo e capacidades numéricos não são transmitidos nesta projeção; permanecem nos bytes de origem que só o engine pode consumir após a A3. A presença do hash não substitui o dado fonte nem demonstra que uma autoridade externa o assinou.
+## 2. Mapeamento do dado físico e sua autoridade
 
-O tipo ainda não possui registro Go, action schema, reducer ou EventDraft; o registro proposto marca runtime_extension_registered=false. Uma mensagem de evidência pendente não é um evento, commit, Genesis, SourceClosure nem WorldRevision. O transporte A1 continua a permitir exclusivamente inspect_run. Qualquer operação física nova requer contrato de transporte versionado explícito, testes e aceite.
+| Registro/artefato | Verificação PSV1-2 #105 | Campo A2 | Natureza |
+| --- | --- | --- | --- |
+| snapshot.yaml inicial | SHA raw, hash documental, seed/coorte/prior/dynamics, BodyState inicial | source.snapshot_raw_sha256, source.snapshot_document_sha256, prior_version/dynamics_version | Origem física local; não Genesis CSF |
+| events.jsonl | SHA raw, UTF-8 JSONL/LF, seq 0-based contíguo, metadata e fases | source.events_raw_sha256, normalised_log_sha256, log_record_count | Fonte auditável; não event store Go |
+| run.started | metadata e componentes pinados | omitido | Abertura local, não SourceClosure |
+| capacity.sampled | rederivado de seed físico real e conferido | omitido | Pré-condição verificada, não evento global |
+| cohort.correlation_report | recalculado e comparado | omitido | Telemetria proibida em contexto de agente |
+| run.extended | identidade de fase, versão, personagem e padrão diário | omitido | Não comprova conclusão do comando |
+| body.advanced | `dynamics.advance(previous_verified_body, dt_hours, exposure)` com comparação do diff integral, clock e versões | transitions[] com referências/hashes e horários físicos locais | Transição física verificada, **ainda não admitida** |
+| Corpo final de cada ator avançado | resultante da reexecução de **toda** sua sequência | subject_tips[] com hash de BodyState, seq e contagem | Estado local ENGINE_ONLY, sem números no envelope |
+| Evento/estrutura futura | falha fechada | omitido | PSV1-3–8 exige novo contrato |
 
-## 2. Matriz de registros e decisão
+## 3. Tipos, relógios, unidades e fingerprints
 
-| Registro fonte local | Verificação A2 | Mapeamento |
+| Campo da transição A2 | Unidade/tipo | Restrição |
 | --- | --- | --- |
-| run.started | primeira posição local seq=0; run_metadata e required_components exatos, seed/roster/versions consistentes | prova de origem física apenas; NÃO Genesis/SourceClosure da CSF |
-| capacity.sampled | um por ator, sem duplicatas; 15 dimensões com units exatas; posterior_hash, substream, coorte, sufficiency e valores iguais aos do baseline | subject tipado com refs, hashes locais e source_local_sample_seq para auditoria |
-| cohort.correlation_report | exatamente um, terminal; prior_version e cohort_size consistentes | telemetria local apenas; nenhum evento causal |
-| run.extended | recusado | PSV1-8 precisa estabelecer continuidade |
-| body.advanced | recusado mesmo com snapshot hash válido | o snapshot inicial NÃO contém estado pós-avanço; PSV1-8 obrigatório |
-| outro evento, feat posterior, contest, interoception ou observation | recusado/UNKNOWN | PSV1-3–8, A3 ou #10 precisam implementar |
+| subject_id | ID de personagem, string fechada | Nunca renomeia nem inventa ator |
+| source_local_seq | inteiro do JSONL, 0-based na origem | **Não** aloca prioridade, identidade, LogicalSequence nem EventOrderKey |
+| source_local_sim_time | string física Y1_START+NNNNN.NNNh | **Não** define SimulationInstant do Go |
+| source_local_after_hours | número, horas desde o seed | Apenas tempo físico local |
+| source_local_delta_hours | número, horas por intervalo (0,24] | Não aciona o relógio global |
+| source_segment | awake/asleep | Conforme rotina diária PSV1-2 |
+| semantic_record_sha256 | hash sobre JSON de registro com wall_time normalizado | Fingerprint local, não digest canônico |
+| channel_diff_sha256 | SHA256 do diff integral previamente verificado | Não expõe o estado numérico |
+| subject_tips[].verified_body_sha256 | SHA256 local do BodyState final reconstruído | Não é WorldStateHash |
+| completion | valor obrigatório UNATTESTED_PREFIX | Prefixo verificável, **não** prova comando terminado |
 
-## 3. Matriz campo a campo, tipo e unidade
+As unidades dos 15 atributos, os valores de BodyState, Environment e IntervalLoad são validados pelos tipos físicos reais de PSV1-2, não redefinidos por A2. O objeto de referência expõe apenas horários locais, dados de segmento, contagens e hashes; não inclui capacidades, lesões, fadiga, RNG, posterior, correlatos do prior ou outros dados privados de personagens.
 
-| Origem física | Regra de validação | Campo de saída/destino |
-| --- | --- | --- |
-| arquivo snapshot.yaml | SHA-256 dos bytes completos, recebido e recalculado | source.snapshot_raw_sha256 |
-| arquivo events.jsonl | SHA-256 dos bytes completos; limite e fechamento de linhas | source.events_raw_sha256 |
-| snapshot_hash local | hash sobre JSON legado ordenado, sem o campo snapshot_hash | source.snapshot_document_sha256; não é CBOR |
-| normalized eventlog local | JSONL com wall_time fixado em 1970-01-01T00:00:00+00:00 | source.normalised_log_sha256; não é identidade causal |
-| snapshot_version | integer estrito igual a 1 | source.snapshot_version |
-| world_seed | integer estrito, igual em snapshot e run_metadata/run.started | validação somente, não exportado |
-| snapshot.sim_time e baseline.sim_time | Y1_START em runs seed-only | source.local_origin |
-| event.seq | integer local 0-based contíguo e único | subjects[].source_local_sample_seq, apenas provenance |
-| event.sim_time | Y1_START no seeding | nunca convertido em SimulationInstant global |
-| event.wall_time | string operacional | omitido; normalizado somente no log fingerprint |
-| run_metadata.prior_version e dynamics_version | strings presentes, restritas a tamanho e iguais às fontes | source.prior_version e source.dynamics_version |
-| posterior_hash_by_character | map exatamente N personagens com hash 64 hex minúsculos | subjects[].posterior_hash, cruzado em 3 registros |
-| evidence_sufficiency_by_character | exatamente 15 dimensões e zero no PSV1-1 | validado, não exposto |
-| capacity_baseline.schema_version | integer estrito 1 | validado, sem confundir com versão da CSF |
-| capacity_baseline.sampled_from | posterior/prior/sex/sex_source/substream fechados e compatíveis com capacity.sampled | validado, sem exportar RNG, sexo nem posterior numérico |
-| capacity_baseline.dimensions | mapa exatamente 15, cada entrada com value finito e unit armazenada; Pydantic CapacityProfile | subjects[].baseline_sha256, ponteiro para a origem, valores NÃO expostos |
-| body_state | conjunto de campos igual ao BodyState atual, revalidado por Pydantic; character_id igual, t_hours=0, illnesses=[] | subjects[].body_state_sha256, ponteiro para a origem, números NÃO expostos |
-| cohort.correlation_report | cohort_size do roster, prior_version pinado, terminal | sem saída: somente telemetria |
+**Canonicalização:** campos de referência têm JSON local ordenado (sort_keys=True, ensure_ascii=False, separators compactos, allow_nan=False). O `normalised_log_sha256` segue o algoritmo original `normalised_bytes` do Embodiment: wall_time fixado e registros JSON com ordenação de chaves e newline terminal. Nenhum hash A2 equivale a `canonical_bytes_v1`, digest CBOR, event_id ou autorização de fonte. Duas execuções físicas com seed igual podem ter hashes **raw** diferentes devido ao wall clock, mas digest normalizado e recibos semânticos coincidentes.
 
-Unidades de armazenamento (não confundir com unidades dos itens da bateria):
-- aerobic_capacity: laps
-- anaerobic_power: cm
-- sprint_speed: m_per_s
-- max_strength: kg
-- strength_endurance: reps_30s
-- agility: touches_20s
-- flexibility: cm
-- body_mass: kg
-- stature: cm
-- reaction_time: ms
-- coordination: hit_rate
-- injury_resilience: risk_multiplier
-- recovery_rate: h
-- thermoregulation: degC
-- pain_tolerance: percentile, com coorte de referência declarada.
+## 4. Fluxo futuro de admissão e commit Go (NÃO implementado)
 
-A lista real de unidades vem de DIMENSION_UNITS no Python físico; A2 não cria números canônicos próprios nem perfis nominais de personagens.
+1. O host Go da A1 fixa no Genesis a origem autorizada e obtém uma visão imutável/coerente dos dois arquivos. Confere hashes raw e recibos do `inspect_run`.
+2. `replay_body_history` da PSV1-2 valida o prefixo inteiro e recompõe os corpos físicos. A2 somente projeta `physical.verified-transition-evidence.v1`, que declara ENGINE_ONLY/PENDING_GO_ADMISSION/UNATTESTED_PREFIX.
+3. **Bloqueio atual:** o JSONL de advance-clock não tem marcador terminal, idempotência/fence, intenção de quantos dias avançar ou contrato transacional; mesmo um prefixo correto não garante que o comando terminou. **Não promover o estado como world truth por omissão.**
+4. A3 fecha a matriz de disclosure e A4 verifica o contrato contra codecs/schema/registries de Go. CSFRV1-10 implementa uma operação de transporte **nova e versionada**, admissão com policy/reducer registrado e codec CBOR canônico.
+5. Somente Go cria producer_unit_key, input/event/candidate IDs e ordem/tempo global a partir de autoridade de fonte/papel/ciclo — **nunca** de seq, sim_time, wall_time, PID ou chegada de worker — e aplica InputLedger → AdmissionFence → ActionSchemaRegistry → AffordanceValidator → ConflictResolver → physical reducer → CommitCoordinator → CycleCommit → WorldRevision.
 
-## 4. Canonicalização, hashes e tipos
+As fases acima descrevem uma interface proposta, não interfaces Go registradas; não alegar que o tipo já é EventDraft/CommitCandidate, nem que Go tem reducer físico, nem que observações de agentes podem ler BodyState. Os fingerprints A2 não substituem verificação independente no Go.
 
-O raw SHA-256 de cada arquivo verifica bytes da fonte selada recebida da A1; por si só não autentica o produtor. O snapshot_document_sha256 usa a função snapshot_hash legada, com json.dumps ordenado, ensure_ascii=False e default=str, excluindo snapshot_hash. O log normalised SHA segue o normalised_digest físico, substituindo só wall_time e preservando a sequência de registros. Os fingerprints baseline_sha256/body_state_sha256 usam json.dumps sort_keys=True, ensure_ascii=False, separators compactos e allow_nan=False, como hashes **locais de referência A2**.
+## 5. Limites e testes necessários
 
-Nenhum deles é canonical_bytes_v1, CausalIdentityPolicy, hash CBOR, unit_digest, event_id, WorldStateHash ou assinatura de produtor. reference_bytes do projector oferece serialização JSON estável para verificar repetibilidade de fixtures e não é byte canônico causal. Uma futura conversão Go é obrigada a usar os codecs/policies registrados da CSF e a derivação de identidade por preimage com domain separation.
+A2 rejeita: hash raw/documental/normalizado diferente do A1, fonte incompleta, campo desconhecido, valor/tipo/unidade incompatível no verificador PSV1-2, evento local inesperado, seq repetido, diff e horários adulterados, sujeitos trocados, saída schema-valid não vinculada aos mesmos bytes, tabela de tips inconsistentemente reduzida/reordenada, ou envelope acima do limite de 4,194,304 bytes de payload IPC A1.
 
-## 5. Rota normativa para uma integração Go posterior
+**PSV1-8 completa NÃO é exigida para verificar o prefixo de transições PSV1-2**, mas é exigida para reconstrução independente de **todos** os módulos físicos (estimador, esforço, observação, interocepção, disputa, recuperação/snapshot) e para as garantias finais de replay físico. A2 não recupera execução interrompida como se estivesse concluída, nem faz snapshot/resume pós-avançamento.
 
-1. Produtor físico emite os arquivos; host Go da A1 obtém visão **coerente e imutável** e fixa origem autorizada no Genesis.
-2. Validador A2 confere os dois SHA raw contra a solicitação, snapshot_hash interno, formato completo de origem, metadata, 15 units, amostras e BodyState.
-3. A2 produz apenas physical.seed-evidence.v1, ENGINE_ONLY/PENDING_GO_ADMISSION, com referências tipadas a dados de origem; não devolve um CommitCandidate autoritativo.
-4. A3 determina disclosure exaustivo por campos e recipients, com fail-closed para campo novo e telemetria; A4 valida contratos negativos/canônicos.
-5. Em CSFRV1-10, **Go** registra extensão própria, escolhe política para inicialização física sem duplicar Genesis e define produtor/fonte/papel estáveis no manifesto, independente de wall_time, seq local, sim_time local, ordem de mapas, timing ou worker.
-6. Somente Go atribui producer_unit_key sob fonte causal pinada, passa pelo InputLedger, AdmissionFence, ActionSchemaRegistry, AffordanceValidator, ConflictResolver, reducer de mundo, CommitCoordinator e CycleCommit. EventOrderKey, LogicalSequence, SimulationInstant, event_id e WorldRevision são derivados/publicados apenas pelo core.
-7. Candidato recusado ou histórico avançado sem PSV1-8 permanece sem qualquer mutação no world-state; o caminho read-only pode continuar a consultar evidência física original sem promovê-la.
+## Gates
 
-A2 **não** define ids globais para o Python nem registros CBOR que não existem no Go. O bundle proposto é um catálogo de intenções não canônicas. A escolha do reducer e schema de event draft exige decisão explícita antes de alterar os registries autoritativos.
-
-## 6. Falhas, limites e pendências
-
-Recusar: SHA raw trocado, snapshot_hash adulterado, YAML com duplicate key/alias/tag, JSONL com chaves duplicadas, NaN/Infinity, linha truncada/sem newline, seq duplicado/lacuna, sim_time não originário, evento desconhecido, extra global fields, samples ausentes/duplicados, mismatch em prior/posterior/sex/substream, unidade trocada, dimensão a mais/a menos, BodyState inválido, versão futura, snapshot incompleto e qualquer body.advanced/run.extended. Limites A1: snapshot 16 MiB, eventlog 64 MiB, linha 1 MiB, 100 mil records.
-
-Permanecem bloqueadores: PSV1-3 (estimador com constraints), PSV1-4 (ExertionIntent/performance), PSV1-5 (ObservedPerformance), PSV1-6 (interocepção), PSV1-7 (contest) e PSV1-8 (replay e estado pós-advance); A3 (disclosure), A4 (contract conformance) e CSFRV1-10 (host subprocess real, registro causal, reducer e cenário). A calibração dos parâmetros físicos continua PROVISIONAL; dados do prior não são autorizações de canon.
-
-## 7. Gates da fatia
-
-- [x] CI focal da A2 em PR executa testes com artefatos físicos reais; baseline validada com 102 PASS e diff check, e a última revisão do documento exige novo check no HEAD.
-- [x] Revisão adversarial A2-R01–R10 com remediações e re-review sem findings acionáveis identificados neste escopo; comentários individuais na PR #104.
-- [x] Links relativos, 6 arquivos, schema/registry de autoridade, unidades, source provenance e testes de permutação/tamper conferidos.
-- [ ] Revisão formal independente e aceite/merge humano; autoverificação não é certificação de terceiro.
-- [ ] First Real Run continua NO-GO; A3/A4/#10 não foram substituídas por esta referência.
+- [ ] CI A2 com schema, casos físicos novos, regressões #105 e A1 no SHA exato.
+- [ ] Revisão adversarial dos contratos/negativos de transições; remediação e novo review até zero achados acionáveis.
+- [ ] Provar remoção dos validadores de seed redundantes sem remoção de seeding real.
+- [ ] Revisão independente, aceitação humana e merge.
+- [ ] A3/A4/CSFRV1-10 e First Real Run continuam NO-GO.

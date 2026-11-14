@@ -191,7 +191,9 @@ def validate_policy(*, schema: dict | None = None, policy: dict | None = None) -
         }:
             _deny()
         classification = rule["classification"]
-        if classification not in CLASSIFICATIONS or rule["direct_disclosure"] is not False:
+        if type(classification) is not str or classification not in CLASSIFICATIONS:
+            _deny()
+        if rule["direct_disclosure"] is not False:
             _deny()
         expected_scope = "SELF_OBSERVER_ONLY" if classification == "QUALITATIVE_DERIVATION_ONLY" else "NONE"
         if rule["recipient_scope"] != expected_scope:
@@ -205,7 +207,12 @@ def validate_policy(*, schema: dict | None = None, policy: dict | None = None) -
         if path.startswith("subject_tips[].verified_body.") and classification == "ENGINE_ONLY":
             _deny()
     proposal = policy.get("future_qualitative_candidate")
-    if not isinstance(proposal, dict) or proposal.get("authority") != "NOT_ADMITTED":
+    if (type(proposal) is not dict or
+            set(proposal) != {"kind", "authority", "subject_scope", "values",
+                              "go_authorization_required",
+                              "provenance_requires_verified_source"} or
+            proposal.get("kind") != "physical.qualitative-observation-candidate.v1" or
+            proposal.get("authority") != "NOT_ADMITTED"):
         _deny()
     if proposal.get("go_authorization_required") is not True:
         _deny()

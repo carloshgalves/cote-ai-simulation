@@ -130,14 +130,15 @@ def _parse_float(token: str) -> float:
     return value
 
 
-def _check_scalars(value: Any) -> None:
+def _check_scalars(value: Any, depth: int = 0) -> None:
+    _valid(depth <= 64, "physical source nesting exceeds limit")
     if type(value) is dict:
         for key, child in value.items():
             _valid(type(key) is str, "non-string mapping key")
-            _check_scalars(child)
+            _check_scalars(child, depth + 1)
     elif type(value) is list:
         for child in value:
-            _check_scalars(child)
+            _check_scalars(child, depth + 1)
     elif type(value) is float:
         _valid(math.isfinite(value), "non-finite physical number")
     else:
@@ -185,7 +186,9 @@ def _snapshot(raw: bytes) -> dict:
         _valid(not any(isinstance(token, (AliasToken, AnchorToken, TagToken))
                        for token in yaml.scan(text)), "YAML aliases/anchors/tags forbidden")
         value = yaml.load(text, Loader=_UniqueLoader)
-    except (UnicodeDecodeError, yaml.YAMLError) as exc:
+    except PhysicalHistoryError:
+        raise
+    except (UnicodeDecodeError, yaml.YAMLError, RecursionError, ValueError, OverflowError) as exc:
         raise PhysicalHistoryError("invalid snapshot YAML") from exc
     _check_scalars(value)
     snap = _closed(value, _SNAPSHOT_KEYS, "snapshot root shape incompatible")
@@ -216,7 +219,10 @@ def _records(raw: bytes) -> list[dict]:
                 parse_constant=_reject_constant,
                 parse_float=_parse_float,
             )
-        except (UnicodeDecodeError, json.JSONDecodeError, OverflowError) as exc:
+        except PhysicalHistoryError:
+            raise
+        except (UnicodeDecodeError, json.JSONDecodeError, RecursionError,
+                OverflowError, ValueError) as exc:
             raise PhysicalHistoryError("invalid JSONL record") from exc
         _check_scalars(rec)
         record = _closed(rec, _RECORD_KEYS, "unknown physical event fields")

@@ -1,0 +1,50 @@
+name: Embodiment A3 physical disclosure contract
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "docs/architecture/embodiment-causal-adapter-v1/physical-disclosure*"
+      - "docs/architecture/embodiment-causal-adapter-v1/schemas/verified-transition-evidence-v1.schema.json"
+      - "tests/architecture/embodiment_a3_disclosure.py"
+      - "tests/architecture/test_embodiment_a3_disclosure.py"
+      - "tests/architecture/embodiment_a2_transition_reference.py"
+      - "src/embodiment/**"
+      - "internal/csf/contextboundary/**"
+      - ".github/workflows/embodiment-a3.yml"
+permissions:
+  contents: read
+concurrency:
+  group: a3-disclosure-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Install pinned test toolchain
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+      - name: Validate branch revision and whitespace
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD
+          echo "PR HEAD: ${{ github.event.pull_request.head.sha }}"
+          git diff --check HEAD^1 HEAD
+      - name: Run A3 disclosure, A2 physical verification and A1 control contract
+        run: |
+          python -m pytest -q \
+            tests/architecture/test_embodiment_a3_disclosure.py \
+            tests/architecture/test_embodiment_a2_transitions.py \
+            tests/architecture/test_embodiment_ipc_contract.py
+      - name: Go context-boundary regression
+        run: go test ./internal/csf/contextboundary

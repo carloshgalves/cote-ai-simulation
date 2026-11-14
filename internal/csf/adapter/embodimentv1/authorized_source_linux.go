@@ -18,14 +18,14 @@ import (
 // This proves signed-pair provenance, not that an arbitrary producer actually
 // serialized its Python writes; the A1 supervisor must enforce quiescence.
 type SignedCut struct {
-	RunID domain.ID
-	GenesisDigest domain.Digest
-	SourceID string
+	RunID            domain.ID
+	GenesisDigest    domain.Digest
+	SourceID         string
 	ExecutableSHA256 [32]byte
-	SnapshotSHA256 [32]byte
-	EventsSHA256 [32]byte
-	Epoch uint64
-	Signature [ed25519.SignatureSize]byte
+	SnapshotSHA256   [32]byte
+	EventsSHA256     [32]byte
+	Epoch            uint64
+	Signature        [ed25519.SignatureSize]byte
 }
 
 // signedCutPayload is canonical, length-delimited CBOR. Transport JSON,
@@ -88,6 +88,6 @@ func InspectSignedSealedUnadmitted(
 	}
 	return InspectSealedUnadmitted(snapshot, events, evidence, SourcePins{
 		SnapshotSHA256: cut.SnapshotSHA256,
-		EventsSHA256: cut.EventsSHA256,
+		EventsSHA256:   cut.EventsSHA256,
 	})
 }

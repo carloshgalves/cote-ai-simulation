@@ -125,7 +125,7 @@ func InspectUnadmitted(s Source) (Verified, error) {
    "verified_body","verified_advance_count","visibility")
   if !ok||tip["visibility"]!="ENGINE_ONLY"{return zero,ErrInvalidPhysical}
   subject,ok:=tip["subject_id"].(string)
-  if !ok||len(subject)==0||len(subject)>128||tipsBySubject[subject]!=nil{return zero,ErrInvalidPhysical}
+  if !ok||!validSubjectID(subject)||tipsBySubject[subject]!=nil{return zero,ErrInvalidPhysical}
   if err:=checkBody(tip["verified_body"],subject);err!=nil{return zero,ErrInvalidPhysical}
   canonical,err:=pyJSON(tip["verified_body"],false)
   if err!=nil{return zero,ErrInvalidPhysical}
@@ -138,8 +138,8 @@ func InspectUnadmitted(s Source) (Verified, error) {
   tip:=tipsBySubject[subject]
   if tip==nil||tip["verified_body_sha256"]!=command["final_body_sha256"] ||
    !numberEq(tip["verified_body"].(map[string]any)["t_hours"],command["t_hours_after"]) ||
-   !numberEq(tip["last_local_seq"],command["last_advance_seq"]) ||
-   !numberEq(tip["verified_advance_count"],command["emitted_event_count"]){
+   !equalIntegerLexeme(tip["last_local_seq"],command["last_advance_seq"]) ||
+   !equalIntegerLexeme(tip["verified_advance_count"],command["emitted_event_count"]){
    return zero,ErrInvalidPhysical
   }
  }
@@ -162,6 +162,17 @@ func hexDigest(v any)bool{
  for _,c:=range s{if !strings.ContainsRune("0123456789abcdef",c){return false}}
  return true
 }
+func validSubjectID(value any)bool{
+ s,ok:=value.(string)
+ return ok&&len(s)>0&&len(s)<=128&&physicalSubjectPattern.MatchString(s)
+}
+func equalIntegerLexeme(a,b any)bool{
+ x,ok:=intValue(a)
+ if !ok{return false}
+ y,ok:=intValue(b)
+ return ok&&x==y
+}
+
 func intValue(v any)(int,bool){
  s,ok:=v.(json.Number);if !ok||strings.ContainsAny(s.String(),".eE"){return 0,false}
  n,err:=strconv.Atoi(s.String());return n,err==nil&&n>=0
@@ -275,6 +286,7 @@ func appendJSON(b *bytes.Buffer,v any,spaced bool,depth int)error{
  return nil
 }
 var wallClockPattern = regexp.MustCompile("^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]{1,9})?\\+00:00$")
+var physicalSubjectPattern = regexp.MustCompile("^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$")
 
 func physicalRecords(raw []byte)([]map[string]any,error){
  if len(raw)==0||raw[len(raw)-1]!='\n'{return nil,ErrInvalidPhysical}
@@ -343,7 +355,7 @@ func scanCompletedSource(rows []map[string]any)([]map[string]any,[]map[string]an
   case "capacity.sampled":
    if phase!="seed"||completedSeeds||row["sim_time"]!="Y1_START"{return failed()}
    subject,ok:=payload["character_id"].(string)
-   if !ok||subject==""||sampled[subject]{return failed()}
+   if !ok||!validSubjectID(subject)||sampled[subject]{return failed()}
    sampled[subject]=true
   case "cohort.correlation_report":
    if phase!="seed"||completedSeeds||len(sampled)==0||row["sim_time"]!="Y1_START"{return failed()}
@@ -364,7 +376,7 @@ func scanCompletedSource(rows []map[string]any)([]map[string]any,[]map[string]an
     "t_hours_before","dynamics_version")
    if !ok||intent["protocol"]!="psv1-2.advance.v1"{return failed()}
    subject,ok:=intent["character_id"].(string)
-   if !ok||subject==""||used[subject]||len(subject)>128{return failed()}
+   if !ok||!validSubjectID(subject)||used[subject]{return failed()}
    if !numberEq(intent["t_hours_before"],json.Number("0"))||
     row["sim_time"]!="Y1_START"{return failed()}
    days,valid:=intValue(intent["planned_days"])
@@ -470,7 +482,9 @@ func transitionMatches(received,actual map[string]any)bool{
  for key,want:=range actual{
   got,ok:=received[key];if !ok{return false}
   switch key {
-  case "source_local_seq","source_local_after_hours","source_local_delta_hours":
+  case "source_local_seq":
+   if !equalIntegerLexeme(got,want){return false}
+  case "source_local_after_hours","source_local_delta_hours":
    if !numberEq(got,want){return false}
   default:if got!=want{return false}
   }
@@ -482,7 +496,9 @@ func commandMatches(received,actual map[string]any)bool{
   got,ok:=received[key];if !ok{return false}
   switch key {
   case "intent_seq","complete_seq","first_advance_seq","last_advance_seq",
-   "planned_days","emitted_event_count","t_hours_after":
+   "planned_days","emitted_event_count":
+   if !equalIntegerLexeme(got,want){return false}
+  case "t_hours_after":
    if !numberEq(got,want){return false}
   default:if got!=want{return false}
   }

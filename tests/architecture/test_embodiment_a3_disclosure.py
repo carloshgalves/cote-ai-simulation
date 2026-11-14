@@ -295,3 +295,39 @@ def test_same_schema_with_forged_blob_pin_is_rejected():
     p["source_schema_git_blob_sha"] = "0" * 40
     with pytest.raises(DisclosureRejected):
         validate_policy(policy=p)
+
+
+
+@pytest.mark.parametrize("mutation", [
+    "source_to_qualitative", "body_reserve_to_qualitative",
+    "delete_forbidden_class", "unknown_policy_field",
+    "additional_qualitative_label", "reclassified_known_signal",
+])
+def test_reclassification_cannot_silently_broaden_a3_permissions(mutation):
+    p = _policy()
+    if mutation == "source_to_qualitative":
+        p["fields"]["source.events_raw_sha256"] = {
+            "classification": "QUALITATIVE_DERIVATION_ONLY",
+            "direct_disclosure": False,
+            "requires_go_authentication": True,
+            "recipient_scope": "SELF_OBSERVER_ONLY",
+        }
+    elif mutation == "body_reserve_to_qualitative":
+        p["fields"]["subject_tips[].verified_body.w_prime_balance.capacity_j"] = {
+            "classification": "QUALITATIVE_DERIVATION_ONLY",
+            "direct_disclosure": False,
+            "requires_go_authentication": True,
+            "recipient_scope": "SELF_OBSERVER_ONLY",
+        }
+    elif mutation == "delete_forbidden_class":
+        p["forbidden_artifact_classes"].remove("rng_state")
+    elif mutation == "unknown_policy_field":
+        p["grant_all_actor_context"] = True
+    elif mutation == "additional_qualitative_label":
+        p["future_qualitative_candidate"]["values"].append("debug_full_body")
+    elif mutation == "reclassified_known_signal":
+        p["fields"]["subject_tips[].verified_body.central_fatigue"]["classification"] = "FORBIDDEN_IN_CONTEXT"
+        p["fields"]["subject_tips[].verified_body.central_fatigue"]["requires_go_authentication"] = False
+        p["fields"]["subject_tips[].verified_body.central_fatigue"]["recipient_scope"] = "NONE"
+    with pytest.raises(DisclosureRejected):
+        validate_policy(policy=p)

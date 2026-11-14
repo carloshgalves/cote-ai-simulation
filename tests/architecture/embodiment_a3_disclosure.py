@@ -20,6 +20,7 @@ BASE = ROOT / "docs/architecture/embodiment-causal-adapter-v1"
 SCHEMA = BASE / "schemas/verified-transition-evidence-v1.schema.json"
 POLICY = BASE / "physical-disclosure-matrix-a3.json"
 MAX_CANDIDATE_BYTES = 4096
+MAX_SOURCE_EVIDENCE_BYTES = 4 * 1024 * 1024  # A1 framed-message ceiling
 CLASSIFICATIONS = frozenset({
     "ENGINE_ONLY", "FORBIDDEN_IN_CONTEXT", "QUALITATIVE_DERIVATION_ONLY",
 })
@@ -236,6 +237,17 @@ def validate_source(evidence: Any, *, policy: dict | None = None) -> None:
     schema = _load_json(SCHEMA)
     validate_policy(schema=schema, policy=policy)
     if type(evidence) is not dict:
+        _deny()
+    # Enforce actual JSON wire semantics: jsonschema on Python values alone
+    # may accept NaN as a number and raise on opaque nested objects.
+    try:
+        payload = json.dumps(
+            evidence, ensure_ascii=False, sort_keys=True,
+            separators=(",", ":"), allow_nan=False,
+        ).encode("utf-8", errors="strict")
+    except (TypeError, ValueError, OverflowError, UnicodeError, RecursionError):
+        _deny()
+    if len(payload) > MAX_SOURCE_EVIDENCE_BYTES:
         _deny()
     try:
         jsonschema.Draft202012Validator(schema).validate(evidence)

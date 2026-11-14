@@ -354,3 +354,16 @@ def test_bad_policy_types_and_qualitative_metadata_fail_sanitized(attack):
         p["future_qualitative_candidate"]["values"][0] = ["fatigue_low"]
     with pytest.raises(DisclosureRejected, match="contract rejected"):
         validate_policy(policy=p)
+
+
+
+@pytest.mark.parametrize("invalid", [0, True, [], "public", {"unknown": True}])
+def test_nonobject_policy_is_denied_without_trace_of_private_data(invalid):
+    with pytest.raises(DisclosureRejected, match="contract rejected"):
+        validate_policy(policy=invalid)
+
+
+@pytest.mark.parametrize("invalid", [0, False, [], "schema"])
+def test_nonobject_schema_is_denied_without_untyped_crash(invalid):
+    with pytest.raises(DisclosureRejected, match="contract rejected"):
+        validate_policy(schema=invalid)

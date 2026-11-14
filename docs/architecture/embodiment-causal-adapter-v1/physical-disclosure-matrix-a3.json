@@ -1,0 +1,570 @@
+{
+  "policy_version": "csfrv1-9a-a3.v1",
+  "source_schema": "verified-transition-evidence-v1.schema.json",
+  "source_schema_id": "https://cote-sim/embodiment/verified-transition-evidence-v1.schema.json",
+  "schema_sha256_state": "validated_by_exact_tree_comparison_not_claimed_as_signed",
+  "exhaustive_schema_paths": true,
+  "default_classification": "REJECT_UNKNOWN",
+  "agent_context_direct_disclosure": false,
+  "future_qualitative_candidate": {
+    "kind": "physical.qualitative-observation-candidate.v1",
+    "authority": "NOT_ADMITTED",
+    "subject_scope": "SELF_ONLY",
+    "values": [
+      "fatigue_low",
+      "fatigue_moderate",
+      "fatigue_high",
+      "thirst_low",
+      "thirst_high",
+      "pain_low",
+      "pain_high",
+      "sleepiness_low",
+      "sleepiness_high"
+    ],
+    "go_authorization_required": true,
+    "provenance_requires_verified_source": true
+  },
+  "forbidden_artifact_classes": [
+    "BodyState",
+    "CapacityProfile",
+    "posterior",
+    "capacity.sampled",
+    "cohort.correlation_report",
+    "random_seed",
+    "rng_state",
+    "third_party_body",
+    "source_raw_bytes",
+    "command_receipts",
+    "local_physical_clock_as_global"
+  ],
+  "fields": {
+    "admission": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "authority": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "command_receipts[].complete_seq": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "command_receipts[].emitted_event_count": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "command_receipts[].final_body_sha256": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "command_receipts[].first_advance_seq": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "command_receipts[].intent_seq": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "command_receipts[].last_advance_seq": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "command_receipts[].planned_days": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "command_receipts[].semantic_completion_sha256": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "command_receipts[].subject_id": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "command_receipts[].t_hours_after": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "completion": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "kind": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "schema_version": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.completed_phase_count": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.completed_transition_count": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.dynamics_version": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.events_raw_sha256": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.local_origin": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.log_record_count": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.normalised_log_sha256": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.prior_version": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.snapshot_document_sha256": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.snapshot_raw_sha256": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.snapshot_version": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "source.verified_transition_count": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].last_local_seq": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].subject_id": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_advance_count": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.central_fatigue": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.character_id": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.cumulative_load.acute_7d": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.cumulative_load.chronic_28d": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.energy.balance_kcal_24h": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.energy.last_meal_at_h": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.energy.substrate_availability": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.hydration.deficit_pct_body_mass": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.illnesses": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.injuries": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.pain.analgesia": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.pain.by_region.arms": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.pain.by_region.core": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.pain.by_region.grip": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.pain.by_region.legs": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.pain.global_intensity": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.peripheral_fatigue.arms": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.peripheral_fatigue.core": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.peripheral_fatigue.grip": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.peripheral_fatigue.legs": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.sleep.circadian_phase": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.sleep.debt_hours": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.sleep.hours_since_wake": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.sleep.last_sleep": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.sleep.last_sleep.end_h": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.sleep.last_sleep.quality": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.sleep.last_sleep.start_h": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.arms.expressed": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.arms.latency[]": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.arms.pending_onset": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.core.expressed": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.core.latency[]": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.core.pending_onset": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.grip.expressed": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.grip.latency[]": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.grip.pending_onset": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.legs.expressed": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.legs.latency[]": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.by_region.legs.pending_onset": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.soreness.repeated_bout_adaptation": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.t_hours": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.thermal.clothing_insulation": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.thermal.core_offset_c": {
+      "classification": "QUALITATIVE_DERIVATION_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": true,
+      "recipient_scope": "SELF_OBSERVER_ONLY"
+    },
+    "subject_tips[].verified_body.thermal.wbgt": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.thermal.work_rest_ratio": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.w_prime_balance.capacity_j": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.w_prime_balance.remaining_j": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body.w_prime_balance.tau_s": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].verified_body_sha256": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "subject_tips[].visibility": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "transitions[].channel_diff_sha256": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "transitions[].semantic_record_sha256": {
+      "classification": "FORBIDDEN_IN_CONTEXT",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "transitions[].source_local_after_hours": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "transitions[].source_local_delta_hours": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "transitions[].source_local_seq": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "transitions[].source_local_sim_time": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "transitions[].source_segment": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    },
+    "transitions[].subject_id": {
+      "classification": "ENGINE_ONLY",
+      "direct_disclosure": false,
+      "requires_go_authentication": false,
+      "recipient_scope": "NONE"
+    }
+  }
+}

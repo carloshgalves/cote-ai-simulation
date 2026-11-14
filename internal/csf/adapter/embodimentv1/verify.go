@@ -18,6 +18,7 @@ import (
 	"sort"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 	"strconv"
 	"strings"
 )
@@ -45,6 +46,7 @@ type Source struct {
 type Verified struct {
 	source                        [2][32]byte
 	commandCount, transitionCount int
+ bodies []reducer.PhysicalBody
 }
 
 // InspectUnadmitted independently checks typed envelope, physical event order,
@@ -188,8 +190,10 @@ func InspectUnadmitted(s Source) (Verified, error) {
 	if !ok || completed != len(transitions) {
 		return zero, ErrInvalidPhysical
 	}
-	return Verified{source: [2][32]byte{snapshotHash, eventsHash},
-		commandCount: len(sourceCommands), transitionCount: len(transitions)}, nil
+	bodies, err := verifiedCompletedBodies(tipsBySubject)
+ if err != nil { return zero, ErrInvalidPhysical }
+ return Verified{source: [2][32]byte{snapshotHash, eventsHash},
+  commandCount: len(sourceCommands), transitionCount: len(transitions), bodies: bodies}, nil
 }
 
 // Verified deliberately has no public commit/admission capability. Only

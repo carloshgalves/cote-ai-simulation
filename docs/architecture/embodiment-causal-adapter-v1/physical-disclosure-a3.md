@@ -4,7 +4,7 @@
 
 ## Autoridade
 
-A fonte A2 `physical.verified-transition-evidence.v1` é exclusivamente engine-only. A conformidade do schema não converte hashes, `BodyState` ou `body.advanced` em `Observation`, `KnowledgeInput` ou `ActorContext`. O Go ainda precisa autenticar origem e destinatário, derivar a percepção a partir de fonte física efetivamente verificada, registrar a policy no Genesis e emitir um registro causal pela transação oficial. Até então, a barreira é **DENY**.
+A fonte A2 `physical.verified-transition-evidence.v1` é exclusivamente engine-only. A conformidade do schema não converte hashes, `BodyState` ou `body.advanced` em `Observation`, `KnowledgeInput` ou `ActorContext`. A matriz também fixa o **Git blob SHA exato do JSON Schema A2**; alterar enum, range, unidade ou fechamento sem atualizar o contrato não passa na CI. O Go ainda precisa autenticar origem e destinatário, derivar a percepção a partir de fonte física efetivamente verificada, registrar a policy no Genesis e emitir um registro causal pela transação oficial. Até então, a barreira é **DENY**.
 
 O arquivo [physical-disclosure-matrix-a3.json](physical-disclosure-matrix-a3.json) classifica **cada caminho terminal do schema A2** em uma categoria, sem herança permissiva:
 
@@ -14,7 +14,7 @@ O arquivo [physical-disclosure-matrix-a3.json](physical-disclosure-matrix-a3.jso
 | `FORBIDDEN_IN_CONTEXT` | Segredos, estado corporal bruto, identificadores/digests sensíveis e correlatos; nunca são evidence/context |
 | `QUALITATIVE_DERIVATION_ONLY` | Pode alimentar *futura* percepção qualitativa restrita ao sujeito/observador autenticado, nunca os valores brutos |
 
-Todas as categorias têm `direct_disclosure=false`. Nenhum campo de corpo possui classificação por omissão. A3 não implementa conversão fisiológica numérica para rótulos qualitativos: os rótulos de exemplo são apenas **formato de candidato não admitido**, sem prova de causalidade/percepção.
+As 88 folhas estão cobertas: **23 ENGINE_ONLY, 31 FORBIDDEN_IN_CONTEXT e 34 QUALITATIVE_DERIVATION_ONLY**. A lista das 34 fontes possíveis e dos nove rótulos qualitativos também está fixada no validador para impedir ampliação apenas por edição de JSON. Todas as categorias têm `direct_disclosure=false`. Nenhum campo de corpo possui classificação por omissão. A3 não implementa conversão fisiológica numérica para rótulos qualitativos: os rótulos de exemplo são apenas **formato de candidato não admitido**, sem prova de causalidade/percepção.
 
 ## Política e invariantes executáveis
 

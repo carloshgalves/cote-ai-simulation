@@ -7,6 +7,7 @@ grants access to KnowledgeInput, Context, Observation or Go WorldRevision.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any, Mapping
@@ -85,8 +86,15 @@ def all_terminal_schema_paths(schema: Mapping[str, Any]) -> frozenset[str]:
 
 
 def validate_policy(*, schema: dict | None = None, policy: dict | None = None) -> None:
-    schema = _load_json(SCHEMA) if schema is None else schema
+    stored_schema = _load_json(SCHEMA)
+    schema = stored_schema if schema is None else schema
     policy = _load_json(POLICY) if policy is None else policy
+    # A field-only inventory misses changed numerical constraints, units,
+    # enums or hidden additionalProperties. Pin ALL bytes of the A2 schema.
+    raw = SCHEMA.read_bytes()
+    blob_sha = hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\x00" + raw).hexdigest()
+    if policy.get("source_schema_git_blob_sha") != blob_sha or schema != stored_schema:
+        _deny()
     try:
         jsonschema.Draft202012Validator.check_schema(schema)
     except jsonschema.SchemaError:

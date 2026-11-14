@@ -502,8 +502,9 @@ def _check_phase_schedule(records: list[dict]) -> None:
                        "awake segment differs from fixed PSV1-2 day plan")
             else:
                 _valid(part["segment"] == "asleep" and
-                       part["dt_hours"] == 24 - first_hours and
-                       part["environment"]["wbgt_c"] == first_env["wbgt_c"],
+                       math.isclose(part["dt_hours"], 24 - first_hours,
+                                    rel_tol=0.0, abs_tol=1e-9) and
+                       _same_typed(part["environment"]["wbgt_c"], first_env["wbgt_c"]),
                        "asleep segment does not close PSV1-2 day")
                 if sleep_env is None:
                     sleep_env = part["environment"]

@@ -70,8 +70,8 @@ def _mutated(root: Path, name: str) -> tuple[bytes, bytes]:
     elif name == "negative_duration":
         p["dt_hours"] = -1
     elif name == "nonfinite_duration":
-        p["dt_hours"] = float("inf")
-        # json.dumps refuses Infinity; use direct substitution below.
+        p["dt_hours"] = 1234567
+        # Leave the log JSON-valid but overflow the decoder's float during parsing.
     elif name == "wrong_load":
         p["load"]["intensity"] = 0.7
     elif name == "wrong_environment":
@@ -121,7 +121,7 @@ def _mutated(root: Path, name: str) -> tuple[bytes, bytes]:
     else:
         raise AssertionError(f"unknown mutation {name}")
     if name == "nonfinite_duration":
-        raw = _write_records(rec).replace(b'"dt_hours": Infinity', b'"dt_hours": 1e400')
+        raw = _write_records(rec).replace(b'"dt_hours": 1234567', b'"dt_hours": 1e400')
     else:
         raw = _write_records(rec)
     return snap, raw

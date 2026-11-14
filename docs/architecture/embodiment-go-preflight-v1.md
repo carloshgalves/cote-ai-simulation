@@ -31,3 +31,45 @@ O reducer físico não pode ser implementado por uma tabela de SQLite separada. 
 - [ ] Revisão adversarial, remediação de findings locais e re-review (não confundir com auditoria independente).
 - [ ] Revisão formal independente e merge humano.
 - [ ] Admissão causal verdadeira e First Real Run continuam **NO-GO**, sem atalhos.
+
+
+## Slice B — Linux kernel-sealed physical cut (2026-11-14)
+
+The Go adapter has `InspectSealedUnadmitted` in
+`internal/csf/adapter/embodimentv1/sealed_source_linux.go`. It accepts only
+already opened, **fully sealed Linux memfd handles** for `snapshot.yaml`
+and `events.jsonl`; the kernel must report `F_SEAL_WRITE`, `F_SEAL_GROW`,
+`F_SEAL_SHRINK` and `F_SEAL_SEAL`. A regular file path, partial
+seal, `F_SEAL_FUTURE_WRITE` by itself, missing/empty or oversized handle
+cannot be substituted for an immutable source. The reader uses `ReadAt`
+over stable length, checks size/seals again after reading, binds the raw
+bytes to **externally supplied** digest pins, and verifies the PSV1-2/A2
+completed source through the existing Go parser. Descriptors remain
+host-owned and this adapter never mutates their content.
+
+**Scope is narrow:** a malicious producer can create and seal forged
+bytes; sealing is an integrity property, *not* producer authorization or
+a coherent cut of two previously mutable files. `SourcePins` by itself
+is **not authenticated**. The host must still implement a Genesis-pinned
+producer identity, immutable binary, coherent quiescence/transactional
+capture, versioned schema/reducer and a wholly registered
+`InputLedger → AdmissionFence → CommitCoordinator/CommitWork` path.
+Without these, `InspectSealedUnadmitted` returns only the opaque
+`Verified` object (no `WorldRevision`, event publication or `KnowledgeInput`).
+
+The existing `genesis.validateCanonical` rejects nonempty extension-bundle
+refs until a verified extension bootstrap is installed. Removing that
+check or reusing a synthetic testresource variant would bypass an essential
+registration gate; neither is done. The future physical WorldState and
+ActionSchema need a new versioned bundle, canonical bytes/digest,
+Genesis pin, deterministic Go reducer, atomic SQLite terminal variant,
+crash/replay and disclosure tests. These are **NOT IMPLEMENTED**.
+
+### Regression evidence
+
+`sealed_source_linux_test.go` consumes the actual two-command Python
+fixture from CI. Positive sealed reads cannot be written back by the
+same descriptor. Negatives include ordinary mutable files,
+unsealed/partially sealed memfd, absent `F_SEAL_WRITE`, wrong external
+pins, correctly repinned truncated JSONL and size bounds. These tests
+do not grant commit authority.

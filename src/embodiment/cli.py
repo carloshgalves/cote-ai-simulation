@@ -24,6 +24,8 @@ Evidence of what happened is the **event log**, not this terminal output.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import itertools
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -42,6 +44,8 @@ from .dynamics import (
 )
 from .eventlog import (
     EVENT_BODY_ADVANCED,
+    EVENT_BODY_ADVANCE_INTENT,
+    EVENT_BODY_ADVANCE_COMPLETE,
     EVENT_COHORT_CORRELATION_REPORT,
     EventLog,
     RunContinuityError,
@@ -374,6 +378,18 @@ def advance_clock_command(
             f"{character_id} has already been advanced in this run; resume/save is owned by "
             "PSV1-8, so advancing the immutable seed snapshot again would fork its history"
         )
+    if segments:
+        # Never append a fresh operation over a half-written previous phase.
+        # Legacy/unattested history remains readable, but is not extendable
+        # into a new "completed" run by merely appending a footer.
+        from .continuity import replay_body_history
+
+        prefix = replay_body_history(snapshot_path.read_bytes(), events_path.read_bytes())
+        if prefix.body_advance_count and not prefix.all_phases_complete:
+            raise RunContinuityError(
+                "physical run contains an incomplete or legacy/unattested advance; "
+                "refuse a new phase until the source is independently recovered"
+            )
 
     #: The environment the report is read in, held fixed on both sides. The body
     #: is advanced through this ambient WBGT, so reading capability in a neutral
@@ -395,6 +411,23 @@ def advance_clock_command(
             required_components=ADVANCE_COMPONENTS,
             sim_time=str(snapshot.get("sim_time", Y1_START)),
         ) as log:
+            intent = log.append(
+                EVENT_BODY_ADVANCE_INTENT,
+                {
+                    "protocol": "psv1-2.advance.v1",
+                    "character_id": character_id,
+                    "planned_days": days,
+                    "expected_event_count": len(segments),
+                    "sleep_hours": sleep_hours,
+                    "quality": quality.value,
+                    "wbgt_c": wbgt_c,
+                    "t_hours_before": body.t_hours,
+                    "dynamics_version": params.model_version,
+                },
+                sim_time=logical_sim_time(
+                    str(snapshot.get("sim_time", Y1_START)), body.t_hours
+                ),
+            )
             for label, hours, environment in segments:
                 exposure = Exposure.of(environment=environment, traits=traits, params=params)
                 moved = advance(body, hours, exposure)
@@ -418,6 +451,35 @@ def advance_clock_command(
                 )
                 advances.append(record)
                 body = moved
+
+            # Only a complete run of the declared plan may emit this terminal
+            # receipt. It is not a CSF commit, event ID or world revision.
+            body_doc = as_document(body)
+            body_sha = hashlib.sha256(
+                json.dumps(
+                    body_doc, sort_keys=True, ensure_ascii=False,
+                    separators=(",", ":"), allow_nan=False,
+                ).encode("utf-8")
+            ).hexdigest()
+            log.append(
+                EVENT_BODY_ADVANCE_COMPLETE,
+                {
+                    "protocol": "psv1-2.advance.v1",
+                    "character_id": character_id,
+                    "intent_seq": intent["seq"],
+                    "first_advance_seq": intent["seq"] + 1,
+                    "last_advance_seq": intent["seq"] + len(segments),
+                    "planned_days": days,
+                    "emitted_event_count": len(segments),
+                    "t_hours_after": body.t_hours,
+                    "final_body_sha256": body_sha,
+                    "dynamics_version": params.model_version,
+                },
+                sim_time=logical_sim_time(
+                    str(snapshot.get("sim_time", Y1_START)), body.t_hours
+                ),
+            )
+            log.sync()
 
     capability_after = capability_available(
         profile, body, environment=ambient, traits=traits, params=params

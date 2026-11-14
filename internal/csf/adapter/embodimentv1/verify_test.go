@@ -53,8 +53,8 @@ func TestActualPythonSourceIsGoVerifiedButNeverCommitted(t *testing.T){
  if v.source[0]!=sha256.Sum256(s.Snapshot)||v.source[1]!=sha256.Sum256(s.Events){
   t.Fatal("Go source fingerprints unbound")
  }
- if !errors.Is(v.AdmitToWorld(),ErrUnadmitted){
-  t.Fatal("unregistered physical reducer cannot permit a CSF commit")
+ if _,capable:=any(v).(interface{AdmitToWorld() error});capable{
+  t.Fatal("preflight result must not export an admission capability")
  }
 }
 

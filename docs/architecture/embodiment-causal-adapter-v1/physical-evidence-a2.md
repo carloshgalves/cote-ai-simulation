@@ -25,7 +25,7 @@
 | cohort.correlation_report | recalculado e comparado | omitido | Telemetria proibida em contexto de agente |
 | run.extended | identidade de fase, versão, personagem e padrão diário | omitido | Não comprova conclusão do comando |
 | body.advanced | `dynamics.advance(previous_verified_body, dt_hours, exposure)` com comparação do diff integral, clock e versões | transitions[] com referências/hashes e horários físicos locais | Transição física verificada, **ainda não admitida** |
-| Corpo final de cada ator avançado | resultante da reexecução de **toda** sua sequência | subject_tips[] com hash de BodyState, seq e contagem | Estado local ENGINE_ONLY, sem números no envelope |
+| Corpo final de cada ator avançado | resultante da reexecução de **toda** sua sequência | subject_tips[] com **verified_body (BodyState tipado e fechado)**, hash, seq e contagem | Estado numérico exclusivamente ENGINE_ONLY; nunca contexto do agente |
 | Evento/estrutura futura | falha fechada | omitido | PSV1-3–8 exige novo contrato |
 
 ## 3. Tipos, relógios, unidades e fingerprints
@@ -40,10 +40,11 @@
 | source_segment | awake/asleep | Conforme rotina diária PSV1-2 |
 | semantic_record_sha256 | hash sobre JSON de registro com wall_time normalizado | Fingerprint local, não digest canônico |
 | channel_diff_sha256 | SHA256 do diff integral previamente verificado | Não expõe o estado numérico |
-| subject_tips[].verified_body_sha256 | SHA256 local do BodyState final reconstruído | Não é WorldStateHash |
+| subject_tips[].verified_body_sha256 | SHA256 local do BodyState final reconstruído | Deve corresponder exatamente a verified_body; não é WorldStateHash |
+| subject_tips[].verified_body | Objeto fechado com os 14 campos do BodyState PSV1-2, estruturas internas e units implícitas da definição física | Materialização engine-only para futuro reducer Go, nunca KnowledgeInput/LLM |
 | completion | valor obrigatório UNATTESTED_PREFIX | Prefixo verificável, **não** prova comando terminado |
 
-As unidades dos 15 atributos, os valores de BodyState, Environment e IntervalLoad são validados pelos tipos físicos reais de PSV1-2, não redefinidos por A2. O objeto de referência expõe apenas horários locais, dados de segmento, contagens e hashes; não inclui capacidades, lesões, fadiga, RNG, posterior, correlatos do prior ou outros dados privados de personagens.
+As unidades dos 15 atributos, os valores de BodyState, Environment e IntervalLoad são validados pelos tipos físicos reais de PSV1-2, não redefinidos por A2. A projeção inclui **BodyState completo de cada ator avançado exclusivamente dentro de subject_tips[].verified_body**, com schema fechado e hash do mesmo conteúdo. Esses valores incluem canais corporais (fadiga, sono, dor, etc.) e **são informação sensível do engine**, proibida como contexto, evidência perceptiva ou observação de agentes até classificação A3. Capacidade nominal, posterior, coorte, RNG, correlação e corpos de atores não avançados **não** integram este envelope. O consumidor Go deverá revalidar a Pydantic-to-Go type mapping sob schema de runtime registrado e nunca expor o objeto bruto por padrão.
 
 **Canonicalização:** campos de referência têm JSON local ordenado (sort_keys=True, ensure_ascii=False, separators compactos, allow_nan=False). O `normalised_log_sha256` segue o algoritmo original `normalised_bytes` do Embodiment: wall_time fixado e registros JSON com ordenação de chaves e newline terminal. Nenhum hash A2 equivale a `canonical_bytes_v1`, digest CBOR, event_id ou autorização de fonte. Duas execuções físicas com seed igual podem ter hashes **raw** diferentes devido ao wall clock, mas digest normalizado e recibos semânticos coincidentes.
 
@@ -59,7 +60,7 @@ As fases acima descrevem uma interface proposta, não interfaces Go registradas;
 
 ## 5. Limites e testes necessários
 
-A2 rejeita: hash raw/documental/normalizado diferente do A1, fonte incompleta, campo desconhecido, valor/tipo/unidade incompatível no verificador PSV1-2, evento local inesperado, seq repetido, diff e horários adulterados, sujeitos trocados, saída schema-valid não vinculada aos mesmos bytes, tabela de tips inconsistentemente reduzida/reordenada, ou envelope acima do limite de 4,194,304 bytes de payload IPC A1.
+A2 rejeita: hash raw/documental/normalizado diferente do A1, fonte incompleta, campo desconhecido, valor/tipo/unidade incompatível no verificador PSV1-2, evento local inesperado, seq repetido, diff e horários adulterados, sujeitos trocados, **BodyState materializado divergente do hash e do replay**, saída schema-valid não vinculada aos mesmos bytes, tabela de tips inconsistentemente reduzida/reordenada, ou envelope acima do limite de 4,194,304 bytes de payload IPC A1.
 
 **PSV1-8 completa NÃO é exigida para verificar o prefixo de transições PSV1-2**, mas é exigida para reconstrução independente de **todos** os módulos físicos (estimador, esforço, observação, interocepção, disputa, recuperação/snapshot) e para as garantias finais de replay físico. A2 não recupera execução interrompida como se estivesse concluída, nem faz snapshot/resume pós-avançamento.
 

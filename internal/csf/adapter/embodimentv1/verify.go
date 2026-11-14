@@ -579,6 +579,11 @@ func hashJSON(value any, spaced bool) (string,error) {
  dig:=identity.OpaqueContentHash(b);return hex.EncodeToString(dig[:]),nil
 }
 
+func onlyPhysicalComponents(value any)bool{
+ parts,ok:=value.([]any)
+ return ok&&len(parts)==2&&parts[0]=="prior"&&parts[1]=="dynamics"
+}
+
 func strictRecordField(r map[string]any,k string)string {
  s,_:=r[k].(string);return s
 }
@@ -595,7 +600,8 @@ func scanCompletedSource(rows []map[string]any)([]map[string]any,[]map[string]an
   strictRecordField(rows[0],"sim_time")!="Y1_START"{return failed()}
  opening,ok:=rows[0]["payload"].(map[string]any);if !ok{return failed()}
  originalMeta,ok:=opening["run_metadata"].(map[string]any);if !ok{return failed()}
- if _,ok=object(opening,"run_metadata","required_components");!ok{return failed()}
+ if _,ok=object(opening,"run_metadata","required_components");!ok||
+  !onlyPhysicalComponents(opening["required_components"]){return failed()}
  originalMetaJSON,err:=pyJSON(originalMeta,false);if err!=nil{return failed()}
  completedSeeds:=false
  phase:="seed"
@@ -622,7 +628,8 @@ func scanCompletedSource(rows []map[string]any)([]map[string]any,[]map[string]an
    if !completedSeeds||(phase!="seed"&&phase!="completed")||row["sim_time"]!="Y1_START"{return failed()}
    ext,ok:=object(payload,"run_metadata","required_components");if !ok{return failed()}
    meta,err:=pyJSON(ext["run_metadata"],false)
-   if err!=nil||!bytes.Equal(meta,originalMetaJSON){return failed()}
+   if err!=nil||!bytes.Equal(meta,originalMetaJSON)||
+    !onlyPhysicalComponents(ext["required_components"]){return failed()}
    phase="extended"
    intent=nil
    intentSeq=0;advanceCount=0;firstSeq=0;lastSeq=0;lastEnd=0
@@ -815,6 +822,48 @@ func checkBody(value any,subject string)error{
  }
  repeats,ok:=sore["repeated_bout_adaptation"].(map[string]any)
  if !ok||len(repeats)!=0{return fail}
+ // Go-side independent P3 numeric domain gate. The Python replay also
+ // validates this, but a forged JSON envelope must not bypass domain checks.
+ bounded:=func(v any,min,max float64)bool{
+  n,ok:=number(v);return ok&&n>=min&&n<=max
+ }
+ nonnegative:=func(v any)bool{n,ok:=number(v);return ok&&n>=0}
+ positive:=func(v any)bool{n,ok:=number(v);return ok&&n>0}
+ if !bounded(b["t_hours"],0,99999)||
+  !bounded(b["central_fatigue"],0,1){return fail}
+ w:=b["w_prime_balance"].(map[string]any)
+ if !nonnegative(w["remaining_j"])||!positive(w["capacity_j"])||
+  !positive(w["tau_s"]){return fail}
+ rest,_:=number(w["remaining_j"])
+ cap,_:=number(w["capacity_j"])
+ if rest>cap{return fail}
+ load:=b["cumulative_load"].(map[string]any)
+ if !nonnegative(load["acute_7d"])||!nonnegative(load["chronic_28d"]){return fail}
+ if !nonnegative(sleep["debt_hours"])||!nonnegative(sleep["hours_since_wake"])||
+  !bounded(sleep["circadian_phase"],0,24){return fail}
+ circ,_:=number(sleep["circadian_phase"]);if circ==24{return fail}
+ if sleep["last_sleep"]!=nil{
+  episode:=sleep["last_sleep"].(map[string]any)
+  begin,validBegin:=number(episode["start_h"])
+  end,validEnd:=number(episode["end_h"])
+  if !validBegin||!validEnd||begin<0||end<begin{return fail}
+ }
+ energy:=b["energy"].(map[string]any)
+ if !bounded(energy["substrate_availability"],0,1){return fail}
+ if energy["last_meal_at_h"]!=nil&&!nonnegative(energy["last_meal_at_h"]){return fail}
+ if !nonnegative(b["hydration"].(map[string]any)["deficit_pct_body_mass"]){return fail}
+ thermal:=b["thermal"].(map[string]any)
+ if !nonnegative(thermal["core_offset_c"])||
+  !positive(thermal["work_rest_ratio"])||
+  !nonnegative(thermal["clothing_insulation"])||
+  !bounded(thermal["wbgt"],-100,100){return fail}
+ pain:=b["pain"].(map[string]any)
+ if !bounded(pain["global_intensity"],0,1)||
+  !bounded(pain["analgesia"],0,1){return fail}
+ for _,field:=range []string{"legs","arms","grip","core"}{
+  r:=regions[field].(map[string]any)
+  if !bounded(r["expressed"],0,1){return fail}
+ }
  return nil
 }
 func checkRegions(value any,_ bool)bool{

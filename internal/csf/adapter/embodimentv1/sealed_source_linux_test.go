@@ -7,6 +7,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"golang.org/x/sys/unix"
 )
 
@@ -102,10 +103,11 @@ func TestSealedPhysicalCutRejectsRepinAndMalformedCompletedSource(t *testing.T) 
 	}
 	unfinished = unfinished[:lastNewline+1]
 	cutFile := testMemfd(t, unfinished, requiredMemfdSeals)
-	wrong := pins
-	// Even a newly pinned internally coherent byte cut is not equivalent to
-	// the completed operation described by the real A2 evidence.
-	if _, err := InspectSealedUnadmitted(s, cutFile, fixture.Evidence, wrong); err == nil {
+	repinned := pins
+	repinned.EventsSHA256 = identity.OpaqueContentHash(unfinished)
+	// Even a *correctly recomputed* local raw cut pin is not enough to fake
+	// the completed operation and the A2 envelope's original source binding.
+	if _, err := InspectSealedUnadmitted(s, cutFile, fixture.Evidence, repinned); err == nil {
 		t.Fatal("truncated source matched a completion receipt")
 	}
 }

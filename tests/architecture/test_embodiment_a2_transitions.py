@@ -108,6 +108,10 @@ def test_multi_day_transition_evidence_follows_real_verified_prefix(tmp_path):
     assert result["source"]["verified_transition_count"] == prefix.body_advance_count == 4
     assert len(result["subject_tips"]) == 1
     assert result["subject_tips"][0]["verified_advance_count"] == 4
+    assert result["subject_tips"][0]["verified_body"]["character_id"] == "npc.0001"
+    assert result["subject_tips"][0]["verified_body"]["t_hours"] == 48.0
+    assert result["subject_tips"][0]["visibility"] == "ENGINE_ONLY"
+    assert result["subject_tips"][0]["verified_body"]["sleep"]["debt_hours"] >= 0
     assert [x["source_local_seq"] for x in result["transitions"]] == [6, 7, 8, 9]
     assert [x["source_segment"] for x in result["transitions"]] == [
         "awake", "asleep", "awake", "asleep"
@@ -195,6 +199,7 @@ def test_untrusted_a1_digest_types_and_widths_are_rejected(tmp_path, invalid):
     "semantic_record_sha256", "channel_diff_sha256", "source_raw",
     "source_normalised", "tip_actor", "tip_hash", "tip_count", "tip_seq",
     "reverse_order", "drop_transition", "duplicate_transition", "drop_tip",
+    "tip_body", "tip_body_id",
 ])
 def test_schema_valid_but_forged_evidence_is_rejected_by_binding(tmp_path, mutation):
     out = _run(tmp_path, extra=True)
@@ -225,6 +230,10 @@ def test_schema_valid_but_forged_evidence_is_rejected_by_binding(tmp_path, mutat
         tip["subject_id"] = "npc.0002"
     elif mutation == "tip_hash":
         tip["verified_body_sha256"] = "f" * 64
+    elif mutation == "tip_body":
+        tip["verified_body"]["central_fatigue"] = 0.37
+    elif mutation == "tip_body_id":
+        tip["verified_body"]["character_id"] = "npc.0002"
     elif mutation == "tip_count":
         tip["verified_advance_count"] += 1
     elif mutation == "tip_seq":
@@ -317,4 +326,57 @@ def test_reference_transport_fails_closed_on_4mib_limit(tmp_path):
     huge["transitions"] *= 13000
     with pytest.raises(TransitionEvidenceRejected, match="frame limit"):
         reference_bytes(huge)
+    _verify(out, evidence)
+
+
+
+def test_body_state_is_closed_engine_only_and_typed_by_schema(tmp_path):
+    out = _run(tmp_path, extra=True)
+    evidence = _project(out)
+    schema = json.loads(SCHEMA.read_text())
+    validator = jsonschema.Draft202012Validator(schema)
+    tip = evidence["subject_tips"][0]
+    assert tip["visibility"] == "ENGINE_ONLY"
+    assert set(tip["verified_body"]) == set(schema["$defs"]["body_state_psv1_2"]["properties"])
+    assert tip["verified_body"]["character_id"] == tip["subject_id"]
+    assert tip["verified_body_sha256"] == HEX(
+        json.dumps(tip["verified_body"], sort_keys=True, ensure_ascii=False,
+                   separators=(",", ":"), allow_nan=False).encode("utf-8")
+    )
+    attacks = [
+        ("top", None),
+        ("nested", None),
+        ("invalid_float", None),
+        ("future_illness", None),
+    ]
+    for attack, _ in attacks:
+        altered = copy.deepcopy(evidence)
+        body = altered["subject_tips"][0]["verified_body"]
+        if attack == "top":
+            body["new_secret_field"] = 123
+        elif attack == "nested":
+            body["hydration"]["event_id"] = "malicious"
+        elif attack == "invalid_float":
+            body["central_fatigue"] = -1.0
+        elif attack == "future_illness":
+            body["illnesses"] = [{"label": "unsupported"}]
+        with pytest.raises(jsonschema.ValidationError):
+            validator.validate(altered)
+    _verify(out, evidence)
+
+
+def test_engine_only_materialization_cannot_be_used_as_agent_context(tmp_path):
+    out = _run(tmp_path)
+    evidence = _project(out)
+    assert evidence["authority"] == "ENGINE_ONLY"
+    assert evidence["admission"] == "PENDING_GO_ADMISSION"
+    assert evidence["completion"] == "UNATTESTED_PREFIX"
+    assert "context" not in evidence
+    assert "observations" not in evidence
+    assert "knowledge_input" not in evidence
+    for tip in evidence["subject_tips"]:
+        assert tip["visibility"] == "ENGINE_ONLY"
+        assert "capacity_baseline" not in tip
+        assert "posterior" not in tip
+        assert "rng" not in tip
     _verify(out, evidence)

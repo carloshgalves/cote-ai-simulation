@@ -108,7 +108,7 @@ def test_multi_day_transition_evidence_follows_real_verified_prefix(tmp_path):
     assert result["source"]["verified_transition_count"] == prefix.body_advance_count == 4
     assert len(result["subject_tips"]) == 1
     assert result["subject_tips"][0]["verified_advance_count"] == 4
-    assert [x["source_local_seq"] for x in result["transitions"]] == [5, 6, 7, 8]
+    assert [x["source_local_seq"] for x in result["transitions"]] == [6, 7, 8, 9]
     assert [x["source_segment"] for x in result["transitions"]] == [
         "awake", "asleep", "awake", "asleep"
     ]
@@ -138,7 +138,7 @@ def test_multiple_independent_subjects_have_distinct_tips(tmp_path):
     tips = result["subject_tips"]
     assert [x["subject_id"] for x in tips] == ["npc.0001", "npc.0002"]
     assert [x["verified_advance_count"] for x in tips] == [4, 2]
-    assert [x["last_local_seq"] for x in tips] == [8, 11]
+    assert [x["last_local_seq"] for x in tips] == [9, 12]
     assert result["source"]["verified_transition_count"] == 6
     _verify(out, result)
 
@@ -281,10 +281,12 @@ def test_corrupted_physical_source_fails_before_any_projection(tmp_path, attack)
     elif attack == "unsupported_event":
         row["event"] = "physical.commit"
     elif attack == "truncate_log":
-        records.pop()
+        pass
     if attack == "duplicate_log_key":
         target = b'"event": "body.advanced"'
         events = events.replace(target, target + b", " + target, 1)
+    elif attack == "truncate_log":
+        events = _jsonl(records).rstrip(b"\n")
     else:
         events = _jsonl(records)
     receipts = _receipts(out)

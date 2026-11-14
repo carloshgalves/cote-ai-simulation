@@ -386,3 +386,19 @@ def test_non_json_numeric_and_opaque_evidence_fail_closed(physical_run, violatio
         body["character_id"] = "\ud800"
     with pytest.raises(DisclosureRejected, match="contract rejected"):
         validate_source(e)
+
+
+@pytest.mark.parametrize("raw", [
+    '{"valid":1,"valid":2}',
+    '{"nested":{"value":"ok","value":"override"}}',
+    '{"classification":NaN}',
+    '{"classification":Infinity}',
+    '{"classification":1e400}',
+    '{"classification":}',
+])
+def test_a3_policy_parser_rejects_duplicate_and_nonfinite_json(tmp_path, raw):
+    from tests.architecture.embodiment_a3_disclosure import _load_json
+    path = tmp_path / "untrusted.json"
+    path.write_text(raw, encoding="utf-8")
+    with pytest.raises(DisclosureRejected, match="contract rejected"):
+        _load_json(path)

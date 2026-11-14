@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -93,8 +94,32 @@ def _deny() -> None:
     raise DisclosureRejected("physical disclosure contract rejected")
 
 
+def _strict_pairs(pairs: list[tuple[str, Any]]) -> dict:
+    result: dict = {}
+    for key, value in pairs:
+        if key in result:
+            _deny()
+        result[key] = value
+    return result
+
+
+def _finite_float(raw: str) -> float:
+    value = float(raw)
+    if not math.isfinite(value):
+        _deny()
+    return value
+
+
 def _load_json(path: Path) -> dict:
-    return json.loads(path.read_text(encoding="utf-8"))
+    try:
+        return json.loads(
+            path.read_text(encoding="utf-8"),
+            object_pairs_hook=_strict_pairs,
+            parse_constant=lambda _: _deny(),
+            parse_float=_finite_float,
+        )
+    except (ValueError, UnicodeError, OverflowError, RecursionError):
+        _deny()
 
 
 def all_terminal_schema_paths(schema: Mapping[str, Any]) -> frozenset[str]:

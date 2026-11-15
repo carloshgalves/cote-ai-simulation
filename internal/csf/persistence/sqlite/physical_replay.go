@@ -218,6 +218,39 @@ func journalCommitPhysicalID(run, cycle [32]byte, journal []any) []byte {
 // from durable CycleCommit/Fence/EventStore roots, not a new live writer.
 func (s *Store) historicalPhysicalInputs(ctx context.Context, runID [32]byte,
 	replayRevision uint64) ([]clock.Pending, error) {
+	// Runs without the physical Genesis extension must not scan historical
+	// WORK journals at every replay coordinate (quadratic in commit count).
+	var genesisRaw []byte
+	if err := s.db.QueryRowContext(ctx,
+		"SELECT canonical FROM genesis_records WHERE run_id=?", runID[:]).
+		Scan(&genesisRaw); err != nil {
+		return nil, err
+	}
+	env, err := codec.StrictDecodeEnvelope(genesisRaw)
+	if err != nil {
+		return nil, err
+	}
+	manifest, ok := env.Value.([]any)
+	if !ok || len(manifest) != 18 {
+		return nil, errors.New("historical physical Genesis malformed")
+	}
+	extensions, ok := manifest[12].([]any)
+	if !ok {
+		return nil, errors.New("historical physical Genesis extensions malformed")
+	}
+	hasPhysical := false
+	for _, raw := range extensions {
+		ext, ok := raw.([]any)
+		if !ok || len(ext) != 2 {
+			return nil, errors.New("historical physical extension reference malformed")
+		}
+		if ext[0] == "cote.embodiment.physical.v1" {
+			hasPhysical = true
+		}
+	}
+	if !hasPhysical {
+		return nil, nil
+	}
 	type terminal struct{ cycle, commit [32]byte }
 	rows, err := s.db.QueryContext(ctx,
 		"SELECT cycle_id,commit_id FROM committed_cycles WHERE run_id=? ORDER BY rowid", runID[:])

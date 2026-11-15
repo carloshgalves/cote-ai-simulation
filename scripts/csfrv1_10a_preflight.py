@@ -40,6 +40,11 @@ FROZEN_BUNDLE = {
 }
 FROZEN_TOOLCHAIN = {"go": "1.27.2", "python": "3.13.5",
                     "sqlite_driver": "modernc.org/sqlite", "sqlite_driver_version": "v1.60.1"}
+FROZEN_PLAN_BLOBS = {
+    "manifest.json": "81267b3c88ec0c19e74ff09fea934054cb6926f5",
+    "scenario.json": "76bbbe51db55704eb087d4594cb93ed900a25678",
+    "traceability.json": "8990c024f19ea5e520c1a0b14f03a6992249a037",
+}
 
 ORACLE_FILES = (
     "input-ledger.bin", "decision-ledger.bin", "event-store.bin",
@@ -282,6 +287,15 @@ def validate_scenario(manifest: dict, plan: dict) -> None:
             "physical telemetry promoted into world/knowledge authority")
 
 
+def check_frozen_plan_blobs(root: Path = ROOT) -> None:
+    # Git blob SHA authenticates the complete raw bytes of the declarative
+    # fixture, including seed, claims, policy pins and all 109 GAP statuses.
+    for name, expected in FROZEN_PLAN_BLOBS.items():
+        path = FOLDER / name
+        require(run("git", "hash-object", str(path), cwd=root) == expected,
+                f"frozen #115 fixture edited without a contract revision: {name}")
+
+
 def check_git(manifest: dict, root: Path = ROOT) -> None:
     base = manifest["baseline"]["commit"]
     require(re.fullmatch(r"[0-9a-f]{40}", base) is not None, "invalid baseline SHA")
@@ -393,6 +407,7 @@ def main() -> int:
         validate_frozen_authority(manifest)
         validate_traceability(matrix, adr_text)
         validate_scenario(manifest, plan)
+        check_frozen_plan_blobs()
         check_git(manifest)
         check_policy(manifest)
         if args.structure_only:

@@ -492,7 +492,7 @@ func TestPhysicalSnapshotRestoreAndIndependentFork(t *testing.T) {
 	if _, err := ledger.CloseSource(ctx, "physical.a1", inputledger.Closure{
 		ProducerKey: "physical.a1.final.epoch.1",
 		ClosedThrough: domain.EligibilityCoordinate{
-			NotBeforeInstant: cycle.Instant, NotBeforeCycleOrdinal: cycle.Ordinal,
+			NotBeforeInstant: cycle.Instant, NotBeforeCycleOrdinal: cycle.Ordinal + 1,
 		},
 		Final: true,
 	}); err != nil {

@@ -495,7 +495,9 @@ func TestPhysicalSnapshotRestoreAndIndependentFork(t *testing.T) {
 			NotBeforeInstant: cycle.Instant, NotBeforeCycleOrdinal: cycle.Ordinal,
 		},
 		Final: true,
-	}); err != nil { t.Fatalf("cannot finalize physical origin before fork: %v", err) }
+	}); err != nil {
+		t.Fatalf("cannot finalize physical origin before fork: %v", err)
+	}
 	expected, expectedHash, err := parent.LoadWorldState(ctx, 1)
 	if err != nil {
 		t.Fatal(err)

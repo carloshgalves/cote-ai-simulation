@@ -17,6 +17,8 @@ import (
 )
 
 type physicalInputProof struct {
+ effective int64
+ eligibility any
 	source                      domain.ID
 	digest                      domain.Digest
 	registration                policy.PhysicalRegistration
@@ -62,6 +64,12 @@ func verifyPhysicalInput(ctx context.Context, q queryOne, run [32]byte, unit []a
 		!sameCanonical(fields[11], []any{uint64(0)}) {
 		return out, errors.New("physical exogenous input identity or schema not registered")
 	}
+	effective,validInstant:=asSigned64(fields[8])
+	if !validInstant||!sameCanonical(fields[9],unit[0]){
+		return out,errors.New("physical ingress effective instant/eligibility not admitted")
+	}
+	out.effective=effective
+	out.eligibility=fields[9]
 	key, ok := fields[3].(string)
 	if !ok {
 		return out, errors.New("physical producer unit key missing")
@@ -125,8 +133,8 @@ func verifyPhysicalInput(ctx context.Context, q queryOne, run [32]byte, unit []a
 		return out, errors.New("signed source signature missing")
 	}
 	completed, ok := payload[4].([]any)
-	if !ok {
-		return out, errors.New("physical completed state missing")
+	if !ok || len(completed)!=4 {
+		return out, errors.New("physical completed state missing or malformed")
 	}
 	cut, err := embodimentv1.DecodeSignedCut(cutRaw, signature)
 	if err != nil {
@@ -170,6 +178,17 @@ func verifyPhysicalTerminal(ctx context.Context, q queryOne, b ports.WorkBatch,
 		len(b.Events) != 1 || len(b.Decisions) != 1 || len(b.PerceptionTasks) != 0 {
 		return errors.New("physical terminal has unsupported partition or perception tasks")
 	}
+	// Mode 9 is a closed physical terminal, never a hybrid batch. Do not
+	// silently discard foreign candidate, communication, system or RNG
+	// records merely because this mode does not persist them.
+	if b.ResourceCandidate.Identity!=([32]byte{})||len(b.ResourceCandidate.Canonical)!=0||
+		b.SystemCandidate.Identity!=([32]byte{})||len(b.SystemCandidate.Canonical)!=0||
+		b.CommunicationCandidate.Identity!=([32]byte{})||len(b.CommunicationCandidate.Canonical)!=0||
+		len(b.SystemExtraCandidates)!=0||len(b.SystemSuccessors)!=0||
+		len(b.ContestProofs)!=0||b.Communication!=nil||
+		b.CommunicationBundle!=nil||b.CommunicationStatus!=0 {
+		return errors.New("physical terminal contains unrelated producer or publication fields")
+	}
 	units, ok := fence[11].([]any)
 	if !ok || len(units) != 1 {
 		return errors.New("physical terminal must settle complete single source cut")
@@ -181,6 +200,10 @@ func verifyPhysicalTerminal(ctx context.Context, q queryOne, b ports.WorkBatch,
 	proof, err := verifyPhysicalInput(ctx, q, b.RunID, unit, genesis)
 	if err != nil {
 		return err
+	}
+	if proof.effective!=int64(prior.Instant) ||
+		!sameCanonical(proof.eligibility,[]any{int64(prior.Instant),journal[4]}) {
+		return errors.New("physical source effective coordinate differs from CSF work cut")
 	}
 	p := b.Physical
 	if !bytes.Equal(p.Manifest, proof.manifest) || !bytes.Equal(p.SignedCut, proof.cutRaw) ||

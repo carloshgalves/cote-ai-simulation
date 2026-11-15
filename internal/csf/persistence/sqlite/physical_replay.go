@@ -88,6 +88,9 @@ func verifyPublishedPhysical(ctx context.Context, q queryOne, run, cycle, commit
 		Scan(&revisionRaw, &revisionDigest); err != nil {
 		return zero, err
 	}
+	if len(previousDigest)!=32 || len(revisionDigest)!=32 {
+		return zero,errors.New("replay physical WorldRevision SHA256 length invalid")
+	}
 	prevParsed, err := codec.StrictDecodePayload(previousRaw)
 	if err != nil {
 		return zero, err

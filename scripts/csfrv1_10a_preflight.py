@@ -360,7 +360,7 @@ def main() -> int:
                          "--genesis", str(genesis_path), "--bundle",
                          manifest["policy_bundle"]["directory"])
             lines = actual.splitlines()
-            require(len(lines) == 2 and lines[0] == engine and lines[1] == "GENESIS_VALIDATED",
+            require(len(lines) == 2 and lines[0] == engine and lines[1] == "GENESIS_VALIDATED:" + manifest["genesis"]["run_id"],
                     "Go-linked SQLite runtime or canonical Genesis rejected")
         if args.compare:
             d = compare_authoritative(*args.compare)

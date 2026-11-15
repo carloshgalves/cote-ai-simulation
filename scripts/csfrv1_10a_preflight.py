@@ -136,9 +136,19 @@ def validate_scenario(manifest: dict, plan: dict) -> None:
     require(plan.get("schema") == "csfrv1-10a.scenario.v1" and plan.get("run_status") == "NOT_RUN",
             "scenario attempts to claim execution")
     g = manifest["genesis"]
-    require(g["status"] == "DECLARATIVE_ONLY_NOT_CANONICAL" and
-            g["run_id"] is None and g["canonical_genesis_sha256"] is None,
-            "unsigned/declarative Genesis must not masquerade as signed canonical bytes")
+    if g.get("status") == "DECLARATIVE_ONLY_NOT_CANONICAL":
+        require(g.get("run_id") is None and g.get("canonical_genesis_sha256") is None and
+                g.get("canonical_path") is None,
+                "unsigned/declarative Genesis must not masquerade as canonical bytes")
+    elif g.get("status") == "CANONICAL_VERIFIED":
+        require(isinstance(g.get("run_id"), str) and
+                re.fullmatch(r"[0-9a-f]{64}", g["run_id"]) is not None and
+                isinstance(g.get("canonical_genesis_sha256"), str) and
+                re.fullmatch(r"[0-9a-f]{64}", g["canonical_genesis_sha256"]) is not None and
+                isinstance(g.get("canonical_path"), str) and bool(g["canonical_path"]),
+                "verified Genesis requires real run ID, raw SHA-256 and canonical path")
+    else:
+        raise PreflightError("unknown Genesis status")
     require(re.fullmatch(r"[0-9a-f]{64}", g["world_seed_hex"]) is not None and
             plan["seed_hex"] == g["world_seed_hex"], "world seed mismatch")
     require(g["timezone"] == "Asia/Tokyo" and g["initial_instant"] == 0, "Genesis time mismatch")
@@ -178,6 +188,51 @@ def validate_scenario(manifest: dict, plan: dict) -> None:
     require(g["physical_extension"]["status"] == "NOT_ATTESTED" and
             plan["physical"]["status"] == "BLOCKED_UNTIL_ISSUE_118",
             "unapproved physical Genesis/A1 admission")
+    require(manifest["execution"]["causal_writers"] == ["go.commit-coordinator"] and
+            manifest["execution"]["stores"] == [
+                "input-ledger", "decision-ledger", "event-store",
+                "evidence-ledger", "snapshot-store"],
+            "causal authority/storage changed")
+    require([s["id"] for s in src] == ["school-events", "physical-a1"] and
+            [v["key"] for v in src[0]["inputs"]] == ["school.e1", "school.e2"] and
+            src[1]["admission_status"] == "BLOCKED_UNTIL_VERIFIED_EXTENSION_AND_AUTHORIZED_SOURCE",
+            "source topology or physical authority changed")
+    require([s["closures"][0]["producer_key"] for s in src] ==
+            ["school.partial.0", "physical.partial.0"] and
+            [s["closures"][1]["producer_key"] for s in src] ==
+            ["school.final.10", "physical.final.10"],
+            "closure aliases/pins changed")
+    require([(x["actor_id"], x["role"], x["pov"], x["slot_id"]) for x in rounds] ==
+            [("actor.a", "candidate", "A", "act"),
+             ("actor.b", "candidate", "B", "act")],
+            "role/POV/slot topology changed")
+    require(plan["dispatch"]["response_kind"] == "ActionProposal" and
+            plan["dispatch"]["match"] == [
+                "run", "cycle", "round", "slot", "actor", "base_revision", "instant"],
+            "dispatch authority changed")
+    require(c["resource_id"] == "supply.last-unit" and c["proposals"] == ["R1", "R2"] and
+            c["winner_oracle"].startswith("derive exclusively from persisted canonical DecisionRecords"),
+            "resource or runtime-derived winner oracle changed")
+    require(plan["clock"]["initial_ordinal"] == 0 and plan["clock"]["advance_to"] == 10 and
+            plan["clock"]["expected_target_ordinal"] == 0, "logical coordinate plan changed")
+    require(plan["triggers"][0]["kind"] == "RISING_EDGE" and
+            plan["triggers"][0]["activation"] ==
+                "durably created with producing CycleCommit" and
+            plan["triggers"][0]["due_coordinate"] == "commit_successor_floor",
+            "trigger semantics changed")
+    require(len(plan["claims"]) == 1 and plan["claims"][0]["truth_in_world"] is False and
+            plan["claims"][0]["promote_to_world_truth"] is False and
+            plan["claims"][0]["destination"] == "actor.b", "claim promoted to world truth")
+    require(len(plan["secrets"]) == 1 and plan["secrets"][0]["holder"] == "actor.a" and
+            plan["secrets"][0]["forbidden_to"] == ["actor.b", "public"] and
+            plan["secrets"][0]["observatory_privileged_is_not_knowledge"] is True,
+            "POV/secret boundary weakened")
+    require(plan["physical"]["global_time_from"] == "Go SimulationInstant" and
+            plan["physical"]["global_sequence_from"] == "Go CommitCoordinator" and
+            set(plan["physical"]["source_fields_private"]) >= {
+                "BodyState", "CapacityProfile", "posterior", "rng_state",
+                "local_seq", "local_sim_time"},
+            "physical telemetry promoted into world/knowledge authority")
 
 
 def check_git(manifest: dict, root: Path = ROOT) -> None:
@@ -233,14 +288,46 @@ def check_versions(manifest: dict, root: Path = ROOT) -> None:
 
 def compare_authoritative(left: Path, right: Path) -> dict[str, str]:
     require(left.resolve() != right.resolve(), "comparison inputs must be independent directories")
-    out = {}
+    require(left.is_dir() and right.is_dir() and not left.is_symlink() and not right.is_symlink(),
+            "comparison directories must be physical and independent")
+    seen_inodes: set[tuple[int, int]] = set()
+    out: dict[str, str] = {}
     for name in ORACLE_FILES:
         a, b = left / name, right / name
-        require(a.is_file() and b.is_file(), f"missing authoritative comparison bytes: {name}")
-        av, bv = a.read_bytes(), b.read_bytes()
-        require(av == bv, f"bytewise mismatch: {name}")
-        out[name] = sha256(av)
+        for path in (a, b):
+            require(not path.is_symlink() and path.is_file(),
+                    f"missing, symlinked or non-regular authoritative bytes: {name}")
+            meta = path.stat()
+            require(meta.st_size > 0, f"empty authoritative bytes: {name}")
+            inode = (meta.st_dev, meta.st_ino)
+            require(inode not in seen_inodes, f"alias/same-inode artifact: {name}")
+            seen_inodes.add(inode)
+        digest = hashlib.sha256()
+        with a.open("rb") as fa, b.open("rb") as fb:
+            while True:
+                av, bv = fa.read(1 << 20), fb.read(1 << 20)
+                require(av == bv, f"bytewise mismatch: {name}")
+                if not av:
+                    break
+                digest.update(av)
+        out[name] = digest.hexdigest()
     return out
+
+
+def check_canonical_genesis(manifest: dict, root: Path = ROOT) -> Path:
+    genesis = manifest["genesis"]
+    require(genesis["status"] == "CANONICAL_VERIFIED",
+            "canonical Genesis not verified by the Go runtime")
+    relative = Path(genesis["canonical_path"])
+    require(not relative.is_absolute() and
+            all(part not in ("..", ".") for part in relative.parts) and
+            len(relative.parts) > 1, "unsafe canonical Genesis path")
+    path = root / relative
+    require(path.is_file() and not path.is_symlink() and
+            path.resolve().is_relative_to(root.resolve()), "canonical Genesis not a local regular file")
+    require(sha256(path.read_bytes()) == genesis["canonical_genesis_sha256"],
+            "canonical Genesis raw bytes/digest mismatch")
+    return path
 
 
 def main() -> int:
@@ -268,12 +355,17 @@ def main() -> int:
             engine = manifest["toolchain"]["sqlite"]["engine_version"]
             require(bool(engine) and manifest["toolchain"]["sqlite"]["engine_status"] == "ATTESTED",
                     "execution blocked: Go-linked SQLite version not attested")
-            require(manifest["genesis"]["canonical_genesis_sha256"] is not None and
-                    manifest["genesis"]["status"] == "CANONICAL_VERIFIED",
-                    "execution blocked: no canonical sealed Genesis")
+            genesis_path = check_canonical_genesis(manifest)
+            actual = run("go", "run", "./tools/csfrv1_10a_sqlite_probe.go",
+                         "--genesis", str(genesis_path), "--bundle",
+                         manifest["policy_bundle"]["directory"])
+            lines = actual.splitlines()
+            require(len(lines) == 2 and lines[0] == engine and lines[1] == "GENESIS_VALIDATED",
+                    "Go-linked SQLite runtime or canonical Genesis rejected")
         if args.compare:
             d = compare_authoritative(*args.compare)
-            print(json.dumps({"status": "BYTE_ORACLE_PASS", "sha256": d}, sort_keys=True))
+            print(json.dumps({"status": "BYTE_EQUALITY_ONLY_NOT_CAUSAL_ATTESTATION",
+                              "sha256": d}, sort_keys=True))
         print("PLAN_PREFLIGHT_PASS: frozen baseline/policy/41 invariants/68 stresses/toolchain; E2E NOT_RUN")
         return 0
     except (PreflightError, OSError, KeyError, TypeError, IndexError) as exc:

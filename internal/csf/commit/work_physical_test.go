@@ -12,6 +12,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
@@ -108,6 +109,12 @@ func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledge
 		t.Fatal(err)
 	}
 	pythonHome := filepath.Dir(filepath.Dir(py))
+	dependencyPath, err := exec.Command(py, "-S", "-c",
+		"import sysconfig; print(sysconfig.get_path('purelib'))").Output()
+	if err != nil {
+		t.Fatalf("cannot locate pinned physical dependency directory: %v", err)
+	}
+	dependencyRoot := strings.TrimSpace(string(dependencyPath))
 	module, err := os.ReadFile("../../../src/embodiment/a1_capture.py")
 	if err != nil {
 		t.Fatal(err)
@@ -169,7 +176,8 @@ func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledge
 	}
 	host := physicalhost.ProducerHost{
 		Bundle: b, GenesisCanonical: g.CanonicalBytes, PrivateKey: key,
-		ExecutablePath: pinnedPython, PythonHome: pythonHome, ImportRoot: importRoot, PrivateStagingRoot: stagingRoot,
+		ExecutablePath: pinnedPython, PythonHome: pythonHome, ImportRoot: importRoot,
+		DependencyRoot: dependencyRoot, PrivateStagingRoot: stagingRoot,
 		Epoch: 1, Plan: physicalhost.ProducerPlan{
 			WorldSeed: 42, Count: 3,
 			Advances: []physicalhost.ProducerAdvance{

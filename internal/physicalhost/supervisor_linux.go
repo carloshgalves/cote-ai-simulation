@@ -24,6 +24,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	"golang.org/x/sys/unix"
 	"regexp"
+	"strings"
 )
 
 // ProducerAdvance is a closed, bounded physical-engine instruction, never a
@@ -84,6 +85,7 @@ type ProducerHost struct {
 	ExecutablePath     string
 	PythonHome         string
 	ImportRoot         string
+	DependencyRoot     string
 	PrivateStagingRoot string
 	Epoch              uint64
 	Plan               ProducerPlan
@@ -230,8 +232,15 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 	if sha256.Sum256(executable) != reg.ExecutableSHA256 {
 		return zero, fmt.Errorf("%w: A1_EXECUTABLE_HASH", ErrUnadmitted)
 	}
-	if !filepath.IsAbs(host.ImportRoot) || !filepath.IsAbs(host.PythonHome) {
+	if !filepath.IsAbs(host.ImportRoot) || !filepath.IsAbs(host.PythonHome) ||
+		!filepath.IsAbs(host.DependencyRoot) ||
+		strings.ContainsAny(host.ImportRoot, ":\x00") ||
+		strings.ContainsAny(host.DependencyRoot, ":\x00") {
 		return zero, fmt.Errorf("%w: A1_IMPORT_ROOT", ErrUnadmitted)
+	}
+	depDir, err := os.Lstat(host.DependencyRoot)
+	if err != nil || !depDir.IsDir() || depDir.Mode()&os.ModeSymlink != 0 {
+		return zero, fmt.Errorf("%w: A1_DEPENDENCY_DIRECTORY", ErrUnadmitted)
 	}
 	modulePath := filepath.Join(host.ImportRoot, "embodiment", "a1_capture.py")
 	module, err := securePinnedFile(modulePath, 1024*1024)
@@ -274,11 +283,14 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 		return zero, fmt.Errorf("%w: A1_SEALED_EXECUTABLE", ErrUnadmitted)
 	}
 	defer pinnedExecutor.Close()
+	// -S disables site initialization and automatic .pth/sitecustomize code
+	// execution. Explicit, externally attested dependencies are on PYTHONPATH
+	// without executing arbitrary startup hooks from their directories.
 	cmd := exec.CommandContext(processCtx, "/proc/self/fd/3",
-		"-B", "-s", "-m", "embodiment.a1_capture", "--out", stage, "--plan", planPath)
+		"-S", "-B", "-s", "-m", "embodiment.a1_capture", "--out", stage, "--plan", planPath)
 	cmd.ExtraFiles = []*os.File{pinnedExecutor}
 	cmd.Dir = stage
-	cmd.Env = []string{"PYTHONPATH=" + host.ImportRoot, "PYTHONHOME=" + host.PythonHome,
+	cmd.Env = []string{"PYTHONPATH=" + host.ImportRoot + ":" + host.DependencyRoot, "PYTHONHOME=" + host.PythonHome,
 		"LD_LIBRARY_PATH=" + filepath.Join(host.PythonHome, "lib"),
 		"PYTHONNOUSERSITE=1", "PYTHONSAFEPATH=1", "PYTHONDONTWRITEBYTECODE=1", "LC_ALL=C.UTF-8"}
 	cmd.Stdout = io.Discard

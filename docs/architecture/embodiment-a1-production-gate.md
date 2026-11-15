@@ -23,9 +23,13 @@ that the OS deployment is a trustworthy source of physical-world truth.
    before launch and again before signing.
 3. The host executes the *authenticated binary bytes* from a sealed Linux
    memfd at `/proc/self/fd/3` (not the original executable pathname).
-   The producer receives no signing private key, canonical SQLite handle or
-   global CSF clock. A successful exit is followed by a process-group
-   termination request and immutable snapshot/log capture.
+   Python is launched with `-S` to disable startup `sitecustomize.py`/
+   `.pth` execution and with a host-selected explicit dependency directory,
+   not an environment-inherited package search path. That directory and its
+   native extensions still require deployment attestation. The producer
+   receives no signing private key, canonical SQLite handle or global CSF
+   clock. A successful exit is followed by a process-group termination
+   request and immutable snapshot/log capture.
 4. Go independently verifies the A2 completion and physical typed projection.
    The signed cut is still **not a commit capability**. It must pass the
    `InputLedger → SourceClosure → AdmissionFence → CommitCoordinator →

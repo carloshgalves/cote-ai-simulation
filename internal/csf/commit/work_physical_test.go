@@ -542,3 +542,36 @@ func TestPhysicalSnapshotRestoreAndIndependentFork(t *testing.T) {
 		t.Fatalf("physical child mutated immutable parent checkpoint: %v", err)
 	}
 }
+
+
+// A non-final producer cursor cannot be silently dropped when a child run
+// receives the physical world snapshot. The parent remains untouched.
+func TestPhysicalForkRejectsUnfinishedSourceCursor(t *testing.T) {
+	ctx := context.Background()
+	coordinator, parent, ledger, cycle, fence, approved, _ := realPhysicalFixture(t)
+	if _, err := coordinator.CommitPhysical(ctx, ledger, cycle, fence, approved); err != nil {
+		t.Fatal(err)
+	}
+	_, _, _, _, _, run := ledger.Snapshot()
+	snapshot, err := parent.CreateSnapshotV1(ctx, [32]byte(run), coordinator.bundle, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	child, err := sqlite.Open(ctx, t.TempDir()+"/unfinished-physical-fork.db")
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer child.Close()
+	childRun := [32]byte(run)
+	childRun[0] ^= 0x52
+	if forked, err := parent.ForkIdleSnapshotV1(ctx, [32]byte(run), snapshot.ID,
+		childRun, child, coordinator.bundle); err == nil || forked != nil {
+		t.Fatalf("fork silently dropped an unfinished physical source: fork=%v err=%v", forked, err)
+	}
+	if _, err := child.ValidatedGenesis(ctx, childRun, coordinator.bundle); err == nil {
+		t.Fatal("rejected physical fork left a committed child Genesis")
+	}
+	if _, err := parent.VerifySnapshotV1(ctx, [32]byte(run), snapshot.ID, coordinator.bundle); err != nil {
+		t.Fatalf("rejected physical fork damaged its parent: %v", err)
+	}
+}

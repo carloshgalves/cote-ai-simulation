@@ -1031,6 +1031,15 @@ func (l *Ledger) Respond(ctx context.Context, response Response) error {
 	return nil
 }
 
+// RunID reads the immutable ledger authority without freezing the source
+// registry. Adapters can authenticate an external producer's Genesis before
+// deciding whether to declare that producer in the durable prefix.
+func (l *Ledger) RunID() domain.ID {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	return l.runID
+}
+
 func (l *Ledger) Sources() []string {
 	l.mu.Lock()
 	defer l.mu.Unlock()

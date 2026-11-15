@@ -47,6 +47,17 @@ func (c *Coordinator) StagePhysicalInput(ctx context.Context, ledger *inputledge
 	if err != nil {
 		return zero, err
 	}
+	// A foreign/forged cut must not leave a durable SourceDeclaration behind.
+	// Snapshot freezes the source registry, so authenticate through the
+	// non-freezing RunID accessor before any declaration or snapshot.
+	run := ledger.RunID()
+	g, err := c.store.ValidatedGenesis(ctx, [32]byte(run), c.bundle)
+	if err != nil || g.RunID != run {
+		return zero, errors.New("physical Genesis is not persisted and authenticated")
+	}
+	if err := embodimentv1.VerifySignedCut(cut, reg, run, g.Digest); err != nil {
+		return zero, err
+	}
 	seen := false
 	for _, source := range ledger.Sources() {
 		if source == reg.SourceID {
@@ -58,14 +69,6 @@ func (c *Coordinator) StagePhysicalInput(ctx context.Context, ledger *inputledge
 		if err := ledger.DeclareSource(inputledger.Source{ID: reg.SourceID}); err != nil {
 			return zero, err
 		}
-	}
-	_, _, _, _, _, run := ledger.Snapshot()
-	g, err := c.store.ValidatedGenesis(ctx, [32]byte(run), c.bundle)
-	if err != nil || g.RunID != run {
-		return zero, errors.New("physical Genesis is not persisted and authenticated")
-	}
-	if err := embodimentv1.VerifySignedCut(cut, reg, run, g.Digest); err != nil {
-		return zero, err
 	}
 	if cut.CompletedStateSHA256 != ([32]byte{}) && !bytes.Equal(cut.CompletedStateSHA256[:], completed[3].([]byte)) {
 		return zero, errors.New("signed physical body does not match A1 projection")

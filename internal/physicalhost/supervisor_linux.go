@@ -235,6 +235,7 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 	if !filepath.IsAbs(host.ImportRoot) || !filepath.IsAbs(host.PythonHome) ||
 		!filepath.IsAbs(host.DependencyRoot) ||
 		strings.ContainsAny(host.ImportRoot, ":\x00") ||
+		strings.ContainsAny(host.PythonHome, ":\x00") ||
 		strings.ContainsAny(host.DependencyRoot, ":\x00") {
 		return zero, fmt.Errorf("%w: A1_IMPORT_ROOT", ErrUnadmitted)
 	}

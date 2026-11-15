@@ -96,3 +96,9 @@ jobs:
         run: go test -v -count=1 ./internal/csf/commit -run "^TestPhysical"
       - name: Test full Go runtime regressions
         run: go test ./...
+      - name: Vet signed A1, policy, causal coordinator and SQLite terminal
+        run: go vet ./internal/physicalhost ./internal/csf/adapter/embodimentv1 ./internal/csf/policy ./internal/csf/commit ./internal/csf/persistence/sqlite
+      - name: Race-check A1 source and physical atomic publication
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: go test -race -count=1 ./internal/physicalhost ./internal/csf/commit -run "^(TestPhysical|TestPinnedExecutor)"

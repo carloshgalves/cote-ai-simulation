@@ -486,6 +486,16 @@ func TestPhysicalSnapshotRestoreAndIndependentFork(t *testing.T) {
 	if _, err := c.CommitPhysical(ctx, ledger, cycle, fence, approved); err != nil {
 		t.Fatalf("physical parent commit refused: %v", err)
 	}
+	// The parent can continue accepting future A1 epochs, so StagePhysicalInput
+	// deliberately uses a NON-final closure. A fork may archive this source
+	// only after the host explicitly finalizes its ingestion cursor.
+	if _, err := ledger.CloseSource(ctx, "physical.a1", inputledger.Closure{
+		ProducerKey: "physical.a1.final.epoch.1",
+		ClosedThrough: domain.EligibilityCoordinate{
+			NotBeforeInstant: cycle.Instant, NotBeforeCycleOrdinal: cycle.Ordinal,
+		},
+		Final: true,
+	}); err != nil { t.Fatalf("cannot finalize physical origin before fork: %v", err) }
 	expected, expectedHash, err := parent.LoadWorldState(ctx, 1)
 	if err != nil {
 		t.Fatal(err)

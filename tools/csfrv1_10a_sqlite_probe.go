@@ -38,6 +38,6 @@ func main() {
         if err != nil { fmt.Fprintln(os.Stderr, err); os.Exit(1) }
         g, err := csfgenesis.ValidateCanonical(raw, bundle)
         if err != nil { fmt.Fprintln(os.Stderr, err); os.Exit(1) }
-        fmt.Printf("GENESIS_VALIDATED:%x\\n", g.RunID)
+        fmt.Printf("GENESIS_VALIDATED:%x\n", g.RunID)
     }
 }

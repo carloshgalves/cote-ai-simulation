@@ -1,0 +1,47 @@
+name: CSFRV1-10A plan integrity
+
+on:
+  pull_request:
+    paths:
+      - "docs/reference-run/csfrv1-10a/**"
+      - "scripts/csfrv1_10a_preflight.py"
+      - "tests/reference_run/**"
+      - "tools/csfrv1_10a_sqlite_probe.go"
+      - ".github/workflows/csfrv1-10a-plan.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  reference-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13.5"
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Read-only structural test and negative controls
+        run: python3 -m unittest discover -s tests/reference_run -p 'test_*.py' -v
+      - name: Plan baseline, policies, runtime versions
+        run: python3 scripts/csfrv1_10a_preflight.py
+      - name: Probe linked Go SQLite core without causal writes
+        run: go run ./tools/csfrv1_10a_sqlite_probe.go
+      - name: Require execution still fail-closed without verified Genesis
+        run: |
+          if python3 scripts/csfrv1_10a_preflight.py --execution > /tmp/issue-115-execution-gate.log 2>&1; then
+            cat /tmp/issue-115-execution-gate.log
+            echo 'ERROR: unsigned Genesis improperly granted execution preflight'
+            exit 1
+          fi
+          grep -F 'execution blocked: Go-linked SQLite version not attested' /tmp/issue-115-execution-gate.log

@@ -125,6 +125,20 @@ func settledNoProposalUnits(ctx context.Context,q queryOne,runID [32]byte)(map[d
    }
    continue
   }
+  if len(eventIDs)==1 {
+   first,ok:=eventRaw[0].([]byte)
+   if !ok{return nil,errors.New("physical candidate event missing")}
+   decoded,err:=codec.StrictDecodePayload(first)
+   if err!=nil{return nil,err}
+   fields,ok:=decoded.([]any)
+   if ok&&len(fields)==19&&fields[3]=="physical.advanced"{
+    sourceID,err:=verifyPublishedPhysical(ctx,q,runID,root.cycle,root.commit,journal,fence,eventRaw)
+    if err!=nil{return nil,err}
+    if result[sourceID]{return nil,errors.New("physical source settled twice")}
+    result[sourceID]=true
+    continue
+   }
+  }
   if len(eventIDs)>0{
    first,valid:=eventRaw[0].([]byte)
    if !valid{return nil,errors.New("committed communication Event missing")}

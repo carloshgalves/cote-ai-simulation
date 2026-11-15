@@ -42,6 +42,8 @@ type Bundle struct {
 	// Canonical fixtures loaded once from verified manifest authority.
 	fixtureBytes []byte
 	genesisRefs [][]any
+	physical *PhysicalRegistration
+ physicalManifest []byte
  historicalV1 *Bundle
 }
 
@@ -61,7 +63,9 @@ func (b *Bundle) RuntimeFingerprint() ([32]byte,error) {
   SuiteHash [32]byte
   FixtureDigest [32]byte
   HistoricalV1Hash [32]byte
- }{b.Directory,b.Profile,b.Registries,b.Transitions,b.CodecPolicyHash,b.SchemaHash,b.SuiteHash,sha256.Sum256(b.fixtureBytes),func()[32]byte{if b.historicalV1!=nil{return b.historicalV1.CodecPolicyHash};return [32]byte{}}()})
+  Physical *PhysicalRegistration
+  PhysicalManifestDigest [32]byte
+ }{b.Directory,b.Profile,b.Registries,b.Transitions,b.CodecPolicyHash,b.SchemaHash,b.SuiteHash,sha256.Sum256(b.fixtureBytes),func()[32]byte{if b.historicalV1!=nil{return b.historicalV1.CodecPolicyHash};return [32]byte{}}(),b.physical,sha256.Sum256(b.physicalManifest)})
  if err!=nil{return [32]byte{},err}
  return sha256.Sum256(data),nil
 }

@@ -90,6 +90,13 @@ func (s *Store) replayAdvanceInputs(ctx context.Context,runID [32]byte,replayRev
  for _,item:=range system{
   if !known[item.ID]{original=append(original,item);known[item.ID]=true}
  }
+ // Physical InputLedger sources are excluded from live pending after commit,
+ // but must be present at the historical coordinate before their revision.
+ physical,err:=s.historicalPhysicalInputs(ctx,runID,replayRevision)
+ if err!=nil{return nil,err}
+ for _,item:=range physical{
+  if !known[item.ID]{original=append(original,item);known[item.ID]=true}
+ }
  return original,nil
 }
 

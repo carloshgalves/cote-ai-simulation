@@ -98,6 +98,35 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
    if err!=nil{return clock.State{},err}
   }
  }
+ // A physical WORK has one secret engine Event, not a synthetic resource
+ // lifecycle pair. Reconstruct its signed typed source from the persisted
+ // InputLedger and Genesis before running the same pure reducer as CommitWork.
+ if len(events)==1{
+  raw,ok:=events[0].([]byte)
+  if !ok{return clock.State{},errors.New("physical WORK event not canonical")}
+  decoded,err:=codec.StrictDecodePayload(raw)
+  if err!=nil{return clock.State{},err}
+  event,ok:=decoded.([]any)
+  if ok&&len(event)==19&&event[3]=="physical.advanced"{
+   var genesisBytes []byte
+   if err:=tx.QueryRowContext(ctx,"SELECT canonical FROM genesis_records WHERE run_id=?",runID[:]).
+    Scan(&genesisBytes);err!=nil{return clock.State{},err}
+   env,err:=codec.StrictDecodeEnvelope(genesisBytes)
+   if err!=nil{return clock.State{},err}
+   genesisFields,ok:=env.Value.([]any)
+   if !ok||len(genesisFields)!=18{return clock.State{},errors.New("replay physical Genesis invalid")}
+   units,ok:=fence[11].([]any)
+   if !ok||len(units)!=1{return clock.State{},errors.New("replay physical source membership invalid")}
+   unit,ok:=units[0].([]any)
+   if !ok{return clock.State{},errors.New("replay physical source unit malformed")}
+   proof,err:=verifyPhysicalInput(ctx,tx,runID,unit,genesisFields)
+   if err!=nil{return clock.State{},err}
+   updates,err:=reducer.DecodePhysical(proof.completed)
+   if err!=nil{return clock.State{},err}
+   resultTyped,resultHash,err=reducer.ApplyCompletedPhysical(typed,updates)
+   if err!=nil{return clock.State{},err}
+  }
+ }
  if !equalBytes(journal[7],hash[:])||!equalBytes(journal[9],resultHash[:]){
   return clock.State{},errors.New("WORK replay WorldState hashes not from registered reducer")
  }

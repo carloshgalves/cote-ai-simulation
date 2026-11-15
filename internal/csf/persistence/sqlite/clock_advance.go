@@ -261,7 +261,7 @@ func pendingClock(ctx context.Context,q clockQuery,runID [32]byte)([]clock.Pendi
   if len(fields)==11{
    slots,ok:=fields[4].([]any);if !ok||len(slots)==0{return nil,errors.New("round has no declared slots")}
    roundRows=append(roundRows,roundPending{pending:point,slots:slots})
-  }else{out=append(out,point)}
+  }else if !settled[id]{out=append(out,point)}
  }
  if err:=inputs.Err();err!=nil{return nil,err}
  if err:=inputs.Close();err!=nil{return nil,err}

@@ -1031,6 +1031,15 @@ func (l *Ledger) Respond(ctx context.Context, response Response) error {
 	return nil
 }
 
+// RunID reads the immutable ledger authority without freezing the source
+// registry. Adapters can authenticate an external producer's Genesis before
+// deciding whether to declare that producer in the durable prefix.
+func (l *Ledger) RunID() domain.ID {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	return l.runID
+}
+
 func (l *Ledger) Sources() []string {
 	l.mu.Lock()
 	defer l.mu.Unlock()
@@ -1293,6 +1302,14 @@ func (l *Ledger) projectSettledNoProposalRounds(ctx context.Context) error{
    }
   }
   if complete{round.Lifecycle=2;l.rounds[id]=round}
+ }
+ // The durable prefix retains every input and ingress receipt. Only the
+ // admission view excludes *terminally settled* exogenous sources, so
+ // replay and the next fence cannot re-admit the same signed physical epoch.
+ for source,items:=range l.inputs{
+  pending:=items[:0:0]
+  for _,item:=range items{if !settled[item.ID]{pending=append(pending,item)}}
+  l.inputs[source]=pending
  }
  return nil
 }

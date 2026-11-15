@@ -108,13 +108,39 @@ func validateCanonical(encoded []byte, bundle *policy.Bundle, forkBootstrap bool
 	if err := validateExtensionBundles(payload[12]); err != nil {
 		return nil, err
 	}
-	// No extension loader is installed in this slice: a pin alone does not
-	// prove that its schema and causal authorities can be replayed.
-	if len(payload[12].([]any)) != 0 {
+	// An extension reference is authorized only if its complete typed
+	// contract was installed from an exact manifest by the verified loader.
+	// A bare matching hash or a fabricated Bundle does not grant admission.
+	extensionRefs := payload[12].([]any)
+	physicalRegistration, physicalErr := bundle.PhysicalRegistration()
+	if physicalErr == nil {
+		if len(extensionRefs) != 1 {
+			return nil, fmt.Errorf("physical Genesis requires exactly one installed extension pin")
+		}
+		ref, ok := extensionRefs[0].([]any)
+		if !ok || len(ref) != 2 || ref[0] != physicalRegistration.ExtensionID {
+			return nil, fmt.Errorf("physical extension ID not bound to Genesis")
+		}
+		hash, ok := ref[1].([]byte)
+		if !ok || !bytes.Equal(hash, physicalRegistration.BundleSHA256[:]) {
+			return nil, fmt.Errorf("physical extension manifest digest mismatch")
+		}
+	} else if len(extensionRefs) != 0 {
 		return nil, fmt.Errorf("genesis extension bundles require verified extension bootstrap")
 	}
 	if err := validateMachineIDSet(payload[13], "exogenous source ids"); err != nil {
 		return nil, err
+	}
+	if physicalErr == nil {
+		found := false
+		for _, item := range payload[13].([]any) {
+			if item == physicalRegistration.SourceID {
+				found = true
+			}
+		}
+		if !found {
+			return nil, fmt.Errorf("Genesis omits registered physical producer source")
+		}
 	}
 	if err := validatePolicies(payload[14], bundle); err != nil {
 		return nil, err
@@ -332,6 +358,13 @@ func validateKnownPayloadShape(schema string, value any, bundle *policy.Bundle) 
 	// The first executable inventory scenario has an explicit, versioned
 	// built-in state validator. Generic/unknown typed values remain forbidden.
 	if schema == reducer.StockSchemaID {
+		if registered, err := bundle.PhysicalRegistration(); err == nil {
+			if registered.StateSchema != reducer.PhysicalSchemaID ||
+				registered.StateVariant != reducer.PhysicalVariant || registered.StateVersion != 1 {
+				return fmt.Errorf("Genesis physical schema does not match installed reducer")
+			}
+			return reducer.ValidatePhysicalPayload(value)
+		}
 		return reducer.ValidateStockPayload(value)
 	}
 	if schema != "cote.csf.schema.snapshot-pending-state" {

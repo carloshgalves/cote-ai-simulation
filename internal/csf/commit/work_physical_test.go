@@ -399,7 +399,7 @@ func TestPhysicalAdversarialMutationsRejectedBeforeDurablePublication(t *testing
 // explained by a previous unrelated broken field.
 func TestPhysicalReplayRejectsPersistedSourceDecisionEventAndWorldTampering(t *testing.T) {
 	ctx := context.Background()
-	c, store, ledger, cycle, fence, approved, path := realPhysicalFixture(t)
+	c, _, ledger, cycle, fence, approved, path := realPhysicalFixture(t)
 	journal, err := c.CommitPhysical(ctx, ledger, cycle, fence, approved)
 	if err != nil {
 		t.Fatal(err)

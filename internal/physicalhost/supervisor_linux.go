@@ -160,6 +160,7 @@ func makeSealedPhysicalFD(raw []byte) (*os.File, error) {
 	}
 	return file, nil
 }
+
 // pinnedExecutableFD makes the exact bytes authenticated by the configured
 // executable digest the ONLY executable image. Executing host.ExecutablePath
 // after hashing would be an avoidable check/use race under pathname renames.

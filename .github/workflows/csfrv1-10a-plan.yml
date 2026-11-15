@@ -31,6 +31,9 @@ jobs:
         with:
           go-version: "1.27.2"
           cache: true
+      - name: Whitespace and patch integrity
+        if: github.event_name == 'pull_request'
+        run: git diff --check HEAD^1 HEAD
       - name: Read-only structural test and negative controls
         run: python3 -m unittest discover -s tests/reference_run -p 'test_*.py' -v
       - name: Plan baseline, policies, runtime versions

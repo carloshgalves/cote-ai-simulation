@@ -543,7 +543,6 @@ func TestPhysicalSnapshotRestoreAndIndependentFork(t *testing.T) {
 	}
 }
 
-
 // A non-final producer cursor cannot be silently dropped when a child run
 // receives the physical world snapshot. The parent remains untouched.
 func TestPhysicalForkRejectsUnfinishedSourceCursor(t *testing.T) {
@@ -573,5 +572,72 @@ func TestPhysicalForkRejectsUnfinishedSourceCursor(t *testing.T) {
 	}
 	if _, err := parent.VerifySnapshotV1(ctx, [32]byte(run), snapshot.ID, coordinator.bundle); err != nil {
 		t.Fatalf("rejected physical fork damaged its parent: %v", err)
+	}
+}
+
+// A fully valid A1 cut from another installed Genesis must be rejected before
+// a physical SourceDeclaration is appended. Otherwise an untrusted caller
+// could irreversibly freeze/pollute a source namespace merely by proposing
+// a cut signed for a different registration.
+func TestPhysicalForeignAttestationHasNoIngressSideEffects(t *testing.T) {
+	ctx := context.Background()
+	original, _, _, cycle, _, approved, _ := realPhysicalFixture(t)
+	baseBundle, err := policy.Load(bundlePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	raw, err := original.bundle.PhysicalManifestCanonical()
+	if err != nil {
+		t.Fatal(err)
+	}
+	var manifest policy.PhysicalManifest
+	if err := json.Unmarshal(raw, &manifest); err != nil {
+		t.Fatal(err)
+	}
+	foreignPublic, _, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		t.Fatal(err)
+	}
+	manifest.ProducerPublicKeyEd25519 = hex.EncodeToString(foreignPublic)
+	foreignRaw, err := json.Marshal(manifest)
+	if err != nil {
+		t.Fatal(err)
+	}
+	foreignBundle, err := policy.PhysicalExtensionV1(baseBundle, foreignRaw)
+	if err != nil {
+		t.Fatal(err)
+	}
+	foreignGenesis := physicalTestGenesis(t, foreignBundle)
+	foreignStore, err := sqlite.Open(ctx, t.TempDir()+"/foreign-physical.db")
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer foreignStore.Close()
+	if err := foreignStore.PersistGenesis(ctx, foreignGenesis, foreignBundle); err != nil {
+		t.Fatal(err)
+	}
+	if err := foreignStore.BootstrapClock(ctx, foreignGenesis, foreignBundle); err != nil {
+		t.Fatal(err)
+	}
+	if err := foreignStore.BootstrapGenesisTriggers(ctx, foreignGenesis, foreignBundle, nil); err != nil {
+		t.Fatal(err)
+	}
+	foreignLedger, err := inputledger.New(ctx, foreignGenesis.RunID, foreignBundle, foreignStore)
+	if err != nil {
+		t.Fatal(err)
+	}
+	foreignCoordinator := New(foreignStore, foreignBundle, original.admissionPolicies)
+	if _, err := foreignCoordinator.StagePhysicalInput(ctx, foreignLedger, approved, cycle); err == nil {
+		t.Fatal("foreign signed cut was accepted")
+	}
+	if len(foreignLedger.Sources()) != 0 {
+		t.Fatal("foreign signed cut left an unauthorized physical SourceDeclaration")
+	}
+	records, err := foreignStore.Records(ctx)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(records) != 0 {
+		t.Fatal("foreign signed cut left durable ingress records")
 	}
 }

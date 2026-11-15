@@ -58,6 +58,14 @@ func (c *Coordinator) StagePhysicalInput(ctx context.Context, ledger *inputledge
 	if err := embodimentv1.VerifySignedCut(cut, reg, run, g.Digest); err != nil {
 		return zero, err
 	}
+	if cut.CompletedStateSHA256 != ([32]byte{}) && !bytes.Equal(cut.CompletedStateSHA256[:], completed[3].([]byte)) {
+		return zero, errors.New("signed physical body does not match A1 projection")
+	}
+	if cycle.Plan != nil || cycle.Attempt != 0 || cycle.Instant != g.InitialInstant && cycle.BaseRevision == 0 {
+		return zero, errors.New("invalid physical staging cycle")
+	}
+	// A source declaration is a durable ingress mutation; no unverified cut,
+	// body digest, or invalid cycle may create it.
 	seen := false
 	for _, source := range ledger.Sources() {
 		if source == reg.SourceID {
@@ -69,12 +77,6 @@ func (c *Coordinator) StagePhysicalInput(ctx context.Context, ledger *inputledge
 		if err := ledger.DeclareSource(inputledger.Source{ID: reg.SourceID}); err != nil {
 			return zero, err
 		}
-	}
-	if cut.CompletedStateSHA256 != ([32]byte{}) && !bytes.Equal(cut.CompletedStateSHA256[:], completed[3].([]byte)) {
-		return zero, errors.New("signed physical body does not match A1 projection")
-	}
-	if cycle.Plan != nil || cycle.Attempt != 0 || cycle.Instant != g.InitialInstant && cycle.BaseRevision == 0 {
-		return zero, errors.New("invalid physical staging cycle")
 	}
 	eligibility := domain.EligibilityCoordinate{
 		NotBeforeInstant: cycle.Instant, NotBeforeCycleOrdinal: cycle.Ordinal,

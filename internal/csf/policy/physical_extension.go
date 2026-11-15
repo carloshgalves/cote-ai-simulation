@@ -228,6 +228,10 @@ func ParsePhysicalManifest(raw []byte) (PhysicalRegistration, error) {
 	if err != nil {
 		return zero, err
 	}
+	tree, err := getHex(m.ProducerImportTreeSHA256)
+	if err != nil {
+		return zero, err
+	}
 	key, err := getHex(m.ProducerPublicKeyEd25519)
 	if err != nil {
 		return zero, err
@@ -238,6 +242,6 @@ func ParsePhysicalManifest(raw []byte) (PhysicalRegistration, error) {
 		ActionType: m.ActionType, ActionVersion: m.ActionVersion,
 		ActionOperation: m.ActionOperation, ActionProducer: m.ActionProducer,
 		SourceID: m.SourceID, ExecutableSHA256: executable, ModuleSHA256: module,
-		PublicKeyEd25519: key, Disclosure: m.Disclosure,
+		ImportTreeSHA256: tree, PublicKeyEd25519: key, Disclosure: m.Disclosure,
 	}, nil
 }

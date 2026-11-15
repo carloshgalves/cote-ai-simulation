@@ -38,6 +38,10 @@ func TestPhysicalPolicyRequiresVerifiedBundleAndExactManifest(t *testing.T) {
 	if err != nil || reg.ActionType != "physical.advance" || reg.StateVariant != "physical.body-state.v1" {
 		t.Fatalf("incorrect physical registration: %#v %v", reg, err)
 	}
+	parsed, err := ParsePhysicalManifest(raw)
+	if err != nil || parsed != reg {
+		t.Fatalf("physical policy loader and SQLite parser do not agree on all pins: %v", err)
+	}
 	if _, err := base.PhysicalRegistration(); err == nil {
 		t.Fatal("installation mutated original base policy")
 	}

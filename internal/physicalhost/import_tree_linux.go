@@ -45,7 +45,9 @@ func PhysicalImportTreeSHA256(importRoot string) ([32]byte, error) {
 		}
 		if d.IsDir() {
 			if d.Name() == "__pycache__" {
-				return filepath.SkipDir
+				// -B prevents writing pyc, NOT loading an existing cache.
+				// Unpinned bytecode could override authenticated .py modules.
+				return errors.New("cached Python bytecode forbidden in A1 source")
 			}
 			return nil
 		}

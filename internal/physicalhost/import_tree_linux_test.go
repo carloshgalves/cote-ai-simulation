@@ -57,6 +57,21 @@ func TestPhysicalImportTreePinsTransitivePythonModulesAndRejectsSymlinks(t *test
 	if err != nil || modelTampered == after {
 		t.Fatalf("physical parameter mutation escaped source pin: %v", err)
 	}
+	// Python -B still reads existing timestamp-valid pyc caches, so reject
+	// them before the host can certify any source bytes.
+	cache := filepath.Join(pkg, "__pycache__")
+	if err := os.Mkdir(cache, 0o700); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(cache, "cli.cpython-313.pyc"), []byte("forged-bytecode"), 0o600); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := PhysicalImportTreeSHA256(root); err == nil {
+		t.Fatal("unregistered cached Python bytecode bypassed source attestation")
+	}
+	if err := os.RemoveAll(cache); err != nil {
+		t.Fatal(err)
+	}
 	if err := os.Symlink(filepath.Join(pkg, "cli.py"), filepath.Join(pkg, "backdoor.py")); err != nil {
 		t.Fatal(err)
 	}

@@ -16,8 +16,11 @@ that the OS deployment is a trustworthy source of physical-world truth.
    The tree digest covers all Python modules under `src/embodiment` and
    physical YAML/JSON parameters in `data/models/physical`, including
    `population-prior.yaml`, `body-dynamics.yaml` and its JSON schema.
-   Non-Python modules, unregistered parameter-file types and symlink entries
-   fail closed. The tree is verified before launch and again before signing.
+   Non-Python modules, unregistered parameter-file types, symlink entries
+   and preexisting `__pycache__`/compiled bytecode fail closed: Python `-B`
+   does **not** prevent *reading* malicious existing pyc files. A1 must be
+   deployed without caches, and the full source/model tree is verified
+   before launch and again before signing.
 3. The host executes the *authenticated binary bytes* from a sealed Linux
    memfd at `/proc/self/fd/3` (not the original executable pathname).
    The producer receives no signing private key, canonical SQLite handle or

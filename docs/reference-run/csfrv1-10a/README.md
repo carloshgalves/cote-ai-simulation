@@ -63,9 +63,12 @@ legacy `seq` position. Until that gate, `--execution` MUST fail.
 **68 stress scenarios** copied from the exact ADR, with links to planned
 named integration tests, primary child issue, and empty evidence/SHA slots.
 Current statuses are all `NEEDS_NEW_INTEGRATION_TEST`. A row's presence is
-not a test pass. `EXISTING_PASS_EXACT_SHA` is reserved for actual, named
-tests executed against a precise code SHA, with evidence artifacts and byte
-oracles. Invariants 1–16 are authority; 17–34 admission/cohorts;
+not a test pass. In this #115 frozen planning artifact, the checker
+**rejects** any `EXISTING_PASS_EXACT_SHA` claim, even a fake evidence path
+and SHA; a later versioned executor/attestor must be implemented before such
+a transition can be trusted. Baseline, normative blob IDs, toolchain and
+bundle hashes are independently pinned in the checker, rather than trusted
+solely from a mutable manifest. Invariants 1–16 are authority; 17–34 admission/cohorts;
 35–40 triggers/events; 41 epistemic chronology. Child issues #116–#120
 supply most integration behavior; #121 collects test/eval coverage.
 

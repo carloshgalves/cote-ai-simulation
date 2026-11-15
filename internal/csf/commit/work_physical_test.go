@@ -476,7 +476,6 @@ func TestPhysicalReplayRejectsPersistedSourceDecisionEventAndWorldTampering(t *t
 	}
 }
 
-
 // Every physically committed world is recoverable from an IDLE snapshot and
 // migrates to an independent child run without inheriting the parent's source
 // authority. This is deliberately a positive test with a real Python A1 cut.
@@ -488,25 +487,35 @@ func TestPhysicalSnapshotRestoreAndIndependentFork(t *testing.T) {
 		t.Fatalf("physical parent commit refused: %v", err)
 	}
 	expected, expectedHash, err := parent.LoadWorldState(ctx, 1)
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	snapshot, err := parent.CreateSnapshotV1(ctx, [32]byte(run), c.bundle, nil)
-	if err != nil { t.Fatalf("physical world cannot create IDLE snapshot: %v", err) }
+	if err != nil {
+		t.Fatalf("physical world cannot create IDLE snapshot: %v", err)
+	}
 	if _, err := parent.VerifySnapshotV1(ctx, [32]byte(run), snapshot.ID, c.bundle); err != nil {
 		t.Fatalf("physical snapshot verification rejected its own canonical truth: %v", err)
 	}
 	reopened, err := sqlite.Open(ctx, path)
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	defer reopened.Close()
 	if _, err := reopened.VerifySnapshotV1(ctx, [32]byte(run), snapshot.ID, c.bundle); err != nil {
 		t.Fatalf("physical snapshot cannot restore after SQLite reopen: %v", err)
 	}
 	child, err := sqlite.Open(ctx, t.TempDir()+"/physical-child.db")
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	defer child.Close()
 	childRun := [32]byte(run)
 	childRun[0] ^= 0x51
 	childGenesis, err := parent.ForkIdleSnapshotV1(ctx, [32]byte(run), snapshot.ID, childRun, child, c.bundle)
-	if err != nil { t.Fatalf("physical canonical snapshot cannot fork: %v", err) }
+	if err != nil {
+		t.Fatalf("physical canonical snapshot cannot fork: %v", err)
+	}
 	if [32]byte(childGenesis.RunID) != childRun {
 		t.Fatal("fork reused its parent's run identity")
 	}

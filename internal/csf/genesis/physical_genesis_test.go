@@ -21,7 +21,7 @@ func registeredPhysicalBundle(t *testing.T) *policy.Bundle {
 		StateSchema: reducer.PhysicalSchemaID, StateVersion: 1, StateVariant: reducer.PhysicalVariant,
 		ActionType: "physical.advance", ActionVersion: 1, ActionOperation: "physical.advance", ActionProducer: "physical.a1",
 		SourceID: "physical.a1", ProducerExecutableSHA256: strings.Repeat("ab", 32),
-		ProducerModuleSHA256: strings.Repeat("fd", 32),
+		ProducerModuleSHA256:     strings.Repeat("fd", 32),
 		ProducerImportTreeSHA256: strings.Repeat("ef", 32),
 		ProducerPublicKeyEd25519: strings.Repeat("cd", 32), Disclosure: "ENGINE_ONLY",
 	}

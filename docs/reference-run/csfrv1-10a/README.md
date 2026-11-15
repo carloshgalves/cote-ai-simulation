@@ -31,7 +31,7 @@ system `sqlite3` program are not equivalent to the Go-linked engine.
 
 The immutable *declarative* fixture is `scenario.json`. Use
 `world_seed_hex = 000102...1f`, timezone `Asia/Tokyo`, instant 0, ordinal 0,
-two exogenous sources `school-events` and `physical-a1`, two partial
+two exogenous sources `school-events` and `physical.a1`, two partial
 closures through `(0,0)` and two final closures through `(10,0)`, and
 producer-controlled E1/E2 keys. R1/actor A and R2/actor B share
 `base_revision=0` and one slot `act` each; complete slots in the opposite
@@ -79,7 +79,8 @@ snapshots, fork and replay, POV visibility, world and knowledge hashes.
 The plan's permutation IDs are **preconditions to test**, not results.
 
 For the scenario acceptance oracle, require **exact** byte equality for
-the five exported ledgers, agenda/trigger runtime, commit cursors, event IDs,
+the five exported ledgers (**input, decision, event, evidence, causal outbox**),
+separately exported snapshot, agenda/trigger runtime, commit cursors, event IDs,
 state hashes, and snapshot across continuous, permuted-worker, replay, and
 resume executions. A JSON semantic diff is insufficient. Differing fork
 tails are expected, but the parent prefix must be identical and tails
@@ -112,7 +113,8 @@ python3 scripts/csfrv1_10a_preflight.py --compare artifacts/continuous artifacts
 ```
 
 Each export must supply `input-ledger.bin`, `decision-ledger.bin`,
-`event-store.bin`, `evidence-ledger.bin`, `snapshot-store.bin`,
+`event-store.bin`, `evidence-ledger.bin`, **`causal-outbox.bin`**, and
+separately `snapshot-store.bin`,
 `agenda-runtime.bin`, `commit-cursors.bin`, `event-ids.bin`,
 `world-state.sha256`, and `knowledge-state.sha256`. The preflight
 compares bytes and prints SHA-256. Merely creating identical placeholder
@@ -131,3 +133,11 @@ are `CI_NOT_RUN`, not `TEST_FAILED` or an assumed billing proof. Any V1
 Definition-of-Done gap holds `NO_GO` even when a partial run exists. Merge
 requires an explicit human decision, separate from a draft PR or clean
 document review.
+
+### Adversarial correction (findings 5–6)
+
+The fifth append-only ledger is **causal outbox**, not snapshot-store. The snapshot is a
+separate export and both are required by the byte oracle. The physical source is the
+registered exact ID `physical.a1`, not `physical-a1`; changing the alias or omitting
+the outbox must fail the plan checks. Neither change attests a real Genesis/A1 cut,
+a causal end-to-end run, or independent external review.

@@ -41,14 +41,14 @@ FROZEN_BUNDLE = {
 FROZEN_TOOLCHAIN = {"go": "1.27.2", "python": "3.13.5",
                     "sqlite_driver": "modernc.org/sqlite", "sqlite_driver_version": "v1.60.1"}
 FROZEN_PLAN_BLOBS = {
-    "manifest.json": "81267b3c88ec0c19e74ff09fea934054cb6926f5",
-    "scenario.json": "76bbbe51db55704eb087d4594cb93ed900a25678",
+    "manifest.json": "59a82d7346405a469db103f5468c4c6253aacbef",
+    "scenario.json": "b84f162f244222e06ba39dcdc9252f5aca732545",
     "traceability.json": "8990c024f19ea5e520c1a0b14f03a6992249a037",
 }
 
 ORACLE_FILES = (
     "input-ledger.bin", "decision-ledger.bin", "event-store.bin",
-    "evidence-ledger.bin", "snapshot-store.bin", "agenda-runtime.bin",
+    "evidence-ledger.bin", "causal-outbox.bin", "snapshot-store.bin", "agenda-runtime.bin",
     "commit-cursors.bin", "event-ids.bin", "world-state.sha256",
     "knowledge-state.sha256",
 )
@@ -243,9 +243,13 @@ def validate_scenario(manifest: dict, plan: dict) -> None:
     require(manifest["execution"]["causal_writers"] == ["go.commit-coordinator"] and
             manifest["execution"]["stores"] == [
                 "input-ledger", "decision-ledger", "event-store",
-                "evidence-ledger", "snapshot-store"],
+                "evidence-ledger", "causal-outbox"],
             "causal authority/storage changed")
-    require([s["id"] for s in src] == ["school-events", "physical-a1"] and
+    require(manifest["execution"].get("snapshot_store") == "snapshot-store" and
+            plan["expected"].get("snapshot_store") == "snapshot-store" and
+            plan["expected"]["authoritative_streams"] == manifest["execution"]["stores"],
+            "causal outbox must be fifth ledger with snapshot separately required")
+    require([s["id"] for s in src] == ["school-events", "physical.a1"] and
             [v["key"] for v in src[0]["inputs"]] == ["school.e1", "school.e2"] and
             src[1]["admission_status"] == "BLOCKED_UNTIL_VERIFIED_EXTENSION_AND_AUTHORIZED_SOURCE",
             "source topology or physical authority changed")

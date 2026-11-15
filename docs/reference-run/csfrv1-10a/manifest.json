@@ -65,7 +65,7 @@
     },
     "source_ids": [
       "school-events",
-      "physical-a1"
+      "physical.a1"
     ],
     "actors": [
       "actor.a",
@@ -100,8 +100,9 @@
       "decision-ledger",
       "event-store",
       "evidence-ledger",
-      "snapshot-store"
+      "causal-outbox"
     ],
+    "snapshot_store": "snapshot-store",
     "persistence": "SQLite; single Go coordinator, atomic CommitWork",
     "network": false,
     "llm": false,

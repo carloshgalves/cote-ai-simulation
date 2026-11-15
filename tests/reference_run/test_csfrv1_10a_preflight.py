@@ -116,6 +116,23 @@ class PreflightStructureTests(unittest.TestCase):
             with self.assertRaises(MODULE.PreflightError):
                 MODULE.load_json(path)
 
+    def test_physical_extension_source_id_exact(self) -> None:
+        p = copy.deepcopy(self.scenario)
+        p["sources"][1]["id"] = "physical-a1"
+        with self.assertRaisesRegex(MODULE.PreflightError, "source alias/Genesis mismatch"):
+            MODULE.validate_scenario(self.manifest, p)
+
+    def test_causal_outbox_fifth_ledger_and_snapshot_separate(self) -> None:
+        MODULE.validate_scenario(self.manifest, self.scenario)
+        m = copy.deepcopy(self.manifest)
+        m["execution"]["stores"][-1] = "snapshot-store"
+        with self.assertRaisesRegex(MODULE.PreflightError, "causal authority"):
+            MODULE.validate_scenario(m, self.scenario)
+        p = copy.deepcopy(self.scenario)
+        p["expected"]["authoritative_streams"][-1] = "snapshot-store"
+        with self.assertRaisesRegex(MODULE.PreflightError, "causal outbox"):
+            MODULE.validate_scenario(self.manifest, p)
+
     def test_duplicate_source_alias_is_rejected(self) -> None:
         p = copy.deepcopy(self.scenario)
         p["sources"][1]["id"] = p["sources"][0]["id"]
@@ -198,6 +215,22 @@ class ByteOracleTests(unittest.TestCase):
             (second / "event-store.bin").hardlink_to(first / "event-store.bin")
             with self.assertRaisesRegex(MODULE.PreflightError, "same-inode"):
                 MODULE.compare_authoritative(first, second)
+
+    def test_causal_outbox_missing_or_divergent_is_rejected(self) -> None:
+        self.assertIn("causal-outbox.bin", MODULE.ORACLE_FILES)
+        with tempfile.TemporaryDirectory() as td:
+            left, right = Path(td) / "A", Path(td) / "B"
+            left.mkdir()
+            right.mkdir()
+            for name in MODULE.ORACLE_FILES:
+                (left / name).write_bytes(b"valid bytes")
+                (right / name).write_bytes(b"valid bytes")
+            (right / "causal-outbox.bin").write_bytes(b"different tasks")
+            with self.assertRaisesRegex(MODULE.PreflightError, "bytewise mismatch"):
+                MODULE.compare_authoritative(left, right)
+            (right / "causal-outbox.bin").unlink()
+            with self.assertRaisesRegex(MODULE.PreflightError, "missing, symlinked"):
+                MODULE.compare_authoritative(left, right)
 
     def test_missing_artifact_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as td:

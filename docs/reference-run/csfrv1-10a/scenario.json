@@ -50,7 +50,7 @@
       ]
     },
     {
-      "id": "physical-a1",
+      "id": "physical.a1",
       "kind": "exogenous",
       "inputs": [
         {
@@ -193,8 +193,9 @@
       "decision-ledger",
       "event-store",
       "evidence-ledger",
-      "snapshot-store"
+      "causal-outbox"
     ],
+    "snapshot_store": "snapshot-store",
     "assertions": [
       "same fence bytes/digests under E1/E2 and R1/R2 ingress permutation when closures equivalent",
       "identical decision/event/knowledge bytes and world/knowledge hashes with reversed response/worker order",

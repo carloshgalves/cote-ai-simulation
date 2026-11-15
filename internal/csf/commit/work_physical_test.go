@@ -6,7 +6,7 @@ import (
 	"crypto/ed25519"
 	"crypto/rand"
 	"crypto/sha256"
- "database/sql"
+	"database/sql"
 	"encoding/hex"
 	"encoding/json"
 	"os"
@@ -23,10 +23,10 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
- "github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 	"github.com/carloshgalves/cote-ai-simulation/internal/physicalhost"
- _ "modernc.org/sqlite"
+	_ "modernc.org/sqlite"
 )
 
 func physicalTestGenesis(t *testing.T, b *policy.Bundle) *genesis.Genesis {
@@ -278,8 +278,8 @@ func TestPhysicalAtomicCommitAndCrashReplay(t *testing.T) {
 	if err != nil {
 		t.Fatalf("physical replay verification failed: %v", err)
 	}
-	if _,err:=reopened.ReplayClock(ctx,[32]byte(run),c.bundle);err!=nil{
-		t.Fatalf("complete physical replay through canonical Clock refused: %v",err)
+	if _, err := reopened.ReplayClock(ctx, [32]byte(run), c.bundle); err != nil {
+		t.Fatalf("complete physical replay through canonical Clock refused: %v", err)
 	}
 	if len(pending) != 0 {
 		t.Fatal("committed physical source remains pending after recovery")
@@ -298,104 +298,179 @@ func samePhysicalState(a, b []any) bool {
 // TestPhysicalAdversarialMutationsRejectedBeforeDurablePublication injects
 // individually plausible forged WorkBatch fields AFTER Go materialization,
 // requiring the SQLite terminal to independently revalidate every authority.
-func TestPhysicalAdversarialMutationsRejectedBeforeDurablePublication(t *testing.T){
-	ctx:=context.Background()
-	c,store,ledger,cycle,fence,approved,_:=realPhysicalFixture(t)
-	_,_,_,_,_,run:=ledger.Snapshot()
-	before,err:=store.LoadClock(ctx,[32]byte(run));if err!=nil{t.Fatal(err)}
-	_,hash,err:=store.LoadWorldState(ctx,uint64(before.Revision));if err!=nil{t.Fatal(err)}
-	mutants:=[]struct{name string;change func(*ports.WorkBatch)}{
-		{"physical-extension-manifest",func(b *ports.WorkBatch){b.Physical.Manifest=bytes.Clone(b.Physical.Manifest);b.Physical.Manifest[0]^=1}},
-		{"signed-A1-cut",func(b *ports.WorkBatch){b.Physical.SignedCut=bytes.Clone(b.Physical.SignedCut);b.Physical.SignedCut[len(b.Physical.SignedCut)-1]^=1}},
-		{"A1-signature",func(b *ports.WorkBatch){b.Physical.Signature=bytes.Clone(b.Physical.Signature);b.Physical.Signature[0]^=1}},
-		{"physical-state-digest",func(b *ports.WorkBatch){b.Physical.CompletedTyped=append([]any(nil),b.Physical.CompletedTyped...);b.Physical.CompletedTyped[3]=bytes.Repeat([]byte{0xEE},32)}},
-		{"candidate-identity",func(b *ports.WorkBatch){b.Physical.Candidate.Identity[0]^=1}},
-		{"candidate-canonical",func(b *ports.WorkBatch){b.Physical.Candidate.Canonical=bytes.Clone(b.Physical.Candidate.Canonical);b.Physical.Candidate.Canonical[len(b.Physical.Candidate.Canonical)-1]^=1}},
-		{"DecisionRecord-canonical",func(b *ports.WorkBatch){b.Decisions[0].Canonical=bytes.Clone(b.Decisions[0].Canonical);b.Decisions[0].Canonical[len(b.Decisions[0].Canonical)-1]^=1}},
-		{"physical-EventStore-event",func(b *ports.WorkBatch){b.Events[0].Canonical=bytes.Clone(b.Events[0].Canonical);b.Events[0].Canonical[len(b.Events[0].Canonical)-1]^=1}},
-		{"physical-EventStore-ID",func(b *ports.WorkBatch){b.Events[0].Identity[0]^=1}},
-		{"CycleCommit-journal",func(b *ports.WorkBatch){b.Journal.Canonical=bytes.Clone(b.Journal.Canonical);b.Journal.Canonical[len(b.Journal.Canonical)-1]^=1}},
-		{"WorldRevision",func(b *ports.WorkBatch){b.RevisionCanonical=bytes.Clone(b.RevisionCanonical);b.RevisionCanonical[len(b.RevisionCanonical)-1]^=1}},
-		{"result-world-digest",func(b *ports.WorkBatch){b.ResultStateHash[0]^=1}},
-		{"unregistered-perception-task",func(b *ports.WorkBatch){b.PerceptionTasks=append(b.PerceptionTasks,ports.CanonicalRecord{Identity:[32]byte{1},Canonical:[]byte{0x80}})}},
-		{"foreign-system-candidate",func(b *ports.WorkBatch){b.SystemCandidate=ports.CanonicalRecord{Identity:[32]byte{1},Canonical:[]byte{0x80}}}},
-		{"foreign-resource-candidate",func(b *ports.WorkBatch){b.ResourceCandidate=ports.CanonicalRecord{Identity:[32]byte{1},Canonical:[]byte{0x80}}}},
-		{"foreign-contest-proof",func(b *ports.WorkBatch){b.ContestProofs=append(b.ContestProofs,ports.CanonicalRecord{Identity:[32]byte{1},Canonical:[]byte{0x80}})}},
-		{"foreign-system-successor",func(b *ports.WorkBatch){b.SystemSuccessors=append(b.SystemSuccessors,ports.CanonicalRecord{Identity:[32]byte{1},Canonical:[]byte{0x80}})}},
-		{"foreign-communication-candidate",func(b *ports.WorkBatch){b.CommunicationCandidate=ports.CanonicalRecord{Identity:[32]byte{1},Canonical:[]byte{0x80}}}},
+func TestPhysicalAdversarialMutationsRejectedBeforeDurablePublication(t *testing.T) {
+	ctx := context.Background()
+	c, store, ledger, cycle, fence, approved, _ := realPhysicalFixture(t)
+	_, _, _, _, _, run := ledger.Snapshot()
+	before, err := store.LoadClock(ctx, [32]byte(run))
+	if err != nil {
+		t.Fatal(err)
 	}
-	for _,mutant:=range mutants{
-		t.Run(mutant.name,func(t *testing.T){
-			c.tamperWorkBatch=mutant.change
-			if _,err:=c.CommitPhysical(ctx,ledger,cycle,fence,approved);err==nil{
+	_, hash, err := store.LoadWorldState(ctx, uint64(before.Revision))
+	if err != nil {
+		t.Fatal(err)
+	}
+	mutants := []struct {
+		name   string
+		change func(*ports.WorkBatch)
+	}{
+		{"physical-extension-manifest", func(b *ports.WorkBatch) {
+			b.Physical.Manifest = bytes.Clone(b.Physical.Manifest)
+			b.Physical.Manifest[0] ^= 1
+		}},
+		{"signed-A1-cut", func(b *ports.WorkBatch) {
+			b.Physical.SignedCut = bytes.Clone(b.Physical.SignedCut)
+			b.Physical.SignedCut[len(b.Physical.SignedCut)-1] ^= 1
+		}},
+		{"A1-signature", func(b *ports.WorkBatch) {
+			b.Physical.Signature = bytes.Clone(b.Physical.Signature)
+			b.Physical.Signature[0] ^= 1
+		}},
+		{"physical-state-digest", func(b *ports.WorkBatch) {
+			b.Physical.CompletedTyped = append([]any(nil), b.Physical.CompletedTyped...)
+			b.Physical.CompletedTyped[3] = bytes.Repeat([]byte{0xEE}, 32)
+		}},
+		{"candidate-identity", func(b *ports.WorkBatch) { b.Physical.Candidate.Identity[0] ^= 1 }},
+		{"candidate-canonical", func(b *ports.WorkBatch) {
+			b.Physical.Candidate.Canonical = bytes.Clone(b.Physical.Candidate.Canonical)
+			b.Physical.Candidate.Canonical[len(b.Physical.Candidate.Canonical)-1] ^= 1
+		}},
+		{"DecisionRecord-canonical", func(b *ports.WorkBatch) {
+			b.Decisions[0].Canonical = bytes.Clone(b.Decisions[0].Canonical)
+			b.Decisions[0].Canonical[len(b.Decisions[0].Canonical)-1] ^= 1
+		}},
+		{"physical-EventStore-event", func(b *ports.WorkBatch) {
+			b.Events[0].Canonical = bytes.Clone(b.Events[0].Canonical)
+			b.Events[0].Canonical[len(b.Events[0].Canonical)-1] ^= 1
+		}},
+		{"physical-EventStore-ID", func(b *ports.WorkBatch) { b.Events[0].Identity[0] ^= 1 }},
+		{"CycleCommit-journal", func(b *ports.WorkBatch) {
+			b.Journal.Canonical = bytes.Clone(b.Journal.Canonical)
+			b.Journal.Canonical[len(b.Journal.Canonical)-1] ^= 1
+		}},
+		{"WorldRevision", func(b *ports.WorkBatch) {
+			b.RevisionCanonical = bytes.Clone(b.RevisionCanonical)
+			b.RevisionCanonical[len(b.RevisionCanonical)-1] ^= 1
+		}},
+		{"result-world-digest", func(b *ports.WorkBatch) { b.ResultStateHash[0] ^= 1 }},
+		{"unregistered-perception-task", func(b *ports.WorkBatch) {
+			b.PerceptionTasks = append(b.PerceptionTasks, ports.CanonicalRecord{Identity: [32]byte{1}, Canonical: []byte{0x80}})
+		}},
+		{"foreign-system-candidate", func(b *ports.WorkBatch) {
+			b.SystemCandidate = ports.CanonicalRecord{Identity: [32]byte{1}, Canonical: []byte{0x80}}
+		}},
+		{"foreign-resource-candidate", func(b *ports.WorkBatch) {
+			b.ResourceCandidate = ports.CanonicalRecord{Identity: [32]byte{1}, Canonical: []byte{0x80}}
+		}},
+		{"foreign-contest-proof", func(b *ports.WorkBatch) {
+			b.ContestProofs = append(b.ContestProofs, ports.CanonicalRecord{Identity: [32]byte{1}, Canonical: []byte{0x80}})
+		}},
+		{"foreign-system-successor", func(b *ports.WorkBatch) {
+			b.SystemSuccessors = append(b.SystemSuccessors, ports.CanonicalRecord{Identity: [32]byte{1}, Canonical: []byte{0x80}})
+		}},
+		{"foreign-communication-candidate", func(b *ports.WorkBatch) {
+			b.CommunicationCandidate = ports.CanonicalRecord{Identity: [32]byte{1}, Canonical: []byte{0x80}}
+		}},
+	}
+	for _, mutant := range mutants {
+		t.Run(mutant.name, func(t *testing.T) {
+			c.tamperWorkBatch = mutant.change
+			if _, err := c.CommitPhysical(ctx, ledger, cycle, fence, approved); err == nil {
 				t.Fatal("forged physical batch reached a terminal CycleCommit")
 			}
-			current,err:=store.LoadClock(ctx,[32]byte(run))
-			if err!=nil||current!=before{t.Fatalf("forged batch changed clock: %+v %v",current,err)}
-			_,actual,err:=store.LoadWorldState(ctx,uint64(before.Revision))
-			if err!=nil||actual!=hash{t.Fatalf("forged batch changed predecessor state: %v",err)}
+			current, err := store.LoadClock(ctx, [32]byte(run))
+			if err != nil || current != before {
+				t.Fatalf("forged batch changed clock: %+v %v", current, err)
+			}
+			_, actual, err := store.LoadWorldState(ctx, uint64(before.Revision))
+			if err != nil || actual != hash {
+				t.Fatalf("forged batch changed predecessor state: %v", err)
+			}
 		})
 	}
-	c.tamperWorkBatch=nil
-	if _,err:=c.CommitPhysical(ctx,ledger,cycle,fence,approved);err!=nil{
-		t.Fatalf("failed adversarial attempts must leave original terminal retryable: %v",err)
+	c.tamperWorkBatch = nil
+	if _, err := c.CommitPhysical(ctx, ledger, cycle, fence, approved); err != nil {
+		t.Fatalf("failed adversarial attempts must leave original terminal retryable: %v", err)
 	}
 }
 
 // This tests durable, independently revalidated provenance AFTER publication.
 // Every corruption is restored before the next one so failures cannot be
 // explained by a previous unrelated broken field.
-func TestPhysicalReplayRejectsPersistedSourceDecisionEventAndWorldTampering(t *testing.T){
-	ctx:=context.Background()
-	c,store,ledger,cycle,fence,approved,path:=realPhysicalFixture(t)
-	journal,err:=c.CommitPhysical(ctx,ledger,cycle,fence,approved)
-	if err!=nil{t.Fatal(err)}
-	_,inputs,_,_,_,run:=ledger.Snapshot()
-	if len(inputs)!=1{t.Fatal("fixture lost physical source")}
-	source:=inputs[0].ID
-	jv,err:=codec.StrictDecodePayload(journal.Canonical)
-	if err!=nil{t.Fatal(err)}
-	j:=jv.([]any)
-	events:=j[15].([]any)
-	eventID:=events[0].([]byte)
-	decisionID:=j[16].([]any)[0].([]byte)
-	replay,err:=sqlite.Open(ctx,path)
-	if err!=nil{t.Fatal(err)}
+func TestPhysicalReplayRejectsPersistedSourceDecisionEventAndWorldTampering(t *testing.T) {
+	ctx := context.Background()
+	c, store, ledger, cycle, fence, approved, path := realPhysicalFixture(t)
+	journal, err := c.CommitPhysical(ctx, ledger, cycle, fence, approved)
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, inputs, _, _, _, run := ledger.Snapshot()
+	if len(inputs) != 1 {
+		t.Fatal("fixture lost physical source")
+	}
+	source := inputs[0].ID
+	jv, err := codec.StrictDecodePayload(journal.Canonical)
+	if err != nil {
+		t.Fatal(err)
+	}
+	j := jv.([]any)
+	events := j[15].([]any)
+	eventID := events[0].([]byte)
+	decisionID := j[16].([]any)[0].([]byte)
+	replay, err := sqlite.Open(ctx, path)
+	if err != nil {
+		t.Fatal(err)
+	}
 	defer replay.Close()
-	if _,err:=replay.ReplayClock(ctx,[32]byte(run),c.bundle);err!=nil{t.Fatalf("healthy physical replay failed: %v",err)}
-	db,err:=sql.Open("sqlite",path)
-	if err!=nil{t.Fatal(err)}
+	if _, err := replay.ReplayClock(ctx, [32]byte(run), c.bundle); err != nil {
+		t.Fatalf("healthy physical replay failed: %v", err)
+	}
+	db, err := sql.Open("sqlite", path)
+	if err != nil {
+		t.Fatal(err)
+	}
 	defer db.Close()
-	for _,tc:=range []struct{name,selectSQL,updateSQL string;where any}{
+	for _, tc := range []struct {
+		name, selectSQL, updateSQL string
+		where                      any
+	}{
 		{"source-ingress",
 			"SELECT canonical FROM input_ledger WHERE id=?",
-			"UPDATE input_ledger SET canonical=? WHERE id=?",source[:]},
+			"UPDATE input_ledger SET canonical=? WHERE id=?", source[:]},
 		{"decision-record",
 			"SELECT canonical FROM decision_ledger WHERE id=?",
-			"UPDATE decision_ledger SET canonical=? WHERE id=?",decisionID},
+			"UPDATE decision_ledger SET canonical=? WHERE id=?", decisionID},
 		{"EventStore",
 			"SELECT canonical FROM event_store WHERE id=?",
-			"UPDATE event_store SET canonical=? WHERE id=?",eventID},
+			"UPDATE event_store SET canonical=? WHERE id=?", eventID},
 		{"world-revision",
 			"SELECT canonical FROM world_revisions WHERE revision=?",
-			"UPDATE world_revisions SET canonical=? WHERE revision=?",uint64(1)},
+			"UPDATE world_revisions SET canonical=? WHERE revision=?", uint64(1)},
 		{"world-revision-hash",
 			"SELECT state_hash FROM world_revisions WHERE revision=?",
-			"UPDATE world_revisions SET state_hash=? WHERE revision=?",uint64(1)},
-	}{
-		t.Run(tc.name,func(t *testing.T){
+			"UPDATE world_revisions SET state_hash=? WHERE revision=?", uint64(1)},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
 			var original []byte
-			if err:=db.QueryRowContext(ctx,tc.selectSQL,tc.where).Scan(&original);err!=nil{t.Fatal(err)}
-			if len(original)<4{t.Fatal("fixture has empty authenticated record")}
-			damage:=bytes.Clone(original)
-			damage[len(damage)-1]^=1
-			if _,err:=db.ExecContext(ctx,tc.updateSQL,damage,tc.where);err!=nil{t.Fatal(err)}
-			if _,err:=replay.ReplayClock(ctx,[32]byte(run),c.bundle);err==nil{
-				t.Fatalf("ReplayClock accepted poisoned %s",tc.name)
+			if err := db.QueryRowContext(ctx, tc.selectSQL, tc.where).Scan(&original); err != nil {
+				t.Fatal(err)
 			}
-			if _,err:=db.ExecContext(ctx,tc.updateSQL,original,tc.where);err!=nil{t.Fatal(err)}
-			if _,err:=replay.ReplayClock(ctx,[32]byte(run),c.bundle);err!=nil{
-				t.Fatalf("restored %s failed canonical replay: %v",tc.name,err)
+			if len(original) < 4 {
+				t.Fatal("fixture has empty authenticated record")
+			}
+			damage := bytes.Clone(original)
+			damage[len(damage)-1] ^= 1
+			if _, err := db.ExecContext(ctx, tc.updateSQL, damage, tc.where); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := replay.ReplayClock(ctx, [32]byte(run), c.bundle); err == nil {
+				t.Fatalf("ReplayClock accepted poisoned %s", tc.name)
+			}
+			if _, err := db.ExecContext(ctx, tc.updateSQL, original, tc.where); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := replay.ReplayClock(ctx, [32]byte(run), c.bundle); err != nil {
+				t.Fatalf("restored %s failed canonical replay: %v", tc.name, err)
 			}
 		})
 	}

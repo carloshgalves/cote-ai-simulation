@@ -6,13 +6,19 @@ package main
 
 import (
     "database/sql"
+    "flag"
     "fmt"
     "os"
 
     _ "modernc.org/sqlite"
+    csfgenesis "github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
 func main() {
+    genesisPath := flag.String("genesis", "", "canonical Genesis file to validate, read-only")
+    bundlePath := flag.String("bundle", "docs/architecture/canonical-codec-v1-bundle", "pinned policy bundle")
+    flag.Parse()
     db, err := sql.Open("sqlite", "file:csfrv110a_sqlite_probe?mode=memory&cache=private")
     if err != nil {
         fmt.Fprintln(os.Stderr, err)
@@ -25,4 +31,13 @@ func main() {
         os.Exit(1)
     }
     fmt.Println(engineVersion)
+    if *genesisPath != "" {
+        bundle, err := policy.Load(*bundlePath)
+        if err != nil { fmt.Fprintln(os.Stderr, err); os.Exit(1) }
+        raw, err := os.ReadFile(*genesisPath)
+        if err != nil { fmt.Fprintln(os.Stderr, err); os.Exit(1) }
+        g, err := csfgenesis.ValidateCanonical(raw, bundle)
+        if err != nil { fmt.Fprintln(os.Stderr, err); os.Exit(1) }
+        fmt.Printf("GENESIS_VALIDATED:%x\\n", g.RunID)
+    }
 }

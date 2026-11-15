@@ -134,8 +134,8 @@ func PhysicalImportTreeSHA256(importRoot string) ([32]byte, error) {
 	}
 	sort.Strings(models)
 	required := map[string]bool{
-		"population-prior.yaml": false,
-		"body-dynamics.yaml": false,
+		"population-prior.yaml":         false,
+		"body-dynamics.yaml":            false,
 		"schema/model-file.schema.json": false,
 	}
 	h.Write([]byte("cote.a1.physical-parameter-tree.v1\x00"))

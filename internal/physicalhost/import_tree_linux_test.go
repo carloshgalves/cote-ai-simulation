@@ -29,8 +29,8 @@ func TestPhysicalImportTreePinsTransitivePythonModulesAndRejectsSymlinks(t *test
 		t.Fatal(err)
 	}
 	for name, data := range map[string]string{
-		"population-prior.yaml": "population: original\n",
-		"body-dynamics.yaml": "physics: original\n",
+		"population-prior.yaml":         "population: original\n",
+		"body-dynamics.yaml":            "physics: original\n",
 		"schema/model-file.schema.json": "{}\n",
 	} {
 		if err := os.WriteFile(filepath.Join(modelRoot, name), []byte(data), 0o600); err != nil {

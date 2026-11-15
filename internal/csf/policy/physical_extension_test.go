@@ -14,6 +14,7 @@ func physicalManifestFixture() []byte {
 		StateSchema: "cote.csf.schema.typed-value", StateVersion: 1, StateVariant: "physical.body-state.v1",
 		ActionType: "physical.advance", ActionVersion: 1, ActionOperation: "physical.advance", ActionProducer: "physical.a1",
 		SourceID: "physical.a1", ProducerExecutableSHA256: strings.Repeat("ab", 32),
+		ProducerModuleSHA256: strings.Repeat("fd", 32),
 		ProducerImportTreeSHA256: strings.Repeat("ef", 32),
 		ProducerPublicKeyEd25519: strings.Repeat("cd", 32), Disclosure: "ENGINE_ONLY",
 	}
@@ -71,5 +72,21 @@ func TestPhysicalPolicyRequiresVerifiedBundleAndExactManifest(t *testing.T) {
 	}
 	if derived.VerifyInstalledBundle() != nil {
 		t.Fatal("untampered registration failed provenance check")
+	}
+	var decoded PhysicalManifest
+	if err := json.Unmarshal(raw, &decoded); err != nil {
+		t.Fatal(err)
+	}
+	entrypointMissing := decoded
+	entrypointMissing.ProducerModuleSHA256 = ""
+	noModule, _ := json.Marshal(entrypointMissing)
+	if _, err := PhysicalExtensionV1(base, noModule); err == nil {
+		t.Fatal("policy installed a producer without an entrypoint digest")
+	}
+	sourceTreeMissing := decoded
+	sourceTreeMissing.ProducerImportTreeSHA256 = ""
+	noTree, _ := json.Marshal(sourceTreeMissing)
+	if _, err := PhysicalExtensionV1(base, noTree); err == nil {
+		t.Fatal("policy installed a producer without its transitive tree pin")
 	}
 }

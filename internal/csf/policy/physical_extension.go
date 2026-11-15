@@ -97,16 +97,14 @@ func PhysicalExtensionV1(base *Bundle, raw []byte) (*Bundle, error) {
 	if bytes.Equal(executable, make([]byte, 32)) || bytes.Equal(key, make([]byte, 32)) {
 		return nil, errors.New("zero producer pin is forbidden")
 	}
+	module, err := hex.DecodeString(manifest.ProducerModuleSHA256)
+	if err != nil || len(module) != 32 || manifest.ProducerModuleSHA256 != hex.EncodeToString(module) {
+		return nil, errors.New("producer entrypoint pin is mandatory")
+	}
 	var modulePin [32]byte
-	if manifest.ProducerModuleSHA256 != "" {
-		module, err := hex.DecodeString(manifest.ProducerModuleSHA256)
-		if err != nil || len(module) != 32 || manifest.ProducerModuleSHA256 != hex.EncodeToString(module) {
-			return nil, errors.New("invalid producer module digest")
-		}
-		copy(modulePin[:], module)
-		if modulePin == ([32]byte{}) {
-			return nil, errors.New("zero producer module pin")
-		}
+	copy(modulePin[:], module)
+	if modulePin == ([32]byte{}) {
+		return nil, errors.New("zero producer module pin")
 	}
 	packageRaw, err := hex.DecodeString(manifest.ProducerImportTreeSHA256)
 	if err != nil || len(packageRaw) != 32 || manifest.ProducerImportTreeSHA256 != hex.EncodeToString(packageRaw) {

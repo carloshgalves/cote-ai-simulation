@@ -15,9 +15,9 @@ func TestPhysicalImportTreePinsTransitivePythonModulesAndRejectsSymlinks(t *test
 		t.Fatal(err)
 	}
 	for name, data := range map[string]string{
-		"__init__.py": "# package\n",
+		"__init__.py":   "# package\n",
 		"a1_capture.py": "from . import cli\n",
-		"cli.py": "MESSAGE = 'trusted'\n",
+		"cli.py":        "MESSAGE = 'trusted'\n",
 	} {
 		if err := os.WriteFile(filepath.Join(pkg, name), []byte(data), 0o600); err != nil {
 			t.Fatal(err)

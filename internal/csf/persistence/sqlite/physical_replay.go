@@ -3,6 +3,7 @@ package sqlite
 import (
 	"bytes"
 	"context"
+ "database/sql"
 	"errors"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
@@ -265,11 +266,16 @@ func (s *Store) historicalPhysicalInputs(ctx context.Context, runID [32]byte,
 			"cote.csf.schema.admission-fence-id-preimage",
 			[]any{runID[:],root.cycle[:],attempt})
 		if err!=nil{return nil,err}
-		fence,err:=workFence(ctx,s.db,runID,root.cycle,[32]byte(fid))
+		// Fence and signed source are verified under the same read snapshot;
+		// workFence requires a transaction, not the *sql.DB pool.
+		proofTx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true})
 		if err!=nil{return nil,err}
-		source,err:=verifyPublishedPhysical(ctx,s.db,runID,root.cycle,
+		fence,err:=workFence(ctx,proofTx,runID,root.cycle,[32]byte(fid))
+		if err!=nil{proofTx.Rollback();return nil,err}
+		source,err:=verifyPublishedPhysical(ctx,proofTx,runID,root.cycle,
 			root.commit,journal,fence,events)
-		if err!=nil{return nil,err}
+		if err!=nil{proofTx.Rollback();return nil,err}
+		if err:=proofTx.Commit();err!=nil{return nil,err}
 		if seen[source]{return nil,errors.New("physical source committed more than once")}
 		seen[source]=true
 		units,ok:=fence[11].([]any)

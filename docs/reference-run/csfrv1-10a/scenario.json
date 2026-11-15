@@ -1,0 +1,299 @@
+{
+  "schema": "csfrv1-10a.scenario.v1",
+  "run_status": "NOT_RUN",
+  "seed_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+  "clock": {
+    "basis": "logical",
+    "timezone": "Asia/Tokyo",
+    "initial_instant": 0,
+    "initial_ordinal": 0,
+    "advance_to": 10,
+    "origin_advance_ordinal": 1,
+    "expected_target_ordinal": 0,
+    "wall_time_authoritative": false
+  },
+  "sources": [
+    {
+      "id": "school-events",
+      "kind": "exogenous",
+      "inputs": [
+        {
+          "key": "school.e1",
+          "alias": "E1",
+          "declared_effective_at": 0,
+          "kind": "resource-notice"
+        },
+        {
+          "key": "school.e2",
+          "alias": "E2",
+          "declared_effective_at": 0,
+          "kind": "resource-notice"
+        }
+      ],
+      "closures": [
+        {
+          "producer_key": "school.partial.0",
+          "closed_through": [
+            0,
+            0
+          ],
+          "final": false
+        },
+        {
+          "producer_key": "school.final.10",
+          "closed_through": [
+            10,
+            0
+          ],
+          "final": true
+        }
+      ]
+    },
+    {
+      "id": "physical-a1",
+      "kind": "exogenous",
+      "inputs": [
+        {
+          "key": "physical.transition.1",
+          "kind": "a1-verified-complete-source",
+          "declared_effective_at": 0,
+          "requires": "immutable authorized snapshot.yaml + events.jsonl + verified Genesis/policy extension"
+        }
+      ],
+      "closures": [
+        {
+          "producer_key": "physical.partial.0",
+          "closed_through": [
+            0,
+            0
+          ],
+          "final": false
+        },
+        {
+          "producer_key": "physical.final.10",
+          "closed_through": [
+            10,
+            0
+          ],
+          "final": true
+        }
+      ],
+      "admission_status": "BLOCKED_UNTIL_VERIFIED_EXTENSION_AND_AUTHORIZED_SOURCE"
+    }
+  ],
+  "rounds": [
+    {
+      "alias": "R1",
+      "actor_id": "actor.a",
+      "role": "candidate",
+      "pov": "A",
+      "slot_id": "act",
+      "effective_at": 0,
+      "base_revision": 0
+    },
+    {
+      "alias": "R2",
+      "actor_id": "actor.b",
+      "role": "candidate",
+      "pov": "B",
+      "slot_id": "act",
+      "effective_at": 0,
+      "base_revision": 0
+    }
+  ],
+  "dispatch": {
+    "response_order": [
+      "R2",
+      "R1"
+    ],
+    "response_kind": "ActionProposal",
+    "alternative": "NoProposal",
+    "match": [
+      "run",
+      "cycle",
+      "round",
+      "slot",
+      "actor",
+      "base_revision",
+      "instant"
+    ],
+    "forbid_second_response": true
+  },
+  "conflict": {
+    "resource_id": "supply.last-unit",
+    "initial_available": 1,
+    "proposals": [
+      "R1",
+      "R2"
+    ],
+    "same_base_revision": 0,
+    "conflict_set": "resource-conflict",
+    "winner_oracle": "derive exclusively from persisted canonical DecisionRecords and event ordering; never set selected actor in fixture",
+    "expected_commits": 1,
+    "expected_resource_available_after": 0
+  },
+  "triggers": [
+    {
+      "id": "resource.exhausted",
+      "kind": "RISING_EDGE",
+      "predicate": "available changes 1 -> 0",
+      "activation": "durably created with producing CycleCommit",
+      "due_coordinate": "commit_successor_floor",
+      "expected_at_least_one_activation": true
+    }
+  ],
+  "scheduled": [
+    {
+      "id": "delayed.notification",
+      "created_at": 0,
+      "due_at": 10,
+      "delivery": "recipient-specific event + KnowledgeInput after causal perception"
+    }
+  ],
+  "claims": [
+    {
+      "speaker": "actor.a",
+      "subject": "actor.b",
+      "truth_in_world": false,
+      "text": "A alleges B took the supply; allegation is unverified",
+      "source_kind": "claim",
+      "destination": "actor.b",
+      "promote_to_world_truth": false
+    }
+  ],
+  "secrets": [
+    {
+      "id": "exam.vip",
+      "holder": "actor.a",
+      "visibility": "SECRET_ROLE",
+      "forbidden_to": [
+        "actor.b",
+        "public"
+      ],
+      "observatory_privileged_is_not_knowledge": true
+    }
+  ],
+  "physical": {
+    "kind": "A1",
+    "status": "BLOCKED_UNTIL_ISSUE_118",
+    "source_fields_private": [
+      "BodyState",
+      "CapacityProfile",
+      "posterior",
+      "rng_state",
+      "local_seq",
+      "local_sim_time"
+    ],
+    "global_time_from": "Go SimulationInstant",
+    "global_sequence_from": "Go CommitCoordinator"
+  },
+  "expected": {
+    "authoritative_streams": [
+      "input-ledger",
+      "decision-ledger",
+      "event-store",
+      "evidence-ledger",
+      "snapshot-store"
+    ],
+    "assertions": [
+      "same fence bytes/digests under E1/E2 and R1/R2 ingress permutation when closures equivalent",
+      "identical decision/event/knowledge bytes and world/knowledge hashes with reversed response/worker order",
+      "one terminal disposition for each admitted unit, or atomic abort with none",
+      "no private A1 or actor-secret leakage to public/POV B",
+      "abort is HALTED_ON_ABORT until explicit durable retry",
+      "replay/snapshot/fork equality of common prefix and isolation of divergent tails",
+      "continuity/recovery comparison uses exact bytes and SHA-256 hashes; no JSON semantic-only comparison"
+    ],
+    "derived_only": [
+      "winner_actor_id",
+      "event_ids",
+      "world_revision",
+      "global_logical_sequence",
+      "commit_digest",
+      "world_state_hash",
+      "knowledge_state_hash",
+      "perception_task_ids"
+    ],
+    "prohibited_heuristics": [
+      "arrival_time",
+      "wall_clock",
+      "map_iteration_order",
+      "Python local seq as GlobalLogicalSequence",
+      "Python sim_time as SimulationInstant"
+    ]
+  },
+  "permutations": [
+    {
+      "id": "P01",
+      "mode": "E1-before-E2"
+    },
+    {
+      "id": "P02",
+      "mode": "E2-before-E1"
+    },
+    {
+      "id": "P03",
+      "mode": "R1-response-before-R2"
+    },
+    {
+      "id": "P04",
+      "mode": "R2-response-before-R1"
+    },
+    {
+      "id": "P05",
+      "mode": "partial-then-final-closure"
+    },
+    {
+      "id": "P06",
+      "mode": "closure-final-and-advance"
+    },
+    {
+      "id": "P07",
+      "mode": "conflict-reversed-workers"
+    },
+    {
+      "id": "P08",
+      "mode": "validation-indeterminate-abort"
+    },
+    {
+      "id": "P09",
+      "mode": "retry-authorized"
+    },
+    {
+      "id": "P10",
+      "mode": "snapshot-after-abort"
+    },
+    {
+      "id": "P11",
+      "mode": "snapshot-between-retry-and-fence"
+    },
+    {
+      "id": "P12",
+      "mode": "crash-after-fence"
+    },
+    {
+      "id": "P13",
+      "mode": "crash-after-commit-before-perception"
+    },
+    {
+      "id": "P14",
+      "mode": "snapshot-mid-transmission"
+    },
+    {
+      "id": "P15",
+      "mode": "fork-different-inputs"
+    },
+    {
+      "id": "P16",
+      "mode": "causal-replay"
+    },
+    {
+      "id": "P17",
+      "mode": "public-vs-POV-A-vs-POV-B-vs-privileged"
+    },
+    {
+      "id": "P18",
+      "mode": "world-and-knowledge-hash-byte-compare"
+    }
+  ]
+}

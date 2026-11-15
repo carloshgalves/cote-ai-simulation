@@ -83,6 +83,24 @@ class PreflightStructureTests(unittest.TestCase):
         with self.assertRaisesRegex(MODULE.PreflightError, "winner"):
             MODULE.validate_scenario(self.manifest, p)
 
+    def test_secret_to_public_is_rejected(self) -> None:
+        p = copy.deepcopy(self.scenario)
+        p["secrets"][0]["forbidden_to"] = ["actor.b"]
+        with self.assertRaisesRegex(MODULE.PreflightError, "secret"):
+            MODULE.validate_scenario(self.manifest, p)
+
+    def test_python_local_seq_promoted_to_global_is_rejected(self) -> None:
+        p = copy.deepcopy(self.scenario)
+        p["physical"]["global_sequence_from"] = "Python local seq"
+        with self.assertRaisesRegex(MODULE.PreflightError, "telemetry"):
+            MODULE.validate_scenario(self.manifest, p)
+
+    def test_closure_key_alias_change_rejected(self) -> None:
+        p = copy.deepcopy(self.scenario)
+        p["sources"][0]["closures"][1]["producer_key"] = "school.final.999"
+        with self.assertRaisesRegex(MODULE.PreflightError, "closure aliases"):
+            MODULE.validate_scenario(self.manifest, p)
+
     def test_promoted_unsigned_genesis_is_rejected(self) -> None:
         m = copy.deepcopy(self.manifest)
         m["genesis"]["status"] = "CANONICAL_VERIFIED"
@@ -104,12 +122,38 @@ class ByteOracleTests(unittest.TestCase):
             with self.assertRaisesRegex(MODULE.PreflightError, "bytewise mismatch"):
                 MODULE.compare_authoritative(first, second)
 
+    def test_symlink_alias_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            first, second = Path(td) / "A", Path(td) / "B"
+            first.mkdir()
+            second.mkdir()
+            for name in MODULE.ORACLE_FILES:
+                (first / name).write_bytes(b"real")
+                (second / name).write_bytes(b"real")
+            (second / "event-store.bin").unlink()
+            (second / "event-store.bin").symlink_to(first / "event-store.bin")
+            with self.assertRaisesRegex(MODULE.PreflightError, "symlinked"):
+                MODULE.compare_authoritative(first, second)
+
+    def test_hardlink_same_inode_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            first, second = Path(td) / "A", Path(td) / "B"
+            first.mkdir()
+            second.mkdir()
+            for name in MODULE.ORACLE_FILES:
+                (first / name).write_bytes(b"real")
+                (second / name).write_bytes(b"real")
+            (second / "event-store.bin").unlink()
+            (second / "event-store.bin").hardlink_to(first / "event-store.bin")
+            with self.assertRaisesRegex(MODULE.PreflightError, "same-inode"):
+                MODULE.compare_authoritative(first, second)
+
     def test_missing_artifact_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             first, second = Path(td) / "A", Path(td) / "B"
             first.mkdir()
             second.mkdir()
-            with self.assertRaisesRegex(MODULE.PreflightError, "missing authoritative"):
+            with self.assertRaisesRegex(MODULE.PreflightError, "missing, symlinked"):
                 MODULE.compare_authoritative(first, second)
 
 

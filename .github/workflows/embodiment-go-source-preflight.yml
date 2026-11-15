@@ -26,6 +26,7 @@ name: Go physical A1 admission and atomic CSF terminal
       - "src/embodiment/**"
       - "tests/architecture/embodiment_a2_transition_reference.py"
       - "docs/architecture/embodiment-causal-adapter-v1/**"
+      - "docs/architecture/embodiment-a1-production-gate.md"
       - "go.mod"
       - "go.sum"
       - "pyproject.toml"

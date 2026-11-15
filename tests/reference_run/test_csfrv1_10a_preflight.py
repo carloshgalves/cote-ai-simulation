@@ -24,6 +24,45 @@ class PreflightStructureTests(unittest.TestCase):
         cls.matrix = MODULE.load_json(DATA / "traceability.json")
         cls.adr = (ROOT / "docs/adr/0008-causal-simulation-foundation-v1.md").read_text(encoding="utf-8")
 
+    def test_original_frozen_authority(self) -> None:
+        MODULE.validate_frozen_authority(self.manifest)
+
+    def test_rebound_baseline_sha_and_tree_rejected(self) -> None:
+        m = copy.deepcopy(self.manifest)
+        m["baseline"]["commit"] = "0" * 40
+        m["baseline"]["tree"] = "f" * 40
+        with self.assertRaisesRegex(MODULE.PreflightError, "baseline"):
+            MODULE.validate_frozen_authority(m)
+
+    def test_policy_manifest_rebind_rejected(self) -> None:
+        m = copy.deepcopy(self.manifest)
+        m["policy_bundle"]["codec_policy_hash"] = "f" * 64
+        with self.assertRaisesRegex(MODULE.PreflightError, "policy"):
+            MODULE.validate_frozen_authority(m)
+
+    def test_toolchain_rebind_rejected(self) -> None:
+        m = copy.deepcopy(self.manifest)
+        m["toolchain"]["go"] = "1.99.9"
+        with self.assertRaisesRegex(MODULE.PreflightError, "toolchain"):
+            MODULE.validate_frozen_authority(m)
+
+    def test_normative_source_blob_rebind_rejected(self) -> None:
+        m = copy.deepcopy(self.manifest)
+        m["normative"]["adr"]["git_blob"] = "0" * 40
+        with self.assertRaisesRegex(MODULE.PreflightError, "normative"):
+            MODULE.validate_frozen_authority(m)
+
+    def test_pass_claim_rejected_even_with_fabricated_evidence(self) -> None:
+        t = copy.deepcopy(self.matrix)
+        row = t["invariants"][0]
+        row["status"] = "EXISTING_PASS_EXACT_SHA"
+        row["test"]["state"] = "EXISTING"
+        row["evidence"] = {"commit_sha": "a" * 40,
+                           "artifact": "fake-evidence.bin",
+                           "exact_bytes_digest": "b" * 64}
+        with self.assertRaisesRegex(MODULE.PreflightError, "cannot claim PASS"):
+            MODULE.validate_traceability(t, self.adr)
+
     def test_exact_41_and_68_from_normative_adr(self) -> None:
         MODULE.validate_traceability(self.matrix, self.adr)
         self.assertEqual(len(self.matrix["invariants"]), 41)

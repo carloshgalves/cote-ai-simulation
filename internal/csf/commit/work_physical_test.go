@@ -76,7 +76,7 @@ func physicalTestGenesis(t *testing.T, b *policy.Bundle) *genesis.Genesis {
 }
 
 func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledger.Ledger,
-	admission.Cycle, admission.Fence, embodimentv1.ApprovedCut, string) {
+	admission.Cycle, admission.Fence, embodimentv1.ApprovedCut, string, physicalhost.ProducerHost) {
 	t.Helper()
 	if os.Getenv("PHYSICAL_A1_PRODUCER_TEST") != "1" {
 		t.Skip("actual Python producer and A1 causal terminal run only under physical CI")
@@ -162,7 +162,7 @@ func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledge
 	if err := os.Chmod(stagingRoot, 0o700); err != nil {
 		t.Fatal(err)
 	}
-	approved, err := physicalhost.RunSupervisedPhysical(ctx, physicalhost.ProducerHost{
+	host := physicalhost.ProducerHost{
 		Bundle: b, GenesisCanonical: g.CanonicalBytes, PrivateKey: key,
 		ExecutablePath: pinnedPython, PythonHome: pythonHome, ImportRoot: importRoot, PrivateStagingRoot: stagingRoot,
 		Epoch: 1, Plan: physicalhost.ProducerPlan{
@@ -172,7 +172,8 @@ func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledge
 				{Subject: "npc.0002", Days: 1, Sleep: "8h", Quality: "good"},
 			},
 		},
-	})
+	}
+	approved, err := physicalhost.RunSupervisedPhysical(ctx, host)
 	if err != nil {
 		t.Fatalf("A1 host failed: %v", err)
 	}
@@ -207,12 +208,12 @@ func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledge
 	if err != nil {
 		t.Fatal(err)
 	}
-	return c, store, ledger, cycle, fence, approved, dbPath
+	return c, store, ledger, cycle, fence, approved, dbPath, host
 }
 
 func TestPhysicalAtomicCommitAndCrashReplay(t *testing.T) {
 	ctx := context.Background()
-	c, store, ledger, cycle, fence, approved, path := realPhysicalFixture(t)
+	c, store, ledger, cycle, fence, approved, path, _ := realPhysicalFixture(t)
 	_, _, _, _, _, run := ledger.Snapshot()
 	before, err := store.LoadClock(ctx, [32]byte(run))
 	if err != nil {
@@ -300,7 +301,7 @@ func samePhysicalState(a, b []any) bool {
 // requiring the SQLite terminal to independently revalidate every authority.
 func TestPhysicalAdversarialMutationsRejectedBeforeDurablePublication(t *testing.T) {
 	ctx := context.Background()
-	c, store, ledger, cycle, fence, approved, _ := realPhysicalFixture(t)
+	c, store, ledger, cycle, fence, approved, _, _ := realPhysicalFixture(t)
 	_, _, _, _, _, run := ledger.Snapshot()
 	before, err := store.LoadClock(ctx, [32]byte(run))
 	if err != nil {
@@ -399,7 +400,7 @@ func TestPhysicalAdversarialMutationsRejectedBeforeDurablePublication(t *testing
 // explained by a previous unrelated broken field.
 func TestPhysicalReplayRejectsPersistedSourceDecisionEventAndWorldTampering(t *testing.T) {
 	ctx := context.Background()
-	c, _, ledger, cycle, fence, approved, path := realPhysicalFixture(t)
+	c, _, ledger, cycle, fence, approved, path, _ := realPhysicalFixture(t)
 	journal, err := c.CommitPhysical(ctx, ledger, cycle, fence, approved)
 	if err != nil {
 		t.Fatal(err)
@@ -481,7 +482,7 @@ func TestPhysicalReplayRejectsPersistedSourceDecisionEventAndWorldTampering(t *t
 // authority. This is deliberately a positive test with a real Python A1 cut.
 func TestPhysicalSnapshotRestoreAndIndependentFork(t *testing.T) {
 	ctx := context.Background()
-	c, parent, ledger, cycle, fence, approved, path := realPhysicalFixture(t)
+	c, parent, ledger, cycle, fence, approved, path, _ := realPhysicalFixture(t)
 	_, _, _, _, _, run := ledger.Snapshot()
 	if _, err := c.CommitPhysical(ctx, ledger, cycle, fence, approved); err != nil {
 		t.Fatalf("physical parent commit refused: %v", err)
@@ -547,7 +548,7 @@ func TestPhysicalSnapshotRestoreAndIndependentFork(t *testing.T) {
 // receives the physical world snapshot. The parent remains untouched.
 func TestPhysicalForkRejectsUnfinishedSourceCursor(t *testing.T) {
 	ctx := context.Background()
-	coordinator, parent, ledger, cycle, fence, approved, _ := realPhysicalFixture(t)
+	coordinator, parent, ledger, cycle, fence, approved, _, _ := realPhysicalFixture(t)
 	if _, err := coordinator.CommitPhysical(ctx, ledger, cycle, fence, approved); err != nil {
 		t.Fatal(err)
 	}
@@ -581,7 +582,7 @@ func TestPhysicalForkRejectsUnfinishedSourceCursor(t *testing.T) {
 // a cut signed for a different registration.
 func TestPhysicalForeignAttestationHasNoIngressSideEffects(t *testing.T) {
 	ctx := context.Background()
-	original, _, _, cycle, _, approved, _ := realPhysicalFixture(t)
+	original, _, _, cycle, _, approved, _, _ := realPhysicalFixture(t)
 	baseBundle, err := policy.Load(bundlePath)
 	if err != nil {
 		t.Fatal(err)
@@ -639,5 +640,79 @@ func TestPhysicalForeignAttestationHasNoIngressSideEffects(t *testing.T) {
 	}
 	if len(records) != 0 {
 		t.Fatal("foreign signed cut left durable ingress records")
+	}
+}
+
+// Two completed A1 epochs at successive global ordinals must replay from
+// durable source/fence roots without pulling the second epoch into the first
+// cycle, re-admitting the first, or reusing Python local sequence numbers.
+func TestPhysicalTwoEpochsKeepGlobalCausalityAndReplay(t *testing.T) {
+	ctx := context.Background()
+	c, store, ledger, first, fence, approved, _, host := realPhysicalFixture(t)
+	if _, err := c.CommitPhysical(ctx, ledger, first, fence, approved); err != nil {
+		t.Fatalf("first physical epoch failed: %v", err)
+	}
+	_, _, _, _, _, run := ledger.Snapshot()
+	state, err := store.LoadClock(ctx, [32]byte(run))
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, hash, err := store.LoadWorldState(ctx, uint64(state.Revision))
+	if err != nil {
+		t.Fatal(err)
+	}
+	nextOrdinal := domain.CycleOrdinal(state.LastOrdinal + 1)
+	cycleID, _, err := identity.New(c.bundle).Sum(
+		"cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1,
+		[]any{run[:], []any{int64(state.Instant), uint64(nextOrdinal)}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	second := admission.Cycle{
+		ID: domain.ID(cycleID), Attempt: 0, Instant: state.Instant,
+		Ordinal: nextOrdinal, BaseRevision: state.Revision,
+		BaseStateHash: domain.Digest(hash), RetryRef: []any{uint64(0)},
+	}
+	host.Epoch = 2
+	host.Plan.Advances = []physicalhost.ProducerAdvance{
+		{Subject: "npc.0001", Days: 3, Sleep: "4h", Quality: "poor"},
+		{Subject: "npc.0002", Days: 2, Sleep: "8h", Quality: "good"},
+	}
+	approvedSecond, err := physicalhost.RunSupervisedPhysical(ctx, host)
+	if err != nil {
+		t.Fatalf("second supervised A1 cut refused: %v", err)
+	}
+	if _, err := c.StagePhysicalInput(ctx, ledger, approvedSecond, second); err != nil {
+		t.Fatalf("second A1 epoch could not enter InputLedger: %v", err)
+	}
+	secondFence, err := admission.NewCoordinator(admission.NewFenceLog(store)).
+		AdmitThenEvaluate(ctx, c.bundle, ledger, second, c.admissionPolicies, nil)
+	if err != nil {
+		t.Fatalf("second physical AdmissionFence rejected: %v", err)
+	}
+	if _, err := c.CommitPhysical(ctx, ledger, second, secondFence, approvedSecond); err != nil {
+		t.Fatalf("second physical terminal refused: %v", err)
+	}
+	finalClock, err := store.LoadClock(ctx, [32]byte(run))
+	if err != nil || finalClock.Revision != 2 || finalClock.NextLogicalSequence != 2 ||
+		finalClock.LastOrdinal != int64(nextOrdinal) {
+		t.Fatalf("two physical epochs did not advance global causality: %+v %v", finalClock, err)
+	}
+	finalWorld, _, err := store.LoadWorldState(ctx, uint64(finalClock.Revision))
+	if err != nil {
+		t.Fatal(err)
+	}
+	bodies, err := reducer.DecodePhysical(finalWorld)
+	if err != nil || len(bodies) != 3 || bodies[0].Hours != 72 ||
+		bodies[1].Hours != 48 || bodies[2].Hours != 0 {
+		t.Fatalf("two physical epochs corrupted canonical BodyState: %+v %v", bodies, err)
+	}
+	report, err := store.ReplayClock(ctx, [32]byte(run), c.bundle)
+	if err != nil || report.ReplayedCommits != 2 || report.ReplayedEvents != 2 {
+		t.Fatalf("multi-epoch replay diverged from journal: %+v %v", report, err)
+	}
+	pending, err := store.PendingClock(ctx, [32]byte(run))
+	if err != nil || len(pending) != 0 {
+		t.Fatalf("liquidated physical epochs reappeared as pending: %+v %v", pending, err)
 	}
 }

@@ -27,6 +27,7 @@ type PhysicalManifest struct {
 	SourceID                 string `json:"source_id"`
 	ProducerExecutableSHA256 string `json:"producer_executable_sha256"`
 	ProducerModuleSHA256     string `json:"producer_module_sha256"`
+	ProducerImportTreeSHA256 string `json:"producer_import_tree_sha256"`
 	ProducerPublicKeyEd25519 string `json:"producer_public_key_ed25519"`
 	Disclosure               string `json:"disclosure"`
 }
@@ -46,6 +47,7 @@ type PhysicalRegistration struct {
 	SourceID         string
 	ExecutableSHA256 [32]byte
 	ModuleSHA256     [32]byte
+	ImportTreeSHA256 [32]byte
 	PublicKeyEd25519 [32]byte
 	Disclosure       string
 }
@@ -106,6 +108,15 @@ func PhysicalExtensionV1(base *Bundle, raw []byte) (*Bundle, error) {
 			return nil, errors.New("zero producer module pin")
 		}
 	}
+	packageRaw, err := hex.DecodeString(manifest.ProducerImportTreeSHA256)
+	if err != nil || len(packageRaw) != 32 || manifest.ProducerImportTreeSHA256 != hex.EncodeToString(packageRaw) {
+		return nil, errors.New("invalid pinned full Python import tree digest")
+	}
+	var treePin [32]byte
+	copy(treePin[:], packageRaw)
+	if treePin == ([32]byte{}) {
+		return nil, errors.New("zero physical Python import tree pin forbidden")
+	}
 	var executablePin, publicKey [32]byte
 	copy(executablePin[:], executable)
 	copy(publicKey[:], key)
@@ -122,6 +133,7 @@ func PhysicalExtensionV1(base *Bundle, raw []byte) (*Bundle, error) {
 		SourceID:         manifest.SourceID,
 		ExecutableSHA256: executablePin,
 		ModuleSHA256:     modulePin,
+		ImportTreeSHA256: treePin,
 		PublicKeyEd25519: publicKey,
 		Disclosure:       manifest.Disclosure,
 	}

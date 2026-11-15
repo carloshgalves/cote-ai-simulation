@@ -113,6 +113,14 @@ func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledge
 		t.Fatal(err)
 	}
 	moduleHash := sha256.Sum256(module)
+	importRoot, err := filepath.Abs("../../../src")
+	if err != nil {
+		t.Fatal(err)
+	}
+	importTreeHash, err := physicalhost.PhysicalImportTreeSHA256(importRoot)
+	if err != nil {
+		t.Fatalf("physical producer package pin invalid: %v", err)
+	}
 	public, key, err := ed25519.GenerateKey(rand.Reader)
 	if err != nil {
 		t.Fatal(err)
@@ -125,6 +133,7 @@ func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledge
 		ActionOperation: "physical.advance", ActionProducer: "physical.a1",
 		SourceID: "physical.a1", ProducerExecutableSHA256: hex.EncodeToString(executableHash[:]),
 		ProducerModuleSHA256:     hex.EncodeToString(moduleHash[:]),
+		ProducerImportTreeSHA256: hex.EncodeToString(importTreeHash[:]),
 		ProducerPublicKeyEd25519: hex.EncodeToString(public), Disclosure: "ENGINE_ONLY",
 	}
 	raw, err := json.Marshal(manifest)
@@ -149,10 +158,6 @@ func realPhysicalFixture(t *testing.T) (*Coordinator, *sqlite.Store, *inputledge
 		t.Fatal(err)
 	}
 	if err := store.BootstrapGenesisTriggers(ctx, g, b, nil); err != nil {
-		t.Fatal(err)
-	}
-	importRoot, err := filepath.Abs("../../../src")
-	if err != nil {
 		t.Fatal(err)
 	}
 	stagingRoot, err := filepath.Abs(t.TempDir())

@@ -238,6 +238,10 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 	if err != nil || sha256.Sum256(module) != reg.ModuleSHA256 {
 		return zero, fmt.Errorf("%w: A1_MODULE_HASH", ErrUnadmitted)
 	}
+	treeHash, err := PhysicalImportTreeSHA256(host.ImportRoot)
+	if err != nil || treeHash != reg.ImportTreeSHA256 {
+		return zero, fmt.Errorf("%w: A1_IMPORT_TREE_PIN", ErrUnadmitted)
+	}
 	if err := checkedPrivateRoot(host.PrivateStagingRoot); err != nil {
 		return zero, fmt.Errorf("%w: A1_STAGING_ROOT: %w", ErrUnadmitted, err)
 	}
@@ -294,6 +298,13 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 	}
 	if err != nil || processCtx.Err() != nil {
 		return zero, fmt.Errorf("%w: A1_PROCESS_EXIT", ErrUnadmitted)
+	}
+	// The signed cut must not be issued if any transitive in-repository
+	// producer module changed during this run. Same-UID race isolation
+	// requires an OS-level read-only deployment, not this fingerprint alone.
+	treeAfter, err := PhysicalImportTreeSHA256(host.ImportRoot)
+	if err != nil || treeAfter != reg.ImportTreeSHA256 {
+		return zero, fmt.Errorf("%w: A1_IMPORT_TREE_CHANGED", ErrUnadmitted)
 	}
 
 	stagingCtx, stageCancel := context.WithTimeout(ctx, 10*time.Second)

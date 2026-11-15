@@ -14,6 +14,7 @@ func physicalManifestFixture() []byte {
 		StateSchema: "cote.csf.schema.typed-value", StateVersion: 1, StateVariant: "physical.body-state.v1",
 		ActionType: "physical.advance", ActionVersion: 1, ActionOperation: "physical.advance", ActionProducer: "physical.a1",
 		SourceID: "physical.a1", ProducerExecutableSHA256: strings.Repeat("ab", 32),
+		ProducerImportTreeSHA256: strings.Repeat("ef", 32),
 		ProducerPublicKeyEd25519: strings.Repeat("cd", 32), Disclosure: "ENGINE_ONLY",
 	}
 	raw, _ := json.Marshal(m)

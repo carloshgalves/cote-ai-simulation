@@ -209,3 +209,89 @@ func journalCommitPhysicalID(run, cycle [32]byte, journal []any) []byte {
 	}
 	return expected[:]
 }
+
+
+// historicalPhysicalInputs reconstructs physical source membership at a
+// historical pre-commit revision. Live pendingClock correctly excludes an
+// already-settled input, but replaying its own WORK must restore it until the
+// authenticated terminal revision has actually been reached. This is derived
+// from durable CycleCommit/Fence/EventStore roots, not a new live writer.
+func (s *Store) historicalPhysicalInputs(ctx context.Context, runID [32]byte,
+	replayRevision uint64) ([]clock.Pending, error) {
+	type terminal struct { cycle, commit [32]byte }
+	rows,err:=s.db.QueryContext(ctx,
+		"SELECT cycle_id,commit_id FROM committed_cycles WHERE run_id=? ORDER BY rowid",runID[:])
+	if err!=nil{return nil,err}
+	var roots []terminal
+	for rows.Next(){
+		var cycle,commit []byte
+		if err:=rows.Scan(&cycle,&commit);err!=nil{rows.Close();return nil,err}
+		if len(cycle)!=32||len(commit)!=32{rows.Close();return nil,errors.New("historical physical cycle ID invalid")}
+		var root terminal
+		copy(root.cycle[:],cycle);copy(root.commit[:],commit)
+		roots=append(roots,root)
+	}
+	if err:=rows.Err();err!=nil{rows.Close();return nil,err}
+	if err:=rows.Close();err!=nil{return nil,err}
+	var result []clock.Pending
+	seen:=map[domain.ID]bool{}
+	for _,root:=range roots{
+		var canonical []byte
+		if err:=s.db.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",root.commit[:]).
+			Scan(&canonical);err!=nil{return nil,err}
+		decoded,err:=codec.StrictDecodePayload(canonical)
+		if err!=nil{return nil,err}
+		journal,ok:=decoded.([]any)
+		if !ok||len(journal)!=24{return nil,errors.New("historical physical journal invalid")}
+		plan,ok:=journal[5].([]any)
+		if !ok||len(plan)==0{return nil,errors.New("historical physical plan malformed")}
+		if len(plan)!=1||plan[0]!=uint64(0){continue} // no physical CLOCK_ADVANCE
+		rev,ok:=journal[8].(uint64)
+		if !ok{return nil,errors.New("historical physical terminal revision missing")}
+		if rev<=replayRevision{continue}
+		eventIDs,ok:=journal[15].([]any)
+		if !ok||len(eventIDs)!=1{continue} // other registered WORK handlers
+		events,err:=loadJournalEvents(ctx,s.db,journal)
+		if err!=nil{return nil,err}
+		eventRaw,ok:=events[0].([]byte)
+		if !ok{return nil,errors.New("historical physical event bytes malformed")}
+		value,err:=codec.StrictDecodePayload(eventRaw)
+		if err!=nil{return nil,err}
+		event,ok:=value.([]any)
+		if !ok||len(event)!=19||event[3]!="physical.advanced"{continue}
+		attempt,ok:=journal[2].(uint64)
+		if !ok{return nil,errors.New("historical physical attempt invalid")}
+		fid,err:=registeredDigest("cote.csf.id.admission-fence",
+			"cote.csf.schema.admission-fence-id-preimage",
+			[]any{runID[:],root.cycle[:],attempt})
+		if err!=nil{return nil,err}
+		fence,err:=workFence(ctx,s.db,runID,root.cycle,[32]byte(fid))
+		if err!=nil{return nil,err}
+		source,err:=verifyPublishedPhysical(ctx,s.db,runID,root.cycle,
+			root.commit,journal,fence,events)
+		if err!=nil{return nil,err}
+		if seen[source]{return nil,errors.New("physical source committed more than once")}
+		seen[source]=true
+		units,ok:=fence[11].([]any)
+		if !ok||len(units)!=1{return nil,errors.New("historical physical source cohort invalid")}
+		unit,ok:=units[0].([]any)
+		if !ok||len(unit)!=5||!equalBytes(unit[3],source[:]){
+			return nil,errors.New("historical physical source does not match verified fence")
+		}
+		coord,ok:=unit[0].([]any)
+		if !ok||len(coord)!=2{return nil,errors.New("historical physical eligibility malformed")}
+		instant,ok:=asSigned64(coord[0])
+		if !ok{return nil,errors.New("historical physical eligibility instant invalid")}
+		ordinal,ok:=coord[1].(uint64)
+		if !ok||ordinal>uint64(^uint64(0)>>1){
+			return nil,errors.New("historical physical eligibility ordinal invalid")
+		}
+		result=append(result,clock.Pending{
+			ID:source,Eligibility:domain.EligibilityCoordinate{
+				NotBeforeInstant:domain.SimulationInstant(instant),
+				NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal),
+			},
+		})
+	}
+	return result,nil
+}

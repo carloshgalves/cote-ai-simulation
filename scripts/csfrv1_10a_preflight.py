@@ -14,6 +14,33 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 FOLDER = Path("docs/reference-run/csfrv1-10a")
 STATUSES = frozenset({"EXISTING_PASS_EXACT_SHA", "NEEDS_NEW_INTEGRATION_TEST", "BLOCKED_RULE", "NOT_RUN"})
+# Independent normative pins for this #115 snapshot. Do not derive these from
+# the manifest under test; doing so makes a malicious coordinated re-pin pass.
+FROZEN_BASELINE = "a20163b1d5124648192f3adff7c330ed5b4350fe"
+FROZEN_TREE = "0ee27ed49a36a42feddd7afce87d29b74f184493"
+FROZEN_NORMATIVE = {
+    "adr": ("docs/adr/0008-causal-simulation-foundation-v1.md",
+            "ec101510e120f86a7bc870e50498a6dd68849ea4"),
+    "spec": ("docs/spec/causal-simulation-foundation-v1.md",
+             "2f78f7dcaf797ce0ba32f469facb534f8e67b02d"),
+    "ticket": ("docs/tickets/csf-runtime-v1/10-adapter-fisico-e-cenario.md",
+               "24ff82e7eeae0a14a95032eb775a4274a3d166cd"),
+}
+FROZEN_BUNDLE = {
+    "codec_id": "cote.csf.codec.cbor-det.v1",
+    "codec_version": 1,
+    "codec_policy_hash": "513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203",
+    "schema_bundle_hash": "ef7c1e4cec18f1491e4b72bd7dd35f49a1c28d77a5bdd89d435122074f5cba18",
+    "conformance_suite_hash": "05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd",
+    "manifest_raw_sha256": {
+        "policy-manifest.json": "6c4db38cdec9e15a2f21195dd8f2110846ff86721b17c6b197b5d15dbe0ece68",
+        "schema-manifest.json": "79e6b37d94fdd04a86a78f167f03c0a04e389e933ec959c06617dd1f934156d3",
+        "conformance-manifest.json": "629a238b9367cb0fd14e5b1040816923797dd051a98bb09955b5c7dcfba31902",
+    },
+}
+FROZEN_TOOLCHAIN = {"go": "1.27.2", "python": "3.13.5",
+                    "sqlite_driver": "modernc.org/sqlite", "sqlite_driver_version": "v1.60.1"}
+
 ORACLE_FILES = (
     "input-ledger.bin", "decision-ledger.bin", "event-store.bin",
     "evidence-ledger.bin", "snapshot-store.bin", "agenda-runtime.bin",
@@ -82,6 +109,29 @@ def parse_adr(text: str) -> tuple[list[str], list[tuple[str, str]]]:
     return invariants, rows
 
 
+def validate_frozen_authority(manifest: dict) -> None:
+    require(manifest.get("baseline", {}).get("commit") == FROZEN_BASELINE and
+            manifest["baseline"].get("tree") == FROZEN_TREE and
+            manifest["baseline"].get("ref") == "main",
+            "frozen baseline commit/tree cannot be re-pinned")
+    for role, (path, blob) in FROZEN_NORMATIVE.items():
+        entry = manifest.get("normative", {}).get(role, {})
+        require(entry.get("path") == path and entry.get("git_blob") == blob,
+                f"frozen normative blob cannot be re-pinned: {role}")
+    b = manifest.get("policy_bundle", {})
+    require(b.get("directory") == "docs/architecture/canonical-codec-v1-bundle",
+            "frozen policy bundle directory cannot be re-pinned")
+    for key, expected in FROZEN_BUNDLE.items():
+        require(b.get(key) == expected, f"frozen policy cannot be re-pinned: {key}")
+    tc = manifest.get("toolchain", {})
+    require(tc.get("go") == FROZEN_TOOLCHAIN["go"] and
+            tc.get("python") == FROZEN_TOOLCHAIN["python"] and
+            tc.get("sqlite", {}).get("driver") == FROZEN_TOOLCHAIN["sqlite_driver"] and
+            tc.get("sqlite", {}).get("driver_version") ==
+                FROZEN_TOOLCHAIN["sqlite_driver_version"],
+            "frozen toolchain cannot be re-pinned")
+
+
 def validate_traceability(trace: dict, adr_text: str) -> None:
     inv, stress = parse_adr(adr_text)
     require(trace.get("schema") == "csfrv1-10a.traceability.v1", "wrong traceability schema")
@@ -115,17 +165,14 @@ def validate_traceability(trace: dict, adr_text: str) -> None:
                     f"{kind}-{i:02d} test alias/name mismatch")
             require(test.get("path") == "tests/scenarios/reference_run_test.go", "test path alias changed")
             evidence = entry.get("evidence", {})
-            if status == "EXISTING_PASS_EXACT_SHA":
-                require(test.get("state") == "EXISTING",
-                        f"{kind}-{i:02d} PASS has no existing test")
-                require(isinstance(evidence.get("commit_sha"), str) and
-                        bool(re.fullmatch(r"[0-9a-f]{40}", evidence["commit_sha"])) and
-                        bool(evidence.get("artifact")) and bool(evidence.get("exact_bytes_digest")),
-                        f"{kind}-{i:02d} PASS without immutable evidence")
-            else:
-                require(test.get("state") == "PLANNED_NOT_PRESENT" and
-                        all(evidence.get(k) is None for k in ("commit_sha", "artifact", "exact_bytes_digest")),
-                        f"{kind}-{i:02d} unproved evidence must remain absent")
+            # #115 is a plan, not the executor. Promoting rows to PASS
+            # requires a future verifier that executes named tests and binds
+            # exact outputs to SHA, never just truthy strings in JSON.
+            require(status == "NEEDS_NEW_INTEGRATION_TEST",
+                    f"{kind}-{i:02d} cannot claim PASS in the unexecuted #115 plan")
+            require(test.get("state") == "PLANNED_NOT_PRESENT" and
+                    all(evidence.get(k) is None for k in ("commit_sha", "artifact", "exact_bytes_digest")),
+                    f"{kind}-{i:02d} unproved evidence must remain absent")
             require(isinstance(entry.get("owner_issue"), int), f"{kind}-{i:02d} missing owner issue")
 
 
@@ -343,6 +390,7 @@ def main() -> int:
         plan = load_json(ROOT / FOLDER / "scenario.json")
         matrix = load_json(ROOT / FOLDER / "traceability.json")
         adr_text = (ROOT / manifest["normative"]["adr"]["path"]).read_text(encoding="utf-8")
+        validate_frozen_authority(manifest)
         validate_traceability(matrix, adr_text)
         validate_scenario(manifest, plan)
         check_git(manifest)

@@ -82,6 +82,8 @@ jobs:
         env:
           PHYSICAL_GO_FIXTURE_DIR: /tmp/physical-go-fixture
         run: go test -v -count=1 ./internal/csf/adapter/embodimentv1
+      - name: Test A1 immutable executable and pathname race defenses
+        run: go test -v -count=1 ./internal/physicalhost
       - name: Test supervised A1 and physical atomic crash/replay under real Python
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"

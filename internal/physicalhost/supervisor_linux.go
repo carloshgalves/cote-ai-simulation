@@ -160,6 +160,18 @@ func makeSealedPhysicalFD(raw []byte) (*os.File, error) {
 	}
 	return file, nil
 }
+// pinnedExecutableFD makes the exact bytes authenticated by the configured
+// executable digest the ONLY executable image. Executing host.ExecutablePath
+// after hashing would be an avoidable check/use race under pathname renames.
+func pinnedExecutableFD(raw []byte) (*os.File, error) {
+	if len(raw) == 0 || len(raw) > 128*1024*1024 {
+		return nil, ErrUnadmitted
+	}
+	// A sealed, anonymous Linux file remains a stable inode even if an
+	// adversary can rename or replace the original pathname after inspection.
+	return makeSealedPhysicalFD(raw)
+}
+
 func checkedPrivateRoot(path string) error {
 	if !filepath.IsAbs(path) {
 		return fmt.Errorf("%w: A1_ROOT_NOT_ABSOLUTE", ErrUnadmitted)
@@ -249,8 +261,17 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 	// producer's response. No shell, network socket or generic command input.
 	processCtx, cancel := context.WithTimeout(ctx, 30*time.Second)
 	defer cancel()
-	cmd := exec.CommandContext(processCtx, host.ExecutablePath,
+	// ExtraFiles[0] is descriptor 3 in the child. The Python image below is
+	// the SAME authenticated, sealed memfd, never the mutable host path.
+	// Failure to execute the sealed image is fatal; no pathname fallback.
+	pinnedExecutor, err := pinnedExecutableFD(executable)
+	if err != nil {
+		return zero, fmt.Errorf("%w: A1_SEALED_EXECUTABLE", ErrUnadmitted)
+	}
+	defer pinnedExecutor.Close()
+	cmd := exec.CommandContext(processCtx, "/proc/self/fd/3",
 		"-B", "-s", "-m", "embodiment.a1_capture", "--out", stage, "--plan", planPath)
+	cmd.ExtraFiles = []*os.File{pinnedExecutor}
 	cmd.Dir = stage
 	cmd.Env = []string{"PYTHONPATH=" + host.ImportRoot, "PYTHONHOME=" + host.PythonHome,
 		"LD_LIBRARY_PATH=" + filepath.Join(host.PythonHome, "lib"),

@@ -52,6 +52,18 @@ class PreflightStructureTests(unittest.TestCase):
         with self.assertRaisesRegex(MODULE.PreflightError, "normative"):
             MODULE.validate_frozen_authority(m)
 
+    def test_frozen_plan_blob_rejects_seed_tamper(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            target = Path(td) / MODULE.FOLDER
+            target.mkdir(parents=True)
+            for name in MODULE.FROZEN_PLAN_BLOBS:
+                (target / name).write_bytes((DATA / name).read_bytes())
+            raw = (target / "scenario.json").read_text(encoding="utf-8")
+            (target / "scenario.json").write_text(
+                raw.replace("0001020304050607", "f001020304050607"), encoding="utf-8")
+            with self.assertRaisesRegex(MODULE.PreflightError, "frozen #115 fixture"):
+                MODULE.check_frozen_plan_blobs(Path(td))
+
     def test_pass_claim_rejected_even_with_fabricated_evidence(self) -> None:
         t = copy.deepcopy(self.matrix)
         row = t["invariants"][0]

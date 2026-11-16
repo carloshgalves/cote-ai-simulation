@@ -1,0 +1,121 @@
+{
+  "schema": "csfrv1-10a.reference-plan.v1",
+  "issue": 115,
+  "epic": 114,
+  "run_status": "NOT_RUN",
+  "acceptance_status": "NOT_APPROVED",
+  "baseline": {
+    "ref": "main",
+    "commit": "a20163b1d5124648192f3adff7c330ed5b4350fe",
+    "tree": "0ee27ed49a36a42feddd7afce87d29b74f184493"
+  },
+  "normative": {
+    "adr": {
+      "path": "docs/adr/0008-causal-simulation-foundation-v1.md",
+      "git_blob": "ec101510e120f86a7bc870e50498a6dd68849ea4",
+      "section": "14",
+      "invariants": 41,
+      "stress_scenarios": 68
+    },
+    "spec": {
+      "path": "docs/spec/causal-simulation-foundation-v1.md",
+      "git_blob": "2f78f7dcaf797ce0ba32f469facb534f8e67b02d",
+      "scenario": "1",
+      "dod": "11.5"
+    },
+    "ticket": {
+      "path": "docs/tickets/csf-runtime-v1/10-adapter-fisico-e-cenario.md",
+      "git_blob": "24ff82e7eeae0a14a95032eb775a4274a3d166cd"
+    }
+  },
+  "toolchain": {
+    "go": "1.27.2",
+    "python": "3.13.5",
+    "sqlite": {
+      "driver": "modernc.org/sqlite",
+      "driver_version": "v1.60.1",
+      "engine_version": null,
+      "engine_status": "NOT_ATTESTED",
+      "note": "Go-linked SQLite engine version must be measured by read-only SELECT sqlite_version() in #116; never substitute Python sqlite3 or system CLI versions."
+    }
+  },
+  "policy_bundle": {
+    "directory": "docs/architecture/canonical-codec-v1-bundle",
+    "codec_id": "cote.csf.codec.cbor-det.v1",
+    "codec_version": 1,
+    "codec_policy_hash": "513111dc82a5e58c07aecdabf410633f5aa5418908d2461ef0dff0d9ae5d8203",
+    "schema_bundle_hash": "ef7c1e4cec18f1491e4b72bd7dd35f49a1c28d77a5bdd89d435122074f5cba18",
+    "conformance_suite_hash": "05a226340c4211045d6f3df8f034434f3ac336001158379833f7230df4038dfd",
+    "manifest_raw_sha256": {
+      "policy-manifest.json": "6c4db38cdec9e15a2f21195dd8f2110846ff86721b17c6b197b5d15dbe0ece68",
+      "schema-manifest.json": "79e6b37d94fdd04a86a78f167f03c0a04e389e933ec959c06617dd1f934156d3",
+      "conformance-manifest.json": "629a238b9367cb0fd14e5b1040816923797dd051a98bb09955b5c7dcfba31902"
+    }
+  },
+  "genesis": {
+    "status": "DECLARATIVE_ONLY_NOT_CANONICAL",
+    "run_id": null,
+    "canonical_genesis_sha256": null,
+    "world_seed_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "timezone": "Asia/Tokyo",
+    "initial_instant": 0,
+    "initial_world_state": {
+      "resource_id": "supply.last-unit",
+      "available": 1
+    },
+    "source_ids": [
+      "school-events",
+      "physical.a1"
+    ],
+    "actors": [
+      "actor.a",
+      "actor.b"
+    ],
+    "policy_ids_to_seal": [
+      "causal-identity",
+      "admission-order",
+      "admission-fence",
+      "coordinate",
+      "event-order",
+      "idempotency",
+      "rng",
+      "perception",
+      "perception-identity"
+    ],
+    "physical_extension": {
+      "status": "NOT_ATTESTED",
+      "required_for_admission": true,
+      "private_to_engine": true
+    },
+    "epistemic_checkpoint_status": "NOT_ATTESTED",
+    "note": "Do not encode a pretend Genesis: canonical CBOR, registered extensions, policy refs and version/hash checks must be produced and validated by the Go genesis loader in #116/#118."
+  },
+  "execution": {
+    "topology": "local-single-operator",
+    "causal_writers": [
+      "go.commit-coordinator"
+    ],
+    "stores": [
+      "input-ledger",
+      "decision-ledger",
+      "event-store",
+      "evidence-ledger",
+      "causal-outbox"
+    ],
+    "snapshot_store": "snapshot-store",
+    "persistence": "SQLite; single Go coordinator, atomic CommitWork",
+    "network": false,
+    "llm": false,
+    "provider": false,
+    "cloud": false,
+    "protected_data": false,
+    "physical_seq_global": false
+  },
+  "gates": {
+    "matrix": "PLANNED_NO_INTEGRATION_RUN",
+    "first_reference_run": "NOT_RUN",
+    "simulated_winner": "UNSPECIFIED_RUNTIME_DERIVED",
+    "external_security_review": "NOT_APPROVED",
+    "human_merge_required": true
+  }
+}

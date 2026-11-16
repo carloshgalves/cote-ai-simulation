@@ -1,0 +1,2139 @@
+{
+  "schema": "csfrv1-10a.traceability.v1",
+  "issue": 115,
+  "source_blob": "ec101510e120f86a7bc870e50498a6dd68849ea4",
+  "measurement_state": "NOT_RUN",
+  "allowed_statuses": [
+    "EXISTING_PASS_EXACT_SHA",
+    "NEEDS_NEW_INTEGRATION_TEST",
+    "BLOCKED_RULE",
+    "NOT_RUN"
+  ],
+  "invariants": [
+    {
+      "id": "INV-01",
+      "number": 1,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Só o commit coordinator acrescenta world events e publica `WorldRevision`.",
+      "scenario_id": "STRESS-19",
+      "test": {
+        "name": "TestReferenceInvariant01",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-02",
+      "number": 2,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Todo evento pertence a exatamente um commit e toda revisão publicada aponta para o lote que a produziu.",
+      "scenario_id": "STRESS-19",
+      "test": {
+        "name": "TestReferenceInvariant02",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-03",
+      "number": 3,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Propostas simultâneas usam o mesmo snapshot; ordem/latência de execução não é prioridade.",
+      "scenario_id": "STRESS-01",
+      "test": {
+        "name": "TestReferenceInvariant03",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-04",
+      "number": 4,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "`LogicalSequence` ordena fatos commitados; não decide disputa.",
+      "scenario_id": "STRESS-31",
+      "test": {
+        "name": "TestReferenceInvariant04",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-05",
+      "number": 5,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Occurrence/trigger handlers, validators e reducers não mutam stores diretamente.",
+      "scenario_id": "STRESS-54",
+      "test": {
+        "name": "TestReferenceInvariant05",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-06",
+      "number": 6,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Trigger repetível tem rearm/cadência persistida; reavaliação sozinha nunca repete efeito, e toda ativação é uma `TriggerActivation` durável antes de produzir candidato.",
+      "scenario_id": "STRESS-51",
+      "test": {
+        "name": "TestReferenceInvariant06",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-07",
+      "number": 7,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Resultado indeterminado de validação é `INDETERMINATE` registrado dentro de um `CycleAbortRecord` auditável e aborta a tentativa antes que qualquer disposição exista; lacuna de implementação não vira permissão.",
+      "scenario_id": "STRESS-17",
+      "test": {
+        "name": "TestReferenceInvariant07",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-08",
+      "number": 8,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Proibição institucional/legal não implica impossibilidade física.",
+      "scenario_id": "STRESS-42",
+      "test": {
+        "name": "TestReferenceInvariant08",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-09",
+      "number": 9,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Eventos são fatos do mundo; claims são alegações; observations são evidência disponível.",
+      "scenario_id": "STRESS-48",
+      "test": {
+        "name": "TestReferenceInvariant09",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "INV-10",
+      "number": 10,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Evento existente, público ou secreto não altera conhecimento sem rota causal registrada.",
+      "scenario_id": "STRESS-43",
+      "test": {
+        "name": "TestReferenceInvariant10",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "INV-11",
+      "number": 11,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Envio sem entrega/percepção não produz `KnowledgeInput` no destinatário.",
+      "scenario_id": "STRESS-50",
+      "test": {
+        "name": "TestReferenceInvariant11",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "INV-12",
+      "number": 12,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Reducer muda estado e nunca decide/emite novo fato.",
+      "scenario_id": "STRESS-54",
+      "test": {
+        "name": "TestReferenceInvariant12",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-13",
+      "number": 13,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Commit multi-evento e commit do ciclo são atômicos.",
+      "scenario_id": "STRESS-19",
+      "test": {
+        "name": "TestReferenceInvariant13",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-14",
+      "number": 14,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Todo uso de randomness é seedado, nomeado, versionado e independente de ordem incidental.",
+      "scenario_id": "STRESS-61",
+      "test": {
+        "name": "TestReferenceInvariant14",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-15",
+      "number": 15,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Replay não chama LLM nem usa wall time.",
+      "scenario_id": "STRESS-40",
+      "test": {
+        "name": "TestReferenceInvariant15",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-16",
+      "number": 16,
+      "group": "authority",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Observatory não possui nenhum port de escrita causal.",
+      "scenario_id": "STRESS-57",
+      "test": {
+        "name": "TestReferenceInvariant16",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 120
+    },
+    {
+      "id": "INV-17",
+      "number": 17,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Toda transição autoritativa de schedule/trigger é representada no event store; runtime e `TriggerActivation` causados por uma revisão são publicados atomicamente no `CycleCommit` dessa revisão, com elegibilidade `>= commit_successor_floor(commit)`; avanço temporal usa `(to, 0)` e nunca cria trabalho pendente no instante de origem já abandonado.",
+      "scenario_id": "STRESS-35",
+      "test": {
+        "name": "TestReferenceInvariant17",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-18",
+      "number": 18,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Nenhum ator começa novo round enquanto houver task causalmente anterior sem completion ou id de `KnowledgeInput` listado pelo completion sem record durável endereçado a ele.",
+      "scenario_id": "STRESS-64",
+      "test": {
+        "name": "TestReferenceInvariant18",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "INV-19",
+      "number": 19,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Contexto de agente é allow-list por holder/timeline/provenance; não é uma view redigida do estado global.",
+      "scenario_id": "STRESS-45",
+      "test": {
+        "name": "TestReferenceInvariant19",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "INV-20",
+      "number": 20,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Toda unidade causal é admitida por um `AdmissionFence` durável, derivado dos ledgers e gravado antes de qualquer avaliação; membresia é função da coordenada de elegibilidade, dos `SourceClosure` gravados e de `base_revision`, nunca da ordem de chegada, do wall clock do coordinator nem da ausência momentânea de pendências. Para cada fonte, a prova usa o primeiro `SourceClosure` por `ingress_seq` que cobre a coordenada exigida pelo `cycle_plan` — a do ciclo em `WORK`, ou a pendência-alvo em `CLOCK_ADVANCE` —, estável sob append; o fence persistido é verificável contra a derivação por leitura prefix-consistente e escrita condicional. Nova identidade de entrega continua sendo unidade causal mesmo quando é alias idempotente de unidade já liquidada: não pode ser consumida nem retirada das pendências antes do próprio fence.",
+      "scenario_id": "STRESS-06",
+      "test": {
+        "name": "TestReferenceInvariant20",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-21",
+      "number": 21,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "`ingress_seq` só participa da normalização de ingresso e da seleção append-stable da prova de fechamento da própria fonte. A ordem total de `admitted_units` usa a chave byte a byte e a política versionada/hash da §3.2.4; prioridade e desempate nunca derivam de ordem de registro, enum local ou iteração de map. Nenhuma derivação escolhe entre respostas de slot, porque o ledger nunca contém duas.",
+      "scenario_id": "STRESS-04",
+      "test": {
+        "name": "TestReferenceInvariant21",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-22",
+      "number": 22,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "A `DecisionCohort` de um ciclo é o conjunto derivado das `RoundDeclaration` elegíveis em `base_revision`; todos os seus rounds são admitidos no mesmo ciclo, leem a mesma `base_revision` e concorrem no mesmo espaço de `ConflictSet`. Latência nunca separa rounds simultâneos nem exclui um round da coorte.",
+      "scenario_id": "STRESS-02",
+      "test": {
+        "name": "TestReferenceInvariant22",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-23",
+      "number": 23,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Todo desfecho terminal (`COMMIT`, `REJECT`, `DEFER`, `NO_PROPOSAL`, `DEDUPLICATED`) é um `DecisionRecord` canônico persistido exclusivamente na transação de um `CycleCommit`, junto de fence closure, eventos e `WorldRevision`; há exatamente um por unidade admitida e nenhuma fonte vencida permanece `PENDING` no instante avaliado. Em `COMMIT|REJECT|DEFER`, o registro aponta ao único candidato cuja partição contém a unidade; em `DEDUPLICATED`, aponta à unidade canônica ainda que ela pertença a ciclo anterior. Ausência de candidato ou evento de domínio nunca suprime o evento de `SOURCE_LIFECYCLE` exigido para terminar schedule, round ou trigger.",
+      "scenario_id": "STRESS-12",
+      "test": {
+        "name": "TestReferenceInvariant23",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-24",
+      "number": 24,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Todo fence gravado termina em exatamente um envelope: `CycleCommit` (mesmo com zero eventos) ou `CycleAbortRecord` (sem revisão, sem evento, sem `PerceptionTask`, sem avanço de ordinal, sem consumo e sem `DecisionRecord`). O envelope repete o `cycle_plan` do fence byte a byte e seu digest terminal o cobre; no abort, evidence refs e records são conjuntos normalizados pelas chaves totais da §8.0.1 antes de calcular `abort_digest`.",
+      "scenario_id": "STRESS-20",
+      "test": {
+        "name": "TestReferenceInvariant24",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "INV-25",
+      "number": 25,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Elegibilidade de readmissão é a coordenada persistida `(not_before_instant, not_before_cycle_ordinal)`; `DEFER` de mesmo instante usa ordinal maior, nunca momento de inserção.",
+      "scenario_id": "STRESS-29",
+      "test": {
+        "name": "TestReferenceInvariant25",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-26",
+      "number": 26,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Link causal dentro do mesmo ciclo só existe entre eventos do mesmo `CommitCandidate` atômico.",
+      "scenario_id": "STRESS-35",
+      "test": {
+        "name": "TestReferenceInvariant26",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-27",
+      "number": 27,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Checkpoint resumível contém ou referencia atomicamente checkpoint epistemológico versionado de cada ator elegível.",
+      "scenario_id": "STRESS-59",
+      "test": {
+        "name": "TestReferenceInvariant27",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "INV-28",
+      "number": 28,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Nenhum ciclo de coordenada `C` deriva membresia ou grava fence enquanto alguma fonte exógena declarada não tiver um fechamento não final com `closed_through >= closure_coordinate(C, cycle_plan)` ou um fechamento `final`. Entrada após fechamento não final recebe coordenada posterior por regra de ingresso; depois de `final`, qualquer input ou fechamento da fonte é rejeitado atomicamente.",
+      "scenario_id": "STRESS-06",
+      "test": {
+        "name": "TestReferenceInvariant28",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-29",
+      "number": 29,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "`CycleControlState` é uma dobra total e ordenada sobre fences, envelopes terminais e `AttemptRetryRecord`: fence sem envelope ⇒ `ATTEMPT_IN_FLIGHT`; abort com retentativa registrada e sem fence ⇒ `RETRY_AUTHORIZED`; abort sem retentativa ⇒ `HALTED_ON_ABORT`; senão `IDLE`. Resume restaura `HALTED_ON_ABORT` como run parado; só `AttemptRetryRecord` ou fork explícito abre `attempt_ordinal + 1`; `RETRY_AUTHORIZED` reabre o mesmo `cycle_id` na tentativa autorizada sem seleção de coordenada; `ATTEMPT_IN_FLIGHT` é reexecutado a partir do fence e de seu `cycle_plan`, sem recalcular o alvo temporal. Cada `AttemptRetryRecord` referencia o último envelope terminal do run e é consumido por exatamente um fence.",
+      "scenario_id": "STRESS-22",
+      "test": {
+        "name": "TestReferenceInvariant29",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "INV-30",
+      "number": 30,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "A resposta de slot é o preenchimento de uma unidade derivada, não entrada de fonte exógena: não tem coordenada própria, não está sujeita a `SourceClosure` nem à normalização de ingresso. Cada slot tem no máximo um `SlotDispatch` aberto e no máximo uma `SlotResponse`, admitida por escrita condicional contra o dispatch aberto; dispatch e resposta correspondem exatamente em run, ciclo, round, slot, ator, revisão e instante, e mismatch é rejeitado antes de preencher o slot. Redespacho exige `SlotDispatchRevocation` durável.",
+      "scenario_id": "STRESS-25",
+      "test": {
+        "name": "TestReferenceInvariant30",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-31",
+      "number": 31,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "`idempotency_key` tem namespace por run, tipo, fonte e ator e é comprometida a `idempotency_digest`. Apenas aliases da mesma operação lógica podem ser `DEDUPLICATED`; reuso do mesmo namespace com digest diferente aborta fail-closed sem `DecisionRecord` nem consumo no fence corrente. Toda identidade de entrega distinta entra em um fence e recebe settlement próprio; recibo terminal anterior nunca a consome por atalho no `InputLedger`.",
+      "scenario_id": "STRESS-13",
+      "test": {
+        "name": "TestReferenceInvariant31",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-32",
+      "number": 32,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "`CycleCommit` existe uma única vez no commit journal canônico do `DecisionLedger`; o `EventStore` contém somente `Event` referenciado. Replay causal lê ambos e nenhuma projeção combinada é fonte de verdade.",
+      "scenario_id": "STRESS-68",
+      "test": {
+        "name": "TestReferenceInvariant32",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "INV-33",
+      "number": 33,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Todo id causal segue a `CausalIdentityPolicy` versionada: input externo exige chave estável do produtor e id derivado usa somente origem causal/semântica canônica. UUID aleatório, wall clock, append position, `ingress_seq` e ordem de iteração nunca alocam identidade; aliases iguais mas distintos preservam ids próprios por chaves de produtor distintas.",
+      "scenario_id": "STRESS-62",
+      "test": {
+        "name": "TestReferenceInvariant33",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-34",
+      "number": 34,
+      "group": "ingress-cohorts",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "`fence_digest` cobre bytes canônicos de toda a topologia do `AdmissionFence`: provas ordenadas por fonte, rounds por id, pares slot/resposta por slot, `admitted_units` como records `(eligibility, unit_kind, source_id, unit_id, unit_digest)`, `input_digest`, `cycle_plan` e maps/set-like collections por chave normativa. Mesmo id com bytes diferentes falha antes da avaliação; mesmos conjuntos e políticas produzem os mesmos bytes independentemente da ordem local de registro ou iteração.",
+      "scenario_id": "STRESS-63",
+      "test": {
+        "name": "TestReferenceInvariant34",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-35",
+      "number": 35,
+      "group": "triggers-events",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Uma transição de predicate que ativa trigger cria exatamente uma `TriggerActivation` `PENDING` na mesma transação da revisão de origem; o `DecisionRecord` da ativação é a única forma de consumi-la. Seu `causing_event_ids[]` é o filtro total e versionado da §4.2 sobre os `pre_trigger_events`, em ordem de `EventOrderKey`, e é provenance do post-state, não link causal entre candidatos simultâneos. Crash/replay não recria, perde nem duplica ativação a partir de memória do processo.",
+      "scenario_id": "STRESS-52",
+      "test": {
+        "name": "TestReferenceInvariant35",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-36",
+      "number": 36,
+      "group": "triggers-events",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Todo evento potencialmente perceptível possui `PerceptionTask` criada na mesma transação do `CycleCommit` e referenciada por ele. Completion só existe depois dos recibos idempotentes no evidence ledger; barrier e resume reconciliam commits, tarefas, completions e entregas antes de despachar novo round. A tarefa não é conteúdo de agente e nenhuma rota concede observação sem avaliação observer-specific de acesso e comparação exata do output permitido. Persistir `KnowledgeInput` já confirma a entrega; nenhuma authority paralela pode alterar esse fato. Task, observation, `KnowledgeInput` e completion derivam ids dos componentes normativos da §10.1; concorrência/retry nunca alocam nova identidade.",
+      "scenario_id": "STRESS-64",
+      "test": {
+        "name": "TestReferenceInvariant36",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "INV-37",
+      "number": 37,
+      "group": "triggers-events",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Todo `CommitCandidate` tem identidade derivada de unidades-fonte e papel/ordinal de schema. Seu `EventDraft`, os records-fonte por id+digest e o contrato versionado do event type projetam o envelope factual/provenance/visibilidade completo do evento candidato; records são resolvidos nos owners registrados e nenhum metadado extra no fence participa dessa projeção. Todo evento persiste sua `EventOrderKey`; `EventBatch`, `event_id` e `LogicalSequence` usam a única ordem total da §7, versionada e independente da ordem em que candidatos/workers terminam. Replay recalcula id em todas as fases, ordem e sequência a partir dessas preimagens, e `batch_digest` cobre os envelopes. Os conjuntos `source_unit_ids[]` formam partição exata das unidades produtoras; overlap, gap ou referência fora do fence aborta antes da resolução, e cada unidade aponta a exatamente um candidato.",
+      "scenario_id": "STRESS-32",
+      "test": {
+        "name": "TestReferenceInvariant37",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-38",
+      "number": 38,
+      "group": "triggers-events",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "A próxima coordenada é função total da §3.3: lacunas de ordinal são saltadas sem commit vazio; o ciclo de avanço pertence ao instante de origem, tem input vazio e reseta o destino para ordinal `-1`. Seu `CyclePlan` persiste `from`, `to` e a pendência-alvo desde o fence até o envelope terminal. Outputs derivados pelo avanço têm piso `(to, 0)`; depois de materializá-los, a menor pendência é recalculada e abre exatamente na sua coordenada, nunca numa coordenada vencida.",
+      "scenario_id": "STRESS-36",
+      "test": {
+        "name": "TestReferenceInvariant38",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-39",
+      "number": 39,
+      "group": "triggers-events",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "`causal_parents`, `source_inputs`, `actor_refs` e `entity_refs` de todo `Event` são conjuntos normalizados pelas chaves totais da §8.1 antes de persistência e digest. Ordem de iteração nunca muda o envelope; ordem de domínio vive no payload tipado, e identidade repetida com bytes incompatíveis falha fechado.",
+      "scenario_id": "STRESS-34",
+      "test": {
+        "name": "TestReferenceInvariant39",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-40",
+      "number": 40,
+      "group": "triggers-events",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "Todo `IndeterminateRecord` identifica por ref+digest o sujeito validado e por id+versão+hash o validator. Normalização nunca colapsa falhas de sujeitos distintos, e nenhum record pode apontar para unidade/candidato fora do fence abortado.",
+      "scenario_id": "STRESS-56",
+      "test": {
+        "name": "TestReferenceInvariant40",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "INV-41",
+      "number": 41,
+      "group": "epistemic-chronology",
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#14-invariantes-normativas",
+      "normative_text": "`observed_at` e `received_at` derivam do evento causal que tornou a evidência disponível sob a política perceptiva versionada; processamento, fila, append e wall clock nunca alteram a cronologia epistemológica. Atraso semântico exige ocorrência e evento posteriores.",
+      "scenario_id": "STRESS-66",
+      "test": {
+        "name": "TestReferenceInvariant41",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    }
+  ],
+  "stress_scenarios": [
+    {
+      "id": "STRESS-01",
+      "number": 1,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Duas respostas LLM chegam em ordens opostas",
+      "required_proof": "mesmo `decision_round_id` + `base_revision`; log e vencedor idênticos",
+      "test": {
+        "name": "TestReferenceStress01",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-02",
+      "number": 2,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Duas `RoundDeclaration` R1 e R2 com a mesma coordenada; R1 completa antes de o coordinator “ver” R2",
+      "required_proof": "a coorte é derivada de `base_revision`, onde R1 e R2 já existem; ambos entram na mesma coorte e no mesmo ciclo em qualquer execução; mesma `base_revision`; seus candidatos disputam o mesmo `ConflictSet`; qual completou primeiro não muda nada",
+      "test": {
+        "name": "TestReferenceStress02",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-03",
+      "number": 3,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Round e input exógeno declaram o mesmo `effective_at`",
+      "required_proof": "o fence deriva de `base_revision` mais o `SourceClosure` da fonte do input; membresia, `ConflictSet`, vencedor e log não mudam com a ordem de chegada",
+      "test": {
+        "name": "TestReferenceStress03",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-04",
+      "number": 4,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Dois inputs exógenos E1 e E2, com `producer_unit_key` estáveis, gravados antes do mesmo `SourceClosure` em ordens opostas",
+      "required_proof": "`input_id` deriva das chaves do produtor, não do append; mesmos `admitted_input_ids`, mesmo `fence_digest`, mesmo log; `ingress_seq` não entra em identidade nem ordenação",
+      "test": {
+        "name": "TestReferenceStress04",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-05",
+      "number": 5,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Record admitido é relido com o mesmo `unit_id`, mas um byte causal diferente",
+      "required_proof": "`unit_digest` diverge do par persistido em `admitted_units`; `input_digest`/`fence_digest` não validam e resume falha fechado antes de avaliar qualquer candidato",
+      "test": {
+        "name": "TestReferenceStress05",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-06",
+      "number": 6,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Execução A grava E1, o coordinator deriva o fence, E2 chega; execução B grava E1 e E2 antes do fence",
+      "required_proof": "impossível divergir: sem `SourceClosure` cobrindo a coordenada o coordinator ainda não derivou nada; com o fechamento, E2 gravado depois dele recebe coordenada posterior por regra em ambas as execuções. Mesmo ledger ⇒ mesmo fence",
+      "test": {
+        "name": "TestReferenceStress06",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-07",
+      "number": 7,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Coordinator grava o fence cedo ou tarde (host rápido/lento, reinício)",
+      "required_proof": "`fence_digest` idêntico; replay recomputa a derivação e verifica; só telemetria muda",
+      "test": {
+        "name": "TestReferenceStress07",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-08",
+      "number": 8,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Fonte grava `close(C)` e depois `close(C+10)`; um coordinator deriva entre os dois e outro depois",
+      "required_proof": "ambos usam o primeiro fechamento por `ingress_seq` que cobre `C`; mesmos `closure_ref` e `fence_digest`",
+      "test": {
+        "name": "TestReferenceStress08",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-09",
+      "number": 9,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Input exógeno gravado depois do `SourceClosure` da própria fonte",
+      "required_proof": "não é inserido retroativamente; recebe `open_coordinate` por regra de ingresso e é admitido pelo primeiro fence posterior que o torne elegível, com o valor declarado preservado como provenance",
+      "test": {
+        "name": "TestReferenceStress09",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-10",
+      "number": 10,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Fonte grava `SourceClosure(final=true)` com `closed_through=C` e o relógio avança além de C",
+      "required_proof": "o marcador satisfaz todo fechamento futuro; qualquer input ou novo fechamento dessa fonte é rejeitado atomicamente; nenhum deadlock por `closed_through` finito",
+      "test": {
+        "name": "TestReferenceStress10",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-11",
+      "number": 11,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Candidato de ocorrência vencida é rejeitado",
+      "required_proof": "ocorrência termina no mesmo commit; nenhum `PENDING` remanescente e nenhum redisparo a partir de estado velho",
+      "test": {
+        "name": "TestReferenceStress11",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-12",
+      "number": 12,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Ciclo em que todos os slots respondem `NoProposal`",
+      "required_proof": "um `DecisionRecord(NO_PROPOSAL)` por slot e evento `SOURCE_LIFECYCLE` que consome cada `RoundDeclaration` completada; não há evento de domínio, mas `event_ids[]` não é vazio; replay reconstrói rounds terminais, revisão, ordinal e `next_logical_sequence`",
+      "test": {
+        "name": "TestReferenceStress12",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-13",
+      "number": 13,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Duas entregas usam `producer_unit_key` distintas, mas mesmo tipo/fonte/ator, `idempotency_key` e bytes lógicos",
+      "required_proof": "`input_id`/`unit_digest` distintos preservam cada entrega; `idempotency_digest` igual prova a mesma operação lógica; no mesmo fence, a primeira pela ordem total recebe a disposição e o alias recebe `DecisionRecord(DEDUPLICATED, canonical_unit_id)`",
+      "test": {
+        "name": "TestReferenceStress13",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-14",
+      "number": 14,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Alias da mesma operação é reentregue depois de a canônica ter sido liquidada e recebe coordenada de admissão posterior",
+      "required_proof": "`unit_digest` reflete a nova coordenada, mas `idempotency_digest` usa o tempo declarado e permanece igual; a nova identidade continua pendente, entra no primeiro fence elegível e recebe seu próprio `DecisionRecord(DEDUPLICATED)` apontando à canônica do ciclo anterior; só esse commit a consome",
+      "test": {
+        "name": "TestReferenceStress14",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-15",
+      "number": 15,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Alias `DEDUPLICATED` é uma occurrence/ativação `PENDING`, ou seu slot completa um round",
+      "required_proof": "não há candidato nem evento de domínio, mas o mesmo lote contém o evento `SOURCE_LIFECYCLE` terminal; replay do event store reconstrói a fonte/container consumido e nunca a readmite",
+      "test": {
+        "name": "TestReferenceStress15",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-16",
+      "number": 16,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Mesmo namespace de `idempotency_key` é reutilizado com payload, tempo efetivo declarado/due time ou provenance causal diferente",
+      "required_proof": "`IDEMPOTENCY_CONFLICT`; `CycleAbortRecord` referencia a unidade corrente e a canônica/conflitante; nenhuma unidade do fence corrente recebe `DecisionRecord` ou é consumida, e settlement histórico permanece imutável; só a coordenada normalizada pelo ledger pode diferir sem mudar a operação",
+      "test": {
+        "name": "TestReferenceStress16",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-17",
+      "number": 17,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Faceta sem regra, dado ou resolvedor disponível",
+      "required_proof": "`INDETERMINATE` canônico dentro de um `CycleAbortRecord`; nenhum `CycleCommit`, nenhum `DecisionRecord`, nenhuma revisão publicada, nenhum avanço de ordinal",
+      "test": {
+        "name": "TestReferenceStress17",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-18",
+      "number": 18,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Candidato A já tem `COMMIT` provisório quando B encontra `INDETERMINATE`",
+      "required_proof": "`CycleAbortRecord` sem nenhum `DecisionRecord`; o `COMMIT` de A é material provisório não autoritativo; A continua elegível e é reavaliado na tentativa seguinte junto com B",
+      "test": {
+        "name": "TestReferenceStress18",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-19",
+      "number": 19,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Crash entre append de eventos, settlement, criação da outbox e publicação da revisão",
+      "required_proof": "impossível: as seis partes são uma transação; fence sem envelope terminal é reexecutado a partir do corte gravado",
+      "test": {
+        "name": "TestReferenceStress19",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-20",
+      "number": 20,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Resume encontra fence gravado sem `CycleCommit` nem `CycleAbortRecord`",
+      "required_proof": "`CycleControlState = ATTEMPT_IN_FLIGHT`; tentativa reexecutada com o mesmo `fence_digest` e as respostas já registradas; mesmo resultado, sem duplicar mundo nem decisão",
+      "test": {
+        "name": "TestReferenceStress20",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-21",
+      "number": 21,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Resume encontra fence de avanço sem envelope terminal depois de o ledger pendente receber novos appends",
+      "required_proof": "usa o `cycle_plan` coberto por `fence_digest`, preserva `from`, `to` e `target_coordinate` e não chama `next_cycle_coordinate`; appends permitidos depois dos fechamentos têm coordenada posterior e não trocam retroativamente o alvo",
+      "test": {
+        "name": "TestReferenceStress21",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-22",
+      "number": 22,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Snapshot tirado depois de um `CycleAbortRecord`",
+      "required_proof": "`CycleControlState = HALTED_ON_ABORT` com `next_attempt_ordinal`; resume restaura o run parado, não abre ciclo nem retenta; um `AttemptRetryRecord` explícito leva a `RETRY_AUTHORIZED` e o fence seguinte abre `attempt_ordinal + 1` com membresia idêntica",
+      "test": {
+        "name": "TestReferenceStress22",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-23",
+      "number": 23,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Snapshot ou crash entre o `AttemptRetryRecord` e o novo fence",
+      "required_proof": "dobra devolve `RETRY_AUTHORIZED` (`cycle_id`, `to_attempt_ordinal`, `retry_ref`), nunca `HALTED_ON_ABORT` nem `IDLE`; resume grava o fence de `to_attempt_ordinal` para o mesmo `cycle_id`, sem §3.3 e sem segundo `AttemptRetryRecord`; `next_attempt_ordinal` continua `N + 1` até o fence existir",
+      "test": {
+        "name": "TestReferenceStress23",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-24",
+      "number": 24,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Fence de `N + 1` gravado sem envelope enquanto o último envelope do run é o abort de `N`",
+      "required_proof": "regra 1 prevalece: `ATTEMPT_IN_FLIGHT`; o abort de `N` foi consumido pelo `AttemptRetryRecord` em `retry_ref`; se `N + 1` abortar, a regra 3 devolve `HALTED_ON_ABORT` com `next_attempt_ordinal = N + 2`",
+      "test": {
+        "name": "TestReferenceStress24",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-25",
+      "number": 25,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Timeout grava `NoProposal(s1)` e a `ActionProposal(s1)` real chega antes de o round fechar",
+      "required_proof": "ambas apontam para o mesmo dispatch aberto; a escrita condicional admite exatamente uma e rejeita a outra para auditoria; o par `{slot_id, response_ref}` e `fence_digest` são função do ledger; qual venceu é input durável e visível no digest, não desempate do coordinator",
+      "test": {
+        "name": "TestReferenceStress25",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-26",
+      "number": 26,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Resposta ao dispatch de A repete B como ator, outro round/slot, revisão ou instante",
+      "required_proof": "admissão rejeita fail-closed antes de preencher o slot; resposta não entra no par `{slot_id, response_ref}`, em `input_digest` ou `fence_digest`",
+      "test": {
+        "name": "TestReferenceStress26",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-27",
+      "number": 27,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Crash após o dispatch de `s1` e antes da resposta; resume enquanto a chamada original ainda está em voo",
+      "required_proof": "resume encontra dispatch aberto e slot vazio; ou aguarda, ou grava `SlotDispatchRevocation` antes de redespachar; a resposta ao dispatch revogado é rejeitada mesmo chegando primeiro; nunca dois dispatches abertos nem duas respostas por slot",
+      "test": {
+        "name": "TestReferenceStress27",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-28",
+      "number": 28,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Adapter que é fonte exógena declarada e também respondedor de slot fecha `closed_through >= C` antes de responder",
+      "required_proof": "suas respostas de slot não recebem `open_coordinate > C`: são preenchimento de unidade derivada, fora da condição de fechamento; o fence admite os slots com a coordenada herdada da `RoundDeclaration`",
+      "test": {
+        "name": "TestReferenceStress28",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-29",
+      "number": 29,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "`DEFER` para o próximo ciclo do mesmo instante",
+      "required_proof": "sucessor recebe `commit_successor_floor(commit) = (instant, cycle_ordinal + 1)` persistido no mesmo commit; resume e replay readmitem exatamente naquele ciclo",
+      "test": {
+        "name": "TestReferenceStress29",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-30",
+      "number": 30,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Dois candidatos C1/C2 referenciam a mesma unidade U, ou uma unidade produtora não aparece em candidato algum",
+      "required_proof": "validação da partição falha com `PROVENANCE_FAILURE` antes de conflito/resolução; `CycleAbortRecord` sem `DecisionRecord`, evento ou consumo; nenhuma implementação escolhe ou agrega dispositions localmente",
+      "test": {
+        "name": "TestReferenceStress30",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-31",
+      "number": 31,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Dois candidatos vencem no mesmo ciclo",
+      "required_proof": "nenhum evento de um aparece como `causal_parent` do outro; reação exige ciclo posterior",
+      "test": {
+        "name": "TestReferenceStress31",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-32",
+      "number": 32,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Dois candidatos vencedores A/B e seus outputs são entregues ao coordinator em ordens opostas",
+      "required_proof": "mesmos `candidate_id`; ordenação por `EventOrderKey` produz os mesmos `event_id`, `LogicalSequence`, `event_ids[]`, tarefas de percepção e `batch_digest`",
+      "test": {
+        "name": "TestReferenceStress32",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-33",
+      "number": 33,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Event store devolve evento com `EventOrderKey` ausente/alterada, ou commit permuta dois `event_ids[]`",
+      "required_proof": "replay recalcula cada `event_id`, reordena pelas chaves persistidas, valida `LogicalSequence` e `batch_digest`; qualquer ausência, id, posição, sequência ou digest divergente falha fechado antes do reducer",
+      "test": {
+        "name": "TestReferenceStress33",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-34",
+      "number": 34,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Dois produtores constroem a mesma projeção candidata, mas enumeram `causal_parents`, `source_inputs`, `actor_refs` e `entity_refs` em ordens opostas e repetem uma ref idêntica",
+      "required_proof": "as quatro coleções são deduplicadas e ordenadas pelas chaves da §8.1 antes da persistência; mesmo envelope, `event_id` e `batch_digest`; mesma identidade de ref com outros bytes falha fechado",
+      "test": {
+        "name": "TestReferenceStress34",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-35",
+      "number": 35,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Dois eventos simultâneos E1/E2 de candidatos distintos tocam dependências do mesmo trigger e workers terminam em ordens opostas",
+      "required_proof": "`causing_event_ids[]` contém ambos pelo filtro de `dependency_footprint`, na ordem canônica do `EventBatch`; mesma ativação/`unit_digest`; os refs são provenance do post-state e nenhum evento de E1/E2 recebe causal parent cross-candidate",
+      "test": {
+        "name": "TestReferenceStress35",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-36",
+      "number": 36,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Último ciclo foi `(t,1)` e a única pendência está em `(t,3)`",
+      "required_proof": "`next_cycle_coordinate` retorna `(t,3)`; não existe `CycleCommit` vazio em `(t,2)` e replay faz o mesmo salto",
+      "test": {
+        "name": "TestReferenceStress36",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-37",
+      "number": 37,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Último ciclo foi `(t,1)` e a menor pendência é `(u,0)`, com `u > t`, sem novo trabalho materializado",
+      "required_proof": "após fechamento até o alvo, ciclo de avanço em `(t,2)` tem input vazio e commita `clock.advanced`; estado resultante é `(current_instant=u, cycle_ordinal_at_instant=-1)` e a nova derivação abre o ciclo de trabalho em `(u,0)`",
+      "test": {
+        "name": "TestReferenceStress37",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-38",
+      "number": 38,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Fonte fechou apenas `C=(t,2)`, um plano provisório de avanço aponta para `P=(u,0)` e, antes de `close(P)`, chega `Q=(v,0)` com `t < v < u`",
+      "required_proof": "`close(C)` não permite gravar o fence; a confirmação condicional após o fechamento até o alvo detecta que `P` deixou de ser a menor pendência, rejeita a derivação antiga e a nova derivação escolhe `Q`; nenhum avanço salta sobre trabalho causal",
+      "test": {
+        "name": "TestReferenceStress38",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-39",
+      "number": 39,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Menor pendência é `P=(u,3)` e `body.advanced` no ciclo de avanço torna um trigger verdadeiro",
+      "required_proof": "a `TriggerActivation` nasce com coordenada mínima `(u,0)`, nunca `(t,n+1)`; depois do commit, `next_cycle_coordinate` recalcula e abre `(u,0)` com a ativação, preserva `P` para `(u,3)` e não encontra trabalho vencido",
+      "test": {
+        "name": "TestReferenceStress39",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-40",
+      "number": 40,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Resume de snapshot com crença formada por LLM",
+      "required_proof": "checkpoint epistemológico presente, versionado e coberto por hash; resume equivalente sem chamar modelo",
+      "test": {
+        "name": "TestReferenceStress40",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-41",
+      "number": 41,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Duas ações consomem a última unidade",
+      "required_proof": "um `ConflictSet`; política/seed fixa seleciona o mesmo resultado; saldo nunca negativo",
+      "test": {
+        "name": "TestReferenceStress41",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-42",
+      "number": 42,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Regra proíbe agressão, mas corpos e acesso permitem",
+      "required_proof": "ação pode commitar; `institution.rule_violated` existe; punição só após cadeia de detecção/resposta",
+      "test": {
+        "name": "TestReferenceStress42",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "STRESS-43",
+      "number": 43,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Evento secreto sem observador elegível",
+      "required_proof": "evento existe; zero `Observation`/`KnowledgeInput` para ator não relacionado",
+      "test": {
+        "name": "TestReferenceStress43",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "STRESS-44",
+      "number": 44,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Papel VIP/segredo de exame antes da divulgação",
+      "required_proof": "ausente do evidence ledger dos não autorizados e de seus contextos",
+      "test": {
+        "name": "TestReferenceStress44",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "STRESS-45",
+      "number": 45,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Observation privada de A",
+      "required_proof": "partição de A contém o registro; partições/contextos dos demais não",
+      "test": {
+        "name": "TestReferenceStress45",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "STRESS-46",
+      "number": 46,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "White Room existe no world/background truth",
+      "required_proof": "nenhum aluno sem gate/evento causal recebe datum ou chunk correspondente",
+      "test": {
+        "name": "TestReferenceStress46",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "STRESS-47",
+      "number": 47,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Evento canônico posterior à divergência",
+      "required_proof": "não entra em memória, retrieval ou `KnowledgeInput` da timeline simulada",
+      "test": {
+        "name": "TestReferenceStress47",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "STRESS-48",
+      "number": 48,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "A diz falsamente que B roubou",
+      "required_proof": "`communication.sent/delivered` + claim recebido; nenhum `resource.stolen` é criado",
+      "test": {
+        "name": "TestReferenceStress48",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "STRESS-49",
+      "number": 49,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "A falsifica remetente C",
+      "required_proof": "destinatário vê `presented_sender=C`; `actual_sender=A` continua world truth não observado",
+      "test": {
+        "name": "TestReferenceStress49",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "STRESS-50",
+      "number": 50,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Mensagem enviada com atraso e run pausado antes da entrega",
+      "required_proof": "`Transmission=IN_TRANSIT`; destinatário sem input; resume dispara exatamente uma entrega",
+      "test": {
+        "name": "TestReferenceStress50",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "STRESS-51",
+      "number": 51,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Trigger permanece verdadeiro por dez commits",
+      "required_proof": "edge/once ativa uma vez; repeat ativa apenas nas cadências persistidas",
+      "test": {
+        "name": "TestReferenceStress51",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-52",
+      "number": 52,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Commit R torna um `RISING_EDGE` verdadeiro e o processo cai antes de expandir a ativação",
+      "required_proof": "R publicou atomicamente runtime + `TriggerActivation(PENDING)` com coordenada do ciclo posterior; resume admite a mesma `activation_id` uma vez, sem reavaliar memória do host nem duplicar candidato",
+      "test": {
+        "name": "TestReferenceStress52",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-53",
+      "number": 53,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Trigger cria outro trigger no mesmo instante",
+      "required_proof": "ciclos ordinais diferentes, DAG causal e limite de cascata determinístico",
+      "test": {
+        "name": "TestReferenceStress53",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-54",
+      "number": 54,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Reducer falha no terceiro evento do lote",
+      "required_proof": "nenhum evento, revisão, disposição terminal ou consumo de occurrence persiste; a tentativa termina em `CycleAbortRecord`",
+      "test": {
+        "name": "TestReferenceStress54",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-55",
+      "number": 55,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Dois validators produzem os mesmos records/refs de falha nas ordens A→B e B→A",
+      "required_proof": "`evidence_refs`, `indeterminate_records` e `failure_evidence_refs` são normalizados pelas chaves da §8.0.1; mesmo envelope e `abort_digest`",
+      "test": {
+        "name": "TestReferenceStress55",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-56",
+      "number": 56,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Propostas A e B falham a mesma facet pelo mesmo validator, reason e evidência",
+      "required_proof": "dois `IndeterminateRecord`, cada um com seu `subject_ref`; a normalização não os colapsa, e o abort permite atribuir cada falha ao sujeito correto",
+      "test": {
+        "name": "TestReferenceStress56",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-57",
+      "number": 57,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Observatory lê segredo e depois fecha",
+      "required_proof": "hashes de world/knowledge/ledgers permanecem inalterados",
+      "test": {
+        "name": "TestReferenceStress57",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 120
+    },
+    {
+      "id": "STRESS-58",
+      "number": 58,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Reflexão resume um rumor como hipótese",
+      "required_proof": "provenance continua apontando ao claim; nenhum Event/world truth é criado",
+      "test": {
+        "name": "TestReferenceStress58",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 117
+    },
+    {
+      "id": "STRESS-59",
+      "number": 59,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Snapshot no meio de comunicação em trânsito",
+      "required_proof": "contínuo e snapshot+resume geram mesmos tails e state hash",
+      "test": {
+        "name": "TestReferenceStress59",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-60",
+      "number": 60,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Duas runs partem do mesmo checkpoint com inputs diferentes",
+      "required_proof": "prefixo/hash parental igual; tails e estados isolados; nenhum evento cruza a branch",
+      "test": {
+        "name": "TestReferenceStress60",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-61",
+      "number": 61,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Mesmo seed/inputs com paralelismo diferente",
+      "required_proof": "event log causal byte a byte e final state hash idênticos",
+      "test": {
+        "name": "TestReferenceStress61",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-62",
+      "number": 62,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Duas entregas semanticamente idênticas são atos de produção distintos da mesma fonte",
+      "required_proof": "chaves estáveis do produtor distintas geram `input_id`/`unit_digest` distintos; se o produtor declara o mesmo `idempotency_key`, o `idempotency_digest` exclui identidade de entrega e o alias canônico é escolhido pelos ids, nunca pelo append",
+      "test": {
+        "name": "TestReferenceStress62",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-63",
+      "number": 63,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Duas implementações registram fontes/categorias ou constroem `closure_proof`, rounds e slots em ordens locais diferentes",
+      "required_proof": "mesma política de identidade/ordem, provas por fonte, rounds por id e pares slot/resposta por slot; mesmos pares de `admitted_units`, `input_digest` e `fence_digest`; `source_rank` e ordem de map não existem no contrato",
+      "test": {
+        "name": "TestReferenceStress63",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 116
+    },
+    {
+      "id": "STRESS-64",
+      "number": 64,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Crash depois do `CycleCommit` de evento perceptível e antes de qualquer percepção",
+      "required_proof": "`perception_task_ids[]` já referencia tarefa `PENDING` na outbox; resume a processa com ids idempotentes, persiste observations/inputs e completion antes de liberar o barrier; nenhuma evidência é perdida ou duplicada",
+      "test": {
+        "name": "TestReferenceStress64",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-65",
+      "number": 65,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Dois workers processam a mesma `PerceptionTask` e um cai após gravar parte dos recibos",
+      "required_proof": "ambos derivam os mesmos ids de task/observation/`KnowledgeInput`/completion por papel e ordinal de schema; reinsert é idempotente, CAS publica um completion e nenhum destinatário recebe duplicata",
+      "test": {
+        "name": "TestReferenceStress65",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-66",
+      "number": 66,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "A mesma `PerceptionTask` de evento em `t` é processada imediatamente numa execução e, em outra, depois de o clock lógico chegar a `u > t`",
+      "required_proof": "ambas usam `observed_at=received_at=t` e produzem observations/inputs/completion byte a byte idênticos; latência operacional não muda availability, e atraso de canal só usa `u` quando há evento causal posterior em `u`",
+      "test": {
+        "name": "TestReferenceStress66",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-67",
+      "number": 67,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "Evento secreto não possui observador elegível",
+      "required_proof": "tarefa commitada termina com completion vazio; nenhum `Observation`/`KnowledgeInput` é criado e o barrier pode avançar sem fallback de divulgação",
+      "test": {
+        "name": "TestReferenceStress67",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    },
+    {
+      "id": "STRESS-68",
+      "number": 68,
+      "normative_source": "docs/adr/0008-causal-simulation-foundation-v1.md#cenarios-de-stress-e-provas-de-aceite",
+      "scenario": "`CycleCommit` vazio seguido de replay causal",
+      "required_proof": "journal do `DecisionLedger` restaura revisão, ordinal e `next_logical_sequence`; o `EventStore` permanece vazio para esse commit e não contém cópia do envelope",
+      "test": {
+        "name": "TestReferenceStress68",
+        "path": "tests/scenarios/reference_run_test.go",
+        "state": "PLANNED_NOT_PRESENT"
+      },
+      "evidence": {
+        "commit_sha": null,
+        "artifact": null,
+        "exact_bytes_digest": null
+      },
+      "status": "NEEDS_NEW_INTEGRATION_TEST",
+      "owner_issue": 119
+    }
+  ],
+  "governance": {
+    "not_equivalent_to": "41/41 tests passing",
+    "all_future_evidence_requires": [
+      "exact_commit_sha",
+      "test_name",
+      "test_exit_code",
+      "byte_or_digest_evidence",
+      "runtime_generated_expected_outcome"
+    ],
+    "no_automatic_status_promotion": true
+  }
+}

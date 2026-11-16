@@ -12,6 +12,7 @@ import (
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 )
 
 // ReferenceC4Proof attests combined C1, C2 and C3 *in the same* RunID,
@@ -94,6 +95,28 @@ func RunReferenceC4(ctx context.Context,dbPath,ownerPath,bundlePath string,
     if len(digests)!=5||len(counts)!=5{
         return zero,errors.New("C4 missing one of five canonical ledger prefixes")
     }
+    // Bind each independently recalculated prefix to the exact canonical
+    // sealed snapshot, not merely to a count/digest created by this audit.
+    snapVal,err:=codec.StrictDecodePayload(snapshot.Snapshot.Canonical)
+    if err!=nil{return zero,err}
+    snapFields,ok:=snapVal.([]any)
+    if !ok||len(snapFields)!=19{return zero,errors.New("C4 snapshot schema malformed")}
+    cursors,ok:=snapFields[12].([]any)
+    if !ok||len(cursors)!=5{return zero,errors.New("C4 five-ledger snapshot cursor missing")}
+    for i,name:=range referenceC4LedgerNames{
+        cursor,ok:=cursors[i].([]any)
+        if !ok||len(cursor)!=3||cursor[0]!=name{
+            return zero,fmt.Errorf("C4 snapshot cursor %s not present in expected slot",name)
+        }
+        sealedCount,ok:=cursor[1].(uint64)
+        if !ok||int(sealedCount)!=counts[name]{
+            return zero,fmt.Errorf("C4 %s count does not equal sealed snapshot prefix",name)
+        }
+        sealedDigest,ok:=cursor[2].([]byte)
+        if !ok||hex.EncodeToString(sealedDigest)!=digests[name]{
+            return zero,fmt.Errorf("C4 %s digest differs from authenticated snapshot",name)
+        }
+    }
     for name,count:=range counts{
         if count==0||len(digests[name])!=64{
             return zero,fmt.Errorf("C4 empty or malformed %s ledger prefix",name)
@@ -126,6 +149,13 @@ func RunReferenceC4(ctx context.Context,dbPath,ownerPath,bundlePath string,
     if scheduledLifecycle!=0{
         return zero,errors.New("C4 scheduled occurrence birth index was altered")
     }
+    pending,err:=store.PendingClock(ctx,runID)
+    if err!=nil{return zero,err}
+    for _,unit:=range pending{
+        if bytes.Equal(unit.ID[:],sourceID){
+            return zero,errors.New("C4 delivered occurrence still belongs to live pending cohort")
+        }
+    }
     var evidenceLinks int
     if err:=db.QueryRowContext(ctx,
         "SELECT COUNT(*) FROM evidence_routes WHERE run_id=? AND task_id=? AND holder_namespace='school' AND holder_id='b'",
@@ -136,8 +166,13 @@ func RunReferenceC4(ctx context.Context,dbPath,ownerPath,bundlePath string,
         "SELECT COUNT(*) FROM evidence_routes WHERE task_id=? AND (run_id<>? OR holder_namespace<>'school' OR holder_id<>'b')",
         taskID[:],runID[:]).Scan(&alienLinks);err!=nil{return zero,err}
     if alienLinks!=0{return zero,errors.New("C4 delivered claim leaked to foreign holder")}
-    if _,_,err:=referenceC1DeliveryEvidence(ctx,dbPath,domain.ID(runID),mustDecodeHex(c1.DeliveryEventID));err!=nil{
-        return zero,fmt.Errorf("C4 delivered task lacks registered causal evidence: %w",err)
+    deliveryID,err:=referenceC4DecodeID(c1.DeliveryEventID)
+    if err!=nil{return zero,err}
+    actualTask,actualKnowledge,err:=referenceC1DeliveryEvidence(
+        ctx,dbPath,domain.ID(runID),deliveryID[:])
+    if err!=nil{return zero,fmt.Errorf("C4 delivered task lacks registered causal evidence: %w",err)}
+    if actualTask!=c1.DeliveryTaskID||actualKnowledge!=c1.KnowledgeInputID{
+        return zero,errors.New("C4 delivery/event/task/knowledge identity mismatch")
     }
     rawRows,err:=db.QueryContext(ctx,"SELECT canonical FROM event_store")
     if err!=nil{return zero,err}
@@ -159,6 +194,25 @@ func RunReferenceC4(ctx context.Context,dbPath,ownerPath,bundlePath string,
     if err:=rawRows.Err();err!=nil{rawRows.Close();return zero,err}
     if err:=rawRows.Close();err!=nil{return zero,err}
     if sent!=1||delivered!=1{return zero,errors.New("C4 send/delivery not unique")}
+    // False allegations and messages must not change World Truth. Inspect
+    // actual WorldRevision bytes for the full C1 chain (3..6), not merely
+    // claim absence from EventStore or a final stock result.
+    var settledHash [32]byte
+    for revision:=uint64(3);revision<=6;revision++{
+        state,digest,err:=store.LoadWorldState(ctx,revision)
+        if err!=nil{return zero,err}
+        stock,err:=reducer.DecodeStock(state)
+        if err!=nil||stock.Available!=0{
+            return zero,errors.New("C4 communication changed resource state")
+        }
+        if revision==3{settledHash=digest}else if settledHash!=digest{
+            return zero,errors.New("C4 Claim/send/delivery changed WorldState hash")
+        }
+    }
+    if hex.EncodeToString(settledHash[:])!=result.FinalWorldHash||
+        result.FinalWorldHash!=result.ContestWorldHash{
+        return zero,errors.New("C4 final world hash does not match contest settlement")
+    }
     result.Status="RUN_LOCAL_10C4"
     result.CrossAcceptance=&ReferenceC4Proof{
         LedgerDigests:digests,LedgerCounts:counts,
@@ -176,10 +230,6 @@ func RunReferenceC4(ctx context.Context,dbPath,ownerPath,bundlePath string,
     }
     result.CrossAcceptance.ReportRedacted=true
     return result,nil
-}
-func mustDecodeHex(s string)[]byte{
-    b,_:=hex.DecodeString(s)
-    return b
 }
 func referenceC4DecodeID(encoded string)([32]byte,error){
     var id [32]byte

@@ -1,0 +1,62 @@
+name: CSFRV1-10D3 ENGINE_ONLY integrated physical/cognitive disclosure
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "internal/csf/commit/reference_disclosure_d3*"
+      - "internal/csf/perception/plan.go"
+      - "internal/csf/contextboundary/**"
+      - "internal/csf/persistence/sqlite/observatory_pov_public.go"
+      - "docs/reference-run/csfrv1-10d3/**"
+      - ".github/workflows/csfrv1-10d3-disclosure.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: csfrv1-10d3-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  crossed-private-public-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Install pinned A1 inputs
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+          python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-d3
+          find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
+      - name: Source format and repository identity
+        run: |
+          set -euo pipefail
+          git diff --check HEAD^1 HEAD
+          git rev-parse HEAD
+          files="$(gofmt -l internal/csf/commit/reference_disclosure_d3*.go)"
+          if [ -n "$files" ]; then echo "D3 gofmt finding: $files"; exit 1; fi
+      - name: Real Python D3, confidential Observatory, adversarial tamper, permutations
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceD3'
+      - name: Race-check physical disclosure and actor/public separation
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: go test -race -count=1 ./internal/csf/commit -run '^TestReferenceD3RealPythonPrivateEventAndLiveObservatory$'
+      - name: Existing D2 and C4, A1/Go, contextual disclosure and Observatory regression
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: |
+          go test -count=1 ./internal/csf/commit -run '^(TestReferenceD2RealTwoEpochsOnSameC4RunID|TestReferenceC4|TestCSFRV19O3)'
+          go test -count=1 ./internal/csf/perception ./internal/csf/contextboundary ./internal/csf/persistence/sqlite ./internal/csf/adapter/embodimentv1 ./internal/csf/reducer
+          go vet ./internal/csf/commit ./internal/csf/persistence/sqlite

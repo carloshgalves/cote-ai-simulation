@@ -230,7 +230,7 @@ func TestReferenceRunTriggerReopenReplayNeverDuplicates(t *testing.T){
         if err!=nil{t.Fatal(err)}
         var count int
         if err:=db.QueryRowContext(ctx,"SELECT COUNT(*) FROM trigger_activations WHERE run_id=?",id[:]).Scan(&count);err!=nil{t.Fatal(err)}
-        if count!=1||state!=2{t.Fatalf("trigger not terminal/unique: %d/%d",count,state)}
+        if count!=1||state!=0{t.Fatalf("immutable trigger source row changed: count=%d origin_lifecycle=%d",count,state)}
         return key,canonical,state
     }
     originalID,originalBytes,originalState:=readActivation()
@@ -244,7 +244,7 @@ func TestReferenceRunTriggerReopenReplayNeverDuplicates(t *testing.T){
         }
         afterID,afterBytes,afterState:=readActivation()
         if !bytes.Equal(originalID,afterID)||!bytes.Equal(originalBytes,afterBytes)||afterState!=originalState{
-            t.Fatal("replay regenerated or changed terminal TriggerActivation")
+            t.Fatal("replay regenerated or changed immutable TriggerActivation origin")
         }
         pending,err:=reopened.PendingClock(ctx,[32]byte(id))
         if err!=nil||len(pending)!=0{t.Fatal("replay resurrected already settled work",err)}

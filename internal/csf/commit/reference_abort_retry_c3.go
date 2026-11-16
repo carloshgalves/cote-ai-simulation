@@ -4,6 +4,7 @@ import (
     "bytes"
     "context"
     "crypto/ed25519"
+    "crypto/rand"
     "encoding/hex"
     "errors"
     "fmt"
@@ -33,6 +34,9 @@ type ReferenceAbortRetryProof struct {
     RetryInputDigest string `json:"retry_input_digest"`
     OperatorKeyFingerprint string `json:"operator_key_fingerprint"`
     OperatorApprovalDigest string `json:"operator_approval_digest"`
+    OperatorPublicKey string `json:"operator_public_key"`
+    OperatorSignature string `json:"operator_signature"`
+    OperatorApprovalPayload string `json:"operator_approval_payload"`
     IndeterminateSubjects int `json:"indeterminate_subjects"`
     ValidatorIndeterminate bool `json:"validator_indeterminate"`
     HaltedAfterRestart bool `json:"halted_after_restart"`
@@ -48,41 +52,41 @@ type ReferenceAbortRetryProof struct {
     ReplayVerified bool `json:"replay_verified"`
 }
 
-// This is an explicitly enrolled *demo* operator in the command's trusted
-// control boundary, not an actor-provided reason string. A frozen local
-// Ed25519 key signs the exact run/cycle/abort/fence/decision digest before
-// the caller may invoke the privileged Coordinator.Retry. It is deterministic
-// only for reproducible synthetic fixtures and must never be used in prod.
-// The normative SQLite AttemptRetryRecord remains the sole causal authority.
-func referenceC3OperatorKey(run domain.ID) ed25519.PrivateKey {
-    preimage:=append([]byte("cote.csf.reference.c3.operator.test-only.v1"),run[:]...)
-    seed:=identity.OpaqueContentHash(preimage)
-    return ed25519.NewKeyFromSeed(seed[:])
+// The local experimental executor enrolls one fresh Ed25519 operator public
+// key BEFORE the contested attempt; the private key is generated from OS
+// entropy, held only in the trusted command and erased after use. The actor's
+// display name or a forged client-supplied retry reason cannot register keys.
+// This is a local demo trust roster, not a production operator registry.
+type referenceC3Authorization struct {
+    Fingerprint [32]byte
+    Digest [32]byte
+    Public []byte
+    Signature []byte
+    Payload []byte
 }
 func referenceC3Authorize(ctx context.Context,b *policy.Bundle,run,cycle domain.ID,
-    abort,priorFence [32]byte,priorDigest [32]byte,forge bool)([32]byte,[32]byte,error){
-    var zero [32]byte
-    if err:=ctx.Err();err!=nil{return zero,zero,err}
-    if b==nil{return zero,zero,errors.New("C3 operator needs a pinned policy")}
-    token,err:=codec.CanonicalPayload([]any{"cote.csf.reference.c3.operator-authorization.v1",
-        run[:],cycle[:],abort[:],priorFence[:],priorDigest[:],"operator.retry",uint64(1)})
-    if err!=nil{return zero,zero,err}
-    signer:=referenceC3OperatorKey(run)
-    defer clear(signer)
-    public:=signer.Public().(ed25519.PublicKey)
-    signature:=ed25519.Sign(signer,token)
-    if forge{signature[0]^=0x80}
-    // Enrolled in the local harness by exact test-only key/role binding,
-    // not by the unverifiable sender/presenter of an ActionProposal.
-    trusted:=referenceC3OperatorKey(run)
-    defer clear(trusted)
-    registered:=trusted.Public().(ed25519.PublicKey)
-    if !bytes.Equal(public,registered)||!ed25519.Verify(registered,token,signature){
-        return zero,zero,errors.New("C3 operator signature not authorized by registered local signer")
+    abortID [32]byte,abortDigest []byte,priorFence [32]byte,priorDigest [32]byte,
+    enrolled ed25519.PublicKey,operatorKey ed25519.PrivateKey,forge bool)(referenceC3Authorization,error){
+    var zero referenceC3Authorization
+    if err:=ctx.Err();err!=nil{return zero,err}
+    if b==nil||len(abortDigest)!=32||len(enrolled)!=ed25519.PublicKeySize||
+       len(operatorKey)!=ed25519.PrivateKeySize{
+        return zero,errors.New("C3 operator requires frozen enrolled key, abort and policy")
     }
-    p:=identity.OpaqueContentHash(registered)
-    approval:=identity.OpaqueContentHash(token)
-    return p,approval,nil
+    token,err:=codec.CanonicalPayload([]any{"cote.csf.reference.c3.operator-authorization.v1",
+        run[:],cycle[:],abortID[:],abortDigest,priorFence[:],priorDigest[:],
+        b.CodecPolicyHash[:],b.SchemaHash[:],"operator.retry",uint64(1)})
+    if err!=nil{return zero,err}
+    signature:=ed25519.Sign(operatorKey,token)
+    if forge{signature[0]^=0x80}
+    if !ed25519.Verify(enrolled,token,signature){
+        return zero,errors.New("C3 operator signature not authorized by frozen local enrollment")
+    }
+    fp:=identity.OpaqueContentHash(enrolled)
+    proofRaw,err:=codec.CanonicalPayload([]any{token,signature})
+    if err!=nil{return zero,err}
+    return referenceC3Authorization{Fingerprint:fp,Digest:identity.OpaqueContentHash(proofRaw),
+        Public:bytes.Clone(enrolled),Signature:bytes.Clone(signature),Payload:bytes.Clone(token)},nil
 }
 
 // ReopenC3 is deliberately a distinct causal SQLite session after an actual
@@ -117,7 +121,13 @@ func referenceC3RowCount(ctx context.Context,path,table string)(int,error){
 func referenceC3AbortRetry(ctx context.Context,path string,b *policy.Bundle,g *genesis.Genesis,
     store *sqlite.Store,ledger *inputledger.Ledger,c *Coordinator,policies admission.Policies,
     cycle admission.Cycle,fence admission.Fence,options ReferenceOptions)(referenceC3Session,error){
+
     var out referenceC3Session
+    // Enrollment precedes even the first validator/abort and freezes the
+    // local operator's public key for the later independent SQLite reopen.
+    enrolled,operatorKey,err:=ed25519.GenerateKey(rand.Reader)
+    if err!=nil{return out,err}
+    defer clear(operatorKey)
     // No predeclared winner is permitted: run the actual deterministic
     // validator with the stock's accessibility facet marked unknown.
     // This simulates epistemic uncertainty, not a corrupted SQLite state.
@@ -189,9 +199,15 @@ func referenceC3AbortRetry(ctx context.Context,path string,b *policy.Bundle,g *g
     if err!=nil||stopped[0]!=uint64(3){
         return out,errors.New("C3 unauthorized attempt changed durable HALTED state")
     }
-    signerFingerprint,approvalDigest,err:=referenceC3Authorize(ctx,b,g.RunID,cycle.ID,
-        [32]byte(abort.Identity),[32]byte(fence.ID),[32]byte(fence.Digest),
-        options.ForgeRetryOperator)
+    parsedAbort,err:=codec.StrictDecodePayload(abort.Canonical)
+    if err!=nil{return out,err}
+    abortFields,ok:=parsedAbort.([]any)
+    if !ok||len(abortFields)!=15{return out,errors.New("C3 abort canonical body malformed")}
+    abortDigest,ok:=abortFields[14].([]byte)
+    if !ok||len(abortDigest)!=32{return out,errors.New("C3 abort missing authoritative digest")}
+    auth,err:=referenceC3Authorize(ctx,b,g.RunID,cycle.ID,
+        [32]byte(abort.Identity),abortDigest,[32]byte(fence.ID),[32]byte(fence.Digest),
+        enrolled,operatorKey,options.ForgeRetryOperator)
     if err!=nil{return out,err}
     operator:=New(resumed,b,policies)
     operator.failAfterStep=options.FailRetryAt
@@ -244,15 +260,18 @@ func referenceC3AbortRetry(ctx context.Context,path string,b *policy.Bundle,g *g
     }
     proof:=&ReferenceAbortRetryProof{
         AbortID:hex.EncodeToString(abort.Identity[:]),
-        AbortDigest:hex.EncodeToString(abort.Canonical[len(abort.Canonical)-32:]),
+        AbortDigest:hex.EncodeToString(abortDigest),
         RetryID:hex.EncodeToString(retry.Identity[:]),
         RetryDigest:hex.EncodeToString(digest[:]),
         PreviousFenceID:hex.EncodeToString(fence.ID[:]),
         RetryFenceID:hex.EncodeToString(nextFence.ID[:]),
         PreviousInputDigest:hex.EncodeToString(fence.InputDigest[:]),
         RetryInputDigest:hex.EncodeToString(nextFence.InputDigest[:]),
-        OperatorKeyFingerprint:hex.EncodeToString(signerFingerprint[:]),
-        OperatorApprovalDigest:hex.EncodeToString(approvalDigest[:]),
+        OperatorKeyFingerprint:hex.EncodeToString(auth.Fingerprint[:]),
+        OperatorApprovalDigest:hex.EncodeToString(auth.Digest[:]),
+        OperatorPublicKey:hex.EncodeToString(auth.Public),
+        OperatorSignature:hex.EncodeToString(auth.Signature),
+        OperatorApprovalPayload:hex.EncodeToString(auth.Payload),
         IndeterminateSubjects:len(evaluated.Indeterminate),
         ValidatorIndeterminate:true,HaltedAfterRestart:true,UnauthorizedFenceDenied:true,
         RetryAuthorizedAfterRestart:true,SameInputDigest:sameInputs,SameMembership:sameMembers,

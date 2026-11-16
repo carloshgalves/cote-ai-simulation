@@ -1,0 +1,55 @@
+name: CSFRV1-10C3 INDETERMINATE, abort and authorized retry
+on:
+  pull_request:
+    paths:
+      - "internal/csf/commit/reference_abort_retry_c3*"
+      - "internal/csf/commit/reference_run.go"
+      - "cmd/csf-reference-run/**"
+      - "docs/reference-run/csfrv1-10c3/**"
+      - ".github/workflows/csfrv1-10c3-retry.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  c3-abort-retry:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Patch whitespace
+        run: git diff --check HEAD^1 HEAD
+      - name: C3 true INDETERMINATE and failure matrix
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceC3'
+      - name: Normative abort/retry, B, C1 and C2 regression
+        run: |
+          go test -count=1 ./internal/csf/commit -run '^(TestAbort|TestRetry|TestTerminalControl|TestIndeterminate|TestCandidateIndeterminate|TestReferenceRun|TestReferenceCommunicationC1|TestReferenceC2)'
+          go test -count=1 ./internal/csf/ownercheckpoint/... ./internal/csf/contextboundary/... ./tests/architecture
+      - name: Two independent real C3 CLI runs with reversed input
+        run: |
+          d="$(mktemp -d)"
+          trap 'rm -rf "$d"' EXIT
+          go run ./cmd/csf-reference-run --db "$d/a.db" --report "$d/a.json" --abort-retry --communication
+          go run ./cmd/csf-reference-run --db "$d/b.db" --report "$d/b.json" --abort-retry --communication --reverse-sources --reverse-responses
+          python3 - "$d/a.json" "$d/b.json" <<'PY'
+          import json,sys
+          a,b=[json.load(open(p,encoding="utf-8")) for p in sys.argv[1:]]
+          for z in (a,b):
+              assert z["status"]=="RUN_LOCAL_10C3" and z["final_revision"]==6
+              assert z["final_stock"]==0 and len(z["cycles"])==6
+              p=z["abort_retry"]
+              assert p["validator_indeterminate"] and p["indeterminate_subjects"]==2
+              assert p["halted_after_restart"] and p["unauthorized_fence_denied"]
+              assert p["retry_authorized_after_restart"] and p["same_input_digest"]
+              assert p["same_membership"] and p["same_policy_and_clock"]
+              assert p["abort_revision"]==0 and p["abort_events"]==0 and p["abort_commit_count"]==0
+              assert p["replay_verified"] and p["retry_attempt"]==1
+              assert z["communication"]["delivered_at"]==35
+          assert a["event_stream_raw_sha256"]==b["event_stream_raw_sha256"]
+          assert a["abort_retry"]["abort_id"]==b["abort_retry"]["abort_id"]
+          assert a["abort_retry"]["retry_id"]==b["abort_retry"]["retry_id"]
+          print("C3_INDEPENDENT_RUNS_SUCCESS")
+          PY

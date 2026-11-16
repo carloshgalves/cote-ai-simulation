@@ -413,7 +413,7 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 	if replay.ReconstructedClock != final || replay.ReplayedCommits != 3 || replay.VerifiedActivations != 1 {
 		return out, fmt.Errorf("replay mismatched committed run: %+v", replay)
 	}
-	triggerTerminal,err:=referenceTriggerTerminal(ctx,abs,g.RunID)
+	triggerTerminal,err:=referenceTriggerTerminal(ctx,abs,g.RunID,systemJournal.Canonical)
     if err!=nil{return out,err}
     events, err := referenceEventBytes(ctx, abs)
 	if err != nil {
@@ -562,17 +562,56 @@ func packRecord(dst []byte, record []byte) []byte {
 	return append(append(dst, n[:]...), record...)
 }
 
-// referenceTriggerTerminal checks the actual persisted lifecycle. A
-// successful trigger activation is not proof that its pending unit was
-// consumed: exactly one sealed activation must now be terminal.
-func referenceTriggerTerminal(ctx context.Context, path string, run domain.ID) (bool,error) {
-    db,err:=sql.Open("sqlite","file:"+filepath.ToSlash(path)+"?mode=ro")
-    if err!=nil{return false,err}
+// referenceTriggerTerminal verifies the immutable activation and its
+// terminal DecisionRecord within the same committed causal journal. The SQL
+// lifecycle column remains 0 (the original PENDING source record); terminality
+// is reconstructed from the authenticated CycleCommit and DecisionRecord, not
+// from a mutable flag on an append-only origin.
+func referenceTriggerTerminal(ctx context.Context, path string, run domain.ID, journalRaw []byte) (bool, error) {
+    db, err := sql.Open("sqlite", "file:"+filepath.ToSlash(path)+"?mode=ro")
+    if err != nil { return false, err }
     defer db.Close()
-    var all,terminal int
-    err=db.QueryRowContext(ctx,`SELECT COUNT(*), COALESCE(SUM(CASE WHEN lifecycle=2 THEN 1 ELSE 0 END),0)
-            FROM trigger_activations WHERE run_id=?`,run[:]).Scan(&all,&terminal)
-    if err!=nil{return false,err}
-    if all!=1||terminal!=1{return false,fmt.Errorf("expected one terminal trigger activation, got %d total/%d terminal",all,terminal)}
-    return true,nil
+    var activationID, canonical []byte
+    var lifecycle, count int
+    if err := db.QueryRowContext(ctx, "SELECT id,canonical,lifecycle FROM trigger_activations WHERE run_id=?", run[:]).
+        Scan(&activationID, &canonical, &lifecycle); err != nil { return false, err }
+    if err := db.QueryRowContext(ctx, "SELECT COUNT(*) FROM trigger_activations WHERE run_id=?", run[:]).Scan(&count); err != nil {
+        return false, err
+    }
+    if count != 1 || lifecycle != 0 || len(activationID) != 32 || len(canonical) == 0 {
+        return false, fmt.Errorf("expected one immutable PENDING-origin trigger record, got %d rows lifecycle=%d", count, lifecycle)
+    }
+    journalValue, err := codec.StrictDecodePayload(journalRaw)
+    if err != nil { return false, fmt.Errorf("decode trigger CycleCommit: %w", err) }
+    journalFields, ok := journalValue.([]any)
+    if !ok || len(journalFields) < 17 {
+        return false, errors.New("invalid canonical trigger CycleCommit")
+    }
+    decisionIDs, ok := journalFields[16].([]any)
+    if !ok || len(decisionIDs) != 2 {
+        return false, errors.New("terminal trigger+occurrence CycleCommit lacks two decision refs")
+    }
+    triggerSettlements := 0
+    for _, value := range decisionIDs {
+        decisionID, ok := value.([]byte)
+        if !ok || len(decisionID) != 32 { return false, errors.New("malformed committed decision ref") }
+        var raw []byte
+        if err := db.QueryRowContext(ctx, "SELECT canonical FROM decision_ledger WHERE id=?", decisionID).Scan(&raw); err != nil {
+            return false, fmt.Errorf("committed decision missing from ledger: %w", err)
+        }
+        decoded, err := codec.StrictDecodePayload(raw)
+        if err != nil { return false, err }
+        fields, ok := decoded.([]any)
+        if !ok || len(fields) < 6 { return false, errors.New("invalid committed decision schema") }
+        source, ok := fields[4].([]any)
+        if !ok || len(source) != 3 { return false, errors.New("invalid committed decision source ref") }
+        if source[0] != uint64(3) { continue }
+        id, ok := source[1].([]byte)
+        if !ok || !bytes.Equal(id, activationID) || fields[5] != uint64(0) {
+            return false, errors.New("trigger source not covered by its terminal COMMIT decision")
+        }
+        triggerSettlements++
+    }
+    if triggerSettlements != 1 { return false, fmt.Errorf("wanted one authenticated terminal trigger decision; got %d", triggerSettlements) }
+    return true, nil
 }

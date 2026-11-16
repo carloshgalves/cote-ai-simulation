@@ -155,9 +155,22 @@ func TestReferenceD3AdversarialEventTaskAndHolderMutationsFailClosed(t *testing.
 	// Force an existing generic task to reference a real physical Event:
 	// this tests persisted outbox, not a made-up ContextBoundary input.
 	var taskID, taskRaw []byte
-	if err := database.QueryRowContext(ctx, "SELECT id,canonical FROM causal_outbox ORDER BY id LIMIT 1").Scan(&taskID, &taskRaw); err != nil {
-		t.Fatal(err)
+	rows, err := database.QueryContext(ctx, "SELECT id,canonical FROM causal_outbox ORDER BY id")
+	if err != nil { t.Fatal(err) }
+	for rows.Next() {
+		var candidateID, candidateRaw []byte
+		if err := rows.Scan(&candidateID, &candidateRaw); err != nil { rows.Close(); t.Fatal(err) }
+		parsed, err := codec.StrictDecodePayload(candidateRaw)
+		if err != nil { rows.Close(); t.Fatal(err) }
+		fields, ok := parsed.([]any)
+		if ok && len(fields) == 10 {
+			taskID, taskRaw = candidateID, candidateRaw
+			break
+		}
 	}
+	if err := rows.Err(); err != nil { rows.Close(); t.Fatal(err) }
+	if err := rows.Close(); err != nil { t.Fatal(err) }
+	if len(taskID) != 32 { t.Fatal("D3 adversarial fixture lacks a genuine PerceptionTask") }
 	v, err := codec.StrictDecodePayload(taskRaw)
 	if err != nil {
 		t.Fatal(err)

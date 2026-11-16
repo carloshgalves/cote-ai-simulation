@@ -34,6 +34,9 @@ import (
 // fence/decision/event bytes even when the host presents sources or workers in
 // a different order.
 type ReferenceOptions struct {
+	// physicalBundle is an internally installed and verified A1 extension.
+	// Never treat a request field or decoded report as an installed bundle.
+	physicalBundle *policy.Bundle
 	ReverseSources   bool
 	ReverseResponses bool
 	LeaveSourceOpen  bool  // negative control; must stop before the first fence
@@ -149,6 +152,26 @@ func buildReferenceGenesis(bundle *policy.Bundle) (*genesis.Genesis, error) {
 		if err != nil {
 			return nil, err
 		}
+		if registered, err := bundle.PhysicalRegistration(); err == nil {
+			// The physical A1 manifest is installed before Genesis, and its
+			// exact SHA-256 and source identity become immutable run pins.
+			fields[12] = []any{[]any{registered.ExtensionID, registered.BundleSHA256[:]}}
+			bodies := make([]reducer.PhysicalBody, 3)
+			for i, subject := range []string{"npc.0001", "npc.0002", "npc.0003"} {
+				bodies[i] = reducer.PhysicalBody{
+					Subject: subject, Hours: 0,
+					WPrimeCapacity: 2000, WPrimeRemaining: 2000, WPrimeTau: 300,
+					WorkRestRatio: 1, Substrate: 1,
+				}
+				for j := range bodies[i].Soreness {
+					bodies[i].Soreness[j] = reducer.PhysicalSoreness{Latency: []float64{0, 0, 0}}
+				}
+			}
+			typed, _, err = reducer.EncodeComposite(reducer.Stock{Available: 1}, bodies)
+			if err != nil {
+				return nil, err
+			}
+		}
 		fields[15] = []any{[]any{reducer.StockSchemaID, uint64(1)}}
 		fields[16] = typed
 		encoded, err = codec.CanonicalBytes("cote.csf.digest.genesis-manifest", envelope.SchemaID, envelope.SchemaVersion, fields)
@@ -177,6 +200,19 @@ func validateReferenceGenesisFixture(raw []byte) error {
 // instant, then same-cycle settlement of occurrence and trigger activation.
 // It deliberately excludes A1 subprocesses, claims and replay/fork perturbation
 // suites assigned to #117-#119. No LLM, network or wall clock selects facts.
+// referenceInstalledBundle supplies only the already verified physical
+// extension explicitly constructed by the trusted reference driver. All
+// legacy C1/C2/C3/C4 callers still independently load their sealed bundle.
+func referenceInstalledBundle(bundlePath string, options ReferenceOptions) (*policy.Bundle, error) {
+	if options.physicalBundle != nil {
+		if err := options.physicalBundle.VerifyInstalledBundle(); err != nil {
+			return nil, err
+		}
+		return options.physicalBundle, nil
+	}
+	return policy.Load(bundlePath)
+}
+
 func RunReference(ctx context.Context, dbPath, bundlePath string, options ReferenceOptions) (ReferenceResult, error) {
 	var out ReferenceResult
 	if ctx == nil {
@@ -197,7 +233,7 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 		return out, fmt.Errorf("reference run requires a fresh database path: %w", err)
 	}
 	if err := reserved.Close(); err != nil { return out, err }
-	bundle, err := policy.Load(bundlePath)
+	bundle, err := referenceInstalledBundle(bundlePath, options)
 	if err != nil {
 		return out, fmt.Errorf("load sealed policies: %w", err)
 	}
@@ -268,7 +304,31 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 		if _, err := ledger.CloseSource(ctx, name, inputledger.Closure{ProducerKey: name + ".partial", ClosedThrough: zero}); err != nil {
 			return out, err
 		}
-		if _, err := ledger.CloseSource(ctx, name, inputledger.Closure{ProducerKey: name + ".final", ClosedThrough: atDue, Final: true}); err != nil {
+		// D2 A1 must be able to append the two signed physical epochs
+		// *after* C4's t=35 snapshot. C1/C2/C3/C4 without an installed
+		// physical extension retain their original final source closure.
+		// Prefix at t=10 is closed for deterministic admission, not FINAL.
+		final := !(options.physicalBundle != nil && name == "physical.a1")
+		if _, err := ledger.CloseSource(ctx, name, inputledger.Closure{
+			ProducerKey: name + ".final", ClosedThrough: atDue, Final: final,
+		}); err != nil {
+			return out, err
+		}
+	}
+	// D2 must cover all C4 and t=35/ordinal=1 NoProposal fences without
+	// irrevocably finalizing physical.a1 before signed epochs 1 and 2.
+	// Append this closure AFTER the shared source-declaration loop, never
+	// interleaved with arbitrary source/worker scheduling permutations.
+	// Its ordinal and identity are part of the deterministic ingress prefix.
+	if options.physicalBundle != nil && !options.LeaveSourceOpen {
+		cut := domain.EligibilityCoordinate{
+			NotBeforeInstant: g.InitialInstant + 35,
+			NotBeforeCycleOrdinal: 1,
+		}
+		if _, err := ledger.CloseSource(ctx, "physical.a1", inputledger.Closure{
+			ProducerKey: "physical.a1.c4-through-next-round",
+			ClosedThrough: cut, Final: false,
+		}); err != nil {
 			return out, err
 		}
 	}

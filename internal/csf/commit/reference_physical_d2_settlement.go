@@ -76,7 +76,7 @@ func referenceD2SettleScriptedCognitiveSlots(ctx context.Context,
 			"act", []any{round.Actor[0], round.Actor[1]},
 			int64(state.Instant), uint64(state.Revision), uint64(0),
 		}
-		digest, _, err := d.Sum("cote.csf.digest.no-proposal",
+		digest, _, err := d.Sum("cote.csf.digest.no-proposal-unit",
 			"cote.csf.schema.no-proposal.body", 1, body)
 		if err != nil {
 			return empty, err

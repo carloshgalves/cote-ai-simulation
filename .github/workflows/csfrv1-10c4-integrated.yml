@@ -1,0 +1,64 @@
+name: CSFRV1-10C4 unified cross-slice acceptance
+on:
+  pull_request:
+    paths:
+      - "internal/csf/commit/reference_cross_c4*"
+      - "internal/csf/commit/reference_epistemic_c2.go"
+      - "internal/csf/commit/reference_run.go"
+      - "cmd/csf-reference-run/**"
+      - "docs/reference-run/csfrv1-10c4/**"
+      - ".github/workflows/csfrv1-10c4-integrated.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  c4-integrated:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Whitespace checks
+        run: git diff --check
+      - name: C4 same run, negative and permutation matrix
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceC4'
+      - name: C1+C2+C3 and canonical regression
+        run: |
+          go test -count=1 ./internal/csf/commit -run '^(TestReferenceRun|TestReferenceCommunicationC1|TestReferenceC2|TestReferenceC3)'
+          go test -count=1 ./internal/csf/ownercheckpoint/... ./internal/csf/contextboundary/... ./tests/architecture
+      - name: Fresh independent CLI C4 runs and strict public report comparison
+        run: |
+          d="$(mktemp -d)"
+          trap 'rm -rf "$d"' EXIT
+          mkdir -m 700 "$d/owner-a" "$d/owner-b"
+          go run ./cmd/csf-reference-run --db "$d/a.db" --owner-db "$d/owner-a/b.db" --report "$d/a.json" --cross-acceptance
+          go run ./cmd/csf-reference-run --db "$d/b.db" --owner-db "$d/owner-b/b.db" --report "$d/b.json" --cross-acceptance --reverse-sources --reverse-responses
+          python3 - "$d/a.json" "$d/b.json" <<'PY'
+          import json,sys
+          a,b=[json.load(open(p,encoding="utf-8")) for p in sys.argv[1:]]
+          allow={"status","run_id","commit_count","delivery","owner","retry","integrity"}
+          for x in (a,b):
+              assert set(x)==allow
+              assert x["status"]=="RUN_LOCAL_10C4"
+              assert x["commit_count"]==6
+              assert x["delivery"]["received_at"]==35
+              assert x["owner"]["restored_after_reopen"]
+              assert x["owner"]["pov_isolated"]
+              assert x["retry"]["validator_indeterminate"]
+              assert x["retry"]["authorized_after_reopen"]
+              assert x["integrity"]["five_ledgers_verified"]
+              assert x["integrity"]["outbox_and_schedule_verified"]
+              raw=json.dumps(x)
+              for token in ("resource.stolen","synthetic-a-private-only-memento","last.resource","final_stock","contest_winner","operator_private_key"):
+                  assert token not in raw,token
+          assert a["run_id"]==b["run_id"]
+          assert a["delivery"]==b["delivery"]
+          assert a["owner"]==b["owner"]
+          assert a["integrity"]["ledger_digests"]==b["integrity"]["ledger_digests"]
+          assert a["retry"]["abort_id"]==b["retry"]["abort_id"]
+          assert a["retry"]["retry_id"]==b["retry"]["retry_id"]
+          print("C4_UNIFIED_PASS: real six-cycle run, abort/retry, private A/B owner and five ledgers byte-exact")
+          PY

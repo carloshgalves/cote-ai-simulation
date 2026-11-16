@@ -130,9 +130,15 @@ func RunReferenceC2(ctx context.Context,dbPath,ownerPath,bundlePath string,
     options.IncludeCommunication=true
     result,err:=RunReference(ctx,absDB,bundlePath,options)
     if err!=nil{return zero,err}
-    if result.Status!="RUN_LOCAL_10C1"||result.Communication==nil||
-        result.FinalRevision!=6||result.FinalInstant!=35{
-        return zero,errors.New("C2 cannot begin without the exact six-commit C1 run")
+    // C4 composes C3's formally authorized, replay-validated retry *before*
+    // the same C1 delivery sequence; all six commits remain in the same run.
+    // C2 standalone retains the strict legacy C1-only prerequisite.
+    expected:="RUN_LOCAL_10C1"
+    if options.IncludeAbortRetry{expected="RUN_LOCAL_10C3"}
+    if result.Status!=expected||result.Communication==nil||
+        result.FinalRevision!=6||result.FinalInstant!=35||
+        (options.IncludeAbortRetry&&result.AbortRetry==nil){
+        return zero,errors.New("C2/C4 requires the exact six-commit C1 or C3+C1 causal run")
     }
     bundle,err:=policy.Load(bundlePath);if err!=nil{return zero,err}
     rawRun,err:=hex.DecodeString(result.RunID)

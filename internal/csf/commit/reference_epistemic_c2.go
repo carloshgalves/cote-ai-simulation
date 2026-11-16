@@ -140,7 +140,7 @@ func RunReferenceC2(ctx context.Context,dbPath,ownerPath,bundlePath string,
         (options.IncludeAbortRetry&&result.AbortRetry==nil){
         return zero,errors.New("C2/C4 requires the exact six-commit C1 or C3+C1 causal run")
     }
-    bundle,err:=policy.Load(bundlePath);if err!=nil{return zero,err}
+    bundle,err:=referenceInstalledBundle(bundlePath,options);if err!=nil{return zero,err}
     rawRun,err:=hex.DecodeString(result.RunID)
     if err!=nil||len(rawRun)!=32{return zero,errors.New("C2 run identifier invalid")}
     var run domain.ID;copy(run[:],rawRun)

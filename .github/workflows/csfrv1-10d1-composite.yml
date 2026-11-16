@@ -24,6 +24,14 @@ jobs:
           cache: true
       - name: Whitespace
         run: git diff --check
+      - name: Emit gofmt check candidate for D1 new source audit
+        shell: bash
+        run: |
+          for f in internal/csf/reducer/composite.go internal/csf/reducer/composite_test.go internal/csf/genesis/composite_genesis_test.go; do
+            printf 'GOFMT_ARTIFACT %s ' "$f"
+            gofmt "$f" | base64 -w0
+            printf '\n'
+          done
       - name: RED GREEN composite tests
         run: go test -count=1 -v ./internal/csf/reducer ./internal/csf/genesis -run '^(TestComposite|TestGenesisComposite)'
       - name: Regression - B/C1/C2/C3/C4 and standalone physical/Genesis contracts

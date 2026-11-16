@@ -250,3 +250,29 @@ func TestReferenceRunTriggerReopenReplayNeverDuplicates(t *testing.T){
         if err!=nil||len(pending)!=0{t.Fatal("replay resurrected already settled work",err)}
     }
 }
+
+func TestReferenceRunGenesisRawFixturePinRejectsMutation(t *testing.T) {
+    raw,err:=os.ReadFile(bundlePath+"/fixtures.json")
+    if err!=nil{t.Fatal(err)}
+    if err:=validateReferenceGenesisFixture(raw);err!=nil{t.Fatalf("pinned normative fixture refused: %v",err)}
+    mutated:=bytes.Clone(raw)
+    mutated[len(mutated)-2]^=1
+    if err:=validateReferenceGenesisFixture(mutated);err==nil{
+        t.Fatal("reopened Genesis fixture accepted mutated raw bytes")
+    }
+}
+
+func TestReferenceRunFreshSQLiteReservationRejectsSymlink(t *testing.T) {
+    ctx:=context.Background()
+    target:=filepath.Join(t.TempDir(),"victim.db")
+    if err:=os.WriteFile(target,[]byte("preserve private file"),0600);err!=nil{t.Fatal(err)}
+    alias:=filepath.Join(t.TempDir(),"new.db")
+    if err:=os.Symlink(target,alias);err!=nil{t.Fatal(err)}
+    if _,err:=RunReference(ctx,alias,bundlePath,ReferenceOptions{});err==nil{
+        t.Fatal("O_EXCL reservation followed attacker-controlled symlink")
+    }
+    after,err:=os.ReadFile(target)
+    if err!=nil||!bytes.Equal(after,[]byte("preserve private file")){
+        t.Fatal("symlink target was altered by reference runner",err)
+    }
+}

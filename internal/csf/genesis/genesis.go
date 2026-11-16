@@ -363,8 +363,17 @@ func validateKnownPayloadShape(schema string, value any, bundle *policy.Bundle) 
 				registered.StateVariant != reducer.PhysicalVariant || registered.StateVersion != 1 {
 				return fmt.Errorf("Genesis physical schema does not match installed reducer")
 			}
+			// With a registered A1 producer, the local reference can use
+			// either the original standalone BodyState or the *closed*
+			// composed stock+BodyState variant. Only the nested physical
+			// branch receives A1 authority; stock remains Go-owned.
+			if payload,ok:=value.([]any);ok&&len(payload)>0&&payload[0]==reducer.CompositeVariant{
+				return reducer.ValidateCompositePayload(value)
+			}
 			return reducer.ValidatePhysicalPayload(value)
 		}
+		// An unregistered physical extension can never bootstrap a mixed
+		// WorldState, even with a valid outer CBOR digest.
 		return reducer.ValidateStockPayload(value)
 	}
 	if schema != "cote.csf.schema.snapshot-pending-state" {

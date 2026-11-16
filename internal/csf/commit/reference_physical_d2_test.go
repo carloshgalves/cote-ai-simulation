@@ -201,7 +201,9 @@ func TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail
 	// Python independently would change exogenous source evidence and is
 	// therefore NOT a valid byte-identical source/worker permutation.
 	g, err := buildReferenceGenesis(host.Bundle)
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	host.GenesisCanonical = g.CanonicalBytes
 	var cuts [2]embodimentv1.ApprovedCut
 	for i := range cuts {
@@ -209,7 +211,9 @@ func TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail
 		source.Epoch = uint64(i + 1)
 		source.Plan = plans[i]
 		cuts[i], err = physicalhost.RunSupervisedPhysical(context.Background(), source)
-		if err != nil { t.Fatalf("real frozen A1 source %d refused: %v", i+1, err) }
+		if err != nil {
+			t.Fatalf("real frozen A1 source %d refused: %v", i+1, err)
+		}
 		if _, _, _, err := cuts[i].CanonicalProof(); err != nil {
 			t.Fatalf("frozen source %d has no signed proof: %v", i+1, err)
 		}
@@ -235,20 +239,30 @@ func TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail
 		// whole-prefix hashes: distinguish an A1/C4 authority bug from
 		// an out-of-order NoProposal or source-ingress receipt.
 		db, err := openReferenceReadOnlyDB(filepath.Join(dir, "run.db"))
-		if err != nil { t.Fatal(err) }
+		if err != nil {
+			t.Fatal(err)
+		}
 		defer db.Close()
 		fingerprints := map[string][]string{}
 		for _, table := range []string{"input_ledger", "decision_ledger", "event_store"} {
 			rows, err := db.Query("SELECT lower(hex(id)), canonical FROM " + table + " ORDER BY id")
-			if err != nil { t.Fatal(err) }
+			if err != nil {
+				t.Fatal(err)
+			}
 			for rows.Next() {
 				var id string
 				var canonical []byte
-				if err := rows.Scan(&id, &canonical); err != nil { rows.Close(); t.Fatal(err) }
+				if err := rows.Scan(&id, &canonical); err != nil {
+					rows.Close()
+					t.Fatal(err)
+				}
 				digest := sha256.Sum256(canonical)
-				fingerprints[table] = append(fingerprints[table], id + ":" + hex.EncodeToString(digest[:]))
+				fingerprints[table] = append(fingerprints[table], id+":"+hex.EncodeToString(digest[:]))
 			}
-			if err := rows.Err(); err != nil { rows.Close(); t.Fatal(err) }
+			if err := rows.Err(); err != nil {
+				rows.Close()
+				t.Fatal(err)
+			}
 			rows.Close()
 		}
 		return got, fingerprints
@@ -257,13 +271,22 @@ func TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail
 	flipped, flippedRows := run(ReferenceOptions{ReverseSources: true, ReverseResponses: true})
 	for _, table := range []string{"input_ledger", "decision_ledger", "event_store"} {
 		a, b := originalRows[table], flippedRows[table]
-		if reflect.DeepEqual(a, b) { continue }
+		if reflect.DeepEqual(a, b) {
+			continue
+		}
 		t.Logf("D2 divergence %s: record counts original=%d flipped=%d; NoProposal journals equal=%t", table, len(a), len(b), original.ScriptedNoProposalJournalID == flipped.ScriptedNoProposalJournalID)
 		for i := 0; i < len(a) || i < len(b); i++ {
 			left, right := "<missing>", "<missing>"
-			if i < len(a) { left = a[i] }
-			if i < len(b) { right = b[i] }
-			if left != right { t.Logf("first divergent %s row index=%d original=%s flipped=%s", table, i, left, right); break }
+			if i < len(a) {
+				left = a[i]
+			}
+			if i < len(b) {
+				right = b[i]
+			}
+			if left != right {
+				t.Logf("first divergent %s row index=%d original=%s flipped=%s", table, i, left, right)
+				break
+			}
 		}
 	}
 	if original.RunID != flipped.RunID ||

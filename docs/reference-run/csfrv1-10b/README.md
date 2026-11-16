@@ -12,7 +12,7 @@ go run ./cmd/csf-reference-run --db /tmp/csf-116-reversed.db --report /tmp/csf-1
 go test -count=1 ./internal/csf/commit -run '^TestReferenceRun' -v
 ```
 
-Use **fresh filenames**, not existing production SQLite databases; the CLI refuses overwrite. Run only in a disposable working directory under the pinned Go 1.27.2, Python 3.13.5 reference toolchain and exact V1 policy bundle. 
+Use **fresh filenames**, not existing production SQLite databases; the CLI refuses overwrite. Run only in a disposable working directory under the pinned Go 1.27.2, Python 3.13.5 reference toolchain and exact V1 policy bundle.
 
 ## Proven causal sequence
 

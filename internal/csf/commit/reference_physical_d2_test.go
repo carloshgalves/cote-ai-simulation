@@ -16,6 +16,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 	"github.com/carloshgalves/cote-ai-simulation/internal/physicalhost"
@@ -195,6 +196,28 @@ func TestReferenceD2ForgedPhysicalOperatorDeniedBeforeCausalGenesis(t *testing.T
 
 func TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail(t *testing.T) {
 	host, plans := referenceD2TestHost(t)
+	// True controlled experiment: produce TWO real, signed A1 captures
+	// once. Each raw physical log includes authentic wall_time. Re-running
+	// Python independently would change exogenous source evidence and is
+	// therefore NOT a valid byte-identical source/worker permutation.
+	g, err := buildReferenceGenesis(host.Bundle)
+	if err != nil { t.Fatal(err) }
+	host.GenesisCanonical = g.CanonicalBytes
+	var cuts [2]embodimentv1.ApprovedCut
+	for i := range cuts {
+		source := host
+		source.Epoch = uint64(i + 1)
+		source.Plan = plans[i]
+		cuts[i], err = physicalhost.RunSupervisedPhysical(context.Background(), source)
+		if err != nil { t.Fatalf("real frozen A1 source %d refused: %v", i+1, err) }
+		if _, _, _, err := cuts[i].CanonicalProof(); err != nil {
+			t.Fatalf("frozen source %d has no signed proof: %v", i+1, err)
+		}
+	}
+	// The D2 runner must derive and persist Genesis itself. The only
+	// test-only replay material is the already supervised authenticated
+	// cut, not a caller-supplied Genesis or manually created WorldState.
+	host.GenesisCanonical = nil
 	run := func(opts ReferenceOptions) (ReferenceD2Proof, map[string][]string) {
 		t.Helper()
 		dir := t.TempDir()
@@ -204,7 +227,7 @@ func TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail
 		}
 		got, err := RunReferenceD2(context.Background(), filepath.Join(dir, "run.db"),
 			filepath.Join(ownerDir, "b.db"), bundlePath,
-			ReferenceD2Config{Host: host, EpochPlans: plans}, opts)
+			ReferenceD2Config{Host: host, EpochPlans: plans, frozenSupervisedCuts: &cuts}, opts)
 		if err != nil {
 			t.Fatalf("D2 permutation failed: %v", err)
 		}

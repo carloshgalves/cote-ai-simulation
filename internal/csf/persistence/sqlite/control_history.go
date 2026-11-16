@@ -1,7 +1,6 @@
 package sqlite
 
 import (
-    "bytes"
     "context"
     "errors"
     "fmt"

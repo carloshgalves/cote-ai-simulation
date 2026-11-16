@@ -4,6 +4,7 @@ import (
     "bytes"
     "context"
     "encoding/hex"
+    "os"
     "path/filepath"
     "testing"
 
@@ -16,7 +17,9 @@ import (
 func TestReferenceC2IntegratedOwnerAndPOV(t *testing.T) {
     ctx:=context.Background()
     dir:=t.TempDir()
-    got,err:=RunReferenceC2(ctx,filepath.Join(dir,"causal.db"),filepath.Join(dir,"owner.db"),bundlePath,
+    privateDir:=filepath.Join(dir,"private-owner")
+    if err:=os.Mkdir(privateDir,0700);err!=nil{t.Fatal(err)}
+    got,err:=RunReferenceC2(ctx,filepath.Join(dir,"causal.db"),filepath.Join(privateDir,"owner.db"),bundlePath,
         ReferenceOptions{})
     if err!=nil{t.Fatal(err)}
     p:=got.Epistemic
@@ -39,8 +42,10 @@ func TestReferenceC2OwnerAndLedgerPermutation(t *testing.T){
     for i,opt:=range []ReferenceOptions{{},{ReverseSources:true},{ReverseResponses:true},
         {ReverseSources:true,ReverseResponses:true}}{
         dir:=t.TempDir()
+        privateDir:=filepath.Join(dir,"private-owner")
+        if err:=os.Mkdir(privateDir,0700);err!=nil{t.Fatal(err)}
         got,err:=RunReferenceC2(context.Background(),filepath.Join(dir,"causal.db"),
-            filepath.Join(dir,"owner.db"),bundlePath,opt)
+            filepath.Join(privateDir,"owner.db"),bundlePath,opt)
         if err!=nil{t.Fatal(i,err)}
         if i==0{prior=got;continue}
         if got.RunID!=prior.RunID||got.EventStreamSHA256!=prior.EventStreamSHA256||
@@ -65,8 +70,10 @@ func TestReferenceC2NoOwnerOrSharedDatabaseFailsBeforeRun(t *testing.T){
 
 func TestReferenceC2OwnerCheckpointBytePin(t *testing.T){
     dir:=t.TempDir()
+    privateDir:=filepath.Join(dir,"private-owner")
+    if err:=os.Mkdir(privateDir,0700);err!=nil{t.Fatal(err)}
     got,err:=RunReferenceC2(context.Background(),filepath.Join(dir,"causal.db"),
-        filepath.Join(dir,"owner.db"),bundlePath,ReferenceOptions{})
+        filepath.Join(privateDir,"owner.db"),bundlePath,ReferenceOptions{})
     if err!=nil{t.Fatal(err)}
     original,err:=hex.DecodeString(got.Epistemic.OwnerCheckpointHash)
     if err!=nil||len(original)!=32{t.Fatal("checkpoint content digest not returned")}

@@ -36,30 +36,30 @@ type ReferenceD2Config struct {
 // ReferenceD2Proof is an INTERNAL privileged test oracle. Neither the raw
 // C4 result, body hours, stock, nor world hashes may be published directly.
 type ReferenceD2Proof struct {
-	Status                             string
-	RunID                              string
-	C4                                 *ReferenceResult `json:"-"`
-	FinalRevision                      uint64
-	FinalInstant                       int64
-	CommittedPhysicalEpochs            int
-	ScriptedNoProposalJournalID        string
-	ScriptedNoProposalVerified         bool
-	PhysicalInputIDs                   [2]string
-	PhysicalJournalIDs                 [2]string
-	PhysicalEventIDs                   [2]string
-	FiveLedgerDigests                  map[string]string
-	GenesisSHA256                      string
-	FinalWorldHash                     string             `json:"-"`
-	PrivilegedBodyHours                map[string]float64 `json:"-"`
-	PrivilegedFinalStock               uint64             `json:"-"`
+	Status                               string
+	RunID                                string
+	C4                                   *ReferenceResult `json:"-"`
+	FinalRevision                        uint64
+	FinalInstant                         int64
+	CommittedPhysicalEpochs              int
+	ScriptedNoProposalJournalID          string
+	ScriptedNoProposalVerified           bool
+	PhysicalInputIDs                     [2]string
+	PhysicalJournalIDs                   [2]string
+	PhysicalEventIDs                     [2]string
+	FiveLedgerDigests                    map[string]string
+	GenesisSHA256                        string
+	FinalWorldHash                       string             `json:"-"`
+	PrivilegedBodyHours                  map[string]float64 `json:"-"`
+	PrivilegedFinalStock                 uint64             `json:"-"`
 	SnapshotVerifiedWithThreeTailCommits bool
-	DigestChainVerified                bool
-	ReplayVerified                     bool
-	A1SignedByGenesisKey               bool
-	SameCausalRun                      bool
-	ResourceBranchUnchanged            bool
-	BodyContinuityVerified             bool
-	FinalSourceClosureVerified         bool
+	DigestChainVerified                  bool
+	ReplayVerified                       bool
+	A1SignedByGenesisKey                 bool
+	SameCausalRun                        bool
+	ResourceBranchUnchanged              bool
+	BodyContinuityVerified               bool
+	FinalSourceClosureVerified           bool
 }
 
 // ReferenceD2PublicReport has a fixed allowlist, separate from privileged
@@ -72,14 +72,14 @@ type ReferenceD2PublicReport struct {
 	Integrity ReferenceD2PublicIntegrity `json:"integrity"`
 }
 type ReferenceD2PublicPhysical struct {
-	EpochsCommitted int       `json:"epochs_committed"`
-	InputIDs        [2]string `json:"input_ids"`
-	JournalIDs      [2]string `json:"journal_ids"`
-	EventIDs        [2]string `json:"event_ids"`
-	FinalRevision   uint64    `json:"final_revision"`
-	FinalInstant    int64     `json:"final_instant"`
-	SourceFinalized bool      `json:"source_finalized"`
-	ScriptedNoProposalJournalID string `json:"scripted_no_proposal_journal_id"`
+	EpochsCommitted             int       `json:"epochs_committed"`
+	InputIDs                    [2]string `json:"input_ids"`
+	JournalIDs                  [2]string `json:"journal_ids"`
+	EventIDs                    [2]string `json:"event_ids"`
+	FinalRevision               uint64    `json:"final_revision"`
+	FinalInstant                int64     `json:"final_instant"`
+	SourceFinalized             bool      `json:"source_finalized"`
+	ScriptedNoProposalJournalID string    `json:"scripted_no_proposal_journal_id"`
 }
 type ReferenceD2PublicIntegrity struct {
 	LedgerDigests               map[string]string `json:"ledger_digests"`
@@ -129,7 +129,7 @@ func (p ReferenceD2Proof) PublicReport() (ReferenceD2PublicReport, error) {
 			EpochsCommitted: 2, InputIDs: p.PhysicalInputIDs,
 			JournalIDs: p.PhysicalJournalIDs, EventIDs: p.PhysicalEventIDs,
 			FinalRevision: p.FinalRevision, FinalInstant: p.FinalInstant,
-			SourceFinalized: p.FinalSourceClosureVerified,
+			SourceFinalized:             p.FinalSourceClosureVerified,
 			ScriptedNoProposalJournalID: p.ScriptedNoProposalJournalID,
 		},
 		Integrity: ReferenceD2PublicIntegrity{

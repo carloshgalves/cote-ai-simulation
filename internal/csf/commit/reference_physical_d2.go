@@ -31,6 +31,11 @@ type ReferenceD2Config struct {
 	EpochPlans            [2]physicalhost.ProducerPlan
 	FailPhysicalAtEpoch   int   // 0 disabled; local fault-injection negative tests only
 	FailPhysicalAfterStep uint8 // 1..7 only when FailPhysicalAtEpoch is set
+	// Test-only, package-private frozen A1 cuts. Captured once through the
+	// *real* Python supervisor, then replayed without replacing their raw
+	// wall_time receipts. A1 signature, Genesis, body/epoch and Go admission
+	// are still verified on EACH run. Ordinary D2 always invokes Python.
+	frozenSupervisedCuts *[2]embodimentv1.ApprovedCut
 }
 
 // ReferenceD2Proof is an INTERNAL privileged test oracle. Neither the raw
@@ -298,9 +303,18 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 		host := cfg.Host
 		host.Epoch = uint64(i + 1)
 		host.Plan = cfg.EpochPlans[i]
-		approved, err := physicalhost.RunSupervisedPhysical(ctx, host)
-		if err != nil {
-			return zero, fmt.Errorf("D2 real Python A1 epoch %d refused: %w", i+1, err)
+		var approved embodimentv1.ApprovedCut
+		if cfg.frozenSupervisedCuts != nil {
+			// Exact-source permutation oracle: same already-supervised,
+			// signed raw A1 cut bytes on both executions. Any forged,
+			// cross-RunID, missing or tampered cut is still rejected by
+			// VerifySignedCut and StagePhysicalInput below.
+			approved = cfg.frozenSupervisedCuts[i]
+		} else {
+			approved, err = physicalhost.RunSupervisedPhysical(ctx, host)
+			if err != nil {
+				return zero, fmt.Errorf("D2 real Python A1 epoch %d refused: %w", i+1, err)
+			}
 		}
 		cutRaw, signature, _, err := approved.CanonicalProof()
 		if err != nil {

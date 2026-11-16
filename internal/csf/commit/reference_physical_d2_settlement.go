@@ -19,7 +19,7 @@ import (
 )
 
 // referenceD2SettleScriptedCognitiveSlots is deliberately a real,
- // deterministic Go NoProposal WORK, not a database patch or silent
+// deterministic Go NoProposal WORK, not a database patch or silent
 // deletion of C2's live future actor RoundDeclarations.
 //
 // C2's two authenticated dispatches are both bound to t=35/ordinal=1.

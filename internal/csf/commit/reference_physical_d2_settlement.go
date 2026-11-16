@@ -29,7 +29,7 @@ import (
 // before epoch 1 can be admitted at t=35/ordinal=2.
 func referenceD2SettleScriptedCognitiveSlots(ctx context.Context,
 	store *sqlite.Store, ledger *inputledger.Ledger, b *policy.Bundle, run domain.ID,
-	c *Coordinator, policies admission.Policies) (ports.CanonicalRecord, error) {
+	c *Coordinator, policies admission.Policies, dbPath string) (ports.CanonicalRecord, error) {
 	var empty ports.CanonicalRecord
 	state, err := store.LoadClock(ctx, [32]byte(run))
 	if err != nil || state.Revision != 6 || state.Instant != 35 || state.LastOrdinal != 0 {
@@ -140,8 +140,12 @@ func referenceD2SettleScriptedCognitiveSlots(ctx context.Context,
 	if err != nil || clock.Revision != 7 || clock.Instant != 35 || clock.LastOrdinal != 1 {
 		return empty, errors.New("D2 NoProposal did not settle the exact cognitive cohort")
 	}
-	if err := store.CheckPerceptionBarrier(ctx, [32]byte(run), 7); err != nil {
-		return empty, fmt.Errorf("D2 NoProposal left incomplete epistemic obligation: %w", err)
+	// The normative NoProposal terminal emits two authentic
+	// round.consumed lifecycle events. They each create PerceptionTasks.
+	// Deliver and complete those exact tasks through C1's existing
+	// addressed-vs-internal dispatch rules; never bypass the barrier.
+	if err := referenceCompleteC1Tasks(ctx, store, b, dbPath, run, 7); err != nil {
+		return empty, fmt.Errorf("D2 NoProposal perception completion/barrier: %w", err)
 	}
 	return journal, nil
 }

@@ -153,7 +153,7 @@ func referenceC3AbortRetry(ctx context.Context,path string,b *policy.Bundle,g *g
     if after.Revision!=cycle.BaseRevision||after.Instant!=cycle.Instant||
         after.LastOrdinal!=-1{return out,errors.New("C3 aborted cycle advanced world clock")}
     worldAfter,hashAfter,err:=store.LoadWorldState(ctx,uint64(after.Revision))
-    if err!=nil||hashAfter!=worldDigest||!bytes.Equal(worldAfter,before){
+    if err!=nil||hashAfter!=worldDigest||!referenceC3Same(worldAfter,before){
         return out,errors.New("C3 aborted validator mutated world or stock")
     }
     events,err:=referenceC3RowCount(ctx,path,"event_store")

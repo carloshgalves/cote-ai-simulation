@@ -1,0 +1,30 @@
+name: TEMP D3 format only
+"on":
+  push:
+    branches:
+      - feat/136-d3-physical-disclosure-cross-acceptance
+permissions:
+  contents: write
+jobs:
+  format:
+    if: github.ref == 'refs/heads/feat/136-d3-physical-disclosure-cross-acceptance'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+      - name: Apply canonical gofmt to D3
+        shell: bash
+        run: |
+          set -euo pipefail
+          gofmt -w internal/csf/commit/reference_disclosure_d3.go internal/csf/commit/reference_disclosure_d3_test.go
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add internal/csf/commit/reference_disclosure_d3.go internal/csf/commit/reference_disclosure_d3_test.go
+            git commit -m "style(#136): gofmt heterogeneous outbox D3 fix"
+            git push origin HEAD:feat/136-d3-physical-disclosure-cross-acceptance
+          fi

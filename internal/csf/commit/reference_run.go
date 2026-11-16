@@ -3,7 +3,6 @@ package commit
 import (
 	"bytes"
 	"context"
-	"crypto/sha256"
 	"database/sql"
 	"encoding/binary"
 	"encoding/hex"
@@ -152,7 +151,7 @@ func buildReferenceGenesis(bundle *policy.Bundle) (*genesis.Genesis, error) {
 // rewrite or a concurrent file replacement is not an acceptable source.
 func validateReferenceGenesisFixture(raw []byte) error {
 	const pinnedSHA256 = "4b88e67490b5f55dbbcb4a54c834e61782c41448dd8d7130352d0d9555bf9b71"
-	hash := sha256.Sum256(raw)
+	hash := identity.OpaqueContentHash(raw)
 	if hex.EncodeToString(hash[:]) != pinnedSHA256 {
 		return errors.New("reference Genesis fixture raw bytes differ from frozen V1 policy authority")
 	}
@@ -440,8 +439,8 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 	if err != nil {
 		return out, err
 	}
-	rawDigest := sha256.Sum256(events)
-	digest := sha256.Sum256(g.CanonicalBytes)
+	rawDigest := identity.OpaqueContentHash(events)
+	digest := identity.OpaqueContentHash(g.CanonicalBytes)
 	out = ReferenceResult{Status: "RUN_LOCAL_10B", RunID: hex.EncodeToString(g.RunID[:]),
 		GenesisSHA256: hex.EncodeToString(digest[:]), CodecPolicyHash: hex.EncodeToString(bundle.CodecPolicyHash[:]),
 		SchemaBundleHash: hex.EncodeToString(bundle.SchemaHash[:]), Database: abs,
@@ -460,7 +459,7 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 }
 
 func referenceCycle(name string, cycle admission.Cycle, fence admission.Fence, journal ports.CanonicalRecord) ReferenceCycle {
-	digest := sha256.Sum256(journal.Canonical)
+	digest := identity.OpaqueContentHash(journal.Canonical)
 	return ReferenceCycle{Kind: name, Instant: int64(cycle.Instant), Ordinal: uint64(cycle.Ordinal),
 		FenceID: hex.EncodeToString(fence.ID[:]), FenceDigest: hex.EncodeToString(fence.Digest[:]),
 		JournalID: hex.EncodeToString(journal.Identity[:]), JournalSHA256: hex.EncodeToString(digest[:])}

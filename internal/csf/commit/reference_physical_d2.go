@@ -340,6 +340,25 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 		if err != nil {
 			return zero, fmt.Errorf("D2 authentic source ingress %d: %w", i+1, err)
 		}
+		if i == 1 {
+			// Finalize after the last signed physical ingress but BEFORE
+			// its AdmissionFence/CommitPhysical. A post-commit closure at
+			// t=35/ordinal=3 would regress behind the clock floor
+			// t=35/ordinal=4 and is normatively forbidden.
+			closure, err := ledger.CloseSource(ctx, reg.SourceID, inputledger.Closure{
+				ProducerKey: "physical.a1.final.epoch-2",
+				ClosedThrough: domain.EligibilityCoordinate{
+					NotBeforeInstant: cycle.Instant, NotBeforeCycleOrdinal: cycle.Ordinal,
+				}, Final: true,
+			})
+			if err != nil {
+				return zero, fmt.Errorf("D2 terminal physical SourceClosure: %w", err)
+			}
+			if len(closure.Fields) != 7 || closure.Fields[5] != true {
+				return zero, errors.New("D2 A1 physical source did not finalize")
+			}
+			proof.FinalSourceClosureVerified = true
+		}
 		fence, err := admission.NewCoordinator(admission.NewFenceLog(store)).
 			AdmitThenEvaluate(ctx, cfg.Host.Bundle, ledger, cycle, policies, nil)
 		if err != nil {
@@ -383,19 +402,6 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 	if err != nil || uint64(last.Revision) != 9 || last.Instant != 35 || last.LastOrdinal != 3 {
 		return zero, errors.New("D2 did not append precisely two physical CycleCommits")
 	}
-	closure, err := ledger.CloseSource(ctx, reg.SourceID, inputledger.Closure{
-		ProducerKey: "physical.a1.final.epoch-2",
-		ClosedThrough: domain.EligibilityCoordinate{
-			NotBeforeInstant: last.Instant, NotBeforeCycleOrdinal: domain.CycleOrdinal(last.LastOrdinal),
-		}, Final: true,
-	})
-	if err != nil {
-		return zero, fmt.Errorf("D2 final physical SourceClosure: %w", err)
-	}
-	if len(closure.Fields) != 7 || closure.Fields[5] != true {
-		return zero, errors.New("D2 physical source still mutable")
-	}
-	proof.FinalSourceClosureVerified = true
 	replayed, err := store.ReplayClock(ctx, rawRun, cfg.Host.Bundle)
 	if err != nil || replayed.ReplayedCommits != 9 ||
 		replayed.ReplayedEvents != int(c4.ReplayedEvents)+4 ||

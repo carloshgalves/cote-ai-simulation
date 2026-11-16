@@ -202,22 +202,58 @@ func RunReferenceC2(ctx context.Context,dbPath,ownerPath,bundlePath string,
     }
     if err:=db.Close();err!=nil{return zero,err}
     cp:=sqlite.SnapshotCheckpoint{ActorNamespace:scope.Namespace,ActorID:scope.Actor,
-        StoreID:"reference-c2-owner",SchemaVersion:1,Content:bytes.Clone(content),
+        StoreID:"reference-c2-owner-b",SchemaVersion:1,Content:bytes.Clone(content),
         Producer:"reference-c2-scripted",ProducerVersion:1,CoversInstant:35,
         CoversRevision:6,CoversEvidenceCursor:evidenceCursor}
     defer clear(cp.Content)
+    // The sender A's opaque, synthetic private state is NOT a percept for B.
+    // A's checkpoint is staged to an entirely separate local owner database,
+    // signed by a distinct key. Only a single sealed CSF snapshot joins the
+    // two private owner receipts at the same immutable causal cutoff.
+    aEvidenceRefs:=make([]any,0,len(aView.Inbox))
+    for _,item:=range aView.Inbox{aEvidenceRefs=append(aEvidenceRefs,item.Input.Identity[:])}
+    contentA,err:=codec.CanonicalPayload([]any{
+        "reference.c2.actor-a",aEvidenceRefs,"synthetic-a-private-only-memento",
+    })
+    if err!=nil{return zero,err}
+    sealA:=identity.OpaqueContentHash(contentA)
+    cpA:=sqlite.SnapshotCheckpoint{ActorNamespace:scopeA.Namespace,ActorID:scopeA.Actor,
+        StoreID:"reference-c2-owner-a",SchemaVersion:1,Content:bytes.Clone(contentA),
+        Producer:"reference-c2-scripted",ProducerVersion:1,CoversInstant:35,
+        CoversRevision:6,CoversEvidenceCursor:evidenceCursor}
+    defer clear(cpA.Content)
+    for _,entry:=range bView.Inbox {
+        if bytes.Contains(entry.Observation.Canonical,[]byte("synthetic-a-private-only-memento")) ||
+           bytes.Contains(entry.Input.Canonical,[]byte("synthetic-a-private-only-memento")){
+            return zero,errors.New("C2 A-only private memento leaked to B's addressed context")
+        }
+    }
     owner,err:=localowner.Open(ctx,absOwner,ownerSigner)
     if err!=nil{return zero,err}
     defer owner.Close()
+    ownerA,err:=localowner.Open(ctx,absAOwner,ownerASigner)
+    if err!=nil{return zero,err}
+    defer ownerA.Close()
+    gateA,err:=ownercheckpoint.NewGate(ownerA,store,bundle)
+    if err!=nil{return zero,err}
+    receiptA,err:=gateA.Stage(ctx,scopeA,cpA)
+    if err!=nil{return zero,fmt.Errorf("C2 A private durable owner stage: %w",err)}
+    gateB,err:=ownercheckpoint.NewGate(owner,store,bundle)
+    if err!=nil{return zero,err}
+    receiptB,err:=gateB.Stage(ctx,scope,cp)
+    if err!=nil{return zero,fmt.Errorf("C2 B private durable owner stage: %w",err)}
+    snapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,[]sqlite.SnapshotCheckpoint{cpA,cp})
+    if err!=nil{return zero,fmt.Errorf("C2 joint A/B sealed causal snapshot: %w",err)}
+    ref:=localdemo.Reference{Snapshot:[32]byte(snapshot.ID),Receipt:receiptB}
+    refA:=localdemo.Reference{Snapshot:[32]byte(snapshot.ID),Receipt:receiptA}
+    if ref.Snapshot==([32]byte{})||ref.Receipt==([32]byte{})||refA.Receipt==([32]byte{})||
+        ref.Receipt==refA.Receipt{
+        return zero,errors.New("C2 two-owner snapshot/receipts missing or not independent")
+    }
     h,err:=localdemo.New(owner,store,bundle,scope,func(context.Context)error{
         return errors.New("C2 cognitive callback must not run before restore")
     })
     if err!=nil{return zero,err}
-    ref,err:=h.StageSnapshot(ctx,cp)
-    if err!=nil{return zero,fmt.Errorf("C2 durable owner checkpoint/snapshot: %w",err)}
-    if ref.Snapshot==([32]byte{})||ref.Receipt==([32]byte{}){
-        return zero,errors.New("C2 owner snapshot/receipt is empty")
-    }
     if err:=h.Run(ctx,ref);!errors.Is(err,ownercheckpoint.ErrNotAcknowledged){
         return zero,errors.New("C2 ran cognitive work without acknowledged restore")
     }

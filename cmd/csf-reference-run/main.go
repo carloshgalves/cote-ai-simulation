@@ -19,6 +19,7 @@ func main() {
 	reverseSources := flag.Bool("reverse-sources", false, "permute source declaration order")
 	reverseResponses := flag.Bool("reverse-responses", false, "permute slot response order")
 	communication := flag.Bool("communication", false, "continue the same run with C1 false Claim and delayed delivery")
+	abortRetry := flag.Bool("abort-retry", false, "C3: validator INDETERMINATE, durable abort and explicit same-cohort authorized retry")
 	epistemic := flag.Bool("epistemic-owner", false, "run integrated C1 + C2 evidence and private owner restore/ACK")
 	ownerDB := flag.String("owner-db", "", "fresh separate cognitive owner SQLite path in a 0700 directory (C2 only)")
 	flag.Parse()
@@ -26,9 +27,13 @@ func main() {
 		fmt.Fprintln(os.Stderr, "--db required")
 		os.Exit(2)
 	}
-	options := commit.ReferenceOptions{ReverseSources: *reverseSources, ReverseResponses: *reverseResponses, IncludeCommunication: *communication}
+	options := commit.ReferenceOptions{ReverseSources: *reverseSources, ReverseResponses: *reverseResponses, IncludeCommunication: *communication, IncludeAbortRetry: *abortRetry}
 	var result commit.ReferenceResult
 	var err error
+	if *epistemic && *abortRetry {
+		fmt.Fprintln(os.Stderr, "C3+owner C2 combined acceptance belongs to issue #129; use --abort-retry with --communication, without --epistemic-owner")
+		os.Exit(2)
+	}
 	if *epistemic {
 		if *ownerDB == "" {
 			fmt.Fprintln(os.Stderr, "--owner-db required with --epistemic-owner")

@@ -81,6 +81,16 @@ func TestReferenceRunSourceAndWorkerPermutationIsByteIdentical(t *testing.T) {
 			!bytes.Equal(r.ContestCommitBytes, first.ContestCommitBytes) {
 			t.Fatalf("causal output depends on source or response order: iteration %d", i)
 		}
+        if len(r.CycleFenceBytes) != 3 || len(r.CycleCommitBytes) != 3 ||
+            len(first.CycleFenceBytes) != 3 || len(first.CycleCommitBytes) != 3 {
+            t.Fatal("cycle byte oracle omitted one of the three committed cycles")
+        }
+        for cycle := 0; cycle < 3; cycle++ {
+            if !bytes.Equal(r.CycleFenceBytes[cycle], first.CycleFenceBytes[cycle]) ||
+                !bytes.Equal(r.CycleCommitBytes[cycle], first.CycleCommitBytes[cycle]) {
+                t.Fatalf("causal cycle %d fence/journal depends on arrival order", cycle)
+            }
+        }
 	}
 }
 
@@ -144,4 +154,51 @@ func TestReferenceRunContestFailpointNeverPublishesHalfRevision(t *testing.T) {
 			}
 		})
 	}
+}
+
+// TestReferenceRunLateInputCannotRetroactAndFinalRejectsFurtherIngress
+// checks the *real* durable source ledger, rather than trusting a manifest
+// flag or a precomputed coordinate in a planning-only fixture.
+func TestReferenceRunLateInputCannotRetroactAndFinalRejectsFurtherIngress(t *testing.T) {
+    ctx:=context.Background()
+    bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+    g,err:=buildReferenceGenesis(bundle);if err!=nil{t.Fatal(err)}
+    path:=filepath.Join(t.TempDir(),"source-contract.db")
+    store,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+    defer store.Close()
+    if err:=store.PersistGenesis(ctx,g,bundle);err!=nil{t.Fatal(err)}
+    if err:=store.BootstrapClock(ctx,g,bundle);err!=nil{t.Fatal(err)}
+    ledger,err:=inputledger.New(ctx,g.RunID,bundle,store);if err!=nil{t.Fatal(err)}
+    if err:=ledger.DeclareSource(inputledger.Source{ID:"school-events"});err!=nil{t.Fatal(err)}
+    zero:=domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant,NotBeforeCycleOrdinal:0}
+    if _,err:=ledger.CloseSource(ctx,"school-events",inputledger.Closure{
+        ProducerKey:"partial.0",ClosedThrough:zero});err!=nil{t.Fatal(err)}
+    input:=inputledger.Input{ProducerUnitKey:"school.e1",Kind:"resource.notice",
+        SchemaVersion:1,Actor:[]any{uint64(0)},Payload:g.Payload[16],
+        DeclaredEffectiveAt:g.InitialInstant,Eligibility:zero,
+        Provenance:[]any{uint64(0)},IdempotencyKey:[]any{uint64(0)}}
+    received,err:=ledger.AppendInput(ctx,"school-events",input);if err!=nil{t.Fatal(err)}
+    coord,ok:=received.Fields[9].([]any)
+    if !ok||len(coord)!=2||coord[0]!=int64(g.InitialInstant)||coord[1]!=uint64(1){
+        t.Fatalf("late input retroactively entered already closed coordinate: %#v",received.Fields[9])
+    }
+    if received.Receipt.Sequence!=1 {t.Fatal("ingress receipt did not follow partial closure")}
+    atTen:=domain.EligibilityCoordinate{NotBeforeInstant:g.InitialInstant+10,NotBeforeCycleOrdinal:0}
+    if _,err:=ledger.CloseSource(ctx,"school-events",inputledger.Closure{
+        ProducerKey:"final.10",ClosedThrough:atTen,Final:true});err!=nil{t.Fatal(err)}
+    input.ProducerUnitKey="school.e2"
+    if _,err:=ledger.AppendInput(ctx,"school-events",input);!errors.Is(err,inputledger.ErrFinalSource){
+        t.Fatalf("post-final input accepted: %v",err)
+    }
+    if _,err:=ledger.CloseSource(ctx,"school-events",inputledger.Closure{
+        ProducerKey:"after-final",ClosedThrough:atTen,Final:true});!errors.Is(err,inputledger.ErrFinalSource){
+        t.Fatalf("post-final closure accepted: %v",err)
+    }
+    db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+    defer db.Close()
+    for table,want:=range map[string]int{"committed_cycles":0,"event_store":0,"world_revisions":1}{
+        var got int
+        if err:=db.QueryRow("SELECT COUNT(*) FROM "+table).Scan(&got);err!=nil{t.Fatal(err)}
+        if got!=want{t.Fatalf("source normalization published half-world %s=%d",table,got)}
+    }
 }

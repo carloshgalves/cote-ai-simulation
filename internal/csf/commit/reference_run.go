@@ -314,6 +314,24 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 		}); err != nil {
 			return out, err
 		}
+		if options.physicalBundle != nil && name == "physical.a1" {
+			// D2 must first terminally settle C2's two real future actor
+			// dispatches as NoProposal at t=35/ordinal=1, then it may
+			// ingress physical epochs at ordinals 2 and 3. A non-FINAL
+			// closure explicitly covers ALL B+C4 fences through that
+			// epistemic round without freezing physical.a1 forever.
+			// Only the post-epoch SourceClosure may set Final=true.
+			nextCognitiveCut := domain.EligibilityCoordinate{
+				NotBeforeInstant: g.InitialInstant + 35,
+				NotBeforeCycleOrdinal: 1,
+			}
+			if _, err := ledger.CloseSource(ctx, name, inputledger.Closure{
+				ProducerKey: "physical.a1.c4-through-next-round",
+				ClosedThrough: nextCognitiveCut, Final: false,
+			}); err != nil {
+				return out, err
+			}
+		}
 	}
 	roles, err := policiesByRole(bundle)
 	if err != nil {

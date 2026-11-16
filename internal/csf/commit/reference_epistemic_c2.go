@@ -36,14 +36,17 @@ type ReferenceC2Proof struct {
     CompletionIdempotent bool  `json:"completion_idempotent"`
     RestoredAfterReopen bool   `json:"restored_after_reopen"`
     WorkDeniedBeforeACK bool   `json:"work_denied_before_ack"`
+    AOwnerReceiptID      string `json:"a_owner_receipt_id"`
+    AOwnerCheckpointHash string `json:"a_owner_checkpoint_hash"`
+    SeparateOwnerKeys    bool   `json:"separate_owner_keys"`
 }
 
 // referenceC2SyntheticSigner is deliberately deterministic so that the local
 // reproducibility experiment produces byte-identical signed owner snapshots.
 // This is a SYNTHETIC TEST KEY, not a production trust root. It must not be
 // used to sign real, remotely durable memory or pass external release gates.
-func referenceC2SyntheticSigner(run [32]byte) ed25519.PrivateKey {
-    preimage:=append([]byte("cote.csf.reference.c2.synthetic-ed25519-owner.v1"),run[:]...)
+func referenceC2SyntheticSigner(run [32]byte, actor string) ed25519.PrivateKey {
+    preimage:=append([]byte("cote.csf.reference.c2.synthetic-ed25519-owner.v1." + actor),run[:]...)
     seed:=identity.OpaqueContentHash(preimage)
     return ed25519.NewKeyFromSeed(seed[:])
 }
@@ -100,16 +103,21 @@ func RunReferenceC2(ctx context.Context,dbPath,ownerPath,bundlePath string,
     if ctx==nil||dbPath==""||ownerPath==""{return zero,errors.New("C2 requires explicit causal/owner paths and context")}
     absDB,err:=filepath.Abs(dbPath);if err!=nil{return zero,err}
     absOwner,err:=filepath.Abs(ownerPath);if err!=nil{return zero,err}
-    if absDB==absOwner{return zero,errors.New("cognitive owner must not share causal SQLite path")}
+    absAOwner:=absOwner+".actor-a"
+    if absDB==absOwner||absDB==absAOwner||absOwner==absAOwner{
+        return zero,errors.New("cognitive actor owners must be distinct from causal SQLite and each other")
+    }
     dir,err:=os.Stat(filepath.Dir(absOwner))
     if err!=nil{return zero,err}
     if !dir.IsDir()||dir.Mode().Perm()&0077!=0{
         return zero,errors.New("C2 owner store requires a private 0700 directory")
     }
     // Resolve pre-existing symlink path aliases before any causal work.
-    if _,err:=os.Lstat(absOwner);err==nil{
-        return zero,errors.New("C2 requires fresh owner database; do not overwrite or reuse")
-    }else if !os.IsNotExist(err){return zero,err}
+    for _,ownerFile:=range []string{absOwner,absAOwner}{
+        if _,err:=os.Lstat(ownerFile);err==nil{
+            return zero,errors.New("C2 requires fresh independent actor-owner databases")
+        }else if !os.IsNotExist(err){return zero,err}
+    }
     if _,err:=os.Lstat(absDB);err==nil{
         return zero,errors.New("C2 requires fresh causal database")
     }else if !os.IsNotExist(err){return zero,err}
@@ -124,20 +132,30 @@ func RunReferenceC2(ctx context.Context,dbPath,ownerPath,bundlePath string,
     rawRun,err:=hex.DecodeString(result.RunID)
     if err!=nil||len(rawRun)!=32{return zero,errors.New("C2 run identifier invalid")}
     var run domain.ID;copy(run[:],rawRun)
-    ownerSigner:=referenceC2SyntheticSigner([32]byte(run))
+    ownerSigner:=referenceC2SyntheticSigner([32]byte(run),"b")
     defer clear(ownerSigner)
+    ownerASigner:=referenceC2SyntheticSigner([32]byte(run),"a")
+    defer clear(ownerASigner)
     store,err:=sqlite.Open(ctx,absDB)
     if err!=nil{return zero,err}
     defer store.Close()
     if err:=store.CheckPerceptionBarrier(ctx,[32]byte(run),6);err!=nil{
         return zero,fmt.Errorf("C2 pre-dispatch epistemic barrier: %w",err)
     }
-    // Enroll only recipient B as an owner who cannot be re-created by replay.
-    // The key is in a different, owner-owned SQLite file and never in a JSON report.
+    // Snapshot eligibility also includes every holder of addressed evidence.
+    // The C1 resource rounds made A and B both eligible. A/B have distinct
+    // real owner files and distinct Ed25519 signing keys: neither actor's
+    // memory can be silently substituted for the other's.
     scope:=ownercheckpoint.Scope{Run:[32]byte(run),Namespace:"school",Actor:"b"}
-    if err:=store.RegisterCognitiveActor(ctx,scope.Run,scope.Namespace,scope.Actor,bundle);err!=nil{return zero,err}
-    public:=ownerSigner.Public().(ed25519.PublicKey)
-    if err:=store.RegisterCognitiveOwnerKeyV1(ctx,scope.Run,scope.Namespace,scope.Actor,public,bundle);err!=nil{return zero,err}
+    scopeA:=ownercheckpoint.Scope{Run:[32]byte(run),Namespace:"school",Actor:"a"}
+    for _,registration:=range []struct{scope ownercheckpoint.Scope;signer ed25519.PrivateKey}{
+        {scopeA,ownerASigner},{scope,ownerSigner},
+    }{
+        who:=registration.scope
+        if err:=store.RegisterCognitiveActor(ctx,who.Run,who.Namespace,who.Actor,bundle);err!=nil{return zero,err}
+        public:=registration.signer.Public().(ed25519.PublicKey)
+        if err:=store.RegisterCognitiveOwnerKeyV1(ctx,who.Run,who.Namespace,who.Actor,public,bundle);err!=nil{return zero,err}
+    }
     ledger,err:=inputledger.Open(ctx,run,bundle,store)
     if err!=nil{return zero,err}
     bDispatch,err:=referenceC2NextDispatch(ctx,store,ledger,bundle,run,"b",3)

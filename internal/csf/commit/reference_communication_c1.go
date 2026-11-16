@@ -131,17 +131,17 @@ func referenceC1DeliveryEvidence(ctx context.Context, dbPath string,run domain.I
     if err:=rows.Close();err!=nil{return "","",err}
     if len(taskID)!=32{return "","",errors.New("C1 delivery Event has no PerceptionTask")}
     proofRows,err:=db.QueryContext(ctx,
-        "SELECT record_id,holder_namespace,holder_id,kind FROM evidence_routes WHERE run_id=? AND task_id=?",
-        run[:],taskID)
+        "SELECT record_id,run_id,holder_namespace,holder_id,kind FROM evidence_routes WHERE task_id=?",
+        taskID)
     if err!=nil{return "","",err}
     seen:=map[int]bool{}
     var inputID []byte
     for proofRows.Next(){
-        var record []byte
+        var record,routeRun []byte
         var ns,name string
         var kind int
-        if err:=proofRows.Scan(&record,&ns,&name,&kind);err!=nil{proofRows.Close();return "","",err}
-        if ns!="school"||name!="b"||(kind!=0&&kind!=1)||seen[kind]||len(record)!=32{
+        if err:=proofRows.Scan(&record,&routeRun,&ns,&name,&kind);err!=nil{proofRows.Close();return "","",err}
+        if !bytes.Equal(routeRun,run[:])||ns!="school"||name!="b"||(kind!=0&&kind!=1)||seen[kind]||len(record)!=32{
             proofRows.Close();return "","",errors.New("C1 delivery routed foreign, malformed or duplicate evidence")
         }
         seen[kind]=true

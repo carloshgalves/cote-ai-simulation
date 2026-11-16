@@ -128,9 +128,10 @@ func TestReferenceD2RealTwoEpochsOnSameC4RunID(t *testing.T) {
 	}
 	if got.Status != "RUN_LOCAL_10D2" || got.C4 == nil ||
 		got.RunID != got.C4.RunID || got.C4.Status != "RUN_LOCAL_10C4" ||
-		len(got.C4.Cycles) != 6 || got.FinalRevision != 8 || got.FinalInstant != 35 ||
-		got.CommittedPhysicalEpochs != 2 || !got.ReplayVerified ||
-		!got.SnapshotVerifiedWithTwoTailCommits || !got.DigestChainVerified ||
+		len(got.C4.Cycles) != 6 || got.FinalRevision != 9 || got.FinalInstant != 35 ||
+		got.CommittedPhysicalEpochs != 2 || !got.ScriptedNoProposalVerified ||
+		len(got.ScriptedNoProposalJournalID) != 64 || !got.ReplayVerified ||
+		!got.SnapshotVerifiedWithThreeTailCommits || !got.DigestChainVerified ||
 		!got.A1SignedByGenesisKey || !got.SameCausalRun ||
 		!got.ResourceBranchUnchanged || !got.BodyContinuityVerified {
 		t.Fatalf("D2 missing same-run invariant: %+v", got)

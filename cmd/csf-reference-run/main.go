@@ -20,6 +20,7 @@ func main() {
 	reverseResponses := flag.Bool("reverse-responses", false, "permute slot response order")
 	communication := flag.Bool("communication", false, "continue the same run with C1 false Claim and delayed delivery")
 	abortRetry := flag.Bool("abort-retry", false, "C3: validator INDETERMINATE, durable abort and explicit same-cohort authorized retry")
+	crossAcceptance := flag.Bool("cross-acceptance", false, "C4: combine C1/C2/C3 on one SQLite/RunID; write strict public allowlisted report")
 	epistemic := flag.Bool("epistemic-owner", false, "run integrated C1 + C2 evidence and private owner restore/ACK")
 	ownerDB := flag.String("owner-db", "", "fresh separate cognitive owner SQLite path in a 0700 directory (C2 only)")
 	flag.Parse()
@@ -30,24 +31,38 @@ func main() {
 	options := commit.ReferenceOptions{ReverseSources: *reverseSources, ReverseResponses: *reverseResponses, IncludeCommunication: *communication, IncludeAbortRetry: *abortRetry}
 	var result commit.ReferenceResult
 	var err error
-	if *epistemic && *abortRetry {
-		fmt.Fprintln(os.Stderr, "C3+owner C2 combined acceptance belongs to issue #129; use --abort-retry with --communication, without --epistemic-owner")
+	if *epistemic && *abortRetry && !*crossAcceptance {
+		fmt.Fprintln(os.Stderr, "C2+C3 combined acceptance requires --cross-acceptance")
 		os.Exit(2)
 	}
-	if *epistemic {
-		if *ownerDB == "" {
-			fmt.Fprintln(os.Stderr, "--owner-db required with --epistemic-owner")
-			os.Exit(2)
+	if *crossAcceptance && (*epistemic || *abortRetry || *communication) {
+		fmt.Fprintln(os.Stderr, "--cross-acceptance implies all C1/C2/C3 flags; do not combine them")
+		os.Exit(2)
+	}
+	if (*epistemic || *crossAcceptance) && *ownerDB == "" {
+		fmt.Fprintln(os.Stderr, "--owner-db required for cognitive owner or C4")
+		os.Exit(2)
+	}
+	var output any
+	if *crossAcceptance {
+		result, err = commit.RunReferenceC4(context.Background(), *db, *ownerDB, *bundle, options)
+		if err == nil {
+			// C4 must NEVER serialize internal ReferenceResult (private
+			// WorldState/decision metadata); enforce explicit public allowlist.
+			output, err = result.C4PublicReport()
 		}
+	} else if *epistemic {
 		result, err = commit.RunReferenceC2(context.Background(), *db, *ownerDB, *bundle, options)
+		output = result
 	} else {
 		result, err = commit.RunReference(context.Background(), *db, *bundle, options)
+		output = result
 	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
-	encoded, err := json.MarshalIndent(result, "", "  ")
+	encoded, err := json.MarshalIndent(output, "", "  ")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

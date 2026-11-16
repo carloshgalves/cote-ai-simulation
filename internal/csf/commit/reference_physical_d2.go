@@ -277,7 +277,7 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 	// This adds a world-neutral seventh CycleCommit, after which the
 	// two physical epochs are eligible at ordinals 2 and 3.
 	noProposalJournal, err := referenceD2SettleScriptedCognitiveSlots(
-		ctx, store, ledger, cfg.Host.Bundle, run, coordinator, policies)
+		ctx, store, ledger, cfg.Host.Bundle, run, coordinator, policies, dbPath)
 	if err != nil {
 		return zero, fmt.Errorf("D2 could not settle C2 outstanding actor slots: %w", err)
 	}

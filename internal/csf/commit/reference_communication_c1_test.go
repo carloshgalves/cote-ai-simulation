@@ -226,3 +226,23 @@ func TestReferenceCommunicationC1ForeignRecipientRouteFailsClosed(t *testing.T){
         t.Fatal("replay accepted swapped holder for B-delivered claim")
     }
 }
+
+func TestReferenceCommunicationC1UnclosedSourceRejectsBeforeFence(t *testing.T){
+    ctx:=context.Background()
+    path:=filepath.Join(t.TempDir(),"unclosed.db")
+    _,err:=RunReference(ctx,path,bundlePath,
+        ReferenceOptions{IncludeCommunication:true,LeaveSourceOpen:true})
+    if err==nil{t.Fatal("open physical source admitted a first fence or false Claim")}
+    db,err:=sql.Open("sqlite","file:"+path)
+    if err!=nil{t.Fatal(err)}
+    defer db.Close()
+    for _,test:=range []struct{table string;want int}{
+        {"communication_claims",0},{"communication_transmissions",0},
+        {"committed_cycles",0},{"world_revisions",1},
+    }{
+        var count int
+        if err:=db.QueryRowContext(ctx,"SELECT COUNT(*) FROM "+test.table).Scan(&count);err!=nil||count!=test.want{
+            t.Fatalf("unclosed source leaked %s: %d expected %d / %v",test.table,count,test.want,err)
+        }
+    }
+}

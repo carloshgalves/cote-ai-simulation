@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"database/sql"
+	"net/url"
 	"encoding/binary"
 	"encoding/hex"
 	"encoding/json"
@@ -488,7 +489,7 @@ func readContestDecisions(ctx context.Context, dbPath string, journal []byte, ac
 	if !ok || len(ids) != 2 {
 		return nil, "", errors.New("contest missing exact two terminal decision IDs")
 	}
-	db, err := sql.Open("sqlite", "file:"+filepath.ToSlash(dbPath)+"?mode=ro")
+	db, err := openReferenceReadOnlyDB(dbPath)
 	if err != nil {
 		return nil, "", err
 	}
@@ -552,8 +553,18 @@ func readContestDecisions(ctx context.Context, dbPath string, journal []byte, ac
 	return decisions, winner, nil
 }
 
+// openReferenceReadOnlyDB preserves exact filename identity, even if the local
+// pathname contains '?', '#' or other URI characters. All C1/C2 audit queries
+// must be read-only; SQLite.CommitWork remains the sole causal writer.
+func openReferenceReadOnlyDB(path string) (*sql.DB, error) {
+    abs, err := filepath.Abs(path)
+    if err != nil { return nil, err }
+    u := (&url.URL{Scheme: "file", Path: filepath.ToSlash(abs), RawQuery: "mode=ro"}).String()
+    return sql.Open("sqlite", u)
+}
+
 func referenceEventBytes(ctx context.Context, dbPath string) ([]byte, error) {
-	db, err := sql.Open("sqlite", "file:"+filepath.ToSlash(dbPath)+"?mode=ro")
+	db, err := openReferenceReadOnlyDB(dbPath)
 	if err != nil {
 		return nil, err
 	}
@@ -598,7 +609,7 @@ func packRecord(dst []byte, record []byte) []byte {
 // is reconstructed from the authenticated CycleCommit and DecisionRecord, not
 // from a mutable flag on an append-only origin.
 func referenceTriggerTerminal(ctx context.Context, path string, run domain.ID, journalRaw []byte) (bool, error) {
-    db, err := sql.Open("sqlite", "file:"+filepath.ToSlash(path)+"?mode=ro")
+    db, err := openReferenceReadOnlyDB(path)
     if err != nil { return false, err }
     defer db.Close()
     var activationID, canonical []byte

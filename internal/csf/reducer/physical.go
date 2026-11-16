@@ -366,11 +366,11 @@ func DecodePhysical(value any) ([]PhysicalBody, error) {
 		envelope.SchemaID != PhysicalSchemaID || envelope.SchemaVersion != 1 {
 		return nil, ErrInvalidPhysicalState
 	}
-	if payload, ok := envelope.Value.([]any);ok&&len(payload)>0&&payload[0]==CompositeVariant{
+	if payload, ok := envelope.Value.([]any); ok && len(payload) > 0 && payload[0] == CompositeVariant {
 		_, bodies, err := DecodeComposite(value)
 		return bodies, err
 	}
-	if ValidatePhysicalPayload(envelope.Value)!=nil{
+	if ValidatePhysicalPayload(envelope.Value) != nil {
 		return nil, ErrInvalidPhysicalState
 	}
 	rows := envelope.Value.([]any)[2].([]any)
@@ -416,7 +416,9 @@ func ApplyCompletedPhysical(before []any, completed []PhysicalBody) ([]any, doma
 	}
 	if isCompositeWorldState(before) {
 		stock, _, err := DecodeComposite(before)
-		if err != nil { return nil, zero, err }
+		if err != nil {
+			return nil, zero, err
+		}
 		return EncodeComposite(stock, next)
 	}
 	return EncodePhysical(next)

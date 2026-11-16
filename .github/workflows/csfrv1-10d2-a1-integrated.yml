@@ -1,0 +1,70 @@
+name: CSFRV1-10D2 supervised Python A1 in same C4 causal run
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "internal/csf/commit/reference_physical_d2*"
+      - "internal/csf/commit/reference_run.go"
+      - "internal/csf/commit/reference_epistemic_c2.go"
+      - "internal/csf/commit/reference_cross_c4.go"
+      - "internal/csf/commit/reference_abort_retry_c3.go"
+      - "internal/csf/commit/work_physical.go"
+      - "internal/csf/reducer/**"
+      - "docs/reference-run/csfrv1-10d2/**"
+      - ".github/workflows/csfrv1-10d2-a1-integrated.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: csfrv1-10d2-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  real-python-a1:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Install pinned physical test dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+      - name: Exact SHA, whitespace and strict gofmt
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check HEAD^1 HEAD
+          echo "PR exact head: ${{ github.event.pull_request.head.sha }}"
+          files="$(gofmt -l internal/csf/commit/reference_physical_d2*.go)"
+          if [ -n "$files" ]; then
+            echo "gofmt required: $files"
+            exit 1
+          fi
+      - name: Produce authentic A2 receipt and remove Python bytecode
+        run: |
+          python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-d2
+          find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
+      - name: Real Python D2 same-RunID positive, negative and permutation tests
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceD2'
+      - name: B+C4 regression, standalone physical and source security
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: |
+          go test -count=1 ./internal/csf/commit -run '^(TestReferenceC4|TestPhysical)'
+          go test -count=1 ./internal/csf/reducer ./internal/csf/genesis ./internal/csf/policy ./internal/csf/adapter/embodimentv1 ./internal/physicalhost
+      - name: Structural controls and vet
+        run: |
+          go test -count=1 ./tests/architecture
+          go vet ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/physicalhost

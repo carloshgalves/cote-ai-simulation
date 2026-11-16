@@ -219,6 +219,17 @@ func TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail
 		!reflect.DeepEqual(original.FiveLedgerDigests, flipped.FiveLedgerDigests) ||
 		original.FinalWorldHash != flipped.FinalWorldHash ||
 		original.GenesisSHA256 != flipped.GenesisSHA256 {
-		t.Fatalf("worker and source order changed canonical D2 causal authority")
+		t.Fatalf("D2 permutation divergence: RunID %t, physical events %t, journals %t, inputs %t, five ledgers %t, world hash %t, Genesis %t; input original=%v flipped=%v; journal original=%v flipped=%v; event original=%v flipped=%v; ledger original=%v flipped=%v",
+			original.RunID == flipped.RunID,
+			reflect.DeepEqual(original.PhysicalEventIDs, flipped.PhysicalEventIDs),
+			reflect.DeepEqual(original.PhysicalJournalIDs, flipped.PhysicalJournalIDs),
+			reflect.DeepEqual(original.PhysicalInputIDs, flipped.PhysicalInputIDs),
+			reflect.DeepEqual(original.FiveLedgerDigests, flipped.FiveLedgerDigests),
+			original.FinalWorldHash == flipped.FinalWorldHash,
+			original.GenesisSHA256 == flipped.GenesisSHA256,
+			original.PhysicalInputIDs, flipped.PhysicalInputIDs,
+			original.PhysicalJournalIDs, flipped.PhysicalJournalIDs,
+			original.PhysicalEventIDs, flipped.PhysicalEventIDs,
+			original.FiveLedgerDigests, flipped.FiveLedgerDigests)
 	}
 }

@@ -37,7 +37,7 @@ if result.GenesisWorldHash==""||result.ContestWorldHash==""||result.AdvanceWorld
         result.AdvanceWorldHash!=result.FinalWorldHash{
         t.Fatal("world mutation/identity lifecycle differs from causal revisions")
     }
-    	if len(result.EventBytes) == 0 || len(result.ContestFenceBytes) == 0 || len(result.ContestCommitBytes) == 0 {
+	if len(result.EventBytes) == 0 || len(result.ContestFenceBytes) == 0 || len(result.ContestCommitBytes) == 0 {
 		t.Fatal("authoritative event/fence/commit bytes absent")
 	}
 	if result.ContestDecisions[result.ContestWinner] != "COMMIT" || len(result.ContestDecisions) != 2 {

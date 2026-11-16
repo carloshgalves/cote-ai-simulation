@@ -78,7 +78,7 @@ func TestReferenceD3RealPythonPrivateEventAndLiveObservatory(t *testing.T) {
 		t.Fatalf("D3 report lacks strict public allowlist: %s", raw)
 	}
 	if strings.Contains(string(raw), "actor_a_addressed") || strings.Contains(string(raw), "actor_b_addressed") {
-		t.Fatalf("public certificate exposed recipient-specific evidence counts: %s",raw)
+		t.Fatalf("public certificate exposed recipient-specific evidence counts: %s", raw)
 	}
 	altered := got
 	altered.Matrix.PublicPublications++

@@ -46,20 +46,20 @@ type ReferenceD3Proof struct {
 // The public audit certificate contains no actor-specific evidence counts,
 // private event IDs, body, stock, seed or policy/producer internals.
 type ReferenceD3PublicDisclosure struct {
-	PhysicalEvents int `json:"physical_events"`
-	PhysicalPerceptionTasks int `json:"physical_perception_tasks"`
+	PhysicalEvents             int  `json:"physical_events"`
+	PhysicalPerceptionTasks    int  `json:"physical_perception_tasks"`
 	RecipientIsolationVerified bool `json:"recipient_isolation_verified"`
-	ActorPhysicalDenied bool `json:"actor_physical_denied"`
-	PublicPhysicalDenied bool `json:"public_physical_denied"`
-	PublicPublications int `json:"public_publications"`
-	ReplayCommits int `json:"replay_commits"`
-	SnapshotTailCommits int `json:"snapshot_tail_commits"`
-	FiveLedgerPrefixStable bool `json:"five_ledger_prefix_stable"`
-	ReadonlyVerified bool `json:"readonly_verified"`
+	ActorPhysicalDenied        bool `json:"actor_physical_denied"`
+	PublicPhysicalDenied       bool `json:"public_physical_denied"`
+	PublicPublications         int  `json:"public_publications"`
+	ReplayCommits              int  `json:"replay_commits"`
+	SnapshotTailCommits        int  `json:"snapshot_tail_commits"`
+	FiveLedgerPrefixStable     bool `json:"five_ledger_prefix_stable"`
+	ReadonlyVerified           bool `json:"readonly_verified"`
 }
 type ReferenceD3PublicReport struct {
-	Status string `json:"status"`
-	RunID string `json:"run_id"`
+	Status     string                      `json:"status"`
+	RunID      string                      `json:"run_id"`
 	Disclosure ReferenceD3PublicDisclosure `json:"disclosure"`
 }
 
@@ -78,18 +78,18 @@ func (p ReferenceD3Proof) PublicReport() (ReferenceD3PublicReport, error) {
 		return zero, err
 	}
 	return ReferenceD3PublicReport{Status: p.Status, RunID: p.RunID,
-	Disclosure: ReferenceD3PublicDisclosure{
-		PhysicalEvents: p.Matrix.PhysicalEvents,
-		PhysicalPerceptionTasks: p.Matrix.PhysicalPerceptionTasks,
-		RecipientIsolationVerified: p.Matrix.RecipientBClaimOnly,
-		ActorPhysicalDenied: p.Matrix.ActorPhysicalDenied,
-		PublicPhysicalDenied: p.Matrix.PublicPhysicalDenied,
-		PublicPublications: p.Matrix.PublicPublications,
-		ReplayCommits: p.Matrix.ReplayCommits,
-		SnapshotTailCommits: p.Matrix.SnapshotTailCommits,
-		FiveLedgerPrefixStable: p.Matrix.FiveLedgerPrefixStable,
-		ReadonlyVerified: p.Matrix.ReadersDidNotWrite,
-	}}, nil
+		Disclosure: ReferenceD3PublicDisclosure{
+			PhysicalEvents:             p.Matrix.PhysicalEvents,
+			PhysicalPerceptionTasks:    p.Matrix.PhysicalPerceptionTasks,
+			RecipientIsolationVerified: p.Matrix.RecipientBClaimOnly,
+			ActorPhysicalDenied:        p.Matrix.ActorPhysicalDenied,
+			PublicPhysicalDenied:       p.Matrix.PublicPhysicalDenied,
+			PublicPublications:         p.Matrix.PublicPublications,
+			ReplayCommits:              p.Matrix.ReplayCommits,
+			SnapshotTailCommits:        p.Matrix.SnapshotTailCommits,
+			FiveLedgerPrefixStable:     p.Matrix.FiveLedgerPrefixStable,
+			ReadonlyVerified:           p.Matrix.ReadersDidNotWrite,
+		}}, nil
 }
 
 // RunReferenceD3 executes two *real* A1 Python epochs through D2, then
@@ -401,8 +401,6 @@ func AuditReferenceD3(ctx context.Context, path string, bundle *policy.Bundle,
 	return proof, nil
 }
 
-
-
 // Check all durable evidence, including records added after C2's owner
 // checkpoint. ENGINE_ONLY data may exist in EventStore for the engine, but
 // must not be materialized in recipient-facing EvidenceLedger.
@@ -410,17 +408,27 @@ func referenceD3CheckGlobalEvidence(ctx context.Context, db interface {
 	QueryContext(context.Context, string, ...any) (*sql.Rows, error)
 }, forbidden [][]byte) error {
 	rows, err := db.QueryContext(ctx, "SELECT canonical FROM evidence_ledger ORDER BY id")
-	if err != nil { return err }
+	if err != nil {
+		return err
+	}
 	defer rows.Close()
 	for rows.Next() {
 		var raw []byte
-		if err := rows.Scan(&raw); err != nil { return err }
-		if _, err := codec.StrictDecodePayload(raw); err != nil { return err }
-		for _, s := range []string{"physical.advanced","physical.a1","npc.0001","npc.0002","npc.0003"} {
-			if bytes.Contains(raw, []byte(s)) { return errors.New("D3 leaked ENGINE_ONLY source in evidence ledger") }
+		if err := rows.Scan(&raw); err != nil {
+			return err
+		}
+		if _, err := codec.StrictDecodePayload(raw); err != nil {
+			return err
+		}
+		for _, s := range []string{"physical.advanced", "physical.a1", "npc.0001", "npc.0002", "npc.0003"} {
+			if bytes.Contains(raw, []byte(s)) {
+				return errors.New("D3 leaked ENGINE_ONLY source in evidence ledger")
+			}
 		}
 		for _, secret := range forbidden {
-			if len(secret)>0 && bytes.Contains(raw,secret) { return errors.New("D3 leaked signed physical BodyState in evidence ledger") }
+			if len(secret) > 0 && bytes.Contains(raw, secret) {
+				return errors.New("D3 leaked signed physical BodyState in evidence ledger")
+			}
 		}
 	}
 	return rows.Err()
@@ -429,11 +437,15 @@ func referenceD3CheckGlobalEvidence(ctx context.Context, db interface {
 // A registered ENGINE_ONLY physical Event must have no addressed actor,
 // observer, publication or derived physical context channel.
 func referenceD3PrivateEventMetadata(fields []any) bool {
-	if len(fields) != 19 { return false }
+	if len(fields) != 19 {
+		return false
+	}
 	private, ok := fields[13].([]any)
-	if !ok || len(private)!=0 { return false }
+	if !ok || len(private) != 0 {
+		return false
+	}
 	confidentiality, ok := fields[14].([]any)
-	return ok && len(confidentiality)==1 && confidentiality[0]==uint64(0)
+	return ok && len(confidentiality) == 1 && confidentiality[0] == uint64(0)
 }
 
 // The only valid audit capabilities are the two actual next-round

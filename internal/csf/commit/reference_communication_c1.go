@@ -3,7 +3,6 @@ package commit
 import (
     "bytes"
     "context"
-    "database/sql"
     "encoding/hex"
     "errors"
     "fmt"
@@ -30,6 +29,8 @@ type ReferenceCommunicationProof struct {
     TransmissionID    string `json:"transmission_id"`
     DeliverySourceID  string `json:"delivery_occurrence_id"`
     DeliveryEventID   string `json:"delivery_event_id"`
+    DeliveryTaskID    string `json:"delivery_task_id"`
+    KnowledgeInputID  string `json:"knowledge_input_id"`
     SentAt            int64  `json:"sent_at"`
     DeliveredAt       int64  `json:"delivered_at"`
     BKnowledgeInputs  int    `json:"b_new_knowledge_inputs"`
@@ -42,7 +43,7 @@ type ReferenceCommunicationProof struct {
 // C2 owns independent hostile privacy/owner-checkpoint audit of these results.
 func referenceCompleteC1Tasks(ctx context.Context, store *sqlite.Store, bundle *policy.Bundle,
     dbPath string, run domain.ID, through uint64) error {
-    db, err := sql.Open("sqlite", "file:"+dbPath)
+    db, err := openReferenceReadOnlyDB(dbPath)
     if err != nil { return err }
     defer db.Close()
     rows, err := db.QueryContext(ctx, "SELECT id,canonical FROM causal_outbox")
@@ -91,11 +92,67 @@ func referenceCompleteC1Tasks(ctx context.Context, store *sqlite.Store, bundle *
 }
 
 func referenceC1BInputs(ctx context.Context,dbPath string)(int,error){
-    db,err:=sql.Open("sqlite","file:"+dbPath);if err!=nil{return 0,err}
+    db,err:=openReferenceReadOnlyDB(dbPath);if err!=nil{return 0,err}
     defer db.Close()
     var n int
     err=db.QueryRowContext(ctx,"SELECT COUNT(*) FROM evidence_routes WHERE holder_namespace='school' AND holder_id='b' AND kind=1").Scan(&n)
     return n,err
+}
+
+// referenceC1DeliveryEvidence proves the *exact* delivered event task was
+// projected to one Observation and one KnowledgeInput for B, and nobody else.
+// A global count of B's inputs would not establish this causal relationship.
+func referenceC1DeliveryEvidence(ctx context.Context, dbPath string,run domain.ID,
+    deliveryEvent []byte)(string,string,error){
+    db,err:=openReferenceReadOnlyDB(dbPath)
+    if err!=nil{return "","",err}
+    defer db.Close()
+    rows,err:=db.QueryContext(ctx,"SELECT id,canonical FROM causal_outbox")
+    if err!=nil{return "","",err}
+    var taskID []byte
+    for rows.Next(){
+        var id,raw []byte
+        if err:=rows.Scan(&id,&raw);err!=nil{rows.Close();return "","",err}
+        decoded,err:=codec.StrictDecodePayload(raw)
+        if err!=nil{rows.Close();return "","",err}
+        fields,ok:=decoded.([]any)
+        if !ok{rows.Close();return "","",errors.New("C1 malformed outbox")}
+        if len(fields)!=10{continue}
+        eventRef,ok:=fields[3].([]byte)
+        if !ok||len(eventRef)!=32{rows.Close();return "","",errors.New("C1 outbox event reference malformed")}
+        if !bytes.Equal(eventRef,deliveryEvent){continue}
+        runRef,ok:=fields[1].([]byte)
+        if !ok||!bytes.Equal(runRef,run[:])||len(id)!=32||taskID!=nil{
+            rows.Close();return "","",errors.New("C1 delivery task absent, foreign or duplicated")
+        }
+        taskID=bytes.Clone(id)
+    }
+    if err:=rows.Err();err!=nil{rows.Close();return "","",err}
+    if err:=rows.Close();err!=nil{return "","",err}
+    if len(taskID)!=32{return "","",errors.New("C1 delivery Event has no PerceptionTask")}
+    proofRows,err:=db.QueryContext(ctx,
+        "SELECT record_id,holder_namespace,holder_id,kind FROM evidence_routes WHERE run_id=? AND task_id=?",
+        run[:],taskID)
+    if err!=nil{return "","",err}
+    seen:=map[int]bool{}
+    var inputID []byte
+    for proofRows.Next(){
+        var record []byte
+        var ns,name string
+        var kind int
+        if err:=proofRows.Scan(&record,&ns,&name,&kind);err!=nil{proofRows.Close();return "","",err}
+        if ns!="school"||name!="b"||(kind!=0&&kind!=1)||seen[kind]||len(record)!=32{
+            proofRows.Close();return "","",errors.New("C1 delivery routed foreign, malformed or duplicate evidence")
+        }
+        seen[kind]=true
+        if kind==1{inputID=bytes.Clone(record)}
+    }
+    if err:=proofRows.Err();err!=nil{proofRows.Close();return "","",err}
+    if err:=proofRows.Close();err!=nil{return "","",err}
+    if !seen[0]||!seen[1]||len(inputID)!=32{
+        return "","",errors.New("C1 delivered message lacks exactly one private Observation/KnowledgeInput pair")
+    }
+    return hex.EncodeToString(taskID),hex.EncodeToString(inputID),nil
 }
 
 func referenceC1Cycle(ctx context.Context,store *sqlite.Store,bundle *policy.Bundle,run domain.ID,
@@ -227,7 +284,7 @@ func extendReferenceC1(ctx context.Context,store *sqlite.Store,ledger *inputledg
     if replay.ReconstructedClock!=stateFinal||replay.ReplayedCommits!=6||replay.VerifiedActivations!=1{
         return errors.New("C1 integrated causal replay mismatch")
     }
-    db,err:=sql.Open("sqlite","file:"+dbPath);if err!=nil{return err}
+    db,err:=openReferenceReadOnlyDB(dbPath);if err!=nil{return err}
     defer db.Close()
     var claimID,txID,sourceID []byte
     var status int
@@ -248,6 +305,8 @@ func extendReferenceC1(ctx context.Context,store *sqlite.Store,ledger *inputledg
     if err:=rows.Err();err!=nil{rows.Close();return err}
     if err:=rows.Close();err!=nil{return err}
     if deliveryCount!=1{return errors.New("C1 delivery Event not unique")}
+    deliveryTaskID,knowledgeID,err:=referenceC1DeliveryEvidence(ctx,dbPath,g.RunID,eventID)
+    if err!=nil{return err}
     events,err:=referenceEventBytes(ctx,dbPath);if err!=nil{return err}
     rawDigest:=identity.OpaqueContentHash(events)
     out.Status="RUN_LOCAL_10C1"
@@ -262,6 +321,7 @@ func extendReferenceC1(ctx context.Context,store *sqlite.Store,ledger *inputledg
     out.Communication=&ReferenceCommunicationProof{
         ClaimID:hex.EncodeToString(claimID),TransmissionID:hex.EncodeToString(txID),
         DeliverySourceID:hex.EncodeToString(sourceID),DeliveryEventID:hex.EncodeToString(eventID),
+        DeliveryTaskID:deliveryTaskID,KnowledgeInputID:knowledgeID,
         SentAt:int64(state.Instant),DeliveredAt:int64(due),
         BKnowledgeInputs:bAfter-bBefore,ReplayVerified:true}
     return nil

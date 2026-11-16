@@ -19,13 +19,25 @@ func main() {
 	reverseSources := flag.Bool("reverse-sources", false, "permute source declaration order")
 	reverseResponses := flag.Bool("reverse-responses", false, "permute slot response order")
 	communication := flag.Bool("communication", false, "continue the same run with C1 false Claim and delayed delivery")
+	epistemic := flag.Bool("epistemic-owner", false, "run integrated C1 + C2 evidence and private owner restore/ACK")
+	ownerDB := flag.String("owner-db", "", "fresh separate cognitive owner SQLite path in a 0700 directory (C2 only)")
 	flag.Parse()
 	if *db == "" {
 		fmt.Fprintln(os.Stderr, "--db required")
 		os.Exit(2)
 	}
-	result, err := commit.RunReference(context.Background(), *db, *bundle,
-		commit.ReferenceOptions{ReverseSources: *reverseSources, ReverseResponses: *reverseResponses, IncludeCommunication: *communication})
+	options := commit.ReferenceOptions{ReverseSources: *reverseSources, ReverseResponses: *reverseResponses, IncludeCommunication: *communication}
+	var result commit.ReferenceResult
+	var err error
+	if *epistemic {
+		if *ownerDB == "" {
+			fmt.Fprintln(os.Stderr, "--owner-db required with --epistemic-owner")
+			os.Exit(2)
+		}
+		result, err = commit.RunReferenceC2(context.Background(), *db, *ownerDB, *bundle, options)
+	} else {
+		result, err = commit.RunReference(context.Background(), *db, *bundle, options)
+	}
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

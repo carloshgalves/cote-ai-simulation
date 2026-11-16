@@ -47,13 +47,9 @@ jobs:
           echo "PR exact head: ${{ github.event.pull_request.head.sha }}"
           files="$(gofmt -l internal/csf/commit/reference_physical_d2*.go)"
           if [ -n "$files" ]; then
-            echo "Gofmt candidate export for review: $files"
+            echo "D2 files not gofmt-clean: $files"
+            exit 1
           fi
-          for f in internal/csf/commit/reference_physical_d2*.go; do
-            printf 'D2_GO_FMT %s ' "$f"
-            gofmt "$f" | base64 -w0
-            printf '\n'
-          done
       - name: Produce authentic A2 receipt and remove Python bytecode
         run: |
           python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-d2
@@ -62,6 +58,20 @@ jobs:
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"
         run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceD2'
+      - name: Race-check real physical A1 causality and frozen-source permutations
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: go test -race -count=1 ./internal/csf/commit -run '^TestReferenceD2(RealTwoEpochsOnSameC4RunID|TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail)
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: |
+          go test -count=1 ./internal/csf/commit -run '^(TestReferenceC4|TestPhysical)'
+          go test -count=1 ./internal/csf/reducer ./internal/csf/genesis ./internal/csf/policy ./internal/csf/adapter/embodimentv1 ./internal/physicalhost
+      - name: Structural controls and vet
+        run: |
+          go test -count=1 ./tests/architecture
+          go vet ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/physicalhost
+
       - name: B+C4 regression, standalone physical and source security
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"

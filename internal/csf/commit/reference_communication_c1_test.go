@@ -107,6 +107,28 @@ func TestReferenceCommunicationC1AtomicFailures(t *testing.T) {
                 if err:=db.QueryRow("SELECT COUNT(*) FROM communication_transmissions").Scan(&tx);err!=nil{t.Fatal(err)}
                 want:=0;if failAt=="delivery"{want=1}
                 if claim!=want||tx!=want{t.Fatalf("partial claim/transmission publication %d/%d",claim,tx)}
+                var revisions int
+                if err:=db.QueryRow("SELECT COUNT(*) FROM world_revisions").Scan(&revisions);err!=nil||revisions!=beforeCommits+1{
+                    t.Fatalf("partial world revision under fault %s/%d: %d expected %d: %v",
+                        failAt,step,revisions,beforeCommits+1,err)
+                }
+                rows,err:=db.Query("SELECT canonical FROM event_store")
+                if err!=nil{t.Fatal(err)}
+                sentEvents,deliveryEvents:=0,0
+                for rows.Next(){
+                    var raw []byte
+                    if err:=rows.Scan(&raw);err!=nil{rows.Close();t.Fatal(err)}
+                    value,err:=codec.StrictDecodePayload(raw)
+                    if err!=nil{rows.Close();t.Fatal(err)}
+                    f:=value.([]any)
+                    if f[3]=="communication.sent"{sentEvents++}
+                    if f[3]=="communication.delivered"{deliveryEvents++}
+                }
+                if err:=rows.Err();err!=nil{rows.Close();t.Fatal(err)}
+                if err:=rows.Close();err!=nil{t.Fatal(err)}
+                if sentEvents!=want||deliveryEvents!=0{
+                    t.Fatalf("partial send/delivery Event under fault %s/%d: %d/%d",failAt,step,sentEvents,deliveryEvents)
+                }
                 var delivered int
                 if err:=db.QueryRow("SELECT COUNT(*) FROM communication_transmissions WHERE status=1").Scan(&delivered);err!=nil||delivered!=0{
                     t.Fatalf("partial delivery despite fault: %d %v",delivered,err)

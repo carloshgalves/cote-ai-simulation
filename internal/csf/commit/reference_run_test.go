@@ -26,10 +26,18 @@ func TestReferenceRunRealCausalSQLiteAndReplay(t *testing.T) {
 	if result.Status != "RUN_LOCAL_10B" || len(result.Cycles) != 3 || result.TriggerActivations != 1 || result.ConsumedSystemUnits != 2 {
 		t.Fatalf("incomplete real causal flow: %+v", result)
 	}
-	if result.FinalRevision != 3 || result.FinalInstant != 10 || result.FinalStock != 0 || result.ReplayedCommits != 3 || result.ReplayedEvents < 7 {
+	if result.FinalRevision != 3 || result.FinalInstant != 10 || result.FinalStock != 0 || !result.TriggerTerminal || result.ReplayedCommits != 3 || result.ReplayedEvents < 7 {
 		t.Fatalf("incorrect causal state/replay: %+v", result)
 	}
-	if len(result.EventBytes) == 0 || len(result.ContestFenceBytes) == 0 || len(result.ContestCommitBytes) == 0 {
+if result.GenesisWorldHash==""||result.ContestWorldHash==""||result.AdvanceWorldHash==""||result.FinalWorldHash=="" {
+        t.Fatal("world-hash trajectory is missing")
+    }
+    if result.GenesisWorldHash==result.ContestWorldHash ||
+        result.ContestWorldHash!=result.AdvanceWorldHash ||
+        result.AdvanceWorldHash!=result.FinalWorldHash{
+        t.Fatal("world mutation/identity lifecycle differs from causal revisions")
+    }
+    	if len(result.EventBytes) == 0 || len(result.ContestFenceBytes) == 0 || len(result.ContestCommitBytes) == 0 {
 		t.Fatal("authoritative event/fence/commit bytes absent")
 	}
 	if result.ContestDecisions[result.ContestWinner] != "COMMIT" || len(result.ContestDecisions) != 2 {
@@ -200,5 +208,45 @@ func TestReferenceRunLateInputCannotRetroactAndFinalRejectsFurtherIngress(t *tes
         var got int
         if err:=db.QueryRow("SELECT COUNT(*) FROM "+table).Scan(&got);err!=nil{t.Fatal(err)}
         if got!=want{t.Fatalf("source normalization published half-world %s=%d",table,got)}
+    }
+}
+
+// A second and third reconstruction may not materialize a new activation,
+// regress lifecycle from TERMINAL, or resurrect settled scheduling work.
+func TestReferenceRunTriggerReopenReplayNeverDuplicates(t *testing.T){
+    ctx:=context.Background()
+    path:=filepath.Join(t.TempDir(),"trigger-replay.db")
+    result,err:=RunReference(ctx,path,bundlePath,ReferenceOptions{})
+    if err!=nil{t.Fatal(err)}
+    rawID,err:=hex.DecodeString(result.RunID);if err!=nil{t.Fatal(err)}
+    var id domain.ID;copy(id[:],rawID)
+    db,err:=sql.Open("sqlite","file:"+path);if err!=nil{t.Fatal(err)}
+    defer db.Close()
+    readActivation:=func()([]byte,[]byte,int){
+        t.Helper()
+        var key,canonical []byte
+        var state int
+        err:=db.QueryRowContext(ctx,"SELECT id,canonical,lifecycle FROM trigger_activations WHERE run_id=?",id[:]).Scan(&key,&canonical,&state)
+        if err!=nil{t.Fatal(err)}
+        var count int
+        if err:=db.QueryRowContext(ctx,"SELECT COUNT(*) FROM trigger_activations WHERE run_id=?",id[:]).Scan(&count);err!=nil{t.Fatal(err)}
+        if count!=1||state!=2{t.Fatalf("trigger not terminal/unique: %d/%d",count,state)}
+        return key,canonical,state
+    }
+    originalID,originalBytes,originalState:=readActivation()
+    bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+    reopened,err:=sqlite.Open(ctx,path);if err!=nil{t.Fatal(err)}
+    defer reopened.Close()
+    for attempt:=0;attempt<2;attempt++{
+        replay,err:=reopened.ReplayClock(ctx,[32]byte(id),bundle)
+        if err!=nil||replay.VerifiedActivations!=1||replay.ReplayedCommits!=3{
+            t.Fatalf("reopen replay mismatch on attempt %d: %+v %v",attempt,replay,err)
+        }
+        afterID,afterBytes,afterState:=readActivation()
+        if !bytes.Equal(originalID,afterID)||!bytes.Equal(originalBytes,afterBytes)||afterState!=originalState{
+            t.Fatal("replay regenerated or changed terminal TriggerActivation")
+        }
+        pending,err:=reopened.PendingClock(ctx,[32]byte(id))
+        if err!=nil||len(pending)!=0{t.Fatal("replay resurrected already settled work",err)}
     }
 }

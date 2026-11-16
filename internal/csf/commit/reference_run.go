@@ -75,6 +75,8 @@ type ReferenceResult struct {
 	EventBytes         []byte `json:"-"`
 	ContestFenceBytes  []byte `json:"-"`
 	ContestCommitBytes []byte `json:"-"`
+	CycleFenceBytes [][]byte `json:"-"`
+	CycleCommitBytes [][]byte `json:"-"`
 }
 
 // buildReferenceGenesis converts the frozen, normative *fixture vector* into a
@@ -422,7 +424,9 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 		FinalWorldHash: hex.EncodeToString(finalHash[:]), FinalStock: int64(last.Available), TriggerActivations: len(advance.Activations),
 		ConsumedSystemUnits: len(systemUnits), ReplayedCommits: uint64(replay.ReplayedCommits), ReplayedEvents: uint64(replay.ReplayedEvents),
 		EventStreamSHA256: hex.EncodeToString(rawDigest[:]), EventBytes: events,
-		ContestFenceBytes: bytes.Clone(fence.Canonical), ContestCommitBytes: bytes.Clone(result.Canonical)}
+		ContestFenceBytes: bytes.Clone(fence.Canonical), ContestCommitBytes: bytes.Clone(result.Canonical),
+        CycleFenceBytes: [][]byte{bytes.Clone(fence.Canonical),bytes.Clone(advance.Fence.Canonical),bytes.Clone(triggerFence.Canonical)},
+        CycleCommitBytes: [][]byte{bytes.Clone(result.Canonical),bytes.Clone(advance.Commit.Canonical),bytes.Clone(systemJournal.Canonical)}}
 	return out, nil
 }
 

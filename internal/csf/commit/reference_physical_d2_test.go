@@ -195,7 +195,7 @@ func TestReferenceD2ForgedPhysicalOperatorDeniedBeforeCausalGenesis(t *testing.T
 
 func TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail(t *testing.T) {
 	host, plans := referenceD2TestHost(t)
-	run := func(opts ReferenceOptions) ReferenceD2Proof {
+	run := func(opts ReferenceOptions) (ReferenceD2Proof, map[string][]string) {
 		t.Helper()
 		dir := t.TempDir()
 		ownerDir := filepath.Join(dir, "owner")
@@ -208,10 +208,41 @@ func TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail
 		if err != nil {
 			t.Fatalf("D2 permutation failed: %v", err)
 		}
-		return got
+		// Compare exact persisted row identities and byte digests, not only
+		// whole-prefix hashes: distinguish an A1/C4 authority bug from
+		// an out-of-order NoProposal or source-ingress receipt.
+		db, err := openReferenceReadOnlyDB(filepath.Join(dir, "run.db"))
+		if err != nil { t.Fatal(err) }
+		defer db.Close()
+		fingerprints := map[string][]string{}
+		for _, table := range []string{"input_ledger", "decision_ledger", "event_store"} {
+			rows, err := db.Query("SELECT lower(hex(id)), canonical FROM " + table + " ORDER BY id")
+			if err != nil { t.Fatal(err) }
+			for rows.Next() {
+				var id string
+				var canonical []byte
+				if err := rows.Scan(&id, &canonical); err != nil { rows.Close(); t.Fatal(err) }
+				digest := sha256.Sum256(canonical)
+				fingerprints[table] = append(fingerprints[table], id + ":" + hex.EncodeToString(digest[:]))
+			}
+			if err := rows.Err(); err != nil { rows.Close(); t.Fatal(err) }
+			rows.Close()
+		}
+		return got, fingerprints
 	}
-	original := run(ReferenceOptions{})
-	flipped := run(ReferenceOptions{ReverseSources: true, ReverseResponses: true})
+	original, originalRows := run(ReferenceOptions{})
+	flipped, flippedRows := run(ReferenceOptions{ReverseSources: true, ReverseResponses: true})
+	for _, table := range []string{"input_ledger", "decision_ledger", "event_store"} {
+		a, b := originalRows[table], flippedRows[table]
+		if reflect.DeepEqual(a, b) { continue }
+		t.Logf("D2 divergence %s: record counts original=%d flipped=%d; NoProposal journals equal=%t", table, len(a), len(b), original.ScriptedNoProposalJournalID == flipped.ScriptedNoProposalJournalID)
+		for i := 0; i < len(a) || i < len(b); i++ {
+			left, right := "<missing>", "<missing>"
+			if i < len(a) { left = a[i] }
+			if i < len(b) { right = b[i] }
+			if left != right { t.Logf("first divergent %s row index=%d original=%s flipped=%s", table, i, left, right); break }
+		}
+	}
 	if original.RunID != flipped.RunID ||
 		!reflect.DeepEqual(original.PhysicalEventIDs, flipped.PhysicalEventIDs) ||
 		!reflect.DeepEqual(original.PhysicalJournalIDs, flipped.PhysicalJournalIDs) ||

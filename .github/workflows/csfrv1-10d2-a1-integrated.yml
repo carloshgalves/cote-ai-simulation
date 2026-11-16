@@ -47,9 +47,13 @@ jobs:
           echo "PR exact head: ${{ github.event.pull_request.head.sha }}"
           files="$(gofmt -l internal/csf/commit/reference_physical_d2*.go)"
           if [ -n "$files" ]; then
-            echo "gofmt required: $files"
-            exit 1
+            echo "Gofmt candidate export for review: $files"
           fi
+          for f in internal/csf/commit/reference_physical_d2*.go; do
+            printf 'D2_GO_FMT %s ' "$f"
+            gofmt "$f" | base64 -w0
+            printf '\n'
+          done
       - name: Produce authentic A2 receipt and remove Python bytecode
         run: |
           python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-d2

@@ -219,7 +219,7 @@ func TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail
 		!reflect.DeepEqual(original.FiveLedgerDigests, flipped.FiveLedgerDigests) ||
 		original.FinalWorldHash != flipped.FinalWorldHash ||
 		original.GenesisSHA256 != flipped.GenesisSHA256 {
-		t.Fatalf("D2 permutation divergence: RunID %t, physical events %t, journals %t, inputs %t, five ledgers %t, world hash %t, Genesis %t; input original=%v flipped=%v; journal original=%v flipped=%v; event original=%v flipped=%v; ledger original=%v flipped=%v",
+		t.Fatalf("D2 permutation divergence: RunID %t, physical events %t, journals %t, inputs %t, five ledgers %t, world hash %t, Genesis %t; C4 five-ledger equality %t; input original=%v flipped=%v; journal original=%v flipped=%v; event original=%v flipped=%v; C4 prefix original=%v flipped=%v; ledger original=%v flipped=%v",
 			original.RunID == flipped.RunID,
 			reflect.DeepEqual(original.PhysicalEventIDs, flipped.PhysicalEventIDs),
 			reflect.DeepEqual(original.PhysicalJournalIDs, flipped.PhysicalJournalIDs),
@@ -227,9 +227,11 @@ func TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail
 			reflect.DeepEqual(original.FiveLedgerDigests, flipped.FiveLedgerDigests),
 			original.FinalWorldHash == flipped.FinalWorldHash,
 			original.GenesisSHA256 == flipped.GenesisSHA256,
+			reflect.DeepEqual(original.C4.CrossAcceptance.LedgerDigests, flipped.C4.CrossAcceptance.LedgerDigests),
 			original.PhysicalInputIDs, flipped.PhysicalInputIDs,
 			original.PhysicalJournalIDs, flipped.PhysicalJournalIDs,
 			original.PhysicalEventIDs, flipped.PhysicalEventIDs,
+			original.C4.CrossAcceptance.LedgerDigests, flipped.C4.CrossAcceptance.LedgerDigests,
 			original.FiveLedgerDigests, flipped.FiveLedgerDigests)
 	}
 }

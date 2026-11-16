@@ -7,6 +7,7 @@ import (
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
     "github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 )
 
 func registeredCompositeGenesis(t *testing.T,b *policy.Bundle)[]byte{
@@ -79,5 +80,33 @@ func TestGenesisCompositeRefusesForgedInnerStateEvenWithValidOuterDigest(t *test
     if err!=nil{t.Fatal(err)}
     if _,err:=ValidateCanonical(forged,b);err==nil{
         t.Fatal("Genesis accepted malicious composite digest while policy registered")
+    }
+}
+
+func TestGenesisCompositeRejectsCorruptedPhysicalComponentUnderRecomputedOuterDigest(t *testing.T){
+    installed:=registeredPhysicalBundle(t)
+    original:=registeredCompositeGenesis(t,installed)
+    g,err:=codec.StrictDecodeEnvelope(original)
+    if err!=nil{t.Fatal(err)}
+    fields:=append([]any(nil),g.Value.([]any)...)
+    outer:=append([]any(nil),fields[16].([]any)...)
+    innerEnv,err:=codec.StrictDecodeEnvelope(outer[2].([]byte))
+    if err!=nil{t.Fatal(err)}
+    payload:=append([]any(nil),innerEnv.Value.([]any)...)
+    units:=append([]any(nil),payload[2].([]any)...)
+    physical:=append([]any(nil),units[1].([]any)...)
+    physical[3]=bytes.Repeat([]byte{0xee},32)
+    units[1]=physical
+    payload[2]=units
+    raw,err:=codec.CanonicalBytes(innerEnv.DomainTag,innerEnv.SchemaID,innerEnv.SchemaVersion,payload)
+    if err!=nil{t.Fatal(err)}
+    outerHash:=identity.OpaqueContentHash(raw)
+    outer[2]=raw
+    outer[3]=outerHash[:]
+    fields[16]=outer
+    forged,err:=codec.CanonicalBytes(g.DomainTag,g.SchemaID,g.SchemaVersion,fields)
+    if err!=nil{t.Fatal(err)}
+    if _,err:=ValidateCanonical(forged,installed);err==nil{
+        t.Fatal("Genesis accepted corrupted A1 physical component behind freshly valid outer composite hash")
     }
 }

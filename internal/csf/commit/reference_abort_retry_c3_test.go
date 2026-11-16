@@ -193,3 +193,30 @@ func TestReferenceC3TamperedAbortOrRetryFailsReplay(t *testing.T){
         }
     })}
 }
+
+func TestReferenceC3MissingOrDisguisedRetryCannotEvadeReplay(t *testing.T){
+    for _,mode:=range []string{"delete","disguise"}{t.Run(mode,func(t *testing.T){
+        ctx:=context.Background()
+        file:=filepath.Join(t.TempDir(),"c3.db")
+        result,err:=RunReference(ctx,file,bundlePath,ReferenceOptions{IncludeAbortRetry:true})
+        if err!=nil{t.Fatal(err)}
+        id:=referenceC2Decode32(t,result.AbortRetry.RetryID)
+        db,err:=sql.Open("sqlite","file:"+file);if err!=nil{t.Fatal(err)}
+        if mode=="delete"{
+            _,err=db.ExecContext(ctx,"DELETE FROM decision_ledger WHERE id=?",id[:])
+        }else{
+            invalid,encodeErr:=codec.CanonicalPayload([]any{"not-an-attempt-retry"})
+            if encodeErr!=nil{db.Close();t.Fatal(encodeErr)}
+            _,err=db.ExecContext(ctx,"UPDATE decision_ledger SET canonical=? WHERE id=?",invalid,id[:])
+        }
+        if err!=nil{db.Close();t.Fatal(err)}
+        if err:=db.Close();err!=nil{t.Fatal(err)}
+        recovered,err:=sqlite.Open(ctx,file);if err!=nil{return}
+        defer recovered.Close()
+        b,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+        run:=referenceC2Decode32(t,result.RunID)
+        if _,err:=recovered.ReplayClock(ctx,run,b);err==nil{
+            t.Fatal("ReplayClock ignored missing or disguised authority for committed retry fence")
+        }
+    })}
+}

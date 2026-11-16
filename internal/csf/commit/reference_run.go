@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"database/sql"
+	"net/url"
 	"encoding/binary"
 	"encoding/hex"
 	"encoding/json"
@@ -37,6 +38,10 @@ type ReferenceOptions struct {
 	ReverseResponses bool
 	LeaveSourceOpen  bool  // negative control; must stop before the first fence
 	FailContestAt    uint8 // internal negative control: 1..7, fail atomic WORK before publication
+	IncludeCommunication bool // C1: continue the same 10B run with a false Claim and delayed delivery
+	FailCommunicationSendAt uint8 // C1 failpoint: no partial Claim/Transmission publication
+	FailCommunicationDeliveryAt uint8 // C1 failpoint: no partial due delivery
+	ForgeCommunicationActor bool // C1 negative control; deliberately unauthenticated slot author
 }
 
 type ReferenceCycle struct {
@@ -80,6 +85,7 @@ type ReferenceResult struct {
 	ContestCommitBytes []byte `json:"-"`
 	CycleFenceBytes [][]byte `json:"-"`
 	CycleCommitBytes [][]byte `json:"-"`
+	Communication *ReferenceCommunicationProof `json:"communication,omitempty"`
 }
 
 // buildReferenceGenesis converts the frozen, normative *fixture vector* into a
@@ -455,6 +461,11 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 		ContestFenceBytes: bytes.Clone(fence.Canonical), ContestCommitBytes: bytes.Clone(result.Canonical),
         CycleFenceBytes: [][]byte{bytes.Clone(fence.Canonical),bytes.Clone(advance.Fence.Canonical),bytes.Clone(triggerFence.Canonical)},
         CycleCommitBytes: [][]byte{bytes.Clone(result.Canonical),bytes.Clone(advance.Commit.Canonical),bytes.Clone(systemJournal.Canonical)}}
+	if options.IncludeCommunication {
+		if err := extendReferenceC1(ctx, store, ledger, bundle, g, coordinator, abs, options, &out); err != nil {
+			return ReferenceResult{}, err
+		}
+	}
 	return out, nil
 }
 
@@ -478,7 +489,7 @@ func readContestDecisions(ctx context.Context, dbPath string, journal []byte, ac
 	if !ok || len(ids) != 2 {
 		return nil, "", errors.New("contest missing exact two terminal decision IDs")
 	}
-	db, err := sql.Open("sqlite", "file:"+filepath.ToSlash(dbPath)+"?mode=ro")
+	db, err := openReferenceReadOnlyDB(dbPath)
 	if err != nil {
 		return nil, "", err
 	}
@@ -542,8 +553,18 @@ func readContestDecisions(ctx context.Context, dbPath string, journal []byte, ac
 	return decisions, winner, nil
 }
 
+// openReferenceReadOnlyDB preserves exact filename identity, even if the local
+// pathname contains '?', '#' or other URI characters. All C1/C2 audit queries
+// must be read-only; SQLite.CommitWork remains the sole causal writer.
+func openReferenceReadOnlyDB(path string) (*sql.DB, error) {
+    abs, err := filepath.Abs(path)
+    if err != nil { return nil, err }
+    u := (&url.URL{Scheme: "file", Path: filepath.ToSlash(abs), RawQuery: "mode=ro"}).String()
+    return sql.Open("sqlite", u)
+}
+
 func referenceEventBytes(ctx context.Context, dbPath string) ([]byte, error) {
-	db, err := sql.Open("sqlite", "file:"+filepath.ToSlash(dbPath)+"?mode=ro")
+	db, err := openReferenceReadOnlyDB(dbPath)
 	if err != nil {
 		return nil, err
 	}
@@ -588,7 +609,7 @@ func packRecord(dst []byte, record []byte) []byte {
 // is reconstructed from the authenticated CycleCommit and DecisionRecord, not
 // from a mutable flag on an append-only origin.
 func referenceTriggerTerminal(ctx context.Context, path string, run domain.ID, journalRaw []byte) (bool, error) {
-    db, err := sql.Open("sqlite", "file:"+filepath.ToSlash(path)+"?mode=ro")
+    db, err := openReferenceReadOnlyDB(path)
     if err != nil { return false, err }
     defer db.Close()
     var activationID, canonical []byte

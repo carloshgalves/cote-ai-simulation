@@ -1,0 +1,58 @@
+name: CSFRV1-10C1 causal claim and delayed communication
+on:
+  pull_request:
+    paths:
+      - "internal/csf/commit/reference_run*"
+      - "internal/csf/commit/reference_communication_c1*"
+      - "cmd/csf-reference-run/**"
+      - "docs/reference-run/csfrv1-10c1/**"
+      - ".github/workflows/csfrv1-10c1-communication.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  communication-c1:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Check patch whitespace
+        run: git diff --check
+      - name: RED/GREEN C1 integration and fault matrix
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceCommunicationC1'
+      - name: Existing B tracer and architecture regression
+        run: |
+          go test -count=1 ./internal/csf/commit -run '^TestReferenceRun'
+          go test -count=1 ./tests/architecture ./tools
+      - name: Execute two independent real C1 SQLite runs
+        run: |
+          d="$(mktemp -d)"
+          trap 'rm -rf "$d"' EXIT
+          go run ./cmd/csf-reference-run --db "$d/normal.db" --report "$d/normal.json" --communication
+          go run ./cmd/csf-reference-run --db "$d/reverse.db" --report "$d/reverse.json" --communication --reverse-sources --reverse-responses
+          python3 - "$d/normal.json" "$d/reverse.json" <<'PY'
+          import json, sys
+          a, b = (json.load(open(p, encoding="utf8")) for p in sys.argv[1:])
+          for x in (a, b):
+              assert x["status"] == "RUN_LOCAL_10C1"
+              assert x["final_revision"] == 6 and x["final_instant"] == 35
+              assert x["final_stock"] == 0 and x["replayed_commits"] == 6
+              assert len(x["cycles"]) == 6
+              p = x["communication"]
+              assert p["sent_at"] == 10 and p["delivered_at"] == 35
+              assert p["b_new_knowledge_inputs"] == 1 and p["replay_verified"]
+              for forbidden in ("resource.stolen", "engine_only", "private_claim_payload"):
+                  assert forbidden not in json.dumps(x), forbidden
+          assert a["run_id"] == b["run_id"]
+          assert a["communication"]["claim_id"] == b["communication"]["claim_id"]
+          assert a["communication"]["transmission_id"] == b["communication"]["transmission_id"]
+          assert a["event_stream_raw_sha256"] == b["event_stream_raw_sha256"]
+          print("C1_CAUSAL_RUN_PASS: 6 real commits; one addressed delayed Claim; replay; same bytes")
+          PY

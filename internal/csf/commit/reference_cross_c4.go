@@ -65,7 +65,7 @@ func RunReferenceC4(ctx context.Context,dbPath,ownerPath,bundlePath string,
         c2.OwnerReceiptID==c2.AOwnerReceiptID{
         return zero,errors.New("C4 cross-slice witness mismatch")
     }
-    bundle,err:=policy.Load(bundlePath)
+    bundle,err:=referenceInstalledBundle(bundlePath,options)
     if err!=nil{return zero,err}
     runID,err:=referenceC4DecodeID(result.RunID)
     if err!=nil{return zero,err}

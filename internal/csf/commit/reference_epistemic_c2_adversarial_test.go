@@ -173,4 +173,3 @@ func TestReferenceC2MissingCompletionBlocksReopen(t *testing.T){
         t.Fatal("replay accepted absent B receipt")
     }
 }
-

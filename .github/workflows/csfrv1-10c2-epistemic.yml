@@ -1,0 +1,56 @@
+name: CSFRV1-10C2 epistemic owner and POV integration
+on:
+  pull_request:
+    paths:
+      - "internal/csf/commit/reference_epistemic_c2*"
+      - "internal/csf/commit/reference_run.go"
+      - "cmd/csf-reference-run/**"
+      - "docs/reference-run/csfrv1-10c2/**"
+      - ".github/workflows/csfrv1-10c2-epistemic.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  c2-epistemic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Check whitespace
+        run: git diff --check
+      - name: Real C2 integrated owner and adversarial regression
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceC2'
+      - name: C1 and B regression + owner checkpoints
+        run: |
+          go test -count=1 ./internal/csf/commit -run '^(TestReferenceRun|TestReferenceCommunicationC1|TestCSFRV18R58B2)'
+          go test -count=1 ./internal/csf/ownercheckpoint/... ./internal/csf/contextboundary/... ./tests/architecture
+      - name: Run CLI on independent SQLite + private owner files
+        run: |
+          d="$(mktemp -d)"
+          trap 'rm -rf "$d"' EXIT
+          mkdir -m 700 "$d/a-owner" "$d/b-owner"
+          go run ./cmd/csf-reference-run --db "$d/a.db" --owner-db "$d/a-owner/owner.db" --report "$d/a.json" --epistemic-owner
+          go run ./cmd/csf-reference-run --db "$d/b.db" --owner-db "$d/b-owner/owner.db" --report "$d/b.json" --epistemic-owner --reverse-sources --reverse-responses
+          python3 - "$d/a.json" "$d/b.json" <<'PY'
+          import json,sys
+          a,b=(json.load(open(f,encoding="utf-8")) for f in sys.argv[1:])
+          for x in (a,b):
+              assert x["status"]=="RUN_LOCAL_10C2"
+              assert x["final_revision"]==6 and x["final_stock"]==0 and len(x["cycles"])==6
+              c=x["epistemic"]
+              assert c["b_received_at"]==35 and c["b_knowledge_inputs"]==1
+              assert c["restored_after_reopen"] and c["work_denied_before_ack"]
+              assert c["pov_isolated"] and c["barrier_verified"] and c["completion_idempotent"]
+              assert all(word not in json.dumps(c) for word in ("synthetic actor", "resource.stolen", "private_key"))
+          assert a["event_stream_raw_sha256"]==b["event_stream_raw_sha256"]
+          assert a["epistemic"]["snapshot_id"]==b["epistemic"]["snapshot_id"]
+          assert a["epistemic"]["owner_receipt_id"]==b["epistemic"]["owner_receipt_id"]
+          print("C2_SUCCESS: same six-cycle SQLite, private B owner, restored ACK, POV, byte-identical owner snapshot")
+          PY

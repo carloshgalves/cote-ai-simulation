@@ -2,7 +2,6 @@ package commit
 
 import (
     "context"
-    "crypto/ed25519"
     "database/sql"
     "encoding/hex"
     "errors"
@@ -122,12 +121,19 @@ func TestReferenceC2MissingObservationRouteHoldsBarrierAndDispatch(t *testing.T)
     if _,err:=store.VerifySnapshotV1(ctx,run,referenceC2Decode32(t,got.Epistemic.SnapshotID),bundle);err==nil{
         t.Fatal("snapshot verification accepted lost addressed observation")
     }
+    countDB,err:=sql.Open("sqlite","file:"+causal)
+    if err!=nil{t.Fatal(err)}
+    var before,after int
+    if err:=countDB.QueryRowContext(ctx,"SELECT COUNT(*) FROM input_ledger").Scan(&before);err!=nil{countDB.Close();t.Fatal(err)}
     ledger,err:=inputledger.Open(ctx,domain.ID(run),bundle,store)
     if err==nil{
         if _,err:=referenceC2NextDispatch(ctx,store,ledger,bundle,domain.ID(run),"b",12);err==nil{
-            t.Fatal("future B dispatch bypassed incomplete epistemic barrier")
+            countDB.Close();t.Fatal("future B dispatch bypassed incomplete epistemic barrier")
         }
     }
+    if err:=countDB.QueryRowContext(ctx,"SELECT COUNT(*) FROM input_ledger").Scan(&after);err!=nil{countDB.Close();t.Fatal(err)}
+    countDB.Close()
+    if after!=before{t.Fatalf("blocked C2 dispatch still appended %d InputLedger records",after-before)}
 }
 
 func TestReferenceC2MissingCompletionBlocksReopen(t *testing.T){
@@ -168,6 +174,3 @@ func TestReferenceC2MissingCompletionBlocksReopen(t *testing.T){
     }
 }
 
-// The owner source accepts only Ed25519 keys for the explicitly enrolled actor,
-// never the C1 message presenter or a caller-supplied observer's public claim.
-var _ ed25519.PrivateKey = ed25519.PrivateKey{}

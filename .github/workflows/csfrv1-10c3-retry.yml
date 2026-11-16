@@ -21,7 +21,7 @@ jobs:
           go-version: "1.27.2"
           cache: true
       - name: Patch whitespace
-        run: git diff --check HEAD^1 HEAD
+        run: git diff --check
       - name: C3 true INDETERMINATE and failure matrix
         run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceC3'
       - name: Normative abort/retry, B, C1 and C2 regression

@@ -37,6 +37,10 @@ type ReferenceOptions struct {
 	ReverseResponses bool
 	LeaveSourceOpen  bool  // negative control; must stop before the first fence
 	FailContestAt    uint8 // internal negative control: 1..7, fail atomic WORK before publication
+	IncludeCommunication bool // C1: continue the same 10B run with a false Claim and delayed delivery
+	FailCommunicationSendAt uint8 // C1 failpoint: no partial Claim/Transmission publication
+	FailCommunicationDeliveryAt uint8 // C1 failpoint: no partial due delivery
+	ForgeCommunicationActor bool // C1 negative control; deliberately unauthenticated slot author
 }
 
 type ReferenceCycle struct {
@@ -80,6 +84,7 @@ type ReferenceResult struct {
 	ContestCommitBytes []byte `json:"-"`
 	CycleFenceBytes [][]byte `json:"-"`
 	CycleCommitBytes [][]byte `json:"-"`
+	Communication *ReferenceCommunicationProof `json:"communication,omitempty"`
 }
 
 // buildReferenceGenesis converts the frozen, normative *fixture vector* into a
@@ -455,6 +460,11 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 		ContestFenceBytes: bytes.Clone(fence.Canonical), ContestCommitBytes: bytes.Clone(result.Canonical),
         CycleFenceBytes: [][]byte{bytes.Clone(fence.Canonical),bytes.Clone(advance.Fence.Canonical),bytes.Clone(triggerFence.Canonical)},
         CycleCommitBytes: [][]byte{bytes.Clone(result.Canonical),bytes.Clone(advance.Commit.Canonical),bytes.Clone(systemJournal.Canonical)}}
+	if options.IncludeCommunication {
+		if err := extendReferenceC1(ctx, store, ledger, bundle, g, coordinator, abs, options, &out); err != nil {
+			return ReferenceResult{}, err
+		}
+	}
 	return out, nil
 }
 

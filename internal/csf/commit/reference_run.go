@@ -42,6 +42,11 @@ type ReferenceOptions struct {
 	FailCommunicationSendAt uint8 // C1 failpoint: no partial Claim/Transmission publication
 	FailCommunicationDeliveryAt uint8 // C1 failpoint: no partial due delivery
 	ForgeCommunicationActor bool // C1 negative control; deliberately unauthenticated slot author
+	IncludeAbortRetry bool // C3: real validator INDETERMINATE, abort, operator retry, same fence
+	FailAbortAt uint8 // C3: injected abort tx failure 1..2
+	FailRetryAt uint8 // C3: injected retry tx failure 1..2
+	ForgeRetryOperator bool // C3: negative test for local operator signature
+
 }
 
 type ReferenceCycle struct {
@@ -87,6 +92,7 @@ type ReferenceResult struct {
 	CycleCommitBytes [][]byte `json:"-"`
 	Communication *ReferenceCommunicationProof `json:"communication,omitempty"`
 	Epistemic *ReferenceC2Proof `json:"epistemic,omitempty"`
+	AbortRetry *ReferenceAbortRetryProof `json:"abort_retry,omitempty"`
 }
 
 // buildReferenceGenesis converts the frozen, normative *fixture vector* into a
@@ -328,6 +334,15 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 	if !ok || len(units) != 2 {
 		return out, errors.New("reference contest must admit exactly two slots")
 	}
+	var c3 *ReferenceAbortRetryProof
+	if options.IncludeAbortRetry {
+		session, err := referenceC3AbortRetry(ctx, abs, bundle, g, store, ledger, coordinator,
+			policies, cycle, fence, options)
+		if err != nil { return out, err }
+		store,ledger,coordinator,cycle,fence,c3 = session.Store,session.Ledger,
+			session.Coordinator,session.Cycle,session.Fence,session.Proof
+		defer store.Close()
+	}
 	coordinator.failAfterStep = options.FailContestAt
 	result, err := coordinator.CommitTwoResourceContest(ctx, ledger, cycle, fence)
 	coordinator.failAfterStep = 0
@@ -465,6 +480,13 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 	if options.IncludeCommunication {
 		if err := extendReferenceC1(ctx, store, ledger, bundle, g, coordinator, abs, options, &out); err != nil {
 			return ReferenceResult{}, err
+		}
+	}
+	if c3 != nil {
+		out.AbortRetry=c3
+		out.Status="RUN_LOCAL_10C3"
+		if out.FinalRevision!=uint64(len(out.Cycles)) || out.FinalStock!=0 {
+			return ReferenceResult{},errors.New("C3 retry terminal/replay world trajectory invalid")
 		}
 	}
 	return out, nil

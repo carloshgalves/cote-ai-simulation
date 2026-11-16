@@ -2,6 +2,8 @@ package commit
 
 import (
     "bytes"
+    "crypto/ed25519"
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
     "context"
     "database/sql"
     "encoding/hex"
@@ -118,4 +120,76 @@ func TestReferenceC3ForgedAuthorityDenied(t *testing.T){
     if err:=db.QueryRow("SELECT COUNT(*) FROM committed_cycles").Scan(&n);err!=nil||n!=0{
         t.Fatal("spoofed retry published WORK",n,err)
     }
+}
+
+func TestReferenceC3SignedOperatorGrantPubliclyVerifiable(t *testing.T){
+    ctx:=context.Background()
+    file:=filepath.Join(t.TempDir(),"c3.db")
+    got,err:=RunReference(ctx,file,bundlePath,ReferenceOptions{IncludeAbortRetry:true})
+    if err!=nil{t.Fatal(err)}
+    p:=got.AbortRetry
+    public,err:=hex.DecodeString(p.OperatorPublicKey);if err!=nil{t.Fatal(err)}
+    signature,err:=hex.DecodeString(p.OperatorSignature);if err!=nil{t.Fatal(err)}
+    token,err:=hex.DecodeString(p.OperatorApprovalPayload);if err!=nil{t.Fatal(err)}
+    if len(public)!=ed25519.PublicKeySize||len(signature)!=ed25519.SignatureSize||
+        !ed25519.Verify(public,token,signature){
+        t.Fatal("C3 approval proof is not independently verifiable")
+    }
+    fp:=identity.OpaqueContentHash(public)
+    if hex.EncodeToString(fp[:])!=p.OperatorKeyFingerprint{t.Fatal("C3 registered operator fingerprint differs")}
+    signed,err:=codec.CanonicalPayload([]any{token,signature})
+    if err!=nil{t.Fatal(err)}
+    approved:=identity.OpaqueContentHash(signed)
+    if hex.EncodeToString(approved[:])!=p.OperatorApprovalDigest{
+        t.Fatal("C3 approval digest does not bind exactly the signed authorization")
+    }
+    tokenFields,err:=codec.StrictDecodePayload(token);if err!=nil{t.Fatal(err)}
+    fields:=tokenFields.([]any)
+    if len(fields)!=11||fields[0]!="cote.csf.reference.c3.operator-authorization.v1"||
+        fields[9]!="operator.retry"||fields[10]!=uint64(1){
+        t.Fatal("C3 operator signature lacks a scoped immutable retry authorization")
+    }
+    runID:=referenceC2Decode32(t,got.RunID)
+    if !bytes.Equal(fields[1].([]byte),runID[:]){
+        t.Fatal("operator approval granted to foreign run")
+    }
+    altered:=bytes.Clone(token);altered[len(altered)-1]^=0x02
+    if ed25519.Verify(public,altered,signature){t.Fatal("changed retry attempt kept operator authority")}
+    spoof:=bytes.Clone(signature);spoof[3]^=0x55
+    if ed25519.Verify(public,token,spoof){t.Fatal("forged operator signature remained valid")}
+    db,err:=sqlite.Open(ctx,file);if err!=nil{t.Fatal(err)}
+    defer db.Close()
+    rawAbort:=referenceC2Decode32(t,p.AbortID)
+    abortBytes,err:=db.GetFence(ctx,rawAbort);if err!=nil{t.Fatal(err)}
+    decoded,err:=codec.StrictDecodePayload(abortBytes);if err!=nil{t.Fatal(err)}
+    actual:=decoded.([]any)[14].([]byte)
+    if hex.EncodeToString(actual)!=p.AbortDigest{
+        t.Fatal("C3 report did not export the authenticated CycleAbortRecord digest")
+    }
+}
+
+func TestReferenceC3TamperedAbortOrRetryFailsReplay(t *testing.T){
+    for _,which:=range []string{"abort","retry"}{t.Run(which,func(t *testing.T){
+        ctx:=context.Background()
+        file:=filepath.Join(t.TempDir(),"c3.db")
+        result,err:=RunReference(ctx,file,bundlePath,ReferenceOptions{IncludeAbortRetry:true})
+        if err!=nil{t.Fatal(err)}
+        id:=result.AbortRetry.AbortID
+        if which=="retry"{id=result.AbortRetry.RetryID}
+        root,err:=hex.DecodeString(id);if err!=nil{t.Fatal(err)}
+        db,err:=sql.Open("sqlite","file:"+file);if err!=nil{t.Fatal(err)}
+        var raw []byte
+        if err:=db.QueryRowContext(ctx,"SELECT canonical FROM decision_ledger WHERE id=?",root).Scan(&raw);err!=nil{db.Close();t.Fatal(err)}
+        if len(raw)<40{db.Close();t.Fatal("wrong canonical journal size")}
+        corrupted:=bytes.Clone(raw);corrupted[len(corrupted)-3]^=0x20
+        if _,err:=db.ExecContext(ctx,"UPDATE decision_ledger SET canonical=? WHERE id=?",corrupted,root);err!=nil{db.Close();t.Fatal(err)}
+        if err:=db.Close();err!=nil{t.Fatal(err)}
+        reopened,err:=sqlite.Open(ctx,file);if err!=nil{return} // fail-closed at open
+        defer reopened.Close()
+        b,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+        r:=referenceC2Decode32(t,result.RunID)
+        if _,err:=reopened.ReplayClock(ctx,r,b);err==nil{
+            t.Fatal("replay accepted corrupted terminal abort/retry root")
+        }
+    })}
 }

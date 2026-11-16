@@ -1,0 +1,44 @@
+name: CSFRV1-10D1 composed stock and physical WorldState
+on:
+  pull_request:
+    paths:
+      - "internal/csf/reducer/**"
+      - "internal/csf/genesis/**"
+      - "internal/csf/commit/work_physical.go"
+      - "internal/csf/persistence/sqlite/**"
+      - "internal/csf/commit/work_contest.go"
+      - "docs/reference-run/csfrv1-10d1/**"
+      - ".github/workflows/csfrv1-10d1-composite.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  composite:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Whitespace
+        run: git diff --check
+      - name: Enforce gofmt on D1 new sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          files="$(gofmt -l internal/csf/reducer/composite.go internal/csf/reducer/composite_test.go internal/csf/genesis/composite_genesis_test.go internal/csf/reducer/physical.go)"
+          if [ -n "$files" ]; then
+            printf 'D1 Go sources not gofmt-clean:\n%s\n' "$files"
+            exit 1
+          fi
+      - name: RED GREEN composite tests
+        run: go test -count=1 -v ./internal/csf/reducer ./internal/csf/genesis -run '^(TestComposite|TestGenesisComposite)'
+      - name: Regression - B/C1/C2/C3/C4 and standalone physical/Genesis contracts
+        run: |
+          go test -count=1 ./internal/csf/reducer ./internal/csf/genesis ./internal/csf/policy
+          go test -count=1 ./internal/csf/commit -run '^(TestReference|TestPhysical)'
+          go test -count=1 ./tests/architecture
+      - name: Validate composite reducer with race detector
+        run: go test -race -count=1 ./internal/csf/reducer ./internal/csf/genesis -run '^(TestComposite|TestGenesisComposite)'

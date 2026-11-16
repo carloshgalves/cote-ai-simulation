@@ -52,6 +52,10 @@ func DecodeStock(value any)(Stock,error){
  if err!=nil||env.DomainTag!=StockDomainTag||env.SchemaID!=StockSchemaID||env.SchemaVersion!=1{
   return stock,ErrInvalidStock
  }
+ if payload, ok := env.Value.([]any); ok && len(payload) > 0 && payload[0] == CompositeVariant {
+  contained, _, err := DecodeComposite(value)
+  return contained, err
+ }
  if err:=ValidateStockPayload(env.Value);err!=nil{return stock,err}
  dg:=identity.OpaqueContentHash(raw)
  if !bytes.Equal(hash,dg[:]){return stock,ErrInvalidStock}
@@ -69,5 +73,12 @@ func Consume(before []any,amount uint64)([]any,domain.Digest,error){
  stock,err:=DecodeStock(before);if err!=nil{return nil,zero,err}
  if stock.Available<amount{return nil,zero,ErrInsufficientStock}
  stock.Available-=amount
+ if isCompositeWorldState(before) {
+  _, bodies, err := DecodeComposite(before)
+  if err != nil {
+   return nil, zero, err
+  }
+  return EncodeComposite(stock, bodies)
+ }
  return EncodeStock(stock)
 }

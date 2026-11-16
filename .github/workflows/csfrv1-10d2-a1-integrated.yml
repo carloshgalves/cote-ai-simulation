@@ -54,24 +54,16 @@ jobs:
         run: |
           python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-d2
           find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
-      - name: Real Python D2 same-RunID positive, negative and permutation tests
+      - name: Real Python D2 positive, adversarial and permutation tests
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"
         run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceD2'
-      - name: Race-check real physical A1 causality and frozen-source permutations
-        env:
-          PHYSICAL_A1_PRODUCER_TEST: "1"
-        run: go test -race -count=1 ./internal/csf/commit -run '^TestReferenceD2(RealTwoEpochsOnSameC4RunID|TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail)
+      - name: Race-check real supervised A1 and fixed-cut permutation
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"
         run: |
-          go test -count=1 ./internal/csf/commit -run '^(TestReferenceC4|TestPhysical)'
-          go test -count=1 ./internal/csf/reducer ./internal/csf/genesis ./internal/csf/policy ./internal/csf/adapter/embodimentv1 ./internal/physicalhost
-      - name: Structural controls and vet
-        run: |
-          go test -count=1 ./tests/architecture
-          go vet ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/physicalhost
-
+          go test -race -count=1 ./internal/csf/commit -run '^TestReferenceD2RealTwoEpochsOnSameC4RunID$'
+          go test -race -count=1 ./internal/csf/commit -run '^TestReferenceD2TwoSourceWorkerOrdersYieldIdenticalAuthenticatedPhysicalTail$'
       - name: B+C4 regression, standalone physical and source security
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"

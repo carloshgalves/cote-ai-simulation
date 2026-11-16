@@ -4,6 +4,10 @@ import (
     "bytes"
     "context"
     "database/sql"
+    "encoding/hex"
+    "runtime"
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
+    "github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
     "path/filepath"
     "testing"
 
@@ -22,7 +26,8 @@ func TestReferenceCommunicationC1SameRunAndDueDelivery(t *testing.T) {
     }
     if got.Communication == nil || got.Communication.ClaimID == "" || got.Communication.TransmissionID == "" ||
         got.Communication.SentAt != 10 || got.Communication.DeliveredAt != 35 ||
-        got.Communication.BKnowledgeInputs != 1 || !got.Communication.ReplayVerified {
+        got.Communication.BKnowledgeInputs != 1 || got.Communication.KnowledgeInputID == "" ||
+        got.Communication.DeliveryTaskID == "" || !got.Communication.ReplayVerified {
         t.Fatalf("missing authoritative claim and addressed delivery proof: %+v", got.Communication)
     }
     db, err := sql.Open("sqlite", "file:"+dbPath)
@@ -120,5 +125,82 @@ func TestReferenceCommunicationC1ForgedAuthorRejected(t *testing.T){
     var count int
     if e:=db.QueryRow("SELECT COUNT(*) FROM communication_claims").Scan(&count);e!=nil||count!=0{
         t.Fatalf("unauthorized actor published a claim: %d %v",count,e)
+    }
+}
+
+func TestReferenceCommunicationC1EncodedReadOnlyURIPath(t *testing.T){
+    if runtime.GOOS=="windows"{t.Skip("Windows forbids '?' in file names")}
+    path:=filepath.Join(t.TempDir(),"causal?mode=memory#forged.db")
+    got,err:=RunReference(context.Background(),path,bundlePath,ReferenceOptions{IncludeCommunication:true})
+    if err!=nil{t.Fatalf("read-only reference selectors confused URI metacharacters: %v",err)}
+    if got.FinalRevision!=6||got.Communication==nil||!got.Communication.ReplayVerified{
+        t.Fatalf("C1 did not use exact reserved SQLite path: %+v",got)
+    }
+}
+
+func TestReferenceCommunicationC1TamperedDurableEvidenceFailsClosed(t *testing.T){
+    cases:=[]struct{table string;byProof bool}{
+        {"communication_claims",false},
+        {"communication_transmissions",false},
+        {"causal_outbox",true},
+        {"evidence_ledger",true},
+    }
+    for _,tc:=range cases{t.Run(tc.table,func(t *testing.T){
+        ctx:=context.Background()
+        path:=filepath.Join(t.TempDir(),"tamper.db")
+        result,err:=RunReference(ctx,path,bundlePath,ReferenceOptions{IncludeCommunication:true})
+        if err!=nil{t.Fatal(err)}
+        db,err:=sql.Open("sqlite","file:"+path)
+        if err!=nil{t.Fatal(err)}
+        var id,raw []byte
+        if tc.byProof{
+            name:=result.Communication.DeliveryTaskID
+            if tc.table=="evidence_ledger"{name=result.Communication.KnowledgeInputID}
+            id,err=hex.DecodeString(name)
+            if err!=nil{db.Close();t.Fatal(err)}
+            if err:=db.QueryRowContext(ctx,"SELECT canonical FROM "+tc.table+" WHERE id=?",id).Scan(&raw);err!=nil{db.Close();t.Fatal(err)}
+        }else{
+            if err:=db.QueryRowContext(ctx,"SELECT id,canonical FROM "+tc.table+" LIMIT 1").Scan(&id,&raw);err!=nil{db.Close();t.Fatal(err)}
+        }
+        if len(raw)<8{db.Close();t.Fatal("canonical communication root unexpectedly short")}
+        damaged:=bytes.Clone(raw);damaged[len(damaged)-2]^=0x7f
+        if _,err:=db.ExecContext(ctx,"UPDATE "+tc.table+" SET canonical=? WHERE id=?",damaged,id);err!=nil{db.Close();t.Fatal(err)}
+        if err:=db.Close();err!=nil{t.Fatal(err)}
+        reopened,err:=sqlite.Open(ctx,path)
+        if err!=nil{return} // fail closed during adapter verification
+        defer reopened.Close()
+        bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+        run,err:=hex.DecodeString(result.RunID);if err!=nil{t.Fatal(err)}
+        var runID [32]byte;copy(runID[:],run)
+        if _,err:=reopened.ReplayClock(ctx,runID,bundle);err==nil{
+            t.Fatal("causal replay trusted a tampered integrated C1 communication root")
+        }
+    })}
+}
+
+func TestReferenceCommunicationC1ForeignRecipientRouteFailsClosed(t *testing.T){
+    ctx:=context.Background()
+    path:=filepath.Join(t.TempDir(),"reroute.db")
+    result,err:=RunReference(ctx,path,bundlePath,ReferenceOptions{IncludeCommunication:true})
+    if err!=nil{t.Fatal(err)}
+    task,err:=hex.DecodeString(result.Communication.DeliveryTaskID)
+    if err!=nil{t.Fatal(err)}
+    db,err:=sql.Open("sqlite","file:"+path)
+    if err!=nil{t.Fatal(err)}
+    changes,err:=db.ExecContext(ctx,"UPDATE evidence_routes SET holder_id='a' WHERE task_id=? AND kind=1",task)
+    if err!=nil{db.Close();t.Fatal(err)}
+    changed,err:=changes.RowsAffected();if err!=nil||changed!=1{db.Close();t.Fatal("missing B input route",changed,err)}
+    if err:=db.Close();err!=nil{t.Fatal(err)}
+    store,err:=sqlite.Open(ctx,path)
+    if err!=nil{return}
+    defer store.Close()
+    b,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
+    rawRun,err:=hex.DecodeString(result.RunID);if err!=nil{t.Fatal(err)}
+    var run [32]byte;copy(run[:],rawRun)
+    if err:=store.CheckPerceptionBarrier(ctx,run,result.FinalRevision);err==nil{
+        t.Fatal("barrier accepted forged actor A access to B-only delivered Claim")
+    }
+    if _,err:=store.ReplayClock(ctx,run,b);err==nil{
+        t.Fatal("replay accepted swapped holder for B-delivered claim")
     }
 }

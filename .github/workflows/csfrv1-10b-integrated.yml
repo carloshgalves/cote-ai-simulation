@@ -29,6 +29,10 @@ jobs:
         run: git diff --check HEAD^1 HEAD
       - name: Compile and run real SQLite causal integration tests
         run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceRun'
+      - name: Validate architecture boundary and standalone legacy Go tool
+        run: |
+          go test -count=1 ./tests/architecture ./tools
+          go run ./tools/csfrv1_10a_sqlite_probe.go
       - name: Execute command twice with inverted source and worker orders
         run: |
           d="$(mktemp -d)"

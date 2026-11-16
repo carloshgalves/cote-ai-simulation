@@ -378,6 +378,9 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  if err:=verifyPendingOutboxExact(ctx,s.db,runID);err!=nil{
   return report,fmt.Errorf("replay pending outbox completeness: %w",err)
  }
+ if err:=s.verifyHistoricalAbortRetry(ctx);err!=nil{
+  return report,fmt.Errorf("replay historical abort/retry: %w",err)
+ }
  if err:=s.VerifyCycleControl(ctx,runID);err!=nil{
   return report,fmt.Errorf("replay/resume CycleControlState: %w",err)
  }

@@ -119,8 +119,12 @@ func RunReferenceC4(ctx context.Context,dbPath,ownerPath,bundlePath string,
     if err:=db.QueryRowContext(ctx,
         "SELECT lifecycle FROM scheduled_occurrences WHERE id=? AND run_id=?",
         sourceID,runID[:]).Scan(&scheduledLifecycle);err!=nil{return zero,err}
-    if scheduledLifecycle==0{
-        return zero,errors.New("C4 delivered communication occurrence remains pending")
+    // scheduled_occurrences.lifecycle is immutable BIRTH state, not a
+    // mutable consumption flag. The C1 due commit and terminal transmission
+    // settle it; ReplayClock plus snapshotPending independently exclude
+    // consumed occurrences from the live pending cohort.
+    if scheduledLifecycle!=0{
+        return zero,errors.New("C4 scheduled occurrence birth index was altered")
     }
     var evidenceLinks int
     if err:=db.QueryRowContext(ctx,

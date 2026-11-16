@@ -62,6 +62,12 @@ func referenceC2NextDispatch(ctx context.Context,store *sqlite.Store,ledger *inp
     if uint64(state.Revision)!=6||state.LastOrdinal!=0{
         return domain.ID{},errors.New("C2 future actor dispatch requires exact C1 completed clock")
     }
+    // Guard BEFORE declaring even a round, not only inside RegisterDispatch.
+    // An absent Observation, missing completion or fake route must not append
+    // new InputLedger records while the epistemic barrier is closed.
+    if err:=store.CheckPerceptionBarrier(ctx,[32]byte(run),uint64(state.Revision));err!=nil{
+        return domain.ID{},fmt.Errorf("C2 cannot open next round before complete perception: %w",err)
+    }
     ordinal:=domain.CycleOrdinal(state.LastOrdinal+1)
     eligibility:=domain.EligibilityCoordinate{NotBeforeInstant:state.Instant,NotBeforeCycleOrdinal:ordinal}
     origin:=[]any{uint64(2),[]any{g.ID[:],g.Digest[:]}}

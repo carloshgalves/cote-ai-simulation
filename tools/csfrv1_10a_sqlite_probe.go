@@ -1,5 +1,7 @@
-//go:build !js
+//go:build ignore
 
+// Standalone Go program invoked with an explicit file path. Excluded from
+// package-level go test ./... to avoid colliding with another tools/main.
 // csfrv1_10a_sqlite_probe reports the Go-linked SQLite engine, not Python/system SQLite.
 // Uses an isolated in-memory connection; no causal ledgers are opened or changed.
 package main

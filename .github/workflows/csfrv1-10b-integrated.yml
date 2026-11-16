@@ -1,0 +1,56 @@
+name: CSFRV1-10B integrated local causal run
+on:
+  pull_request:
+    paths:
+      - "internal/csf/commit/reference_run*"
+      - "cmd/csf-reference-run/**"
+      - "docs/reference-run/csfrv1-10b/**"
+      - ".github/workflows/csfrv1-10b-integrated.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  reference-run:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - name: Check patch whitespace
+        if: github.event_name == 'pull_request'
+        run: git diff --check HEAD^1 HEAD
+      - name: Compile and run real SQLite causal integration tests
+        run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceRun'
+      - name: Validate architecture boundary and standalone legacy Go tool
+        run: |
+          go test -count=1 ./tests/architecture ./tools
+          go run ./tools/csfrv1_10a_sqlite_probe.go
+      - name: Execute command twice with inverted source and worker orders
+        run: |
+          d="$(mktemp -d)"
+          trap 'rm -rf "$d"' EXIT
+          go run ./cmd/csf-reference-run --db "$d/a.db" --report "$d/a.json"
+          go run ./cmd/csf-reference-run --db "$d/b.db" --report "$d/b.json" --reverse-sources --reverse-responses
+          python3 - "$d/a.json" "$d/b.json" <<'PY'
+          import json,sys
+          a,b=(json.load(open(p,encoding="utf8")) for p in sys.argv[1:])
+          for x in (a,b):
+              assert x["status"] == "RUN_LOCAL_10B"
+              assert x["final_revision"] == 3
+              assert x["final_instant"] == 10
+              assert x["final_stock"] == 0
+              assert x["trigger_activations"] == 1
+              assert x["replayed_commits"] == 3
+          assert a["contest_winner"] == b["contest_winner"]
+          assert a["final_world_hash"] == b["final_world_hash"]
+          assert a["event_stream_raw_sha256"] == b["event_stream_raw_sha256"]
+          print("LOCAL_REFERENCE_RUN_PASS — real SQLite; 3 commits; 1 trigger; no LLM")
+          PY

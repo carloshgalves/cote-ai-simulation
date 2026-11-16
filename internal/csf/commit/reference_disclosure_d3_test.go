@@ -77,6 +77,9 @@ func TestReferenceD3RealPythonPrivateEventAndLiveObservatory(t *testing.T) {
 	if len(obj) != 3 || obj["status"] != "RUN_LOCAL_10D3" {
 		t.Fatalf("D3 report lacks strict public allowlist: %s", raw)
 	}
+	if strings.Contains(string(raw), "actor_a_addressed") || strings.Contains(string(raw), "actor_b_addressed") {
+		t.Fatalf("public certificate exposed recipient-specific evidence counts: %s",raw)
+	}
 	altered := got
 	altered.Matrix.PublicPublications++
 	if _, err := altered.PublicReport(); err == nil {
@@ -213,8 +216,10 @@ func TestReferenceD3AdversarialEventTaskAndHolderMutationsFailClosed(t *testing.
 	if _, err := database.ExecContext(ctx, "UPDATE event_store SET canonical=? WHERE id=?", eventRaw, physical[:]); err != nil {
 		t.Fatal(err)
 	}
-	if next, err := AuditReferenceD3(ctx, db, host.Bundle, got.d2); err != nil || !reflect.DeepEqual(original.Disclosure, next.Matrix) {
-		t.Fatalf("D3 could not recover exact original clean audit: %v", err)
+	if next, err := AuditReferenceD3(ctx, db, host.Bundle, got.d2); err != nil {
+		t.Fatalf("D3 could not recover original clean audit: %v", err)
+	} else if published, err := next.PublicReport(); err != nil || !reflect.DeepEqual(original.Disclosure, published.Disclosure) {
+		t.Fatalf("D3 recovered disclosure differs from original public certificate: %v", err)
 	}
 }
 

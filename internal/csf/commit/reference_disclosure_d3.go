@@ -230,9 +230,15 @@ func AuditReferenceD3(ctx context.Context, path string, bundle *policy.Bundle,
 			return zero, err
 		}
 		fields, ok := value.([]any)
-		if !ok || len(fields) != 10 {
+		if !ok {
 			taskRows.Close()
-			return zero, errors.New("D3 outbox task malformed")
+			return zero, errors.New("D3 outbox record is not canonical field array")
+		}
+		// The causal_outbox also stores other registered records, e.g.
+		// non-perception outputs. Task V1 is a 10-field envelope; leave
+		// other record families to the normative replay verifier below.
+		if len(fields) != 10 {
+			continue
 		}
 		id, ok := fields[3].([]byte)
 		if !ok || len(id) != 32 {

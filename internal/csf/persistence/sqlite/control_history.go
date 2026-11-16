@@ -167,6 +167,31 @@ func (s *Store) verifyHistoricalAbortRetry(ctx context.Context)error{
             }
         }
     }
+    // A malformed or deleted historical AttemptRetryRecord may no longer be
+    // recognizable by its arity. Its successor AdmissionFence still names
+    // attempt > 0, which must have an authenticated predecessor retry. This
+    // reverse link prevents an attacker from evading the audit by changing
+    // the record shape rather than only its digest.
+    for _,fence:=range fences{
+        attempt:=fence.fields[2].(uint64)
+        if attempt==0{
+            if !sameCanonical(fence.fields[3],[]any{uint64(0)}){
+                return errors.New("first historical attempt fabricated retry authority")
+            }
+            continue
+        }
+        run,_:=historicalID(fence.fields[0]);cycle,_:=historicalID(fence.fields[1])
+        retryID,err:=registeredDigest("cote.csf.id.attempt-retry","cote.csf.schema.attempt-retry-id-preimage",
+            []any{run[:],cycle[:],attempt-1,attempt})
+        if err!=nil{return err}
+        retry,ok:=retries[retryID]
+        if !ok||retry.row>=fence.row{
+            return errors.New("historical retried fence lacks preceding authoritative AttemptRetryRecord")
+        }
+        if !sameCanonical(fence.fields[3],[]any{uint64(1),[]any{uint64(14),retry.id[:],retry.digest[:]}}){
+            return errors.New("historical retried fence references modified retry bytes")
+        }
+    }
     // A successful retry cannot exist without an authoritative abort, nor
     // can a historical abort be silently altered after control reached IDLE.
     // Return only after the entire journal has been revalidated.

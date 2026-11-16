@@ -93,6 +93,7 @@ type ReferenceResult struct {
 	Communication *ReferenceCommunicationProof `json:"communication,omitempty"`
 	Epistemic *ReferenceC2Proof `json:"epistemic,omitempty"`
 	AbortRetry *ReferenceAbortRetryProof `json:"abort_retry,omitempty"`
+	CrossAcceptance *ReferenceC4Proof `json:"cross_acceptance,omitempty"`
 }
 
 // buildReferenceGenesis converts the frozen, normative *fixture vector* into a

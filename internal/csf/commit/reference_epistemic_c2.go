@@ -242,10 +242,10 @@ func RunReferenceC2(ctx context.Context,dbPath,ownerPath,bundlePath string,
     if err!=nil{return zero,err}
     receiptB,err:=gateB.Stage(ctx,scope,cp)
     if err!=nil{return zero,fmt.Errorf("C2 B private durable owner stage: %w",err)}
-    snapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,[]sqlite.SnapshotCheckpoint{cpA,cp})
+    publishedSnapshot,err:=store.CreateSnapshotV1(ctx,[32]byte(run),bundle,[]sqlite.SnapshotCheckpoint{cpA,cp})
     if err!=nil{return zero,fmt.Errorf("C2 joint A/B sealed causal snapshot: %w",err)}
-    ref:=localdemo.Reference{Snapshot:[32]byte(snapshot.ID),Receipt:receiptB}
-    refA:=localdemo.Reference{Snapshot:[32]byte(snapshot.ID),Receipt:receiptA}
+    ref:=localdemo.Reference{Snapshot:[32]byte(publishedSnapshot.ID),Receipt:receiptB}
+    refA:=localdemo.Reference{Snapshot:[32]byte(publishedSnapshot.ID),Receipt:receiptA}
     if ref.Snapshot==([32]byte{})||ref.Receipt==([32]byte{})||refA.Receipt==([32]byte{})||
         ref.Receipt==refA.Receipt{
         return zero,errors.New("C2 two-owner snapshot/receipts missing or not independent")
@@ -260,6 +260,7 @@ func RunReferenceC2(ctx context.Context,dbPath,ownerPath,bundlePath string,
     // Prove independent connections/session, not just reusing the same open
     // Gate permit in the process that published the checkpoint.
     if err:=owner.Close();err!=nil{return zero,err}
+    if err:=ownerA.Close();err!=nil{return zero,err}
     if err:=store.Close();err!=nil{return zero,err}
     restoredCSF,err:=sqlite.Open(ctx,absDB)
     if err!=nil{return zero,err}
@@ -267,6 +268,25 @@ func RunReferenceC2(ctx context.Context,dbPath,ownerPath,bundlePath string,
     restoredOwner,err:=localowner.Open(ctx,absOwner,ownerSigner)
     if err!=nil{return zero,err}
     defer restoredOwner.Close()
+    restoredOwnerA,err:=localowner.Open(ctx,absAOwner,ownerASigner)
+    if err!=nil{return zero,err}
+    defer restoredOwnerA.Close()
+    aWorkCalls:=0
+    freshA,err:=localdemo.New(restoredOwnerA,restoredCSF,bundle,scopeA,func(ctx context.Context)error{
+        view,err:=referenceC2AddressedView(ctx,restoredCSF,aDispatch,[2]string{"school","a"})
+        if err!=nil{return err}
+        for _,entry:=range view.Inbox{
+            if entry.Input.Identity==messageID{
+                return errors.New("C2 A owner accessed B-only communication input")
+            }
+        }
+        aWorkCalls++
+        return nil
+    })
+    if err!=nil{return zero,err}
+    if err:=freshA.Run(ctx,refA);!errors.Is(err,ownercheckpoint.ErrNotAcknowledged){
+        return zero,errors.New("C2 A owner got WORK without ACK")
+    }
     workCalls:=0
     fresh,err:=localdemo.New(restoredOwner,restoredCSF,bundle,scope,func(ctx context.Context)error{
         proof,err:=referenceC2AddressedView(ctx,restoredCSF,bDispatch,[2]string{"school","b"})
@@ -303,6 +323,12 @@ func RunReferenceC2(ctx context.Context,dbPath,ownerPath,bundlePath string,
     })
     if err!=nil{return zero,err}
     if err:=alien.Restore(ctx,ref);err==nil{return zero,errors.New("actor A restored B checkpoint")}
+    if err:=freshA.Restore(ctx,ref);err==nil{
+        return zero,errors.New("A owner accepted B-signed checkpoint receipt")
+    }
+    if err:=fresh.Restore(ctx,refA);err==nil{
+        return zero,errors.New("B owner accepted A-signed checkpoint receipt")
+    }
     wrongRun:=scope
     wrongRun.Run[0]^=0x20
     foreign,err:=localdemo.New(restoredOwner,restoredCSF,bundle,wrongRun,func(context.Context)error{
@@ -315,6 +341,12 @@ func RunReferenceC2(ctx context.Context,dbPath,ownerPath,bundlePath string,
     }
     if err:=fresh.Run(ctx,ref);err!=nil||workCalls!=1{
         return zero,fmt.Errorf("C2 restored recipient did not execute authorized callback once: %w",err)
+    }
+    if err:=freshA.Restore(ctx,refA);err!=nil{
+        return zero,fmt.Errorf("C2 A private restore/ACK: %w",err)
+    }
+    if err:=freshA.Run(ctx,refA);err!=nil||aWorkCalls!=1{
+        return zero,fmt.Errorf("C2 isolated A owner did not execute after its own ACK: %w",err)
     }
     taskRaw,err:=hex.DecodeString(result.Communication.DeliveryTaskID)
     if err!=nil||len(taskRaw)!=32{return zero,errors.New("C2 delivery task malformed")}
@@ -341,6 +373,9 @@ func RunReferenceC2(ctx context.Context,dbPath,ownerPath,bundlePath string,
         BarrierVerified:true,POVIsolated:true,
         CompletionIdempotent:true,RestoredAfterReopen:true,
         WorkDeniedBeforeACK:true,
+        AOwnerReceiptID:hex.EncodeToString(refA.Receipt[:]),
+        AOwnerCheckpointHash:hex.EncodeToString(sealA[:]),
+        SeparateOwnerKeys:true,
     }
     return result,nil
 }

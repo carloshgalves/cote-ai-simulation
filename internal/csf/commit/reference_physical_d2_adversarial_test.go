@@ -242,31 +242,43 @@ func TestReferenceD2WrongEpochCannotReuseRealSignedA1Cut(t *testing.T) {
 func TestReferenceD2RejectsAuthenticSignedCutFromForeignRunID(t *testing.T) {
 	host, plans := referenceD2TestHost(t)
 	g, err := buildReferenceGenesis(host.Bundle)
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	env, err := codec.StrictDecodeEnvelope(g.CanonicalBytes)
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	fields := append([]any(nil), env.Value.([]any)...)
 	foreignRun := append([]byte(nil), fields[0].([]byte)...)
 	foreignRun[0] ^= 0x4b
 	fields[0] = foreignRun
 	encoded, err := codec.CanonicalBytes(env.DomainTag, env.SchemaID, env.SchemaVersion, fields)
-	if err != nil { t.Fatal(err) }
+	if err != nil {
+		t.Fatal(err)
+	}
 	foreignGenesis, err := genesis.ValidateCanonical(encoded, host.Bundle)
-	if err != nil { t.Fatalf("could not derive genuine foreign registered Genesis: %v", err) }
-	if foreignGenesis.RunID == g.RunID { t.Fatal("foreign RunID was not actually distinct") }
+	if err != nil {
+		t.Fatalf("could not derive genuine foreign registered Genesis: %v", err)
+	}
+	if foreignGenesis.RunID == g.RunID {
+		t.Fatal("foreign RunID was not actually distinct")
+	}
 	producer := host
 	producer.GenesisCanonical = foreignGenesis.CanonicalBytes
 	producer.Epoch = 1
 	producer.Plan = plans[0]
 	alienCut, err := physicalhost.RunSupervisedPhysical(context.Background(), producer)
-	if err != nil { t.Fatalf("foreign-run real A1 producer failed unexpectedly: %v", err) }
+	if err != nil {
+		t.Fatalf("foreign-run real A1 producer failed unexpectedly: %v", err)
+	}
 	if _, _, _, err := alienCut.CanonicalProof(); err != nil {
 		t.Fatal("foreign A1 cut did not contain a real signed proof", err)
 	}
 	frozen := [2]embodimentv1.ApprovedCut{alienCut, alienCut}
 	db, owner := referenceD2AdversarialPaths(t)
 	if _, err := RunReferenceD2(context.Background(), db, owner, bundlePath,
-		ReferenceD2Config{Host:host, EpochPlans:plans, frozenSupervisedCuts:&frozen},
+		ReferenceD2Config{Host: host, EpochPlans: plans, frozenSupervisedCuts: &frozen},
 		ReferenceOptions{}); err == nil {
 		t.Fatal("authentically signed A1 physical cut from another RunID was admitted")
 	}

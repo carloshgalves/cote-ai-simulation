@@ -18,7 +18,6 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 	"github.com/carloshgalves/cote-ai-simulation/internal/physicalhost"
 )
@@ -226,7 +225,7 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 	if err != nil || g.RunID != run {
 		return zero, errors.New("D2 Genesis was not authenticated after C4")
 	}
-	if _, err := reducer.DecodeComposite(g.Payload[16]); err != nil {
+	if _, _, err := reducer.DecodeComposite(g.Payload[16]); err != nil {
 		return zero, errors.New("D2 Genesis lacks the physical+inventory compound world")
 	}
 	snapshotID, err := referenceC4DecodeID(c4.Epistemic.SnapshotID)

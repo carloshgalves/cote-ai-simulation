@@ -195,11 +195,31 @@ func TestReferenceC4CrossFaultsNeverCreateOwnerOrPartialTruth(t *testing.T){
         if _,err:=os.Stat(owner+".actor-a");!os.IsNotExist(err){
             t.Fatal("C4 failure still published A owner checkpoint",err)
         }
-        s,err:=sqlite.Open(context.Background(),db)
+        audit,err:=sql.Open("sqlite","file:"+db)
         if err!=nil{t.Fatal(err)}
-        defer s.Close()
-        run:=referenceC2Decode32(t, "f40baf490888aebff1b986737de1e94a42cf94eb70aaf8342c5656bf3cda98d0")
-        _=run // replay of unfinished in-flight faults has separate normative coverage
+        defer audit.Close()
+        wantCommits:=0
+        wantSent:=0
+        switch tc.name {
+        case "unauthorized-sender":wantCommits=3
+        case "delivery-rollback":wantCommits=5;wantSent=1
+        }
+        for table,want:=range map[string]int{
+            "committed_cycles":wantCommits,
+            "world_revisions":wantCommits+1,
+            "communication_claims":wantSent,
+            "communication_transmissions":wantSent,
+        }{
+            var count int
+            if err:=audit.QueryRow("SELECT COUNT(*) FROM "+table).Scan(&count);err!=nil||count!=want{
+                t.Fatalf("C4 %s failure leaked partial %s: count=%d expected=%d err=%v",
+                    tc.name,table,count,want,err)
+            }
+        }
+        var delivered int
+        if err:=audit.QueryRow("SELECT COUNT(*) FROM communication_transmissions WHERE status=1").Scan(&delivered);err!=nil||delivered!=0{
+            t.Fatalf("C4 %s failure published due delivery %d: %v",tc.name,delivered,err)
+        }
     })}
 }
 

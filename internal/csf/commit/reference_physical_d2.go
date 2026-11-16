@@ -42,6 +42,8 @@ type ReferenceD2Proof struct {
 	FinalRevision                      uint64
 	FinalInstant                       int64
 	CommittedPhysicalEpochs            int
+	ScriptedNoProposalJournalID        string
+	ScriptedNoProposalVerified         bool
 	PhysicalInputIDs                   [2]string
 	PhysicalJournalIDs                 [2]string
 	PhysicalEventIDs                   [2]string
@@ -50,7 +52,7 @@ type ReferenceD2Proof struct {
 	FinalWorldHash                     string             `json:"-"`
 	PrivilegedBodyHours                map[string]float64 `json:"-"`
 	PrivilegedFinalStock               uint64             `json:"-"`
-	SnapshotVerifiedWithTwoTailCommits bool
+	SnapshotVerifiedWithThreeTailCommits bool
 	DigestChainVerified                bool
 	ReplayVerified                     bool
 	A1SignedByGenesisKey               bool
@@ -77,6 +79,7 @@ type ReferenceD2PublicPhysical struct {
 	FinalRevision   uint64    `json:"final_revision"`
 	FinalInstant    int64     `json:"final_instant"`
 	SourceFinalized bool      `json:"source_finalized"`
+	ScriptedNoProposalJournalID string `json:"scripted_no_proposal_journal_id"`
 }
 type ReferenceD2PublicIntegrity struct {
 	LedgerDigests               map[string]string `json:"ledger_digests"`
@@ -91,11 +94,12 @@ type ReferenceD2PublicIntegrity struct {
 func (p ReferenceD2Proof) PublicReport() (ReferenceD2PublicReport, error) {
 	var zero ReferenceD2PublicReport
 	if p.Status != "RUN_LOCAL_10D2" || p.C4 == nil || p.RunID != p.C4.RunID ||
-		p.FinalRevision != 8 || p.FinalInstant != 35 || p.CommittedPhysicalEpochs != 2 ||
-		!p.SnapshotVerifiedWithTwoTailCommits || !p.DigestChainVerified ||
+		p.FinalRevision != 9 || p.FinalInstant != 35 || p.CommittedPhysicalEpochs != 2 ||
+		!p.SnapshotVerifiedWithThreeTailCommits || !p.DigestChainVerified ||
 		!p.ReplayVerified || !p.A1SignedByGenesisKey || !p.SameCausalRun ||
 		!p.ResourceBranchUnchanged || !p.BodyContinuityVerified ||
-		!p.FinalSourceClosureVerified || len(p.FiveLedgerDigests) != 5 {
+		!p.FinalSourceClosureVerified || !p.ScriptedNoProposalVerified ||
+		len(p.ScriptedNoProposalJournalID) != 64 || len(p.FiveLedgerDigests) != 5 {
 		return zero, errors.New("D2 has incomplete or unverified causal/public proof")
 	}
 	c4, err := p.C4.C4PublicReport()
@@ -126,6 +130,7 @@ func (p ReferenceD2Proof) PublicReport() (ReferenceD2PublicReport, error) {
 			JournalIDs: p.PhysicalJournalIDs, EventIDs: p.PhysicalEventIDs,
 			FinalRevision: p.FinalRevision, FinalInstant: p.FinalInstant,
 			SourceFinalized: p.FinalSourceClosureVerified,
+			ScriptedNoProposalJournalID: p.ScriptedNoProposalJournalID,
 		},
 		Integrity: ReferenceD2PublicIntegrity{
 			LedgerDigests: digests, SnapshotTailCommitsVerified: true,
@@ -266,10 +271,22 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 	if err != nil {
 		return zero, err
 	}
+	// C2's two authentic future A/B dispatches are outstanding at
+	// t=35/ordinal=1. An A1 cycle cannot skip them: the normative
+	// AdmissionFence requires explicit terminal NoProposal responses.
+	// This adds a world-neutral seventh CycleCommit, after which the
+	// two physical epochs are eligible at ordinals 2 and 3.
+	noProposalJournal, err := referenceD2SettleScriptedCognitiveSlots(
+		ctx, store, ledger, cfg.Host.Bundle, run, coordinator, policies)
+	if err != nil {
+		return zero, fmt.Errorf("D2 could not settle C2 outstanding actor slots: %w", err)
+	}
 	var proof ReferenceD2Proof
 	proof.C4 = &c4
 	proof.RunID = c4.RunID
 	proof.GenesisSHA256 = c4.GenesisSHA256
+	proof.ScriptedNoProposalJournalID = hex.EncodeToString(noProposalJournal.Identity[:])
+	proof.ScriptedNoProposalVerified = true
 	proof.SameCausalRun = true
 	proof.A1SignedByGenesisKey = true
 	proof.ResourceBranchUnchanged = true
@@ -363,7 +380,7 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 		proof.CommittedPhysicalEpochs++
 	}
 	last, err := store.LoadClock(ctx, rawRun)
-	if err != nil || uint64(last.Revision) != 8 || last.Instant != 35 || last.LastOrdinal != 2 {
+	if err != nil || uint64(last.Revision) != 9 || last.Instant != 35 || last.LastOrdinal != 3 {
 		return zero, errors.New("D2 did not append precisely two physical CycleCommits")
 	}
 	closure, err := ledger.CloseSource(ctx, reg.SourceID, inputledger.Closure{
@@ -380,18 +397,18 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 	}
 	proof.FinalSourceClosureVerified = true
 	replayed, err := store.ReplayClock(ctx, rawRun, cfg.Host.Bundle)
-	if err != nil || replayed.ReplayedCommits != 8 ||
-		replayed.ReplayedEvents != int(c4.ReplayedEvents)+2 ||
+	if err != nil || replayed.ReplayedCommits != 9 ||
+		replayed.ReplayedEvents != int(c4.ReplayedEvents)+4 ||
 		replayed.ReconstructedClock != last {
 		return zero, fmt.Errorf("D2 replay failed after two physical epochs: %w", err)
 	}
 	proof.ReplayVerified = true
 	snapshot, err := store.VerifySnapshotV1(ctx, rawRun, snapshotID, cfg.Host.Bundle)
-	if err != nil || snapshot.TailCommits != 2 {
-		return zero, fmt.Errorf("D2 original owner C4 snapshot did not verify 2-commit causal tail: %w", err)
+	if err != nil || snapshot.TailCommits != 3 {
+		return zero, fmt.Errorf("D2 original owner C4 snapshot did not verify 3-commit causal tail: %w", err)
 	}
-	proof.SnapshotVerifiedWithTwoTailCommits = true
-	finalWorld, finalHash, err := store.LoadWorldState(ctx, 8)
+	proof.SnapshotVerifiedWithThreeTailCommits = true
+	finalWorld, finalHash, err := store.LoadWorldState(ctx, 9)
 	if err != nil {
 		return zero, err
 	}

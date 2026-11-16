@@ -107,8 +107,15 @@ func PlanPinned(genesisPins [][]any,run,cycle domain.ID,base,result domain.World
   // An attacker cannot exploit this exclusion in a different terminal:
   // the physical SQLite mode independently authenticates producer, source,
   // signed cut and reducer output before publication.
-  if fields[3]=="physical.advanced"&&fields[16]=="physical.a1"&&
-   fields[15]==uint64(2)&&key[0]==uint64(1)&&key[2]=="physical.a1"{
+  // Any attempted physical reclassification must fail closed, rather
+  // than inherit the ordinal-zero generic PerceptionTask route. A
+  // malformed physical Event cannot masquerade as an ordinary event.
+  if fields[3]=="physical.advanced"||fields[16]=="physical.a1"||key[2]=="physical.a1" {
+   if fields[3]!="physical.advanced"||fields[16]!="physical.a1"||
+    fields[15]!=uint64(2)||key[0]!=uint64(1)||
+    key[2]!="physical.a1"||key[4]!=uint64(0){
+    return nil,errors.New("physical engine-only Event identity/classification mismatch")
+   }
    continue
   }
   if ordinal!=0{continue}

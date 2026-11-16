@@ -63,9 +63,13 @@ type ReferenceResult struct {
 	ContestDecisions    map[string]string `json:"contest_decisions"`
 	FinalRevision       uint64            `json:"final_revision"`
 	FinalInstant        int64             `json:"final_instant"`
+	GenesisWorldHash    string            `json:"genesis_world_hash"`
+	ContestWorldHash    string            `json:"contest_world_hash"`
+	AdvanceWorldHash    string            `json:"advance_world_hash"`
 	FinalWorldHash      string            `json:"final_world_hash"`
 	FinalStock          int64             `json:"final_stock"`
 	TriggerActivations  int               `json:"trigger_activations"`
+	TriggerTerminal     bool              `json:"trigger_terminal"`
 	ConsumedSystemUnits int               `json:"consumed_system_units"`
 	ReplayedCommits     uint64            `json:"replayed_commits"`
 	ReplayedEvents      uint64            `json:"replayed_events"`
@@ -311,7 +315,7 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 	if state.Revision != 1 || state.NextLogicalSequence != 3 {
 		return out, errors.New("contest did not publish one atomic revision/three events")
 	}
-	world, _, err := store.LoadWorldState(ctx, 1)
+	world, contestHash, err := store.LoadWorldState(ctx, 1)
 	if err != nil {
 		return out, err
 	}
@@ -409,7 +413,9 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 	if replay.ReconstructedClock != final || replay.ReplayedCommits != 3 || replay.VerifiedActivations != 1 {
 		return out, fmt.Errorf("replay mismatched committed run: %+v", replay)
 	}
-	events, err := referenceEventBytes(ctx, abs)
+	triggerTerminal,err:=referenceTriggerTerminal(ctx,abs,g.RunID)
+    if err!=nil{return out,err}
+    events, err := referenceEventBytes(ctx, abs)
 	if err != nil {
 		return out, err
 	}
@@ -421,7 +427,9 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 		Ledgers:       map[string]string{"input": "input_ledger", "decision": "decision_ledger", "event": "event_store", "evidence": "evidence_ledger", "outbox": "causal_outbox", "snapshots": "snapshots"},
 		Cycles:        []ReferenceCycle{firstCycle, referenceCycle("CLOCK_ADVANCE", admission.Cycle{Instant: advance.Plan.From, Ordinal: advance.Plan.OriginOrdinal}, advance.Fence, advance.Commit), referenceCycle("TRIGGER_AND_OCCURRENCE", triggerCycle, triggerFence, systemJournal)},
 		ContestWinner: winner, ContestDecisions: decisions, FinalRevision: uint64(final.Revision), FinalInstant: int64(final.Instant),
-		FinalWorldHash: hex.EncodeToString(finalHash[:]), FinalStock: int64(last.Available), TriggerActivations: len(advance.Activations),
+		GenesisWorldHash: hex.EncodeToString(worldHash[:]), ContestWorldHash: hex.EncodeToString(contestHash[:]),
+        AdvanceWorldHash: hex.EncodeToString(afterAdvanceHash[:]),
+        FinalWorldHash: hex.EncodeToString(finalHash[:]), FinalStock: int64(last.Available), TriggerActivations: len(advance.Activations),TriggerTerminal:triggerTerminal,
 		ConsumedSystemUnits: len(systemUnits), ReplayedCommits: uint64(replay.ReplayedCommits), ReplayedEvents: uint64(replay.ReplayedEvents),
 		EventStreamSHA256: hex.EncodeToString(rawDigest[:]), EventBytes: events,
 		ContestFenceBytes: bytes.Clone(fence.Canonical), ContestCommitBytes: bytes.Clone(result.Canonical),
@@ -552,4 +560,19 @@ func packRecord(dst []byte, record []byte) []byte {
 	var n [8]byte
 	binary.BigEndian.PutUint64(n[:], uint64(len(record)))
 	return append(append(dst, n[:]...), record...)
+}
+
+// referenceTriggerTerminal checks the actual persisted lifecycle. A
+// successful trigger activation is not proof that its pending unit was
+// consumed: exactly one sealed activation must now be terminal.
+func referenceTriggerTerminal(ctx context.Context, path string, run domain.ID) (bool,error) {
+    db,err:=sql.Open("sqlite","file:"+filepath.ToSlash(path)+"?mode=ro")
+    if err!=nil{return false,err}
+    defer db.Close()
+    var all,terminal int
+    err=db.QueryRowContext(ctx,`SELECT COUNT(*), COALESCE(SUM(CASE WHEN lifecycle=2 THEN 1 ELSE 0 END),0)
+            FROM trigger_activations WHERE run_id=?`,run[:]).Scan(&all,&terminal)
+    if err!=nil{return false,err}
+    if all!=1||terminal!=1{return false,fmt.Errorf("expected one terminal trigger activation, got %d total/%d terminal",all,terminal)}
+    return true,nil
 }

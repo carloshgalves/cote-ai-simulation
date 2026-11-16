@@ -86,6 +86,7 @@ type ReferenceResult struct {
 	CycleFenceBytes [][]byte `json:"-"`
 	CycleCommitBytes [][]byte `json:"-"`
 	Communication *ReferenceCommunicationProof `json:"communication,omitempty"`
+	Epistemic *ReferenceC2Proof `json:"epistemic,omitempty"`
 }
 
 // buildReferenceGenesis converts the frozen, normative *fixture vector* into a

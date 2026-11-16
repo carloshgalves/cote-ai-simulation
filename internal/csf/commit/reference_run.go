@@ -98,6 +98,12 @@ func buildReferenceGenesis(bundle *policy.Bundle) (*genesis.Genesis, error) {
 			GenesisHex string `json:"genesis_envelope_hex"`
 		} `json:"semantic"`
 	}
+	// Independently pin the exact approved V1 conformance fixture bytes.
+	// Bundle.Load seals its own read; this second read must not trust a path
+	// swapped after that seal.
+	if err := validateReferenceGenesisFixture(raw); err != nil {
+		return nil, err
+	}
 	if err := json.Unmarshal(raw, &source); err != nil {
 		return nil, err
 	}
@@ -141,6 +147,18 @@ func buildReferenceGenesis(bundle *policy.Bundle) (*genesis.Genesis, error) {
 	return nil, errors.New("normative Genesis source vector missing")
 }
 
+// validateReferenceGenesisFixture pins the second read against the frozen
+// conformance manifest's raw fixture digest (V1). A semantic-equivalent JSON
+// rewrite or a concurrent file replacement is not an acceptable source.
+func validateReferenceGenesisFixture(raw []byte) error {
+	const pinnedSHA256 = "4b88e67490b5f55dbbcb4a54c834e61782c41448dd8d7130352d0d9555bf9b71"
+	hash := sha256.Sum256(raw)
+	if hex.EncodeToString(hash[:]) != pinnedSHA256 {
+		return errors.New("reference Genesis fixture raw bytes differ from frozen V1 policy authority")
+	}
+	return nil
+}
+
 // RunReference performs three real, atomic causal publications in one newly
 // allocated SQLite: two-round resource contest, clock advance to a scheduled
 // instant, then same-cycle settlement of occurrence and trigger activation.
@@ -158,11 +176,14 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 	if err != nil {
 		return out, err
 	}
-	if _, err := os.Lstat(abs); err == nil {
-		return out, errors.New("reference run requires a fresh database path")
-	} else if !errors.Is(err, os.ErrNotExist) {
-		return out, err
+	// O_EXCL reserves the exact fresh pathname atomically. A prior Lstat
+	// followed by sqlite.Open leaves a race where another local process can
+	// create a victim file between the two calls.
+	reserved, err := os.OpenFile(abs, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0600)
+	if err != nil {
+		return out, fmt.Errorf("reference run requires a fresh database path: %w", err)
 	}
+	if err := reserved.Close(); err != nil { return out, err }
 	bundle, err := policy.Load(bundlePath)
 	if err != nil {
 		return out, fmt.Errorf("load sealed policies: %w", err)

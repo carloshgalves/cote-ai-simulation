@@ -82,3 +82,57 @@ func TestPotentialPerceptibilityHasNoObserverOrPayloadProjection(t *testing.T){
  skipped,err:=Plan(bundle,refs,run,cycle,0,1,[]ports.CanonicalRecord{{Identity:[32]byte(alternative),Canonical:alt}},pins)
  if err!=nil||len(skipped)!=0{t.Fatal("planner created task for event-local-ordinal 1",err)}
 }
+
+	
+// A forged ENGINE_ONLY label or producer must never inherit the generic
+// ordinal-zero task path. Recompute an authentic canonical event body digest
+// so the negative exercises the classification gate, not just checksum logic.
+func TestPhysicalEngineOnlyClassificationCannotBeRelabeledIntoPerception(t *testing.T) {
+	bundle,err:=policy.Load("../../../docs/architecture/canonical-codec-v1-bundle")
+	if err!=nil{t.Fatal(err)}
+	refs,err:=bundle.GenesisPolicyRefs();if err!=nil{t.Fatal(err)}
+	byID:=map[string][]any{}
+	for _,r:=range refs {byID[r[0].(string)]=r}
+	pins:=Pins{Classification:byID["perception-v1"],Resolver:byID["validators-v1"],Identity:byID["perception-identity-v1"]}
+	var run,cycle,round,source domain.ID
+	run[0],cycle[0],round[0],source[0]=1,2,3,4
+	var digest domain.Digest
+	digest[0]=9
+	base,err:=settlement.ConsumedRoundEvent(run,cycle,round,100,0,0,
+		[]any{[]any{uint64(0),uint64(1),source[:],digest[:]}})
+	if err!=nil{t.Fatal(err)}
+	v,err:=codec.StrictDecodePayload(base.Canonical);if err!=nil{t.Fatal(err)}
+	original:=v.([]any)
+	for _,tc:=range []struct{name string; change func([]any)}{
+		{"physical-kind-with-ordinary-producer",func(f []any){f[3]="physical.advanced"}},
+		{"physical-producer-with-ordinary-kind",func(f []any){f[16]="physical.a1"}},
+		{"physical-key-with-ordinary-kind",func(f []any){
+			key:=append([]any(nil),f[2].([]any)...)
+			key[2]="physical.a1"
+			f[2]=key
+		}},
+	}{
+		t.Run(tc.name,func(t *testing.T){
+			fields:=append([]any(nil),original...)
+			tc.change(fields)
+			d:=identity.New(bundle)
+			if tc.name=="physical-key-with-ordinary-kind" {
+				eventID,_,err:=d.Sum("cote.csf.id.event",
+					"cote.csf.schema.event-id-preimage",1,
+					[]any{run[:],cycle[:],fields[2]})
+				if err!=nil{t.Fatal(err)}
+				fields[0]=eventID[:]
+			}
+			checksum,_,err:=d.Sum("cote.csf.digest.event",
+				"cote.csf.schema.event.body",1,fields[:18])
+			if err!=nil{t.Fatal(err)}
+			fields[18]=checksum[:]
+			canonical,err:=codec.CanonicalPayload(fields);if err!=nil{t.Fatal(err)}
+			var id [32]byte;copy(id[:],fields[0].([]byte))
+			if _,err:=Plan(bundle,refs,run,cycle,0,1,
+				[]ports.CanonicalRecord{{Identity:id,Canonical:canonical}},pins);err==nil{
+				t.Fatal("reclassified physical marker escaped ENGINE_ONLY and was accepted")
+			}
+		})
+	}
+}

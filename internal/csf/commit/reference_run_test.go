@@ -4,12 +4,15 @@ import (
 	"bytes"
 	"context"
 	"database/sql"
+	"encoding/hex"
 	"errors"
 	"os"
 	"path/filepath"
 	"testing"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 )
 
@@ -45,7 +48,13 @@ func TestReferenceRunRealCausalSQLiteAndReplay(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer reopened.Close()
-	ledger, err := inputledger.Open(ctx, mustReferenceRunID(t, result.RunID), mustReferenceBundle(t), reopened)
+	rawID, err := hex.DecodeString(result.RunID)
+	if err != nil || len(rawID) != 32 { t.Fatal("invalid report RunID",err) }
+	var run domain.ID
+	copy(run[:],rawID)
+	bundle, err := policy.Load(bundlePath)
+	if err != nil { t.Fatal(err) }
+	ledger, err := inputledger.Open(ctx, run, bundle, reopened)
 	if err != nil {
 		t.Fatal("cannot reconstruct input ledger", err)
 	}

@@ -30,20 +30,47 @@ func (s *Store) ForkIdleSnapshotV1(ctx context.Context,sourceRun,parentSnapshotI
 // and their pending activation proofs; unsupported source classes fail closed.
 func (s *Store) ForkIdleSnapshotV1ToV2(ctx context.Context,sourceRun,parentSnapshotID,childRun [32]byte,
  child *Store,origin,version2 *policy.Bundle)(*genesis.Genesis,error){
- if origin==nil||version2==nil{return nil,errors.New("cross-policy fork requires both installed bundles")}
- id,v,_,_,err:=origin.CodecIdentity()
- if err!=nil||id!=policy.CodecPolicyID||v!=1{return nil,errors.New("cross-policy fork origin must be installed V1")}
- id,v,_,_,err=version2.CodecIdentity()
- if err!=nil||id!=policy.CodecPolicyV2ID||v!=2{return nil,errors.New("cross-policy fork child must be installed V2")}
- historic,err:=version2.ResolveHistoricalOrigin(policy.CodecPolicyID,origin.CodecPolicyHash)
- if err!=nil||historic==version2{return nil,errors.New("V2 lacks exactly pinned V1 origin")}
+ if err:=validateForkV1ToV2Policies(origin,version2);err!=nil{return nil,err}
  return s.forkSnapshotWithInstalledPolicies(ctx,sourceRun,parentSnapshotID,childRun,child,origin,version2,true)
+}
+
+// ForkClosedReferenceV1ToV2 is the stricter local reference-run boundary.
+// In contrast to the historical fork APIs, the source must be a current,
+// settled epistemic cut when authenticated. The existing versioned migration
+// still verifies final SourceClosures at that cut and archives the exact five
+// ledger prefixes. No pending or unsupported source is silently dropped.
+// This is not a distributed transaction or a new migration for physical A1.
+func (s *Store) ForkClosedReferenceV1ToV2(ctx context.Context, sourceRun, parentSnapshotID, childRun [32]byte,
+ child *Store, origin, version2 *policy.Bundle) (*genesis.Genesis, error) {
+ if err:=validateForkV1ToV2Policies(origin,version2);err!=nil{return nil,err}
+ cut,err:=s.prepareVerifiedForkCut(ctx,sourceRun,parentSnapshotID,childRun,child,origin,version2,true)
+ if err!=nil{return nil,err}
+ if !cut.resume.ReferenceForkReady {
+  return nil,errors.New("reference fork requires a current settled epistemic cut")
+ }
+ return s.publishVerifiedForkCut(ctx,sourceRun,parentSnapshotID,childRun,child,origin,version2,true,true,cut)
+}
+
+func validateForkV1ToV2Policies(origin,version2 *policy.Bundle) error {
+ if origin==nil||version2==nil{return errors.New("cross-policy fork requires both installed bundles")}
+ id,v,_,_,err:=origin.CodecIdentity()
+ if err!=nil||id!=policy.CodecPolicyID||v!=1{return errors.New("cross-policy fork origin must be installed V1")}
+ id,v,_,_,err=version2.CodecIdentity()
+ if err!=nil||id!=policy.CodecPolicyV2ID||v!=2{return errors.New("cross-policy fork child must be installed V2")}
+ historic,err:=version2.ResolveHistoricalOrigin(policy.CodecPolicyID,origin.CodecPolicyHash)
+ if err!=nil||historic==version2{return errors.New("V2 lacks exactly pinned V1 origin")}
+ return nil
 }
 
 func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,parentSnapshotID,childRun [32]byte,
  child *Store,origin,childPolicy *policy.Bundle,crossPolicy bool)(*genesis.Genesis,error){
  cut,err:=s.prepareVerifiedForkCut(ctx,sourceRun,parentSnapshotID,childRun,child,origin,childPolicy,crossPolicy)
  if err!=nil{return nil,err}
+ return s.publishVerifiedForkCut(ctx,sourceRun,parentSnapshotID,childRun,child,origin,childPolicy,crossPolicy,false,cut)
+}
+
+func (s *Store) publishVerifiedForkCut(ctx context.Context,sourceRun,parentSnapshotID,childRun [32]byte,
+ child *Store,origin,childPolicy *policy.Bundle,crossPolicy,currentReference bool,cut verifiedForkCut)(*genesis.Genesis,error){
  snapshot:=cut.snapshot
  draft,err:=s.prepareForkMigrationDraft(ctx,sourceRun,parentSnapshotID,childRun,cut,origin,childPolicy,crossPolicy)
  if err!=nil{return nil,err}
@@ -52,6 +79,16 @@ func (s *Store) forkSnapshotWithInstalledPolicies(ctx context.Context,sourceRun,
  // no complete plan may be supplied to the child SQL publisher.
  archived,err:=s.verifiedForkArchive(ctx,parentSnapshotID,snapshot,origin)
  if err!=nil{return nil,err}
+ if currentReference{
+  // A cooperative local host must stop parent writers during fork. Recheck
+  // after preparation as well, so an observed advancement cannot publish
+  // a stale reference cut. This is not a cross-file writer lock.
+  fresh,err:=s.VerifySnapshotV1(ctx,sourceRun,parentSnapshotID,origin)
+  if err!=nil{return nil,err}
+  if !fresh.ReferenceForkReady||fresh.Snapshot.Digest!=cut.resume.Snapshot.Digest{
+   return nil,errors.New("reference fork requires a current settled epistemic cut")
+  }
+ }
  plan:=forkMigrationPlan{forkMigrationDraft:draft,archived:archived}
  if err:=child.publishForkChildTransactional(ctx,s,sourceRun,parentSnapshotID,childRun,cut,plan,origin,childPolicy,crossPolicy);err!=nil{
   return nil,err

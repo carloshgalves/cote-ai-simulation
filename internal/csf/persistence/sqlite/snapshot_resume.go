@@ -33,6 +33,11 @@ type ResumeCheckpointV1 struct{
  // OwnerWorkReady is stricter than historical replay validity: a sealed and
  // current idle epistemic cut, with no pending tasks or unsealed evidence.
  OwnerWorkReady bool
+ // ReferenceForkReady also seals all five live ledger prefixes and pending
+ // runtime against this snapshot in the SAME read transaction. A new slot
+ // response can leave cognition ready and WorldRevision unchanged, but the
+ // reference cut would omit that response, so must not start a new fork.
+ ReferenceForkReady bool
 }
 
 // VerifySnapshotV1 fails closed if a snapshot, ledger prefix, pending runtime,
@@ -168,13 +173,20 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
    ownerReady=verifySnapshotCheckpointRefs(ctx,tx,run,refs,hist.Instant,rev,evidenceCursor,nil)==nil
   }
  }
+ forkReady:=ownerReady&&sameCanonical(currentPending,all[11])
+ if forkReady{
+  for i,name:=range snapshotLedgerNames{
+   live,err:=snapshotLedgerPrefix(ctx,tx,name,b);if err!=nil{return zero,err}
+   if !sameCanonical(live,cursors[i]){forkReady=false;break}
+  }
+ }
  if err:=tx.Commit();err!=nil{return zero,err}
  return ResumeCheckpointV1{
   Snapshot:SnapshotV1{ID:id,Digest:hash,Canonical:bytes.Clone(canonical),Revision:rev},
   SnapshotClock:clock.State{Instant:domain.SimulationInstant(hist.Instant),Revision:domain.WorldRevision(hist.Revision),
     NextLogicalSequence:domain.LogicalSequence(hist.NextSequence),LastOrdinal:hist.LastOrdinal},
   Clock:c,TailCommits:uint64(c.Revision)-rev,SnapshotControlStatus:controlStatus,
-  ControlStatus:tipControlStatus,Action:action,PendingTasks:tasks,OwnerWorkReady:ownerReady,
+  ControlStatus:tipControlStatus,Action:action,PendingTasks:tasks,OwnerWorkReady:ownerReady,ReferenceForkReady:forkReady,
  },nil
 }
 

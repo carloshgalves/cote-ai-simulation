@@ -85,7 +85,7 @@ func TestReferenceE3C4JointOwnerReopenByteExactAndNegativeReceipts(t *testing.T)
 			t.Fatal(err)
 		}
 		for _, tc := range []struct {
-			actor, file string
+			actor, file                string
 			receipt, foreign, dispatch [32]byte
 		}{
 			{"a", owner + ".actor-a", receiptA, receiptB, dispatches[0]},

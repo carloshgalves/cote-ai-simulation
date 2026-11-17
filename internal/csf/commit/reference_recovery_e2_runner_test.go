@@ -182,8 +182,12 @@ func referenceE2RecoverPhysical(ctx context.Context, path string, bundle *policy
 	}
 	defer s.store.Close()
 	initial, err := s.store.LoadClock(ctx, [32]byte(s.run))
-	if err != nil { return err }
-	if initial.Revision == 9 { return errReferenceE2AlreadyCommitted }
+	if err != nil {
+		return err
+	}
+	if initial.Revision == 9 {
+		return errReferenceE2AlreadyCommitted
+	}
 	for epoch := failedEpoch; epoch <= 2; epoch++ {
 		if epoch == failedEpoch {
 			if err := referenceE2ResumeFrozen(ctx, path, s, bundle, epoch, cuts[epoch-1]); err != nil {

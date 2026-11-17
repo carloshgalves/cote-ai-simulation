@@ -15,7 +15,6 @@ import (
 	"net/url"
 	"path/filepath"
 	"sort"
-	"strings"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 )

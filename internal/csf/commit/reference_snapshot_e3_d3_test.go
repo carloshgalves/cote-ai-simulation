@@ -3,9 +3,12 @@
 package commit
 
 import (
+	"bytes"
 	"context"
 	"database/sql"
+	"encoding/json"
 	"errors"
+	"os"
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
@@ -162,6 +165,37 @@ func TestReferenceE3D3PostPhysicalTailHistoricalOwnerDeniedNewCutRestored(t *tes
 			t.Fatalf("second D3 owner restart changed byte transcript: %v", err)
 		}
 	}
+	// Re-audit the actual D3 disclosure perimeter after creating and ACKing
+	// the new owner cut, not only the pre-restore D3 certificate.
+	if _, err := AuditReferenceD3(ctx, path, b, proof.d2); err != nil {
+		t.Fatalf("post-restore physical disclosure audit: %v", err)
+	}
+	if err := referenceE1Compare(before, referenceE3Capture(t, path, ownerPath)); err != nil {
+		t.Fatalf("D3 re-audit mutated authority: %v", err)
+	}
+	if artifact := os.Getenv("CSF_E3_EVIDENCE_PATH"); artifact != "" {
+		report := struct {
+			Status   string
+			Revision uint64
+			Owners   int
+			Manifest []referenceE1ManifestEntry
+		}{"E3_LOCAL_D3_OWNER_RESTORE_BYTES_EQUAL", 9, 2, before.Manifest()}
+		raw, err := json.MarshalIndent(report, "", "  ")
+		if err != nil {
+			t.Fatal(err)
+		}
+		file, err := os.OpenFile(artifact, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0600)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if _, err := file.Write(append(raw, '\n')); err != nil {
+			file.Close()
+			t.Fatal(err)
+		}
+		if err := file.Close(); err != nil {
+			t.Fatal(err)
+		}
+	}
 }
 
 func TestReferenceE3PersistedOwnerAndSnapshotCorruptionFailsClosed(t *testing.T) {
@@ -230,6 +264,10 @@ func TestReferenceE3PersistedOwnerAndSnapshotCorruptionFailsClosed(t *testing.T)
 			if err := db.Close(); err != nil {
 				t.Fatal(err)
 			}
+			fiveBefore, err := csfrv18ExactFiveLedgers(path)
+			if err != nil {
+				t.Fatal(err)
+			}
 			store, err := sqlite.Open(ctx, path)
 			if err != nil {
 				t.Fatal(err)
@@ -252,6 +290,10 @@ func TestReferenceE3PersistedOwnerAndSnapshotCorruptionFailsClosed(t *testing.T)
 			}
 			if err := h.Run(ctx, ref); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || calls != 0 {
 				t.Fatal("corrupt restore invoked cognitive callback")
+			}
+			fiveAfter, err := csfrv18ExactFiveLedgers(path)
+			if err != nil || !bytes.Equal(fiveBefore, fiveAfter) {
+				t.Fatalf("corrupted restore mutated one of five causal ledgers: %v", err)
 			}
 		})
 	}

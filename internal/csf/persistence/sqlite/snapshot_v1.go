@@ -353,8 +353,16 @@ func (s *Store) createSnapshotV1(ctx context.Context,run [32]byte,b *policy.Bund
  case sql.ErrNoRows:
  default:return zero,err
  }
- if expectedRevision!=nil&&control[0]!=uint64(0){
-  return zero,errors.New("frozen handoff snapshot requires IDLE under writer lock")
+ if expectedRevision!=nil{
+  if control[0]!=uint64(0){
+   return zero,errors.New("frozen handoff snapshot requires IDLE under writer lock")
+  }
+  raw,ok:=pending[2].([]byte);if !ok{return zero,errors.New("snapshot pending envelope missing")}
+  envelope,err:=codec.StrictDecodeEnvelope(raw);if err!=nil{return zero,err}
+  parts,ok:=envelope.Value.([]any);if !ok||len(parts)!=10{return zero,errors.New("snapshot pending partitions invalid")}
+  tasks,ok:=parts[8].([]any);if !ok||len(tasks)!=0{
+   return zero,errors.New("owner/handoff snapshot requires completed perception under writer lock")
+  }
  }
  installedID,_,_,_,err:=b.CodecIdentity()
  if err!=nil{return zero,err}

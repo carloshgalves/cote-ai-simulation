@@ -134,13 +134,13 @@ func referenceE2ResumeFrozen(ctx context.Context, path string, s *referenceE2Ses
 		return err
 	}
 	var count int
-	err = reader.QueryRowContext(ctx, "SELECT COUNT(*) FROM snapshots WHERE run_id=?", s.run[:]).Scan(&count)
+	err = reader.QueryRowContext(ctx, "SELECT COUNT(*) FROM snapshot_seals WHERE run_id=?", s.run[:]).Scan(&count)
 	if err != nil || count != 1 {
 		reader.Close()
 		return errors.New("E2 requires exactly one authoritative C4 owner snapshot")
 	}
 	var raw []byte
-	err = reader.QueryRowContext(ctx, "SELECT id FROM snapshots WHERE run_id=?", s.run[:]).Scan(&raw)
+	err = reader.QueryRowContext(ctx, "SELECT snapshot_id FROM snapshot_seals WHERE run_id=?", s.run[:]).Scan(&raw)
 	closeErr := reader.Close()
 	if err != nil || closeErr != nil || len(raw) != 32 {
 		return errors.New("E2 sealed C4 snapshot ID absent or malformed")

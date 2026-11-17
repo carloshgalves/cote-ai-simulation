@@ -13,6 +13,7 @@ import (
 	"path/filepath"
 	"testing"
 	"time"
+	"strings"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
@@ -269,8 +270,9 @@ func TestReferenceE2RecoveredCutCannotCreateNewSourceOrCrossRun(t *testing.T) {
 		t.Fatalf("cannot authenticate durable physical cut: %v", err)
 	}
 	before := referenceE2CausalTranscript(t, path)
-	if _, err := c.StagePhysicalInput(ctx, ledger, recovered, cycle); err == nil {
-		t.Fatal("terminal-only recovered cut created new exogenous authority")
+	if _, err := c.StagePhysicalInput(ctx, ledger, recovered, cycle); err == nil ||
+		!strings.Contains(err.Error(), "recovered") {
+		t.Fatalf("terminal-only recovered cut was not denied by the specific authority guard: %v", err)
 	}
 	if err := referenceE1Compare(before, referenceE2CausalTranscript(t, path)); err != nil {
 		t.Fatalf("recovered cut stage denial mutated ledger: %v", err)
@@ -306,8 +308,20 @@ func TestReferenceE2RecoveredCutCannotCreateNewSourceOrCrossRun(t *testing.T) {
 
 func TestReferenceE2CorruptSavedIngressRefusesRecoveryBeforeCommit(t *testing.T) {
 	ctx := context.Background()
-	c, store, ledger, _, _, _, path, host := realPhysicalFixture(t)
+	c, store, ledger, _, fence, _, path, host := realPhysicalFixture(t)
 	_, _, _, _, _, run := ledger.Snapshot()
+	units, ok := fence.Fields[11].([]any)
+	if !ok || len(units) != 1 {
+		t.Fatal("E2 corrupt-ingress probe lacks one frozen physical source")
+	}
+	entry, ok := units[0].([]any)
+	if !ok || len(entry) != 5 {
+		t.Fatal("E2 corrupt-ingress probe lacks persisted source descriptor")
+	}
+	physicalID, ok := entry[3].([]byte)
+	if !ok || len(physicalID) != 32 {
+		t.Fatal("E2 corrupt-ingress probe lacks authenticated physical ID")
+	}
 	snap, err := store.CreateSnapshotV1(ctx, [32]byte(run), host.Bundle, nil)
 	if err != nil {
 		t.Fatal(err)
@@ -321,9 +335,14 @@ func TestReferenceE2CorruptSavedIngressRefusesRecoveryBeforeCommit(t *testing.T)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err := db.ExecContext(ctx, "UPDATE input_ledger SET canonical=x'80' WHERE id=(SELECT id FROM input_ledger WHERE canonical<>x'' LIMIT 1)"); err != nil {
+	changed, err := db.ExecContext(ctx, "UPDATE input_ledger SET canonical=x'80' WHERE id=?", physicalID)
+	if err != nil {
 		db.Close()
 		t.Fatal(err)
+	}
+	if rows, err := changed.RowsAffected(); err != nil || rows != 1 {
+		db.Close()
+		t.Fatalf("E2 did not corrupt exactly the physical signed input: rows=%d err=%v", rows, err)
 	}
 	if err := db.Close(); err != nil {
 		t.Fatal(err)

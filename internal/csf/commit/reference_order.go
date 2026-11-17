@@ -2,7 +2,7 @@ package commit
 
 import (
 	"hash/fnv"
-	"math/rand"
+	"sort"
 )
 
 // referenceOrder is host-only experiment metadata, never a normative RNG
@@ -30,8 +30,10 @@ func referencePermute[T any](order *referenceOrder, phase string, values []T) {
 	} else {
 		h := fnv.New64a()
 		_, _ = h.Write([]byte(phase))
-		r := rand.New(rand.NewSource(order.seed ^ int64(h.Sum64())))
-		r.Shuffle(len(indices), func(i, j int) { indices[i], indices[j] = indices[j], indices[i] })
+		base := h.Sum64() ^ uint64(order.seed)
+		sort.Slice(indices, func(i, j int) bool {
+			return referenceOrderRank(base, indices[i]) < referenceOrderRank(base, indices[j])
+		})
 	}
 	copyOfValues := append([]T(nil), values...)
 	for i, original := range indices {
@@ -40,6 +42,16 @@ func referencePermute[T any](order *referenceOrder, phase string, values []T) {
 	if order.trace != nil {
 		order.trace[phase] = indices
 	}
+}
+
+// referenceOrderRank is a deterministic host scheduling rank, not a causal
+// identity, random source or policy. The odd multipliers and xor shifts are
+// bijections on uint64, so distinct indices have distinct ranks.
+func referenceOrderRank(base uint64, index int) uint64 {
+	x := base + (uint64(index)+1)*0x9e3779b97f4a7c15
+	x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9
+	x = (x ^ (x >> 27)) * 0x94d049bb133111eb
+	return x ^ (x >> 31)
 }
 
 func referenceWorkerOrder(order *referenceOrder, phase string, n int) []int {

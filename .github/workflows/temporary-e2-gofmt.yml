@@ -1,0 +1,27 @@
+name: TEMP E2 native gofmt
+"on":
+  push:
+    branches: [feat/141-e2-durable-physical-recovery]
+permissions:
+  contents: write
+jobs:
+  formatting:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+      - name: Canonical E2 test formatting
+        run: |
+          set -euo pipefail
+          gofmt -w internal/csf/commit/reference_recovery_e2*.go
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add internal/csf/commit/reference_recovery_e2*.go
+            git commit -m "style(#141): canonical gofmt of E2 recovery tests"
+            git push origin HEAD:feat/141-e2-durable-physical-recovery
+          fi

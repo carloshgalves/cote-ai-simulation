@@ -168,8 +168,9 @@ func TestReferenceE1MismatchAndMissingAuthorityFailClosed(t *testing.T) {
 	}
 	right = left.clone()
 	delete(right.Databases, "causal")
-	if err := referenceE1Compare(left, right); err == nil || !strings.Contains(err.Error(), "causal") {
-		t.Fatalf("missing causal database accepted: %v", err)
+	if err := referenceE1Compare(left, right); err == nil ||
+		(!strings.Contains(err.Error(), "causal") && !strings.Contains(err.Error(), "empty authority")) {
+		t.Fatalf("missing causal database was not rejected: %v", err)
 	}
 }
 

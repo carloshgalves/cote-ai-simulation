@@ -41,3 +41,15 @@ func referencePermute[T any](order *referenceOrder, phase string, values []T) {
 		order.trace[phase] = indices
 	}
 }
+
+func referenceWorkerOrder(order *referenceOrder, phase string, n int) []int {
+	if order == nil {
+		return nil
+	}
+	indices := make([]int, n)
+	for i := range indices {
+		indices[i] = i
+	}
+	referencePermute(order, phase, indices)
+	return indices
+}

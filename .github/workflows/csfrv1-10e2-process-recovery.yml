@@ -14,7 +14,7 @@ name: CSFRV1-10E2 physical crash resume and fault matrix
 permissions:
   contents: read
 concurrency:
-  group: csfrv1-10e2-${{ github.event.pull_request.number || github.ref }}
+  group: csfrv1-10e2-process-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   real-a1-crash-and-recovery:

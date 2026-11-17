@@ -9,7 +9,6 @@ import (
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 )
@@ -143,5 +142,4 @@ func TestReferenceE2PreFenceReopenAndAdmitSameSignedSource(t *testing.T) {
 	}
 	// Explicitly no new Python A1 call is made after the first original
 	// supervised production in realPhysicalFixture.
-	_ = domain.ID(run)
 }

@@ -220,29 +220,38 @@ func TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs(t *testing
 	// Only counts, run shape and hashes are safe evidence for this oracle.
 	if artifact := os.Getenv("CSF_E2_EVIDENCE_PATH"); artifact != "" {
 		report := struct {
-			Status string
-			Reference string
-			VerifiedBaselineCommits int
-			AuthenticatedA1Cuts int
+			Status                      string
+			Reference                   string
+			VerifiedBaselineCommits     int
+			AuthenticatedA1Cuts         int
 			IndependentCrashResumeCases int
-			PhysicalSQLRollbackSteps int
-			SignerReexecution bool
-			CanonicalManifest []referenceE1ManifestEntry
+			PhysicalSQLRollbackSteps    int
+			SignerReexecution           bool
+			CanonicalManifest           []referenceE1ManifestEntry
 		}{
-			Status:"E2_LOCAL_C4_D3_RECOVERY_BYTES_EQUAL",
-			Reference:"CSFRV1-10/E2 #141",
-			VerifiedBaselineCommits:9,
-			AuthenticatedA1Cuts:2,
-			IndependentCrashResumeCases:6,
-			PhysicalSQLRollbackSteps:7,
-			SignerReexecution:false,
-			CanonicalManifest:expected.Manifest(),
+			Status:                      "E2_LOCAL_C4_D3_RECOVERY_BYTES_EQUAL",
+			Reference:                   "CSFRV1-10/E2 #141",
+			VerifiedBaselineCommits:     9,
+			AuthenticatedA1Cuts:         2,
+			IndependentCrashResumeCases: 6,
+			PhysicalSQLRollbackSteps:    7,
+			SignerReexecution:           false,
+			CanonicalManifest:           expected.Manifest(),
 		}
-		raw,err:=json.MarshalIndent(report,"","  ")
-		if err!=nil{t.Fatal(err)}
-		file,err:=os.OpenFile(artifact,os.O_CREATE|os.O_EXCL|os.O_WRONLY,0600)
-		if err!=nil{t.Fatal(err)}
-		if _,err:=file.Write(append(raw,'\n'));err!=nil{file.Close();t.Fatal(err)}
-		if err:=file.Close();err!=nil{t.Fatal(err)}
+		raw, err := json.MarshalIndent(report, "", "  ")
+		if err != nil {
+			t.Fatal(err)
+		}
+		file, err := os.OpenFile(artifact, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0600)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if _, err := file.Write(append(raw, '\n')); err != nil {
+			file.Close()
+			t.Fatal(err)
+		}
+		if err := file.Close(); err != nil {
+			t.Fatal(err)
+		}
 	}
 }

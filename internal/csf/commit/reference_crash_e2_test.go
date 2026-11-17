@@ -11,9 +11,9 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"testing"
 	"time"
-	"strings"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"

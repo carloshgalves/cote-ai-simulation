@@ -20,7 +20,8 @@ NEGATIVE = {
 }
 PHASES = {
     "ingress-declarations", "worker-responses", "abort-validator-inputs",
-    "contest-validator-inputs", "candidate-completions", "validator-assessments",
+    "contest-validator-inputs", "abort-validator-workers", "contest-validator-workers",
+    "candidate-completions", "validator-assessments",
 }
 TOP = "TestReferenceE5CrossMatrix"
 

@@ -28,6 +28,9 @@ import (
 func (c *Coordinator) StagePhysicalInput(ctx context.Context, ledger *inputledger.Ledger,
 	approved embodimentv1.ApprovedCut, cycle admission.Cycle) (inputledger.StoredInput, error) {
 	var zero inputledger.StoredInput
+	if approved.IsDurablyRecovered() {
+		return zero, errors.New("recovered physical cut cannot create new source ingress")
+	}
 	if c == nil || c.bundle == nil || c.store == nil || ledger == nil || !ledger.SharesFenceAuthority(c.store) {
 		return zero, errors.New("physical ingress requires one durable authority")
 	}

@@ -1,31 +1,44 @@
-# CSFRV1-10/E2 — crash, retomada durável e falhas atômicas
+# CSFRV1-10/E2 — crash/reopen do mesmo cenário causal
 
-**Issues:** [E2 #141](https://github.com/carloshgalves/cote-ai-simulation/issues/141) → [pai #119](https://github.com/carloshgalves/cote-ai-simulation/issues/119) → [épica #114](https://github.com/carloshgalves/cote-ai-simulation/issues/114). **Predecessora:** E1 [#140](https://github.com/carloshgalves/cote-ai-simulation/issues/140), mesclada na PR #145 (`main@1b01dc563333aa92c78e9b62ca64a20e80d42194`).
+**Issue:** [#141](https://github.com/carloshgalves/cote-ai-simulation/issues/141), filha de [#119](https://github.com/carloshgalves/cote-ai-simulation/issues/119). **Baseline:** E1 [PR #145](https://github.com/carloshgalves/cote-ai-simulation/pull/145), merge humano `1b01dc563333aa92c78e9b62ca64a20e80d42194`.
 
-## Autoridades e contrato de recuperação
+## Cenário que precisa ser preservado
 
-O produtor Python A1 executa uma época, conclui e sela os dois arquivos da fonte, é validado pelo supervisor Go, assina um `ApprovedCut` vinculado à extensão física do Genesis e o ingressa no `InputLedger`, com recibo e `SourceClosure`. Somente **após esse ingresso validado** a E2 consegue recuperar a execução do terminal sem ter a chave privada do produtor nem os antigos handles `memfd`.
+O cenário é **C4 + duas épocas A1 reais autenticadas por Python supervisor + Go/SQLite**: nove commits Go; três bancos SQLite distintos (CSF e owners A/B), duas fontes exógenas, SourceClosure(final) de física somente na época 2, dois eventos `physical.advanced` ENGINE_ONLY, claim privado e checkpoint dono.
 
-O ciclo congelado é recuperado pela sequência nativa `ResumeRegisteredWorkV1 → VerifySnapshotV1 → DrainPendingPerceptionV1 → ReopenFencedCycle → DispatchFencedWorkV1`. Para fonte tipo 1 (`physical.a1`), o dispatcher exige ID/digest da fonte e payload completo no **AdmissionView**, manifesto físico byte a byte igual ao bundle instalado, assinatura Ed25519 válida, Genesis/policy corretos e `ENGINE_ONLY`. `RecoverApprovedCutFromDurableIngress` valida a projeção física e cria um **cut restrito à conclusão do terminal**. `StagePhysicalInput` rejeita expressamente qualquer cut dessa categoria.
+A fatia E1 disponibilizou um oráculo test-only que captura `sqlite_master`, todas as tabelas causal/owner, classes SQLite e as **linhas completas CBOR byte a byte**. A E2 usa esse oráculo no mesmo cenário, não um novo benchmark artificial.
 
-O único caminho capaz de publicar a mutação segue sendo **`CommitPhysical` → `SQLite.CommitWork`**, com CAS, journal, WorldRevision e EventStore atômicos. O novo código não permite refazer a física, criar um SourceDeclaration, enviar BodyState para agente cognitivo ou emitir uma assinatura após o crash.
+## Falha e recuperação
 
-## Cenários executáveis e contagem esperada
+- Obter dois `ApprovedCut` reais de `physicalhost.RunSupervisedPhysical` **uma vez**, sob Genesis, assinatura Ed25519 e manifesto físico verificados. Reutilizar seus bytes idênticos em todos os testes: a fonte contém `wall_time` autêntico e uma nova execução Python não é input equivalente.
+- Executar a D2 com falha injetada `CommitWork` após cada um dos sete passos atômicos, primeiro na época 1, depois na época 2 (**14 casos independentes**). O runner D2 fecha o SQLite ao retornar erro.
+- Em uma **nova conexão SQLite**, conferir Genesis original, reconstruir InputLedger com `inputledger.Open`, verificar o snapshot C4 original, e chamar **`Coordinator.ResumeRunV1`**, que utiliza `DrainPendingPerceptionV1`/`ReopenFencedCycle` e valida independentemente o `CycleCommit` de saída. O ciclo/fence não é resamplado. O passo falho já possui `StagePhysicalInput` e `SourceClosure` persistidos, portanto **não reingressar, reexecutar nem reassinar a época falha**.
+- Executar `CommitPhysical` com o `ApprovedCut` original autenticado. Se a primeira época foi interrompida, somente após seu commit completar ingressar a segunda época **já capturada pelo supervisor**, fechar a source final e admitir a nova fence. Se a segunda época falhou, **não** reabrir SourceClosure(final).
+- Comparar o resultado contra uma D3 contínua: todos os bytes capturados no oráculo E1 de três bases, `ReplayClock` nove commits, `AuditReferenceD3` read-only/cognitivo/físico e source closure final. Não aceitar apenas contagem final de revisão.
+- Negative tests: trocar o cut da época em tentativa congelada e tentar reexecutar uma época já completada. Ambos devem falhar sem alterar qualquer registro persistido.
 
-| Família | Injeção/recuperação | Oráculo |
-|---|---|---|
-| **Ingestão pré-fence** | Fonte A1 assinada ingressa, SQLite é fechado; nova instância reabre cursor/closure, reenvio idempotente da mesma fonte, fence só depois do reinício | Zero eventos/commits antes do fence, um depois |
-| **Commit físico, sete etapas** | Injetar erro interno em `CommitPhysical` nas etapas **1–7**; conferir rollback; reabrir no **processo filho**, efetuar a conclusão e provocar `os.Exit(86)` imediatamente após commit | Transcrição canônica antes/depois do rollback igual; segundo restart sem commit novo; transcrição final idêntica à execução contínua sobre o mesmo `ApprovedCut` |
-| **Mesmo run C4+D3, duas épocas** | Seis combinações `epoch 1/2 × failpoint 1/4/7`; cada falha deixa sete ou oito commits íntegros, recupera da snapshot C4 e continua até nove | Mesmos **dois cortes reais A1** assinados (congelados após supervisão inicial) em baseline e em cada execução; `referenceE1Compare` igual para **três** bancos, incluindo os proprietários A/B |
-| **Fonte adulterada** | Atualizar de propósito **a linha de InputLedger cujo ID está no fence físico** e não uma linha arbitrária | `inputledger.Open` ou `ResumeRegisteredWorkV1` rejeita, sem nova WorldRevision/commit |
-| **Autoridade e sigilo** | Recuperar com RunID errado, assinatura alterada, digest corporal falso, reapresentar cut recuperado como fonte nova | `FAIL_CLOSED`, nenhum registro adicional |
-| **Controle cognitivo/epistêmico** | Rerun da suíte C3 abort/retry e R58 B3 processo/restore/ACK e barreira de percepção/owner em snapshot | Estados e ACKs consistentes; sem KnowledgeInput/percepção duplicados |
+## Matriz adicional: controles, comunicação e barreira epistemológica
 
-Os casos de recuperação em processo filho **não** compartilham objetos Go, `Coordinator`, `inputledger.Ledger`, handles da fonte nem chave privada do produtor. Recebem apenas o **caminho do SQLite, o manifesto público da extensão e os identificadores de RunID/snapshot**, reconstruindo política, ingresso e fence por leitura persistida. O código do filho usa `os.Exit(86)` após o commit e não executa `defer Close`, exercitando o journal SQLite na reabertura posterior.
+A revisão ampliou a matriz para **25 falhas antes das épocas físicas** no mesmo entrypoint D2/C4:
+- `CommitCycleAbort` C3, steps 1–2: reabertura verifica `ATTEMPT_IN_FLIGHT`, 0 commits, 1 Genesis revision e replay íntegro
+- `AuthorizeAttemptRetry` C3, steps 1–2: reabertura verifica `HALTED_ON_ABORT`, sem mutação de world/event
+- `CommitTwoResourceContest` após retry autorizado, steps 1–7: preservação do prefixo de revisão 0 e controle da nova tentativa
+- `CommitCommunicationSend` C1, steps 1–7: três commits anteriores íntegros; falso claim não vira world truth antes do send
+- `CommitCommunicationDue` C1, steps 1–7: cinco commits anteriores íntegros; transmissão incompleta não produz delivery terminal
 
-A comparação E1 inclui esquema, tabelas, colunas e todas as linhas canônicas, não somente `CycleCommit` ou hash de mundo. Para comparar os bytes de duas execuções, os inputs exógenos A1 têm de ser os **mesmos**: capturas diferentes contêm `wall_time` real e não são comparáveis como se fossem idênticas.
+Cada caso fecha a sessão, abre SQLite do zero, reconstrói `InputLedger`, reexecuta `ReplayClock`, confere WorldRevision/committed_cycles, o estado do controle persistente e compara todos os bytes da captura E1 **antes e depois** da reabertura. **Não** é uma continuação ao nono commit para esses 25 casos; é uma prova de não-publicação parcial com prefixo recuperável. Já os 14 casos físicos retomam realmente até a nona revisão.
 
-## Reproduzir (Linux)
+No cenário que completou D3, a E2 reabre o SQLite, repete um `DeliverCommunicationPerception` já finalizado, verifica `CheckPerceptionBarrier` e `VerifySnapshotV1` com os dois proprietários A/B já ACKed, executa `ReplayClock` e exige **igualdade exata do transcript E1 antes/depois**. Os controles de `ErrNotAcknowledged` antes do ACK e chave/scope privada continuam demonstrados pelos testes C2, não por uma nova decisão LLM.
+
+## Limites e aceitação
+
+A recuperação de E2 pressupõe o **ApprovedCut original** durável/acessível por provedor confiável; o teste congela o cut somente em memória de harness para evitar falsificar dados físicos. O `InputLedger` também contém sua versão assinada que será validada pelo Go em cada retentativa. **Não** significa reiniciar o Python PSV1-8 a partir do checkpoint de processo nem comprovar isolamentos de produção #113.
+
+Diferenciar **falha atômica por `FailAfterStep`** (rollback SQLite + abandono/reabertura da sessão) de **SIGKILL real** entre processos. Os sete passos verificam atomicidade, mas não equivalem à prova operacional de corte de energia, durability fsync ou reinício do próprio produtor. Os estados C3 `HALTED_ON_ABORT`/`RETRY_AUTHORIZED` já contêm restart real documentado, porém E2 também precisa consolidar os testes de falhas em contest, communication, percepção e ACK; qualquer falta deve ser marcada `NOT_COVERED`, não PASS.
+
+**Validação exigida:** RED histórico `03cdfcd7`, teste completo com 14 falhas, wrong-epoch, duplicate-restart, `go test -race` da época 2, regressão D2/D3/C4/SQLite, `go vet` e revisão adversarial após cada correção. **Nenhuma PR é mesclada automaticamente**. E3 #142 (snapshot/resume) e E4 #143 (fork) continuam separadas e gates #93/#94/#113 continuam não homologados.
+
+### Executar localmente
 
 ```bash
 python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
@@ -33,24 +46,14 @@ python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
   'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
 python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-e2
 find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
-mkdir -p /tmp/e2-evidence
-PHYSICAL_A1_PRODUCER_TEST=1 CSF_E2_EVIDENCE_PATH=/tmp/e2-evidence/matrix.json \
-  go test -count=1 -v ./internal/csf/commit -run '^TestReferenceE2'
-PHYSICAL_A1_PRODUCER_TEST=1 go test -race -count=1 ./internal/csf/commit \
-  -run '^TestReferenceE2(RecoveredCutCannotCreateNewSourceOrCrossRun|IntegratedC4D3CrashResumeByteExactAfterBothEpochs)$'
-go test -count=1 ./internal/csf/commit -run \
-  '^(TestReferenceC3IndeterminateAbortRetryAndC1Continuation|TestReferenceC3AbortAndRetryFaultInjectionAtomic|TestCSFRV18R58B3ProcessCrashMatrix|TestCSFRV18RunnerDrainsIdlePerceptionWithoutWorkHandler|TestCSFRV18RunnerNilHandlerRejectsFrozenWork)$'
+PHYSICAL_A1_PRODUCER_TEST=1 go test -count=1 -timeout=25m -v ./internal/csf/commit -run '^TestReferenceE2'
+PHYSICAL_A1_PRODUCER_TEST=1 go test -race -count=1 -timeout=20m ./internal/csf/commit \
+  -run '^TestReferenceE2FourteenAtomicPhysicalFaultsReopenAndConvergeOnExactD3$/epoch2-commitwork-step7$'
 ```
 
-O arquivo de evidência é criado com `O_EXCL`/0600, **sem overwrite**: uma segunda execução deve usar novo caminho. O `CSF_E2_EVIDENCE_PATH` produz apenas contagens, nomes de casos e digests SHA-256 das estruturas verificadas; não exporta a base SQLite, BodyState, assinatura privada, checkpoint cognitivo nem payload de fontes. [Workflow E2](https://github.com/carloshgalves/cote-ai-simulation/actions/workflows/csfrv1-10e2-recovery.yml) publica o artefato com retenção de sete dias.
 
-## Não escopo / riscos ainda abertos
+## Revisão e rastreabilidade de execuções
 
-- Retomar **o processo Python A1 enquanto ainda está produzindo arquivos** ou o estado interno PSV1-3–8 permanece **não implementado**; esta E2 admite somente uma fonte **já supervisionada e duravelmente ingressada**.
-- Testes de falhas SQL são rollback simulado **antes do efetivo commit da transação**. O desligamento abrupto real do processo de recuperação ocorre **imediatamente após o commit**. Não confundir com teste de interrupção de energia física, perda do disco, `fsync` no hardware ou testes de crash de todas as chamadas do SO.
-- E3 #142: matriz adicional de snapshot/resume cognitivo; E4 #143: forks; E5 #144: permutações seeded/corrupções extensivas e aceite cruzado. Nenhuma é validada por esta PR.
-- Gates independentes #93/#94/#113 e revisão externa permanecem OPEN. Zero findings da revisão interna não autoriza produção nem mesclagem automática.
+A CI [`csfrv1-10e2-recovery.yml`](https://github.com/carloshgalves/cote-ai-simulation/actions/workflows/csfrv1-10e2-recovery.yml) executa RED histórico, valida a matriz de 14 retentativas físicas com recuperação usando **`ResumeRunV1`**, os 25 controles negativos de C3/C1, reabertura e verificação da imutabilidade após percepção/ACK, `-race` num caso físico representativo e regressões + `go vet`. Nunca atribuir `PASS` a uma etapa que foi `SKIP`, cancelada ou não executada no SHA final.
 
-## Registro de revisão
-
-A primeira execução integrada encontrou uma falha **no fixture negativo**: ele consultava o snapshot corrente do ledger, e não o `AdmissionView` congelado. Após a correção, o teste usa exatamente a visão autenticada que o dispatcher utiliza. A inspeção adversarial também exigiu mutação **da fonte física assinada específica**, teste do bloqueio explícito de restaging e recriação integral do YAML após erro de substituição. Resultados finais e SHA devem constar na descrição da PR #147 depois da reexecução da CI.
+Os casos `FailAfterStep` simulam **falha de transação** no SQLite e fechamento/reabertura de handles. Um `SIGKILL` real do host, perda de energia, segurança de sincronização do filesystem e retomada do produtor Python não estão implementados por esse harness; continuam testes/gates distintos a exigir na auditoria global. O estado de aprovação não é derivado de checkbox ou merge.

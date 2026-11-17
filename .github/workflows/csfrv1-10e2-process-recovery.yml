@@ -1,0 +1,75 @@
+name: CSFRV1-10E2 physical crash resume and fault matrix
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "internal/csf/adapter/embodimentv1/authorized_source_linux.go"
+      - "internal/csf/commit/work_physical.go"
+      - "internal/csf/commit/resume_physical.go"
+      - "internal/csf/commit/resume_dispatch.go"
+      - "internal/csf/commit/reference_crash_e2*.go"
+      - "docs/reference-run/csfrv1-10e2/**"
+      - ".github/workflows/csfrv1-10e2-process-recovery.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: csfrv1-10e2-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  real-a1-crash-and-recovery:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Install pinned physical A1 dependencies and generated Go fixture
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+          python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-e2
+          find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
+      - name: Source formatting and diff hygiene
+        run: |
+          set -euo pipefail
+          git diff --check origin/main...HEAD
+          files="$(gofmt -l internal/csf/adapter/embodimentv1/authorized_source_linux.go internal/csf/commit/work_physical.go internal/csf/commit/resume_physical.go internal/csf/commit/resume_dispatch.go internal/csf/commit/reference_crash_e2*.go)"
+          if [ -n "$files" ]; then echo "E2 unformatted Go: $files"; exit 1; fi
+      - name: Compile and run E2 physical crash/restart matrix with real Python A1
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+          CSF_E2_EVIDENCE_PATH: "/tmp/e2-evidence/e2-hash-only.json"
+        run: |
+          mkdir -p /tmp/e2-evidence
+          go test -count=1 -v ./internal/csf/commit -run '^TestReferenceE2(Integrated|PreFence|RecoveryProcess|Seven|RecoveredCut|CorruptSaved)'
+      - name: Preserve safe E2 fault-matrix hashes, never source payloads
+        uses: actions/upload-artifact@v4
+        with:
+          name: csfrv1-10e2-safe-hash-matrix
+          path: /tmp/e2-evidence/e2-hash-only.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Race detector on E2 physical recovery and provenance guards
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: |
+          go test -race -count=1 ./internal/csf/commit -run '^TestReferenceE2(RecoveredCutCannotCreateNewSourceOrCrossRun|IntegratedC4D3CrashResumeByteExactAfterBothEpochs)$'
+          go test -race -count=1 ./internal/csf/commit -run '^TestCSFRV18RegisteredResume'
+      - name: Existing abort/retry, perception/ACK and physical regressions
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: |
+          go test -count=1 ./internal/csf/commit -run '^(TestPhysicalAtomicCommitAndCrashReplay|TestReferenceD3RealPythonPrivateEventAndLiveObservatory|TestReferenceE1MismatchAndMissingAuthorityFailClosed|TestCSFRV18Runner)'
+          go test -count=1 ./internal/csf/commit -run '^(TestReferenceC3IndeterminateAbortRetryAndC1Continuation|TestReferenceC3AbortAndRetryFaultInjectionAtomic|TestCSFRV18R58B3ProcessCrashMatrix|TestCSFRV18RunnerDrainsIdlePerceptionWithoutWorkHandler|TestCSFRV18RunnerNilHandlerRejectsFrozenWork)$'
+          go test -count=1 ./internal/csf/adapter/embodimentv1 ./internal/csf/persistence/sqlite ./internal/csf/perception ./internal/csf/contextboundary
+          go vet ./internal/csf/commit ./internal/csf/adapter/embodimentv1 ./internal/csf/persistence/sqlite

@@ -47,8 +47,8 @@ func TestReferenceE2PreFenceReopenAndAdmitSameSignedSource(t *testing.T) {
 	policies := admission.Policies{
 		AdmissionOrder: refs["admission-order"],
 		CausalIdentity: refs["causal-identity"],
-		Fence: refs["admission-fence"],
-		Rules: [][]any{},
+		Fence:          refs["admission-fence"],
+		Rules:          [][]any{},
 	}
 	ingress, err := inputledger.New(ctx, run, host.Bundle, first)
 	if err != nil {

@@ -86,7 +86,7 @@ def verify(report, events, revision):
         need(row.get("literal_difference"), name + " no measured mutation")
         need(manifest(row["before"]) == manifest(row["after"]), name + " mutated after denial")
     expected = {TOP, "TestReferenceE5ScheduleDeterministic"}
-    expected |= {TOP + "/" + n for n in (POSITIVE - {"normal"}) | NEGATIVE}
+    expected |= {TOP + "/" + n for n in POSITIVE | NEGATIVE}
     passes = set()
     for item in events:
         test = item.get("Test")

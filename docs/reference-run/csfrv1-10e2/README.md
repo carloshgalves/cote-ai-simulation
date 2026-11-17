@@ -12,10 +12,23 @@ A fatia E1 disponibilizou um oráculo test-only que captura `sqlite_master`, tod
 
 - Obter dois `ApprovedCut` reais de `physicalhost.RunSupervisedPhysical` **uma vez**, sob Genesis, assinatura Ed25519 e manifesto físico verificados. Reutilizar seus bytes idênticos em todos os testes: a fonte contém `wall_time` autêntico e uma nova execução Python não é input equivalente.
 - Executar a D2 com falha injetada `CommitWork` após cada um dos sete passos atômicos, primeiro na época 1, depois na época 2 (**14 casos independentes**). O runner D2 fecha o SQLite ao retornar erro.
-- Em uma **nova conexão SQLite**, conferir Genesis original, reconstruir InputLedger com `inputledger.Open` e `ReplayClock`, derivar nova tentativa do mesmo `cycle_id` e `AdmissionFence` a partir de `clock_states` e `world_revisions` duráveis. O passo falho já possui `StagePhysicalInput` e `SourceClosure` persistidos, portanto **não reingressar, reexecutar nem reassinar a época falha**.
+- Em uma **nova conexão SQLite**, conferir Genesis original, reconstruir InputLedger com `inputledger.Open`, verificar o snapshot C4 original, e chamar **`Coordinator.ResumeRunV1`**, que utiliza `DrainPendingPerceptionV1`/`ReopenFencedCycle` e valida independentemente o `CycleCommit` de saída. O ciclo/fence não é resamplado. O passo falho já possui `StagePhysicalInput` e `SourceClosure` persistidos, portanto **não reingressar, reexecutar nem reassinar a época falha**.
 - Executar `CommitPhysical` com o `ApprovedCut` original autenticado. Se a primeira época foi interrompida, somente após seu commit completar ingressar a segunda época **já capturada pelo supervisor**, fechar a source final e admitir a nova fence. Se a segunda época falhou, **não** reabrir SourceClosure(final).
 - Comparar o resultado contra uma D3 contínua: todos os bytes capturados no oráculo E1 de três bases, `ReplayClock` nove commits, `AuditReferenceD3` read-only/cognitivo/físico e source closure final. Não aceitar apenas contagem final de revisão.
 - Negative tests: trocar o cut da época em tentativa congelada e tentar reexecutar uma época já completada. Ambos devem falhar sem alterar qualquer registro persistido.
+
+## Matriz adicional: controles, comunicação e barreira epistemológica
+
+A revisão ampliou a matriz para **25 falhas antes das épocas físicas** no mesmo entrypoint D2/C4:
+- `CommitCycleAbort` C3, steps 1–2: reabertura verifica `ATTEMPT_IN_FLIGHT`, 0 commits, 1 Genesis revision e replay íntegro
+- `AuthorizeAttemptRetry` C3, steps 1–2: reabertura verifica `HALTED_ON_ABORT`, sem mutação de world/event
+- `CommitTwoResourceContest` após retry autorizado, steps 1–7: preservação do prefixo de revisão 0 e controle da nova tentativa
+- `CommitCommunicationSend` C1, steps 1–7: três commits anteriores íntegros; falso claim não vira world truth antes do send
+- `CommitCommunicationDue` C1, steps 1–7: cinco commits anteriores íntegros; transmissão incompleta não produz delivery terminal
+
+Cada caso fecha a sessão, abre SQLite do zero, reconstrói `InputLedger`, reexecuta `ReplayClock`, confere WorldRevision/committed_cycles, o estado do controle persistente e compara todos os bytes da captura E1 **antes e depois** da reabertura. **Não** é uma continuação ao nono commit para esses 25 casos; é uma prova de não-publicação parcial com prefixo recuperável. Já os 14 casos físicos retomam realmente até a nona revisão.
+
+No cenário que completou D3, a E2 reabre o SQLite, repete um `DeliverCommunicationPerception` já finalizado, verifica `CheckPerceptionBarrier` e `VerifySnapshotV1` com os dois proprietários A/B já ACKed, executa `ReplayClock` e exige **igualdade exata do transcript E1 antes/depois**. Os controles de `ErrNotAcknowledged` antes do ACK e chave/scope privada continuam demonstrados pelos testes C2, não por uma nova decisão LLM.
 
 ## Limites e aceitação
 

@@ -17,6 +17,7 @@ import (
 	"sort"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
 )
 
 // This is a test-only, engine-privileged oracle. The canonical records below
@@ -248,7 +249,7 @@ func referenceE1ReadDatabase(ctx context.Context, path string) (referenceE1Datab
 		return zero, err
 	}
 	defer tx.Rollback()
-	schema, err := referenceE1ReadQuery(ctx, tx,
+	schema, err := referenceE1ReadQuery(ctx, tx, "__schema__",
 		"SELECT type,name,tbl_name,sql FROM sqlite_master WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name")
 	if err != nil {
 		return zero, err
@@ -291,7 +292,7 @@ func referenceE1ReadDatabase(ctx context.Context, path string) (referenceE1Datab
 		return zero, errors.New("E1 empty authority database")
 	}
 	for _, table := range tables {
-		value, err := referenceE1ReadQuery(ctx, tx, "SELECT * FROM "+table)
+		value, err := referenceE1ReadQuery(ctx, tx, table, "SELECT * FROM "+table)
 		if err != nil {
 			return zero, fmt.Errorf("E1 table %s: %w", table, err)
 		}
@@ -302,7 +303,7 @@ func referenceE1ReadDatabase(ctx context.Context, path string) (referenceE1Datab
 	}
 	return out, nil
 }
-func referenceE1ReadQuery(ctx context.Context, tx *sql.Tx, query string) (referenceE1Table, error) {
+func referenceE1ReadQuery(ctx context.Context, tx *sql.Tx, tableName, query string) (referenceE1Table, error) {
 	var zero referenceE1Table
 	rows, err := tx.QueryContext(ctx, query)
 	if err != nil {
@@ -339,6 +340,14 @@ func referenceE1ReadQuery(ctx context.Context, tx *sql.Tx, query string) (refere
 				if _, err := codec.StrictDecodePayload(raw); err != nil {
 					rows.Close()
 					return zero, fmt.Errorf("E1 corrupt canonical row in column %d: %w", i, err)
+				}
+				// Syntactic CBOR alone is not a verified clock. A canonical
+				// empty array (0x80) is CBOR-valid yet cannot be a CSF clock.
+				if tableName == "clock_states" {
+					if _, err := clock.Decode(raw); err != nil {
+						rows.Close()
+						return zero, fmt.Errorf("E1 invalid authoritative clock payload: %w", err)
+					}
 				}
 			}
 			typed[i], err = referenceE1Value(v)

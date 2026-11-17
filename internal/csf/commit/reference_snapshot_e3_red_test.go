@@ -52,7 +52,7 @@ func TestReferenceE3SameRevisionFrozenFenceRevokesBothOwners(t *testing.T) {
 	policies := admission.Policies{
 		AdmissionOrder: refs["admission-order"],
 		CausalIdentity: refs["causal-identity"],
-		Fence: refs["admission-fence"], Rules: [][]any{},
+		Fence:          refs["admission-fence"], Rules: [][]any{},
 	}
 	calls := 0
 	type actorHost struct {

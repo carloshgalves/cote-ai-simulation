@@ -371,7 +371,7 @@ func TestReferenceE5CrossMatrix(t *testing.T) {
 			order := &referenceOrder{seed: spec.seed, reverse: spec.reverse, trace: map[string][]int{}}
 			db, owner, p := referenceE5Run(t, host, plans, &cuts, order, spec.epoch, spec.step, &baselineProof)
 			row.Trace = order.trace
-			for _, phase := range []string{"ingress-declarations", "worker-responses", "abort-validator-inputs", "contest-validator-inputs", "candidate-completions", "validator-assessments"} {
+			for _, phase := range []string{"ingress-declarations", "worker-responses", "abort-validator-inputs", "contest-validator-inputs", "abort-validator-workers", "contest-validator-workers", "candidate-completions", "validator-assessments"} {
 				indices := row.Trace[phase]
 				if len(indices) != 2 || indices[0]+indices[1] != 1 || indices[0] == indices[1] {
 					t.Fatalf("phase %s not genuinely permuted: %v", phase, indices)

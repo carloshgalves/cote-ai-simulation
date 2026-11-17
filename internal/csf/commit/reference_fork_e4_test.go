@@ -82,7 +82,7 @@ func referenceE4Policies(t *testing.T, b *policy.Bundle) admission.Policies {
 	return admission.Policies{AdmissionOrder: refs["admission-order"], CausalIdentity: refs["causal-identity"], Fence: refs["admission-fence"], Rules: [][]any{}}
 }
 
-func referenceE4ChildOwners(t *testing.T, child *sqlite.Store, b *policy.Bundle, parentRun, childRun, parentSnapshot [32]byte, parentReceipts [2][32]byte) ([32]byte, [2][32]byte) {
+func referenceE4ChildOwners(t *testing.T, parent, child *sqlite.Store, v1, b *policy.Bundle, parentRun, childRun, parentSnapshot [32]byte, parentReceipts [2][32]byte) ([32]byte, [2][32]byte, [2]string) {
 	t.Helper()
 	ctx := context.Background()
 	state, err := child.LoadClock(ctx, childRun)
@@ -90,18 +90,21 @@ func referenceE4ChildOwners(t *testing.T, child *sqlite.Store, b *policy.Bundle,
 		t.Fatalf("missing child genesis clock: %v", err)
 	}
 	var receipts [2][32]byte
+	var paths [2]string
 	var cps []sqlite.SnapshotCheckpoint
 	var hosts []*localdemo.Host
 	var calls [2]int
 	for i, actor := range []string{"a", "b"} {
 		// The existing V2 migration imports the historical actor public key;
 		// the new receipt still binds the child's RunID and an independent DB.
-		// These are synthetic opaque payloads, not reconstructed cognition.
+		// Re-attest the exact opaque synthetic parent bytes; do not
+		// reconstruct cognition from archived EventStore or BodyState.
 		dir := t.TempDir()
 		if err := os.Chmod(dir, 0700); err != nil {
 			t.Fatal(err)
 		}
-		o, err := localowner.Open(ctx, filepath.Join(dir, "owner.db"), referenceC2SyntheticSigner(parentRun, actor))
+		paths[i] = filepath.Join(dir, "owner.db")
+		o, err := localowner.Open(ctx, paths[i], referenceC2SyntheticSigner(parentRun, actor))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -119,11 +122,14 @@ func referenceE4ChildOwners(t *testing.T, child *sqlite.Store, b *policy.Bundle,
 		if err := h.Run(ctx, foreign); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || calls[i] != 0 {
 			t.Fatal("parent permit crossed into child")
 		}
-		raw, err := codec.CanonicalPayload([]any{"reference.e4.synthetic-owner", childRun[:], actor})
+		cp, _, err := parent.LoadCognitiveCheckpointV1(ctx, parentRun, parentReceipts[i], "school", actor, v1)
 		if err != nil {
 			t.Fatal(err)
 		}
-		cp := sqlite.SnapshotCheckpoint{ActorNamespace: "school", ActorID: actor, StoreID: "reference-e4-" + actor, SchemaVersion: 1, Content: raw, Producer: "reference-e4-scripted", ProducerVersion: 1, CoversInstant: int64(state.Instant), CoversRevision: 0, CoversEvidenceCursor: 0}
+		cp.StoreID = "reference-e4-" + actor
+		cp.CoversInstant = int64(state.Instant)
+		cp.CoversRevision = 0
+		cp.CoversEvidenceCursor = 0
 		gate, err := ownercheckpoint.NewGate(o, child, b)
 		if err != nil {
 			t.Fatal(err)
@@ -133,6 +139,9 @@ func referenceE4ChildOwners(t *testing.T, child *sqlite.Store, b *policy.Bundle,
 			t.Fatalf("failed child-specific receipt: %v", err)
 		}
 		cps = append(cps, cp)
+	}
+	if bytes.Equal(cps[0].Content, cps[1].Content) {
+		t.Fatal("C4 opaque A/B checkpoint fixture is not distinct")
 	}
 	if receipts[0] == receipts[1] {
 		t.Fatal("A/B owner receipt collision")
@@ -152,11 +161,15 @@ func referenceE4ChildOwners(t *testing.T, child *sqlite.Store, b *policy.Bundle,
 		if err := h.Restore(ctx, ref); err != nil {
 			t.Fatal(err)
 		}
+		restored, _, err := child.LoadCognitiveCheckpointV1(ctx, childRun, receipts[i], "school", cps[i].ActorID, b)
+		if err != nil || !bytes.Equal(restored.Content, cps[i].Content) {
+			t.Fatal("child receipt did not preserve the exact opaque parent bytes", err)
+		}
 		if err := h.Run(ctx, ref); err != nil || calls[i] != 1 {
 			t.Fatalf("child owner did not obtain scoped permit: %v", err)
 		}
 	}
-	return snap.ID, receipts
+	return snap.ID, receipts, paths
 }
 
 // This is a native NoProposal terminal on migrated C4 pending actor rounds,
@@ -243,6 +256,7 @@ func TestReferenceE4C4TwoChildrenAndIndependentTails(t *testing.T) {
 	var ids [2][32]byte
 	var childSnaps [2][32]byte
 	var childReceipts [2][2][32]byte
+	var ownerPaths [2][2]string
 	var genesisIDs [2]domain.ID
 	for i := range children {
 		ids[i] = run
@@ -273,12 +287,48 @@ func TestReferenceE4C4TwoChildrenAndIndependentTails(t *testing.T) {
 				t.Fatalf("historical %s promoted to child authority", table)
 			}
 		}
-		childSnaps[i], childReceipts[i] = referenceE4ChildOwners(t, child, v2, run, ids[i], snap, receipts)
+		childSnaps[i], childReceipts[i], ownerPaths[i] = referenceE4ChildOwners(t, parent, child, v1, v2, run, ids[i], snap, receipts)
 	}
 	if genesisIDs[0] == genesisIDs[1] || childSnaps[0] == childSnaps[1] || childReceipts[0][0] == childReceipts[1][0] || childReceipts[0][1] == childReceipts[1][1] {
 		t.Fatal("children reused causal or owner identities")
 	}
 	referenceE4Equal(t, before, referenceE3Capture(t, parentPath, parentOwner))
+	// Same actor signing key is inherited by design, so this negative must
+	// distinguish the sibling by run, not merely by actor or key mismatch.
+	for i, child := range children {
+		for j, actor := range []string{"a", "b"} {
+			o, err := localowner.Open(ctx, ownerPaths[i][j], referenceC2SyntheticSigner(run, actor))
+			if err != nil {
+				t.Fatal(err)
+			}
+			calls := 0
+			h, err := localdemo.New(o, child, v2, ownercheckpoint.Scope{Run: ids[i], Namespace: "school", Actor: actor}, func(context.Context) error { calls++; return nil })
+			if err != nil {
+				t.Fatal(err)
+			}
+			own := localdemo.Reference{Snapshot: childSnaps[i], Receipt: childReceipts[i][j]}
+			foreign := localdemo.Reference{Snapshot: childSnaps[1-i], Receipt: childReceipts[1-i][j]}
+			if err := h.Restore(ctx, own); err != nil {
+				t.Fatal(err)
+			}
+			if err := h.Restore(ctx, foreign); err == nil {
+				t.Fatal("same actor restored private sibling-run checkpoint")
+			}
+			if err := h.Run(ctx, own); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) || calls != 0 {
+				t.Fatal("failed sibling restore did not revoke local permit")
+			}
+			if err := o.Close(); err != nil {
+				t.Fatal(err)
+			}
+		}
+	}
+	ownersBefore, err := referenceE1Read(ctx, []referenceE1Location{
+		{Name: "first-a", Path: ownerPaths[0][0]}, {Name: "first-b", Path: ownerPaths[0][1]},
+		{Name: "second-a", Path: ownerPaths[1][0]}, {Name: "second-b", Path: ownerPaths[1][1]},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
 	secondBefore := referenceE2CausalTranscript(t, paths[1])
 	first := referenceE4CommitChild(t, children[0], paths[0], ids[0], v2, 0)
 	referenceE4Equal(t, secondBefore, referenceE2CausalTranscript(t, paths[1]))
@@ -321,6 +371,14 @@ func TestReferenceE4C4TwoChildrenAndIndependentTails(t *testing.T) {
 		}
 		referenceE4Equal(t, childBefore[i], referenceE2CausalTranscript(t, paths[i]))
 	}
+	ownersAfter, err := referenceE1Read(ctx, []referenceE1Location{
+		{Name: "first-a", Path: ownerPaths[0][0]}, {Name: "first-b", Path: ownerPaths[0][1]},
+		{Name: "second-a", Path: ownerPaths[1][0]}, {Name: "second-b", Path: ownerPaths[1][1]},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	referenceE4Equal(t, ownersBefore, ownersAfter)
 }
 
 func TestReferenceE4RejectFrozenTipWrongPolicyAndCorruptSnapshot(t *testing.T) {

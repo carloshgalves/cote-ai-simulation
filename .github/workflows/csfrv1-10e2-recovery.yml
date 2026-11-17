@@ -1,0 +1,75 @@
+name: CSFRV1-10E2 crash/reopen physical recovery
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "internal/csf/commit/reference_recovery_e2*"
+      - "docs/reference-run/csfrv1-10e2/**"
+      - ".github/workflows/csfrv1-10e2-recovery.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: csfrv1-10e2-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  e2-integrated:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Pin real A1 Python producer fixture
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+          python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-e2
+          find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
+      - name: Format and diff
+        run: |
+          set -euo pipefail
+          git diff --check HEAD^1 HEAD
+          files="$(gofmt -l internal/csf/commit/reference_recovery_e2*.go)"
+          if [ -n "$files" ]; then echo "E2 unformatted: $files"; exit 1; fi
+      - name: RED historical E2 contract before implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          git worktree add --detach /tmp/e2-red 03cdfcd7b31a7b15997e0045816509e07fb392a7
+          set +e
+          (cd /tmp/e2-red && go test -count=1 ./internal/csf/commit -run '^TestReferenceE2NoReexecutionOfPhysicalAfterRestart$') >/tmp/e2-red.log 2>&1
+          status=$?
+          set -e
+          if [ "$status" -eq 0 ] || ! grep -q 'undefined: referenceE2RecoverPhysical' /tmp/e2-red.log; then
+            cat /tmp/e2-red.log
+            exit 1
+          fi
+          echo "E2 RED genuine missing implementation proved"
+          git worktree remove --force /tmp/e2-red
+      - name: All fourteen real integrated E2 atomic failpoints, source replay and negative controls
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: |
+          go test -count=1 -timeout=25m -v ./internal/csf/commit -run '^TestReferenceE2'
+      - name: Race detector on recovered epoch-two atomic boundary
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: |
+          go test -race -count=1 -timeout=20m ./internal/csf/commit -run '^TestReferenceE2FourteenAtomicPhysicalFaultsReopenAndConvergeOnExactD3$/epoch2-commitwork-step7$'
+      - name: D2/D3/C4 and persistence regressions plus vet
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: |
+          go test -count=1 -timeout=20m ./internal/csf/commit -run '^(TestReferenceD3|TestReferenceD2RealTwoEpochsOnSameC4RunID|TestReferenceC4)'
+          go test -count=1 ./internal/csf/perception ./internal/csf/contextboundary ./internal/csf/persistence/sqlite
+          go vet ./internal/csf/commit ./internal/csf/persistence/sqlite

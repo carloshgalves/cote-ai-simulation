@@ -102,6 +102,11 @@ func (s referenceE1Snapshot) clone() referenceE1Snapshot {
 // Compare literal rows; SHA256 is only a safe reporting summary. Diagnostic
 // errors identify the earliest table/ordinal, NEVER raw private bytes.
 func referenceE1Compare(a, b referenceE1Snapshot) error {
+	// An absent causal prefix is not proof of determinism. Never allow two
+	// empty/unfinished snapshots to compare equal by vacuous truth.
+	if len(a.Databases) == 0 || len(b.Databases) == 0 {
+		return errors.New("E1 empty authority transcript cannot be accepted")
+	}
 	names := make([]string, 0, len(a.Databases))
 	for name := range a.Databases {
 		names = append(names, name)

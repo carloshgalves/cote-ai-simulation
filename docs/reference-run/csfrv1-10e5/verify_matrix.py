@@ -52,6 +52,9 @@ def manifest(payload):
 
 
 def verify(report, events, revision):
+    need(set(report) == {"sha", "status", "run_id", "genesis_hash", "policy_hash",
+                         "signed_cut_and_signature_sha256", "experiments", "restrictions"},
+         "unexpected top-level evidence field")
     need(report["status"] == "MATRIX_PASS" and report["sha"] == revision, "matrix/SHA")
     need(re.fullmatch(r"[0-9a-f]{40}", revision), "invalid checkout SHA")
     for key in ("run_id", "genesis_hash", "policy_hash"):
@@ -61,6 +64,10 @@ def verify(report, events, revision):
     rows = report["experiments"]
     names = [row["name"] for row in rows]
     need(len(names) == len(set(names)) and set(names) == POSITIVE | NEGATIVE, "matrix roster differs")
+    allowed_row = {"name", "seed", "status", "realized_order", "fault_epoch", "fault_step",
+                   "mutation", "changed_rows", "commits", "before", "clean", "after",
+                   "literal_difference", "guard"}
+    need(all(set(row) <= allowed_row for row in rows), "unexpected experiment field")
     by_name = {row["name"]: row for row in rows}
     baseline = manifest(by_name["normal"]["after"])
     for name in POSITIVE:
@@ -78,6 +85,20 @@ def verify(report, events, revision):
                 need(values == [1, 0], "reverse phase")
         if "fault" in name:
             need(row["fault_epoch"] in (1, 2) and 1 <= row["fault_step"] <= 7, "fault coordinates")
+    for phase in PHASES:
+        need({by_name[n]["realized_order"][phase][0] for n in POSITIVE if n.startswith("seed-")} == {0, 1},
+             "seeded schedule did not vary " + phase)
+    mutation_tables = {
+        "corrupt-genesis-policy": ("causal", "genesis_records"),
+        "corrupt-snapshot": ("causal", "snapshots"),
+        "corrupt-owner-receipt": ("causal", "cognitive_owner_receipts"),
+        "corrupt-source-cursor": ("causal", "input_source_cursors"),
+        "corrupt-source-closure": ("causal", "input_ledger"),
+        "corrupt-physical-source": ("causal", "input_ledger"),
+        "corrupt-physical-signature": ("causal", "input_ledger"),
+        "corrupt-event-visibility": ("causal", "event_store"),
+        "corrupt-private-owner": ("owner-b", "checkpoints"),
+    }
     for name in NEGATIVE:
         row = by_name[name]
         need(row["status"] == "FAIL_CLOSED" and row.get("guard"), name)
@@ -85,7 +106,16 @@ def verify(report, events, revision):
             continue
         need(row["changed_rows"] == 1 and row["commits"] == 9, name + " mutation count")
         need(row.get("literal_difference"), name + " no measured mutation")
-        need(manifest(row["before"]) == manifest(row["after"]), name + " mutated after denial")
+        clean = manifest(row["clean"])
+        attacked = manifest(row["before"])
+        need(clean.keys() == attacked.keys(), name + " schema changed")
+        changes = {key for key in clean if clean[key] != attacked[key]}
+        expected_table = mutation_tables.get(name, ("causal", name.removeprefix("corrupt-")))
+        need(changes == {expected_table}, name + " incorrect mutation target")
+        need(clean[expected_table]["Rows"] == attacked[expected_table]["Rows"], name + " row count changed")
+        need(attacked == manifest(row["after"]), name + " mutated after denial")
+        if name != "corrupt-private-owner":
+            need(clean == baseline, name + " clean run differs from baseline")
     expected = {TOP, "TestReferenceE5ScheduleDeterministic"}
     expected |= {TOP + "/" + n for n in POSITIVE | NEGATIVE}
     passes = set()

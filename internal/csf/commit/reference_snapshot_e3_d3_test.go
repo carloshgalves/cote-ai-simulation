@@ -168,7 +168,7 @@ func TestReferenceE3PersistedOwnerAndSnapshotCorruptionFailsClosed(t *testing.T)
 	ctx := context.Background()
 	for _, tc := range []struct {
 		name, stmt string
-		owner bool
+		owner      bool
 	}{
 		{"receipt-signature", "UPDATE cognitive_owner_receipts SET signature=zeroblob(64) WHERE actor_id='b'", false},
 		{"snapshot-version", "", false},

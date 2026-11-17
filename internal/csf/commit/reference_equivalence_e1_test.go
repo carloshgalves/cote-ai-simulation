@@ -106,26 +106,35 @@ func TestReferenceE1SameSignedSourcesWholeCausalAndOwnerByteTranscript(t *testin
 	// Never write underlying rows, private owner bytes or raw A1 cuts.
 	if path := os.Getenv("CSF_E1_EVIDENCE_PATH"); path != "" {
 		report := struct {
-			Status string
-			Reference string
-			CaptureMode string
+			Status              string
+			Reference           string
+			CaptureMode         string
 			AuthenticatedA1Cuts int
-			EquivalentRuns int
-			Databases int
-			Manifest []referenceE1ManifestEntry
+			EquivalentRuns      int
+			Databases           int
+			Manifest            []referenceE1ManifestEntry
 		}{
-			Status:"E1_LOCAL_EQUAL_CANONICAL_BYTES",
-			Reference:"CSFRV1-10/E1 #140",
-			CaptureMode:"two genuine A1 supervised signed cuts reused unchanged across four D3 runs",
-			AuthenticatedA1Cuts:2,EquivalentRuns:4,Databases:3,
-			Manifest:baseline.Manifest(),
+			Status:              "E1_LOCAL_EQUAL_CANONICAL_BYTES",
+			Reference:           "CSFRV1-10/E1 #140",
+			CaptureMode:         "two genuine A1 supervised signed cuts reused unchanged across four D3 runs",
+			AuthenticatedA1Cuts: 2, EquivalentRuns: 4, Databases: 3,
+			Manifest: baseline.Manifest(),
 		}
-		raw,err:=json.MarshalIndent(report,"","  ")
-		if err!=nil{t.Fatal(err)}
-		f,err:=os.OpenFile(path,os.O_WRONLY|os.O_CREATE|os.O_EXCL,0600)
-		if err!=nil{t.Fatalf("E1 evidence must be new (no overwrite): %v",err)}
-		if _,err:=f.Write(append(raw,'\n'));err!=nil{f.Close();t.Fatal(err)}
-		if err:=f.Close();err!=nil{t.Fatal(err)}
+		raw, err := json.MarshalIndent(report, "", "  ")
+		if err != nil {
+			t.Fatal(err)
+		}
+		f, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0600)
+		if err != nil {
+			t.Fatalf("E1 evidence must be new (no overwrite): %v", err)
+		}
+		if _, err := f.Write(append(raw, '\n')); err != nil {
+			f.Close()
+			t.Fatal(err)
+		}
+		if err := f.Close(); err != nil {
+			t.Fatal(err)
+		}
 	}
 	t.Logf("E1 verified %d database/table digest entries; two real authenticated cuts, 4 deterministic same-source runs",
 		len(baseline.Manifest()))

@@ -13,6 +13,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
 )
 
 // SignedCut is a producer-attested pair of immutable physical source hashes.
@@ -116,8 +117,9 @@ func InspectSignedSealedUnadmitted(
 // ApprovedCut is a capability created only after Genesis-pinned producer,
 // signature and immutable A2 completion verification. It cannot write a ledger.
 type ApprovedCut struct {
-	cut   SignedCut
-	typed []any
+	cut       SignedCut
+	typed     []any
+	recovered bool // Only a previously persisted, authenticated ingress; NEVER stage this cut anew.
 }
 
 // InspectSignedSealedAuthorized requires signed A2 evidence and completed
@@ -137,6 +139,55 @@ func InspectSignedSealedAuthorized(snapshot, events *os.File, evidence []byte,
 		return zero, err
 	}
 	return ApprovedCut{cut: cut, typed: typed}, nil
+}
+
+
+ 
+// IsDurablyRecovered distinguishes a producer-sealed ApprovedCut from a
+// post-crash reconstruction. Recovered cuts are terminal-only and MUST NEVER
+// be accepted by StagePhysicalInput to create new source authority.
+func (a ApprovedCut) IsDurablyRecovered() bool { return a.recovered }
+
+// RecoverApprovedCutFromDurableIngress reconstructs a terminal-only
+// representation of a cut whose original sealed A1 capture has ALREADY
+// been admitted into the authoritative InputLedger. This function is NOT
+// a replacement for InspectSignedSealedAuthorized at initial ingestion.
+// The caller must independently verify the stored source ID/digest,
+// complete fence and immutable Genesis BEFORE using CommitPhysical.
+// CommitPhysical repeats those ledger/fence validations under its CAS.
+func RecoverApprovedCutFromDurableIngress(
+	encoded, signature []byte, completed []any,
+	reg policy.PhysicalRegistration, run domain.ID, genesisDigest domain.Digest,
+) (ApprovedCut, error) {
+	var zero ApprovedCut
+	cut, err := DecodeSignedCut(encoded, signature)
+	if err != nil {
+		return zero, ErrUnadmitted
+	}
+	if err := VerifySignedCut(cut, reg, run, genesisDigest); err != nil {
+		return zero, ErrUnadmitted
+	}
+	bodies, err := reducer.DecodePhysical(completed)
+	if err != nil {
+		return zero, ErrUnadmitted
+	}
+	normalized, _, err := reducer.EncodePhysical(bodies)
+	if err != nil {
+		return zero, ErrUnadmitted
+	}
+	originalBytes, err := codec.CanonicalPayload(completed)
+	if err != nil {
+		return zero, ErrUnadmitted
+	}
+	normalizedBytes, err := codec.CanonicalPayload(normalized)
+	if err != nil || !bytes.Equal(originalBytes, normalizedBytes) {
+		return zero, ErrUnadmitted
+	}
+	digest, ok := normalized[3].([]byte)
+	if !ok || len(digest) != 32 || !bytes.Equal(digest, cut.CompletedStateSHA256[:]) {
+		return zero, ErrUnadmitted
+	}
+	return ApprovedCut{cut: cut, typed: normalized, recovered: true}, nil
 }
 
 // CanonicalProof returns defensive copies for durable InputLedger ingress.

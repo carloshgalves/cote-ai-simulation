@@ -16,8 +16,8 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 )
 
 // This is a test-only, engine-privileged oracle. The canonical records below

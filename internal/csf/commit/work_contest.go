@@ -71,6 +71,7 @@ func (c *Coordinator) CommitTwoResourceContest(ctx context.Context,ledger *input
   []decision.ActionSchema{{Type:"resource.consume",Version:1,Operation:"resource.consume",Producer:"resource.consume"}},
   manifest.WorldSeed,nil)
  if err!=nil{return empty,err}
+ referencePermute(c.referenceOrder,"contest-validator-inputs",input.Units)
  tentative,err:=decision.Run(input);if err!=nil{return empty,err}
  if len(tentative.Candidates)!=2||len(tentative.Conflicts)!=1||
   len(tentative.Draws)!=1||len(tentative.Assessments)!=2||len(tentative.Dispositions)!=2{
@@ -81,6 +82,8 @@ func (c *Coordinator) CommitTwoResourceContest(ctx context.Context,ledger *input
  deriver:=identity.New(c.bundle)
  policies,err:=policiesByRole(c.bundle);if err!=nil{return empty,err}
  candidates:=map[domain.ID]decision.Candidate{}
+ referencePermute(c.referenceOrder,"candidate-completions",tentative.Candidates)
+ referencePermute(c.referenceOrder,"validator-assessments",tentative.Assessments)
  for _,candidate:=range tentative.Candidates{candidates[candidate.ID]=candidate}
  conflict:=tentative.Conflicts[0]
  draw:=tentative.Draws[0]

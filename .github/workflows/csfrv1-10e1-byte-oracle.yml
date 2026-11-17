@@ -45,23 +45,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # This commit contains the E1 tests but NOT the oracle helpers.
-          # A genuinely unavailable implementation must be a compilation RED.
           git worktree add --detach /tmp/e1-red 03c1dfb499250643a5aaf21353f3fcf5143a49b4
           set +e
-          (cd /tmp/e1-red && go test -count=1 ./internal/csf/commit -run '^TestReferenceE1MismatchAndMissingAuthorityFailClosed
-      - name: Race detector on full E1 equivalence
-        env:
-          PHYSICAL_A1_PRODUCER_TEST: "1"
-        run: go test -race -count=1 ./internal/csf/commit -run '^TestReferenceE1SameSignedSourcesWholeCausalAndOwnerByteTranscript$'
-      - name: Integration regressions and vet
-        env:
-          PHYSICAL_A1_PRODUCER_TEST: "1"
-        run: |
-          go test -count=1 ./internal/csf/commit -run '^(TestReferenceD3|TestReferenceD2RealTwoEpochsOnSameC4RunID|TestReferenceC4)'
-          go test -count=1 ./internal/csf/perception ./internal/csf/contextboundary ./internal/csf/persistence/sqlite
-          go vet ./internal/csf/commit ./internal/csf/persistence/sqlite
-) >/tmp/e1-red.log 2>&1
+          (cd /tmp/e1-red && go test -count=1 ./internal/csf/commit -run '^TestReferenceE1MismatchAndMissingAuthorityFailClosed$') >/tmp/e1-red.log 2>&1
           status=$?
           set -e
           if [ "$status" -eq 0 ] || ! grep -q 'undefined: referenceE1Snapshot' /tmp/e1-red.log; then

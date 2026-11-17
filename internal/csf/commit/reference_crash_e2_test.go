@@ -243,7 +243,8 @@ func TestReferenceE2CorruptSavedIngressRefusesRecoveryBeforeCommit(t *testing.T)
 	reloaded,err:=inputledger.Open(ctx,run,host.Bundle,reopened)
 	if err==nil{
 		// A loaded ledger is not proof of snapshot correctness.
-		if _,err:=c.ResumeRegisteredWorkV1(ctx,reloaded,[32]byte(run),[32]byte(snap.ID));err==nil{
+		recoveredCoordinator := New(reopened, host.Bundle, c.admissionPolicies)
+		if _,err:=recoveredCoordinator.ResumeRegisteredWorkV1(ctx,reloaded,[32]byte(run),[32]byte(snap.ID));err==nil{
 			t.Fatal("E2 corrupted authoritative source was recovered")
 		}
 	}

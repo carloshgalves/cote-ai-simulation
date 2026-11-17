@@ -5,6 +5,7 @@ package commit
 import (
 	"context"
 	"errors"
+	"strings"
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
@@ -113,6 +114,21 @@ func TestReferenceE3SameRevisionFrozenFenceRevokesBothOwners(t *testing.T) {
 	if verified.ControlStatus != 1 || verified.TailCommits != 0 || verified.Clock.Revision != 6 {
 		t.Fatal("RED fixture failed to create same-revision frozen fence")
 	}
+	frozenBytes := referenceE3Capture(t, path, ownerPath)
+	checkpoints := make([]sqlite.SnapshotCheckpoint, 0, len(actors))
+	for _, a := range actors {
+		cp, _, err := store.LoadCognitiveCheckpointV1(ctx, run, a.ref.Receipt, "school", a.actor, b)
+		if err != nil {
+			t.Fatal(err)
+		}
+		checkpoints = append(checkpoints, cp)
+	}
+	// Supply both authentic signed refs, so a roster error cannot mask
+	// failure of the writer-locked IDLE check.
+	if _, err := store.CreateSnapshotV1AtRevision(ctx, run, b, checkpoints, 6); err == nil ||
+		!strings.Contains(err.Error(), "requires IDLE") {
+		t.Fatalf("revision-pinned owner snapshot was not denied by the frozen control guard: %v", err)
+	}
 	for _, a := range actors {
 		if err := a.host.Run(ctx, a.ref); !errors.Is(err, ownercheckpoint.ErrNotAcknowledged) {
 			t.Errorf("E3 barrier: already acknowledged owner %s invoked new WORK on frozen fence: %v", a.actor, err)
@@ -133,5 +149,8 @@ func TestReferenceE3SameRevisionFrozenFenceRevokesBothOwners(t *testing.T) {
 	}
 	if calls != 2 {
 		t.Fatalf("E3 barrier: denied callbacks actually ran, got %d", calls)
+	}
+	if err := referenceE1Compare(frozenBytes, referenceE3Capture(t, path, ownerPath)); err != nil {
+		t.Fatalf("rejected snapshot/restore/work mutated frozen authorities: %v", err)
 	}
 }

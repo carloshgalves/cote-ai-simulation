@@ -48,12 +48,42 @@ jobs:
       - name: Compile and run E2 physical crash/restart matrix with real Python A1
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"
-        run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceE2'
+          CSF_E2_EVIDENCE_PATH: "/tmp/e2-evidence/e2-hash-only.json"
+        run: |
+          mkdir -p /tmp/e2-evidence
+          go test -count=1 -v ./internal/csf/commit -run '^TestReferenceE2'
+      - name: Preserve safe E2 fault-matrix hashes, never source payloads
+        uses: actions/upload-artifact@v4
+        with:
+          name: csfrv1-10e2-safe-hash-matrix
+          path: /tmp/e2-evidence/e2-hash-only.json
+          if-no-files-found: error
+          retention-days: 7
       - name: Race detector on E2 physical recovery and provenance guards
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"
         run: |
-          go test -race -count=1 ./internal/csf/commit -run '^TestReferenceE2RecoveredCutCannotCreateNewSourceOrCrossRun$'
+          go test -race -count=1 ./internal/csf/commit -run '^TestReferenceE2(RecoveredCutCannotCreateNewSourceOrCrossRun|IntegratedC4D3CrashResumeByteExactAfterBothEpochs)
+      - name: Existing physical, integrated and SQLite regressions
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: |
+          go test -count=1 ./internal/csf/commit -run '^(TestPhysicalAtomicCommitAndCrashReplay|TestReferenceD3RealPythonPrivateEventAndLiveObservatory|TestReferenceE1MismatchAndMissingAuthorityFailClosed|TestCSFRV18Runner)'
+          go test -count=1 ./internal/csf/commit -run '^(TestReferenceC3IndeterminateAbortRetryAndC1Continuation|TestReferenceC3AbortAndRetryFaultInjectionAtomic|TestCSFRV18R58B3ProcessCrashMatrix|TestCSFRV18RunnerDrainsIdlePerceptionWithoutWorkHandler|TestCSFRV18RunnerNilHandlerRejectsFrozenWork)
+          go vet ./internal/csf/commit ./internal/csf/adapter/embodimentv1 ./internal/csf/persistence/sqlite
+
+          go test -race -count=1 ./internal/csf/commit -run '^TestCSFRV18RegisteredResume'
+      - name: Existing physical, integrated and SQLite regressions
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: |
+          go test -count=1 ./internal/csf/commit -run '^(TestPhysicalAtomicCommitAndCrashReplay|TestReferenceD3RealPythonPrivateEventAndLiveObservatory|TestReferenceE1MismatchAndMissingAuthorityFailClosed|TestCSFRV18Runner)'
+          go test -count=1 ./internal/csf/adapter/embodimentv1 ./internal/csf/persistence/sqlite ./internal/csf/perception ./internal/csf/contextboundary
+          go vet ./internal/csf/commit ./internal/csf/adapter/embodimentv1 ./internal/csf/persistence/sqlite
+
+          go test -count=1 ./internal/csf/adapter/embodimentv1 ./internal/csf/persistence/sqlite ./internal/csf/perception ./internal/csf/contextboundary
+          go vet ./internal/csf/commit ./internal/csf/adapter/embodimentv1 ./internal/csf/persistence/sqlite
+
           go test -race -count=1 ./internal/csf/commit -run '^TestCSFRV18RegisteredResume'
       - name: Existing physical, integrated and SQLite regressions
         env:

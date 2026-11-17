@@ -37,6 +37,7 @@ type ReferenceOptions struct {
 	// physicalBundle is an internally installed and verified A1 extension.
 	// Never treat a request field or decoded report as an installed bundle.
 	physicalBundle *policy.Bundle
+	order *referenceOrder
 	ReverseSources   bool
 	ReverseResponses bool
 	LeaveSourceOpen  bool  // negative control; must stop before the first fence
@@ -290,6 +291,7 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 	if options.ReverseSources {
 		sources[0], sources[1] = sources[1], sources[0]
 	}
+	referencePermute(options.order, "ingress-declarations", sources)
 	for _, name := range sources {
 		if err := ledger.DeclareSource(inputledger.Source{ID: name}); err != nil {
 			return out, err
@@ -372,6 +374,7 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 		responses = append(responses, response)
 		actorForResponse[response.ID] = "actor." + actor
 	}
+	referencePermute(options.order, "worker-responses", responses)
 	if options.ReverseResponses {
 		responses[0], responses[1] = responses[1], responses[0]
 	}
@@ -404,6 +407,7 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 			session.Coordinator,session.Cycle,session.Fence,session.Proof
 		defer store.Close()
 	}
+	coordinator.referenceOrder = options.order
 	coordinator.failAfterStep = options.FailContestAt
 	result, err := coordinator.CommitTwoResourceContest(ctx, ledger, cycle, fence)
 	coordinator.failAfterStep = 0

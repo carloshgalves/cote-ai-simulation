@@ -55,6 +55,7 @@ type Coordinator struct {
     // Fault injection is deliberately unexported; only same-package tests
     // can interrupt a SQLite transaction before its commit.
     failAfterStep uint8
+    referenceOrder *referenceOrder
     // Test-only interleaving hook; production coordinator has no callback.
     beforeCommit func()
     // Same-package tests may submit damaged bytes to the durable adapter.

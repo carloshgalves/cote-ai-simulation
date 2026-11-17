@@ -15,6 +15,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
 )
 
 // Test-harness-only E2 recovery: never consumes a model authored body state,
@@ -119,6 +120,54 @@ func (s *referenceE2Session) physicalCycle(ctx context.Context, bundle *policy.B
 	return cycle, fence, nil
 }
 
+// Resume the *failed* epoch through the existing authoritative recovery
+// protocol. It validates the C4 owner/snapshot seal, derives the exact
+// frozen fence from persisted cycle control and independently checks the
+// published terminal. This avoids a second, weaker E2 recovery algorithm.
+func referenceE2ResumeFrozen(ctx context.Context, path string, s *referenceE2Session,
+	bundle *policy.Bundle, epoch int, cut embodimentv1.ApprovedCut) error {
+	if epoch != 1 && epoch != 2 {
+		return errors.New("E2 invalid frozen epoch")
+	}
+	reader, err := openReferenceReadOnlyDB(path)
+	if err != nil {
+		return err
+	}
+	var count int
+	err = reader.QueryRowContext(ctx, "SELECT COUNT(*) FROM snapshots WHERE run_id=?", s.run[:]).Scan(&count)
+	if err != nil || count != 1 {
+		reader.Close()
+		return errors.New("E2 requires exactly one authoritative C4 owner snapshot")
+	}
+	var raw []byte
+	err = reader.QueryRowContext(ctx, "SELECT id FROM snapshots WHERE run_id=?", s.run[:]).Scan(&raw)
+	closeErr := reader.Close()
+	if err != nil || closeErr != nil || len(raw) != 32 {
+		return errors.New("E2 sealed C4 snapshot ID absent or malformed")
+	}
+	var snapshot [32]byte
+	copy(snapshot[:], raw)
+	verified, err := s.coordinator.ResumeRunV1(ctx, s.ledger, [32]byte(s.run), snapshot,
+		func(ctx context.Context, ledger *inputledger.Ledger, cycle admission.Cycle,
+			fence admission.Fence) (ports.CanonicalRecord, error) {
+			if cycle.Attempt != 0 || cycle.Plan != nil || cycle.Instant != 35 ||
+				uint64(cycle.Ordinal) != uint64(epoch+1) ||
+				uint64(cycle.BaseRevision) != uint64(6+epoch) ||
+				cycle.ID == (domain.ID{}) {
+				return ports.CanonicalRecord{}, errors.New("E2 recovered the wrong cycle or attempt")
+			}
+			return s.coordinator.CommitPhysical(ctx, ledger, cycle, fence, cut)
+		})
+	if err != nil {
+		return fmt.Errorf("E2 ResumeRunV1 refused frozen physical epoch %d: %w", epoch, err)
+	}
+	if !verified.Continued || verified.Checkpoint.Action.Kind != sqlite.ResumeReexecuteFencedAttempt ||
+		verified.Publication.Identity == ([32]byte{}) || len(verified.Publication.Canonical) == 0 {
+		return errors.New("E2 native resume did not independently verify the physical terminal")
+	}
+	return nil
+}
+
 // Called only on the TEST side of the trusted A1 protocol: the original two
 // approved cuts are frozen from a real supervised producer. No Python replay,
 // new signature, new source key or artificial terminal is generated.
@@ -132,7 +181,16 @@ func referenceE2RecoverPhysical(ctx context.Context, path string, bundle *policy
 		return err
 	}
 	defer s.store.Close()
+	initial, err := s.store.LoadClock(ctx, [32]byte(s.run))
+	if err != nil { return err }
+	if initial.Revision == 9 { return errReferenceE2AlreadyCommitted }
 	for epoch := failedEpoch; epoch <= 2; epoch++ {
+		if epoch == failedEpoch {
+			if err := referenceE2ResumeFrozen(ctx, path, s, bundle, epoch, cuts[epoch-1]); err != nil {
+				return err
+			}
+			continue
+		}
 		if epoch == 2 && failedEpoch == 1 {
 			// This is a brand-new epoch: its authenticated A1 cut has not
 			// yet been staged. The producer is NOT executed in recovery.
@@ -201,11 +259,7 @@ func referenceE2RecoverWrongEpoch(ctx context.Context, path string, bundle *poli
 		return err
 	}
 	defer s.store.Close()
-	cycle, fence, err := s.physicalCycle(ctx, bundle, 1)
-	if err != nil {
-		return err
-	}
-	_, err = s.coordinator.CommitPhysical(ctx, s.ledger, cycle, fence, wrong)
+	err = referenceE2ResumeFrozen(ctx, path, s, bundle, 1, wrong)
 	if err == nil {
 		return errors.New("E2 wrong future cut was unexpectedly accepted")
 	}

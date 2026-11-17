@@ -85,7 +85,8 @@ func (h *Host) StageSnapshot(ctx context.Context, checkpoint sqlite.SnapshotChec
 	if err != nil {
 		return zero, fmt.Errorf("owner stage/CSF escrow: %w", err)
 	}
-	snapshot, err := h.causal.CreateSnapshotV1(ctx, h.scope.Run, h.bundle, []sqlite.SnapshotCheckpoint{frozen})
+	snapshot, err := h.causal.CreateSnapshotV1AtRevision(ctx, h.scope.Run, h.bundle,
+		[]sqlite.SnapshotCheckpoint{frozen}, frozen.CoversRevision)
 	if err != nil {
 		return zero, fmt.Errorf("CSF snapshot after owner escrow: %w", err)
 	}

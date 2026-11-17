@@ -6,6 +6,7 @@ import (
  "errors"
  "fmt"
 
+ "github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
  "github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
@@ -43,7 +44,7 @@ func (c *Coordinator) DispatchFencedWorkV1(ctx context.Context, ledger *inputled
  }
  units, ok := fence.Fields[11].([]any)
  if !ok || len(units) == 0 { return empty, errors.New("empty or malformed V1 WORK fence") }
- _, _, _, _, byRound, run := view.Snapshot()
+ _, sources, _, _, byRound, run := view.Snapshot()
  responses := map[domain.ID]inputledger.Response{}
  for _, slots := range byRound {
   for _, response := range slots {
@@ -57,7 +58,8 @@ func (c *Coordinator) DispatchFencedWorkV1(ctx context.Context, ledger *inputled
   LoadSystemUnit(context.Context, [32]byte, [32]byte) ([]byte, uint8, error)
  })
  if !ok { return empty, errors.New("registered dispatcher lacks system unit authority") }
- var resources, noProposals, sends, system int
+ var resources, noProposals, sends, system, physical int
+ var physicalCut embodimentv1.ApprovedCut
  var delivery bool
  for _, raw := range units {
   entry, ok := raw.([]any)
@@ -98,6 +100,11 @@ func (c *Coordinator) DispatchFencedWorkV1(ctx context.Context, ledger *inputled
    default:
     return empty, fmt.Errorf("no V1 terminal registered for action %q", action)
    }
+  case 1:
+   if physical != 0 { return empty, errors.New("duplicate physical source in frozen fence") }
+   physicalCut, err = c.frozenPhysicalCut(ctx, run, sources, entry)
+   if err != nil { return empty, err }
+   physical++
   case 2, 3:
    sourceRaw, actualKind, err := loader.LoadSystemUnit(ctx, [32]byte(run), [32]byte(id))
    if err != nil || uint64(actualKind) != kind {
@@ -125,6 +132,10 @@ func (c *Coordinator) DispatchFencedWorkV1(ctx context.Context, ledger *inputled
   }
  }
  switch {
+ case physical == 1 && len(units) == 1 && resources == 0 && noProposals == 0 && sends == 0 && system == 0:
+  return c.CommitPhysical(ctx, ledger, cycle, fence, physicalCut)
+ case physical > 0:
+  return empty, errors.New("physical WORK cannot be mixed with actor or system source")
  case sends == 1 && resources == 0 && noProposals == 0 && system == 0 && len(units) == 1:
   return c.CommitCommunicationSend(ctx, ledger, cycle, fence)
  case sends > 0:

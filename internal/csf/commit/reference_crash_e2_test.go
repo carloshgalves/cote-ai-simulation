@@ -251,7 +251,11 @@ func TestReferenceE2RecoveredCutCannotCreateNewSourceOrCrossRun(t *testing.T) {
 	ctx := context.Background()
 	c, store, ledger, cycle, fence, approved, path, host := realPhysicalFixture(t)
 	_, _, _, _, _, run := ledger.Snapshot()
-	_, sources, _, _, _, _ := ledger.Snapshot()
+	view, _, err := ledger.AdmissionView(ctx, host.Bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, sources, _, _, _, _ := view.Snapshot()
 	units, ok := fence.Fields[11].([]any)
 	if !ok || len(units) != 1 {
 		t.Fatal("E2 invalid frozen physical fixture")

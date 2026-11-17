@@ -18,6 +18,8 @@ import (
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ownercheckpoint"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ownercheckpoint/localowner"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
@@ -177,9 +179,17 @@ func referenceE5Mutate(t *testing.T, path string, proof ReferenceD3Proof, kind s
 	}
 	defer db.Close()
 	var result sql.Result
+	mustExec := func(query string, args ...any) sql.Result {
+		t.Helper()
+		res, err := db.ExecContext(ctx, query, args...)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return res
+	}
 	switch kind {
 	case "input_ledger", "decision_ledger", "event_store", "evidence_ledger", "causal_outbox":
-		result, err = db.ExecContext(ctx, "UPDATE "+kind+" SET canonical=x'80' WHERE id=(SELECT id FROM "+kind+" ORDER BY id LIMIT 1)")
+		result = mustExec("UPDATE "+kind+" SET canonical=x'80' WHERE id=(SELECT id FROM "+kind+" ORDER BY id LIMIT 1)")
 	case "genesis-policy":
 		var raw []byte
 		run := referenceC2Decode32(t, proof.RunID)
@@ -196,15 +206,15 @@ func referenceE5Mutate(t *testing.T, path string, proof ReferenceD3Proof, kind s
 		if err != nil {
 			t.Fatal(err)
 		}
-		result, err = db.ExecContext(ctx, "UPDATE genesis_records SET canonical=? WHERE run_id=?", mutant, run[:])
+		result = mustExec("UPDATE genesis_records SET canonical=? WHERE run_id=?", mutant, run[:])
 	case "snapshot":
 		id := referenceC2Decode32(t, proof.d2.C4.Epistemic.SnapshotID)
-		result, err = db.ExecContext(ctx, "UPDATE snapshots SET canonical=x'80' WHERE id=?", id[:])
+		result = mustExec("UPDATE snapshots SET canonical=x'80' WHERE id=?", id[:])
 	case "owner-receipt":
 		id := referenceC2Decode32(t, proof.d2.C4.Epistemic.OwnerReceiptID)
-		result, err = db.ExecContext(ctx, "UPDATE cognitive_owner_receipts SET signature=zeroblob(64) WHERE receipt_id=?", id[:])
+		result = mustExec("UPDATE cognitive_owner_receipts SET signature=zeroblob(64) WHERE receipt_id=?", id[:])
 	case "source-cursor":
-		result, err = db.ExecContext(ctx, "UPDATE input_source_cursors SET next_seq=next_seq+1 WHERE source_id='physical.a1'")
+		result = mustExec("UPDATE input_source_cursors SET next_seq=next_seq+1 WHERE source_id='physical.a1'")
 	case "source-closure":
 		// Select the final closure by its actual canonical identity, never
 		// by the last SQLite row or a string search over binary values.
@@ -250,7 +260,7 @@ func referenceE5Mutate(t *testing.T, path string, proof ReferenceD3Proof, kind s
 		if len(id) != 32 || len(mutant) == 0 {
 			t.Fatal("missing actual final A1 closure")
 		}
-		result, err = db.ExecContext(ctx, "UPDATE input_ledger SET canonical=? WHERE id=?", mutant, id)
+		result = mustExec("UPDATE input_ledger SET canonical=? WHERE id=?", mutant, id)
 	case "physical-source", "physical-signature", "event-visibility":
 		id := referenceC2Decode32(t, proof.d2.PhysicalInputIDs[0])
 		table := "input_ledger"
@@ -289,7 +299,7 @@ func referenceE5Mutate(t *testing.T, path string, proof ReferenceD3Proof, kind s
 		if err != nil || bytes.Equal(raw, mutant) {
 			t.Fatal("mutation did not change canonical bytes", err)
 		}
-		result, err = db.ExecContext(ctx, "UPDATE "+table+" SET canonical=? WHERE id=?", mutant, id[:])
+		result = mustExec("UPDATE "+table+" SET canonical=? WHERE id=?", mutant, id[:])
 	default:
 		t.Fatal("unregistered mutation")
 	}
@@ -332,7 +342,17 @@ func TestReferenceE5CrossMatrix(t *testing.T) {
 	defer referenceE5Evidence(t, &report)
 	path, owner, baselineProof := referenceE5Run(t, host, plans, &cuts, nil, 0, 0, nil)
 	base := referenceE2Capture(t, path, owner)
-	report.Experiments = append(report.Experiments, referenceE5Row{Name: "normal", Status: "BYTE_EQUAL", Commits: 9, Before: base.Manifest(), After: base.Manifest()})
+	referenceE5Case(t, &report, referenceE5Row{Name: "normal"}, func(t *testing.T, row *referenceE5Row) {
+		referenceE5NoOp(t, path, baselineProof, host, cuts)
+		after := referenceE2Capture(t, path, owner)
+		row.Before, row.After = base.Manifest(), after.Manifest()
+		row.Commits = len(after.Databases["causal"].Tables["committed_cycles"].Rows)
+		if err := referenceE1Compare(base, after); err != nil {
+			row.Difference = err.Error()
+			t.Fatal(err)
+		}
+		row.Status = "BYTE_EQUAL"
+	})
 	for _, spec := range []struct {
 		name    string
 		seed    int64
@@ -433,6 +453,20 @@ func TestReferenceE5CrossMatrix(t *testing.T) {
 					t.Fatal("corrupted causal input was accepted by ReplayClock")
 				}
 				row.Guard += "+ReplayClock"
+			}
+			// Exercise the actual recovery entrypoint, not solely a read-only
+			// audit. Corrupt ingress may fail while opening the ledger; if
+			// that succeeds, a registered resume must itself fail.
+			ledger, ledgerErr := inputledger.Open(ctx, domain.ID(run), host.Bundle, store)
+			if ledgerErr == nil {
+				resumed, resumeErr := New(store, host.Bundle, referenceE4Policies(t, host.Bundle)).ResumeRegisteredWorkV1(ctx, ledger, run, snap)
+				if resumeErr == nil || resumed.Continued {
+					store.Close()
+					t.Fatal("corrupt authority permitted registered resume")
+				}
+				row.Guard += "+ResumeRegisteredWorkV1"
+			} else {
+				row.Guard += "+InputLedger.Open"
 			}
 			if err := store.Close(); err != nil {
 				t.Fatal(err)

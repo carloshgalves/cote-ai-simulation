@@ -42,7 +42,7 @@ type ResumeCheckpointV1 struct{
 func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.Bundle)(ResumeCheckpointV1,error){
  var zero ResumeCheckpointV1
  if s==nil||b==nil{return zero,errors.New("resume requires store and pinned policy")}
- if _,err:=s.ReplayClock(ctx,run,b);err!=nil{return zero,fmt.Errorf("resume causal replay: %w",err)}
+ auditedClock,err:=s.ReplayClock(ctx,run,b);if err!=nil{return zero,fmt.Errorf("resume causal replay: %w",err)}
  if err:=s.VerifyCycleControl(ctx,run);err!=nil{return zero,err}
  tx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true});if err!=nil{return zero,err}
  defer tx.Rollback()
@@ -158,7 +158,7 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  // can advance authority without a new WorldRevision.
  ownerReady:=false
  sealedTasks,ok:=snapshotLists[8].([]any);if !ok{return zero,errors.New("invalid sealed perception task list")}
- if rev==uint64(c.Revision)&&controlStatus==0&&tipControlStatus==0&&
+ if c==auditedClock.ReconstructedClock&&rev==uint64(c.Revision)&&controlStatus==0&&tipControlStatus==0&&
   action.Kind==ResumeIdle&&tasks==0&&len(sealedTasks)==0{
   liveEvidence,err:=snapshotLedgerPrefix(ctx,tx,"evidence_ledger",b);if err!=nil{return zero,err}
   if sameCanonical(liveEvidence,cursors[3]){

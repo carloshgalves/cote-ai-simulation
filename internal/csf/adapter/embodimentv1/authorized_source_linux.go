@@ -141,8 +141,6 @@ func InspectSignedSealedAuthorized(snapshot, events *os.File, evidence []byte,
 	return ApprovedCut{cut: cut, typed: typed}, nil
 }
 
-
- 
 // IsDurablyRecovered distinguishes a producer-sealed ApprovedCut from a
 // post-crash reconstruction. Recovered cuts are terminal-only and MUST NEVER
 // be accepted by StagePhysicalInput to create new source authority.

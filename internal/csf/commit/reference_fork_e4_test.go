@@ -467,3 +467,67 @@ func TestReferenceE4RejectFrozenTipWrongPolicyAndCorruptSnapshot(t *testing.T) {
 	assertCSFRV18EmptyRejectedFork(t, childPath)
 	referenceE4Equal(t, frozen, referenceE3Capture(t, path, owner))
 }
+
+func TestReferenceE4SameRevisionUnsealedResponseDenied(t *testing.T) {
+	ctx := context.Background()
+	result, path, owner := c4Fixture(t, ReferenceOptions{})
+	v1, err := policy.Load(bundlePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	v2 := referenceE4Bundle(t)
+	run := referenceC2Decode32(t, result.RunID)
+	snap := referenceC2Decode32(t, result.Epistemic.SnapshotID)
+	parent, err := sqlite.Open(ctx, path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer parent.Close()
+	l, err := inputledger.Open(ctx, domain.ID(run), v1, parent)
+	if err != nil {
+		t.Fatal(err)
+	}
+	state, err := parent.LoadClock(ctx, run)
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, _, _, rounds, _, _ := l.Snapshot()
+	responded := 0
+	for _, round := range rounds {
+		if round.Lifecycle != 0 || round.Actor != [2]string{"school", "a"} {
+			continue
+		}
+		cycle, err := referenceC1Cycle(ctx, parent, v1, domain.ID(run), state, round.Eligibility.NotBeforeCycleOrdinal)
+		if err != nil {
+			t.Fatal(err)
+		}
+		d := r19Dispatch(t, v1, domain.ID(run), cycle.ID, round, "act", 0, state.Revision, state.Instant)
+		if err := l.Respond(ctx, r19NoProposal(t, v1, d, 0)); err != nil {
+			t.Fatal(err)
+		}
+		responded++
+	}
+	if responded != 1 {
+		t.Fatalf("expected exactly one newly appended C4 response, got %d", responded)
+	}
+	proof, err := parent.VerifySnapshotV1(ctx, run, snap, v1)
+	if err != nil || !proof.OwnerWorkReady || proof.ControlStatus != 0 || proof.TailCommits != 0 {
+		t.Fatalf("RED fixture must be historical, same-revision, IDLE and owner-ready: %v", err)
+	}
+	childID := run
+	childID[0] ^= 0x62
+	childPath := filepath.Join(t.TempDir(), "child.db")
+	child, err := sqlite.Open(ctx, childPath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer child.Close()
+	parentBefore := referenceE3Capture(t, path, owner)
+	if _, err := parent.ForkClosedReferenceV1ToV2(ctx, run, snap, childID, child, v1, v2); err == nil {
+		t.Fatal("E4 accepted a stale cut after an unsealed same-revision response")
+	} else if !strings.Contains(err.Error(), "current settled epistemic cut") {
+		t.Fatalf("E4 rejected same-revision input for an unrelated reason: %v", err)
+	}
+	assertCSFRV18EmptyRejectedFork(t, childPath)
+	referenceE4Equal(t, parentBefore, referenceE3Capture(t, path, owner))
+}

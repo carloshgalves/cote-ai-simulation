@@ -93,7 +93,7 @@ func TestReferenceE4D3RejectUnfinishedSourceAndUnsupportedPhysicalFork(t *testin
 		t.Fatal(err)
 	}
 	settled, err := parent.VerifySnapshotV1(ctx, run, final.ID, v1)
-	if err != nil || !settled.OwnerWorkReady {
+	if err != nil || !settled.OwnerWorkReady || !settled.ReferenceForkReady {
 		t.Fatalf("D3 final snapshot lacks settled epistemic barrier: %v", err)
 	}
 	before = referenceE3Capture(t, path, ownerPath)
@@ -104,8 +104,8 @@ func TestReferenceE4D3RejectUnfinishedSourceAndUnsupportedPhysicalFork(t *testin
 	if _, err := v2.PhysicalRegistration(); err == nil {
 		t.Fatal("test premise changed: V2 now registers physical A1; review E4 contract")
 	}
-	if _, err := parent.ForkClosedReferenceV1ToV2(ctx, run, final.ID, childID, child, v1, v2); err == nil {
-		t.Fatal("unregistered physical extension accepted by V2 child")
+	if _, err := parent.ForkClosedReferenceV1ToV2(ctx, run, final.ID, childID, child, v1, v2); err == nil || !strings.Contains(err.Error(), "genesis extension bundles require verified extension bootstrap") {
+		t.Fatalf("V2 must reject the final settled cut specifically for the unregistered physical extension: %v", err)
 	}
 	assertCSFRV18EmptyRejectedFork(t, childPath)
 	referenceE4Equal(t, before, referenceE3Capture(t, path, ownerPath))

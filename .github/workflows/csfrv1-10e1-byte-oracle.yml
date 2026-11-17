@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
-          fetch-depth: 2
+          fetch-depth: 0
       - uses: actions/setup-go@v6
         with:
           go-version: "1.27.2"
@@ -41,10 +41,50 @@ jobs:
           git diff --check HEAD^1 HEAD
           files="$(gofmt -l internal/csf/commit/reference_equivalence_e1*.go)"
           if [ -n "$files" ]; then echo "E1 gofmt: $files"; exit 1; fi
+      - name: Verify historical RED test before E1 oracle implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          # This commit contains the E1 tests but NOT the oracle helpers.
+          # A genuinely unavailable implementation must be a compilation RED.
+          git worktree add --detach /tmp/e1-red 03c1dfb499250643a5aaf21353f3fcf5143a49b4
+          set +e
+          (cd /tmp/e1-red && go test -count=1 ./internal/csf/commit -run '^TestReferenceE1MismatchAndMissingAuthorityFailClosed
+      - name: Race detector on full E1 equivalence
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: go test -race -count=1 ./internal/csf/commit -run '^TestReferenceE1SameSignedSourcesWholeCausalAndOwnerByteTranscript$'
+      - name: Integration regressions and vet
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+        run: |
+          go test -count=1 ./internal/csf/commit -run '^(TestReferenceD3|TestReferenceD2RealTwoEpochsOnSameC4RunID|TestReferenceC4)'
+          go test -count=1 ./internal/csf/perception ./internal/csf/contextboundary ./internal/csf/persistence/sqlite
+          go vet ./internal/csf/commit ./internal/csf/persistence/sqlite
+) >/tmp/e1-red.log 2>&1
+          status=$?
+          set -e
+          if [ "$status" -eq 0 ] || ! grep -q 'undefined: referenceE1Snapshot' /tmp/e1-red.log; then
+            cat /tmp/e1-red.log
+            echo "E1 RED proof did not detect missing oracle symbols"
+            exit 1
+          fi
+          echo "RED verified: test-only oracle did not exist at initial test commit"
+          git worktree remove --force /tmp/e1-red
       - name: E1 canonical transcript real A1, owner escrow and corruption negatives
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"
-        run: go test -count=1 -v ./internal/csf/commit -run '^TestReferenceE1'
+          CSF_E1_EVIDENCE_PATH: "/tmp/e1-evidence/manifest.json"
+        run: |
+          mkdir -p /tmp/e1-evidence
+          go test -count=1 -v ./internal/csf/commit -run '^TestReferenceE1'
+      - name: Retain hash/count-only E1 evidence (no raw actor or BodyState rows)
+        uses: actions/upload-artifact@v4
+        with:
+          name: csfrv1-10e1-safe-hash-manifest
+          path: /tmp/e1-evidence/manifest.json
+          if-no-files-found: error
+          retention-days: 7
       - name: Race detector on full E1 equivalence
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"

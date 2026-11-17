@@ -50,3 +50,10 @@ PHYSICAL_A1_PRODUCER_TEST=1 go test -count=1 -timeout=25m -v ./internal/csf/comm
 PHYSICAL_A1_PRODUCER_TEST=1 go test -race -count=1 -timeout=20m ./internal/csf/commit \
   -run '^TestReferenceE2FourteenAtomicPhysicalFaultsReopenAndConvergeOnExactD3$/epoch2-commitwork-step7$'
 ```
+
+
+## Revisão e rastreabilidade de execuções
+
+A CI [`csfrv1-10e2-recovery.yml`](https://github.com/carloshgalves/cote-ai-simulation/actions/workflows/csfrv1-10e2-recovery.yml) executa RED histórico, valida a matriz de 14 retentativas físicas com recuperação usando **`ResumeRunV1`**, os 25 controles negativos de C3/C1, reabertura e verificação da imutabilidade após percepção/ACK, `-race` num caso físico representativo e regressões + `go vet`. Nunca atribuir `PASS` a uma etapa que foi `SKIP`, cancelada ou não executada no SHA final.
+
+Os casos `FailAfterStep` simulam **falha de transação** no SQLite e fechamento/reabertura de handles. Um `SIGKILL` real do host, perda de energia, segurança de sincronização do filesystem e retomada do produtor Python não estão implementados por esse harness; continuam testes/gates distintos a exigir na auditoria global. O estado de aprovação não é derivado de checkbox ou merge.

@@ -21,7 +21,7 @@ jobs:
             internal/csf/commit/work_physical.go \
             internal/csf/commit/resume_physical.go \
             internal/csf/commit/resume_dispatch.go \
-            internal/csf/commit/reference_crash_e2_test.go
+            internal/csf/commit/reference_crash_e2*.go
           if ! git diff --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -29,7 +29,7 @@ jobs:
               internal/csf/commit/work_physical.go \
               internal/csf/commit/resume_physical.go \
               internal/csf/commit/resume_dispatch.go \
-              internal/csf/commit/reference_crash_e2_test.go
+              internal/csf/commit/reference_crash_e2*.go
             git commit -m "style(#141): gofmt E2 recovery implementation and tests"
             git push origin HEAD:feat/141-e2-physical-crash-resume
           fi

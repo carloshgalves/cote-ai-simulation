@@ -39,6 +39,7 @@ type referenceE5Row struct {
 	ChangedRows int64                      `json:"changed_rows,omitempty"`
 	Commits     int                        `json:"commits"`
 	Before      []referenceE1ManifestEntry `json:"before,omitempty"`
+	Clean       []referenceE1ManifestEntry `json:"clean,omitempty"`
 	After       []referenceE1ManifestEntry `json:"after,omitempty"`
 	Difference  string                     `json:"literal_difference,omitempty"`
 	Guard       string                     `json:"guard,omitempty"`
@@ -383,11 +384,16 @@ func TestReferenceE5CrossMatrix(t *testing.T) {
 			if p.Matrix.ReplayCommits != 9 {
 				t.Fatal("perturbed run incomplete")
 			}
+			before := referenceE2Capture(t, db, owner)
+			if err := referenceE1Compare(base, before); err != nil {
+				row.Difference = err.Error()
+				t.Fatal(err)
+			}
 			referenceE5NoOp(t, db, p, host, cuts)
 			after := referenceE2Capture(t, db, owner)
 			row.Commits = len(after.Databases["causal"].Tables["committed_cycles"].Rows)
-			row.Before, row.After = base.Manifest(), after.Manifest()
-			if err := referenceE1Compare(base, after); err != nil {
+			row.Before, row.After = before.Manifest(), after.Manifest()
+			if err := referenceE1Compare(before, after); err != nil {
 				row.Difference = err.Error()
 				t.Fatal(err)
 			}
@@ -434,6 +440,7 @@ func TestReferenceE5CrossMatrix(t *testing.T) {
 				t.Fatal("mutation was invisible to the E1 oracle")
 			}
 			row.Difference = diff.Error()
+			row.Clean = clean.Manifest()
 			row.Before = damaged.Manifest()
 			store, err := sqlite.Open(ctx, db)
 			if err != nil {
@@ -565,6 +572,7 @@ func TestReferenceE5CrossMatrix(t *testing.T) {
 			t.Fatal("mutation did not change owner authority")
 		}
 		row.Difference = diff.Error()
+		row.Clean = clean.Manifest()
 		row.Before = damaged.Manifest()
 		o, err = localowner.Open(ctx, owner, referenceC2SyntheticSigner(run, "b"))
 		if err != nil {
@@ -594,6 +602,19 @@ func TestReferenceE5CrossMatrix(t *testing.T) {
 		row.Guard = "RestoreAndAcknowledge+RunWork"
 		row.Status = "FAIL_CLOSED"
 	})
+	// Non-reverse seeded cases must collectively exercise BOTH orders
+	// at every phase, independently of the explicit reverse control.
+	for _, phase := range []string{"ingress-declarations", "worker-responses", "abort-validator-inputs", "contest-validator-inputs", "abort-validator-workers", "contest-validator-workers", "candidate-completions", "validator-assessments"} {
+		seen := map[int]bool{}
+		for _, row := range report.Experiments {
+			if strings.HasPrefix(row.Name, "seed-") && len(row.Trace[phase]) == 2 {
+				seen[row.Trace[phase][0]] = true
+			}
+		}
+		if !seen[0] || !seen[1] {
+			t.Errorf("seeded cases did not exercise both orders at %s", phase)
+		}
+	}
 	t.Logf("E5 completed %d experiments on %s", len(report.Experiments), report.SHA)
 }
 

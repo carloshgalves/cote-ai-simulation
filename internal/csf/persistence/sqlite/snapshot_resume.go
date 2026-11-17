@@ -30,6 +30,9 @@ type ResumeCheckpointV1 struct{
  ControlStatus uint64
  Action ResumeAction
  PendingTasks int
+ // OwnerWorkReady is stricter than historical replay validity: a sealed and
+ // current idle epistemic cut, with no pending tasks or unsealed evidence.
+ OwnerWorkReady bool
 }
 
 // VerifySnapshotV1 fails closed if a snapshot, ledger prefix, pending runtime,
@@ -39,7 +42,7 @@ type ResumeCheckpointV1 struct{
 func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.Bundle)(ResumeCheckpointV1,error){
  var zero ResumeCheckpointV1
  if s==nil||b==nil{return zero,errors.New("resume requires store and pinned policy")}
- if _,err:=s.ReplayClock(ctx,run,b);err!=nil{return zero,fmt.Errorf("resume causal replay: %w",err)}
+ auditedClock,err:=s.ReplayClock(ctx,run,b);if err!=nil{return zero,fmt.Errorf("resume causal replay: %w",err)}
  if err:=s.VerifyCycleControl(ctx,run);err!=nil{return zero,err}
  tx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true});if err!=nil{return zero,err}
  defer tx.Rollback()
@@ -150,13 +153,28 @@ func (s *Store) VerifySnapshotV1(ctx context.Context,run,id [32]byte,b *policy.B
  }
  action,err:=resumeActionForControl(tipFields,tasks,fetchFence)
  if err!=nil{return zero,err}
+ // A valid recovery root is not necessarily a live permission to start
+ // cognitive WORK. Same-revision admissions and perception completions
+ // can advance authority without a new WorldRevision.
+ ownerReady:=false
+ sealedTasks,ok:=snapshotLists[8].([]any);if !ok{return zero,errors.New("invalid sealed perception task list")}
+ if c==auditedClock.ReconstructedClock&&rev==uint64(c.Revision)&&controlStatus==0&&tipControlStatus==0&&
+  action.Kind==ResumeIdle&&tasks==0&&len(sealedTasks)==0{
+  liveEvidence,err:=snapshotLedgerPrefix(ctx,tx,"evidence_ledger",b);if err!=nil{return zero,err}
+  if sameCanonical(liveEvidence,cursors[3]){
+   // The historical roster was verified against sealed membership above.
+   // Revalidate against LIVE holders, actors and owner receipts too:
+   // enrollment can change at the same world revision.
+   ownerReady=verifySnapshotCheckpointRefs(ctx,tx,run,refs,hist.Instant,rev,evidenceCursor,nil)==nil
+  }
+ }
  if err:=tx.Commit();err!=nil{return zero,err}
  return ResumeCheckpointV1{
   Snapshot:SnapshotV1{ID:id,Digest:hash,Canonical:bytes.Clone(canonical),Revision:rev},
   SnapshotClock:clock.State{Instant:domain.SimulationInstant(hist.Instant),Revision:domain.WorldRevision(hist.Revision),
     NextLogicalSequence:domain.LogicalSequence(hist.NextSequence),LastOrdinal:hist.LastOrdinal},
   Clock:c,TailCommits:uint64(c.Revision)-rev,SnapshotControlStatus:controlStatus,
-  ControlStatus:tipControlStatus,Action:action,PendingTasks:tasks,
+  ControlStatus:tipControlStatus,Action:action,PendingTasks:tasks,OwnerWorkReady:ownerReady,
  },nil
 }
 

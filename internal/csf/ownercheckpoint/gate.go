@@ -266,9 +266,9 @@ func (g *Gate) RestoreAndAcknowledge(ctx context.Context, scope Scope,
 	if verified.Snapshot.ID != snapshotID {
 		return errors.New("snapshot verifier returned a different identity")
 	}
-	if verified.TailCommits != 0 ||
+	if !verified.OwnerWorkReady || verified.TailCommits != 0 ||
 		uint64(verified.Clock.Revision) != verified.Snapshot.Revision {
-		return errors.New("historical snapshot cannot authorize new cognitive WORK")
+		return fmt.Errorf("%w: snapshot is historical or epistemic cut is not idle", ErrNotAcknowledged)
 	}
 	cp, locator, err := g.escrow.LoadCognitiveCheckpointV1(ctx, scope.Run,
 		receiptID, scope.Namespace, scope.Actor, g.bundle)
@@ -303,6 +303,16 @@ func (g *Gate) RestoreAndAcknowledge(ctx context.Context, scope Scope,
 	}
 	if err := ctx.Err(); err != nil {
 		return err
+	}
+	// The external owner may have taken arbitrarily long to restore/ACK.
+	// Recheck current causal authority before granting a local permit.
+	afterACK, err := g.escrow.VerifySnapshotV1(ctx, scope.Run, snapshotID, g.bundle)
+	if err != nil {
+		return fmt.Errorf("owner cut revalidation after ACK: %w", err)
+	}
+	if afterACK.Snapshot.ID != snapshotID || !afterACK.OwnerWorkReady ||
+		afterACK.TailCommits != 0 || uint64(afterACK.Clock.Revision) != afterACK.Snapshot.Revision {
+		return ErrNotAcknowledged
 	}
 	g.mu.Lock()
 	defer g.mu.Unlock()
@@ -340,7 +350,7 @@ func (g *Gate) RunWork(ctx context.Context, scope Scope,
 	if err != nil {
 		return fmt.Errorf("cognitive WORK snapshot revalidation: %w", err)
 	}
-	if verified.Snapshot.ID != snapshotID || verified.TailCommits != 0 ||
+	if verified.Snapshot.ID != snapshotID || !verified.OwnerWorkReady || verified.TailCommits != 0 ||
 		uint64(verified.Clock.Revision) != verified.Snapshot.Revision {
 		return ErrNotAcknowledged
 	}

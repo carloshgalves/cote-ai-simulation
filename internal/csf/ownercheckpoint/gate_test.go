@@ -104,6 +104,7 @@ type testEscrow struct {
 	snapshotCanonical []byte
 	snapshotPublished bool
 	tailCommits       uint64
+	ownerWorkBlocked  bool
 	failPersist       bool
 	failLoad          bool
 }
@@ -173,8 +174,9 @@ func (e *testEscrow) VerifySnapshotV1(_ context.Context, _ [32]byte, snapshot [3
 		return sqlite.ResumeCheckpointV1{}, errors.New("sealed snapshot absent")
 	}
 	return sqlite.ResumeCheckpointV1{
-		Snapshot:    sqlite.SnapshotV1{ID: e.snapshotID, Canonical: bytes.Clone(e.snapshotCanonical)},
-		TailCommits: e.tailCommits,
+		Snapshot:       sqlite.SnapshotV1{ID: e.snapshotID, Canonical: bytes.Clone(e.snapshotCanonical)},
+		TailCommits:    e.tailCommits,
+		OwnerWorkReady: !e.ownerWorkBlocked && e.tailCommits == 0,
 	}, nil
 }
 

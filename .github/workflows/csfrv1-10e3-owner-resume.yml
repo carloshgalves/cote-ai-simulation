@@ -53,9 +53,18 @@ jobs:
       - name: E3 exact owner transcripts, pending perception and physical integration
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"
+          CSF_E3_EVIDENCE_PATH: "/tmp/e3-evidence/owner-hash-matrix.json"
         run: |
+          mkdir -p /tmp/e3-evidence
           go test -count=1 -v ./internal/csf/commit -run '^TestReferenceE3'
           go test -count=1 -v ./internal/csf/ownercheckpoint/... -run '^(TestE3|TestOwner58)'
+      - name: Preserve only E3 counts and canonical table digests
+        uses: actions/upload-artifact@v4
+        with:
+          name: csfrv1-10e3-safe-owner-hash-matrix
+          path: /tmp/e3-evidence/owner-hash-matrix.json
+          if-no-files-found: error
+          retention-days: 7
       - name: Race detector on cognitive ACK and integrated cold restore
         run: |
           go test -race -count=1 ./internal/csf/ownercheckpoint/...

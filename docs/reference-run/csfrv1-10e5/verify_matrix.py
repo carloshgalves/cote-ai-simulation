@@ -24,6 +24,32 @@ PHASES = {
     "candidate-completions", "validator-assessments",
 }
 TOP = "TestReferenceE5CrossMatrix"
+SCHEDULE = {
+    "normal": (0, 0, 0),
+    "reverse": (0, 0, 0),
+    "seed-1": (1, 0, 0),
+    "seed-42": (42, 0, 0),
+    "seed-2026": (2026, 0, 0),
+    "seed-144-fault-1": (144, 1, 3),
+    "seed-999-fault-2": (999, 2, 7),
+}
+MASK64 = (1 << 64) - 1
+
+
+def seeded_order(seed, phase):
+    # Independently reconstruct the host-only FNV phase and rank schedule.
+    base = 14695981039346656037
+    for byte in phase.encode("utf-8"):
+        base = ((base ^ byte) * 1099511628211) & MASK64
+    base ^= seed & MASK64
+
+    def rank(index):
+        x = (base + (index + 1) * 0x9E3779B97F4A7C15) & MASK64
+        x = ((x ^ (x >> 30)) * 0xBF58476D1CE4E5B9) & MASK64
+        x = ((x ^ (x >> 27)) * 0x94D049BB133111EB) & MASK64
+        return x ^ (x >> 31)
+
+    return sorted(range(2), key=rank)
 
 
 def need(condition, message):
@@ -75,16 +101,17 @@ def verify(report, events, revision):
         need(row["status"] == "BYTE_EQUAL" and not row.get("literal_difference"), name)
         need(row["commits"] == 9, name + " commit count")
         need(manifest(row["before"]) == baseline == manifest(row["after"]), name + " literal manifest")
+        seed, epoch, step = SCHEDULE[name]
+        need((row["seed"], row.get("fault_epoch", 0), row.get("fault_step", 0)) == (seed, epoch, step),
+             name + " wrong seed or fault coordinates")
         if name == "normal":
+            need(not row.get("realized_order"), "normal must retain default order")
             continue
         trace = row["realized_order"]
         need(set(trace) == PHASES, name + " phase coverage")
-        for values in trace.values():
-            need(sorted(values) == [0, 1], name + " permutation")
-            if name == "reverse":
-                need(values == [1, 0], "reverse phase")
-        if "fault" in name:
-            need(row["fault_epoch"] in (1, 2) and 1 <= row["fault_step"] <= 7, "fault coordinates")
+        for phase, values in trace.items():
+            expected_order = [1, 0] if name == "reverse" else seeded_order(seed, phase)
+            need(values == expected_order, name + " incorrect phase schedule: " + phase)
     for phase in PHASES:
         need({by_name[n]["realized_order"][phase][0] for n in POSITIVE if n.startswith("seed-")} == {0, 1},
              "seeded schedule did not vary " + phase)

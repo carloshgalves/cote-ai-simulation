@@ -43,7 +43,14 @@ jobs:
           git worktree add --detach /tmp/e4-red b4ca52efa0ef351e7b3b3cf795429c8249ee26e1
           trap 'git worktree remove --force /tmp/e4-red' EXIT
           set +e
-          (cd /tmp/e4-red && go test -count=1 -v ./internal/csf/commit -run '^TestReferenceE4SameRevisionUnsealedResponseDenied
+          (cd /tmp/e4-red && go test -count=1 -v ./internal/csf/commit -run '^TestReferenceE4SameRevisionUnsealedResponseDenied$') >/tmp/e4-red.log 2>&1
+          status=$?
+          set -e
+          cat /tmp/e4-red.log
+          test "$status" -ne 0
+          grep -F 'E4 accepted a stale cut after an unsealed same-revision response' /tmp/e4-red.log
+          grep -F -- '--- FAIL: TestReferenceE4SameRevisionUnsealedResponseDenied' /tmp/e4-red.log
+      - name: Integrated C4 fork and D3 fail-closed boundary
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"
         run: |
@@ -62,33 +69,5 @@ jobs:
           go test -count=1 ./internal/csf/persistence/sqlite ./internal/csf/ownercheckpoint/...
           go vet ./internal/csf/commit ./internal/csf/persistence/sqlite
           git diff --check 6ac3ec0348f4a54ebbf97db95bcd3ac983a4e007...HEAD
-          files="$(gofmt -l internal/csf/commit/reference_fork_e4*.go)"
-          if [ -n "$files" ]; then gofmt -d $files; exit 1; fi
-) >/tmp/e4-red.log 2>&1
-          status=$?
-          set -e
-          cat /tmp/e4-red.log
-          test "$status" -ne 0
-          grep -F 'E4 accepted a stale cut after an unsealed same-revision response' /tmp/e4-red.log
-          grep -F -- '--- FAIL: TestReferenceE4SameRevisionUnsealedResponseDenied' /tmp/e4-red.log
-      - name: Integrated C4 fork and D3 fail-closed boundary
-        env:
-          PHYSICAL_A1_PRODUCER_TEST: "1"
-        run: |
-          set -euo pipefail
-          go test -count=1 -v ./internal/csf/commit -run '^TestReferenceE4' | tee /tmp/e4.log
-          for test in TestReferenceE4C4TwoChildrenAndIndependentTails TestReferenceE4RejectFrozenTipWrongPolicyAndCorruptSnapshot TestReferenceE4D3RejectUnfinishedSourceAndUnsupportedPhysicalFork; do
-            grep -F -- "--- PASS: $test " /tmp/e4.log
-          done
-          if grep -F -- '--- SKIP: TestReferenceE4' /tmp/e4.log; then exit 1; fi
-      - name: Race and regression
-        env:
-          PHYSICAL_A1_PRODUCER_TEST: "1"
-        run: |
-          go test -race -count=1 ./internal/csf/commit -run '^(TestReferenceE4|TestCSFRV18R58B3ForkChild)'
-          go test -count=1 ./internal/csf/commit -run '^(TestCSFRV18|TestReferenceE3|TestReferenceD3RealPythonPrivateEventAndLiveObservatory)'
-          go test -count=1 ./internal/csf/persistence/sqlite ./internal/csf/ownercheckpoint/...
-          go vet ./internal/csf/commit ./internal/csf/persistence/sqlite
-          git diff --check HEAD^ HEAD
           files="$(gofmt -l internal/csf/commit/reference_fork_e4*.go)"
           if [ -n "$files" ]; then gofmt -d $files; exit 1; fi

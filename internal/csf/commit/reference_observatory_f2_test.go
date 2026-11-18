@@ -12,6 +12,7 @@ import (
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
 func TestReferenceF2ColdOperationalCuts(t *testing.T) {
@@ -118,6 +119,15 @@ func TestReferenceF2FinalAndCorruptedAuthority(t *testing.T) {
 	if q, err := sqlite.OpenPrivilegedObservatory(ctx,path,nil); !errors.Is(err,observatory.ErrInvalidPolicy) || q!=nil {
 		t.Fatal("missing policy acquired query authority",err)
 	}
+	base, err := policy.Load(bundlePath)
+	if err != nil { t.Fatal(err) }
+	wrong, err := sqlite.OpenPrivilegedObservatory(ctx,path,base)
+	if err != nil { t.Fatal(err) }
+	if bad, err := wrong.ReadOperationalReport(ctx,run); !errors.Is(err,observatory.ErrInvalidPolicy) || !reflect.DeepEqual(bad,observatory.OperationalReport{}) {
+		wrong.Close()
+		t.Fatal("bare codec falsely acquired physical Genesis query authority",err)
+	}
+	if err := wrong.Close(); err != nil { t.Fatal(err) }
 	q, err := sqlite.OpenPrivilegedObservatory(ctx,path,host.Bundle)
 	if err != nil { t.Fatal(err) }
 	defer q.Close()

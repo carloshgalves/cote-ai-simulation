@@ -169,3 +169,68 @@ func (q *PrivilegedReader) o2TaskEvidence(ctx context.Context, run [32]byte,
 	}
 	return completions, evidence, nil
 }
+
+// Project one causal task at a time so evidence cannot be mistaken for
+// evidence delivered by a different task in the same CycleCommit.
+func (q *PrivilegedReader) o2PerceptionLinks(ctx context.Context, run [32]byte, c *observatory.CausalCommit) error {
+	c.Completions = make([]observatory.AuthorityRef, 0)
+	c.Evidence = make([]observatory.AuthorityRef, 0)
+	for _, task := range c.Tasks {
+		_, fields, err := q.readRef(ctx, "causal_outbox", task.ID)
+		if err != nil || len(fields) != 10 || !equalBytes(fields[0], task.ID[:]) ||
+			!equalBytes(fields[1], run[:]) || !equalBytes(fields[2], c.CycleID[:]) ||
+			fields[4] != c.BaseRevision || fields[5] != c.ResultRevision {
+			return errors.New("perception task does not match commit coordinate")
+		}
+		link := observatory.PerceptionLink{Task: task}
+		found := false
+		for _, event := range c.Events {
+			if equalBytes(fields[3], event.ID[:]) {
+				link.Event, found = event, true
+			}
+		}
+		if !found {
+			return errors.New("perception task source absent from commit")
+		}
+		completions, evidence, err := q.o2TaskEvidence(ctx, run, []observatory.AuthorityRef{task})
+		if err != nil || len(completions) > 1 {
+			return fmt.Errorf("perception completion verification: %v", err)
+		}
+		if len(completions) == 1 {
+			completion := completions[0]
+			link.Completion = &completion
+			_, f, err := q.readRef(ctx, "causal_outbox", completion.ID)
+			if err != nil || len(f) != 5 {
+				return errors.New("invalid perception completion link")
+			}
+			kinds := []struct {
+				at int
+				target *[]observatory.AuthorityRef
+			}{{2, &link.Observations}, {3, &link.KnowledgeInputs}}
+			for _, kind := range kinds {
+				list, ok := f[kind.at].([]any)
+				if !ok {
+					return errors.New("invalid perception completion evidence roster")
+				}
+				for _, id := range list {
+					found := false
+					for _, ref := range evidence {
+						if equalBytes(id, ref.ID[:]) {
+							*kind.target = append(*kind.target, ref)
+							found = true
+						}
+					}
+					if !found {
+						return errors.New("completion evidence not authenticated")
+					}
+				}
+			}
+		} else if len(evidence) != 0 {
+			return errors.New("pending task has evidence")
+		}
+		c.Completions = append(c.Completions, completions...)
+		c.Evidence = append(c.Evidence, evidence...)
+		c.PerceptionLinks = append(c.PerceptionLinks, link)
+	}
+	return nil
+}

@@ -152,6 +152,33 @@ func o2DecisionLink(run, cycle [32]byte, attempt uint64, rec o2Record,
 			*spec.target = append(*spec.target, o2Ref("decision_ledger", key, p.bytes))
 		}
 	}
+	// A contested terminal persists one assessment per admitted response.
+	// Single-source terminals need not persist one. Only the exact subject
+	// and source digest can be linked to this decision.
+	if len(out.Conflicts) > 0 || len(out.Draws) > 0 {
+		for key, record := range records {
+			if len(record.fields) != 3 {
+				continue
+			}
+			sub, ok := record.fields[0].([]any)
+			if !ok || len(sub) != 3 || sub[0] != uint64(5) || !equalBytes(sub[1], id[:]) {
+				continue
+			}
+			if out.Assessment != nil || !equalBytes(sub[2], digest[:]) {
+				return zero, errors.New("ambiguous or mismatched assessment subject")
+			}
+			hash, err := registeredDigest("cote.csf.digest.affordance-assessment",
+				"cote.csf.schema.affordance-assessment.body", record.fields[:2])
+			if err != nil || [32]byte(hash) != key || !equalBytes(record.fields[2], hash[:]) {
+				return zero, errors.New("assessment digest mismatch")
+			}
+			ref := o2Ref("decision_ledger", key, record.bytes)
+			out.Assessment = &ref
+		}
+		if out.Assessment == nil {
+			return zero, errors.New("contested decision missing assessment")
+		}
+	}
 	produced, ok := f[12].([]any)
 	if !ok {
 		return zero, errors.New("invalid decision event roster")

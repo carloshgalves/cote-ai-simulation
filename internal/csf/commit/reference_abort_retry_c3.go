@@ -242,6 +242,9 @@ func referenceC3AbortRetry(ctx context.Context,path string,b *policy.Bundle,g *g
     if err!=nil||accepted[0]!=uint64(2)||accepted[6]!=uint64(1){
         return out,errors.New("C3 restart lost RETRY_AUTHORIZED")
     }
+    if options.stopAfterAuthorizedRetry {
+        return out,errors.New("reference harness stopped at durable RETRY_AUTHORIZED")
+    }
     frozen.RetryRef=[]any{uint64(1),[]any{uint64(14),retry.Identity[:],digest[:]}}
     nextFence,err:=admission.NewCoordinator(admission.NewFenceLog(recovered)).
         AdmitThenEvaluate(ctx,b,ledgerAgain,frozen,policies,nil)

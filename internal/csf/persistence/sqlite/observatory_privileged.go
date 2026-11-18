@@ -484,7 +484,12 @@ func (q *PrivilegedReader) readCommits(ctx context.Context, run [32]byte,
 			if err != nil || !equalBytes(rec.fields[15], dg[:]) {
 				return nil, fmt.Errorf("CycleCommit %x decision %x digest invalid", entry.commit, did)
 			}
-			c.Decisions = append(c.Decisions, o2Ref("decision_ledger", did, rec.bytes))
+			link, err := o2DecisionLink(run, entry.cycle, attempt, rec, fence.fields, c.Admitted, c.Events, records)
+			if err != nil {
+				return nil, fmt.Errorf("CycleCommit %x decision %x provenance: %w", entry.commit, did, err)
+			}
+			c.Decisions = append(c.Decisions, link.Decision)
+			c.DecisionLinks = append(c.DecisionLinks, link)
 		}
 		tasks, ok := v[18].([]any)
 		if !ok {

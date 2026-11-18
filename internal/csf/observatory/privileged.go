@@ -31,6 +31,7 @@ type DecisionLink struct {
 	DecisionDigest [32]byte
 	Status         uint64
 	Candidate      *AuthorityRef
+	Assessment     *AuthorityRef
 	Conflicts      []AuthorityRef
 	Draws          []AuthorityRef
 	ProducedEvents []AuthorityRef
@@ -91,10 +92,20 @@ type CausalAttempt struct {
 	AbortReason *uint64
 }
 
+// GenesisAuthority retains the actual SQL key (Run) and distinct
+// registered Genesis ID/digest without exposing seed or manifest bytes.
+type GenesisAuthority struct {
+	Run         [32]byte
+	GenesisID   [32]byte
+	Digest      [32]byte
+	ContentHash [32]byte
+}
+
 // PrivilegedReport is for the local human operator's diagnostics only.
 // Never pass it as a KnowledgeInput, Observation or character prompt.
 type PrivilegedReport struct {
 	State                  RunState
+	Genesis                GenesisAuthority
 	Commits                []CausalCommit
 	Attempts               []CausalAttempt
 	PendingUnits           int

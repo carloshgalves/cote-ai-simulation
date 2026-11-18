@@ -39,6 +39,7 @@ type ReferenceOptions struct {
 	physicalBundle *policy.Bundle
 	order *referenceOrder
 	stopAfterAuthorizedRetry bool // reference harness cut only; no new terminal or admission
+	stopAfterClockAdvance bool // reference harness cut before pending trigger execution
 	ReverseSources   bool
 	ReverseResponses bool
 	LeaveSourceOpen  bool  // negative control; must stop before the first fence
@@ -457,6 +458,9 @@ func RunReference(ctx context.Context, dbPath, bundlePath string, options Refere
 	}
 	if check, err := reducer.DecodeStock(afterAdvanceWorld); err != nil || check.Available != 0 {
 		return out, errors.New("clock advance mutated inventory")
+	}
+	if options.stopAfterClockAdvance {
+		return out, errors.New("reference harness stopped after committed clock advance")
 	}
 	triggerCycleID, _, err := deriver.Sum("cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1,
 		[]any{g.RunID[:], []any{int64(due), uint64(0)}})

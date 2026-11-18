@@ -204,7 +204,7 @@ func (q *PrivilegedReader) o2PerceptionLinks(ctx context.Context, run [32]byte, 
 				return errors.New("invalid perception completion link")
 			}
 			kinds := []struct {
-				at int
+				at     int
 				target *[]observatory.AuthorityRef
 			}{{2, &link.Observations}, {3, &link.KnowledgeInputs}}
 			for _, kind := range kinds {

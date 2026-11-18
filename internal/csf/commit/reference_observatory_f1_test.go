@@ -62,6 +62,15 @@ func TestReferenceF1IntegratedProvenance(t *testing.T) {
 		}
 		return raw
 	}
+	var genesisRaw []byte
+	if err := db.QueryRowContext(ctx, "SELECT canonical FROM genesis_records WHERE run_id=?", run[:]).Scan(&genesisRaw); err != nil {
+		t.Fatal(err)
+	}
+	g, err := buildReferenceGenesis(host.Bundle)
+	if err != nil || report.Genesis.Run != run || report.Genesis.GenesisID != [32]byte(g.ID) ||
+		report.Genesis.Digest != [32]byte(g.Digest) || report.Genesis.ContentHash != [32]byte(identity.OpaqueContentHash(genesisRaw)) {
+		t.Fatal("Genesis authority link invalid", err)
+	}
 	aborts, retries, links, candidates, conflicts, draws := 0, 0, 0, 0, 0, 0
 	var contested [][32]byte
 	for _, a := range report.Attempts {
@@ -138,9 +147,10 @@ func TestReferenceF1IntegratedProvenance(t *testing.T) {
 				read(ref)
 			}
 			if len(link.Conflicts) != 0 {
-				if link.Candidate == nil {
-					t.Fatal("contested decision missing candidate")
+				if link.Candidate == nil || link.Assessment == nil {
+					t.Fatal("contested decision missing candidate or assessment")
 				}
+				read(*link.Assessment)
 				contested = append(contested, link.Candidate.ID)
 			}
 			for _, e := range link.ProducedEvents {

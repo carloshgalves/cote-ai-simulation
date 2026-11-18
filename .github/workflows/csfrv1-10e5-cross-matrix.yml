@@ -75,7 +75,7 @@ jobs:
           set -euo pipefail
           # The child entrypoint only does work when spawned by its parent.
           # Exclude its standalone no-op from the reported regression passes.
-          go test -json -count=1 -timeout=15m ./internal/csf/commit -run '^(TestReferenceE[1-4]|TestReferenceD3)' -skip '^TestReferenceE2RecoveryProcessChild | tee /tmp/e5-regressions.jsonl
+          go test -json -count=1 -timeout=15m ./internal/csf/commit -run '^(TestReferenceE[1-4]|TestReferenceD3)' -skip '^TestReferenceE2RecoveryProcessChild$' | tee /tmp/e5-regressions.jsonl
           python - /tmp/e5-regressions.jsonl <<'PY'
           import sys, json
           events = [json.loads(line) for line in open(sys.argv[1])]

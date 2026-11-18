@@ -149,7 +149,8 @@ func referenceC3AbortRetry(ctx context.Context,path string,b *policy.Bundle,g *g
             Operation:"resource.consume",Producer:"resource.consume"}},
         g.WorldSeed,nil)
     if err!=nil{return out,fmt.Errorf("C3 authentic validator input: %w",err)}
-    evaluated,validationErr:=decision.Run(request)
+    referencePermute(options.order,"abort-validator-inputs",request.Units)
+    evaluated,validationErr:=decision.RunWithWorkerOrder(request,referenceWorkerOrder(options.order,"abort-validator-workers",len(request.Admitted)))
     if !errors.Is(validationErr,decision.ErrIndeterminate)||
         len(evaluated.Indeterminate)!=2||len(evaluated.Dispositions)!=0 {
         return out,fmt.Errorf("C3 validator did not return 2 INDETERMINATE and 0 final dispositions: %w",validationErr)

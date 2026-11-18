@@ -1,0 +1,100 @@
+name: CSFRV1-10E5 crossed adversarial matrix
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "internal/csf/**"
+      - "internal/physicalhost/**"
+      - "src/embodiment/**"
+      - "docs/reference-run/csfrv1-10e5/**"
+      - ".github/workflows/csfrv1-10e5-cross-matrix.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: csfrv1-10e5-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  crossed-adversarial:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      PHYSICAL_A1_PRODUCER_TEST: "1"
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Install pinned A1 integration dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+          python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-e5
+          find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
+      - name: Bind evidence to the exact PR head
+        run: |
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          git diff --check 8c564e91c9841ecb6469e6ac629641f0a788f5cc...HEAD
+          mkdir -m 700 /tmp/e5-evidence
+      - name: Real signed-pair E5 matrix
+        env:
+          CSF_E5_EVIDENCE_PATH: "/tmp/e5-evidence/normal.json"
+        run: |
+          set -euo pipefail
+          go test -json -count=1 ./internal/csf/commit -run '^TestReferenceE5' | tee /tmp/e5-normal.jsonl
+          python docs/reference-run/csfrv1-10e5/verify_matrix.py /tmp/e5-evidence/normal.json /tmp/e5-normal.jsonl "$SOURCE_SHA" /tmp/e5-evidence/normal-verified.json
+      - name: Same matrix under race detector
+        env:
+          CSF_E5_EVIDENCE_PATH: "/tmp/e5-evidence/race.json"
+        run: |
+          set -euo pipefail
+          # Measured ~42-52 seconds per instrumented integrated case.
+          # A finite 25m budget retains the entire 22-case matrix.
+          go test -race -json -count=1 -timeout=25m ./internal/csf/commit -run '^TestReferenceE5' | tee /tmp/e5-race.jsonl
+          python docs/reference-run/csfrv1-10e5/verify_matrix.py /tmp/e5-evidence/race.json /tmp/e5-race.jsonl "$SOURCE_SHA" /tmp/e5-evidence/race-verified.json
+      - name: Publish hash-only matrix, never databases or raw source bytes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: csfrv1-10e5-safe-matrix-${{ github.run_attempt }}
+          path: /tmp/e5-evidence/*.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: E1-E4 and D3 predecessor regressions, actual non-skipped tests
+        run: |
+          set -euo pipefail
+          # The subprocess helper is exercised by its actual parent test.
+          # Its standalone no-op must not count as regression evidence.
+          go test -json -count=1 -timeout=15m ./internal/csf/commit -run '^(TestReferenceE[1-4]|TestReferenceD3)' -skip '^TestReferenceE2RecoveryProcessChild$' | tee /tmp/e5-regressions.jsonl
+          python - /tmp/e5-regressions.jsonl <<'PY'
+          import sys, json
+          events = [json.loads(line) for line in open(sys.argv[1])]
+          tests = {x.get("Test") for x in events if x["Action"] == "pass" and x.get("Test") and "/" not in x["Test"]}
+          required = {
+              "TestReferenceE1SameSignedSourcesWholeCausalAndOwnerByteTranscript",
+              "TestReferenceE2FourteenAtomicPhysicalFaultsReopenAndConvergeOnExactD3",
+              "TestReferenceE2SevenPhysicalAtomicFaultsNewProcessRecovery",
+              "TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs",
+              "TestReferenceE3D3PostPhysicalTailHistoricalOwnerDeniedNewCutRestored",
+              "TestReferenceE4C4TwoChildrenAndIndependentTails",
+              "TestReferenceE4D3RejectUnfinishedSourceAndUnsupportedPhysicalFork",
+              "TestReferenceD3RealPythonPrivateEventAndLiveObservatory",
+          }
+          if not required <= tests or any(x["Action"] in ("fail", "skip") for x in events if x.get("Test")):
+              raise SystemExit("missing or failed/skipped required predecessor test")
+          print(f"Verified {len(tests)} actual predecessor test passes")
+          PY
+      - name: Kernel, persistence and owner regressions
+        run: |
+          go test -count=1 ./internal/csf/decision ./internal/csf/admission ./internal/csf/inputledger ./internal/csf/persistence/sqlite ./internal/csf/ownercheckpoint/... ./internal/csf/contextboundary ./internal/csf/perception ./internal/csf/adapter/embodimentv1
+          go vet ./internal/csf/commit ./internal/csf/persistence/sqlite

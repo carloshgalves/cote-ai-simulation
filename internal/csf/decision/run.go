@@ -11,6 +11,25 @@ import (
 )
 
 func Run(input Input)(Result,error){
+ return run(input,nil)
+}
+
+// RunWithWorkerOrder evaluates the independent validation/candidate work in
+// the given host order, while preserving the normative fence order for
+// alias resolution, canonical evidence, conflict semantics and disposition.
+// Indices are a complete permutation of the admitted cohort, not authority.
+func RunWithWorkerOrder(input Input, workerOrder []int)(Result,error){
+ if workerOrder==nil{return Run(input)}
+ if len(workerOrder)!=len(input.Admitted){return Result{},fmt.Errorf("%w: incomplete worker permutation",ErrProvenance)}
+ seen:=make(map[int]bool,len(workerOrder))
+ for _,i:=range workerOrder{
+  if i<0||i>=len(input.Admitted)||seen[i]{return Result{},fmt.Errorf("%w: invalid worker permutation",ErrProvenance)}
+  seen[i]=true
+ }
+ return run(input,workerOrder)
+}
+
+func run(input Input,workerOrder []int)(Result,error){
  result:=Result{PostAvailable:input.Snapshot.Available}
  if input.Bundle==nil{return result,errors.New("canonical bundle missing")}
  // A registered 32-byte causal ID is identified by its derivation and
@@ -59,7 +78,12 @@ func Run(input Input)(Result,error){
  blocked:=map[domain.ID]bool{}
  accessBlocked:=map[domain.ID]bool{}
  current:=map[domain.ID]int64{}
- for _,p:=range ordered{
+ workers:=ordered
+ if workerOrder!=nil{
+  workers=make([]prepared,len(ordered))
+  for i,index:=range workerOrder{workers[i]=ordered[index]}
+ }
+ for _,p:=range workers{
   if p.noProposal{noProposals[p.id]=true;continue}
   if p.aliasFound{aliases[p.id]=true;continue}
   if p.indeterminate||!input.Snapshot.Known {
@@ -107,6 +131,16 @@ func Run(input Input)(Result,error){
   }
   result.Candidates=append(result.Candidates,candidate)
   current[candidate.ID]=p.amount
+ }
+ // Worker completion order cannot enter the canonical provisional seal.
+ // At this point each independent output is rooted in exactly one admitted
+ // unit. Candidate-level indeterminates are derived only in later stages.
+ if workerOrder!=nil{
+  rank:=make(map[domain.ID]int,len(input.Admitted))
+  for i,id:=range input.Admitted{rank[id]=i}
+  sort.Slice(result.Assessments,func(i,j int)bool{return rank[result.Assessments[i].Subject]<rank[result.Assessments[j].Subject]})
+  sort.Slice(result.Candidates,func(i,j int)bool{return rank[result.Candidates[i].SourceUnitIDs[0]]<rank[result.Candidates[j].SourceUnitIDs[0]]})
+  sort.Slice(result.Indeterminate,func(i,j int)bool{return rank[result.Indeterminate[i].Subject]<rank[result.Indeterminate[j].Subject]})
  }
  if len(result.Indeterminate)>0 {
   result.Failure="INDETERMINATE_FACET"

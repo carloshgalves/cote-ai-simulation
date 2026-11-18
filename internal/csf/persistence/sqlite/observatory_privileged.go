@@ -254,6 +254,14 @@ func (q *PrivilegedReader) ReadPrivilegedReport(ctx context.Context, run [32]byt
 	if err != nil {
 		return empty, fmt.Errorf("privileged causal replay: %w", err)
 	}
+	root, err := q.base.store.ValidatedGenesis(ctx, run, q.base.bundle)
+	if err != nil {
+		return empty, err
+	}
+	genesisRef := observatory.GenesisAuthority{
+		Run: run, GenesisID: [32]byte(root.ID), Digest: [32]byte(root.Digest),
+		ContentHash: [32]byte(identity.OpaqueContentHash(root.CanonicalBytes)),
+	}
 	snap, err := q.snapshot(ctx, run)
 	if err != nil {
 		return empty, err
@@ -307,7 +315,7 @@ func (q *PrivilegedReader) ReadPrivilegedReport(ctx context.Context, run [32]byt
 		return empty, observatory.ErrSourceChanged
 	}
 	return observatory.PrivilegedReport{
-		State: state, Commits: commits, Attempts: finalized,
+		State: state, Genesis: genesisRef, Commits: commits, Attempts: finalized,
 		PendingUnits: len(pending), PendingClosureSources: missingClosures,
 		PendingPerceptionTasks: missingTasks, RejectedIngress: "NOT_PERSISTED",
 	}, nil

@@ -36,6 +36,17 @@ type DecisionLink struct {
 	ProducedEvents []AuthorityRef
 }
 
+// PerceptionLink binds one task to the exact committed Event. A missing
+// completion represents pending work; evidence is never inferred from an
+// event's existence. Observations and KnowledgeInputs are refs only.
+type PerceptionLink struct {
+	Event           AuthorityRef
+	Task            AuthorityRef
+	Completion      *AuthorityRef
+	Observations    []AuthorityRef
+	KnowledgeInputs []AuthorityRef
+}
+
 // CausalCommit is a privileged, verified, immutable summary of one terminal
 // CycleCommit. It contains references and causal metadata, not actor context.
 type CausalCommit struct {
@@ -56,6 +67,7 @@ type CausalCommit struct {
 	Admitted        []AuthorityRef
 	Decisions       []AuthorityRef
 	DecisionLinks   []DecisionLink
+	PerceptionLinks []PerceptionLink
 	Events          []AuthorityRef
 	Tasks           []AuthorityRef
 	Completions     []AuthorityRef

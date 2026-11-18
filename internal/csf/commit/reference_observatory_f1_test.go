@@ -156,8 +156,24 @@ func TestReferenceF1IntegratedProvenance(t *testing.T) {
 				}
 			}
 		}
-		if len(c.Evidence) != 0 {
-			addressed += len(c.Evidence)
+		if len(c.PerceptionLinks) != len(c.Tasks) {
+			t.Fatal("perception link roster differs from committed tasks")
+		}
+		for _, link := range c.PerceptionLinks {
+			raw := read(link.Task)
+			value, err := codec.StrictDecodePayload(raw)
+			if err != nil || !bytes.Equal(value.([]any)[3].([]byte), link.Event.ID[:]) {
+				t.Fatal("task-to-event link absent or forged", err)
+			}
+			read(link.Event)
+			if link.Completion == nil {
+				t.Fatal("completed D3 retained an unfinished task")
+			}
+			read(*link.Completion)
+			for _, refs := range [][]observatory.AuthorityRef{link.Observations, link.KnowledgeInputs} {
+				for _, ref := range refs { read(ref) }
+			}
+			addressed += len(link.Observations) + len(link.KnowledgeInputs)
 		}
 	}
 	if links == 0 || candidates == 0 || conflicts != 2 || draws != 2 || len(contested) != 2 || contested[0] == contested[1] || physical != 2 || addressed != 2 {
@@ -227,6 +243,19 @@ func TestReferenceF1IntegratedProvenance(t *testing.T) {
 	if restored, err := q.ReadPrivilegedReport(ctx, run); err != nil || !reflect.DeepEqual(restored, report) {
 		t.Fatal("positive control did not recover after restoration", err)
 	}
+	// A valid candidate record under an unrelated SQL key must not be
+	// ignored just because no terminal decision cites the forged key.
+	orphan := contested[0]
+	orphan[0] ^= 0xff
+	if _, err := admin.ExecContext(ctx, "INSERT INTO decision_ledger(id,canonical) VALUES(?,?)", orphan[:],candidateRaw); err != nil {
+		t.Fatal(err)
+	}
+	damaged = referenceE2Capture(t,path,owner)
+	if bad,err := q.ReadPrivilegedReport(ctx,run); err==nil || !reflect.DeepEqual(bad,observatory.PrivilegedReport{}) {
+		t.Fatal("orphan candidate acquired verified report",err)
+	}
+	if err:=referenceE1Compare(damaged,referenceE2Capture(t,path,owner));err!=nil{t.Fatal(err)}
+	if _,err:=admin.ExecContext(ctx,"DELETE FROM decision_ledger WHERE id=?",orphan[:]);err!=nil{t.Fatal(err)}
 	if err := referenceE1Compare(before, referenceE2Capture(t, path, owner)); err != nil {
 		t.Fatal("restored transcript differs", err)
 	}

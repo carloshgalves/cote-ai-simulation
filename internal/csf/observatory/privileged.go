@@ -19,6 +19,23 @@ type RevisionAuthority struct {
 	ContentHash [32]byte
 }
 
+// DecisionLink explicitly binds a terminal DecisionRecord to a source in
+// its authenticated fence. The optional candidate and referenced conflict
+// and draw records are immutable authority refs, not raw proof bodies.
+// ProducedEvents is a subset of the commit event roster (lifecycle events
+// may have no individual decision owner).
+type DecisionLink struct {
+	Decision       AuthorityRef
+	Source         AuthorityRef
+	SourceDigest   [32]byte
+	DecisionDigest [32]byte
+	Status         uint64
+	Candidate      *AuthorityRef
+	Conflicts      []AuthorityRef
+	Draws          []AuthorityRef
+	ProducedEvents []AuthorityRef
+}
+
 // CausalCommit is a privileged, verified, immutable summary of one terminal
 // CycleCommit. It contains references and causal metadata, not actor context.
 type CausalCommit struct {
@@ -38,6 +55,7 @@ type CausalCommit struct {
 	Closures        []AuthorityRef
 	Admitted        []AuthorityRef
 	Decisions       []AuthorityRef
+	DecisionLinks   []DecisionLink
 	Events          []AuthorityRef
 	Tasks           []AuthorityRef
 	Completions     []AuthorityRef

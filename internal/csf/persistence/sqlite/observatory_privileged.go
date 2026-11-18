@@ -304,7 +304,7 @@ func (q *PrivilegedReader) ReadPrivilegedReport(ctx context.Context, run [32]byt
 		return empty, err
 	}
 	if version != versionNow || !reflect.DeepEqual(state, after) {
-		return empty, errors.New("privileged report authorities changed during verification")
+		return empty, observatory.ErrSourceChanged
 	}
 	return observatory.PrivilegedReport{
 		State: state, Commits: commits, Attempts: finalized,

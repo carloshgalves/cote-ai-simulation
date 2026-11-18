@@ -38,6 +38,7 @@ type ReferenceOptions struct {
 	// Never treat a request field or decoded report as an installed bundle.
 	physicalBundle *policy.Bundle
 	order *referenceOrder
+	stopAfterAuthorizedRetry bool // reference harness cut only; no new terminal or admission
 	ReverseSources   bool
 	ReverseResponses bool
 	LeaveSourceOpen  bool  // negative control; must stop before the first fence

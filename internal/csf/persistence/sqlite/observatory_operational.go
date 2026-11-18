@@ -31,15 +31,15 @@ func (q *PrivilegedReader) ReadOperationalReport(ctx context.Context, run [32]by
 	if err != nil {
 		return zero, err
 	}
+	// Distinguish an incompatible installed codec/extension from a broken
+	// causal replay. This is diagnostic only, never a substitute for the
+	// complete Genesis + lineage + replay checks in ReadPrivilegedReport.
+	if err := q.operationalPins(ctx, run); err != nil {
+		return zero, operationalAuthorityError(ctx, err)
+	}
 	verified, err := q.ReadPrivilegedReport(ctx, run)
 	if err != nil {
-		if ctx.Err() != nil {
-			return zero, ctx.Err()
-		}
-		if errors.Is(err, observatory.ErrSourceChanged) || errors.Is(err, observatory.ErrInvalidPolicy) {
-			return zero, err
-		}
-		return zero, fmt.Errorf("%w: %v", observatory.ErrInvalidReplay, err)
+		return zero, operationalAuthorityError(ctx, err)
 	}
 	out := observatory.OperationalReport{
 		State: verified.State, PendingPerceptionTasks: verified.PendingPerceptionTasks,
@@ -47,7 +47,7 @@ func (q *PrivilegedReader) ReadOperationalReport(ctx context.Context, run [32]by
 	}
 	pending, err := q.base.store.PendingClock(ctx, run)
 	if err != nil {
-		return zero, err
+		return zero, operationalAuthorityError(ctx, err)
 	}
 	plan, exists, err := clock.Next(out.State.Clock, pending)
 	if err != nil {
@@ -60,13 +60,13 @@ func (q *PrivilegedReader) ReadOperationalReport(ctx context.Context, run [32]by
 	for _, item := range pending {
 		p, err := q.operationalPending(ctx, run, item)
 		if err != nil {
-			return zero, err
+			return zero, operationalAuthorityError(ctx, err)
 		}
 		out.Pending = append(out.Pending, p)
 	}
 	out.Sources, err = q.operationalSources(ctx, run, out.NextPendingEligibility)
 	if err != nil {
-		return zero, err
+		return zero, operationalAuthorityError(ctx, err)
 	}
 	last, err := q.base.dataVersion(ctx)
 	if err != nil {
@@ -195,4 +195,60 @@ func (q *PrivilegedReader) operationalSources(ctx context.Context, run [32]byte,
 		out = append(out, d)
 	}
 	return out, nil
+}
+
+func operationalAuthorityError(ctx context.Context, err error) error {
+	if ctx.Err() != nil {
+		return ctx.Err()
+	}
+	if errors.Is(err, observatory.ErrSourceChanged) || errors.Is(err, observatory.ErrInvalidPolicy) ||
+		errors.Is(err, observatory.ErrInvalidReplay) {
+		return err
+	}
+	return fmt.Errorf("%w: %w", observatory.ErrInvalidReplay, err)
+}
+
+// Only classify mismatches of installed pins here. Malformed authority
+// or unrelated Genesis tampering is reserved for replay failure. No
+// successful diagnostic is returned unless the actual replay passes.
+func (q *PrivilegedReader) operationalPins(ctx context.Context, run [32]byte) error {
+	raw, err := q.base.store.LoadGenesis(ctx, run)
+	if err != nil {
+		return err
+	}
+	env, err := codec.StrictDecodeEnvelope(raw)
+	if err != nil {
+		return err
+	}
+	f, ok := env.Value.([]any)
+	if !ok || len(f) != 18 || !equalBytes(f[0], run[:]) {
+		return errors.New("malformed Genesis authority")
+	}
+	id, version, codecHash, schemaHash, err := q.base.bundle.CodecIdentity()
+	if err != nil {
+		return fmt.Errorf("%w: %w", observatory.ErrInvalidPolicy, err)
+	}
+	if env.SchemaVersion != 1 || f[5] != id || !sameCanonical(f[6], uint64(version)) ||
+		!equalBytes(f[10], codecHash[:]) || !equalBytes(f[11], schemaHash[:]) {
+		return observatory.ErrInvalidPolicy
+	}
+	extension, ok := f[12].([]any)
+	if !ok {
+		return errors.New("malformed Genesis extension roster")
+	}
+	reg, err := q.base.bundle.PhysicalRegistration()
+	if err != nil {
+		if len(extension) != 0 {
+			return observatory.ErrInvalidPolicy
+		}
+		return nil
+	}
+	if len(extension) != 1 {
+		return observatory.ErrInvalidPolicy
+	}
+	ref, ok := extension[0].([]any)
+	if !ok || len(ref) != 2 || ref[0] != reg.ExtensionID || !equalBytes(ref[1], reg.BundleSHA256[:]) {
+		return observatory.ErrInvalidPolicy
+	}
+	return nil
 }

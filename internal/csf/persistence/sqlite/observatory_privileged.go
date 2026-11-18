@@ -512,8 +512,7 @@ func (q *PrivilegedReader) readCommits(ctx context.Context, run [32]byte,
 		if err != nil {
 			return nil, fmt.Errorf("CycleCommit %x world revision: %w", entry.commit, err)
 		}
-		c.Completions, c.Evidence, err = q.o2TaskEvidence(ctx, run, c.Tasks)
-		if err != nil {
+		if err := q.o2PerceptionLinks(ctx, run, &c); err != nil {
 			return nil, fmt.Errorf("CycleCommit %x addressed evidence: %w", entry.commit, err)
 		}
 		if a := attempts[k]; a != nil {
@@ -539,6 +538,25 @@ func (q *PrivilegedReader) readCommits(ctx context.Context, run [32]byte,
 		}
 		if i > 0 && c.BaseWorldHash != out[i-1].ResultWorldHash {
 			return nil, fmt.Errorf("privileged causal world hash chain diverged at %d", i)
+		}
+	}
+	// Replay verifies every referenced candidate. Also reject a valid-looking
+	// unreferenced candidate in the same privileged ledger, rather than
+	// silently certifying an incomplete candidate roster.
+	candidateRoster := map[[32]byte]bool{}
+	for _, commit := range out {
+		for _, link := range commit.DecisionLinks {
+			if link.Candidate != nil {
+				candidateRoster[link.Candidate.ID] = true
+			}
+		}
+	}
+	for id, record := range records {
+		f := record.fields
+		if len(f) == 17 && o2IsID(f[0]) && o2IsID(f[1]) && o2IsID(f[2]) && o2IsID(f[16]) {
+			if !candidateRoster[id] {
+				return nil, fmt.Errorf("orphan or foreign candidate authority %x", id)
+			}
 		}
 	}
 	return out, nil

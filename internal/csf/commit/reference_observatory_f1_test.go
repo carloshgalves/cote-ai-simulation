@@ -94,6 +94,7 @@ func TestReferenceF1IntegratedProvenance(t *testing.T) {
 		t.Fatal("historical abort/retry disappeared")
 	}
 	physical, addressed := 0, 0
+	seenEvidence := map[[32]byte]bool{}
 	for _, c := range report.Commits {
 		read(c.Fence)
 		read(c.Commit)
@@ -181,12 +182,18 @@ func TestReferenceF1IntegratedProvenance(t *testing.T) {
 			}
 			read(*link.Completion)
 			for _, refs := range [][]observatory.AuthorityRef{link.Observations, link.KnowledgeInputs} {
-				for _, ref := range refs { read(ref) }
+				for _, ref := range refs {
+					read(ref)
+					if seenEvidence[ref.ID] {
+						t.Fatal("evidence linked to more than one task")
+					}
+					seenEvidence[ref.ID] = true
+				}
 			}
 			addressed += len(link.Observations) + len(link.KnowledgeInputs)
 		}
 	}
-	if links == 0 || candidates == 0 || conflicts != 2 || draws != 2 || len(contested) != 2 || contested[0] == contested[1] || physical != 2 || addressed != 2 {
+	if links == 0 || candidates == 0 || conflicts != 2 || draws != 2 || len(contested) != 2 || contested[0] == contested[1] || physical != 2 || addressed != 12 || addressed != len(before.Databases["causal"].Tables["evidence_ledger"].Rows) || len(seenEvidence) != addressed {
 		t.Fatalf("incomplete chain links=%d candidates=%d conflict=%d draws=%d physics=%d evidence=%d", links, candidates, conflicts, draws, physical, addressed)
 	}
 	if err := db.Close(); err != nil {

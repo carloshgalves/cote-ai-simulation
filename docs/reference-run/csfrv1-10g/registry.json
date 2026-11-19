@@ -301,19 +301,6 @@
       "kind": "INTEGRATED",
       "subtests": []
     },
-    "g3-clock-atomic": {
-      "path": "internal/csf/commit/clock_advance_test.go",
-      "name": "TestAdvanceAtomicRollbackAtEveryWriteBoundary",
-      "kind": "INTEGRATED",
-      "subtests": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
-    },
     "g3-clock-origin": {
       "path": "internal/csf/commit/clock_advance_test.go",
       "name": "TestClockAdvancePublishesCycleAndPendingActivation",
@@ -743,7 +730,7 @@
       "eval": "determinism",
       "state": "READY",
       "witnesses": [
-        "g3-clock-atomic",
+        "g2-atomic-trigger",
         "g2-no-proposal-atomic",
         "g2-system-terminal",
         "g3-crash-contest",
@@ -1207,7 +1194,7 @@
         "g3-e2-physical-atomic",
         "g3-crash-contest",
         "g3-crash-message",
-        "g3-clock-atomic"
+        "g2-atomic-trigger"
       ],
       "reason": "All fourteen real signed epoch CommitWork rollback boundaries and exact recovered D3, mixed resource and communication recovery cuts, atomic temporal publication."
     },
@@ -1711,7 +1698,7 @@
         "g3-second-abort",
         "g3-frozen-advance",
         "g3-ordinal-gap",
-        "g3-clock-atomic",
+        "g2-atomic-trigger",
         "g3-clock-origin",
         "g3-clock-replay-corruption",
         "g3-rehashed-topology",
@@ -1750,7 +1737,6 @@
         "g3-earlier-round",
         "g3-postfence-round",
         "g2-event-revision-roster",
-        "g2-atomic-trigger",
         "g2-trigger-cold",
         "g2-fence-mixed",
         "g2-same-source-permutation",

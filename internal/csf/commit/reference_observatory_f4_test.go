@@ -77,21 +77,9 @@ func TestReferenceF4ConcurrentReadOnly(t *testing.T) {
 		t.Fatal(err)
 	}
 	before := referenceE2Capture(t, path, owner)
-	// Discover both owner DBs under the private test directory rather than
-	// relying on the exact names of the owner provisioning helper.
-	files := []string{path, sidecar}
-	entries, err := os.ReadDir(filepath.Dir(owner))
-	if err != nil {
-		t.Fatal(err)
-	}
-	for _, entry := range entries {
-		if !entry.IsDir() && filepath.Ext(entry.Name()) == ".db" {
-			files = append(files, filepath.Join(filepath.Dir(owner), entry.Name()))
-		}
-	}
-	if len(files) != 4 {
-		t.Fatal("missing independent A and B owner DBs")
-	}
+	// Use the same two exact owner paths sealed by the E1 oracle, not
+	// an extension filter (A's path ends in .actor-a).
+	files := []string{path, sidecar, owner, owner + ".actor-a"}
 	raw := f4DurableFiles(t, files...)
 	audit, err := sqlite.OpenPrivilegedObservatory(ctx, path, host.Bundle)
 	if err != nil {

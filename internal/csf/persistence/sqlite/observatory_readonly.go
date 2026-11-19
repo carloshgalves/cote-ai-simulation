@@ -12,6 +12,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+	"github.com/carloshgalves/cote-ai-simulation/internal/localdbguard"
 	modernsqlite "modernc.org/sqlite"
 )
 
@@ -20,8 +21,9 @@ import (
 // All normative genesis, replay and CycleControl verification is reused from
 // Store internally; read-only mode and query_only independently reject writes.
 type ObservatoryReader struct {
-	store  *Store
-	bundle *policy.Bundle
+	store   *Store
+	bundle  *policy.Bundle
+	pathPin *localdbguard.Pin
 }
 
 var _ observatory.Queries = (*ObservatoryReader)(nil)
@@ -33,11 +35,11 @@ func OpenObservatory(ctx context.Context, path string, bundle *policy.Bundle) (*
 	if err := bundle.VerifyInstalledBundle(); err != nil {
 		return nil, fmt.Errorf("%w: %v", observatory.ErrInvalidPolicy, err)
 	}
-	absolute, err := filepath.Abs(path)
+	pin, err := localdbguard.OpenPin(path)
 	if err != nil {
 		return nil, err
 	}
-	uri := &url.URL{Scheme: "file", Path: filepath.ToSlash(absolute)}
+	uri := &url.URL{Scheme: "file", Path: filepath.ToSlash(pin.Path())}
 	q := url.Values{}
 	// DO NOT use immutable=1: it ignores the live WAL and can silently
 	// return a stale run. mode=ro is enforced by the SQLite pager.
@@ -71,7 +73,10 @@ func OpenObservatory(ctx context.Context, path string, bundle *policy.Bundle) (*
 		return failed(errors.New("observatory SQLite connection is not query_only"))
 	}
 	// Deliberately no Store.createSchema and no writable Store export.
-	return &ObservatoryReader{store: s, bundle: bundle}, nil
+	if err := pin.Check(); err != nil {
+		return failed(err)
+	}
+	return &ObservatoryReader{store: s, bundle: bundle, pathPin: pin}, nil
 }
 
 func (r *ObservatoryReader) Close() error {
@@ -82,9 +87,17 @@ func (r *ObservatoryReader) Close() error {
 }
 
 func (r *ObservatoryReader) dataVersion(ctx context.Context) (int64, error) {
+	if err := r.pathPin.Check(); err != nil {
+		return 0, fmt.Errorf("%w: %v", observatory.ErrSourceChanged, err)
+	}
 	var version int64
-	err := r.store.db.QueryRowContext(ctx, "PRAGMA data_version").Scan(&version)
-	return version, err
+	if err := r.store.db.QueryRowContext(ctx, "PRAGMA data_version").Scan(&version); err != nil {
+		return 0, err
+	}
+	if err := r.pathPin.Check(); err != nil {
+		return 0, fmt.Errorf("%w: %v", observatory.ErrSourceChanged, err)
+	}
+	return version, nil
 }
 
 // ReadRun reuses the existing replay verifier rather than implementing a

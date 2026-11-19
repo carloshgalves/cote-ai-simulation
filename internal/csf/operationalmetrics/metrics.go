@@ -160,6 +160,32 @@ func OpenRecorder(ctx context.Context, causal, sidecar string) (*Recorder, error
 	if err != nil {
 		return nil, err
 	}
+	// Opening an arbitrary existing file read/write can run SQLite
+	// recovery before user_version or schema is checked. Never do that.
+	// Metrics use a rollback journal, not WAL, and a dirty shutdown
+	// requires explicit operator recovery rather than automatic writes.
+	if !fresh {
+		for _, suffix := range []string{"-journal", "-wal", "-shm"} {
+			if _, err := os.Lstat(p + suffix); !errors.Is(err, os.ErrNotExist) {
+				return nil, errors.New("operational database has an active/recovery pager companion")
+			}
+		}
+		preflight, err := openDB(ctx, p, "ro")
+		if err != nil {
+			return nil, err
+		}
+		err = verifyVersionedSchema(ctx, preflight)
+		closeErr := preflight.Close()
+		if err != nil {
+			return nil, err
+		}
+		if closeErr != nil {
+			return nil, closeErr
+		}
+		if err := pin.Check(); err != nil {
+			return nil, err
+		}
+	}
 	db, err := openDB(ctx, p, "rw")
 	if err != nil {
 		return nil, err
@@ -217,6 +243,17 @@ func (r *Recorder) Close() error {
 type schemaReader interface {
 	QueryContext(context.Context, string, ...any) (*sql.Rows, error)
 }
+func verifyVersionedSchema(ctx context.Context, db *sql.DB) error {
+	var version int
+	if err := db.QueryRowContext(ctx, "PRAGMA user_version").Scan(&version); err != nil {
+		return err
+	}
+	if version != 1 {
+		return errors.New("unsupported operational schema version")
+	}
+	return verifySchema(ctx, db)
+}
+
 func verifySchema(ctx context.Context, reader schemaReader) error {
 	expected := map[string]string{}
 	for _, stmt := range strings.Split(strings.TrimSpace(schema), ";") {

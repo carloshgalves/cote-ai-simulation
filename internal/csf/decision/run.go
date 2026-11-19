@@ -86,22 +86,9 @@ func run(input Input,workerOrder []int,parallelism int)(Result,error){
  blocked:=map[domain.ID]bool{}
  accessBlocked:=map[domain.ID]bool{}
  current:=map[domain.ID]int64{}
- workers:=ordered
- if workerOrder!=nil{
-  workers=make([]prepared,len(ordered))
-  for i,index:=range workerOrder{workers[i]=ordered[index]}
- }
- outcomes:=evaluateWorkers(workers,parallelism,func(p prepared)(preparedOutcome,error){
+ outcomes:=evaluateCanonicalWorkers(ordered,workerOrder,parallelism,func(p prepared)(preparedOutcome,error){
   return evaluatePrepared(d,input,p,refs)
  })
- // Normalize even error/partial outcomes before the first merge. Failure
- // precedence, assessment prefixes and dispositions cannot depend on the
- // chosen worker schedule. Each host index points to a fence index.
- if workerOrder!=nil{
-  canonical:=make([]workerOutcome,len(ordered))
-  for hostIndex,fenceIndex:=range workerOrder{canonical[fenceIndex]=outcomes[hostIndex]}
-  outcomes=canonical
- }
  for i,out:=range outcomes{
   p:=ordered[i]
   if p.noProposal{noProposals[p.id]=true;continue}

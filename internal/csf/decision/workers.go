@@ -49,6 +49,24 @@ func evaluateWorkers(units []prepared, parallelism int, evaluate func(prepared) 
 	return out
 }
 
+// evaluateCanonicalWorkers preserves fence positions even if a worker returns
+// partial evidence and an error. The caller must validate the permutation.
+func evaluateCanonicalWorkers(ordered []prepared, workerOrder []int, parallelism int, evaluate func(prepared) (preparedOutcome, error)) []workerOutcome {
+	if workerOrder == nil {
+		return evaluateWorkers(ordered, parallelism, evaluate)
+	}
+	workers := make([]prepared, len(ordered))
+	for i, index := range workerOrder {
+		workers[i] = ordered[index]
+	}
+	outcomes := evaluateWorkers(workers, parallelism, evaluate)
+	canonical := make([]workerOutcome, len(ordered))
+	for hostIndex, fenceIndex := range workerOrder {
+		canonical[fenceIndex] = outcomes[hostIndex]
+	}
+	return canonical
+}
+
 func evaluatePrepared(d identity.Deriver, input Input, p prepared, refs map[string][]any) (preparedOutcome, error) {
 	var out preparedOutcome
 	if p.noProposal || p.aliasFound {

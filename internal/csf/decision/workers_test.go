@@ -77,29 +77,24 @@ func TestG3ParallelDecisionCanonicalAndInvalidCounts(t *testing.T) {
 			}
 		}
 	}
-	// Remove only the candidate ID operation from a test-local bundle. Each
-	// worker now fails AFTER producing its assessment. The observed partial
-	// result must start with the first admitted subject, not the first worker.
-	in, a, _ := fixture(t, true)
-	entries := in.Bundle.Registries["domain_operations"].([]any)
-	filtered := make([]any, 0, len(entries))
-	for _, entry := range entries {
-		if entry.([]any)[0] != "cote.csf.id.commit-candidate" {
-			filtered = append(filtered, entry)
+	// Inject worker-local faults at the same scheduling boundary used by Run.
+	// Mutating an installed policy bundle would instead fail its seal before
+	// any worker runs, and would not exercise this partial-outcome path.
+	first, second := errors.New("first worker fault"), errors.New("second worker fault")
+	units := []prepared{{id: domain.ID{1}}, {id: domain.ID{2}}}
+	evaluate := func(p prepared) (preparedOutcome, error) {
+		out := preparedOutcome{Result: Result{Assessments: []Assessment{{Subject: p.id}}}}
+		if p.id == units[0].id {
+			return out, first
 		}
-	}
-	if len(filtered) != len(entries)-1 {
-		t.Fatal("candidate operation mutation did not remove exactly one entry")
-	}
-	in.Bundle.Registries["domain_operations"] = filtered
-	base, baseErr := Run(in)
-	if baseErr == nil || len(base.Assessments) != 1 || base.Assessments[0].Subject != a.ID || len(base.Canonical) != 0 || len(base.Dispositions) != 0 {
-		t.Fatal("expected an unsealed assessment prefix before candidate derivation failure", baseErr)
+		return out, second
 	}
 	for _, count := range []int{1, 2, 4} {
-		got, err := RunWithParallelism(in, []int{1, 0}, count)
-		if err == nil || err.Error() != baseErr.Error() || !reflect.DeepEqual(base, got) {
-			t.Fatal("worker failure changed the canonical assessment prefix", count, err)
+		got := evaluateCanonicalWorkers(units, []int{1, 0}, count, evaluate)
+		if len(got) != 2 || !errors.Is(got[0].err, first) || !errors.Is(got[1].err, second) ||
+			len(got[0].value.Assessments) != 1 || len(got[1].value.Assessments) != 1 ||
+			got[0].value.Assessments[0].Subject != units[0].id || got[1].value.Assessments[0].Subject != units[1].id {
+			t.Fatal("worker failures or partial outcomes lost fence order", count)
 		}
 	}
 }

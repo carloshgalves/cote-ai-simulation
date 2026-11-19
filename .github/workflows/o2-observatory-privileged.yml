@@ -46,9 +46,12 @@ jobs:
           files=(
             internal/csf/observatory/privileged.go
             internal/csf/persistence/sqlite/observatory_privileged.go
-            internal/csf/persistence/sqlite/observatory_privileged_attempts.go
-            internal/csf/persistence/sqlite/observatory_privileged_diagnostics.go
-            internal/csf/persistence/sqlite/observatory_privileged_evidence.go
+            internal/csf/observatory/queryhost/observatory_privileged.go
+            internal/csf/observatory/queryhost/observatory_privileged_attempts.go
+            internal/csf/observatory/queryhost/observatory_privileged_links.go
+            internal/csf/observatory/queryhost/observatory_privileged_diagnostics.go
+            internal/csf/observatory/queryhost/observatory_operational.go
+            internal/csf/observatory/queryhost/observatory_privileged_evidence.go
             internal/csf/commit/observatory_o2_integration_test.go
           )
           if [ -n "$(gofmt -l "${files[@]}")" ]; then
@@ -65,7 +68,7 @@ jobs:
       - name: O2 race detector
         run: go test -race -count=1 -timeout=16m ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/csf/observatory -run '^TestCSFRV19O2'
       - name: Static analysis
-        run: go vet ./internal/csf/observatory ./internal/csf/persistence/sqlite ./internal/csf/commit
+        run: go vet ./internal/csf/observatory/... ./internal/csf/persistence/sqlite ./internal/csf/commit
   full-go:
     runs-on: ubuntu-latest
     timeout-minutes: 40

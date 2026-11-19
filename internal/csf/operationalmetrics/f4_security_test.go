@@ -45,6 +45,22 @@ func TestF4MetricsPagerAndForeignSchema(t *testing.T) {
 			}
 		}
 	}
+	// An orphan regular journal is unsafe even when not linked. A
+	// fresh metrics open must not truncate or recover it.
+	orphan := sidecar + "-journal"
+	if err := os.WriteFile(orphan, logBytes, 0600); err != nil {
+		t.Fatal(err)
+	}
+	if r, err := OpenRecorder(ctx, causal, sidecar); err == nil {
+		r.Close()
+		t.Fatal("fresh metrics opened over an orphan journal")
+	}
+	if got, err := os.ReadFile(orphan); err != nil || !bytes.Equal(got, logBytes) {
+		t.Fatal("orphan journal damaged")
+	}
+	if err := os.Remove(orphan); err != nil {
+		t.Fatal(err)
+	}
 	if r, err := OpenRecorder(ctx, causal, log); err == nil {
 		r.Close()
 		t.Fatal("metrics accepted unrelated log")
@@ -98,6 +114,18 @@ func TestF4MetricsInjectedTriggerAndPathReplacement(t *testing.T) {
 	defer view.Close()
 	admin, err := sql.Open("sqlite", sidecar)
 	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := admin.Exec("PRAGMA user_version=2"); err != nil {
+		t.Fatal(err)
+	}
+	if err := r.Record(ctx, metricSample(2, 20)); err == nil {
+		t.Fatal("opened recorder ignored changed schema version")
+	}
+	if got, err := view.Read(ctx, s.Run, 10); err == nil || len(got) != 0 {
+		t.Fatal("opened reader ignored changed schema version")
+	}
+	if _, err := admin.Exec("PRAGMA user_version=1"); err != nil {
 		t.Fatal(err)
 	}
 	if _, err := admin.Exec("CREATE TRIGGER forged AFTER INSERT ON operational_samples BEGIN DELETE FROM operational_samples; END"); err != nil {

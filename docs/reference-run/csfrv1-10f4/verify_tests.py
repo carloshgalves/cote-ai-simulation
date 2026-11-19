@@ -21,6 +21,7 @@ expected = {
         "TestCSFRV19O1SQLiteReadOnlyModeAndIndependentQueryOnlyDefense",
         "TestF4SegregatedReadCapabilities",
     },
+    prefix + "internal/readonlysql": {"TestF4ConnectorCannotReopen"},
     prefix + "internal/localdbguard": {"TestF4ActualACLAndPinReplacement"},
     prefix + "tests/architecture": {"TestF4ReadCapabilityTransitiveDependencies"},
 }

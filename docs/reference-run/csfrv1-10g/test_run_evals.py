@@ -91,12 +91,13 @@ class CheckoutTests(unittest.TestCase):
                 subprocess.run(["git", *args], cwd=root, check=True,
                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             git("init")
-            (root / ".gitignore").write_text("*.go\\n")
+            (root / ".gitignore").write_text("*.go\n")
             git("add", ".gitignore")
             git("-c", "user.name=Test", "-c", "user.email=test@example.invalid",
                 "commit", "-m", "fixture")
             self.assertTrue(g.clean_checkout(root))
-            (root / "injected_test.go").write_text("package fixture\\n")
+            (root / "injected_test.go").write_text("package fixture\n")
+            self.assertEqual(g.git(root, "status", "--porcelain", "--untracked-files=all"), "")
             self.assertFalse(g.clean_checkout(root))
 
 

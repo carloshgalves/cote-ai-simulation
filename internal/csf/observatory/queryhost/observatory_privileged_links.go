@@ -123,8 +123,8 @@ func o2DecisionLink(run, cycle [32]byte, attempt uint64, rec o2Record,
 	// independently rederives the registered conflict and RNG semantics.
 	proofs := []struct {
 		at, size int
-		kind uint64
-		target *[]observatory.AuthorityRef
+		kind     uint64
+		target   *[]observatory.AuthorityRef
 	}{
 		{8, 7, 9, &out.Conflicts}, {11, 11, 24, &out.Draws},
 	}

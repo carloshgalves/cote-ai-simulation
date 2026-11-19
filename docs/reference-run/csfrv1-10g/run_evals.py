@@ -165,7 +165,10 @@ def execute(root, directory, witnesses):
     for wid, w in sorted(witnesses.items()):
         package = str(Path(w["path"]).parent)
         names = [w["name"], *(w["name"] + "/" + s for s in w["subtests"])]
-        results[wid] = {}
+        results[wid] = {
+            "source": w["path"], "name": w["name"], "kind": w["kind"],
+            "source_git_blob": git_blob((root / w["path"]).read_bytes()),
+        }
         for mode in ("normal", "race"):
             args = ["go", "test", "-json", "-count=1", "-timeout=15m"]
             if mode == "race":
@@ -241,6 +244,12 @@ def main():
         git(root, "ls-files", "--error-unmatch", "--", path)
         return (root / path).read_text(encoding="utf-8")
     normative = validate(registry, trace, source)
+    # Only trusted commands from this checkout are executed. No test text or
+    # executable supplied in a registry is interpreted as shell code.
+    env = dict(os.environ, GOFLAGS="", GOWORK="off", GOTOOLCHAIN="local")
+    go_version = subprocess.check_output(["go", "version"], cwd=root, env=env, text=True).strip()
+    if not re.fullmatch(r"go version go1\.27\.2 linux/\w+", go_version):
+        raise SystemExit("expected pinned Go 1.27.2 Linux toolchain")
     # Exclusive output outside repository; do not accidentally overwrite evidence.
     directory = args.out.resolve()
     if directory == root or root in directory.parents:
@@ -251,6 +260,10 @@ def main():
     if git(root, "rev-parse", "HEAD") != sha or git(root, "status", "--porcelain", "--untracked-files=all"):
         raise SystemExit("checkout changed during execution; no certificate")
     certificate = report(registry, normative, results, sha, digest(raw))
+    certificate["go_version"] = go_version
+    certificate["python_version"] = __import__("platform").python_version()
+    certificate["ci_run"] = os.environ.get("GITHUB_RUN_ID")
+    certificate["ci_attempt"] = os.environ.get("GITHUB_RUN_ATTEMPT")
     with (directory / "evidence.json").open("x", encoding="utf-8") as f:
         json.dump(certificate, f, ensure_ascii=False, indent=2)
         f.write("\n")

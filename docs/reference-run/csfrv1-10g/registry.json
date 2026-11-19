@@ -264,6 +264,366 @@
       "name": "TestReferenceG2ExactEventRevisionBijection",
       "kind": "INTEGRATED",
       "subtests": []
+    },
+    "g3-worker-overlap": {
+      "path": "internal/csf/decision/workers_test.go",
+      "name": "TestG3WorkerPoolActuallyConcurrent",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g3-worker-canonical": {
+      "path": "internal/csf/decision/workers_test.go",
+      "name": "TestG3ParallelDecisionCanonicalAndInvalidCounts",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g3-parallel-d3": {
+      "path": "internal/csf/commit/reference_eval_g3_parallel_test.go",
+      "name": "TestReferenceG3ActualParallelismWholeTranscript",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-second-abort": {
+      "path": "internal/csf/commit/reference_eval_g3_control_test.go",
+      "name": "TestReferenceG3RetryFencePrecedenceAndSecondAbort",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-frozen-advance": {
+      "path": "internal/csf/commit/reference_eval_g3_control_test.go",
+      "name": "TestReferenceG3FrozenAdvanceAfterAppend",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-ordinal-gap": {
+      "path": "internal/csf/commit/reference_eval_g3_control_test.go",
+      "name": "TestReferenceG3OrdinalGapAndAdvance",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-clock-atomic": {
+      "path": "internal/csf/commit/clock_advance_test.go",
+      "name": "TestAdvanceAtomicRollbackAtEveryWriteBoundary",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    "g3-clock-origin": {
+      "path": "internal/csf/commit/clock_advance_test.go",
+      "name": "TestClockAdvancePublishesCycleAndPendingActivation",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-clock-replay-corruption": {
+      "path": "internal/csf/commit/clock_advance_test.go",
+      "name": "TestReplayRejectsCorruptedDurableAuthority",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "definition",
+        "runtime",
+        "activation",
+        "journal",
+        "event",
+        "clock"
+      ]
+    },
+    "g3-rehashed-topology": {
+      "path": "internal/csf/commit/clock_advance_test.go",
+      "name": "TestReplayRejectsRehashedAuthorityForgeries",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "missing-declared-source-closure",
+        "later-covering-closure-instead-of-first",
+        "different-versioned-policy-ref",
+        "synthetic-event-forged-source-provenance"
+      ]
+    },
+    "g3-control-cuts": {
+      "path": "internal/csf/commit/csfrv18_snapshot_test.go",
+      "name": "TestCSFRV18SnapshotRealInFlightHaltedRetryRecovery",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "fence",
+        "halted",
+        "retry"
+      ]
+    },
+    "g3-retry-resume": {
+      "path": "internal/csf/commit/csfrv18_snapshot_test.go",
+      "name": "TestCSFRV18ReopenRetryFromVerifiedFrozenSemanticCut",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-halted": {
+      "path": "internal/csf/commit/csfrv18_snapshot_test.go",
+      "name": "TestCSFRV18HaltedNeverAutoResumesOnReconnect",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-control-tail": {
+      "path": "internal/csf/commit/csfrv18_snapshot_test.go",
+      "name": "TestCSFRV18SameRevisionFenceAbortRetryJournalTails",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-work-frozen": {
+      "path": "internal/csf/commit/csfrv18_snapshot_test.go",
+      "name": "TestCSFRV18RehydrateFrozenFenceInsteadOfReselectingCoordinate",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-crash-contest": {
+      "path": "internal/csf/commit/csfrv18_snapshot_test.go",
+      "name": "TestCSFRV18ResourceContestTriggerScheduleContinuityCrashMatrix",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "continuous",
+        "reopened",
+        "reverse-workers",
+        "crash-before-journal",
+        "crash-mid-terminal",
+        "crash-near-terminal"
+      ]
+    },
+    "g3-crash-message": {
+      "path": "internal/csf/commit/csfrv18_snapshot_test.go",
+      "name": "TestCSFRV18IntegratedResourceTriggerCommunicationInTransit",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "continuous",
+        "reverse-workers",
+        "resume-before-communication",
+        "crash-in-communication",
+        "crash-step-1",
+        "crash-step-2",
+        "crash-step-3",
+        "crash-step-5",
+        "crash-step-6",
+        "crash-step-7"
+      ]
+    },
+    "g3-in-transit": {
+      "path": "internal/csf/commit/csfrv18_snapshot_test.go",
+      "name": "TestCSFRV18ContinuousVersusReopenedDeliverySnapshotByteEquivalence",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "reopen-after-step-0",
+        "reopen-after-step-1",
+        "reopen-after-step-2",
+        "reopen-after-step-3"
+      ]
+    },
+    "g3-drain-perception": {
+      "path": "internal/csf/commit/csfrv18_snapshot_test.go",
+      "name": "TestCSFRV18ResumeDrainsCausallyCommittedPerceptionExactlyOnce",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-partial-perception": {
+      "path": "internal/csf/commit/csfrv18_snapshot_test.go",
+      "name": "TestCSFRV18PartialPerceptionBeforeCrashResumesWithoutDuplicateReceipt",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-e2-physical-atomic": {
+      "path": "internal/csf/commit/reference_recovery_e2_test.go",
+      "name": "TestReferenceE2FourteenAtomicPhysicalFaultsReopenAndConvergeOnExactD3",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "epoch1-commitwork-step1",
+        "epoch1-commitwork-step2",
+        "epoch1-commitwork-step3",
+        "epoch1-commitwork-step4",
+        "epoch1-commitwork-step5",
+        "epoch1-commitwork-step6",
+        "epoch1-commitwork-step7",
+        "epoch2-commitwork-step1",
+        "epoch2-commitwork-step2",
+        "epoch2-commitwork-step3",
+        "epoch2-commitwork-step4",
+        "epoch2-commitwork-step5",
+        "epoch2-commitwork-step6",
+        "epoch2-commitwork-step7"
+      ]
+    },
+    "g3-e2-no-reexecute": {
+      "path": "internal/csf/commit/reference_recovery_e2_test.go",
+      "name": "TestReferenceE2NoReexecutionOfPhysicalAfterRestart",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-e2-wrong-epoch": {
+      "path": "internal/csf/commit/reference_recovery_e2_test.go",
+      "name": "TestReferenceE2TamperedRestartAttemptDoesNotChangePrefix",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-e2-prefence": {
+      "path": "internal/csf/commit/reference_crash_e2_prefence_test.go",
+      "name": "TestReferenceE2PreFenceReopenAndAdmitSameSignedSource",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-e2-damaged-input": {
+      "path": "internal/csf/commit/reference_crash_e2_test.go",
+      "name": "TestReferenceE2CorruptSavedIngressRefusesRecoveryBeforeCommit",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-e2-prephysical": {
+      "path": "internal/csf/commit/reference_recovery_e2_boundaries_test.go",
+      "name": "TestReferenceE2PrePhysicalAtomicFaultsReopenWithoutPartialHistory",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "abort-step1",
+        "retry-step1",
+        "abort-step2",
+        "retry-step2",
+        "contest-step1",
+        "communication-send-step1",
+        "communication-due-step1",
+        "contest-step2",
+        "communication-send-step2",
+        "communication-due-step2",
+        "contest-step3",
+        "communication-send-step3",
+        "communication-due-step3",
+        "contest-step4",
+        "communication-send-step4",
+        "communication-due-step4",
+        "contest-step5",
+        "communication-send-step5",
+        "communication-due-step5",
+        "contest-step6",
+        "communication-send-step6",
+        "communication-due-step6",
+        "contest-step7",
+        "communication-send-step7",
+        "communication-due-step7"
+      ]
+    },
+    "g3-e3-joint": {
+      "path": "internal/csf/commit/reference_snapshot_e3_test.go",
+      "name": "TestReferenceE3C4JointOwnerReopenByteExactAndNegativeReceipts",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-e3-transit": {
+      "path": "internal/csf/commit/reference_snapshot_e3_test.go",
+      "name": "TestReferenceE3InTransitRecoveryRootDoesNotAuthorizeOwnerCut",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-e3-postphysical": {
+      "path": "internal/csf/commit/reference_snapshot_e3_d3_test.go",
+      "name": "TestReferenceE3D3PostPhysicalTailHistoricalOwnerDeniedNewCutRestored",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-e3-mutants": {
+      "path": "internal/csf/commit/reference_snapshot_e3_d3_test.go",
+      "name": "TestReferenceE3PersistedOwnerAndSnapshotCorruptionFailsClosed",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "receipt-signature",
+        "snapshot-version",
+        "owner-version",
+        "owner-content"
+      ]
+    },
+    "g3-e4-sibling": {
+      "path": "internal/csf/commit/reference_fork_e4_test.go",
+      "name": "TestReferenceE4C4TwoChildrenAndIndependentTails",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-e4-invalid": {
+      "path": "internal/csf/commit/reference_fork_e4_test.go",
+      "name": "TestReferenceE4RejectFrozenTipWrongPolicyAndCorruptSnapshot",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-e4-physical-unsupported": {
+      "path": "internal/csf/commit/reference_fork_e4_d3_test.go",
+      "name": "TestReferenceE4D3RejectUnfinishedSourceAndUnsupportedPhysicalFork",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-e5-order": {
+      "path": "internal/csf/commit/reference_matrix_e5_test.go",
+      "name": "TestReferenceE5ScheduleDeterministic",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g3-e1-verifier": {
+      "path": "internal/csf/commit/reference_equivalence_e1_test.go",
+      "name": "TestReferenceE1MismatchAndMissingAuthorityFailClosed",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g3-f5-metrics": {
+      "path": "internal/csf/commit/reference_observatory_f5_test.go",
+      "name": "TestReferenceF5EquivalentIntegratedViews",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "normal",
+        "reverse",
+        "recovered"
+      ]
+    },
+    "g3-core-no-clock-model": {
+      "path": "tests/architecture/csf_runtime_test.go",
+      "name": "TestCausalCoreHasNoModelRandomUUIDOrWallClockAuthority",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g3-core-hash": {
+      "path": "tests/architecture/csf_runtime_test.go",
+      "name": "TestSHA256AuthorityIsConfinedToRegisteredAdapters",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g3-core-workers": {
+      "path": "tests/architecture/csf_decision_boundary_test.go",
+      "name": "TestResourceDecisionBoundaryHasNoMutableStoreDependency",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g3-one-clock-port": {
+      "path": "internal/csf/commit/transaction_architecture_test.go",
+      "name": "TestClockAdvanceTransactionPortHasOneProductionCaller",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g3-next-gap": {
+      "path": "internal/csf/clock/clock_test.go",
+      "name": "TestOrdinalGapAndAdvance",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g3-early-min": {
+      "path": "internal/csf/clock/clock_test.go",
+      "name": "TestNewEarlierPendingInvalidatesAdvance",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g3-earlier-round": {
+      "path": "internal/csf/commit/clock_advance_test.go",
+      "name": "TestEarlierRoundBeforeFenceBecomesClockTarget",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g3-postfence-round": {
+      "path": "internal/csf/commit/clock_advance_test.go",
+      "name": "TestPostFenceEarlierRoundIsRejectedAndClockCanCommit",
+      "kind": "INTEGRATED",
+      "subtests": []
     }
   },
   "rows": [
@@ -381,9 +741,17 @@
       "id": "INV-13",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-clock-atomic",
+        "g2-no-proposal-atomic",
+        "g2-system-terminal",
+        "g3-crash-contest",
+        "g3-crash-message",
+        "g3-e2-physical-atomic",
+        "g3-e2-prephysical"
+      ],
+      "reason": "Atomic CLOCK_ADVANCE and WORK terminals, all registered physical CommitWork fault points across both signed epochs, prephysical abort/retry/contest/send/due rollback, mixed causal continuity exact five ledgers."
     },
     {
       "id": "INV-14",
@@ -391,15 +759,21 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Named resource RNG and E1 same signed A1 proof cover scoped producer, not all randomness producers/registered substreams. Need full producer inventory and negative policy drift."
     },
     {
       "id": "INV-15",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-core-no-clock-model",
+        "g3-core-workers",
+        "g3-e2-no-reexecute",
+        "exact-e1",
+        "g3-in-transit"
+      ],
+      "reason": "Production CSF import audit rejects model/wall-clock dependencies; verified historical replay and restart reuse admitted sources, not Python/model resampling; exact E1 and in-transit equivalence."
     },
     {
       "id": "INV-16",
@@ -533,7 +907,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "WORK fold/retry and initial frozen CLOCK_ADVANCE validated; retried CLOCK_ADVANCE terminal still only supports attempt 0 and explicit fork from halted remains a separate proof."
     },
     {
       "id": "INV-30",
@@ -560,9 +934,13 @@
       "id": "INV-32",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-event-revision-roster",
+        "g3-clock-replay-corruption",
+        "g3-in-transit"
+      ],
+      "reason": "Independent SQL commit journal and complete event roster, one authoritative decision-ledger terminal per commit, unique owning commit for every event; missing/corrupt durable event/journal fails replay."
     },
     {
       "id": "INV-33",
@@ -570,7 +948,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Same-source producer-key order and child identities verified, but not complete causal ID/namespace/alias lifecycle coverage; #22 durable deduplication remains relevant."
     },
     {
       "id": "INV-34",
@@ -578,7 +956,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Mixed fence/order and rehashed closure controls exist; full topology mutations including multi-slot/canonical policy map/identity collision before evaluation still need a complete witness."
     },
     {
       "id": "INV-35",
@@ -602,15 +980,21 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Canonical candidates/partition and exact current terminal roster are partial; no generic two independent winning candidates with all event projection/partition negatives, also tracked #168."
     },
     {
       "id": "INV-38",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-next-gap",
+        "g3-ordinal-gap",
+        "g3-clock-origin",
+        "g3-frozen-advance",
+        "g2-trigger-cold"
+      ],
+      "reason": "Actual ordinal hole skipped without empty commit, explicit origin advance with empty admitted roster and destination -1 then WORK(0), persisted target and destination activation floor; cold replay reconstructs exact clock."
     },
     {
       "id": "INV-39",
@@ -618,7 +1002,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Full four event reference sets, deduplication and identity-conflict rejection before durable publication are not proven together."
     },
     {
       "id": "INV-40",
@@ -683,7 +1067,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Saved signed input corruption and wrong-epoch refusal exist; need well-formed same unit_id with changed causal byte/digest and complete before-evaluation denial proof."
     },
     {
       "id": "STRESS-06",
@@ -701,9 +1085,13 @@
       "id": "STRESS-07",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-f5-metrics",
+        "g3-crash-contest",
+        "g2-late-cut"
+      ],
+      "reason": "Same-source F5 normal/reverse/recovered literal authority and views while phase/host timing/retry telemetry differs; equivalent frozen fence in actual resumed mixed work; append-stable closure."
     },
     {
       "id": "STRESS-08",
@@ -814,49 +1202,73 @@
       "id": "STRESS-19",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-e2-physical-atomic",
+        "g3-crash-contest",
+        "g3-crash-message",
+        "g3-clock-atomic"
+      ],
+      "reason": "All fourteen real signed epoch CommitWork rollback boundaries and exact recovered D3, mixed resource and communication recovery cuts, atomic temporal publication."
     },
     {
       "id": "STRESS-20",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-crash-contest",
+        "g3-crash-message",
+        "g3-work-frozen",
+        "g3-control-cuts"
+      ],
+      "reason": "Verified snapshot and real registered resumed WORK preserves exact frozen fence/response roster and terminal/ledgers; no duplicate settlement."
     },
     {
       "id": "STRESS-21",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-frozen-advance",
+        "g3-one-clock-port"
+      ],
+      "reason": "Initial CLOCK_ADVANCE failpoint, durable snapshot, normalized real appended source beyond target; registered dispatcher rehydrates original plan and matches uninterrupted fence/terminal, no second publication. Storage minimum check is CAS validation only, not new selection."
     },
     {
       "id": "STRESS-22",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-control-cuts",
+        "g3-halted",
+        "g3-retry-resume",
+        "g3-second-abort"
+      ],
+      "reason": "Actual halted snapshot/restart denies unauthorized resume; explicit retry reopens same cycle and cut with next attempt ordinal; no duplicate authorization."
     },
     {
       "id": "STRESS-23",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-control-cuts",
+        "g3-control-tail",
+        "g3-retry-resume"
+      ],
+      "reason": "Actual cold snapshot/tail restores authorized retry directive and same cycle, then one fence at attempt 1 with identical input digest; second recovery denied."
     },
     {
       "id": "STRESS-24",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-second-abort"
+      ],
+      "reason": "Actual same-revision snapshot, explicit retry and new in-flight fence outrank prior abort; second abort halts with next attempt 2, implicit recovery denied."
     },
     {
       "id": "STRESS-25",
@@ -882,7 +1294,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Revocation/slot CAS proven in isolation, but actual restart with open dispatch and old response before new dispatch response needs an integrated witness."
     },
     {
       "id": "STRESS-28",
@@ -924,7 +1336,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Current contested fixture has one winning candidate. Need two distinct winners and permuted evaluator outputs with complete candidate/event/order/task/batch proof."
     },
     {
       "id": "STRESS-33",
@@ -932,7 +1344,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Schema and rehashed provenance mutations fail replay; dedicated missing/altered EventOrderKey, reversed event IDs and sequence variants plus pre-reducer proof not yet established."
     },
     {
       "id": "STRESS-34",
@@ -940,7 +1352,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Not all four normalized reference collections are exercised with duplicates and same-identity unequal bytes."
     },
     {
       "id": "STRESS-35",
@@ -954,17 +1366,23 @@
       "id": "STRESS-36",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-ordinal-gap",
+        "g3-next-gap"
+      ],
+      "reason": "Real SQLite histories commit ordinals 0,1,3 with no ordinal-2 terminal and cold replay exact."
     },
     {
       "id": "STRESS-37",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-ordinal-gap",
+        "g3-clock-origin"
+      ],
+      "reason": "Real terminal at (t,1), empty admitted CLOCK_ADVANCE at (t,2), destination -1, then original (u,0) and cold replay."
     },
     {
       "id": "STRESS-38",
@@ -972,7 +1390,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Earlier pending and closure wait checked independently; exact provisional P, late Q before target closure, old CAS rejection and new target selection need one linked witness."
     },
     {
       "id": "STRESS-39",
@@ -1149,25 +1567,37 @@
       "id": "STRESS-59",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-in-transit",
+        "g3-e3-transit"
+      ],
+      "reason": "Actual communication in flight, four continuation cuts across dispatch/delivery, literal five ledgers and final canonical snapshot match; transit is not an owner cut."
     },
     {
       "id": "STRESS-60",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g3-e4-sibling",
+        "g3-e4-invalid",
+        "g3-e4-physical-unsupported"
+      ],
+      "reason": "Actual C4 checkpoint fork into two V2 children with differing no-proposal reasons; equal archived prefix; child/sibling/parent authority and owner bytes stay isolated; physical tail fork explicitly denied."
     },
     {
       "id": "STRESS-61",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "E1 proves literal same-input transcript equality under arrival/worker-order permutations, but decision.RunWithWorkerOrder currently executes a serial loop. Actual different parallelism is not established; G3 must provide a valid parallel execution witness or retain the gap. E1 remains a successful pilot candidate without row credit."
+      "state": "READY",
+      "witnesses": [
+        "g3-worker-overlap",
+        "g3-worker-canonical",
+        "g3-parallel-d3",
+        "exact-e1"
+      ],
+      "reason": "Real worker rendezvous cannot pass under serial fake; same pure evaluator at effective 1 vs 2 workers, reversed order, fixed authenticated A1 cuts; full causal and owner transcripts identical in completed nine-commit D3 runs."
     },
     {
       "id": "STRESS-62",
@@ -1183,7 +1613,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Existing tests reorder one implementation's source/round rosters; independent implementations and multi-slot canonical comparisons not yet established."
     },
     {
       "id": "STRESS-64",
@@ -1191,7 +1621,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Pending outbox and resume drains internal tasks; need actual perceptible recipient delivery crash BEFORE any observations, exact knowledge/evidence identities and barrier."
     },
     {
       "id": "STRESS-65",
@@ -1199,7 +1629,7 @@
       "eval": "determinism",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Partial receipt recovery tested sequentially; competing actual perception workers and partial persistence need a dedicated CAS/concurrency test."
     },
     {
       "id": "STRESS-66",
@@ -1271,10 +1701,67 @@
       ]
     },
     "determinism": {
-      "scope": "PILOT_ONLY",
-      "description": "Real E1 same signed inputs and full three-database transcript; recovery/fork matrix is G3.",
+      "scope": "SCOPED_WITH_GAPS",
+      "description": "G3 real E1-E4 byte, rollback, snapshot, recovery, fork and mutations; E5 phase-order witness plus separate existing full exact-head E5 normal/race workflow. Actual bounded concurrent decision worker pool with serial/concurrent whole D3 equality. Registered frozen CLOCK_ADVANCE resume, ordinal gaps and second abort. All G3 rows classified, unsupported or unproven remain explicit.",
       "witnesses": [
-        "exact-e1"
+        "exact-e1",
+        "g3-worker-overlap",
+        "g3-worker-canonical",
+        "g3-parallel-d3",
+        "g3-second-abort",
+        "g3-frozen-advance",
+        "g3-ordinal-gap",
+        "g3-clock-atomic",
+        "g3-clock-origin",
+        "g3-clock-replay-corruption",
+        "g3-rehashed-topology",
+        "g3-control-cuts",
+        "g3-retry-resume",
+        "g3-halted",
+        "g3-control-tail",
+        "g3-work-frozen",
+        "g3-crash-contest",
+        "g3-crash-message",
+        "g3-in-transit",
+        "g3-drain-perception",
+        "g3-partial-perception",
+        "g3-e2-physical-atomic",
+        "g3-e2-no-reexecute",
+        "g3-e2-wrong-epoch",
+        "g3-e2-prefence",
+        "g3-e2-damaged-input",
+        "g3-e2-prephysical",
+        "g3-e3-joint",
+        "g3-e3-transit",
+        "g3-e3-postphysical",
+        "g3-e3-mutants",
+        "g3-e4-sibling",
+        "g3-e4-invalid",
+        "g3-e4-physical-unsupported",
+        "g3-e5-order",
+        "g3-e1-verifier",
+        "g3-f5-metrics",
+        "g3-core-no-clock-model",
+        "g3-core-hash",
+        "g3-core-workers",
+        "g3-one-clock-port",
+        "g3-next-gap",
+        "g3-early-min",
+        "g3-earlier-round",
+        "g3-postfence-round",
+        "g2-event-revision-roster",
+        "g2-atomic-trigger",
+        "g2-trigger-cold",
+        "g2-fence-mixed",
+        "g2-same-source-permutation",
+        "g2-late-cut",
+        "g2-slot-revoke",
+        "g2-source-stale",
+        "g2-closure-wait",
+        "g2-early-cohort",
+        "g2-abort-retry",
+        "g2-no-proposal-atomic",
+        "g2-system-terminal"
       ]
     },
     "embodiment": {

@@ -230,7 +230,7 @@ func verifySchema(ctx context.Context, reader schemaReader) error {
 		}
 		expected[name] = strings.ReplaceAll(stmt, "IF NOT EXISTS ", "")
 	}
-	rows, err := reader.QueryContext(ctx, "SELECT type,name,sql FROM sqlite_master WHERE name NOT LIKE 'sqlite_%'")
+	rows, err := reader.QueryContext(ctx, "SELECT type,name,sql FROM sqlite_master WHERE name NOT GLOB 'sqlite_*'")
 	if err != nil {
 		return err
 	}

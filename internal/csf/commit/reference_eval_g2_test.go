@@ -3,6 +3,7 @@ package commit
 import (
 	"bytes"
 	"context"
+	"database/sql"
 	"errors"
 	"fmt"
 	"reflect"
@@ -112,8 +113,8 @@ func TestReferenceG2NoProposalExactLifecycle(t *testing.T) {
 	}
 	commit := report.Commits[0]
 	if commit.Commit.ID != journal.Identity || len(commit.DecisionLinks) != 2 || len(commit.Events) != 2 ||
-		commit.BaseWorldHash != commit.ResultWorldHash || len(commit.Tasks) != 0 {
-		t.Fatal("NoProposal batch lacks exact lifecycle/decision cardinality")
+		commit.BaseWorldHash != commit.ResultWorldHash || len(commit.Tasks) != 2 {
+		t.Fatalf("NoProposal batch lacks exact lifecycle/decision cardinality: decisions=%d events=%d tasks=%d", len(commit.DecisionLinks), len(commit.Events), len(commit.Tasks))
 	}
 	want := map[domain.ID]domain.ID{}
 	for _, round := range rounds {
@@ -175,7 +176,7 @@ func g2NoProposal(t *testing.T, bundle *policy.Bundle, d inputledger.Dispatch) i
 		t.Fatal(err)
 	}
 	body := []any{id[:], d.ID[:], d.RunID[:], d.CycleID[:], d.RoundID[:], d.SlotID,
-		[]any{d.Actor[0], d.Actor[1]}, int64(d.EffectiveAt), uint64(d.BaseRevision), uint64(0)}
+		[]any{d.Actor[0], d.Actor[1]}, int64(d.EffectiveAt), uint64(d.BaseRevision), uint64(1)}
 	digest, _, err := deriver.Sum("cote.csf.digest.no-proposal-unit", "cote.csf.schema.no-proposal.body", 1, body)
 	if err != nil {
 		t.Fatal(err)
@@ -337,6 +338,25 @@ func TestReferenceG2AbortSubjectPermutation(t *testing.T) {
 			!reflect.DeepEqual(a.Evidence, b.Evidence) || !reflect.DeepEqual(a.Validator, b.Validator) {
 			t.Fatal("control did not produce matching failures on distinct subjects")
 		}
+		// A syntactically valid but unpinned validator cannot produce an
+		// authoritative abort, even when the coordinator rehashes it.
+		for _, change := range []func(*decision.Indeterminate){
+			func(v *decision.Indeterminate) { v.Validator[0] = "forged-validator-v1" },
+			func(v *decision.Indeterminate) { v.Validator[1] = uint64(999) },
+			func(v *decision.Indeterminate) { v.Validator[2] = make([]byte, 32) },
+			func(v *decision.Indeterminate) { v.SubjectDigest[0] ^= 1 },
+		} {
+			bad := a
+			bad.Validator = append([]any(nil), a.Validator...)
+			change(&bad)
+			if _, err := c.Abort(ctx, run, cycle.ID, fence, 0, []decision.Indeterminate{bad, b}); err == nil {
+				t.Fatal("accepted forged abort authority")
+			}
+			control, err := store.LoadCycleControl(ctx, [32]byte(run))
+			if err != nil || control[0] != uint64(1) {
+				t.Fatal("rejected abort altered the in-flight fence", err)
+			}
+		}
 		abort, err := c.Abort(ctx, run, cycle.ID, fence, 0, evaluated.Indeterminate)
 		if err != nil {
 			t.Fatal(err)
@@ -347,7 +367,7 @@ func TestReferenceG2AbortSubjectPermutation(t *testing.T) {
 		}
 		fields := v.([]any)
 		records := fields[11].([]any)
-		if len(fields) != 15 || len(records) != 2 || !referenceC3Same(fields[6], fence.Fields[6]) || !referenceC3Same(fields[13], fence.Fields[16]) {
+		if len(fields) != 15 || len(records) != 2 || !referenceC3Same(fields[5], fence.Fields[6]) || !referenceC3Same(fields[13], fence.Fields[16]) {
 			t.Fatal("abort omitted subjects or frozen plan")
 		}
 		expected := map[domain.ID]decision.Indeterminate{a.Subject: a, b.Subject: b}
@@ -376,6 +396,70 @@ func TestReferenceG2AbortSubjectPermutation(t *testing.T) {
 			report.Attempts[0].Abort == nil || report.Attempts[0].Abort.ID != abort.Identity ||
 			report.State.Clock != state {
 			t.Fatal("abort changed world or was not durably recoverable", err)
+		}
+		// Tamper with the durable abort AND the control digest. The exact
+		// history must reject a coherently rehashed unauthorized validator
+		// or source digest, not just a stale control digest.
+		db, err := sql.Open("sqlite", "file:"+path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var originalControl []byte
+		if err := db.QueryRowContext(ctx, "SELECT canonical FROM cycle_control_state WHERE run_id=?", run[:]).Scan(&originalControl); err != nil {
+			db.Close()
+			t.Fatal(err)
+		}
+		for _, forgedSubject := range []bool{false, true} {
+			decoded, err := codec.StrictDecodePayload(abort.Canonical)
+			if err != nil {
+				t.Fatal(err)
+			}
+			payload := decoded.([]any)
+			record := payload[11].([]any)[0].([]any)
+			if forgedSubject {
+				record[0].([]any)[2] = make([]byte, 32)
+			} else {
+				record[4] = make([]byte, 32)
+				record[7] = []any{record[2], record[3], record[4]}
+			}
+			digest, _, err := identity.New(c.bundle).Sum("cote.csf.digest.abort", "cote.csf.schema.cycle-abort.body", 1, payload[:14])
+			if err != nil {
+				t.Fatal(err)
+			}
+			payload[14] = digest[:]
+			forged, err := codec.CanonicalPayload(payload)
+			if err != nil {
+				t.Fatal(err)
+			}
+			decodedCtl, err := codec.StrictDecodePayload(originalControl)
+			if err != nil {
+				t.Fatal(err)
+			}
+			ctl := decodedCtl.([]any)
+			ctl[5] = []any{uint64(1), []any{uint64(13), abort.Identity[:], digest[:]}}
+			forgedCtl, err := codec.CanonicalPayload(ctl)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := db.ExecContext(ctx, "UPDATE decision_ledger SET canonical=? WHERE id=?", forged, abort.Identity[:]); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := db.ExecContext(ctx, "UPDATE cycle_control_state SET canonical=? WHERE run_id=?", forgedCtl, run[:]); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := store.ReplayClock(ctx, [32]byte(run), c.bundle); err == nil {
+				t.Fatal("cold replay accepted rehashed forged authority")
+			}
+			if _, err := db.ExecContext(ctx, "UPDATE decision_ledger SET canonical=? WHERE id=?", abort.Canonical, abort.Identity[:]); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := db.ExecContext(ctx, "UPDATE cycle_control_state SET canonical=? WHERE run_id=?", originalControl, run[:]); err != nil {
+				t.Fatal(err)
+			}
+		}
+		db.Close()
+		if _, err := store.ReplayClock(ctx, [32]byte(run), c.bundle); err != nil {
+			t.Fatal("restored authentic abort failed replay", err)
 		}
 		if baseline == nil {
 			baseline = abort.Canonical

@@ -177,7 +177,7 @@ func (s *Store) CommitCycleAbort(ctx context.Context,b ports.TerminalAbortBatch)
  if err:=rejectTerminalDuplicate(ctx,tx,b.RunID,b.CycleID);err!=nil{return err}
  fence,err:=workFence(ctx,tx,b.RunID,b.CycleID,b.FenceID);if err!=nil{return err}
  if fence[2]!=attempt{return errors.New("abort attempt differs from fence")}
- if err:=verifyAbortSubjects(fence,ind,b.CandidateEvidence,b.RunID,b.CycleID);err!=nil{return err}
+ if err:=verifyAbortAuthorities(ctx,tx,b.RunID,fence,body,b.CandidateEvidence);err!=nil{return err}
  for _,pair:=range [][2]int{{4,3},{5,4},{6,5},{7,6},{8,7},{12,9},{16,13}}{
   if !sameCanonical(fence[pair[0]],body[pair[1]]){return errors.New("abort differs from frozen fence")}
  }
@@ -250,6 +250,13 @@ func (s *Store) AuthorizeAttemptRetry(ctx context.Context,b ports.AttemptRetryBa
  if !sameCanonical(fields[4],wantRef)||!present(aborted[5],wantRef){
   return errors.New("retry must cite the exact authoritative abort")
  }
+ if !equalBytes(abort[14],h[:]){return errors.New("retry abort digest invalid")}
+ fenceID,err:=registeredDigest("cote.csf.id.admission-fence","cote.csf.schema.admission-fence-id-preimage",[]any{b.RunID[:],b.CycleID[:],from})
+ if err!=nil{return err}
+ fence,err:=workFence(ctx,tx,b.RunID,b.CycleID,fenceID);if err!=nil{return err}
+ if !sameCanonical(abort[8],fence[17]){return errors.New("retry abort fence digest invalid")}
+ candidates,err:=loadAbortCandidates(ctx,tx,abort);if err!=nil{return err}
+ if err:=verifyAbortAuthorities(ctx,tx,b.RunID,fence,abort,candidates);err!=nil{return err}
  if !sameCanonical(fields[6],abort[13]){return errors.New("retry rule versions differ from aborted cycle")}
  if _,err:=tx.ExecContext(ctx,"INSERT INTO decision_ledger(id,canonical) VALUES(?,?)",b.Record.Identity[:],b.Record.Canonical);err!=nil{return err}
  if b.FailAfterStep==1{return errors.New("injected retry journal failure")}

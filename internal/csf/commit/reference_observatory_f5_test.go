@@ -207,7 +207,7 @@ func TestReferenceF5EquivalentIntegratedViews(t *testing.T) {
 			t.Cleanup(func() { rec.Close() })
 			first := operationalmetrics.Sample{ID: [32]byte{1}, Run: run, Stage: "replay",
 				HostID: "host-" + spec.name, WorkerID: "worker-" + spec.name,
-				ObservedUnixNanos: int64(100+i), DurationNanos: int64(1000 * (i + 1)), WorkerCalls: int64(i + 1)}
+				ObservedUnixNanos: int64(100 + i), DurationNanos: int64(1000 * (i + 1)), WorkerCalls: int64(i + 1)}
 			if err := rec.Record(ctx, first); err != nil {
 				t.Fatal(err)
 			}

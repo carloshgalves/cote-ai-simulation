@@ -375,7 +375,30 @@ func TestReferenceF3CrossedViews(t *testing.T) {
 			if err := admin.QueryRowContext(ctx, "SELECT canonical FROM "+tc.table+" WHERE id=?", tc.id[:]).Scan(&raw); err != nil {
 				t.Fatal(err)
 			}
-			res, err := admin.ExecContext(ctx, "UPDATE "+tc.table+" SET canonical=x'80' WHERE id=?", tc.id[:])
+			mutant := []byte{0x80}
+			if tc.name == "physical-event" {
+				decoded, err := codec.StrictDecodePayload(raw)
+				if err != nil {
+					t.Fatal(err)
+				}
+				fields := decoded.([]any)
+				if len(fields) != 19 || fields[3] != "physical.advanced" || fields[15] != uint64(2) {
+					t.Fatal("missing genuine ENGINE_ONLY event")
+				}
+				// Forge publicity with an internally valid Event digest.
+				// The commit and normative producer policy must reject it.
+				fields[15] = uint64(0)
+				dg, _, err := identity.New(host.Bundle).Sum("cote.csf.digest.event", "cote.csf.schema.event.body", 1, fields[:18])
+				if err != nil {
+					t.Fatal(err)
+				}
+				fields[18] = dg[:]
+				mutant, err = codec.CanonicalPayload(fields)
+				if err != nil {
+					t.Fatal(err)
+				}
+			}
+			res, err := admin.ExecContext(ctx, "UPDATE "+tc.table+" SET canonical=? WHERE id=?", mutant, tc.id[:])
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -435,34 +458,47 @@ func TestReferenceF3CrossedViews(t *testing.T) {
 		if len(fields) != 11 || fields[8] != uint64(6) {
 			t.Fatal("fixture lacks genuine revision-six dispatch")
 		}
-		// The base revision is not part of the dispatch ID preimage.
-		// Changing it must not expand or preserve a now-invalid grant.
-		fields[8] = uint64(9)
-		mutated, err := codec.CanonicalPayload(fields)
-		if err != nil {
-			t.Fatal(err)
+		// Neither base revision nor request digest is in the dispatch ID
+		// preimage. Test both without inventing another dispatch ID.
+		for _, field := range []int{8, 10} {
+			original := fields[field]
+			if field == 8 {
+				fields[field] = uint64(9)
+			} else {
+				hash := bytes.Clone(original.([]byte))
+				if len(hash) != 32 {
+					t.Fatal("fixture missing dispatch request digest")
+				}
+				hash[0] ^= 0x80
+				fields[field] = hash
+			}
+			mutated, err := codec.CanonicalPayload(fields)
+			if err != nil {
+				t.Fatal(err)
+			}
+			res, err := admin.ExecContext(ctx, "UPDATE input_ledger SET canonical=? WHERE id=?", mutated, dispatches[1][:])
+			if err != nil {
+				t.Fatal(err)
+			}
+			if n, err := res.RowsAffected(); err != nil || n != 1 {
+				t.Fatal("dispatch mutation missed authority")
+			}
+			damaged := referenceE2Capture(t, path, owner)
+			if referenceE1Compare(before, damaged) == nil {
+				t.Fatal("vacuous dispatch mutation")
+			}
+			if v, err := b.ReadPOV(ctx); err != observatory.ErrViewUnavailable || !reflect.DeepEqual(v, observatory.POVView{}) {
+				t.Fatal("cached capability retained altered durable binding")
+			}
+			if err := referenceE1Compare(damaged, referenceE2Capture(t, path, owner)); err != nil {
+				t.Fatal("rejected live grant mutated authority", err)
+			}
+			if _, err := admin.ExecContext(ctx, "UPDATE input_ledger SET canonical=? WHERE id=?", raw, dispatches[1][:]); err != nil {
+				t.Fatal(err)
+			}
+			fields[field] = original
+			restored()
 		}
-		res, err := admin.ExecContext(ctx, "UPDATE input_ledger SET canonical=? WHERE id=?", mutated, dispatches[1][:])
-		if err != nil {
-			t.Fatal(err)
-		}
-		if n, err := res.RowsAffected(); err != nil || n != 1 {
-			t.Fatal("dispatch mutation missed authority")
-		}
-		damaged := referenceE2Capture(t, path, owner)
-		if referenceE1Compare(before, damaged) == nil {
-			t.Fatal("vacuous dispatch mutation")
-		}
-		if v, err := b.ReadPOV(ctx); err != observatory.ErrViewUnavailable || !reflect.DeepEqual(v, observatory.POVView{}) {
-			t.Fatal("cached capability retained altered durable binding")
-		}
-		if err := referenceE1Compare(damaged, referenceE2Capture(t, path, owner)); err != nil {
-			t.Fatal("rejected live grant mutated authority", err)
-		}
-		if _, err := admin.ExecContext(ctx, "UPDATE input_ledger SET canonical=? WHERE id=?", raw, dispatches[1][:]); err != nil {
-			t.Fatal(err)
-		}
-		restored()
 	})
 	t.Run("unsupported-public-view", func(t *testing.T) {
 		if _, err := admin.ExecContext(ctx, "CREATE VIEW PUBLIC_ROUTES AS SELECT id FROM evidence_ledger"); err != nil {

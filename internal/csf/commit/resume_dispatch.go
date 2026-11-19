@@ -45,10 +45,19 @@ func (c *Coordinator) DispatchFencedWorkV1(ctx context.Context, ledger *inputled
 		return empty, errors.New("registered dispatcher refuses an unsealed or altered fence")
 	}
 	units, ok := fence.Fields[11].([]any)
-	if !ok || len(units) == 0 {
-		return empty, errors.New("empty or malformed V1 WORK fence")
+	if !ok {
+		return empty, errors.New("malformed V1 admitted roster")
 	}
 	_, sources, _, _, byRound, run := view.Snapshot()
+	if cycle.Plan != nil {
+		if len(units) != 0 {
+			return empty, errors.New("CLOCK_ADVANCE cannot admit WORK units")
+		}
+		return c.resumeFrozenClockAdvance(ctx, run, cycle, fence)
+	}
+	if len(units) == 0 {
+		return empty, errors.New("empty V1 WORK fence")
+	}
 	responses := map[domain.ID]inputledger.Response{}
 	for _, slots := range byRound {
 		for _, response := range slots {

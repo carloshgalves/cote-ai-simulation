@@ -147,18 +147,61 @@ func (c *Coordinator) Advance(ctx context.Context,ledger *inputledger.Ledger,run
     fenceCoord:=admission.NewCoordinator(admission.NewFenceLog(c.store))
     var applied ports.ClockAdvanceBatch
     fence,err:=fenceCoord.AdmitThenEvaluate(ctx,c.bundle,ledger,cycle,c.admissionPolicies,func(f admission.Fence)error{
-        prepared,err:=c.buildBatch(ctx,runID,state,plan,f,typed)
-        if err!=nil{return err}
-        prepared.FailAfterStep=c.failAfterStep
-        if err:=c.prepareClockPerception(&prepared);err!=nil{return err}
-        if c.beforeCommit!=nil {c.beforeCommit()}
-        if c.tamperBatch!=nil {c.tamperBatch(&prepared)}
-        applied=prepared
-        return c.store.CommitClockAdvance(ctx,prepared)
+        var err error
+        applied,err=c.publishClockAdvance(ctx,runID,state,plan,f,typed)
+        return err
     })
     if err!=nil{return Outcome{},err}
     after,err:=clock.Decode(applied.ResultClock);if err!=nil{return Outcome{},err}
     return Outcome{Plan:plan,Fence:fence,Commit:applied.Journal,Events:applied.Events,Activations:applied.Activations,ResultClock:after},nil
+}
+
+// publishClockAdvance is the single transaction publisher for both live
+// planning and a verified recovered fence. It never selects a coordinate.
+func (c *Coordinator) publishClockAdvance(ctx context.Context,runID domain.ID,state clock.State,plan clock.Plan,f admission.Fence,typed []any)(ports.ClockAdvanceBatch,error){
+    var empty ports.ClockAdvanceBatch
+    prepared,err:=c.buildBatch(ctx,runID,state,plan,f,typed)
+    if err!=nil{return empty,err}
+    prepared.FailAfterStep=c.failAfterStep
+    if err:=c.prepareClockPerception(&prepared);err!=nil{return empty,err}
+    if c.beforeCommit!=nil {c.beforeCommit()}
+    if c.tamperBatch!=nil {c.tamperBatch(&prepared)}
+    if err:=c.store.CommitClockAdvance(ctx,prepared);err!=nil{return empty,err}
+    return prepared,nil
+}
+
+// resumeFrozenClockAdvance is called only after the registered dispatcher
+// verifies the fence against the durable ledger and exact persisted bytes.
+// The transaction rechecks the minimum as a CAS guard; it cannot select or
+// publish a replacement plan. V1 clock terminal supports initial attempt only.
+func (c *Coordinator) resumeFrozenClockAdvance(ctx context.Context,runID domain.ID,cycle admission.Cycle,f admission.Fence)(ports.CanonicalRecord,error){
+    var empty ports.CanonicalRecord
+    if cycle.Attempt!=0||len(cycle.Plan)!=4||cycle.Plan[0]!=uint64(1){
+        return empty,errors.New("unsupported frozen CLOCK_ADVANCE attempt or plan")
+    }
+    from,fromOK:=resumeSignedInstant(cycle.Plan[1])
+    to,toOK:=resumeSignedInstant(cycle.Plan[2])
+    target,targetOK:=cycle.Plan[3].([]any)
+    if !fromOK||!toOK||!targetOK||len(target)!=2||from!=int64(cycle.Instant)||to<=from{
+        return empty,errors.New("invalid frozen CLOCK_ADVANCE coordinates")
+    }
+    targetInstant,instantOK:=resumeSignedInstant(target[0])
+    ordinal,ordinalOK:=target[1].(uint64)
+    if !instantOK||!ordinalOK||targetInstant!=to{
+        return empty,errors.New("invalid frozen CLOCK_ADVANCE target")
+    }
+    plan:=clock.Plan{Kind:clock.ClockAdvance,From:domain.SimulationInstant(from),To:domain.SimulationInstant(to),
+        OriginOrdinal:cycle.Ordinal,Target:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(to),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}}
+    state,err:=c.store.LoadClock(ctx,[32]byte(runID));if err!=nil{return empty,err}
+    if state.Instant!=cycle.Instant||state.Revision!=cycle.BaseRevision||state.LastOrdinal>=int64(cycle.Ordinal){
+        return empty,errors.New("frozen clock advance no longer at admitted revision")
+    }
+    if _,err:=c.store.ValidatedGenesis(ctx,[32]byte(runID),c.bundle);err!=nil{return empty,err}
+    typed,hash,err:=c.store.LoadWorldState(ctx,uint64(cycle.BaseRevision));if err!=nil{return empty,err}
+    if hash!=cycle.BaseStateHash{return empty,errors.New("frozen clock advance world hash mismatch")}
+    batch,err:=c.publishClockAdvance(ctx,runID,state,plan,f,typed)
+    if err!=nil{return empty,err}
+    return batch.Journal,nil
 }
 
 func (c *Coordinator) buildBatch(ctx context.Context,runID domain.ID,state clock.State,plan clock.Plan,f admission.Fence,baseTyped []any)(ports.ClockAdvanceBatch,error){

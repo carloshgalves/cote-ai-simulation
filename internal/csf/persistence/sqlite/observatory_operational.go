@@ -141,11 +141,11 @@ func (q *PrivilegedReader) operationalPending(ctx context.Context, run [32]byte,
 
 func (q *PrivilegedReader) operationalSources(ctx context.Context, run [32]byte,
 	target *domain.EligibilityCoordinate) ([]observatory.SourceDiagnostic, error) {
-	ledger, err := inputledger.Open(ctx, domain.ID(run), q.base.bundle, q.base.store)
+	ledger, err := inputledger.RestoreReadPrefix(ctx, domain.ID(run), q.base.bundle, q.base.store)
 	if err != nil {
 		return nil, err
 	}
-	sources, _, closures, _, _, loadedRun := ledger.Snapshot()
+	sources, closures, loadedRun := ledger.Sources, ledger.Closures, ledger.Run
 	if loadedRun != domain.ID(run) {
 		return nil, errors.New("operational source ledger run mismatch")
 	}

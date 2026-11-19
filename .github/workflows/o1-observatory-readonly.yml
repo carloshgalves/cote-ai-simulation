@@ -43,7 +43,7 @@ jobs:
           git rev-parse HEAD
       - name: Require committed gofmt output
         run: |
-          files=$(gofmt -l internal/csf/observatory/query.go internal/csf/observatory/query_test.go internal/csf/persistence/sqlite/observatory_readonly.go internal/csf/persistence/sqlite/observatory_readonly_test.go internal/csf/commit/observatory_o1_integration_test.go)
+          files=$(gofmt -l internal/csf/observatory/query.go internal/csf/observatory/query_test.go internal/csf/observatory/queryhost/run.go internal/csf/observatory/queryhost/authority.go internal/csf/persistence/sqlite/observatory_readonly.go internal/csf/persistence/sqlite/observatory_readonly_test.go internal/csf/commit/observatory_o1_integration_test.go)
           if [ -n "$files" ]; then
             echo "Unformatted source in O1 commit:"
             echo "$files"
@@ -60,4 +60,4 @@ jobs:
       - name: O1 race detector on all affected packages
         run: go test -race -count=1 -timeout=14m ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/csf/observatory -run '^TestCSFRV19O1'
       - name: O1 static analyzer
-        run: go vet ./internal/csf/observatory ./internal/csf/persistence/sqlite
+        run: go vet ./internal/csf/observatory/... ./internal/csf/persistence/sqlite

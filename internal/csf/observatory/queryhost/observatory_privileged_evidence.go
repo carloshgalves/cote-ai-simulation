@@ -1,4 +1,4 @@
-package sqlite
+package queryhost
 
 import (
 	"bytes"
@@ -17,7 +17,7 @@ func (q *PrivilegedReader) o2RevisionAuthority(ctx context.Context, revision uin
 	expectedHash [32]byte) (observatory.RevisionAuthority, error) {
 	var zero observatory.RevisionAuthority
 	var raw, hash []byte
-	err := q.base.store.db.QueryRowContext(ctx,
+	err := q.audit.QueryRowContext(ctx,
 		"SELECT canonical,state_hash FROM world_revisions WHERE revision=?", revision).Scan(&raw, &hash)
 	if err != nil {
 		return zero, err
@@ -55,7 +55,7 @@ func (q *PrivilegedReader) o2TaskEvidence(ctx context.Context, run [32]byte,
 			return nil, nil, err
 		}
 		var raw []byte
-		err = q.base.store.db.QueryRowContext(ctx,
+		err = q.audit.QueryRowContext(ctx,
 			"SELECT canonical FROM causal_outbox WHERE id=?", completion[:]).Scan(&raw)
 		hasCompletion := err == nil
 		if err != nil && err != sql.ErrNoRows {
@@ -102,7 +102,7 @@ func (q *PrivilegedReader) o2TaskEvidence(ctx context.Context, run [32]byte,
 			hash []byte
 			kind int
 		}
-		rows, err := q.base.store.db.QueryContext(ctx,
+		rows, err := q.audit.QueryContext(ctx,
 			"SELECT record_id,canonical_hash,kind FROM evidence_routes WHERE run_id=? AND task_id=? ORDER BY kind,record_id",
 			run[:], task.ID[:])
 		if err != nil {

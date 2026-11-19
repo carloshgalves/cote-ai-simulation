@@ -1,4 +1,4 @@
-package sqlite
+package queryhost
 
 import (
 	"context"
@@ -26,7 +26,7 @@ func (q *PrivilegedReader) o2ClosureGaps(ctx context.Context, run [32]byte,
 		return nil, nil
 	}
 	target := plan.Target
-	rows, err := q.base.store.db.QueryContext(ctx, "SELECT canonical FROM input_ledger ORDER BY id")
+	rows, err := q.audit.QueryContext(ctx, "SELECT canonical FROM input_ledger ORDER BY id")
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ func (q *PrivilegedReader) o2PendingTasks(ctx context.Context, run [32]byte,
 				return 0, err
 			}
 			var raw []byte
-			err = q.base.store.db.QueryRowContext(ctx, "SELECT canonical FROM causal_outbox WHERE id=?", completion[:]).Scan(&raw)
+			err = q.audit.QueryRowContext(ctx, "SELECT canonical FROM causal_outbox WHERE id=?", completion[:]).Scan(&raw)
 			if err == sql.ErrNoRows {
 				missing++
 				continue
@@ -133,7 +133,7 @@ func (q *PrivilegedReader) o2PendingTasks(ctx context.Context, run [32]byte,
 		}
 	}
 	if missing == 0 {
-		if err := q.base.store.CheckPerceptionBarrier(ctx, run, revision); err != nil {
+		if err := q.audit.CheckPerceptionBarrier(ctx, run, revision); err != nil {
 			return 0, fmt.Errorf("prior perception barrier verification: %w", err)
 		}
 	}

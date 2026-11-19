@@ -49,7 +49,7 @@ jobs:
       - name: Exact SHA, format and whitespace
         run: |
           test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
-          files=(internal/csf/observatory/views.go internal/csf/persistence/sqlite/observatory_pov_public.go internal/csf/commit/reference_observatory_f3_test.go)
+          files=(internal/csf/observatory/queryhost/views.go internal/csf/observatory/views.go internal/csf/persistence/sqlite/observatory_pov_public.go internal/csf/commit/reference_observatory_f3_test.go)
           remaining=$(gofmt -l "${files[@]}")
           if [ -n "$remaining" ]; then
             printf 'F3 files not gofmt-clean:\n%s\n' "$remaining"
@@ -70,4 +70,4 @@ jobs:
         run: |
           go test -count=1 -timeout=10m ./internal/csf/commit -run '^(TestReferenceF[12]|TestReferenceD3|TestCSFRV19O3)'
           go test -count=1 ./internal/csf/observatory ./internal/csf/persistence/sqlite ./internal/csf/contextboundary ./internal/csf/perception ./tests/architecture
-          go vet ./internal/csf/observatory ./internal/csf/persistence/sqlite ./internal/csf/commit ./internal/csf/contextboundary
+          go vet ./internal/csf/observatory/... ./internal/csf/persistence/sqlite ./internal/csf/commit ./internal/csf/contextboundary

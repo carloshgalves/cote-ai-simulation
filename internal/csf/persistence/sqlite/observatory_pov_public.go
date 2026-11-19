@@ -1,253 +1,35 @@
 package sqlite
 
 import (
-	"bytes"
 	"context"
-	"reflect"
 
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/contextboundary"
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory/queryhost"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
-// POVReader is the only actor-facing Observatory reader. Its identity and
-// causal cutoff are fixed by a persisted SlotDispatch; they cannot be replaced
-// by a caller at read time. Its SQL connection remains SQLite mode=ro.
-type POVReader struct {
-	base         *ObservatoryReader
-	dispatch     [32]byte
-	dispatchHash [32]byte
-	run          [32]byte
-	actor        [2]string
-	through      uint64
-}
+type POVReader = queryhost.POVReader
+type PublicReader = queryhost.PublicReader
 
-var _ observatory.POVQueries = (*POVReader)(nil)
-
-// Restricted callers must never receive inner error strings or wrapped
-// causes (including hashes, private IDs, filenames and actor metadata).
-// Preserve only the caller's own cancellation signal.
-func restrictedViewError(ctx context.Context) error {
+func restrictedOpenError(ctx context.Context) error {
 	if err := ctx.Err(); err != nil {
 		return err
 	}
 	return observatory.ErrViewUnavailable
 }
 
-// OpenPOVObservatory is a capability binding in the single-operator local
-// host; a SlotDispatch ID is not a user authentication secret. Only the
-// existing durable holder/cycle/round/authorization proof is accepted.
-// This must NOT be exposed as an arbitrary-actor HTTP endpoint.
-func OpenPOVObservatory(
-	ctx context.Context, path string, bundle *policy.Bundle,
-	run, dispatchID [32]byte, actor [2]string,
-) (*POVReader, error) {
-	if actor[0] == "" || actor[1] == "" {
-		return nil, restrictedViewError(ctx)
-	}
-	base, err := OpenObservatory(ctx, path, bundle)
+func OpenPOVObservatory(ctx context.Context, path string, bundle *policy.Bundle, run, dispatchID [32]byte, actor [2]string) (*POVReader, error) {
+	host, err := openObservatoryAuthority(ctx, path, bundle)
 	if err != nil {
-		return nil, restrictedViewError(ctx)
+		return nil, restrictedOpenError(ctx)
 	}
-	fail := func() (*POVReader, error) {
-		_ = base.Close()
-		return nil, restrictedViewError(ctx)
-	}
-	version, err := base.dataVersion(ctx)
-	if err != nil {
-		return fail()
-	}
-	if _, err := base.ReadRun(ctx, run); err != nil {
-		return fail()
-	}
-	inbox, err := base.store.BindActorInbox(ctx, dispatchID, actor)
-	if err != nil {
-		return fail()
-	}
-	if inbox.run != run || inbox.actor != actor {
-		return fail()
-	}
-	digest, err := povDispatchHash(ctx, base, dispatchID)
-	if err != nil {
-		return fail()
-	}
-	now, err := base.dataVersion(ctx)
-	if err != nil || version != now {
-		return fail()
-	}
-	return &POVReader{base: base, dispatch: dispatchID, dispatchHash: digest, run: run, actor: actor, through: inbox.throughRevision}, nil
+	return queryhost.NewPOV(ctx, actorAuthority{coreAuthority{host: host}}, bundle, run, dispatchID, actor)
 }
-
-// The canonical dispatch ID does not bind all its fields. Preserve the
-// precise authenticated dispatch bytes as well as its holder and cutoff.
-func povDispatchHash(ctx context.Context, base *ObservatoryReader, dispatch [32]byte) ([32]byte, error) {
-	var raw []byte
-	if err := base.store.db.QueryRowContext(ctx, "SELECT canonical FROM input_ledger WHERE id=?", dispatch[:]).Scan(&raw); err != nil {
-		return [32]byte{}, err
-	}
-	return [32]byte(identity.OpaqueContentHash(raw)), nil
-}
-
-func (q *POVReader) Close() error {
-	if q == nil || q.base == nil {
-		return observatory.ErrViewUnavailable
-	}
-	if err := q.base.Close(); err != nil {
-		return observatory.ErrViewUnavailable
-	}
-	return nil
-}
-
-// ReadPOV first authenticates the complete current run by normative replay,
-// then delegates epistemic access to the same receiver-scoped ActorInbox and
-// contextboundary.Build used by cognition. Context boundary rejects unpinned
-// channels, missing receipts, future evidence and raw EventStore provenance.
-// The returned bytes are clones of *delivered* Observation/KnowledgeInput
-// only. A concurrent write causes fail-closed rather than a mixed result.
-func (q *POVReader) ReadPOV(ctx context.Context) (observatory.POVView, error) {
-	var zero observatory.POVView
-	if q == nil || q.base == nil {
-		return zero, restrictedViewError(ctx)
-	}
-	version, err := q.base.dataVersion(ctx)
-	if err != nil {
-		return zero, restrictedViewError(ctx)
-	}
-	state, err := q.base.ReadRun(ctx, q.run)
-	if err != nil {
-		return zero, restrictedViewError(ctx)
-	}
-	if uint64(state.Clock.Revision) < q.through {
-		return zero, restrictedViewError(ctx)
-	}
-	// Reauthenticate the original durable dispatch on every read. A
-	// cached inbox alone would not prove that its binding still exists.
-	inbox, err := q.base.store.BindActorInbox(ctx, q.dispatch, q.actor)
-	if err != nil || inbox.run != q.run || inbox.actor != q.actor || inbox.throughRevision != q.through {
-		return zero, restrictedViewError(ctx)
-	}
-	digest, err := povDispatchHash(ctx, q.base, q.dispatch)
-	if err != nil || digest != q.dispatchHash {
-		return zero, restrictedViewError(ctx)
-	}
-	view, err := contextboundary.Build(ctx, inbox, q.actor)
-	if err != nil {
-		return zero, restrictedViewError(ctx)
-	}
-	if view.Actor != q.actor {
-		return zero, restrictedViewError(ctx)
-	}
-	out := observatory.POVView{
-		Run: q.run, Actor: q.actor, ThroughRevision: q.through,
-		Entries: make([]observatory.AddressedEvidence, 0, len(view.Inbox)),
-	}
-	for _, entry := range view.Inbox {
-		value, err := codec.StrictDecodePayload(entry.Input.Canonical)
-		if err != nil {
-			return zero, restrictedViewError(ctx)
-		}
-		fields, ok := value.([]any)
-		if !ok || len(fields) != 11 {
-			return zero, restrictedViewError(ctx)
-		}
-		channel, ok := fields[6].(string)
-		if !ok || (channel != "school.round.lifecycle.v1" && channel != "school.message.v1") {
-			return zero, restrictedViewError(ctx)
-		}
-		out.Entries = append(out.Entries, observatory.AddressedEvidence{
-			ObservationID:        entry.Observation.Identity,
-			KnowledgeInputID:     entry.Input.Identity,
-			ObservationCanonical: bytes.Clone(entry.Observation.Canonical),
-			KnowledgeCanonical:   bytes.Clone(entry.Input.Canonical),
-			ReceivedAt:           entry.ReceivedAt,
-			Channel:              channel,
-		})
-	}
-	// O1 already establishes immutable replay proof for the first snapshot.
-	// Version and state comparison detect concurrent writes by another handle.
-	final, err := q.base.loadReadRun(ctx, q.run)
-	if err != nil {
-		return zero, restrictedViewError(ctx)
-	}
-	now, err := q.base.dataVersion(ctx)
-	if err != nil {
-		return zero, restrictedViewError(ctx)
-	}
-	if version != now || !reflect.DeepEqual(state, final) {
-		return zero, restrictedViewError(ctx)
-	}
-	return out, nil
-}
-
-// PublicReader is separate from POVReader and PrivilegedReader. The current
-// V1 schema has an addressed evidence route, but no authenticated public
-// publication channel or fanout. A public Event marker alone authorizes no
-// knowledge: return no publications rather than silently leaking world truth.
-type PublicReader struct {
-	base *ObservatoryReader
-}
-
-var _ observatory.PublicQueries = (*PublicReader)(nil)
 
 func OpenPublicObservatory(ctx context.Context, path string, bundle *policy.Bundle) (*PublicReader, error) {
-	base, err := OpenObservatory(ctx, path, bundle)
+	host, err := openObservatoryAuthority(ctx, path, bundle)
 	if err != nil {
-		return nil, restrictedViewError(ctx)
+		return nil, restrictedOpenError(ctx)
 	}
-	return &PublicReader{base: base}, nil
-}
-
-func (q *PublicReader) Close() error {
-	if q == nil || q.base == nil {
-		return observatory.ErrViewUnavailable
-	}
-	if err := q.base.Close(); err != nil {
-		return observatory.ErrViewUnavailable
-	}
-	return nil
-}
-
-func (q *PublicReader) ReadPublic(ctx context.Context, run [32]byte) (observatory.PublicView, error) {
-	var zero observatory.PublicView
-	if q == nil || q.base == nil {
-		return zero, restrictedViewError(ctx)
-	}
-	version, err := q.base.dataVersion(ctx)
-	if err != nil {
-		return zero, restrictedViewError(ctx)
-	}
-	state, err := q.base.ReadRun(ctx, run)
-	if err != nil {
-		return zero, restrictedViewError(ctx)
-	}
-	// A future schema that installs a publisher must explicitly authorize
-	// publication and extend the public projection before it can be used.
-	// Never use EventStore, publicity bits, routes for private recipients,
-	// actor context, decision journal or privileged Observatory as fallback.
-	var candidate int
-	if err := q.base.store.db.QueryRowContext(ctx,
-		"SELECT COUNT(*) FROM sqlite_master WHERE type IN ('table','view') AND lower(name) IN ('publications','public_routes','public_dispatches')").Scan(&candidate); err != nil {
-		return zero, restrictedViewError(ctx)
-	}
-	if candidate != 0 {
-		return zero, restrictedViewError(ctx)
-	}
-	final, err := q.base.loadReadRun(ctx, run)
-	if err != nil {
-		return zero, restrictedViewError(ctx)
-	}
-	now, err := q.base.dataVersion(ctx)
-	if err != nil {
-		return zero, restrictedViewError(ctx)
-	}
-	if version != now || !reflect.DeepEqual(state, final) {
-		return zero, restrictedViewError(ctx)
-	}
-	return observatory.PublicView{
-		Run:               run,
-		PublicationStatus: observatory.NoPublicRoute,
-		Publications:      make([]observatory.PublicPublication, 0),
-	}, nil
+	return queryhost.NewPublic(publicAuthority{coreAuthority{host: host}}, bundle), nil
 }

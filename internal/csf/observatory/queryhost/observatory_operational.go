@@ -1,4 +1,4 @@
-package sqlite
+package queryhost
 
 import (
 	"bytes"
@@ -10,7 +10,6 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
 )
 
@@ -45,7 +44,7 @@ func (q *PrivilegedReader) ReadOperationalReport(ctx context.Context, run [32]by
 		State: verified.State, PendingPerceptionTasks: verified.PendingPerceptionTasks,
 		RejectedIngress: verified.RejectedIngress,
 	}
-	pending, err := q.base.store.PendingClock(ctx, run)
+	pending, err := q.audit.PendingClock(ctx, run)
 	if err != nil {
 		return zero, operationalAuthorityError(ctx, err)
 	}
@@ -100,7 +99,7 @@ func (q *PrivilegedReader) operationalPending(ctx context.Context, run [32]byte,
 			query += " AND run_id=?"
 			args = append(args, run[:])
 		}
-		err := q.base.store.db.QueryRowContext(ctx, query, args...).Scan(&raw)
+		err := q.audit.QueryRowContext(ctx, query, args...).Scan(&raw)
 		if err == sql.ErrNoRows {
 			continue
 		}
@@ -141,19 +140,19 @@ func (q *PrivilegedReader) operationalPending(ctx context.Context, run [32]byte,
 
 func (q *PrivilegedReader) operationalSources(ctx context.Context, run [32]byte,
 	target *domain.EligibilityCoordinate) ([]observatory.SourceDiagnostic, error) {
-	ledger, err := inputledger.Open(ctx, domain.ID(run), q.base.bundle, q.base.store)
+	ledger, err := q.audit.SourcePrefix(ctx, run, q.base.bundle)
 	if err != nil {
 		return nil, err
 	}
-	sources, _, closures, _, _, loadedRun := ledger.Snapshot()
-	if loadedRun != domain.ID(run) {
+	sources, closures, loadedRun := ledger.Sources, ledger.Closures, ledger.Run
+	if loadedRun != run {
 		return nil, errors.New("operational source ledger run mismatch")
 	}
-	latest := map[string]inputledger.StoredClosure{}
+	latest := map[string]StoredClosure{}
 	// Snapshot orders closures by authenticated ingress sequence. The last
 	// record for each source is the latest closure, not latest rowid.
 	for _, closure := range closures {
-		latest[closure.Receipt.SourceID] = closure
+		latest[closure.Source] = closure
 	}
 	out := make([]observatory.SourceDiagnostic, 0, len(sources))
 	for _, name := range sources {
@@ -212,7 +211,7 @@ func operationalAuthorityError(ctx context.Context, err error) error {
 // or unrelated Genesis tampering is reserved for replay failure. No
 // successful diagnostic is returned unless the actual replay passes.
 func (q *PrivilegedReader) operationalPins(ctx context.Context, run [32]byte) error {
-	raw, err := q.base.store.LoadGenesis(ctx, run)
+	raw, err := q.audit.LoadGenesis(ctx, run)
 	if err != nil {
 		return err
 	}

@@ -60,6 +60,7 @@ jobs:
         run: |
           files=(
             internal/csf/observatory/views.go
+            internal/csf/observatory/queryhost/views.go
             internal/csf/persistence/sqlite/observatory_pov_public.go
             internal/csf/commit/observatory_o3_integration_test.go
           )
@@ -77,7 +78,7 @@ jobs:
       - name: O3 race detector on affected packages
         run: go test -race -count=1 -timeout=18m ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/csf/observatory ./internal/csf/contextboundary -run '^TestCSFRV19O3'
       - name: Vet affected Go modules
-        run: go vet ./internal/csf/observatory ./internal/csf/persistence/sqlite ./internal/csf/commit ./internal/csf/contextboundary
+        run: go vet ./internal/csf/observatory/... ./internal/csf/persistence/sqlite ./internal/csf/commit ./internal/csf/contextboundary
   full-go:
     runs-on: ubuntu-latest
     timeout-minutes: 40

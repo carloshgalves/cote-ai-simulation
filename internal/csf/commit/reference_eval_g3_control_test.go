@@ -84,7 +84,7 @@ func TestReferenceG3FrozenAdvanceAfterAppend(t *testing.T) {
 			t.Helper()
 			late, err := ledger.AppendInput(ctx, "driver", inputledger.Input{
 				ProducerUnitKey: "late-after-fence", Kind: "external.event", SchemaVersion: 1,
-				Actor: []any{uint64(0)}, Payload: []any{}, DeclaredEffectiveAt: state.Instant + 100,
+				Actor: []any{uint64(0)}, Payload: validGenesis(t, bundle).Payload[16], DeclaredEffectiveAt: state.Instant + 100,
 				Eligibility: domain.EligibilityCoordinate{NotBeforeInstant: state.Instant + 100},
 				Provenance: []any{uint64(0)}, IdempotencyKey: []any{uint64(0)},
 			})

@@ -94,8 +94,16 @@ func run(input Input,workerOrder []int,parallelism int)(Result,error){
  outcomes:=evaluateWorkers(workers,parallelism,func(p prepared)(preparedOutcome,error){
   return evaluatePrepared(d,input,p,refs)
  })
+ // Normalize even error/partial outcomes before the first merge. Failure
+ // precedence, assessment prefixes and dispositions cannot depend on the
+ // chosen worker schedule. Each host index points to a fence index.
+ if workerOrder!=nil{
+  canonical:=make([]workerOutcome,len(ordered))
+  for hostIndex,fenceIndex:=range workerOrder{canonical[fenceIndex]=outcomes[hostIndex]}
+  outcomes=canonical
+ }
  for i,out:=range outcomes{
-  p:=workers[i]
+  p:=ordered[i]
   if p.noProposal{noProposals[p.id]=true;continue}
   if p.aliasFound{aliases[p.id]=true;continue}
   result.Assessments=append(result.Assessments,out.value.Assessments...)
@@ -107,16 +115,6 @@ func run(input Input,workerOrder []int,parallelism int)(Result,error){
    result.Candidates=append(result.Candidates,candidate)
    current[candidate.ID]=p.amount
   }
- }
- // Worker completion order cannot enter the canonical provisional seal.
- // At this point each independent output is rooted in exactly one admitted
- // unit. Candidate-level indeterminates are derived only in later stages.
- if workerOrder!=nil{
-  rank:=make(map[domain.ID]int,len(input.Admitted))
-  for i,id:=range input.Admitted{rank[id]=i}
-  sort.Slice(result.Assessments,func(i,j int)bool{return rank[result.Assessments[i].Subject]<rank[result.Assessments[j].Subject]})
-  sort.Slice(result.Candidates,func(i,j int)bool{return rank[result.Candidates[i].SourceUnitIDs[0]]<rank[result.Candidates[j].SourceUnitIDs[0]]})
-  sort.Slice(result.Indeterminate,func(i,j int)bool{return rank[result.Indeterminate[i].Subject]<rank[result.Indeterminate[j].Subject]})
  }
  if len(result.Indeterminate)>0 {
   result.Failure="INDETERMINATE_FACET"

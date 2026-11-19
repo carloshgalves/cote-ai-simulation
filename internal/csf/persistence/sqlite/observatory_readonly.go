@@ -13,6 +13,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	"github.com/carloshgalves/cote-ai-simulation/internal/localdbguard"
+	"github.com/carloshgalves/cote-ai-simulation/internal/readonlysql"
 	modernsqlite "modernc.org/sqlite"
 )
 
@@ -52,7 +53,7 @@ func OpenObservatory(ctx context.Context, path string, bundle *policy.Bundle) (*
 	if err != nil {
 		return nil, err
 	}
-	db := sql.OpenDB(connector)
+	db := sql.OpenDB(readonlysql.Wrap(connector))
 	// One persistent connection stabilizes PRAGMA data_version checks, which
 	// are connection-relative and detect concurrent writes by other handles.
 	db.SetMaxOpenConns(1)

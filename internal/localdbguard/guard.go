@@ -81,6 +81,13 @@ func privateParent(path string) (os.FileInfo, error) {
 	if !ok || stat.Uid != uint32(os.Geteuid()) || !info.IsDir() || info.Mode().Perm()&0022 != 0 {
 		return nil, errors.New("SQLite parent must be operator-owned and not group/other writable")
 	}
+	// Default POSIX ACLs can grant unsafe access to a newly created WAL
+	// or journal before its post-open permissions can be inspected.
+	if n, err := syscall.Getxattr(filepath.Dir(path), "system.posix_acl_default", nil); err == nil && n > 0 {
+		return nil, errors.New("SQLite parent has an inherited-access ACL")
+	} else if err != nil && !errors.Is(err, syscall.ENODATA) && !errors.Is(err, syscall.ENOTSUP) {
+		return nil, err
+	}
 	// A private ancestor also protects ordinary 0755 subdirectories
 	// (e.g. testing.TempDir creates children beneath a 0700 root).
 	for dir := filepath.Dir(path); ; dir = filepath.Dir(dir) {

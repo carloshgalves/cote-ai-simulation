@@ -57,11 +57,14 @@ jobs:
             exit 1
           fi
           python -B docs/reference-run/csfrv1-10g/test_run_evals.py
+      - name: G2 real focused controls (synthetic fixtures)
+        run: |
+          go test -count=1 -timeout=5m ./internal/csf/commit ./internal/csf/admission -run '^TestReferenceG2'
       - name: Execute all registered witnesses normal and race
         run: |
           python -B docs/reference-run/csfrv1-10g/run_evals.py --sha "$SOURCE_SHA" --out "$RUNNER_TEMP/csf-g-evidence"
       - name: Publish digest-only matrix even on test failure
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v6
         with:
           name: csfrv1-10g-evidence-${{ env.SOURCE_SHA }}

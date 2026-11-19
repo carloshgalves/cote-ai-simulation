@@ -636,4 +636,3 @@ func TestReferenceG2TriggerAtomicOriginAndColdSettlement(t *testing.T) {
 		t.Fatal("activation not consumed by its exact decision", err)
 	}
 }
-

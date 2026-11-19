@@ -3,7 +3,6 @@ package sqlite
 import (
 	"bytes"
 	"context"
-	"errors"
 	"reflect"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
@@ -77,9 +76,12 @@ func OpenPOVObservatory(
 
 func (q *POVReader) Close() error {
 	if q == nil || q.base == nil {
-		return errors.New("POV reader is not initialized")
+		return observatory.ErrViewUnavailable
 	}
-	return q.base.Close()
+	if err := q.base.Close(); err != nil {
+		return observatory.ErrViewUnavailable
+	}
+	return nil
 }
 
 // ReadPOV first authenticates the complete current run by normative replay,
@@ -179,9 +181,12 @@ func OpenPublicObservatory(ctx context.Context, path string, bundle *policy.Bund
 
 func (q *PublicReader) Close() error {
 	if q == nil || q.base == nil {
-		return errors.New("public Observatory reader is not initialized")
+		return observatory.ErrViewUnavailable
 	}
-	return q.base.Close()
+	if err := q.base.Close(); err != nil {
+		return observatory.ErrViewUnavailable
+	}
+	return nil
 }
 
 func (q *PublicReader) ReadPublic(ctx context.Context, run [32]byte) (observatory.PublicView, error) {

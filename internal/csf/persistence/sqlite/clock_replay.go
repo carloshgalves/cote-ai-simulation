@@ -125,10 +125,10 @@ func (s *Store) ReplayClock(ctx context.Context,runID [32]byte,bundle *policy.Bu
  // Validate the complete durable InputLedger, not just the minimum used
  // for clock selection: identity, source, unit digests, receipt association
  // and gapless source ingress sequences are restored from canonical bytes.
- restored,err:=inputledger.Open(ctx,domain.ID(runID),bundle,s)
+ restored,err:=inputledger.RestoreReadPrefix(ctx,domain.ID(runID),bundle,s)
  if err!=nil{return report,fmt.Errorf("replay input ledger integrity: %w",err)}
  if err:=verifyIngressProjections(ctx,s.db);err!=nil{return report,fmt.Errorf("replay ingress SQL projection diverged: %w",err)}
- _,_,_,rounds,_,_:=restored.Snapshot()
+ rounds:=restored.Rounds
  for _,round:=range rounds{
   hash:=identity.OpaqueContentHash(round.Canonical)
   var pinned []byte

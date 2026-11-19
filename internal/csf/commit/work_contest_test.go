@@ -26,7 +26,7 @@ func twoResourceContestFixture(t *testing.T,reverse bool)(*Coordinator,*sqlite.S
 func twoResourceContestFixtureWithOccurrence(t *testing.T,reverse,dueNow bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
  return twoResourceContestFixtureWithSystem(t,reverse,dueNow,false)
 }
-func twoResourceContestFixtureWithSystem(t *testing.T,reverse,dueNow,activeTrigger bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
+func twoResourceContestFixtureWithSystem(t *testing.T,reverse,dueNow,activeTrigger bool,earlyFirst ...bool)(*Coordinator,*sqlite.Store,*inputledger.Ledger,admission.Cycle,admission.Fence,string){
  t.Helper()
  ctx:=context.Background()
  bundle,err:=policy.Load(bundlePath);if err!=nil{t.Fatal(err)}
@@ -77,9 +77,15 @@ func twoResourceContestFixtureWithSystem(t *testing.T,reverse,dueNow,activeTrigg
    SlotID:"act",Actor:round.Actor,Eligibility:round.Eligibility,BaseRevision:0,EffectiveAt:g.InitialInstant}
   if err:=ledger.RegisterDispatch(ctx,dispatch,inputledger.CycleBinding{ID:id,BaseRevision:0,Instant:g.InitialInstant});err!=nil{t.Fatal(err)}
   response,err:=testresourcev1.ProposalForDispatch(bundle,dispatch);if err!=nil{t.Fatal(err)}
-  responses=append(responses,response)
+  if len(earlyFirst)>0&&earlyFirst[0]&&i==0{
+   if err:=ledger.Respond(ctx,response);err!=nil{t.Fatal(err)}
+   // Assert the response really reached durable storage before R2 exists.
+   view,_,err:=ledger.AdmissionView(ctx,bundle);if err!=nil{t.Fatal(err)}
+   _,_,_,rounds,slots,_:=view.Snapshot()
+   if len(rounds)!=1||slots[round.ID]["act"].ID!=response.ID{t.Fatal("early response was not persisted before R2")}
+  }else{responses=append(responses,response)}
  }
- if reverse{responses[0],responses[1]=responses[1],responses[0]}
+ if reverse&&len(responses)==2{responses[0],responses[1]=responses[1],responses[0]}
  for _,v:=range responses{if err:=ledger.Respond(ctx,v);err!=nil{t.Fatal(err)}}
  var base domain.Digest;copy(base[:],g.Payload[16].([]any)[3].([]byte))
  cycle:=admission.Cycle{ID:id,Attempt:0,Instant:g.InitialInstant,Ordinal:0,BaseRevision:0,

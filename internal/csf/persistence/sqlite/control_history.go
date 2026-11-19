@@ -132,6 +132,9 @@ func (s *Store) verifyHistoricalAbortRetry(ctx context.Context)error{
         if !equalBytes(fields[8],fence.digest[:]){
             return errors.New("historical abort cites wrong fence digest")
         }
+        candidates,err:=loadAbortCandidates(ctx,s.db,fields)
+        if err!=nil{return err}
+        if err:=verifyAbortAuthorities(ctx,s.db,run,fence.fields,fields,candidates);err!=nil{return fmt.Errorf("historical abort authority: %w",err)}
     }
     for _,retry:=range retries{
         f:=retry.fields

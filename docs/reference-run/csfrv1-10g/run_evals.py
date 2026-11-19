@@ -90,7 +90,7 @@ def validate(registry, trace, source):
         raise ValueError("four explicit eval packages required")
     used = set()
     for name, group in evals.items():
-        if (set(group) != {"scope", "description", "witnesses"} or group["scope"] != "PILOT_ONLY"
+        if (set(group) != {"scope", "description", "witnesses"} or group["scope"] not in {"PILOT_ONLY", "SCOPED_WITH_GAPS"}
                 or not isinstance(group["description"], str) or not group["description"].strip()):
             raise ValueError("eval scope not reviewed")
         refs = group["witnesses"]
@@ -264,7 +264,7 @@ def report(registry, normative, results, sha, registry_hash):
     eval_results = {}
     for name, group in registry["evals"].items():
         rs = group["witnesses"]
-        eval_results[name] = dict(group, status="PASS_PILOT_ONLY" if all(witness_passes(results, w) for w in rs) else "FAIL",
+        eval_results[name] = dict(group, status=("PASS_PILOT_ONLY" if group["scope"] == "PILOT_ONLY" else "PASS_SCOPED_WITH_GAPS") if all(witness_passes(results, w) for w in rs) else "FAIL",
                                   complete=False)
     evals_complete = all(group["complete"] for group in eval_results.values())
     disposition = ("NO_GO_INCOMPLETE_MATRIX" if not complete else

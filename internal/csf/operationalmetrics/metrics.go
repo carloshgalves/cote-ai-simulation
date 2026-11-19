@@ -16,6 +16,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+	"sync"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/localdbguard"
 	"github.com/carloshgalves/cote-ai-simulation/internal/readonlysql"
@@ -133,6 +134,7 @@ CREATE INDEX IF NOT EXISTS idx_operational_sample_run ON operational_samples(run
 type Recorder struct {
 	db  *sql.DB
 	pin *localdbguard.Pin
+	mu  sync.Mutex
 }
 
 func OpenRecorder(ctx context.Context, causal, sidecar string) (*Recorder, error) {
@@ -144,6 +146,9 @@ func OpenRecorder(ctx context.Context, causal, sidecar string) (*Recorder, error
 	fresh := errors.Is(statErr, os.ErrNotExist)
 	if statErr != nil && !fresh {
 		return nil, statErr
+	}
+	if err := noPagerCompanions(p, true); err != nil {
+		return nil, err
 	}
 	if fresh {
 		// Reserve a private file without following a link or truncating a
@@ -165,10 +170,8 @@ func OpenRecorder(ctx context.Context, causal, sidecar string) (*Recorder, error
 	// Metrics use a rollback journal, not WAL, and a dirty shutdown
 	// requires explicit operator recovery rather than automatic writes.
 	if !fresh {
-		for _, suffix := range []string{"-journal", "-wal", "-shm"} {
-			if _, err := os.Lstat(p + suffix); !errors.Is(err, os.ErrNotExist) {
-				return nil, errors.New("operational database has an active/recovery pager companion")
-			}
+		if err := rollbackHeader(p); err != nil {
+			return nil, err
 		}
 		preflight, err := openDB(ctx, p, "ro")
 		if err != nil {
@@ -223,7 +226,7 @@ func OpenRecorder(ctx context.Context, causal, sidecar string) (*Recorder, error
 			return fail(err)
 		}
 	}
-	if err := verifySchema(ctx, db); err != nil {
+	if err := verifyVersionedSchema(ctx, db); err != nil {
 		return fail(err)
 	}
 	if err := pin.Check(); err != nil {
@@ -245,13 +248,56 @@ type schemaReader interface {
 	QueryContext(context.Context, string, ...any) (*sql.Rows, error)
 }
 
-func verifyVersionedSchema(ctx context.Context, db *sql.DB) error {
+func noPagerCompanions(path string, includeJournal bool) error {
+	suffixes := []string{"-wal", "-shm"}
+	if includeJournal {
+		suffixes = append(suffixes, "-journal")
+	}
+	for _, suffix := range suffixes {
+		if _, err := os.Lstat(path + suffix); !errors.Is(err, os.ErrNotExist) {
+			return errors.New("operational database has an active/recovery pager companion")
+		}
+	}
+	return nil
+}
+
+// Read the version bytes before SQLite opens a foreign file. A WAL-mode
+// database could otherwise create shared-memory files during preflight.
+func rollbackHeader(path string) error {
+	f, err := os.Open(path)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	var header [100]byte
+	if _, err := io.ReadFull(f, header[:]); err != nil {
+		return err
+	}
+	if !bytes.Equal(header[:16], []byte("SQLite format 3\x00")) || header[18] != 1 || header[19] != 1 {
+		return errors.New("operational database must use rollback-journal format")
+	}
+	return nil
+}
+
+type versionedSchemaReader interface {
+	schemaReader
+	QueryRowContext(context.Context, string, ...any) *sql.Row
+}
+
+func verifyVersionedSchema(ctx context.Context, db versionedSchemaReader) error {
 	var version int
 	if err := db.QueryRowContext(ctx, "PRAGMA user_version").Scan(&version); err != nil {
 		return err
 	}
 	if version != 1 {
 		return errors.New("unsupported operational schema version")
+	}
+	var journal string
+	if err := db.QueryRowContext(ctx, "PRAGMA journal_mode").Scan(&journal); err != nil {
+		return err
+	}
+	if journal != "delete" {
+		return errors.New("operational database journal mode must be DELETE")
 	}
 	return verifySchema(ctx, db)
 }
@@ -309,7 +355,15 @@ func (r *Recorder) Record(ctx context.Context, s Sample) error {
 	if len(raw) > 4096 {
 		return errors.New("operational sample exceeds bounded schema")
 	}
+	r.mu.Lock()
+	defer r.mu.Unlock()
 	if err := r.pin.Check(); err != nil {
+		return err
+	}
+	if err := noPagerCompanions(r.pin.Path(), true); err != nil {
+		return err
+	}
+	if err := rollbackHeader(r.pin.Path()); err != nil {
 		return err
 	}
 	tx, err := r.db.BeginTx(ctx, nil)
@@ -317,7 +371,7 @@ func (r *Recorder) Record(ctx context.Context, s Sample) error {
 		return err
 	}
 	defer tx.Rollback()
-	if err := verifySchema(ctx, tx); err != nil {
+	if err := verifyVersionedSchema(ctx, tx); err != nil {
 		return err
 	}
 	res, err := tx.ExecContext(ctx, "INSERT OR IGNORE INTO operational_samples(id,run_id,at_ns,body) VALUES (?,?,?,?)",
@@ -370,6 +424,12 @@ func OpenReader(ctx context.Context, causal, sidecar string) (*Reader, error) {
 	if err != nil {
 		return nil, err
 	}
+	if err := noPagerCompanions(p, false); err != nil {
+		return nil, err
+	}
+	if err := rollbackHeader(p); err != nil {
+		return nil, err
+	}
 	db, err := openDB(ctx, p, "ro")
 	if err != nil {
 		return nil, err
@@ -386,7 +446,7 @@ func OpenReader(ctx context.Context, causal, sidecar string) (*Reader, error) {
 	if err := db.QueryRowContext(ctx, "PRAGMA user_version").Scan(&version); err != nil || version != 1 {
 		return fail(errors.New("unsupported operational metrics schema version"))
 	}
-	if err := verifySchema(ctx, db); err != nil {
+	if err := verifyVersionedSchema(ctx, db); err != nil {
 		return fail(err)
 	}
 	if err := pin.Check(); err != nil {
@@ -414,12 +474,18 @@ func (r *Reader) Read(ctx context.Context, run [32]byte, limit int) ([]Sample, e
 	if err := r.pin.Check(); err != nil {
 		return nil, err
 	}
+	if err := noPagerCompanions(r.pin.Path(), false); err != nil {
+		return nil, err
+	}
+	if err := rollbackHeader(r.pin.Path()); err != nil {
+		return nil, err
+	}
 	tx, err := r.db.BeginTx(ctx, &sql.TxOptions{ReadOnly: true})
 	if err != nil {
 		return nil, err
 	}
 	defer tx.Rollback()
-	if err := verifySchema(ctx, tx); err != nil {
+	if err := verifyVersionedSchema(ctx, tx); err != nil {
 		return nil, err
 	}
 	rows, err := tx.QueryContext(ctx, "SELECT id,run_id,at_ns,body FROM operational_samples WHERE run_id=? ORDER BY at_ns,id LIMIT ?", run[:], limit+1)

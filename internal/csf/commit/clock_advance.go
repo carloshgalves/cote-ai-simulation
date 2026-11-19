@@ -193,10 +193,11 @@ func (c *Coordinator) resumeFrozenClockAdvance(ctx context.Context,runID domain.
     plan:=clock.Plan{Kind:clock.ClockAdvance,From:domain.SimulationInstant(from),To:domain.SimulationInstant(to),
         OriginOrdinal:cycle.Ordinal,Target:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(to),NotBeforeCycleOrdinal:domain.CycleOrdinal(ordinal)}}
     state,err:=c.store.LoadClock(ctx,[32]byte(runID));if err!=nil{return empty,err}
-    if state.Instant!=cycle.Instant||state.Revision!=cycle.BaseRevision||state.LastOrdinal>=int64(cycle.Ordinal){
+    if state.Instant!=cycle.Instant||state.Revision!=cycle.BaseRevision||uint64(cycle.Ordinal)>uint64(1<<63-1)||state.LastOrdinal>=int64(cycle.Ordinal){
         return empty,errors.New("frozen clock advance no longer at admitted revision")
     }
-    if _,err:=c.store.ValidatedGenesis(ctx,[32]byte(runID),c.bundle);err!=nil{return empty,err}
+    g,err:=c.store.ValidatedGenesis(ctx,[32]byte(runID),c.bundle);if err!=nil{return empty,err}
+    if g.RunID!=runID{return empty,errors.New("clock run ID differs from persisted genesis")}
     typed,hash,err:=c.store.LoadWorldState(ctx,uint64(cycle.BaseRevision));if err!=nil{return empty,err}
     if hash!=cycle.BaseStateHash{return empty,errors.New("frozen clock advance world hash mismatch")}
     batch,err:=c.publishClockAdvance(ctx,runID,state,plan,f,typed)

@@ -16,7 +16,7 @@ type preparedOutcome struct {
 
 type workerOutcome struct {
 	value preparedOutcome
-	err error
+	err   error
 }
 
 func evaluateWorkers(units []prepared, parallelism int, evaluate func(prepared) (preparedOutcome, error)) []workerOutcome {

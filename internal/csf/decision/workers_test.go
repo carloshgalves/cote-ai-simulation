@@ -9,7 +9,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 )
 
-// The unbuffered rendezvous requires both real workers to enter their
+// The rendezvous requires both real workers to enter their
 // evaluator before either may exit. A serial fake cannot satisfy it.
 func TestG3WorkerPoolActuallyConcurrent(t *testing.T) {
 	units := []prepared{{id: domain.ID{1}}, {id: domain.ID{2}}}
@@ -46,6 +46,7 @@ func TestG3WorkerPoolActuallyConcurrent(t *testing.T) {
 	select {
 	case out := <-done:
 		if len(out) != 2 || out[0].err != nil || out[1].err != nil ||
+			len(out[0].value.Dispositions) != 1 || len(out[1].value.Dispositions) != 1 ||
 			out[0].value.Dispositions[0].Subject != units[0].id || out[1].value.Dispositions[0].Subject != units[1].id {
 			t.Fatal("parallel results did not preserve input positions")
 		}
@@ -74,6 +75,31 @@ func TestG3ParallelDecisionCanonicalAndInvalidCounts(t *testing.T) {
 			if !errors.Is(err, ErrProvenance) || !reflect.DeepEqual(got, Result{}) {
 				t.Fatal("invalid worker count gained authority", n, err)
 			}
+		}
+	}
+	// Remove only the candidate ID operation from a test-local bundle. Each
+	// worker now fails AFTER producing its assessment. The observed partial
+	// result must start with the first admitted subject, not the first worker.
+	in, a, _ := fixture(t, true)
+	entries := in.Bundle.Registries["domain_operations"].([]any)
+	filtered := make([]any, 0, len(entries))
+	for _, entry := range entries {
+		if entry.([]any)[0] != "cote.csf.id.commit-candidate" {
+			filtered = append(filtered, entry)
+		}
+	}
+	if len(filtered) != len(entries)-1 {
+		t.Fatal("candidate operation mutation did not remove exactly one entry")
+	}
+	in.Bundle.Registries["domain_operations"] = filtered
+	base, baseErr := Run(in)
+	if baseErr == nil || len(base.Assessments) != 1 || base.Assessments[0].Subject != a.ID || len(base.Canonical) != 0 || len(base.Dispositions) != 0 {
+		t.Fatal("expected an unsealed assessment prefix before candidate derivation failure", baseErr)
+	}
+	for _, count := range []int{1, 2, 4} {
+		got, err := RunWithParallelism(in, []int{1, 0}, count)
+		if err == nil || err.Error() != baseErr.Error() || !reflect.DeepEqual(base, got) {
+			t.Fatal("worker failure changed the canonical assessment prefix", count, err)
 		}
 	}
 }

@@ -44,6 +44,12 @@ func (c *Coordinator) DispatchFencedWorkV1(ctx context.Context, ledger *inputled
 	if err != nil || !bytes.Equal(persisted, fence.Canonical) {
 		return empty, errors.New("registered dispatcher refuses an unsealed or altered fence")
 	}
+	// The exported DTO is mutable even when its Canonical bytes remain intact.
+	// Never dispatch using fields that differ from the verified persisted fence.
+	fieldsBytes, err := codec.CanonicalPayload(fence.Fields)
+	if err != nil || len(fence.Fields) != 18 || !bytes.Equal(fieldsBytes, persisted) {
+		return empty, errors.New("registered dispatcher refuses altered fence fields")
+	}
 	units, ok := fence.Fields[11].([]any)
 	if !ok {
 		return empty, errors.New("malformed V1 admitted roster")

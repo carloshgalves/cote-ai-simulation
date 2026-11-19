@@ -3,6 +3,7 @@ package commit
 import (
 	"bytes"
 	"context"
+	"reflect"
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
@@ -74,12 +75,14 @@ func TestReferenceG3RetryFencePrecedenceAndSecondAbort(t *testing.T) {
 }
 
 // The continuous and recovered runs get the same late input. It is appended
-// only after a fence exists and its eligibility is normalized beyond the
-// closed target. Compare the actual terminal and event bytes.
+// before planning in the continuous case and after the stored fence in the
+// recovery case. Both normalize beyond the closure. Compare actual bytes.
 func TestReferenceG3FrozenAdvanceAfterAppend(t *testing.T) {
 	ctx := context.Background()
 	var baseline []byte
 	var fenceBytes []byte
+	var eventIDs [][32]byte
+	var eventBytes [][]byte
 	for _, recover := range []bool{false, true} {
 		c, store, ledger, run, bundle, path := testFixture(t)
 		state, err := store.LoadClock(ctx, [32]byte(run))
@@ -92,7 +95,7 @@ func TestReferenceG3FrozenAdvanceAfterAppend(t *testing.T) {
 				ProducerUnitKey: "late-after-fence", Kind: "external.event", SchemaVersion: 1,
 				Actor: []any{uint64(0)}, Payload: validGenesis(t, bundle).Payload[16], DeclaredEffectiveAt: state.Instant + 100,
 				Eligibility: domain.EligibilityCoordinate{NotBeforeInstant: state.Instant + 100},
-				Provenance: []any{uint64(0)}, IdempotencyKey: []any{uint64(0)},
+				Provenance:  []any{uint64(0)}, IdempotencyKey: []any{uint64(0)},
 			})
 			if err != nil || !referenceC3Same(late.Fields[9], []any{int64(state.Instant + 100), uint64(2)}) {
 				t.Fatal("late append did not normalize beyond closed target", err)
@@ -108,6 +111,13 @@ func TestReferenceG3FrozenAdvanceAfterAppend(t *testing.T) {
 			}
 			baseline = bytes.Clone(out.Commit.Canonical)
 			fenceBytes = bytes.Clone(out.Fence.Canonical)
+			for _, event := range out.Events {
+				eventIDs = append(eventIDs, event.Identity)
+			}
+			if len(eventIDs) < 2 {
+				t.Fatal("clock advance did not publish temporal events")
+			}
+			eventBytes = g2EventBytes(t, store, eventIDs)
 			continue
 		}
 		c.failAfterStep = 1
@@ -132,6 +142,19 @@ func TestReferenceG3FrozenAdvanceAfterAppend(t *testing.T) {
 			t.Fatal(err)
 		}
 		resumer := New(cold, bundle, c.admissionPolicies)
+		frozenCycle, frozenFence, _, err := resumer.ReopenFencedCycle(ctx, [32]byte(run), snap.ID)
+		if err != nil {
+			t.Fatal(err)
+		}
+		forged := frozenFence
+		forged.Fields = cloneAny(frozenFence.Fields)
+		forged.Fields[8] = make([]byte, 32)
+		if bytes.Equal(forged.Fields[8].([]byte), frozenFence.Fields[8].([]byte)) {
+			forged.Fields[8].([]byte)[0] = 1
+		}
+		if _, err := resumer.DispatchFencedWorkV1(ctx, reopened, frozenCycle, forged); err == nil {
+			t.Fatal("mutable fence fields bypassed persisted canonical bytes")
+		}
 		result, err := resumer.ResumeRegisteredWorkV1(ctx, reopened, [32]byte(run), snap.ID)
 		if err != nil || !result.Continued || !bytes.Equal(result.Publication.Canonical, baseline) ||
 			!bytes.Equal(result.Fence.Canonical, fenceBytes) || len(result.Cycle.Plan) != 4 {
@@ -140,6 +163,9 @@ func TestReferenceG3FrozenAdvanceAfterAppend(t *testing.T) {
 		after, err := cold.LoadClock(ctx, [32]byte(run))
 		if err != nil || after.Instant != state.Instant+100 || after.LastOrdinal != -1 || after.Revision != 1 {
 			t.Fatal("wrong recovered temporal successor", err)
+		}
+		if !reflect.DeepEqual(eventBytes, g2EventBytes(t, cold, eventIDs)) {
+			t.Fatal("resumed temporal event bytes differ from continuous execution")
 		}
 		again, err := resumer.ResumeRegisteredWorkV1(ctx, reopened, [32]byte(run), snap.ID)
 		if err != nil || again.Continued {

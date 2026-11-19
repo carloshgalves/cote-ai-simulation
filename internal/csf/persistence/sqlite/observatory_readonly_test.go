@@ -26,7 +26,7 @@ func TestCSFRV19O1SQLiteReadOnlyModeAndIndependentQueryOnlyDefense(t *testing.T)
 	if err != nil {
 		t.Fatal(err)
 	}
-	r, err := OpenObservatory(ctx, path, b)
+	r, err := openObservatoryAuthority(ctx, path, b)
 	if err != nil {
 		t.Fatal(err)
 	}

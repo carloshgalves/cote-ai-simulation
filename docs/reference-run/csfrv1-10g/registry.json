@@ -44,6 +44,12 @@
       "name": "TestCSFRV19O1SQLiteReadOnlyModeAndIndependentQueryOnlyDefense",
       "kind": "EXISTING",
       "subtests": []
+    },
+    "contest-cardinality": {
+      "path": "internal/csf/commit/reference_eval_g1_test.go",
+      "name": "TestReferenceG1ExactLastUnitConflictSet",
+      "kind": "INTEGRATED",
+      "subtests": []
     }
   },
   "rows": [
@@ -713,9 +719,10 @@
       "state": "READY",
       "witnesses": [
         "contest",
-        "reference-contest"
+        "reference-contest",
+        "contest-cardinality"
       ],
-      "reason": "Real contested resource, committed winner/loser, one stock unit consumed, identical fence/journal/event bytes under worker reversal, replay and no unsettled loser."
+      "reason": "Real contested resource, committed winner/loser, one stock unit consumed, identical fence/journal/event bytes under worker reversal, replay and no unsettled loser. Independent SQL journal check authenticates exactly one ConflictSet with both candidate IDs and the named RNG draw, and exactly one COMMIT/REJECT pair."
     },
     {
       "id": "STRESS-42",

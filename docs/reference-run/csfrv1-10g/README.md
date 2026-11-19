@@ -52,7 +52,7 @@ the exact package/test normal and race, uncached; it requires every
 declared test/subtest start/pass and package start/pass, and rejects
 skips, extras, cache, malformed JSON, failed or missing execution.
 The report includes actual command, exit status, source blob, names,
-SHA-256 of logs, normative wording and link, owner, status per row and
+sanitized start/run/pass records with their own digest, SHA-256 of raw logs, normative wording and link, owner, status per row and
 aggregate counts. A failing witness gates the linked rows; no passing
 witness can silently replace a failing one. The CI only uploads
 `evidence.json`, not raw logs, observation bytes or owner data.
@@ -64,3 +64,4 @@ for an incomplete matrix; 1 for a test failure. Even all passing rows
 are EVIDENCE_COMPLETE_REVIEW_REQUIRED, not DoD accepted or production GO.
 The registry is reviewed source code, not a signed external attestation;
 the checkout, installed toolchain and CI runner remain trusted inputs.
+Ignored Go sources/module controls are refused; tracked witness sources must be direct regular files matching their HEAD blobs. Sanitized event records permit audit of actual test inventories without exposing test output. This is not a hostile-code sandbox.

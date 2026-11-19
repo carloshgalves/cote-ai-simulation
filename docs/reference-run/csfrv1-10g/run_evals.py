@@ -114,13 +114,17 @@ def validate(registry, trace, source):
     return normative
 
 
-def verify_events(raw, package, names):
+def verify_events(raw, package, names, *, transcript=None):
     """Exact starts, passes and package completion; no skip/cache/extra tests."""
     wanted = set(names)
+    if not wanted or len(wanted) != len(names):
+        raise ValueError("invalid expected inventory")
     started, passed = set(), set()
     package_started = package_passed = False
     for line in raw.splitlines():
         event = load(line)
+        if not isinstance(event, dict):
+            raise ValueError("invalid JSON event object")
         action, pkg, name = event.get("Action"), event.get("Package"), event.get("Test")
         if action in {"fail", "skip", "build-fail"} or event.get("FailedBuild"):
             raise ValueError("test/package failed or skipped")
@@ -132,6 +136,8 @@ def verify_events(raw, package, names):
             if package_started:
                 raise ValueError("duplicate package start")
             package_started = True
+            if transcript is not None:
+                transcript.append({"action": "start", "package": package})
             continue
         if not package_started or package_passed:
             raise ValueError("event outside live package")
@@ -140,12 +146,14 @@ def verify_events(raw, package, names):
         if action == "output" and not name and "(cached)" in event.get("Output", ""):
             raise ValueError("cached result")
         if name and action == "run":
-            if name in started:
-                raise ValueError("duplicate test start")
+            parent = name.rpartition("/")[0]
+            if name in started or (parent and (parent not in started or parent in passed)):
+                raise ValueError("duplicate or out-of-order test start")
             started.add(name)
         elif name and action == "pass":
-            if name not in started or name in passed:
-                raise ValueError("pass without unique start")
+            children = {case for case in wanted if case.startswith(name + "/")}
+            if name not in started or name in passed or not children <= passed:
+                raise ValueError("pass without unique start or completed children")
             passed.add(name)
         elif not name and action == "pass":
             if passed != wanted:
@@ -153,6 +161,11 @@ def verify_events(raw, package, names):
             package_passed = True
         elif action not in {"output", "pause", "cont"}:
             raise ValueError("unexpected test action")
+        if transcript is not None and action in {"run", "pass"}:
+            item = {"action": action, "package": package}
+            if name:
+                item["test"] = name
+            transcript.append(item)
     if not package_started or not package_passed or started != wanted or passed != wanted:
         raise ValueError("incomplete executed inventory")
     return sorted(passed)
@@ -180,15 +193,18 @@ def execute(root, directory, witnesses):
                 with (directory / f"{wid}-{mode}.{suffix}").open("xb") as f:
                     f.write(content)
             status, reason, tests = "FAIL", "nonzero exit", []
+            events = []
             if proc.returncode == 0:
                 try:
-                    tests = verify_events(proc.stdout, PREFIX + package, names)
+                    tests = verify_events(proc.stdout, PREFIX + package, names, transcript=events)
                     status, reason = "PASS", ""
                 except (ValueError, TypeError, AttributeError) as exc:
                     reason = str(exc)
             result = {"status": status, "command": args, "exit_status": proc.returncode,
                       "log_sha256": digest(proc.stdout), "stderr_sha256": digest(proc.stderr),
-                      "test_names": tests, "reason": reason}
+                      "test_names": tests, "reason": reason,
+                      "sanitized_events": events if status == "PASS" else [],
+                      "sanitized_events_sha256": digest(json.dumps(events if status == "PASS" else [], sort_keys=True, separators=(",", ":")).encode())}
             results[wid][mode] = result
             print(f"{wid}/{mode}: {status} exit={proc.returncode} {reason}", flush=True)
     return results
@@ -224,6 +240,15 @@ def report(registry, normative, results, sha, registry_hash):
             "disposition": "EVIDENCE_COMPLETE_REVIEW_REQUIRED" if complete else "NO_GO_INCOMPLETE_MATRIX"}
 
 
+def clean_checkout(root):
+    # Ignored source can still be compiled by Go despite a clean porcelain
+    # result. Refuse ignored Go sources and module/workspace controls.
+    if git(root, "status", "--porcelain", "--untracked-files=all"):
+        return False
+    return not git(root, "ls-files", "--others", "--ignored", "--exclude-standard",
+                   "--", "*.go", "go.mod", "go.sum", "go.work", "go.work.sum")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--sha", required=True)
@@ -234,15 +259,24 @@ def main():
     sha = git(root, "rev-parse", "HEAD")
     if args.sha != sha or not re.fullmatch(r"[0-9a-f]{40}", sha):
         raise SystemExit("exact checkout SHA required")
-    if git(root, "status", "--porcelain", "--untracked-files=all"):
-        raise SystemExit("clean tracked and untracked checkout required")
+    if not clean_checkout(root):
+        raise SystemExit("clean tracked/untracked checkout without ignored Go inputs required")
     trace_raw, adr_raw, raw = ((root / p).read_bytes() for p in (TRACE, ADR, REGISTRY))
     if git_blob(trace_raw) != PIN_TRACE or git_blob(adr_raw) != PIN_ADR:
         raise SystemExit("frozen normative inputs changed")
     registry, trace = load(raw), load(trace_raw)
     def source(path):
-        git(root, "ls-files", "--error-unmatch", "--", path)
-        return (root / path).read_text(encoding="utf-8")
+        entry = git(root, "ls-files", "--stage", "--", path)
+        fields = entry.split()
+        if len(fields) != 4 or fields[0] not in {"100644", "100755"} or fields[2] != "0" or fields[3] != path:
+            raise ValueError("witness must be a tracked regular source file")
+        file = root / path
+        if not file.is_file() or file.is_symlink() or file.resolve() != file:
+            raise ValueError("witness source must be a direct regular path")
+        content = file.read_bytes()
+        if git_blob(content) != git(root, "rev-parse", "HEAD:" + path):
+            raise ValueError("witness source differs from committed blob")
+        return content.decode("utf-8")
     normative = validate(registry, trace, source)
     # Only trusted commands from this checkout are executed. No test text or
     # executable supplied in a registry is interpreted as shell code.
@@ -257,7 +291,7 @@ def main():
     directory.mkdir(mode=0o700, parents=False, exist_ok=False)
     os.umask(0o077)
     results = execute(root, directory, registry["witnesses"])
-    if git(root, "rev-parse", "HEAD") != sha or git(root, "status", "--porcelain", "--untracked-files=all"):
+    if git(root, "rev-parse", "HEAD") != sha or not clean_checkout(root):
         raise SystemExit("checkout changed during execution; no certificate")
     certificate = report(registry, normative, results, sha, digest(raw))
     certificate["go_version"] = go_version

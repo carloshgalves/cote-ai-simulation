@@ -1,6 +1,8 @@
 """Falsification controls: a green certificate cannot be fabricated by missing cases."""
 import copy
 import json
+import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -81,6 +83,23 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(report["counts"]["STRESS"]["FAIL"], 1)
 
 
+class CheckoutTests(unittest.TestCase):
+    def test_ignored_go_source_is_not_clean(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            def git(*args):
+                subprocess.run(["git", *args], cwd=root, check=True,
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            git("init")
+            (root / ".gitignore").write_text("*.go\\n")
+            git("add", ".gitignore")
+            git("-c", "user.name=Test", "-c", "user.email=test@example.invalid",
+                "commit", "-m", "fixture")
+            self.assertTrue(g.clean_checkout(root))
+            (root / "injected_test.go").write_text("package fixture\\n")
+            self.assertFalse(g.clean_checkout(root))
+
+
 class EventTests(unittest.TestCase):
     package = "pkg"
     names = ["TestA", "TestA/child"]
@@ -97,7 +116,12 @@ class EventTests(unittest.TestCase):
         ]
 
     def test_valid(self):
-        self.assertEqual(g.verify_events(encoded(self.valid()), self.package, self.names), self.names)
+        safe = []
+        data = self.valid()
+        data.insert(3, {"Action": "output", "Package": self.package, "Test": "TestA/child", "Output": "private payload"})
+        self.assertEqual(g.verify_events(encoded(data), self.package, self.names, transcript=safe), self.names)
+        self.assertEqual(len(safe), 6)
+        self.assertNotIn("private payload", json.dumps(safe))
 
     def test_negative(self):
         f = self.valid()
@@ -115,6 +139,8 @@ class EventTests(unittest.TestCase):
             "failed-build": [*f, {"Action": "build-fail", "ImportPath": "pkg"}],
             "cached": [*f[:-1], {"Action": "output", "Package": "pkg", "Output": "ok (cached)"}, f[-1]],
             "extra-test": [*f[:-1], {"Action": "run", "Package": "pkg", "Test": "TestOther"}, f[-1]],
+            "child-before-parent": [f[0], f[2], f[1], *f[3:]],
+            "parent-before-child-pass": [*f[:3], f[4], f[3], f[5]],
         }
         for name, events in bad.items():
             with self.subTest(name=name), self.assertRaises(ValueError):

@@ -50,6 +50,12 @@
       "name": "TestReferenceG1ExactLastUnitConflictSet",
       "kind": "INTEGRATED",
       "subtests": []
+    },
+    "physical-d3": {
+      "path": "internal/csf/commit/reference_disclosure_d3_test.go",
+      "name": "TestReferenceD3RealPythonPrivateEventAndLiveObservatory",
+      "kind": "INTEGRATED",
+      "subtests": []
     }
   },
   "rows": [
@@ -943,5 +949,40 @@
       "reason": "Empty WORK / zero-event terminal remains deferred in #22; existing non-empty commit/abort tests are only partial proof.",
       "blocker_issue": 22
     }
-  ]
+  ],
+  "evals": {
+    "simulation": {
+      "scope": "PILOT_ONLY",
+      "description": "Last-unit conflict, exact roster and outcome under source/worker reversal; wider simulation coverage is G2.",
+      "witnesses": [
+        "contest",
+        "reference-contest",
+        "contest-cardinality"
+      ]
+    },
+    "determinism": {
+      "scope": "PILOT_ONLY",
+      "description": "Real E1 same signed inputs and full three-database transcript; recovery/fork matrix is G3.",
+      "witnesses": [
+        "exact-e1"
+      ]
+    },
+    "embodiment": {
+      "scope": "PILOT_ONLY",
+      "description": "Real supervised A1 physical epochs with engine-only disclosure; policy/tamper/recovery coverage is G4. No direct normative row credit for this partial eval.",
+      "witnesses": [
+        "physical-d3"
+      ]
+    },
+    "knowledge": {
+      "scope": "PILOT_ONLY",
+      "description": "Actual Observatory read capability and concurrent immutable authority; complete knowledge boundaries are G5.",
+      "witnesses": [
+        "f4-concurrent",
+        "f4-imports",
+        "f4-capability",
+        "f4-pager"
+      ]
+    }
+  }
 }

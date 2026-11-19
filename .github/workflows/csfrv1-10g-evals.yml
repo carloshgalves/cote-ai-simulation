@@ -51,6 +51,7 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
           git diff --check 902ff115b5008b6d33dec314eeb4a9a5c805412e...HEAD
+          test -z "$(gofmt -l internal/csf/commit/reference_eval_g1_test.go)"
           python -B docs/reference-run/csfrv1-10g/test_run_evals.py
       - name: Execute all registered witnesses normal and race
         run: |

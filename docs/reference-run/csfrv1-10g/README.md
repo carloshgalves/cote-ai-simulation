@@ -30,8 +30,14 @@ Pilot witnesses:
   real D3 queries with E1/durable-byte equality. F4 trusted operator and
   SQLite composition-root limitations remain.
 
-G1 is infrastructure plus initial executable rows, not completion of
-any whole eval or of 41/41. No LLM or network selection of causal facts.
+G1 contains four explicit pilot eval packages, including the genuine D3
+physical witness without direct row credit (partial physical evidence must
+not promote STRESS-39). Package-level supplemental witnesses can be tracked
+and fail an eval even if not sufficient for a normative requirement. All
+four group scopes remain PILOT_ONLY; success is PASS_PILOT_ONLY and complete
+is false. A later reviewed G6 gate must extend the scope contract when each
+whole eval has been independently mapped and executed. G1 is infrastructure
+plus initial executable rows, not completion of any whole eval or of 41/41. No LLM or network selection of causal facts.
 Separate #93/#94/#113 review gates remain NOT_ATTESTED.
 
 ## Execute
@@ -60,7 +66,7 @@ witness can silently replace a failing one. The CI only uploads
 Exit 0 means registered tests have passed and the matrix was generated,
 **not** that the matrix is complete. Missing/blocked rows are explicitly
 NO_GO_INCOMPLETE_MATRIX. Add `--require-complete` to receive exit 2
-for an incomplete matrix; 1 for a test failure. Even all passing rows
+for an incomplete matrix or incomplete eval package; 1 for a test failure, including a supplemental pilot.  Even all passing rows
 are EVIDENCE_COMPLETE_REVIEW_REQUIRED, not DoD accepted or production GO.
 The registry is reviewed source code, not a signed external attestation;
 the checkout, installed toolchain and CI runner remain trusted inputs.

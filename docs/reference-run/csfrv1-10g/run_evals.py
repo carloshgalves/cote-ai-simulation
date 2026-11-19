@@ -62,7 +62,7 @@ def norm_rows(trace):
 
 
 def validate(registry, trace, source):
-    if set(registry) != {"schema", "baseline_traceability_blob", "baseline_adr_blob", "witnesses", "rows"} or registry["schema"] != "csfrv1-10g.registry.v1":
+    if set(registry) != {"schema", "baseline_traceability_blob", "baseline_adr_blob", "witnesses", "rows", "evals"} or registry["schema"] != "csfrv1-10g.registry.v1":
         raise ValueError("invalid registry schema")
     if registry["baseline_traceability_blob"] != PIN_TRACE or registry["baseline_adr_blob"] != PIN_ADR:
         raise ValueError("registry changed frozen identity")
@@ -85,8 +85,19 @@ def validate(registry, trace, source):
         pattern = r"(?m)^func\s+" + re.escape(w["name"]) + r"\(\s*\w+\s+\*testing\.T\s*\)"
         if not re.search(pattern, source(w["path"])):
             raise ValueError("missing named test in registered tracked source")
-    rows = {}
+    evals = registry["evals"]
+    if set(evals) != set(OWNERS):
+        raise ValueError("four explicit eval packages required")
     used = set()
+    for name, group in evals.items():
+        if (set(group) != {"scope", "description", "witnesses"} or group["scope"] != "PILOT_ONLY"
+                or not isinstance(group["description"], str) or not group["description"].strip()):
+            raise ValueError("eval scope not reviewed")
+        refs = group["witnesses"]
+        if not isinstance(refs, list) or not refs or len(set(refs)) != len(refs) or not set(refs) <= set(witnesses):
+            raise ValueError("invalid eval witness roster")
+        used.update(refs)
+    rows = {}
     for row in registry["rows"]:
         rid = row["id"]
         if rid not in normative or rid in rows:
@@ -102,7 +113,8 @@ def validate(registry, trace, source):
         if row["state"] == "READY":
             if not refs:
                 raise ValueError("ready row requires executable proof")
-            used.update(refs)
+            if not set(refs) <= set(evals[row["eval"]]["witnesses"]):
+                raise ValueError("row witness is absent from its eval package")
         elif row["state"] in {"NOT_RUN", "BLOCKED"}:
             if refs or (row["state"] == "BLOCKED" and (type(row["blocker_issue"]) is not int or row["blocker_issue"] <= 0)):
                 raise ValueError("non-executable row must not receive credit")
@@ -210,13 +222,19 @@ def execute(root, directory, witnesses):
     return results
 
 
+def witness_passes(results, witness):
+    return witness in results and all(results[witness].get(mode, {}).get("status") == "PASS" for mode in ("normal", "race"))
+
+
 def report(registry, normative, results, sha, registry_hash):
+    if set(results) - set(registry["witnesses"]):
+        raise ValueError("unregistered result")
     rows = []
     for item in registry["rows"]:
         status = item["state"]
         refs = item["witnesses"]
         if status == "READY":
-            ok = all(w in results and all(results[w].get(mode, {}).get("status") == "PASS" for mode in ("normal", "race")) for w in refs)
+            ok = all(witness_passes(results, w) for w in refs)
             status = ("PASS_INTEGRATED_TEST" if any(registry["witnesses"][w]["kind"] == "INTEGRATED" for w in refs) else "PASS_EXISTING_TEST") if ok else "FAIL"
         row = dict(item, status=status)
         norm = normative[item["id"]]
@@ -232,9 +250,14 @@ def report(registry, normative, results, sha, registry_hash):
         tally = counts.setdefault(group, {})
         tally[row["status"]] = tally.get(row["status"], 0) + 1
     complete = all(row["status"].startswith("PASS_") for row in rows)
+    eval_results = {}
+    for name, group in registry["evals"].items():
+        rs = group["witnesses"]
+        eval_results[name] = dict(group, status="PASS_PILOT_ONLY" if all(witness_passes(results, w) for w in rs) else "FAIL",
+                                  complete=False)
     return {"schema": "csfrv1-10g.evidence.v1", "sha": sha, "registry_sha256": registry_hash,
             "normative_traceability_blob": PIN_TRACE, "normative_adr_blob": PIN_ADR,
-            "counts": counts, "rows": rows, "witnesses": results,
+            "counts": counts, "rows": rows, "witnesses": results, "evals": eval_results,
             "matrix_complete": complete, "dod_accepted": False, "release_authorized": False,
             "external_gates": {"93": "NOT_ATTESTED", "94": "NOT_ATTESTED", "113": "NOT_ATTESTED"},
             "disposition": "EVIDENCE_COMPLETE_REVIEW_REQUIRED" if complete else "NO_GO_INCOMPLETE_MATRIX"}
@@ -302,9 +325,9 @@ def main():
         json.dump(certificate, f, ensure_ascii=False, indent=2)
         f.write("\n")
     print(json.dumps(certificate["counts"], sort_keys=True), flush=True)
-    if any(row["status"] == "FAIL" for row in certificate["rows"]):
+    if any(row["status"] == "FAIL" for row in certificate["rows"]) or any(group["status"] == "FAIL" for group in certificate["evals"].values()):
         return 1
-    if args.require_complete and not certificate["matrix_complete"]:
+    if args.require_complete and (not certificate["matrix_complete"] or not all(group["complete"] for group in certificate["evals"].values())):
         return 2
     return 0
 

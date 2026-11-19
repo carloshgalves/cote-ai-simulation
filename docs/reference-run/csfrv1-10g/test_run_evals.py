@@ -49,6 +49,9 @@ class RegistryTests(unittest.TestCase):
             "fake-test": lambda m: m["witnesses"]["contest"].update(name="TestNonexistent"),
             "duplicate-selector": lambda m: m["witnesses"].update(dup=m["witnesses"]["contest"]),
             "changed-pin": lambda m: m.update(baseline_adr_blob="0" * 40),
+            "missing-eval": lambda m: m["evals"].pop("embodiment"),
+            "fake-complete-eval": lambda m: m["evals"]["embodiment"].update(scope="COMPLETE"),
+            "row-witness-unlisted": lambda m: m["evals"]["simulation"]["witnesses"].remove("contest"),
         }
         for name, mutate in cases.items():
             with self.subTest(name=name), self.assertRaises((ValueError, KeyError)):
@@ -76,8 +79,18 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(report["counts"]["INV"]["PASS_INTEGRATED_TEST"], 1)
         self.assertEqual(report["counts"]["STRESS"]["PASS_INTEGRATED_TEST"], 2)
         self.assertFalse(report["matrix_complete"])
+        self.assertEqual(set(report["evals"]), set(g.OWNERS))
+        self.assertTrue(all(x["status"] == "PASS_PILOT_ONLY" and not x["complete"] for x in report["evals"].values()))
         self.assertFalse(report["release_authorized"])
         self.assertEqual(report["disposition"], "NO_GO_INCOMPLETE_MATRIX")
+        # A supplemental embodiment witness cannot promote STRESS-39
+        # even if both of its runs pass. Its failure gates its eval even
+        # though it is not credited to any normative row.
+        self.assertEqual(next(r for r in report["rows"] if r["id"] == "STRESS-39")["status"], "NOT_RUN")
+        del successes["physical-d3"]["normal"]
+        bad_eval = g.report(self.registry, normative, successes, "a" * 40, "b" * 64)
+        self.assertEqual(bad_eval["evals"]["embodiment"]["status"], "FAIL")
+        self.assertEqual(bad_eval["counts"], report["counts"])
         del successes["contest"]["race"]
         report = g.report(self.registry, normative, successes, "a" * 40, "b" * 64)
         self.assertEqual(report["counts"]["STRESS"]["FAIL"], 1)

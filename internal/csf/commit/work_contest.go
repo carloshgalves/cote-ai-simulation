@@ -72,7 +72,7 @@ func (c *Coordinator) CommitTwoResourceContest(ctx context.Context,ledger *input
   manifest.WorldSeed,nil)
  if err!=nil{return empty,err}
  referencePermute(c.referenceOrder,"contest-validator-inputs",input.Units)
- tentative,err:=decision.RunWithWorkerOrder(input,referenceWorkerOrder(c.referenceOrder,"contest-validator-workers",len(input.Admitted)));if err!=nil{return empty,err}
+ tentative,err:=referenceDecisionRun(input,c.referenceOrder,"contest-validator-workers");if err!=nil{return empty,err}
  if len(tentative.Candidates)!=2||len(tentative.Conflicts)!=1||
   len(tentative.Draws)!=1||len(tentative.Assessments)!=2||len(tentative.Dispositions)!=2{
   return empty,errors.New("contested resource outcome missing canonical evidence")

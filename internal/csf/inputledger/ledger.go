@@ -192,6 +192,45 @@ func Open(ctx context.Context, runID domain.ID, bundle *policy.Bundle, inputStor
 	return l, nil
 }
 
+// ReadPrefix is an immutable projection of a restored durable ledger.
+// The verifier receives only read operations; no append-capable Ledger
+// or mutable store is returned to a query caller.
+type ReadPrefix struct {
+	Sources  []string
+	Inputs   []StoredInput
+	Closures []StoredClosure
+	Rounds   []Round
+	Slots    map[domain.ID]map[string]Response
+	Run      domain.ID
+}
+
+type PrefixReader interface {
+	Records(context.Context) ([]ports.CanonicalRecord, error)
+	SettledNoProposalUnits(context.Context, [32]byte) (map[domain.ID]bool, error)
+}
+
+func RestoreReadPrefix(ctx context.Context, run domain.ID, bundle *policy.Bundle, reader PrefixReader) (ReadPrefix, error) {
+	var zero ReadPrefix
+	if reader == nil {
+		return zero, ErrStoreRequired
+	}
+	l := newLedger(run, bundle, nil)
+	records, err := reader.Records(ctx)
+	if err != nil {
+		return zero, err
+	}
+	if err := l.restore(records); err != nil {
+		return zero, err
+	}
+	settled, err := reader.SettledNoProposalUnits(ctx, [32]byte(run))
+	if err != nil {
+		return zero, err
+	}
+	l.projectSettled(settled)
+	sources, inputs, closures, rounds, slots, loaded := l.Snapshot()
+	return ReadPrefix{Sources: sources, Inputs: inputs, Closures: closures, Rounds: rounds, Slots: slots, Run: loaded}, nil
+}
+
 func (l *Ledger) restore(records []ports.CanonicalRecord) error {
 	type receiptRecord struct {
 		source string
@@ -1291,6 +1330,11 @@ func (l *Ledger) projectSettledNoProposalRounds(ctx context.Context) error{
  if !ok{return nil} // in-memory admission fixtures have no WORK publisher
  settled,err:=reader.SettledNoProposalUnits(ctx,[32]byte(l.runID))
  if err!=nil{return err}
+ l.projectSettled(settled)
+ return nil
+}
+
+func (l *Ledger) projectSettled(settled map[domain.ID]bool) {
  for id,round:=range l.rounds{
   if round.Lifecycle!=0{continue}
   providers:=l.providers[idKey(id)]
@@ -1311,7 +1355,6 @@ func (l *Ledger) projectSettledNoProposalRounds(ctx context.Context) error{
   for _,item:=range items{if !settled[item.ID]{pending=append(pending,item)}}
   l.inputs[source]=pending
  }
- return nil
 }
 
  // SystemUnit is a read-only authenticated pending scheduling/trigger source.

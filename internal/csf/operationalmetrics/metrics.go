@@ -15,6 +15,9 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
+
+	"github.com/carloshgalves/cote-ai-simulation/internal/localdbguard"
 
 	modernsqlite "modernc.org/sqlite"
 )
@@ -83,56 +86,7 @@ func validSample(s Sample) error {
 // database before opening the sidecar. Production must keep these paths under
 // a trusted local operator directory; there is no remote untrusted host.
 func sidecarPath(causal, sidecar string) (string, error) {
-	if causal == "" || sidecar == "" {
-		return "", errors.New("both causal and operational paths required")
-	}
-	a, err := filepath.Abs(causal)
-	if err != nil {
-		return "", err
-	}
-	b, err := filepath.Abs(sidecar)
-	if err != nil {
-		return "", err
-	}
-	if a == b {
-		return "", errors.New("operational database must not alias causal database")
-	}
-	// Reject sidecar symlinks even when their targets are not yet created.
-	// os.Stat(dangling) looks like ENOENT; opening it with mode=rwc could
-	// otherwise CREATE the causal database at that target before our second
-	// alias check has a chance to run.
-	link, linkErr := os.Lstat(b)
-	if linkErr != nil && !errors.Is(linkErr, os.ErrNotExist) {
-		return "", linkErr
-	}
-	if linkErr == nil && link.Mode()&os.ModeSymlink != 0 {
-		return "", errors.New("operational sidecar must not be a symbolic link")
-	}
-	// Check both canonical parent directories *before* opening either file.
-	// A directory symlink can make distinct absent textual paths aliases.
-	parentA, err := filepath.EvalSymlinks(filepath.Dir(a))
-	if err != nil {
-		return "", fmt.Errorf("causal parent not accessible: %w", err)
-	}
-	parentB, err := filepath.EvalSymlinks(filepath.Dir(b))
-	if err != nil {
-		return "", fmt.Errorf("operational parent not accessible: %w", err)
-	}
-	if filepath.Join(parentA, filepath.Base(a)) == filepath.Join(parentB, filepath.Base(b)) {
-		return "", errors.New("operational file resolves to the future causal path")
-	}
-	statA, errA := os.Stat(a)
-	if errA != nil && !errors.Is(errA, os.ErrNotExist) {
-		return "", errA
-	}
-	statB, errB := os.Stat(b)
-	if errB != nil && !errors.Is(errB, os.ErrNotExist) {
-		return "", errB
-	}
-	if errA == nil && errB == nil && os.SameFile(statA, statB) {
-		return "", errors.New("operational file aliases causal file (hardlink/symlink)")
-	}
-	return b, nil
+	return localdbguard.Distinct(causal, sidecar)
 }
 func metricURI(path, mode string) string {
 	u := url.URL{Scheme: "file", Path: filepath.ToSlash(path)}
@@ -170,7 +124,10 @@ CREATE INDEX IF NOT EXISTS idx_operational_sample_run ON operational_samples(run
 
 // Recorder is deliberately NOT a member of the Observatory and owns only
 // the operator's separate metrics file. It never receives a causal Store.
-type Recorder struct{ db *sql.DB }
+type Recorder struct {
+	db  *sql.DB
+	pin *localdbguard.Pin
+}
 
 func OpenRecorder(ctx context.Context, causal, sidecar string) (*Recorder, error) {
 	p, err := sidecarPath(causal, sidecar)
@@ -182,7 +139,22 @@ func OpenRecorder(ctx context.Context, causal, sidecar string) (*Recorder, error
 	if statErr != nil && !fresh {
 		return nil, statErr
 	}
-	db, err := openDB(ctx, p, "rwc")
+	if fresh {
+		// Reserve a private file without following a link or truncating a
+		// pre-existing database. SQLite opens it in existing-only mode.
+		file, err := os.OpenFile(p, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0600)
+		if err != nil {
+			return nil, err
+		}
+		if err := file.Close(); err != nil {
+			return nil, err
+		}
+	}
+	pin, err := localdbguard.OpenPin(p)
+	if err != nil {
+		return nil, err
+	}
+	db, err := openDB(ctx, p, "rw")
 	if err != nil {
 		return nil, err
 	}
@@ -201,23 +173,31 @@ func OpenRecorder(ctx context.Context, causal, sidecar string) (*Recorder, error
 	} else if version != 1 {
 		return fail(errors.New("existing metrics file has no registered v1 schema"))
 	}
-	tx, err := db.BeginTx(ctx, nil)
-	if err != nil {
-		return fail(err)
-	}
-	defer tx.Rollback()
-	if _, err := tx.ExecContext(ctx, schema); err != nil {
-		return fail(err)
-	}
 	if fresh {
+		tx, err := db.BeginTx(ctx, nil)
+		if err != nil {
+			return fail(err)
+		}
+		defer tx.Rollback()
+		if _, err := tx.ExecContext(ctx, schema); err != nil {
+			tx.Rollback()
+			return fail(err)
+		}
 		if _, err := tx.ExecContext(ctx, "PRAGMA user_version=1"); err != nil {
+			tx.Rollback()
+			return fail(err)
+		}
+		if err := tx.Commit(); err != nil {
 			return fail(err)
 		}
 	}
-	if err := tx.Commit(); err != nil {
+	if err := verifySchema(ctx, db); err != nil {
 		return fail(err)
 	}
-	return &Recorder{db: db}, nil
+	if err := pin.Check(); err != nil {
+		return fail(err)
+	}
+	return &Recorder{db: db, pin: pin}, nil
 }
 func (r *Recorder) Close() error {
 	if r == nil || r.db == nil {
@@ -225,6 +205,51 @@ func (r *Recorder) Close() error {
 	}
 	return r.db.Close()
 }
+// Check the exact registered schema before accepting or writing any
+// sample. In particular a foreign version=1 database or injected SQL
+// trigger must not become an operational store.
+type schemaReader interface {
+	QueryContext(context.Context, string, ...any) (*sql.Rows, error)
+}
+func verifySchema(ctx context.Context, reader schemaReader) error {
+	expected := map[string]string{}
+	for _, stmt := range strings.Split(strings.TrimSpace(schema), ";") {
+		stmt = strings.TrimSpace(stmt)
+		if stmt == "" {
+			continue
+		}
+		name := "operational_samples"
+		if strings.HasPrefix(stmt, "CREATE INDEX") {
+			name = "idx_operational_sample_run"
+		}
+		expected[name] = strings.ReplaceAll(stmt, "IF NOT EXISTS ", "")
+	}
+	rows, err := reader.QueryContext(ctx, "SELECT type,name,sql FROM sqlite_master WHERE name NOT LIKE 'sqlite_%'")
+	if err != nil {
+		return err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var kind, name, statement string
+		if err := rows.Scan(&kind, &name, &statement); err != nil {
+			return err
+		}
+		want, ok := expected[name]
+		if !ok || statement != want || (name == "operational_samples" && kind != "table") ||
+			(name == "idx_operational_sample_run" && kind != "index") {
+			return errors.New("foreign or altered operational schema")
+		}
+		delete(expected, name)
+	}
+	if err := rows.Err(); err != nil {
+		return err
+	}
+	if len(expected) != 0 {
+		return errors.New("incomplete operational schema")
+	}
+	return nil
+}
+
 func (r *Recorder) Record(ctx context.Context, s Sample) error {
 	if r == nil || r.db == nil {
 		return errors.New("nil operational recorder")
@@ -239,7 +264,18 @@ func (r *Recorder) Record(ctx context.Context, s Sample) error {
 	if len(raw) > 4096 {
 		return errors.New("operational sample exceeds bounded schema")
 	}
-	res, err := r.db.ExecContext(ctx, "INSERT OR IGNORE INTO operational_samples(id,run_id,at_ns,body) VALUES (?,?,?,?)",
+	if err := r.pin.Check(); err != nil {
+		return err
+	}
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+	if err := verifySchema(ctx, tx); err != nil {
+		return err
+	}
+	res, err := tx.ExecContext(ctx, "INSERT OR IGNORE INTO operational_samples(id,run_id,at_ns,body) VALUES (?,?,?,?)",
 		s.ID[:], s.Run[:], s.ObservedUnixNanos, raw)
 	if err != nil {
 		return err
@@ -249,24 +285,33 @@ func (r *Recorder) Record(ctx context.Context, s Sample) error {
 		return err
 	}
 	if affected == 1 {
-		return nil
+		if err := r.pin.Check(); err != nil {
+			return err
+		}
+		return tx.Commit()
 	}
 	var stored []byte
 	var run []byte
 	var at int64
-	if err := r.db.QueryRowContext(ctx, "SELECT run_id,at_ns,body FROM operational_samples WHERE id=?", s.ID[:]).
+	if err := tx.QueryRowContext(ctx, "SELECT run_id,at_ns,body FROM operational_samples WHERE id=?", s.ID[:]).
 		Scan(&run, &at, &stored); err != nil {
 		return err
 	}
 	if !bytes.Equal(stored, raw) || !bytes.Equal(run, s.Run[:]) || at != s.ObservedUnixNanos {
 		return errors.New("operational sample identity collision")
 	}
-	return nil
+	if err := r.pin.Check(); err != nil {
+		return err
+	}
+	return tx.Commit()
 }
 
 // Reader uses an enforced mode=ro connection independently of Recorder.
 // The absence of the sidecar is an error (not proof of zero measured cost).
-type Reader struct{ db *sql.DB }
+type Reader struct {
+	db  *sql.DB
+	pin *localdbguard.Pin
+}
 
 func OpenReader(ctx context.Context, causal, sidecar string) (*Reader, error) {
 	p, err := sidecarPath(causal, sidecar)
@@ -275,6 +320,10 @@ func OpenReader(ctx context.Context, causal, sidecar string) (*Reader, error) {
 	}
 	if _, err := os.Stat(p); err != nil {
 		return nil, fmt.Errorf("operational sidecar unavailable: %w", err)
+	}
+	pin, err := localdbguard.OpenPin(p)
+	if err != nil {
+		return nil, err
 	}
 	db, err := openDB(ctx, p, "ro")
 	if err != nil {
@@ -292,7 +341,13 @@ func OpenReader(ctx context.Context, causal, sidecar string) (*Reader, error) {
 	if err := db.QueryRowContext(ctx, "PRAGMA user_version").Scan(&version); err != nil || version != 1 {
 		return fail(errors.New("unsupported operational metrics schema version"))
 	}
-	return &Reader{db: db}, nil
+	if err := verifySchema(ctx, db); err != nil {
+		return fail(err)
+	}
+	if err := pin.Check(); err != nil {
+		return fail(err)
+	}
+	return &Reader{db: db, pin: pin}, nil
 }
 func (r *Reader) Close() error {
 	if r == nil || r.db == nil {
@@ -311,11 +366,17 @@ func (r *Reader) Read(ctx context.Context, run [32]byte, limit int) ([]Sample, e
 	if limit <= 0 || limit > 1000 {
 		return nil, errors.New("operational query bound must be in 1..1000")
 	}
+	if err := r.pin.Check(); err != nil {
+		return nil, err
+	}
 	tx, err := r.db.BeginTx(ctx, &sql.TxOptions{ReadOnly: true})
 	if err != nil {
 		return nil, err
 	}
 	defer tx.Rollback()
+	if err := verifySchema(ctx, tx); err != nil {
+		return nil, err
+	}
 	rows, err := tx.QueryContext(ctx, "SELECT id,run_id,at_ns,body FROM operational_samples WHERE run_id=? ORDER BY at_ns,id LIMIT ?", run[:], limit+1)
 	if err != nil {
 		return nil, err
@@ -368,6 +429,9 @@ func (r *Reader) Read(ctx context.Context, run [32]byte, limit int) ([]Sample, e
 		return nil, err
 	}
 	if err := tx.Commit(); err != nil {
+		return nil, err
+	}
+	if err := r.pin.Check(); err != nil {
 		return nil, err
 	}
 	return out, nil

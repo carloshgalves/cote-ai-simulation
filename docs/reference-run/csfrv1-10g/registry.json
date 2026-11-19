@@ -1,0 +1,986 @@
+{
+  "schema": "csfrv1-10g.registry.v1",
+  "baseline_traceability_blob": "8990c024f19ea5e520c1a0b14f03a6992249a037",
+  "baseline_adr_blob": "ec101510e120f86a7bc870e50498a6dd68849ea4",
+  "witnesses": {
+    "contest": {
+      "path": "internal/csf/commit/work_contest_test.go",
+      "name": "TestTwoResourceContestCommitReplaysAndDoesNotDependOnArrival",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "reference-contest": {
+      "path": "internal/csf/commit/reference_run_test.go",
+      "name": "TestReferenceRunRealCausalSQLiteAndReplay",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "exact-e1": {
+      "path": "internal/csf/commit/reference_equivalence_e1_test.go",
+      "name": "TestReferenceE1SameSignedSourcesWholeCausalAndOwnerByteTranscript",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "f4-concurrent": {
+      "path": "internal/csf/commit/reference_observatory_f4_test.go",
+      "name": "TestReferenceF4ConcurrentReadOnly",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "f4-imports": {
+      "path": "tests/architecture/observatory_f4_boundary_test.go",
+      "name": "TestF4ReadCapabilityTransitiveDependencies",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "f4-capability": {
+      "path": "internal/csf/persistence/sqlite/observatory_readonly_test.go",
+      "name": "TestF4SegregatedReadCapabilities",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "f4-pager": {
+      "path": "internal/csf/persistence/sqlite/observatory_readonly_test.go",
+      "name": "TestCSFRV19O1SQLiteReadOnlyModeAndIndependentQueryOnlyDefense",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "contest-cardinality": {
+      "path": "internal/csf/commit/reference_eval_g1_test.go",
+      "name": "TestReferenceG1ExactLastUnitConflictSet",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "physical-d3": {
+      "path": "internal/csf/commit/reference_disclosure_d3_test.go",
+      "name": "TestReferenceD3RealPythonPrivateEventAndLiveObservatory",
+      "kind": "INTEGRATED",
+      "subtests": []
+    }
+  },
+  "rows": [
+    {
+      "id": "INV-01",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-02",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-03",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-04",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-05",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-06",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-07",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-08",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-09",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-10",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-11",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-12",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-13",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-14",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-15",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-16",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "READY",
+      "witnesses": [
+        "f4-concurrent",
+        "f4-imports",
+        "f4-capability",
+        "f4-pager"
+      ],
+      "reason": "Actual queryhost dependency graph excludes causal sinks/ports; restricted wrappers cannot widen capabilities; SQLite pager and query-only gate deny writes; real concurrent reads preserve E1 transcript and durable bytes. Trusted engine composition root is not a separate sandbox."
+    },
+    {
+      "id": "INV-17",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-18",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-19",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-20",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-21",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-22",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-23",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "BLOCKED",
+      "witnesses": [],
+      "reason": "Canonical DEDUPLICATED settlement and alias lifecycle are deferred in #22; partial idempotency tests cannot fulfill the complete requirement.",
+      "blocker_issue": 22
+    },
+    {
+      "id": "INV-24",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "BLOCKED",
+      "witnesses": [],
+      "reason": "Empty WORK / zero-event terminal remains deferred in #22; existing non-empty commit/abort tests are only partial proof.",
+      "blocker_issue": 22
+    },
+    {
+      "id": "INV-25",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-26",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-27",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-28",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-29",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-30",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-31",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "BLOCKED",
+      "witnesses": [],
+      "reason": "Canonical DEDUPLICATED settlement and alias lifecycle are deferred in #22; partial idempotency tests cannot fulfill the complete requirement.",
+      "blocker_issue": 22
+    },
+    {
+      "id": "INV-32",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-33",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-34",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-35",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-36",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-37",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-38",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-39",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-40",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "INV-41",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-01",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-02",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-03",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-04",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-05",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-06",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-07",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-08",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-09",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-10",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-11",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-12",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-13",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "BLOCKED",
+      "witnesses": [],
+      "reason": "Canonical DEDUPLICATED settlement and alias lifecycle are deferred in #22; partial idempotency tests cannot fulfill the complete requirement.",
+      "blocker_issue": 22
+    },
+    {
+      "id": "STRESS-14",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "BLOCKED",
+      "witnesses": [],
+      "reason": "Canonical DEDUPLICATED settlement and alias lifecycle are deferred in #22; partial idempotency tests cannot fulfill the complete requirement.",
+      "blocker_issue": 22
+    },
+    {
+      "id": "STRESS-15",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "BLOCKED",
+      "witnesses": [],
+      "reason": "Canonical DEDUPLICATED settlement and alias lifecycle are deferred in #22; partial idempotency tests cannot fulfill the complete requirement.",
+      "blocker_issue": 22
+    },
+    {
+      "id": "STRESS-16",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-17",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-18",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-19",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-20",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-21",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-22",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-23",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-24",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-25",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-26",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-27",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-28",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-29",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-30",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-31",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-32",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-33",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-34",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-35",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-36",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-37",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-38",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-39",
+      "owner_issue": 163,
+      "eval": "embodiment",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-40",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-41",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "READY",
+      "witnesses": [
+        "contest",
+        "reference-contest",
+        "contest-cardinality"
+      ],
+      "reason": "Real contested resource, committed winner/loser, one stock unit consumed, identical fence/journal/event bytes under worker reversal, replay and no unsettled loser. Independent SQL journal check authenticates exactly one ConflictSet with both candidate IDs and the named RNG draw, and exactly one COMMIT/REJECT pair."
+    },
+    {
+      "id": "STRESS-42",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-43",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-44",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-45",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-46",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-47",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-48",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-49",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-50",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-51",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-52",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-53",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-54",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-55",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-56",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-57",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-58",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-59",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-60",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-61",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "E1 proves literal same-input transcript equality under arrival/worker-order permutations, but decision.RunWithWorkerOrder currently executes a serial loop. Actual different parallelism is not established; G3 must provide a valid parallel execution witness or retain the gap. E1 remains a successful pilot candidate without row credit."
+    },
+    {
+      "id": "STRESS-62",
+      "owner_issue": 161,
+      "eval": "simulation",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-63",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-64",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-65",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-66",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-67",
+      "owner_issue": 164,
+      "eval": "knowledge",
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+    },
+    {
+      "id": "STRESS-68",
+      "owner_issue": 162,
+      "eval": "determinism",
+      "state": "BLOCKED",
+      "witnesses": [],
+      "reason": "Empty WORK / zero-event terminal remains deferred in #22; existing non-empty commit/abort tests are only partial proof.",
+      "blocker_issue": 22
+    }
+  ],
+  "evals": {
+    "simulation": {
+      "scope": "PILOT_ONLY",
+      "description": "Last-unit conflict, exact roster and outcome under source/worker reversal; wider simulation coverage is G2.",
+      "witnesses": [
+        "contest",
+        "reference-contest",
+        "contest-cardinality"
+      ]
+    },
+    "determinism": {
+      "scope": "PILOT_ONLY",
+      "description": "Real E1 same signed inputs and full three-database transcript; recovery/fork matrix is G3.",
+      "witnesses": [
+        "exact-e1"
+      ]
+    },
+    "embodiment": {
+      "scope": "PILOT_ONLY",
+      "description": "Real supervised A1 physical epochs with engine-only disclosure; policy/tamper/recovery coverage is G4. No direct normative row credit for this partial eval.",
+      "witnesses": [
+        "physical-d3"
+      ]
+    },
+    "knowledge": {
+      "scope": "PILOT_ONLY",
+      "description": "Actual Observatory read capability and concurrent immutable authority; complete knowledge boundaries are G5.",
+      "witnesses": [
+        "f4-concurrent",
+        "f4-imports",
+        "f4-capability",
+        "f4-pager"
+      ]
+    }
+  }
+}

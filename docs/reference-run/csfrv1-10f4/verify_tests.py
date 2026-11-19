@@ -20,6 +20,7 @@ expected = {
     prefix + "internal/csf/persistence/sqlite": {
         "TestCSFRV19O1SQLiteReadOnlyModeAndIndependentQueryOnlyDefense",
     },
+    prefix + "internal/localdbguard": {"TestF4ActualACLAndPinReplacement"},
     prefix + "tests/architecture": {"TestF4ReadCapabilityTransitiveDependencies"},
 }
 wanted = {(package, test) for package, tests in expected.items() for test in tests}

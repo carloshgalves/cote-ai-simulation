@@ -19,6 +19,35 @@ type RevisionAuthority struct {
 	ContentHash [32]byte
 }
 
+// DecisionLink explicitly binds a terminal DecisionRecord to a source in
+// its authenticated fence. The optional candidate and referenced conflict
+// and draw records are immutable authority refs, not raw proof bodies.
+// ProducedEvents is a subset of the commit event roster (lifecycle events
+// may have no individual decision owner).
+type DecisionLink struct {
+	Decision       AuthorityRef
+	Source         AuthorityRef
+	SourceDigest   [32]byte
+	DecisionDigest [32]byte
+	Status         uint64
+	Candidate      *AuthorityRef
+	Assessment     *AuthorityRef
+	Conflicts      []AuthorityRef
+	Draws          []AuthorityRef
+	ProducedEvents []AuthorityRef
+}
+
+// PerceptionLink binds one task to the exact committed Event. A missing
+// completion represents pending work; evidence is never inferred from an
+// event's existence. Observations and KnowledgeInputs are refs only.
+type PerceptionLink struct {
+	Event           AuthorityRef
+	Task            AuthorityRef
+	Completion      *AuthorityRef
+	Observations    []AuthorityRef
+	KnowledgeInputs []AuthorityRef
+}
+
 // CausalCommit is a privileged, verified, immutable summary of one terminal
 // CycleCommit. It contains references and causal metadata, not actor context.
 type CausalCommit struct {
@@ -38,6 +67,8 @@ type CausalCommit struct {
 	Closures        []AuthorityRef
 	Admitted        []AuthorityRef
 	Decisions       []AuthorityRef
+	DecisionLinks   []DecisionLink
+	PerceptionLinks []PerceptionLink
 	Events          []AuthorityRef
 	Tasks           []AuthorityRef
 	Completions     []AuthorityRef
@@ -61,10 +92,20 @@ type CausalAttempt struct {
 	AbortReason *uint64
 }
 
+// GenesisAuthority retains the actual SQL key (Run) and distinct
+// registered Genesis ID/digest without exposing seed or manifest bytes.
+type GenesisAuthority struct {
+	Run         [32]byte
+	GenesisID   [32]byte
+	Digest      [32]byte
+	ContentHash [32]byte
+}
+
 // PrivilegedReport is for the local human operator's diagnostics only.
 // Never pass it as a KnowledgeInput, Observation or character prompt.
 type PrivilegedReport struct {
 	State                  RunState
+	Genesis                GenesisAuthority
 	Commits                []CausalCommit
 	Attempts               []CausalAttempt
 	PendingUnits           int

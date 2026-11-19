@@ -28,10 +28,10 @@ var _ observatory.Queries = (*ObservatoryReader)(nil)
 
 func OpenObservatory(ctx context.Context, path string, bundle *policy.Bundle) (*ObservatoryReader, error) {
 	if bundle == nil {
-		return nil, errors.New("observatory needs an installed causal bundle")
+		return nil, observatory.ErrInvalidPolicy
 	}
 	if err := bundle.VerifyInstalledBundle(); err != nil {
-		return nil, fmt.Errorf("observatory policy: %w", err)
+		return nil, fmt.Errorf("%w: %v", observatory.ErrInvalidPolicy, err)
 	}
 	absolute, err := filepath.Abs(path)
 	if err != nil {
@@ -96,7 +96,7 @@ func (r *ObservatoryReader) ReadRun(ctx context.Context, run [32]byte) (observat
 		return zero, errors.New("observatory reader is not initialized")
 	}
 	if err := r.bundle.VerifyInstalledBundle(); err != nil {
-		return zero, err
+		return zero, fmt.Errorf("%w: %v", observatory.ErrInvalidPolicy, err)
 	}
 	versionBefore, err := r.dataVersion(ctx)
 	if err != nil {
@@ -122,7 +122,7 @@ func (r *ObservatoryReader) ReadRun(ctx context.Context, run [32]byte) (observat
 		return zero, err
 	}
 	if versionBefore != versionAfter || !reflect.DeepEqual(first, last) {
-		return zero, errors.New("observatory source changed during verified query")
+		return zero, observatory.ErrSourceChanged
 	}
 	return last, nil
 }

@@ -254,6 +254,14 @@ func (q *PrivilegedReader) ReadPrivilegedReport(ctx context.Context, run [32]byt
 	if err != nil {
 		return empty, fmt.Errorf("privileged causal replay: %w", err)
 	}
+	root, err := q.base.store.ValidatedGenesis(ctx, run, q.base.bundle)
+	if err != nil {
+		return empty, err
+	}
+	genesisRef := observatory.GenesisAuthority{
+		Run: run, GenesisID: [32]byte(root.ID), Digest: [32]byte(root.Digest),
+		ContentHash: [32]byte(identity.OpaqueContentHash(root.CanonicalBytes)),
+	}
 	snap, err := q.snapshot(ctx, run)
 	if err != nil {
 		return empty, err
@@ -304,10 +312,10 @@ func (q *PrivilegedReader) ReadPrivilegedReport(ctx context.Context, run [32]byt
 		return empty, err
 	}
 	if version != versionNow || !reflect.DeepEqual(state, after) {
-		return empty, errors.New("privileged report authorities changed during verification")
+		return empty, observatory.ErrSourceChanged
 	}
 	return observatory.PrivilegedReport{
-		State: state, Commits: commits, Attempts: finalized,
+		State: state, Genesis: genesisRef, Commits: commits, Attempts: finalized,
 		PendingUnits: len(pending), PendingClosureSources: missingClosures,
 		PendingPerceptionTasks: missingTasks, RejectedIngress: "NOT_PERSISTED",
 	}, nil
@@ -484,7 +492,12 @@ func (q *PrivilegedReader) readCommits(ctx context.Context, run [32]byte,
 			if err != nil || !equalBytes(rec.fields[15], dg[:]) {
 				return nil, fmt.Errorf("CycleCommit %x decision %x digest invalid", entry.commit, did)
 			}
-			c.Decisions = append(c.Decisions, o2Ref("decision_ledger", did, rec.bytes))
+			link, err := o2DecisionLink(run, entry.cycle, attempt, rec, fence.fields, c.Admitted, c.Events, records)
+			if err != nil {
+				return nil, fmt.Errorf("CycleCommit %x decision %x provenance: %w", entry.commit, did, err)
+			}
+			c.Decisions = append(c.Decisions, link.Decision)
+			c.DecisionLinks = append(c.DecisionLinks, link)
 		}
 		tasks, ok := v[18].([]any)
 		if !ok {
@@ -507,8 +520,7 @@ func (q *PrivilegedReader) readCommits(ctx context.Context, run [32]byte,
 		if err != nil {
 			return nil, fmt.Errorf("CycleCommit %x world revision: %w", entry.commit, err)
 		}
-		c.Completions, c.Evidence, err = q.o2TaskEvidence(ctx, run, c.Tasks)
-		if err != nil {
+		if err := q.o2PerceptionLinks(ctx, run, &c); err != nil {
 			return nil, fmt.Errorf("CycleCommit %x addressed evidence: %w", entry.commit, err)
 		}
 		if a := attempts[k]; a != nil {
@@ -534,6 +546,25 @@ func (q *PrivilegedReader) readCommits(ctx context.Context, run [32]byte,
 		}
 		if i > 0 && c.BaseWorldHash != out[i-1].ResultWorldHash {
 			return nil, fmt.Errorf("privileged causal world hash chain diverged at %d", i)
+		}
+	}
+	// Replay verifies every referenced candidate. Also reject a valid-looking
+	// unreferenced candidate in the same privileged ledger, rather than
+	// silently certifying an incomplete candidate roster.
+	candidateRoster := map[[32]byte]bool{}
+	for _, commit := range out {
+		for _, link := range commit.DecisionLinks {
+			if link.Candidate != nil {
+				candidateRoster[link.Candidate.ID] = true
+			}
+		}
+	}
+	for id, record := range records {
+		f := record.fields
+		if len(f) == 17 && o2IsID(f[0]) && o2IsID(f[1]) && o2IsID(f[2]) && o2IsID(f[16]) {
+			if !candidateRoster[id] {
+				return nil, fmt.Errorf("orphan or foreign candidate authority %x", id)
+			}
 		}
 	}
 	return out, nil

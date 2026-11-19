@@ -1,0 +1,73 @@
+name: CSFRV1-10F3 crossed disclosure views
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "internal/csf/**"
+      - "internal/physicalhost/**"
+      - "src/embodiment/**"
+      - "tests/architecture/**"
+      - "docs/architecture/canonical-codec-*/**"
+      - "docs/reference-run/csfrv1-10f3/**"
+      - ".github/workflows/csfrv1-10f3-observatory-views.yml"
+      - "pyproject.toml"
+      - "go.mod"
+      - "go.sum"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: csfrv1-10f3-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  crossed-disclosure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      PHYSICAL_A1_PRODUCER_TEST: "1"
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Pinned real A1 supervisor
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+          python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-f3
+          find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
+      - name: Exact SHA, format and whitespace
+        run: |
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          files=(internal/csf/observatory/views.go internal/csf/persistence/sqlite/observatory_pov_public.go internal/csf/commit/reference_observatory_f3_test.go)
+          remaining=$(gofmt -l "${files[@]}")
+          if [ -n "$remaining" ]; then
+            printf 'F3 files not gofmt-clean:\n%s\n' "$remaining"
+            exit 1
+          fi
+          git diff --check 51ecd1c72f520e3fb79386db4cc23f9d74f2d4e1...HEAD
+      - name: F3 normal matrix and required non-skipped inventory
+        run: |
+          set -euo pipefail
+          go test -json -count=1 -timeout=10m ./internal/csf/commit -run '^TestReferenceF3' | tee /tmp/f3-normal.jsonl
+          python docs/reference-run/csfrv1-10f3/verify_tests.py /tmp/f3-normal.jsonl
+      - name: F3 race matrix and required non-skipped inventory
+        run: |
+          set -euo pipefail
+          go test -race -json -count=1 -timeout=15m ./internal/csf/commit -run '^TestReferenceF3' | tee /tmp/f3-race.jsonl
+          python docs/reference-run/csfrv1-10f3/verify_tests.py /tmp/f3-race.jsonl
+      - name: F1 F2 D3 O3 and architecture regressions
+        run: |
+          go test -count=1 -timeout=10m ./internal/csf/commit -run '^(TestReferenceF[12]|TestReferenceD3|TestCSFRV19O3)'
+          go test -count=1 ./internal/csf/observatory ./internal/csf/persistence/sqlite ./internal/csf/contextboundary ./internal/csf/perception ./tests/architecture
+          go vet ./internal/csf/observatory ./internal/csf/persistence/sqlite ./internal/csf/commit ./internal/csf/contextboundary

@@ -40,9 +40,15 @@ func (deniedDriver) Open(string) (driver.Conn, error) { return nil, errDenied }
 
 type conn struct{ raw driver.Conn }
 
-func (c *conn) Close() error { return c.raw.Close() }
-func (c *conn) Prepare(string) (driver.Stmt, error) { return nil, errDenied }
-func (c *conn) Begin() (driver.Tx, error) { return nil, errDenied }
+func (c *conn) Close() error {
+	return c.raw.Close()
+}
+func (c *conn) Prepare(string) (driver.Stmt, error) {
+	return nil, errDenied
+}
+func (c *conn) Begin() (driver.Tx, error) {
+	return nil, errDenied
+}
 func (c *conn) BeginTx(ctx context.Context, options driver.TxOptions) (driver.Tx, error) {
 	if !options.ReadOnly {
 		return nil, errDenied

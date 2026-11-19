@@ -2,7 +2,15 @@
 // world truth: it consists solely of delivered, recipient-scoped evidence.
 package observatory
 
-import "context"
+import (
+	"context"
+	"errors"
+)
+
+// ErrViewUnavailable is the only non-cancellation failure exposed by a
+// restricted view. Engine diagnostics belong to the privileged operator;
+// replay errors can contain foreign actor IDs, source IDs or state hashes.
+var ErrViewUnavailable = errors.New("observatory view unavailable")
 
 // AddressedEvidence contains only a pair of canonical records that has
 // passed the pre-existing context allow-list, including causal receipts and

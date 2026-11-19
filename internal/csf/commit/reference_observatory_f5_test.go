@@ -332,7 +332,7 @@ func TestReferenceF5LiveWALFailClosed(t *testing.T) {
 // Parent #120 requires an allowlist for EACH projection, not only the
 // restricted DTOs. Pin nested human-only field rosters alongside F3.
 func TestReferenceF5HumanAllowlists(t *testing.T) {
-	for _, spec := range []struct {
+	specs := []struct {
 		v     any
 		names string
 	}{
@@ -351,14 +351,35 @@ func TestReferenceF5HumanAllowlists(t *testing.T) {
 		{observatory.SourceDiagnostic{}, "Source LatestClosure ClosedThrough Final Coverage"},
 		{observatory.PendingDiagnostic{}, "Authority Kind Eligibility"},
 		{domain.EligibilityCoordinate{}, "NotBeforeInstant NotBeforeCycleOrdinal"},
-	} {
+	}
+	registered := map[reflect.Type]bool{}
+	for _, spec := range specs {
+		registered[reflect.TypeOf(spec.v)] = true
+	}
+	var safe func(reflect.Type) bool
+	safe = func(typ reflect.Type) bool {
+		switch typ.Kind() {
+		case reflect.Pointer:
+			return safe(typ.Elem())
+		case reflect.Slice:
+			return typ.Elem().Kind() != reflect.Uint8 && safe(typ.Elem())
+		case reflect.Array:
+			return typ == reflect.TypeOf([32]byte{})
+		case reflect.Struct:
+			return registered[typ]
+		case reflect.String, reflect.Bool, reflect.Int, reflect.Int64, reflect.Uint64:
+			return true
+		default:
+			return false
+		}
+	}
+	for _, spec := range specs {
 		typ := reflect.TypeOf(spec.v)
 		names := make([]string, typ.NumField())
 		for i := range names {
 			field := typ.Field(i)
 			names[i] = field.Name
-			if field.Type.Kind() == reflect.Interface || field.Type.Kind() == reflect.Map ||
-				(field.Type.Kind() == reflect.Slice && field.Type.Elem().Kind() == reflect.Uint8) {
+			if !safe(field.Type) {
 				t.Fatal("human projection gained arbitrary or raw payload", typ.Name(), field.Name)
 			}
 		}

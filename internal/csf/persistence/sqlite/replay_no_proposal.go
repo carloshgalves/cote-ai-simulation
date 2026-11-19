@@ -3,6 +3,7 @@ package sqlite
 import (
  "bytes"
  "context"
+ "database/sql"
  "errors"
  "math"
 
@@ -41,7 +42,7 @@ func (s *Store) replayNoProposalCommit(ctx context.Context,runID,cycleID,commitI
  if !valid||!exists||selected.Kind!=clock.Work||selected.OriginOrdinal!=domain.CycleOrdinal(claimedOrdinal){
   return clock.State{},errors.New("WORK replay did not select the earliest pending coordinate")
  }
- tx,err:=s.db.BeginTx(ctx,nil);if err!=nil{return clock.State{},err}
+ tx,err:=s.db.BeginTx(ctx,&sql.TxOptions{ReadOnly:true});if err!=nil{return clock.State{},err}
  defer tx.Rollback()
  fenceID,err:=registeredDigest("cote.csf.id.admission-fence","cote.csf.schema.admission-fence-id-preimage",
   []any{runID[:],cycleID[:],attempt});if err!=nil{return clock.State{},err}

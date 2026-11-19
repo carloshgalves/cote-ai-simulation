@@ -237,12 +237,14 @@ func (r *Recorder) Close() error {
 	}
 	return r.db.Close()
 }
+
 // Check the exact registered schema before accepting or writing any
 // sample. In particular a foreign version=1 database or injected SQL
 // trigger must not become an operational store.
 type schemaReader interface {
 	QueryContext(context.Context, string, ...any) (*sql.Rows, error)
 }
+
 func verifyVersionedSchema(ctx context.Context, db *sql.DB) error {
 	var version int
 	if err := db.QueryRowContext(ctx, "PRAGMA user_version").Scan(&version); err != nil {

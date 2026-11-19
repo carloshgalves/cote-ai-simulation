@@ -8,16 +8,26 @@ import (
 	"database/sql/driver"
 	"errors"
 	"strings"
+	"sync/atomic"
 )
 
 var errDenied = errors.New("read-only SQL capability denied operation")
 
-type connector struct{ inner driver.Connector }
+type connector struct {
+	inner     driver.Connector
+	connected atomic.Bool
+}
 
 // Wrap does not expose the underlying connection or driver to the caller.
 func Wrap(inner driver.Connector) driver.Connector { return &connector{inner: inner} }
 
 func (c *connector) Connect(ctx context.Context) (driver.Conn, error) {
+	// data_version is connection-relative. Never transparently reconnect
+	// the same reader: a new pager connection could reuse an old version
+	// counter and incorrectly attest a mixed snapshot. Reopen explicitly.
+	if !c.connected.CompareAndSwap(false, true) {
+		return nil, errDenied
+	}
 	raw, err := c.inner.Connect(ctx)
 	if err != nil {
 		return nil, err

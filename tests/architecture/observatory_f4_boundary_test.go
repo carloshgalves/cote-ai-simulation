@@ -6,13 +6,12 @@ import (
 	"testing"
 )
 
-// Query-facing DTOs and the filesystem/SQL capability implementations are
-// independently importable without the causal Store, writer sinks or input
-// ledger mutation ports. The shared engine SQLite adapter still hosts the
-// legacy verifier; this gate does not pretend it is a separate package.
+// The actual query implementation, not merely its DTOs, must have no
+// dependency on an engine persistence/write/sink package. The composition
+// root injects narrow read authorities that are protected by the SQL gate.
 func TestF4ReadCapabilityTransitiveDependencies(t *testing.T) {
 	const module = "github.com/carloshgalves/cote-ai-simulation/"
-	for _, path := range []string{"./internal/csf/observatory", "./internal/localdbguard", "./internal/readonlysql"} {
+	for _, path := range []string{"./internal/csf/observatory", "./internal/csf/observatory/queryhost", "./internal/localdbguard", "./internal/readonlysql"} {
 		cmd := exec.Command("go", "list", "-deps", "-f", "{{.ImportPath}}", path)
 		cmd.Dir = "../.."
 		output, err := cmd.CombinedOutput()

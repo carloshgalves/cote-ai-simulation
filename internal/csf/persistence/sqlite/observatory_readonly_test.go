@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory/queryhost"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
@@ -79,5 +80,24 @@ func TestCSFRV19O1SQLiteReadOnlyModeAndIndependentQueryOnlyDefense(t *testing.T)
 	}
 	if _, err := os.Stat(path); err != nil {
 		t.Fatal("read-only query corrupted/removed sqlite database:", err)
+	}
+}
+
+func TestF4SegregatedReadCapabilities(t *testing.T) {
+	for _, restricted := range []any{coreAuthority{}, actorAuthority{}, publicAuthority{}} {
+		if _, ok := restricted.(queryhost.AuditAuthority); ok {
+			t.Fatal("restricted host can recover privileged raw query methods")
+		}
+		if _, ok := restricted.(interface {
+			ExecContext(context.Context, string, ...any) (sql.Result, error)
+		}); ok {
+			t.Fatal("restricted host exposes a SQL mutation port")
+		}
+	}
+	if _, ok := any(publicAuthority{}).(queryhost.POVAuthority); ok {
+		t.Fatal("public host can obtain actor-sensitive methods")
+	}
+	if _, ok := any(actorAuthority{}).(queryhost.PublicAuthority); ok {
+		t.Fatal("POV host unexpectedly gains public authority")
 	}
 }

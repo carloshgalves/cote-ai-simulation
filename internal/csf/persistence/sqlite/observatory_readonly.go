@@ -11,9 +11,9 @@ import (
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/contextboundary"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/contextboundary"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory/queryhost"
@@ -33,9 +33,43 @@ type observatoryAuthority struct {
 
 var (
 	_ queryhost.AuditAuthority  = (*observatoryAuthority)(nil)
-	_ queryhost.POVAuthority    = (*observatoryAuthority)(nil)
-	_ queryhost.PublicAuthority = (*observatoryAuthority)(nil)
+	_ queryhost.CoreAuthority   = coreAuthority{}
+	_ queryhost.POVAuthority    = actorAuthority{}
+	_ queryhost.PublicAuthority = publicAuthority{}
 )
+
+// Nominal wrappers prevent dynamic type assertions from recovering the
+// audit capability (including raw SQL) from a POV/public authority. Only
+// the engine composition root has the unexported full host type.
+type coreAuthority struct{ host *observatoryAuthority }
+
+func (a coreAuthority) Close() error {
+	return a.host.Close()
+}
+func (a coreAuthority) DataVersion(ctx context.Context) (int64, error) {
+	return a.host.DataVersion(ctx)
+}
+func (a coreAuthority) LoadRun(ctx context.Context, run [32]byte) (observatory.RunState, error) {
+	return a.host.LoadRun(ctx, run)
+}
+func (a coreAuthority) Replay(ctx context.Context, run [32]byte, bundle *policy.Bundle) (clock.State, error) {
+	return a.host.Replay(ctx, run, bundle)
+}
+
+type actorAuthority struct{ coreAuthority }
+
+func (a actorAuthority) Bind(ctx context.Context, dispatch [32]byte, actor [2]string) (queryhost.Binding, error) {
+	return a.host.Bind(ctx, dispatch, actor)
+}
+func (a actorAuthority) ReadAddressed(ctx context.Context, dispatch [32]byte, actor [2]string) (queryhost.Binding, []observatory.AddressedEvidence, error) {
+	return a.host.ReadAddressed(ctx, dispatch, actor)
+}
+
+type publicAuthority struct{ coreAuthority }
+
+func (a publicAuthority) PublicationAuthorityPresent(ctx context.Context) (bool, error) {
+	return a.host.PublicationAuthorityPresent(ctx)
+}
 
 type ObservatoryReader = queryhost.ObservatoryReader
 
@@ -44,7 +78,7 @@ func OpenObservatory(ctx context.Context, path string, bundle *policy.Bundle) (*
 	if err != nil {
 		return nil, err
 	}
-	return queryhost.New(host, bundle), nil
+	return queryhost.New(coreAuthority{host: host}, bundle), nil
 }
 
 func openObservatoryAuthority(ctx context.Context, path string, bundle *policy.Bundle) (*observatoryAuthority, error) {

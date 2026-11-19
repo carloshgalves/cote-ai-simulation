@@ -23,7 +23,7 @@ func OpenPOVObservatory(ctx context.Context, path string, bundle *policy.Bundle,
 	if err != nil {
 		return nil, restrictedOpenError(ctx)
 	}
-	return queryhost.NewPOV(ctx, host, bundle, run, dispatchID, actor)
+	return queryhost.NewPOV(ctx, actorAuthority{coreAuthority{host: host}}, bundle, run, dispatchID, actor)
 }
 
 func OpenPublicObservatory(ctx context.Context, path string, bundle *policy.Bundle) (*PublicReader, error) {
@@ -31,5 +31,5 @@ func OpenPublicObservatory(ctx context.Context, path string, bundle *policy.Bund
 	if err != nil {
 		return nil, restrictedOpenError(ctx)
 	}
-	return queryhost.NewPublic(host, bundle), nil
+	return queryhost.NewPublic(publicAuthority{coreAuthority{host: host}}, bundle), nil
 }

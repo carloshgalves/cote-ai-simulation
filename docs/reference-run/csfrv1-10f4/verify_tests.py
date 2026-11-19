@@ -19,6 +19,7 @@ expected = {
     },
     prefix + "internal/csf/persistence/sqlite": {
         "TestCSFRV19O1SQLiteReadOnlyModeAndIndependentQueryOnlyDefense",
+        "TestF4SegregatedReadCapabilities",
     },
     prefix + "internal/localdbguard": {"TestF4ActualACLAndPinReplacement"},
     prefix + "tests/architecture": {"TestF4ReadCapabilityTransitiveDependencies"},

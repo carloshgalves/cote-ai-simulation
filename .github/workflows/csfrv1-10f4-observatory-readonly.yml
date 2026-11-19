@@ -49,10 +49,11 @@ jobs:
       - name: SHA and formatting
         run: |
           test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
-          files=(internal/localdbguard/guard_test.go internal/localdbguard/guard.go internal/readonlysql/connector.go internal/csf/persistence/sqlite/observatory_readonly.go internal/csf/persistence/sqlite/observatory_readonly_test.go internal/csf/persistence/sqlite/observatory_operational.go internal/csf/operationalmetrics/metrics.go internal/csf/operationalmetrics/f4_security_test.go internal/csf/commit/reference_observatory_f4_test.go tests/architecture/observatory_f4_boundary_test.go)
+          files=(internal/csf/observatory/queryhost/*.go internal/localdbguard/guard_test.go internal/localdbguard/guard.go internal/readonlysql/connector.go internal/csf/persistence/sqlite/observatory_readonly.go internal/csf/persistence/sqlite/observatory_readonly_test.go internal/csf/persistence/sqlite/observatory_operational.go internal/csf/operationalmetrics/metrics.go internal/csf/operationalmetrics/f4_security_test.go internal/csf/commit/reference_observatory_f4_test.go tests/architecture/observatory_f4_boundary_test.go)
           remaining=$(gofmt -l "${files[@]}")
           if [ -n "$remaining" ]; then
             printf 'F4 files not gofmt-clean:\n%s\n' "$remaining"
+            gofmt -d "${files[@]}"
             exit 1
           fi
           git diff --check 242faa93b20f0d3a24d7723378a68e69e748d4fd...HEAD
@@ -69,5 +70,5 @@ jobs:
       - name: F1-F3 and O1-O4 regressions
         run: |
           go test -count=1 -timeout=12m ./internal/csf/commit -run '^(TestReferenceF[123]|TestCSFRV19O[1-4]|TestReferenceD3)'
-          go test -count=1 ./internal/csf/operationalmetrics ./internal/csf/inputledger ./internal/csf/persistence/sqlite ./internal/csf/observatory ./tests/architecture
-          go vet ./internal/localdbguard ./internal/readonlysql ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/csf/operationalmetrics
+          go test -count=1 ./internal/csf/operationalmetrics ./internal/csf/inputledger ./internal/csf/persistence/sqlite ./internal/csf/observatory/... ./tests/architecture
+          go vet ./internal/csf/observatory/queryhost ./internal/localdbguard ./internal/readonlysql ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/csf/operationalmetrics

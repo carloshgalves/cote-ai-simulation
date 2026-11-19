@@ -18,6 +18,7 @@ import (
 	"strings"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/localdbguard"
+	"github.com/carloshgalves/cote-ai-simulation/internal/readonlysql"
 
 	modernsqlite "modernc.org/sqlite"
 )
@@ -104,7 +105,12 @@ func openDB(ctx context.Context, path, mode string) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	db := sql.OpenDB(connector)
+	var db *sql.DB
+	if mode == "ro" {
+		db = sql.OpenDB(readonlysql.Wrap(connector))
+	} else {
+		db = sql.OpenDB(connector)
+	}
 	db.SetMaxOpenConns(1)
 	db.SetMaxIdleConns(1)
 	if err := db.PingContext(ctx); err != nil {

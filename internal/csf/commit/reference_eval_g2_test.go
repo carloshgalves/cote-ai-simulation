@@ -3,6 +3,7 @@ package commit
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"errors"
 	"reflect"
 	"testing"
@@ -17,6 +18,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/trigger"
 )
 
 // Read actual durable authority through an independent verified projection,
@@ -345,7 +347,7 @@ func TestReferenceG2AbortSubjectPermutation(t *testing.T) {
 		}
 		fields := v.([]any)
 		records := fields[11].([]any)
-		if len(fields) != 15 || len(records) != 2 || !reflect.DeepEqual(fields[13], fence.Fields[16]) {
+		if len(fields) != 15 || len(records) != 2 || !referenceC3Same(fields[6], fence.Fields[6]) || !referenceC3Same(fields[13], fence.Fields[16]) {
 			t.Fatal("abort omitted subjects or frozen plan")
 		}
 		expected := map[domain.ID]decision.Indeterminate{a.Subject: a, b.Subject: b}
@@ -473,4 +475,165 @@ func TestReferenceG2FirstClosureAndFinalBeyondCut(t *testing.T) {
 	}
 }
 
-var _ = clock.Work
+// Exercise a closure gap on real SQLite. No evaluator may leave a fence
+// while a declared source has not covered the requested target.
+func TestReferenceG2AdvanceWaitsForAllClosures(t *testing.T) {
+	ctx := context.Background()
+	c, store, ledger, run, _, path := testFixture(t)
+	if err := ledger.DeclareSource(inputledger.Source{ID: "delayed-source"}); err != nil {
+		t.Fatal(err)
+	}
+	initial, err := store.LoadClock(ctx, [32]byte(run))
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, cover := range []domain.SimulationInstant{initial.Instant, initial.Instant + 50} {
+		if _, err := ledger.CloseSource(ctx, "delayed-source", inputledger.Closure{
+			ProducerKey: fmt.Sprintf("partial-%d", cover), ClosedThrough: domain.EligibilityCoordinate{NotBeforeInstant: cover},
+		}); err != nil {
+			t.Fatal(err)
+		}
+		if _, err := c.Advance(ctx, ledger, run); !errors.Is(err, admission.ErrWaitingForClosure) {
+			t.Fatal("advance did not wait for the full target", err)
+		}
+		db, err := openReferenceReadOnlyDB(path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var decisions, events, revisions int
+		for _, table := range []struct {
+			name string
+			out  *int
+		}{{"decision_ledger", &decisions}, {"event_store", &events}, {"world_revisions", &revisions}} {
+			if err := db.QueryRowContext(ctx, "SELECT COUNT(*) FROM "+table.name).Scan(table.out); err != nil {
+				db.Close()
+				t.Fatal(err)
+			}
+		}
+		db.Close()
+		if decisions != 0 || events != 0 || revisions != 1 {
+			t.Fatal("closure gap created causal artifacts")
+		}
+	}
+	if _, err := ledger.CloseSource(ctx, "delayed-source", inputledger.Closure{ProducerKey: "final",
+		ClosedThrough: domain.EligibilityCoordinate{NotBeforeInstant: initial.Instant + 50}, Final: true}); err != nil {
+		t.Fatal(err)
+	}
+	out, err := c.Advance(ctx, ledger, run)
+	if err != nil || out.ResultClock.Instant != initial.Instant+100 {
+		t.Fatal("positive final closure failed", err)
+	}
+}
+
+func TestReferenceG2TriggerAtomicOriginAndColdSettlement(t *testing.T) {
+	ctx := context.Background()
+	def := trigger.Definition{ID: domain.ID{0x91}, Version: 1, Policy: trigger.RisingEdge,
+		FireOnInitialTrue: true, Dependencies: []string{"body", "clock"}}
+	c, store, ledger, run, bundle, path := testFixture(t, def)
+	advance, err := c.Advance(ctx, ledger, run)
+	if err != nil || len(advance.Activations) != 1 || len(advance.Events) != 4 {
+		t.Fatal("origin commit did not produce registered activation", err)
+	}
+	act := advance.Activations[0]
+	raw, err := codec.StrictDecodePayload(act.Canonical)
+	if err != nil {
+		t.Fatal(err)
+	}
+	f := raw.([]any)
+	if len(f) != 12 || f[10] != uint64(0) ||
+		!referenceC3Same(f[6], []any{int64(advance.ResultClock.Instant), uint64(0)}) {
+		t.Fatal("origin did not create pending activation at destination floor")
+	}
+	causes := f[5].([]any)[3].([]any)
+	if len(causes) != 2 || !bytes.Equal(causes[0].([]byte), advance.Events[0].Identity[:]) ||
+		!bytes.Equal(causes[1].([]byte), advance.Events[1].Identity[:]) {
+		t.Fatal("dependency filter failed to include both causal pre-trigger events")
+	}
+	db, err := openReferenceReadOnlyDB(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var persisted []byte
+	err = db.QueryRowContext(ctx, "SELECT canonical FROM trigger_activations WHERE id=?", act.Identity[:]).Scan(&persisted)
+	db.Close()
+	if err != nil || !bytes.Equal(persisted, act.Canonical) {
+		t.Fatal("activation not atomically durable before expansion", err)
+	}
+	// No owner request or candidate expansion has occurred. Drop the
+	// producing handle, then build the next plan from the durable prefix.
+	if err := store.Close(); err != nil {
+		t.Fatal(err)
+	}
+	cold, err := sqlite.Open(ctx, path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer cold.Close()
+	restored, err := inputledger.Open(ctx, run, bundle, cold)
+	if err != nil {
+		t.Fatal(err)
+	}
+	proof, err := cold.ReplayClock(ctx, [32]byte(run), bundle)
+	if err != nil || proof.ReplayedCommits != 1 || proof.VerifiedActivations != 1 {
+		t.Fatal("cold origin replay lost activation", err)
+	}
+	state, err := cold.LoadClock(ctx, [32]byte(run))
+	if err != nil {
+		t.Fatal(err)
+	}
+	pending, err := cold.PendingClock(ctx, [32]byte(run))
+	if err != nil {
+		t.Fatal(err)
+	}
+	plan, ok, err := clock.Next(state, pending)
+	if err != nil || !ok || plan.Kind != clock.Work || plan.OriginOrdinal != 0 {
+		t.Fatal("trigger did not precede later due occurrence", err)
+	}
+	_, hash, err := cold.LoadWorldState(ctx, uint64(state.Revision))
+	if err != nil {
+		t.Fatal(err)
+	}
+	cid, _, err := identity.New(bundle).Sum("cote.csf.id.cycle", "cote.csf.schema.cycle-id-preimage", 1,
+		[]any{run[:], []any{int64(state.Instant), uint64(0)}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	cycle := admission.Cycle{ID: domain.ID(cid), Instant: state.Instant, BaseRevision: state.Revision,
+		BaseStateHash: domain.Digest(hash), RetryRef: []any{uint64(0)}}
+	fence, err := admission.NewCoordinator(admission.NewFenceLog(cold)).AdmitThenEvaluate(ctx, bundle, restored, cycle, c.admissionPolicies, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	units := fence.Fields[11].([]any)
+	if len(units) != 1 || units[0].([]any)[1] != uint64(3) ||
+		!bytes.Equal(units[0].([]any)[3].([]byte), act.Identity[:]) {
+		t.Fatal("resume recomputed or duplicated activation identity")
+	}
+	coordinator := New(cold, bundle, c.admissionPolicies)
+	if _, err := coordinator.CommitSystemUnit(ctx, restored, cycle, fence); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := coordinator.CommitSystemUnit(ctx, restored, cycle, fence); err == nil {
+		t.Fatal("activation settled twice")
+	}
+	pending, err = cold.PendingClock(ctx, [32]byte(run))
+	if err != nil || len(pending) != 1 || pending[0].ID == domain.ID(act.Identity) ||
+		pending[0].Eligibility.NotBeforeCycleOrdinal != 1 {
+		t.Fatal("wrong remaining lifecycle after trigger terminal", err)
+	}
+	proof, err = cold.ReplayClock(ctx, [32]byte(run), bundle)
+	if err != nil || proof.ReplayedCommits != 2 || proof.VerifiedActivations != 1 {
+		t.Fatal("replay resurrected trigger", err)
+	}
+	q, err := sqlite.OpenPrivilegedObservatory(ctx, path, bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer q.Close()
+	report, err := q.ReadPrivilegedReport(ctx, [32]byte(run))
+	if err != nil || len(report.Commits) != 2 || len(report.Commits[1].DecisionLinks) != 1 ||
+		report.Commits[1].DecisionLinks[0].Source.ID != act.Identity || report.Commits[1].DecisionLinks[0].Status != 0 {
+		t.Fatal("activation not consumed by its exact decision", err)
+	}
+}
+

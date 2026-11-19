@@ -19,6 +19,11 @@ func verifyAbortAuthorities(ctx context.Context, q abortAuthorityReader, run [32
 	if len(abort) != 15 || len(fence) != 18 {
 		return errors.New("invalid abort authority envelope")
 	}
+	for _, pair := range [][2]int{{0, 0}, {1, 1}, {2, 2}, {4, 3}, {5, 4}, {6, 5}, {7, 6}, {8, 7}, {12, 9}, {16, 13}, {17, 8}} {
+		if !sameCanonical(fence[pair[0]], abort[pair[1]]) {
+			return errors.New("abort authority differs from frozen fence")
+		}
+	}
 	items, ok := abort[11].([]any)
 	if !ok {
 		return errors.New("abort evidence missing")

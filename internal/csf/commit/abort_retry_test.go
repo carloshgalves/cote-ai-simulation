@@ -293,6 +293,16 @@ func TestCandidateIndeterminateEvidenceBoundToSealedAdmittedUnits(t *testing.T){
  if _,err:=c.Abort(ctx,run,cycleID,fence,0,out.Indeterminate,forged...);err==nil{
   t.Fatal("accepted malformed candidate proof")
  }
+ // Genuine candidate-level evidence must also reject an unpinned
+ // validator and a source digest that is not part of the sealed fence.
+ for _,which:=range []int{0,1}{
+  bad:=append([]decision.Indeterminate(nil),out.Indeterminate...)
+  bad[0].Validator=append([]any(nil),bad[0].Validator...)
+  if which==0{bad[0].Validator[1]=uint64(999)}else{bad[0].SubjectDigest[0]^=1}
+  if _,err:=c.Abort(ctx,run,cycleID,fence,0,bad,out.Candidates...);err==nil{
+   t.Fatal("accepted forged candidate-level abort authority")
+  }
+ }
  ctl,err:=store.LoadCycleControl(ctx,[32]byte(run))
  if err!=nil||ctl[0]!=uint64(1){t.Fatalf("failed candidate proof did not roll back: %v %v",ctl,err)}
  abort,err:=c.Abort(ctx,run,cycleID,fence,0,out.Indeterminate,out.Candidates...)

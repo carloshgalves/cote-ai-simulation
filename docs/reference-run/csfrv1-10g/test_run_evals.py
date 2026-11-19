@@ -29,7 +29,7 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(g.git_blob((ROOT / g.ADR).read_bytes()), g.PIN_ADR)
         self.assertEqual(g.git_blob((ROOT / g.TRACE).read_bytes()), g.PIN_TRACE)
         self.assertEqual(len(self.validate()), 109)
-        self.assertEqual(sum(r["state"] == "READY" for r in self.registry["rows"]), 21)
+        self.assertEqual(sum(r["state"] == "READY" for r in self.registry["rows"]), 23)
         self.assertEqual(sum(r["state"] == "BLOCKED" for r in self.registry["rows"]), 8)
 
     def test_invalid_manifest(self):
@@ -69,15 +69,15 @@ class RegistryTests(unittest.TestCase):
         normative = self.validate()
         no_runs = g.report(self.registry, normative, {}, "a" * 40, "b" * 64)
         self.assertFalse(no_runs["matrix_complete"])
-        self.assertEqual(no_runs["counts"]["INV"]["FAIL"], 7)
-        self.assertEqual(no_runs["counts"]["STRESS"]["FAIL"], 14)
+        self.assertEqual(no_runs["counts"]["INV"]["FAIL"], 10)
+        self.assertEqual(no_runs["counts"]["STRESS"]["FAIL"], 13)
         # Test certificate aggregation only: synthetic results are NEVER
         # written as simulation evidence, only run by this verifier unit test.
         successes = {w: {mode: {"status": "PASS"} for mode in ("normal", "race")}
                      for w in self.registry["witnesses"]}
         report = g.report(self.registry, normative, successes, "a" * 40, "b" * 64)
-        self.assertEqual(report["counts"]["INV"]["PASS_INTEGRATED_TEST"], 7)
-        self.assertEqual(report["counts"]["STRESS"]["PASS_INTEGRATED_TEST"], 14)
+        self.assertEqual(report["counts"]["INV"]["PASS_INTEGRATED_TEST"], 10)
+        self.assertEqual(report["counts"]["STRESS"]["PASS_INTEGRATED_TEST"], 13)
         self.assertFalse(report["matrix_complete"])
         self.assertFalse(report["evals_complete"])
         self.assertEqual(next(r for r in report["rows"] if r["id"] == "STRESS-61")["status"], "NOT_RUN")

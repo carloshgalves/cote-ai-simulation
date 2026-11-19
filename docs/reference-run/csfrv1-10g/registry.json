@@ -252,6 +252,18 @@
       "name": "TestFootprintOrderDoesNotFollowWorkers",
       "kind": "EXISTING",
       "subtests": []
+    },
+    "g2-same-source-permutation": {
+      "path": "internal/csf/admission/reference_eval_g2_test.go",
+      "name": "TestReferenceG2SameSourcePermutation",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g2-event-revision-roster": {
+      "path": "internal/csf/commit/reference_eval_g2_test.go",
+      "name": "TestReferenceG2ExactEventRevisionBijection",
+      "kind": "INTEGRATED",
+      "subtests": []
     }
   },
   "rows": [
@@ -267,9 +279,11 @@
       "id": "INV-02",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "F1 checks forward provenance, but complete event/revision reverse coverage of all rows is not yet a dedicated G2 witness."
+      "state": "READY",
+      "witnesses": [
+        "g2-event-revision-roster"
+      ],
+      "reason": "Independent SQL walk of every indexed terminal and exact Event roster/ownership, sequence, adjacent WorldRevision hashes and reverse authority cardinalities; actual three-terminal local reference execution."
     },
     {
       "id": "INV-03",
@@ -437,9 +451,14 @@
       "id": "INV-21",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Existing mixed-source fence order and slot CAS prove portions; same-source reordering and full stable total-order authority require remaining witness."
+      "state": "READY",
+      "witnesses": [
+        "g2-same-source-permutation",
+        "g2-fence-mixed",
+        "g2-slot-cas",
+        "g2-late-cut"
+      ],
+      "reason": "Three distinct same-source producer keys, reversed actual receipt sequence, identical canonical inputs, total digest/ID order and fence; mixed-source/cohort order and single durable slot CAS controls."
     },
     {
       "id": "INV-22",
@@ -605,9 +624,13 @@
       "id": "INV-40",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Subject persistence proven for matching failures and candidate forgery; need negative tests of validator digest/version and subject digest prior to abort."
+      "state": "READY",
+      "witnesses": [
+        "g2-abort",
+        "g2-forged-candidate",
+        "g2-unknown-facet"
+      ],
+      "reason": "Distinct real source failures and candidates, canonical ordering, rejected foreign subject digest/validator ID/version/hash on authoritative abort publication, negative rehashed durable abort and control on cold replay. Real candidate-level negative and positive controls."
     },
     {
       "id": "INV-41",
@@ -839,11 +862,9 @@
       "id": "STRESS-25",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "READY",
-      "witnesses": [
-        "g2-slot-cas"
-      ],
-      "reason": "Timeout NoProposal and real ActionProposal on identical dispatch, both arrival orders with independently opened stale ledger; exactly one CAS winner bound into rederived fence; loser explicitly rejected (no persisted rejection ledger claim)."
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "Slot CAS and both valid timeout/real-response orders are proven, but rejected competing input is not durably retained for audit under V1 (RejectedIngress=NOT_PERSISTED). No full stress credit."
     },
     {
       "id": "STRESS-26",
@@ -1244,7 +1265,9 @@
         "g2-pure-historical-idempotent",
         "g2-cascade-limit",
         "g2-partition",
-        "g2-footprint"
+        "g2-footprint",
+        "g2-same-source-permutation",
+        "g2-event-revision-roster"
       ]
     },
     "determinism": {

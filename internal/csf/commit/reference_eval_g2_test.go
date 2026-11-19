@@ -4,8 +4,10 @@ import (
 	"bytes"
 	"context"
 	"database/sql"
+	"encoding/hex"
 	"errors"
 	"fmt"
+	"path/filepath"
 	"reflect"
 	"testing"
 
@@ -718,5 +720,112 @@ func TestReferenceG2TriggerAtomicOriginAndColdSettlement(t *testing.T) {
 	if err != nil || len(report.Commits) != 2 || len(report.Commits[1].DecisionLinks) != 1 ||
 		report.Commits[1].DecisionLinks[0].Source.ID != act.Identity || report.Commits[1].DecisionLinks[0].Status != 0 {
 		t.Fatal("activation not consumed by its exact decision", err)
+	}
+}
+
+func TestReferenceG2ExactEventRevisionBijection(t *testing.T) {
+	ctx := context.Background()
+	path := filepath.Join(t.TempDir(), "roster.db")
+	result, err := RunReference(ctx, path, bundlePath, ReferenceOptions{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	rawID, err := hex.DecodeString(result.RunID)
+	if err != nil || len(rawID) != 32 {
+		t.Fatal("invalid run ID", err)
+	}
+	var run [32]byte
+	copy(run[:], rawID)
+	bundle, err := policy.Load(bundlePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+	q, err := sqlite.OpenPrivilegedObservatory(ctx, path, bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer q.Close()
+	report, err := q.ReadPrivilegedReport(ctx, run)
+	if err != nil || len(report.Commits) != 3 {
+		t.Fatal("expected nonempty three-terminal causal run", err)
+	}
+	db, err := openReferenceReadOnlyDB(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer db.Close()
+	seen := map[[32]byte]bool{}
+	var seq uint64
+	var priorHash []byte
+	if err := db.QueryRowContext(ctx, "SELECT state_hash FROM world_revisions WHERE revision=0").Scan(&priorHash); err != nil {
+		t.Fatal(err)
+	}
+	for i, terminal := range report.Commits {
+		var journalRaw, revisionRaw, stateHash []byte
+		if err := db.QueryRowContext(ctx, "SELECT canonical FROM decision_ledger WHERE id=?", terminal.Commit.ID[:]).Scan(&journalRaw); err != nil {
+			t.Fatal(err)
+		}
+		raw, err := codec.StrictDecodePayload(journalRaw)
+		if err != nil {
+			t.Fatal(err)
+		}
+		journal := raw.([]any)
+		if len(journal) != 24 || journal[6] != uint64(i) || journal[8] != uint64(i+1) || !bytes.Equal(journal[7].([]byte), priorHash) {
+			t.Fatal("commit does not join adjacent revisions")
+		}
+		if err := db.QueryRowContext(ctx, "SELECT canonical,state_hash FROM world_revisions WHERE revision=?", i+1).Scan(&revisionRaw, &stateHash); err != nil {
+			t.Fatal(err)
+		}
+		rev, err := codec.StrictDecodePayload(revisionRaw)
+		if err != nil {
+			t.Fatal(err)
+		}
+		fields := rev.([]any)
+		if len(fields) != 6 || fields[0] != uint64(i) || fields[3] != uint64(i+1) ||
+			!bytes.Equal(fields[2].([]byte), priorHash) || !bytes.Equal(fields[5].([]byte), stateHash) || !bytes.Equal(journal[9].([]byte), stateHash) {
+			t.Fatal("published world revision does not identify its unique terminal")
+		}
+		priorHash = bytes.Clone(stateHash)
+		ids := journal[15].([]any)
+		if len(ids) != len(terminal.Events) || len(ids) == 0 {
+			t.Fatal("terminal roster incomplete")
+		}
+		for pos, idRaw := range ids {
+			var id [32]byte
+			copy(id[:], idRaw.([]byte))
+			if seen[id] || terminal.Events[pos].ID != id {
+				t.Fatal("event repeated or changed order")
+			}
+			seen[id] = true
+			var raw []byte
+			if err := db.QueryRowContext(ctx, "SELECT canonical FROM event_store WHERE id=?", id[:]).Scan(&raw); err != nil {
+				t.Fatal(err)
+			}
+			event, err := codec.StrictDecodePayload(raw)
+			if err != nil {
+				t.Fatal(err)
+			}
+			f := event.([]any)
+			if len(f) != 19 || !bytes.Equal(f[0].([]byte), id[:]) || !bytes.Equal(f[1].([]byte), run[:]) ||
+				!bytes.Equal(f[7].([]byte), terminal.CycleID[:]) || f[8] != uint64(i) || f[6] != seq {
+				t.Fatal("event not bound to exact owning commit/sequence")
+			}
+			seq++
+		}
+		if journal[22] != seq {
+			t.Fatal("terminal logical next sequence differs from roster")
+		}
+	}
+	var events, revisions, commits int
+	for _, item := range []struct {
+		table string
+		dst   *int
+	}{{"event_store", &events}, {"world_revisions", &revisions}, {"committed_cycles", &commits}} {
+		if err := db.QueryRowContext(ctx, "SELECT count(*) FROM "+item.table).Scan(item.dst); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if events != len(seen) || revisions != len(report.Commits)+1 || commits != len(report.Commits) || seq != uint64(report.State.Clock.NextLogicalSequence) {
+		t.Fatal("orphan or unindexed durable event/revision/commit")
 	}
 }

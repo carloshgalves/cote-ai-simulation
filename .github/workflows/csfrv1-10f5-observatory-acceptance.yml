@@ -1,0 +1,89 @@
+name: CSFRV1-10F5 integrated Observatory acceptance
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "internal/**"
+      - "src/**"
+      - "tests/**"
+      - "docs/architecture/**"
+      - "docs/reference-run/csfrv1-10*/**"
+      - ".github/workflows/csfrv1-10f*.yml"
+      - "go.mod"
+      - "go.sum"
+      - "pyproject.toml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: csfrv1-10f5-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  acceptance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    env:
+      PHYSICAL_A1_PRODUCER_TEST: "1"
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Pinned real A1 supervisor
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+          python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-f5
+          find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
+      - name: Exact SHA, gofmt and verifier negative controls
+        run: |
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          git diff --check ecf8f2f7d15b1469b95035970d42d4a112168657...HEAD
+          files=(internal/csf/commit/reference_observatory_f5_test.go internal/csf/commit/reference_equivalence_e1_oracle_test.go internal/csf/persistence/sqlite/observatory_f5_fence_test.go internal/csf/commit/observatory_o1_integration_test.go)
+          remaining=$(gofmt -l "${files[@]}")
+          if [ -n "$remaining" ]; then
+            gofmt -d "${files[@]}"
+            exit 1
+          fi
+          python docs/reference-run/csfrv1-10f5/test_verify_matrix.py
+      - name: F1-F5 integrated normal matrix
+        run: |
+          set -euo pipefail
+          go test -json -count=1 -timeout=15m ./internal/csf/commit ./internal/csf/operationalmetrics ./internal/csf/persistence/sqlite ./internal/localdbguard ./internal/readonlysql ./tests/architecture -run '^(TestReferenceF[1-5]|TestF[45]|TestCSFRV19O1SQLiteReadOnlyMode)' | tee /tmp/f5-normal.jsonl
+          python -c 'import sys; sys.path.insert(0,"docs/reference-run/csfrv1-10f5"); from verify_matrix import verify, MATRIX; print(verify(open("/tmp/f5-normal.jsonl","rb").read(), MATRIX)["test_count"])'
+      - name: F1-F5 integrated race matrix
+        run: |
+          set -euo pipefail
+          go test -race -json -count=1 -timeout=20m ./internal/csf/commit ./internal/csf/operationalmetrics ./internal/csf/persistence/sqlite ./internal/localdbguard ./internal/readonlysql ./tests/architecture -run '^(TestReferenceF[1-5]|TestF[45]|TestCSFRV19O1SQLiteReadOnlyMode)' | tee /tmp/f5-race.jsonl
+          python -c 'import sys; sys.path.insert(0,"docs/reference-run/csfrv1-10f5"); from verify_matrix import verify, MATRIX; print(verify(open("/tmp/f5-race.jsonl","rb").read(), MATRIX)["test_count"])'
+      - name: Mandatory O1-O4, D3 and E1 regression inventory
+        run: |
+          set -euo pipefail
+          go test -json -count=1 -timeout=15m ./internal/csf/commit -run '^(TestCSFRV19O[1-4]|TestReferenceD3|TestReferenceE1)' | tee /tmp/f5-regressions.jsonl
+          python -c 'import sys; sys.path.insert(0,"docs/reference-run/csfrv1-10f5"); from verify_matrix import verify, REGRESSIONS; print(verify(open("/tmp/f5-regressions.jsonl","rb").read(), REGRESSIONS)["test_count"])'
+      - name: Persistence, boundary and owner regressions; vet
+        run: |
+          go test -count=1 ./internal/csf/observatory/... ./internal/csf/persistence/sqlite ./internal/csf/inputledger ./internal/csf/contextboundary ./internal/csf/perception ./internal/csf/operationalmetrics ./internal/csf/ownercheckpoint/... ./internal/localdbguard ./internal/readonlysql ./tests/architecture
+          go vet ./internal/csf/observatory/... ./internal/csf/persistence/sqlite ./internal/csf/commit ./internal/csf/operationalmetrics ./internal/localdbguard ./internal/readonlysql
+      - name: Publish exact-SHA local acceptance certificate
+        run: |
+          mkdir -p /tmp/f5-certificate
+          python docs/reference-run/csfrv1-10f5/verify_matrix.py \
+            --sha "$SOURCE_SHA" --normal /tmp/f5-normal.jsonl --race /tmp/f5-race.jsonl \
+            --regressions /tmp/f5-regressions.jsonl --out /tmp/f5-certificate/acceptance.json
+      - uses: actions/upload-artifact@v6
+        with:
+          name: csfrv1-10f5-acceptance-${{ env.SOURCE_SHA }}
+          path: /tmp/f5-certificate/acceptance.json
+          if-no-files-found: error
+          retention-days: 90

@@ -33,7 +33,7 @@ func o1WholeDatabaseDigest(t *testing.T, path string) [32]byte {
 		t.Fatal(err)
 	}
 	defer db.Close()
-	names, err := db.Query("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")
+	names, err := db.Query("SELECT name FROM sqlite_master WHERE type='table' AND name NOT GLOB 'sqlite_*'")
 	if err != nil {
 		t.Fatal(err)
 	}

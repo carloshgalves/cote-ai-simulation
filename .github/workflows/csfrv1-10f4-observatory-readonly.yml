@@ -1,0 +1,73 @@
+name: CSFRV1-10F4 concurrent read-only and sidecar guards
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "internal/csf/**"
+      - "internal/localdbguard/**"
+      - "internal/readonlysql/**"
+      - "internal/physicalhost/**"
+      - "src/embodiment/**"
+      - "tests/architecture/**"
+      - "docs/reference-run/csfrv1-10f4/**"
+      - ".github/workflows/csfrv1-10f4-observatory-readonly.yml"
+      - "go.mod"
+      - "go.sum"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: csfrv1-10f4-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  readonly:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      PHYSICAL_A1_PRODUCER_TEST: "1"
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Pinned real A1 supervisor
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+          python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-f4
+          find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
+      - name: SHA and formatting
+        run: |
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          files=(internal/localdbguard/guard.go internal/readonlysql/connector.go internal/csf/persistence/sqlite/observatory_readonly.go internal/csf/persistence/sqlite/observatory_readonly_test.go internal/csf/persistence/sqlite/observatory_operational.go internal/csf/operationalmetrics/metrics.go internal/csf/operationalmetrics/f4_security_test.go internal/csf/commit/reference_observatory_f4_test.go tests/architecture/observatory_f4_boundary_test.go)
+          remaining=$(gofmt -l "${files[@]}")
+          if [ -n "$remaining" ]; then
+            printf 'F4 files not gofmt-clean:\n%s\n' "$remaining"
+            exit 1
+          fi
+          git diff --check 242faa93b20f0d3a24d7723378a68e69e748d4fd...HEAD
+      - name: F4 normal matrix and mandatory test inventory
+        run: |
+          set -euo pipefail
+          go test -json -count=1 -timeout=15m ./internal/csf/commit ./internal/csf/operationalmetrics ./internal/csf/persistence/sqlite ./tests/architecture -run '^(TestReferenceF4|TestF4|TestCSFRV19O1SQLiteReadOnlyMode)' | tee /tmp/f4-normal.jsonl
+          python docs/reference-run/csfrv1-10f4/verify_tests.py /tmp/f4-normal.jsonl
+      - name: F4 race matrix and mandatory test inventory
+        run: |
+          set -euo pipefail
+          go test -race -json -count=1 -timeout=20m ./internal/csf/commit ./internal/csf/operationalmetrics ./internal/csf/persistence/sqlite ./tests/architecture -run '^(TestReferenceF4|TestF4|TestCSFRV19O1SQLiteReadOnlyMode)' | tee /tmp/f4-race.jsonl
+          python docs/reference-run/csfrv1-10f4/verify_tests.py /tmp/f4-race.jsonl
+      - name: F1-F3 and O1-O4 regressions
+        run: |
+          go test -count=1 -timeout=12m ./internal/csf/commit -run '^(TestReferenceF[123]|TestCSFRV19O[1-4]|TestReferenceD3)'
+          go test -count=1 ./internal/csf/operationalmetrics ./internal/csf/inputledger ./internal/csf/persistence/sqlite ./internal/csf/observatory ./tests/architecture
+          go vet ./internal/localdbguard ./internal/readonlysql ./internal/csf/commit ./internal/csf/persistence/sqlite ./internal/csf/operationalmetrics

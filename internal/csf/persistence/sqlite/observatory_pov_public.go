@@ -7,6 +7,7 @@ import (
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/contextboundary"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
@@ -15,11 +16,12 @@ import (
 // causal cutoff are fixed by a persisted SlotDispatch; they cannot be replaced
 // by a caller at read time. Its SQL connection remains SQLite mode=ro.
 type POVReader struct {
-	base     *ObservatoryReader
-	dispatch [32]byte
-	run      [32]byte
-	actor    [2]string
-	through  uint64
+	base         *ObservatoryReader
+	dispatch     [32]byte
+	dispatchHash [32]byte
+	run          [32]byte
+	actor        [2]string
+	through      uint64
 }
 
 var _ observatory.POVQueries = (*POVReader)(nil)
@@ -67,11 +69,25 @@ func OpenPOVObservatory(
 	if inbox.run != run || inbox.actor != actor {
 		return fail()
 	}
+	digest, err := povDispatchHash(ctx, base, dispatchID)
+	if err != nil {
+		return fail()
+	}
 	now, err := base.dataVersion(ctx)
 	if err != nil || version != now {
 		return fail()
 	}
-	return &POVReader{base: base, dispatch: dispatchID, run: run, actor: actor, through: inbox.throughRevision}, nil
+	return &POVReader{base: base, dispatch: dispatchID, dispatchHash: digest, run: run, actor: actor, through: inbox.throughRevision}, nil
+}
+
+// The canonical dispatch ID does not bind all its fields. Preserve the
+// precise authenticated dispatch bytes as well as its holder and cutoff.
+func povDispatchHash(ctx context.Context, base *ObservatoryReader, dispatch [32]byte) ([32]byte, error) {
+	var raw []byte
+	if err := base.store.db.QueryRowContext(ctx, "SELECT canonical FROM input_ledger WHERE id=?", dispatch[:]).Scan(&raw); err != nil {
+		return [32]byte{}, err
+	}
+	return [32]byte(identity.OpaqueContentHash(raw)), nil
 }
 
 func (q *POVReader) Close() error {
@@ -110,6 +126,10 @@ func (q *POVReader) ReadPOV(ctx context.Context) (observatory.POVView, error) {
 	// cached inbox alone would not prove that its binding still exists.
 	inbox, err := q.base.store.BindActorInbox(ctx, q.dispatch, q.actor)
 	if err != nil || inbox.run != q.run || inbox.actor != q.actor || inbox.throughRevision != q.through {
+		return zero, restrictedViewError(ctx)
+	}
+	digest, err := povDispatchHash(ctx, q.base, q.dispatch)
+	if err != nil || digest != q.dispatchHash {
 		return zero, restrictedViewError(ctx)
 	}
 	view, err := contextboundary.Build(ctx, inbox, q.actor)

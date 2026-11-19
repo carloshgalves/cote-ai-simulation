@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"database/sql"
+	"encoding/json"
 	"errors"
 	"os"
 	"path/filepath"
@@ -238,13 +239,40 @@ func TestReferenceF5EquivalentIntegratedViews(t *testing.T) {
 			if after := reader.read(t); !reflect.DeepEqual(v, after) {
 				t.Fatal("F5 changed host metrics influenced causal projection")
 			}
-			if err := referenceE1Compare(before, referenceE2Capture(t, dbPath, ownerPath)); err != nil {
+			after := referenceE2Capture(t, dbPath, ownerPath)
+			if err := referenceE1Compare(before, after); err != nil {
 				t.Fatal("F5 queries/metrics changed literal E1 authority", err)
 			}
 			if !reflect.DeepEqual(durable, f4DurableFiles(t, dbPath, ownerPath, ownerPath+".actor-a")) {
 				t.Fatal("F5 queries/metrics changed durable file bytes")
 			}
-			t.Log("F5 equivalent D3: nine commits, ten attempts, six read surfaces, unchanged authorities and durable bytes")
+			// Publish only counts and digests of E1 manifests, never the
+			// combined projection or any private canonical rows.
+			beforeManifest, err := json.Marshal(before.Manifest())
+			if err != nil {
+				t.Fatal(err)
+			}
+			afterManifest, err := json.Marshal(after.Manifest())
+			if err != nil {
+				t.Fatal(err)
+			}
+			row := struct {
+				Case       string `json:"case"`
+				Commits    int    `json:"commits"`
+				Attempts   int    `json:"attempts"`
+				Databases  int    `json:"databases"`
+				Tables     int    `json:"tables"`
+				BeforeHash string `json:"before_sha256"`
+				AfterHash  string `json:"after_sha256"`
+			}{
+				spec.name, len(v.Audit.Commits), len(v.Audit.Attempts), len(before.Databases),
+				len(before.Manifest()), referenceE5Hash(beforeManifest), referenceE5Hash(afterManifest),
+			}
+			safe, err := json.Marshal(row)
+			if err != nil {
+				t.Fatal(err)
+			}
+			t.Logf("F5_EVIDENCE %s", safe)
 		})
 	}
 }

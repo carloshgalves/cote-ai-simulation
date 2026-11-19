@@ -2,7 +2,7 @@
 import json
 import unittest
 
-from verify_matrix import MATRIX, REGRESSIONS, verify
+from verify_matrix import COMMIT, MATRIX, REGRESSIONS, verify, verify_evidence
 
 
 def encode(events):
@@ -27,6 +27,29 @@ class ValidatorTests(unittest.TestCase):
 
     def test_valid(self):
         self.assertEqual(verify(encode(fixture()), self.expected)["test_count"], 1)
+
+    def test_integrated_evidence(self):
+        rows = [
+            {"case": name, "commits": 9, "attempts": 10, "databases": 3, "tables": 45,
+             "before_sha256": "a" * 64, "after_sha256": "a" * 64}
+            for name in ("normal", "reverse", "recovered")
+        ]
+
+        def event(row):
+            return {"Action": "output", "Package": COMMIT,
+                    "Test": "TestReferenceF5EquivalentIntegratedViews/" + row["case"],
+                    "Output": "F5_EVIDENCE " + json.dumps(row)}
+
+        self.assertEqual(len(verify_evidence(encode(map(event, rows)))), 3)
+        for invalid in (
+            rows[:2],
+            [*rows, rows[0]],
+            [*rows[:2], {**rows[2], "before_sha256": "b" * 64, "after_sha256": "b" * 64}],
+            [*rows[:2], {**rows[2], "after_sha256": "b" * 64}],
+            [*rows[:2], {**rows[2], "private_payload": "must not appear"}],
+        ):
+            with self.assertRaises(ValueError):
+                verify_evidence(encode(map(event, invalid)))
 
     def test_invalid(self):
         cases = {

@@ -147,6 +147,37 @@ def verify(raw, expected):
     }
 
 
+def verify_evidence(raw):
+    """Require actual per-case E1 digest/count summaries, with no private data."""
+    names = {"normal", "reverse", "recovered"}
+    rows = {}
+    fields = {"case", "commits", "attempts", "databases", "tables",
+              "before_sha256", "after_sha256"}
+    for line in raw.splitlines():
+        event = json.loads(line)
+        output = event.get("Output", "")
+        if event.get("Action") != "output" or "F5_EVIDENCE " not in output:
+            continue
+        row = json.loads(output.split("F5_EVIDENCE ", 1)[1].strip())
+        name = row.get("case")
+        if (set(row) != fields or name not in names or name in rows
+                or event.get("Package") != COMMIT
+                or event.get("Test") != "TestReferenceF5EquivalentIntegratedViews/" + name
+                or row["commits"] != 9 or row["attempts"] != 10 or row["databases"] != 3
+                or type(row["tables"]) is not int or row["tables"] < 20
+                or not re.fullmatch(r"[0-9a-f]{64}", row["before_sha256"])
+                or row["before_sha256"] != row["after_sha256"]):
+            raise ValueError("invalid F5 E1 evidence")
+        rows[name] = row
+    if set(rows) != names:
+        raise ValueError("missing F5 E1 evidence")
+    if len({row["before_sha256"] for row in rows.values()}) != 1:
+        raise ValueError("equivalent executions have different E1 transcript digests")
+    if len({row["tables"] for row in rows.values()}) != 1:
+        raise ValueError("equivalent executions have different table counts")
+    return [rows[n] for n in sorted(names)]
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--normal", type=Path, required=True)
@@ -170,6 +201,8 @@ def main():
             "race": verify(race, MATRIX),
             "regressions": verify(regressions, REGRESSIONS),
         }
+        passes["normal"]["integrated_e1"] = verify_evidence(normal)
+        passes["race"]["integrated_e1"] = verify_evidence(race)
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
     report = {

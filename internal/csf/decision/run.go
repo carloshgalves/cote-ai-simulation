@@ -11,7 +11,7 @@ import (
 )
 
 func Run(input Input)(Result,error){
- return run(input,nil)
+ return run(input,nil,1)
 }
 
 // RunWithWorkerOrder evaluates the independent validation/candidate work in
@@ -19,17 +19,25 @@ func Run(input Input)(Result,error){
 // alias resolution, canonical evidence, conflict semantics and disposition.
 // Indices are a complete permutation of the admitted cohort, not authority.
 func RunWithWorkerOrder(input Input, workerOrder []int)(Result,error){
- if workerOrder==nil{return Run(input)}
+ return RunWithParallelism(input,workerOrder,1)
+}
+
+// RunWithParallelism changes host scheduling only. A bounded worker pool
+// evaluates pure, independent prepared units and consolidates by fence order.
+// Input and its pinned policy bundle must remain immutable during the call.
+func RunWithParallelism(input Input, workerOrder []int, parallelism int)(Result,error){
+ if parallelism<1||parallelism>64{return Result{},fmt.Errorf("%w: worker count outside [1,64]",ErrProvenance)}
+ if workerOrder==nil{return run(input,nil,parallelism)}
  if len(workerOrder)!=len(input.Admitted){return Result{},fmt.Errorf("%w: incomplete worker permutation",ErrProvenance)}
  seen:=make(map[int]bool,len(workerOrder))
  for _,i:=range workerOrder{
   if i<0||i>=len(input.Admitted)||seen[i]{return Result{},fmt.Errorf("%w: invalid worker permutation",ErrProvenance)}
   seen[i]=true
  }
- return run(input,workerOrder)
+ return run(input,workerOrder,parallelism)
 }
 
-func run(input Input,workerOrder []int)(Result,error){
+func run(input Input,workerOrder []int,parallelism int)(Result,error){
  result:=Result{PostAvailable:input.Snapshot.Available}
  if input.Bundle==nil{return result,errors.New("canonical bundle missing")}
  // A registered 32-byte causal ID is identified by its derivation and
@@ -83,54 +91,22 @@ func run(input Input,workerOrder []int)(Result,error){
   workers=make([]prepared,len(ordered))
   for i,index:=range workerOrder{workers[i]=ordered[index]}
  }
- for _,p:=range workers{
+ outcomes:=evaluateWorkers(workers,parallelism,func(p prepared)(preparedOutcome,error){
+  return evaluatePrepared(d,input,p,refs)
+ })
+ for i,out:=range outcomes{
+  p:=workers[i]
   if p.noProposal{noProposals[p.id]=true;continue}
   if p.aliasFound{aliases[p.id]=true;continue}
-  if p.indeterminate||!input.Snapshot.Known {
-   result.Indeterminate=append(result.Indeterminate,Indeterminate{
-    Subject:p.id,SubjectDigest:p.unit.Response.Digest,SubjectKind:0,Facet:2,Validator:refs["validators"],Reason:"resource.validator.missing",Evidence:[]any{},
-   })
-   continue
+  result.Assessments=append(result.Assessments,out.value.Assessments...)
+  if out.err!=nil{return result,out.err}
+  result.Indeterminate=append(result.Indeterminate,out.value.Indeterminate...)
+  for _,candidate:=range out.value.Candidates{
+   blocked[p.id]=out.value.blocked
+   accessBlocked[p.id]=out.value.accessBlocked
+   result.Candidates=append(result.Candidates,candidate)
+   current[candidate.ID]=p.amount
   }
-  actor:=p.unit.Response.Actor[0]+":"+p.unit.Response.Actor[1]
-  canAccess,accessKnown:=input.Snapshot.AccessibleActors[actor]
-  forbidden,institutionKnown:=input.Snapshot.ForbiddenActors[actor]
-  if !accessKnown||!institutionKnown{
-   facet,reason:=uint8(1),"access.validator.missing"
-   if accessKnown{facet=4;reason="institution.validator.missing"}
-   result.Indeterminate=append(result.Indeterminate,Indeterminate{
-    Subject:p.id,SubjectDigest:p.unit.Response.Digest,SubjectKind:0,
-    Facet:facet,Validator:refs["validators"],Reason:reason,Evidence:[]any{},
-   })
-   continue
-  }
-  resourceBlocked:=p.amount>input.Snapshot.Available
-  assessment,err:=assess(d,p,resourceBlocked,canAccess,forbidden,refs["validators"])
-  if err!=nil{return result,err}
-  result.Assessments=append(result.Assessments,assessment)
-  blocked[p.id]=resourceBlocked||!canAccess
-  accessBlocked[p.id]=!canAccess
-  // Candidate provenance resolves the authentic ActionProposal unit root.
-  source:=[]any{uint64(5),p.id[:],p.unit.Response.Digest[:]}
-  claims:=p.unit.Response.Body[9].([]any)
-  candidate,err:=MakeCandidate(d,input.RunID,input.CycleID,[]domain.ID{p.id},
-   p.producer,1,0,0,claims,[]any{source},0,refs["conflict-resolvers"])
-  if err!=nil{return result,err}
-  // The synthetic V1 resource action has exactly one declared event draft.
-  // Its typed payload is the already validated immutable proposal params;
-  // the claim amount is independently authenticated from that proposal.
-  // Loser drafts are never events unless settlement commits them.
-  if p.producer=="resource.consume" {
-   draft:=[]any{uint64(0),uint64(0),"resource.consumed",p.unit.Response.Body[8],[]any{}}
-   candidate.Fields[8]=[]any{draft}
-   h,err:=digest(d,"cote.csf.digest.commit-candidate","cote.csf.schema.commit-candidate.body",candidate.Fields)
-   if err!=nil{return result,err}
-   candidate.Digest=h
-   candidate.Canonical,err=encode(candidate.Fields,h)
-   if err!=nil{return result,err}
-  }
-  result.Candidates=append(result.Candidates,candidate)
-  current[candidate.ID]=p.amount
  }
  // Worker completion order cannot enter the canonical provisional seal.
  // At this point each independent output is rooted in exactly one admitted

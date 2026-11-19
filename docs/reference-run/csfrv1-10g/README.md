@@ -14,7 +14,7 @@ registry contains no verified PASS values. READY means reviewed candidate
 witness(es) are registered; actual results are supplied by the runner.
 NOT_RUN means the complete proof has not been mapped; BLOCKED requires an
 issue and explicit explanation. In G1 seven rows are blocked by #22
-(DEDUPLICATED / zero-event empty WORK), 99 are not yet mapped and three
+(DEDUPLICATED / zero-event empty WORK), 100 are not yet mapped and two
 are executable pilot rows. These counts describe the registration, not a
 passing run. G2–G5 must inspect and extend the reviewed witnesses, not
 blindly promote partial coverage. G6 aggregates four evals, conformance
@@ -23,8 +23,11 @@ and reports gaps. No changing the ADR to fit tests.
 Pilot witnesses:
 - STRESS-41 (simulation): actual last-unit conflict/replay and stable
   decision/stock, reversed arrival.
-- STRESS-61 (determinism): real E1 same signed A1 cuts, four equivalent
-  runs and byte equality of all authoritative rows.
+- Determinism pilot (no row credit): real E1 same signed A1 cuts, four
+  equivalent runs and byte equality of all authoritative rows. STRESS-61
+  stays NOT_RUN: the current decision evaluator changes traversal order
+  in a serial loop, not true parallelism. G3 must produce an actual
+  different-parallelism witness or document the gap.
 - INV-16 (knowledge boundary): true queryhost dependency graph, nominal
   restricted capabilities, independent pager defense and concurrent
   real D3 queries with E1/durable-byte equality. F4 trusted operator and
@@ -66,8 +69,9 @@ witness can silently replace a failing one. The CI only uploads
 Exit 0 means registered tests have passed and the matrix was generated,
 **not** that the matrix is complete. Missing/blocked rows are explicitly
 NO_GO_INCOMPLETE_MATRIX. Add `--require-complete` to receive exit 2
-for an incomplete matrix or incomplete eval package; 1 for a test failure, including a supplemental pilot.  Even all passing rows
-are EVIDENCE_COMPLETE_REVIEW_REQUIRED, not DoD accepted or production GO.
+for an incomplete matrix or incomplete eval package; 1 for a test failure, including a supplemental pilot.  Even all passing rows with PILOT_ONLY scopes are NO_GO_INCOMPLETE_EVAL_SCOPE.
+Only a future fully evidenced and complete eval scope may produce
+EVIDENCE_COMPLETE_REVIEW_REQUIRED, never DoD accepted or production GO.
 The registry is reviewed source code, not a signed external attestation;
 the checkout, installed toolchain and CI runner remain trusted inputs.
 Ignored Go sources/module controls are refused; tracked witness sources must be direct regular files matching their HEAD blobs. Sanitized event records permit audit of actual test inventories without exposing test output. This is not a hostile-code sandbox.

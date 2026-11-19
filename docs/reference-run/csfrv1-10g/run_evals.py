@@ -212,13 +212,24 @@ def execute(root, directory, witnesses):
                     status, reason = "PASS", ""
                 except (ValueError, TypeError, AttributeError) as exc:
                     reason = str(exc)
+            # For diagnostic triage expose only registered failing names,
+            # never raw output or an unexpected name controlled by a test.
+            failed_cases = set()
+            for line in proc.stdout.splitlines():
+                try:
+                    event = load(line)
+                    if isinstance(event, dict) and event.get("Action") in {"fail", "skip"} and event.get("Package") == PREFIX + package and event.get("Test") in names:
+                        failed_cases.add(event["Test"])
+                except (ValueError, TypeError):
+                    continue
             result = {"status": status, "command": args, "exit_status": proc.returncode,
+                      "failed_registered_tests": sorted(failed_cases),
                       "log_sha256": digest(proc.stdout), "stderr_sha256": digest(proc.stderr),
                       "test_names": tests, "reason": reason,
                       "sanitized_events": events if status == "PASS" else [],
                       "sanitized_events_sha256": digest(json.dumps(events if status == "PASS" else [], sort_keys=True, separators=(",", ":")).encode())}
             results[wid][mode] = result
-            print(f"{wid}/{mode}: {status} exit={proc.returncode} {reason}", flush=True)
+            print(f"{wid}/{mode}: {status} exit={proc.returncode} {reason} {sorted(failed_cases)}", flush=True)
     return results
 
 
@@ -255,12 +266,17 @@ def report(registry, normative, results, sha, registry_hash):
         rs = group["witnesses"]
         eval_results[name] = dict(group, status="PASS_PILOT_ONLY" if all(witness_passes(results, w) for w in rs) else "FAIL",
                                   complete=False)
+    evals_complete = all(group["complete"] for group in eval_results.values())
+    disposition = ("NO_GO_INCOMPLETE_MATRIX" if not complete else
+                   "NO_GO_INCOMPLETE_EVAL_SCOPE" if not evals_complete else
+                   "EVIDENCE_COMPLETE_REVIEW_REQUIRED")
     return {"schema": "csfrv1-10g.evidence.v1", "sha": sha, "registry_sha256": registry_hash,
             "normative_traceability_blob": PIN_TRACE, "normative_adr_blob": PIN_ADR,
             "counts": counts, "rows": rows, "witnesses": results, "evals": eval_results,
-            "matrix_complete": complete, "dod_accepted": False, "release_authorized": False,
+            "matrix_complete": complete, "evals_complete": evals_complete,
+            "dod_accepted": False, "release_authorized": False,
             "external_gates": {"93": "NOT_ATTESTED", "94": "NOT_ATTESTED", "113": "NOT_ATTESTED"},
-            "disposition": "EVIDENCE_COMPLETE_REVIEW_REQUIRED" if complete else "NO_GO_INCOMPLETE_MATRIX"}
+            "disposition": disposition}
 
 
 def clean_checkout(root):

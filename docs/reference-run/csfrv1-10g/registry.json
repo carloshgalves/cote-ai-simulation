@@ -886,11 +886,9 @@
       "id": "STRESS-61",
       "owner_issue": 162,
       "eval": "determinism",
-      "state": "READY",
-      "witnesses": [
-        "exact-e1"
-      ],
-      "reason": "Same authentic signed A1 inputs reused in four independently executed D3 runs; all literal rows in causal and both owner databases equal across source/worker permutations, including event and world revision hashes."
+      "state": "NOT_RUN",
+      "witnesses": [],
+      "reason": "E1 proves literal same-input transcript equality under arrival/worker-order permutations, but decision.RunWithWorkerOrder currently executes a serial loop. Actual different parallelism is not established; G3 must provide a valid parallel execution witness or retain the gap. E1 remains a successful pilot candidate without row credit."
     },
     {
       "id": "STRESS-62",

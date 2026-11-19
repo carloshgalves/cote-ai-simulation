@@ -49,54 +49,64 @@ func evaluateWorkers(units []prepared, parallelism int, evaluate func(prepared) 
 	return out
 }
 
-func evaluatePrepared(d identity.Deriver, input Input, p prepared, refs map[string][]any) (preparedOutcome,error) {
+func evaluatePrepared(d identity.Deriver, input Input, p prepared, refs map[string][]any) (preparedOutcome, error) {
 	var out preparedOutcome
-  if p.noProposal{return out,nil}
-  if p.aliasFound{return out,nil}
-  if p.indeterminate||!input.Snapshot.Known {
-   out.Indeterminate=append(out.Indeterminate,Indeterminate{
-    Subject:p.id,SubjectDigest:p.unit.Response.Digest,SubjectKind:0,Facet:2,Validator:refs["validators"],Reason:"resource.validator.missing",Evidence:[]any{},
-   })
-   return out,nil
-  }
-  actor:=p.unit.Response.Actor[0]+":"+p.unit.Response.Actor[1]
-  canAccess,accessKnown:=input.Snapshot.AccessibleActors[actor]
-  forbidden,institutionKnown:=input.Snapshot.ForbiddenActors[actor]
-  if !accessKnown||!institutionKnown{
-   facet,reason:=uint8(1),"access.validator.missing"
-   if accessKnown{facet=4;reason="institution.validator.missing"}
-   out.Indeterminate=append(out.Indeterminate,Indeterminate{
-    Subject:p.id,SubjectDigest:p.unit.Response.Digest,SubjectKind:0,
-    Facet:facet,Validator:refs["validators"],Reason:reason,Evidence:[]any{},
-   })
-   return out,nil
-  }
-  resourceBlocked:=p.amount>input.Snapshot.Available
-  assessment,err:=assess(d,p,resourceBlocked,canAccess,forbidden,refs["validators"])
-  if err!=nil{return out,err}
-  out.Assessments=append(out.Assessments,assessment)
-  out.blocked=resourceBlocked||!canAccess
-  out.accessBlocked=!canAccess
-  // Candidate provenance resolves the authentic ActionProposal unit root.
-  source:=[]any{uint64(5),p.id[:],p.unit.Response.Digest[:]}
-  claims:=p.unit.Response.Body[9].([]any)
-  candidate,err:=MakeCandidate(d,input.RunID,input.CycleID,[]domain.ID{p.id},
-   p.producer,1,0,0,claims,[]any{source},0,refs["conflict-resolvers"])
-  if err!=nil{return out,err}
-  // The synthetic V1 resource action has exactly one declared event draft.
-  // Its typed payload is the already validated immutable proposal params;
-  // the claim amount is independently authenticated from that proposal.
-  // Loser drafts are never events unless settlement commits them.
-  if p.producer=="resource.consume" {
-   draft:=[]any{uint64(0),uint64(0),"resource.consumed",p.unit.Response.Body[8],[]any{}}
-   candidate.Fields[8]=[]any{draft}
-   h,err:=digest(d,"cote.csf.digest.commit-candidate","cote.csf.schema.commit-candidate.body",candidate.Fields)
-   if err!=nil{return out,err}
-   candidate.Digest=h
-   candidate.Canonical,err=encode(candidate.Fields,h)
-   if err!=nil{return out,err}
-  }
-  out.Candidates=append(out.Candidates,candidate)
-
-	return out,nil
+	if p.noProposal || p.aliasFound {
+		return out, nil
+	}
+	if p.indeterminate || !input.Snapshot.Known {
+		out.Indeterminate = append(out.Indeterminate, Indeterminate{
+			Subject: p.id, SubjectDigest: p.unit.Response.Digest, SubjectKind: 0, Facet: 2, Validator: refs["validators"], Reason: "resource.validator.missing", Evidence: []any{},
+		})
+		return out, nil
+	}
+	actor := p.unit.Response.Actor[0] + ":" + p.unit.Response.Actor[1]
+	canAccess, accessKnown := input.Snapshot.AccessibleActors[actor]
+	forbidden, institutionKnown := input.Snapshot.ForbiddenActors[actor]
+	if !accessKnown || !institutionKnown {
+		facet, reason := uint8(1), "access.validator.missing"
+		if accessKnown {
+			facet = 4
+			reason = "institution.validator.missing"
+		}
+		out.Indeterminate = append(out.Indeterminate, Indeterminate{
+			Subject: p.id, SubjectDigest: p.unit.Response.Digest, SubjectKind: 0, Facet: facet, Validator: refs["validators"], Reason: reason, Evidence: []any{},
+		})
+		return out, nil
+	}
+	resourceBlocked := p.amount > input.Snapshot.Available
+	assessment, err := assess(d, p, resourceBlocked, canAccess, forbidden, refs["validators"])
+	if err != nil {
+		return out, err
+	}
+	out.Assessments = append(out.Assessments, assessment)
+	out.blocked = resourceBlocked || !canAccess
+	out.accessBlocked = !canAccess
+	// Candidate provenance resolves the authentic ActionProposal unit root.
+	source := []any{uint64(5), p.id[:], p.unit.Response.Digest[:]}
+	claims := p.unit.Response.Body[9].([]any)
+	candidate, err := MakeCandidate(d, input.RunID, input.CycleID, []domain.ID{p.id},
+		p.producer, 1, 0, 0, claims, []any{source}, 0, refs["conflict-resolvers"])
+	if err != nil {
+		return out, err
+	}
+	// The synthetic V1 resource action has exactly one declared event draft.
+	// Its typed payload is the already validated immutable proposal params;
+	// the claim amount is independently authenticated from that proposal.
+	// Loser drafts are never events unless settlement commits them.
+	if p.producer == "resource.consume" {
+		draft := []any{uint64(0), uint64(0), "resource.consumed", p.unit.Response.Body[8], []any{}}
+		candidate.Fields[8] = []any{draft}
+		h, err := digest(d, "cote.csf.digest.commit-candidate", "cote.csf.schema.commit-candidate.body", candidate.Fields)
+		if err != nil {
+			return out, err
+		}
+		candidate.Digest = h
+		candidate.Canonical, err = encode(candidate.Fields, h)
+		if err != nil {
+			return out, err
+		}
+	}
+	out.Candidates = append(out.Candidates, candidate)
+	return out, nil
 }

@@ -1,10 +1,10 @@
 package commit
 
 import (
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/decision"
-
 	"hash/fnv"
 	"sort"
+
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/decision"
 )
 
 // referenceOrder is host-only experiment metadata, never a normative RNG
@@ -12,9 +12,9 @@ import (
 // Each phase gets its own deterministic stream; adding a phase cannot
 // silently change another phase's physical/causal inputs.
 type referenceOrder struct {
-	seed    int64
-	reverse bool
-	trace   map[string][]int
+	seed        int64
+	reverse     bool
+	trace       map[string][]int
 	parallelism int
 }
 

@@ -23,7 +23,12 @@ func TestG3WorkerPoolActuallyConcurrent(t *testing.T) {
 			return preparedOutcome{Result: Result{Dispositions: []Disposition{{Subject: p.id}}}}, nil
 		})
 	}()
-	defer close(release)
+	released := false
+	defer func() {
+		if !released {
+			close(release)
+		}
+	}()
 	seen := map[domain.ID]bool{}
 	for i := 0; i < 2; i++ {
 		select {
@@ -35,6 +40,17 @@ func TestG3WorkerPoolActuallyConcurrent(t *testing.T) {
 	}
 	if len(seen) != 2 || !seen[units[0].id] || !seen[units[1].id] {
 		t.Fatal("worker cohort was not actually evaluated")
+	}
+	close(release)
+	released = true
+	select {
+	case out := <-done:
+		if len(out) != 2 || out[0].err != nil || out[1].err != nil ||
+			out[0].value.Dispositions[0].Subject != units[0].id || out[1].value.Dispositions[0].Subject != units[1].id {
+			t.Fatal("parallel results did not preserve input positions")
+		}
+	case <-time.After(10 * time.Second):
+		t.Fatal("worker group did not join")
 	}
 }
 

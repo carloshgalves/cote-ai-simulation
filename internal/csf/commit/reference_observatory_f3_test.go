@@ -283,6 +283,15 @@ func TestReferenceF3CrossedViews(t *testing.T) {
 				}
 			case "school.message.v1":
 				messages++
+				noticeEnvelope, err := codec.StrictDecodeEnvelope(of[9].([]any)[0].([]any)[2].([]byte))
+				if err != nil {
+					t.Fatal(err)
+				}
+				notice, ok := noticeEnvelope.Value.([]any)
+				if !ok || len(notice) != 6 || !reflect.DeepEqual(notice[0], []any{"school", "b"}) ||
+					notice[1] != "C" || noticeEnvelope.DomainTag != "cote.csf.communication.delivered.v1" {
+					t.Fatal("message exposed unregistered fields or actual sender")
+				}
 				if i != 1 || e.KnowledgeInputID != claim || e.ReceivedAt != 35 ||
 					!reflect.DeepEqual(of[11], []any{"actual-sender-redacted", "claim-unverified"}) ||
 					!bytes.Contains(o.raw, []byte("resource.stolen")) {
@@ -356,7 +365,7 @@ func TestReferenceF3CrossedViews(t *testing.T) {
 	}
 	for _, tc := range []struct {
 		name, table string
-		id [32]byte
+		id          [32]byte
 	}{
 		{"physical-event", "event_store", referenceC2Decode32(t, p.d2.PhysicalEventIDs[0])},
 		{"knowledge-input", "evidence_ledger", claim},
@@ -412,6 +421,48 @@ func TestReferenceF3CrossedViews(t *testing.T) {
 				t.Fatal("foreign actor dispatch granted capability")
 			}
 		}
+	})
+	t.Run("changed-live-dispatch", func(t *testing.T) {
+		var raw []byte
+		if err := admin.QueryRowContext(ctx, "SELECT canonical FROM input_ledger WHERE id=?", dispatches[1][:]).Scan(&raw); err != nil {
+			t.Fatal(err)
+		}
+		value, err := codec.StrictDecodePayload(raw)
+		if err != nil {
+			t.Fatal(err)
+		}
+		fields := value.([]any)
+		if len(fields) != 11 || fields[8] != uint64(6) {
+			t.Fatal("fixture lacks genuine revision-six dispatch")
+		}
+		// The base revision is not part of the dispatch ID preimage.
+		// Changing it must not expand or preserve a now-invalid grant.
+		fields[8] = uint64(9)
+		mutated, err := codec.CanonicalPayload(fields)
+		if err != nil {
+			t.Fatal(err)
+		}
+		res, err := admin.ExecContext(ctx, "UPDATE input_ledger SET canonical=? WHERE id=?", mutated, dispatches[1][:])
+		if err != nil {
+			t.Fatal(err)
+		}
+		if n, err := res.RowsAffected(); err != nil || n != 1 {
+			t.Fatal("dispatch mutation missed authority")
+		}
+		damaged := referenceE2Capture(t, path, owner)
+		if referenceE1Compare(before, damaged) == nil {
+			t.Fatal("vacuous dispatch mutation")
+		}
+		if v, err := b.ReadPOV(ctx); err != observatory.ErrViewUnavailable || !reflect.DeepEqual(v, observatory.POVView{}) {
+			t.Fatal("cached capability retained altered durable binding")
+		}
+		if err := referenceE1Compare(damaged, referenceE2Capture(t, path, owner)); err != nil {
+			t.Fatal("rejected live grant mutated authority", err)
+		}
+		if _, err := admin.ExecContext(ctx, "UPDATE input_ledger SET canonical=? WHERE id=?", raw, dispatches[1][:]); err != nil {
+			t.Fatal(err)
+		}
+		restored()
 	})
 	t.Run("unsupported-public-view", func(t *testing.T) {
 		if _, err := admin.ExecContext(ctx, "CREATE VIEW PUBLIC_ROUTES AS SELECT id FROM evidence_ledger"); err != nil {

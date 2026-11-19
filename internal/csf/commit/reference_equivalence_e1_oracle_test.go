@@ -255,13 +255,13 @@ func referenceE1ReadDatabase(ctx context.Context, path string) (referenceE1Datab
 	}
 	defer tx.Rollback()
 	schema, err := referenceE1ReadQuery(ctx, tx, "__schema__",
-		"SELECT type,name,tbl_name,sql FROM sqlite_master WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name")
+		"SELECT type,name,tbl_name,sql FROM sqlite_master WHERE name NOT GLOB 'sqlite_*' ORDER BY type,name")
 	if err != nil {
 		return zero, err
 	}
 	out := referenceE1Database{Tables: map[string]referenceE1Table{"__schema__": schema}}
 	rows, err := tx.QueryContext(ctx,
-		"SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name")
+		"SELECT name FROM sqlite_master WHERE type='table' AND name NOT GLOB 'sqlite_*' ORDER BY name")
 	if err != nil {
 		return zero, err
 	}

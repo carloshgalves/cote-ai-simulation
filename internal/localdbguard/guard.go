@@ -78,10 +78,25 @@ func privateParent(path string) (os.FileInfo, error) {
 		return nil, err
 	}
 	stat, ok := info.Sys().(*syscall.Stat_t)
-	if !ok || stat.Uid != uint32(os.Geteuid()) || !info.IsDir() || info.Mode().Perm()&0077 != 0 {
-		return nil, errors.New("SQLite parent must be operator-owned and private (0700)")
+	if !ok || stat.Uid != uint32(os.Geteuid()) || !info.IsDir() || info.Mode().Perm()&0022 != 0 {
+		return nil, errors.New("SQLite parent must be operator-owned and not group/other writable")
 	}
-	return info, nil
+	// A private ancestor also protects ordinary 0755 subdirectories
+	// (e.g. testing.TempDir creates children beneath a 0700 root).
+	for dir := filepath.Dir(path); ; dir = filepath.Dir(dir) {
+		ancestor, err := os.Lstat(dir)
+		if err != nil {
+			return nil, err
+		}
+		st, ok := ancestor.Sys().(*syscall.Stat_t)
+		if ok && st.Uid == uint32(os.Geteuid()) && ancestor.Mode().Perm()&0077 == 0 {
+			return info, nil
+		}
+		if dir == filepath.Dir(dir) {
+			break
+		}
+	}
+	return nil, errors.New("SQLite workspace requires an operator-owned private ancestor (0700)")
 }
 
 // Pin retains main-file and parent identities, independent of the normal

@@ -34,7 +34,7 @@ func TestReferenceG2ClosureRaceStableMembership(t *testing.T) {
 		cycle := Cycle{ID: domain.ID{0x62}, Instant: 100, BaseStateHash: domain.Digest{0x63}, RetryRef: []any{uint64(0)}}
 		policies := Policies{AdmissionOrder: []any{"admission-order-v1", uint64(1), bytes.Repeat([]byte{2}, 32)},
 			CausalIdentity: []any{"causal-identity-v1", uint64(1), bytes.Repeat([]byte{1}, 32)},
-			Fence: []any{"admission-fence-v1", uint64(1), bytes.Repeat([]byte{3}, 32)}, Rules: [][]any{}}
+			Fence:          []any{"admission-fence-v1", uint64(1), bytes.Repeat([]byte{3}, 32)}, Rules: [][]any{}}
 		appendInput := func(key string) inputledger.StoredInput {
 			t.Helper()
 			in, err := l.AppendInput(ctx, "driver", inputledger.Input{ProducerUnitKey: key, Kind: "external.event",

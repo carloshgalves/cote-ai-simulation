@@ -319,7 +319,7 @@ func TestReferenceG2AbortSubjectPermutation(t *testing.T) {
 		request, err := decision.FromPersistedFence(ctx, c.bundle, ledger, cycle, c.admissionPolicies, fence, store,
 			decision.Snapshot{BaseRevision: 0, ResourceKind: "inventory", ResourceID: "last.resource", Available: 1, Known: false,
 				AccessibleActors: map[string]bool{"school:a": true, "school:b": true},
-				ForbiddenActors: map[string]bool{"school:a": false, "school:b": false}},
+				ForbiddenActors:  map[string]bool{"school:a": false, "school:b": false}},
 			[]decision.ActionSchema{{Type: "resource.consume", Version: 1, Operation: "resource.consume", Producer: "resource.consume"}},
 			domain.Digest{}, nil)
 		if err != nil {

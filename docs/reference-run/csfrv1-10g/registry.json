@@ -56,6 +56,202 @@
       "name": "TestReferenceD3RealPythonPrivateEventAndLiveObservatory",
       "kind": "INTEGRATED",
       "subtests": []
+    },
+    "g2-early-cohort": {
+      "path": "internal/csf/commit/reference_eval_g2_test.go",
+      "name": "TestReferenceG2EarlyResponseCohort",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-no-proposal": {
+      "path": "internal/csf/commit/reference_eval_g2_test.go",
+      "name": "TestReferenceG2NoProposalExactLifecycle",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-slot-cas": {
+      "path": "internal/csf/commit/reference_eval_g2_test.go",
+      "name": "TestReferenceG2SlotCASAndClosedSource",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-abort": {
+      "path": "internal/csf/commit/reference_eval_g2_test.go",
+      "name": "TestReferenceG2AbortSubjectPermutation",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-final-closure": {
+      "path": "internal/csf/commit/reference_eval_g2_test.go",
+      "name": "TestReferenceG2FirstClosureAndFinalBeyondCut",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-closure-wait": {
+      "path": "internal/csf/commit/reference_eval_g2_test.go",
+      "name": "TestReferenceG2AdvanceWaitsForAllClosures",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-trigger-cold": {
+      "path": "internal/csf/commit/reference_eval_g2_test.go",
+      "name": "TestReferenceG2TriggerAtomicOriginAndColdSettlement",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-late-cut": {
+      "path": "internal/csf/admission/reference_eval_g2_test.go",
+      "name": "TestReferenceG2ClosureRaceStableMembership",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g2-no-proposal-atomic": {
+      "path": "internal/csf/commit/work_no_proposal_test.go",
+      "name": "TestNoProposalWorkAtomicityAcrossAllFailurePoints",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-system-terminal": {
+      "path": "internal/csf/commit/work_system_test.go",
+      "name": "TestSystemUnitRejectAndDeferAreAtomicAndReplayable",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "reject",
+        "defer"
+      ]
+    },
+    "g2-abort-retry": {
+      "path": "internal/csf/commit/reference_abort_retry_c3_test.go",
+      "name": "TestReferenceC3IndeterminateAbortRetryAndC1Continuation",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-forged-candidate": {
+      "path": "internal/csf/commit/abort_retry_test.go",
+      "name": "TestCandidateIndeterminateEvidenceBoundToSealedAdmittedUnits",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-unknown-facet": {
+      "path": "internal/csf/commit/abort_retry_test.go",
+      "name": "TestIndeterminateResourceFenceOnlyPublishesAbort",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-fence-before": {
+      "path": "internal/csf/admission/fence_test.go",
+      "name": "TestCoordinatorPersistsFenceBeforeEvaluation",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g2-slot-revoke": {
+      "path": "internal/csf/inputledger/ledger_test.go",
+      "name": "TestRevocationGatesLateResponseAndSlotHasOneWinner",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g2-atomic-trigger": {
+      "path": "internal/csf/commit/clock_advance_test.go",
+      "name": "TestAdvanceAtomicRollbackAtEveryWriteBoundary",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    "g2-trigger-repeat": {
+      "path": "internal/csf/commit/clock_advance_test.go",
+      "name": "TestRepeatCadenceIsPersistedAsFuturePendingWork",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-trigger-replay": {
+      "path": "internal/csf/commit/reference_run_test.go",
+      "name": "TestReferenceRunTriggerReopenReplayNeverDuplicates",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-trigger-policy": {
+      "path": "internal/csf/trigger/trigger_test.go",
+      "name": "TestEdgeOnceAndRepeat",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g2-trigger-lifecycle": {
+      "path": "internal/csf/commit/clock_advance_test.go",
+      "name": "TestTriggerLifecycleEventsBelongToClockCommit",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-fence-mixed": {
+      "path": "internal/csf/admission/fence_test.go",
+      "name": "TestFenceStableAcrossIngressAndRoundCompletionPermutations",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g2-source-sealed": {
+      "path": "internal/csf/admission/fence_test.go",
+      "name": "TestFenceSealRejectsPostPublicationSourcesAndRetroactiveRounds",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g2-source-stale": {
+      "path": "internal/csf/admission/fence_test.go",
+      "name": "TestStaleLedgerCannotWritePreFenceIngressSQLite",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-source-final-negative": {
+      "path": "internal/csf/commit/review_cycle5_test.go",
+      "name": "TestReview5RejectAfterFinalAndRegressiveClosure",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-source-late": {
+      "path": "internal/csf/commit/reference_run_test.go",
+      "name": "TestReferenceRunLateInputCannotRetroactAndFinalRejectsFurtherIngress",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-pure-prohibition": {
+      "path": "internal/csf/decision/kernel_test.go",
+      "name": "TestLastResourceStableAcrossWorkerPermutation",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g2-pure-idempotent": {
+      "path": "internal/csf/decision/kernel_test.go",
+      "name": "TestIdempotentAliasWithoutRemovingDelivery",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g2-pure-historical-idempotent": {
+      "path": "internal/csf/decision/kernel_test.go",
+      "name": "TestHistoricalAliasKeepsIndependentSourceUnit",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g2-cascade-limit": {
+      "path": "internal/csf/commit/work_system_test.go",
+      "name": "TestSameInstantCascadeLimitAbortsAfterSixtyFourCompleteWorkCycles",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g2-partition": {
+      "path": "internal/csf/decision/kernel_test.go",
+      "name": "TestPartitionRejectsGapOverlapAndExternalUnit",
+      "kind": "EXISTING",
+      "subtests": []
+    },
+    "g2-footprint": {
+      "path": "internal/csf/trigger/trigger_test.go",
+      "name": "TestFootprintOrderDoesNotFollowWorkers",
+      "kind": "EXISTING",
+      "subtests": []
     }
   },
   "rows": [
@@ -65,7 +261,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Static clock transaction caller test does not yet prove every world/event-producing port and all concrete adapters; need generalized publication authority audit."
     },
     {
       "id": "INV-02",
@@ -73,23 +269,30 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "F1 checks forward provenance, but complete event/revision reverse coverage of all rows is not yet a dedicated G2 witness."
     },
     {
       "id": "INV-03",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-early-cohort",
+        "contest-cardinality"
+      ],
+      "reason": "Three actual SQLite executions (early R1 response before R2 exists, normal and reversed responses), same revision and exact fence/commit/events; no arrival-based winner."
     },
     {
       "id": "INV-04",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-early-cohort",
+        "contest-cardinality",
+        "g2-pure-prohibition"
+      ],
+      "reason": "Conflict/draw and outcome invariant before assignment of EventOrderKey/logical sequence; canonical terminal/event bytes match under worker/response order and replay."
     },
     {
       "id": "INV-05",
@@ -97,7 +300,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Resource kernel import guard does not cover all occurrence/trigger/reducer paths and transitive mutation imports."
     },
     {
       "id": "INV-06",
@@ -105,15 +308,20 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Existing pure repeat/rearm and durable cadence tests are partial: long persisted history with rearm and repeated activation before candidate still needs proof."
     },
     {
       "id": "INV-07",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-abort",
+        "g2-unknown-facet",
+        "g2-forged-candidate",
+        "g2-abort-retry"
+      ],
+      "reason": "Real unknown validators cause durable subject-bound abort before any terminal disposition; no clock/world mutation; candidate forgery rejected; explicit retry retains membership."
     },
     {
       "id": "INV-08",
@@ -121,7 +329,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Kernel separates institutional prohibition from physical feasibility, but committed rule-violation path is not registered in the synthetic reference scenario."
     },
     {
       "id": "INV-09",
@@ -153,7 +361,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Pure reducer contract is only partially covered by reducer unit tests; need exhaustive actual reducer side-effect boundary audit."
     },
     {
       "id": "INV-13",
@@ -198,7 +406,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Clock atomic origin and system settlement tested; all schedule/trigger transitions and every WORK successor floor not yet established in one complete witness."
     },
     {
       "id": "INV-18",
@@ -220,9 +428,10 @@
       "id": "INV-20",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
+      "state": "BLOCKED",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Alias settlement/deferred lifecycle #22 prevents full invariant; existing fence-prefix and closure proofs are partial.",
+      "blocker_issue": 22
     },
     {
       "id": "INV-21",
@@ -230,15 +439,18 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Existing mixed-source fence order and slot CAS prove portions; same-source reordering and full stable total-order authority require remaining witness."
     },
     {
       "id": "INV-22",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-early-cohort",
+        "g2-fence-mixed"
+      ],
+      "reason": "Real common snapshot and exact cohort includes both rounds, early/normal/reverse responses; conflict set shared and same terminal/event bytes."
     },
     {
       "id": "INV-23",
@@ -264,7 +476,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "TestSystemUnitRejectAndDeferAreAtomicAndReplayable defers to a future instant. Same-instant DEFER ordinal successor and actual resume need dedicated proof."
     },
     {
       "id": "INV-26",
@@ -272,7 +484,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Need two winning different candidates with explicit event causation, including rejection of cross-candidate parent before publication."
     },
     {
       "id": "INV-27",
@@ -286,9 +498,15 @@
       "id": "INV-28",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-closure-wait",
+        "g2-final-closure",
+        "g2-late-cut",
+        "g2-source-final-negative",
+        "g2-source-late"
+      ],
+      "reason": "Real SQLite waits until full target closure (no fence), finite final covers future target, post-final ingress fails at ledger and storage, late input normalizes after closed coordinate."
     },
     {
       "id": "INV-29",
@@ -302,9 +520,13 @@
       "id": "INV-30",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-slot-cas",
+        "g2-slot-revoke",
+        "g2-source-sealed"
+      ],
+      "reason": "Real SQLite independent stale response producer, both winner orders, source cursor unchanged, all seven envelope mismatches denied; receipt/revocation and unique slot reconstructed from ledger. Existing revocation test uses persistent memory store."
     },
     {
       "id": "INV-31",
@@ -345,7 +567,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Origin+causes and cold settlement verified, but applicable WORK trigger origin and complete versioned filter across independent candidate post-state are not fully proven."
     },
     {
       "id": "INV-36",
@@ -385,7 +607,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Subject persistence proven for matching failures and candidate forgery; need negative tests of validator digest/version and subject digest prior to abort."
     },
     {
       "id": "INV-41",
@@ -399,17 +621,22 @@
       "id": "STRESS-01",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-early-cohort",
+        "contest-cardinality"
+      ],
+      "reason": "Synthetic deterministic proposals use same round IDs and base revision; exact committed winner, fence, journal and events invariant across response orders. No LLM required for this local fixture."
     },
     {
       "id": "STRESS-02",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-early-cohort"
+      ],
+      "reason": "Genuine first response persisted before second round declaration; both source IDs bound to common revision/fence, shared ConflictSet and identical committed history in all three executions."
     },
     {
       "id": "STRESS-03",
@@ -417,7 +644,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Mixed input+round fence can be derived, but generic external.event terminal contest with shared ConflictSet is not implemented by the synthetic handlers."
     },
     {
       "id": "STRESS-04",
@@ -425,7 +652,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Same-source input reorder needs exact candidate/terminal causal log; no generic external.event terminal handler in scope."
     },
     {
       "id": "STRESS-05",
@@ -439,9 +666,13 @@
       "id": "STRESS-06",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-late-cut",
+        "g2-source-stale",
+        "g2-closure-wait"
+      ],
+      "reason": "No derivation before covering closure; late E2 enters ordinal 1 with declared time preserved whether before/after first fence derivation; replay stable; SQLite stale-prefix guard and target closure wait."
     },
     {
       "id": "STRESS-07",
@@ -455,9 +686,11 @@
       "id": "STRESS-08",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-final-closure"
+      ],
+      "reason": "Real CLOCK_ADVANCE first covering closure remains exact even when second closure appended before derivation vs after commit; IDs, sequences, fence/commit bytes and cold replay compared."
     },
     {
       "id": "STRESS-09",
@@ -465,31 +698,39 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Late input normalization proved, but generic late source settlement into next authoritative WORK fence needs registered terminal handler."
     },
     {
       "id": "STRESS-10",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-final-closure",
+        "g2-source-final-negative"
+      ],
+      "reason": "Actual final closure at origin satisfies advance 100 ticks later; input and further closures rejected, cursor unchanged, direct SQLite ingress bypass denied."
     },
     {
       "id": "STRESS-11",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-system-terminal"
+      ],
+      "reason": "Rejected due occurrence consumes pending entry in same real commit; seven failure points and independent replay, no pending successor."
     },
     {
       "id": "STRESS-12",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-no-proposal",
+        "g2-no-proposal-atomic"
+      ],
+      "reason": "Exact two slot DecisionRecord(NO_PROPOSAL), no candidate/domain events, one round.consumed per round with its slot ref; nonempty event roster, revision/ordinal/sequence restored and no pending."
     },
     {
       "id": "STRESS-13",
@@ -524,15 +765,19 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Idempotency conflict proved only provisionally by decision kernel; dedicated canonical CycleAbortRecord referring current/canonical operations not established."
     },
     {
       "id": "STRESS-17",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-abort",
+        "g2-unknown-facet",
+        "g2-abort-retry"
+      ],
+      "reason": "Actual INDETERMINATE recorded durably for genuine fence, no Event/DecisionRecord/CycleCommit or new revision/ordinal; resumed explicit retry."
     },
     {
       "id": "STRESS-18",
@@ -540,7 +785,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Current decision kernel aborts before terminal dispositions; test with A candidate genuinely computed, B indeterminate and retry proving A re-evaluation needed."
     },
     {
       "id": "STRESS-19",
@@ -594,17 +839,21 @@
       "id": "STRESS-25",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-slot-cas"
+      ],
+      "reason": "Timeout NoProposal and real ActionProposal on identical dispatch, both arrival orders with independently opened stale ledger; exactly one CAS winner bound into rederived fence; loser explicitly rejected (no persisted rejection ledger claim)."
     },
     {
       "id": "STRESS-26",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-slot-cas"
+      ],
+      "reason": "Seven actor/round/slot/revision/time/run/cycle mismatches rejected before filling; actual accepted winner is only fence slot and admitted unit, verified on reopen."
     },
     {
       "id": "STRESS-27",
@@ -618,9 +867,11 @@
       "id": "STRESS-28",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-slot-cas"
+      ],
+      "reason": "Same driver source declared and closed before slot responses. Both possible response kinds retain inherited coordinate, not normalized ingress, and ingress cursor unchanged."
     },
     {
       "id": "STRESS-29",
@@ -628,7 +879,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Existing DEFER recurrence moves to future instant rather than same-instant ordinal; explicit successor/resume proof missing."
     },
     {
       "id": "STRESS-30",
@@ -636,7 +887,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "CheckPartition pure rejects overlap/gap, but persisted PROVENANCE_FAILURE abort for both malformed topologies not yet proved."
     },
     {
       "id": "STRESS-31",
@@ -644,7 +895,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Need two independently winning candidates with cross-candidate parent negative control and later reaction."
     },
     {
       "id": "STRESS-32",
@@ -676,7 +927,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Pure footprint and two synthetic CLOCK_ADVANCE events covered, but they are not two independent winning CommitCandidates; exact required case not yet proved."
     },
     {
       "id": "STRESS-36",
@@ -736,7 +987,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "institution.rule_violated is not emitted by registered synthetic terminal handler; pure assessment gives no durable institutional event or detection/response."
     },
     {
       "id": "STRESS-43",
@@ -808,15 +1059,19 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Repeat/edge/once and future persisted cadence tested, but ten committed revisions with activated/settled repeat cadence not yet proved."
     },
     {
       "id": "STRESS-52",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-trigger-cold",
+        "g2-atomic-trigger",
+        "g2-trigger-replay"
+      ],
+      "reason": "Real origin revision atomically publishes pending activation and runtime lifecycle, producing store dropped before expansion. Reopen, rederive exact same activation ID, terminal once, repeat rejected, replay and later ordinal remains."
     },
     {
       "id": "STRESS-53",
@@ -824,7 +1079,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "64-WORK cascade limit tested with predeclared occurrences, not trigger-caused triggers/DAG; need real causal chain."
     },
     {
       "id": "STRESS-54",
@@ -832,7 +1087,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "SQLite transaction failure injection tests rollback, not a reducer genuinely failing on third event with terminal CycleAbortRecord."
     },
     {
       "id": "STRESS-55",
@@ -840,15 +1095,18 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Subject-order abort tested, but independent validator ordering with nonempty normalized evidence/failure refs still needs exact proof."
     },
     {
       "id": "STRESS-56",
       "owner_issue": 161,
       "eval": "simulation",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g2-abort",
+        "g2-unknown-facet"
+      ],
+      "reason": "Two matching actual validator failures on different subjects persist distinct canonical records and validator references; no provisional event/terminal; reverse order preserved."
     },
     {
       "id": "STRESS-57",
@@ -896,7 +1154,7 @@
       "eval": "simulation",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Provisional alias arbitration uses response identities, not the required distinct external producer_unit_key acts and durable idempotency proof."
     },
     {
       "id": "STRESS-63",
@@ -950,12 +1208,43 @@
   ],
   "evals": {
     "simulation": {
-      "scope": "PILOT_ONLY",
-      "description": "Last-unit conflict, exact roster and outcome under source/worker reversal; wider simulation coverage is G2.",
+      "scope": "SCOPED_WITH_GAPS",
+      "description": "G2 actual SQLite co-admission, source closure, terminal NoProposal/occurrence, slot CAS, abort/retry, trigger cold origin, plus supplemental pure/persisted kernel controls. Every simulation-owned row classified; unproven or unsupported cases remain explicit gaps; no complete eval claim.",
       "witnesses": [
         "contest",
         "reference-contest",
-        "contest-cardinality"
+        "contest-cardinality",
+        "g2-early-cohort",
+        "g2-no-proposal",
+        "g2-slot-cas",
+        "g2-abort",
+        "g2-final-closure",
+        "g2-closure-wait",
+        "g2-trigger-cold",
+        "g2-late-cut",
+        "g2-no-proposal-atomic",
+        "g2-system-terminal",
+        "g2-abort-retry",
+        "g2-forged-candidate",
+        "g2-unknown-facet",
+        "g2-fence-before",
+        "g2-slot-revoke",
+        "g2-atomic-trigger",
+        "g2-trigger-repeat",
+        "g2-trigger-replay",
+        "g2-trigger-policy",
+        "g2-trigger-lifecycle",
+        "g2-fence-mixed",
+        "g2-source-sealed",
+        "g2-source-stale",
+        "g2-source-final-negative",
+        "g2-source-late",
+        "g2-pure-prohibition",
+        "g2-pure-idempotent",
+        "g2-pure-historical-idempotent",
+        "g2-cascade-limit",
+        "g2-partition",
+        "g2-footprint"
       ]
     },
     "determinism": {

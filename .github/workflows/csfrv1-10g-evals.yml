@@ -1,4 +1,4 @@
-name: CSFRV1-10G1 executable normative evidence registry
+name: CSFRV1-10G executable normative evidence registry
 "on":
   pull_request:
     branches: [main]
@@ -22,7 +22,7 @@ concurrency:
 jobs:
   evidence:
     runs-on: ubuntu-24.04
-    timeout-minutes: 50
+    timeout-minutes: 75
     env:
       SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       PHYSICAL_A1_PRODUCER_TEST: "1"
@@ -51,7 +51,11 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
           git diff --check 902ff115b5008b6d33dec314eeb4a9a5c805412e...HEAD
-          test -z "$(gofmt -l internal/csf/commit/reference_eval_g1_test.go)"
+          files=(internal/csf/commit/reference_eval_g1_test.go internal/csf/commit/reference_eval_g2_test.go internal/csf/admission/reference_eval_g2_test.go)
+          if [ -n "$(gofmt -l "${files[@]}")" ]; then
+            gofmt -d "${files[@]}"
+            exit 1
+          fi
           python -B docs/reference-run/csfrv1-10g/test_run_evals.py
       - name: Execute all registered witnesses normal and race
         run: |

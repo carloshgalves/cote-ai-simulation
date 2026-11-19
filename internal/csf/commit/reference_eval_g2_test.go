@@ -3,8 +3,8 @@ package commit
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"errors"
+	"fmt"
 	"reflect"
 	"testing"
 
@@ -540,7 +540,7 @@ func TestReferenceG2TriggerAtomicOriginAndColdSettlement(t *testing.T) {
 		t.Fatal(err)
 	}
 	f := raw.([]any)
-	if len(f) != 12 || f[10] != uint64(0) ||
+	if len(f) != 12 || f[9] != uint64(0) ||
 		!referenceC3Same(f[6], []any{int64(advance.ResultClock.Instant), uint64(0)}) {
 		t.Fatal("origin did not create pending activation at destination floor")
 	}

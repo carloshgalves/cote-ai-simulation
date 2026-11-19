@@ -29,8 +29,8 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(g.git_blob((ROOT / g.ADR).read_bytes()), g.PIN_ADR)
         self.assertEqual(g.git_blob((ROOT / g.TRACE).read_bytes()), g.PIN_TRACE)
         self.assertEqual(len(self.validate()), 109)
-        self.assertEqual(sum(r["state"] == "READY" for r in self.registry["rows"]), 2)
-        self.assertEqual(sum(r["state"] == "BLOCKED" for r in self.registry["rows"]), 7)
+        self.assertEqual(sum(r["state"] == "READY" for r in self.registry["rows"]), 21)
+        self.assertEqual(sum(r["state"] == "BLOCKED" for r in self.registry["rows"]), 8)
 
     def test_invalid_manifest(self):
         def row(m, rid):
@@ -69,20 +69,20 @@ class RegistryTests(unittest.TestCase):
         normative = self.validate()
         no_runs = g.report(self.registry, normative, {}, "a" * 40, "b" * 64)
         self.assertFalse(no_runs["matrix_complete"])
-        self.assertEqual(no_runs["counts"]["INV"]["FAIL"], 1)
-        self.assertEqual(no_runs["counts"]["STRESS"]["FAIL"], 1)
+        self.assertEqual(no_runs["counts"]["INV"]["FAIL"], 7)
+        self.assertEqual(no_runs["counts"]["STRESS"]["FAIL"], 14)
         # Test certificate aggregation only: synthetic results are NEVER
         # written as simulation evidence, only run by this verifier unit test.
         successes = {w: {mode: {"status": "PASS"} for mode in ("normal", "race")}
                      for w in self.registry["witnesses"]}
         report = g.report(self.registry, normative, successes, "a" * 40, "b" * 64)
-        self.assertEqual(report["counts"]["INV"]["PASS_INTEGRATED_TEST"], 1)
-        self.assertEqual(report["counts"]["STRESS"]["PASS_INTEGRATED_TEST"], 1)
+        self.assertEqual(report["counts"]["INV"]["PASS_INTEGRATED_TEST"], 7)
+        self.assertEqual(report["counts"]["STRESS"]["PASS_INTEGRATED_TEST"], 14)
         self.assertFalse(report["matrix_complete"])
         self.assertFalse(report["evals_complete"])
         self.assertEqual(next(r for r in report["rows"] if r["id"] == "STRESS-61")["status"], "NOT_RUN")
         self.assertEqual(set(report["evals"]), set(g.OWNERS))
-        self.assertTrue(all(x["status"] == "PASS_PILOT_ONLY" and not x["complete"] for x in report["evals"].values()))
+        self.assertTrue(all(x["status"] in {"PASS_PILOT_ONLY", "PASS_SCOPED_WITH_GAPS"} and not x["complete"] for x in report["evals"].values()))
         self.assertFalse(report["release_authorized"])
         self.assertEqual(report["disposition"], "NO_GO_INCOMPLETE_MATRIX")
         # A supplemental embodiment witness cannot promote STRESS-39

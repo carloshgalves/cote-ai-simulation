@@ -7,12 +7,14 @@ import (
 	"context"
 	"errors"
 	"reflect"
+	"path/filepath"
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/contextboundary"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 )
 
 // This adapter exists only in the G5 test: it cannot query a global ledger,
@@ -119,5 +121,77 @@ func TestReferenceG5RealFourViewActorContextsAndFalseClaim(t *testing.T) {
 	}
 	if err := referenceE1Compare(initial, referenceE2Capture(t, path, owner)); err != nil {
 		t.Fatal("G5 actor/public/privileged queries modified any causal or private owner byte", err)
+	}
+}
+
+// A real C1 delivery fault at its first transactional boundary leaves a
+// durably sent, IN_TRANSIT transmission but no delivered event or recipient
+// KnowledgeInput. This probes the intermediate causal state, not only a
+// completed six-commit happy path.
+func TestReferenceG5InTransitClaimHasNoRecipientKnowledge(t *testing.T) {
+	ctx := context.Background()
+	path := filepath.Join(t.TempDir(), "in-transit.db")
+	_, err := RunReference(ctx, path, bundlePath, ReferenceOptions{
+		IncludeCommunication: true, FailCommunicationDeliveryAt: 1,
+	})
+	if err == nil {
+		t.Fatal("injected due-delivery fault did not interrupt real transaction")
+	}
+	db, err := openReferenceReadOnlyDB(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer db.Close()
+	var total, inTransit int
+	if err := db.QueryRowContext(ctx, "SELECT COUNT(*), COALESCE(SUM(CASE WHEN status=0 THEN 1 ELSE 0 END),0) FROM communication_transmissions").Scan(&total, &inTransit); err != nil {
+		t.Fatal(err)
+	}
+	if total != 1 || inTransit != 1 {
+		t.Fatalf("missing durable unsent-to-recipient transmission: %d/%d", total, inTransit)
+	}
+	rows, err := db.QueryContext(ctx, "SELECT canonical FROM evidence_ledger")
+	if err != nil {
+		t.Fatal(err)
+	}
+	receivedMessages := 0
+	for rows.Next() {
+		var raw []byte
+		if err := rows.Scan(&raw); err != nil {
+			rows.Close()
+			t.Fatal(err)
+		}
+		value, err := codec.StrictDecodePayload(raw)
+		if err != nil {
+			rows.Close()
+			t.Fatal(err)
+		}
+		fields, ok := value.([]any)
+		if ok && len(fields) == 11 && fields[5] == uint64(1) && fields[6] == "school.message.v1" {
+			receivedMessages++
+		}
+	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		t.Fatal(err)
+	}
+	if err := rows.Close(); err != nil {
+		t.Fatal(err)
+	}
+	if receivedMessages != 0 {
+		t.Fatalf("IN_TRANSIT false claim became %d recipient KnowledgeInputs", receivedMessages)
+	}
+	var delivered int
+	if err := db.QueryRowContext(ctx, "SELECT COUNT(*) FROM event_store WHERE canonical IS NULL").Scan(&delivered); err != nil || delivered != 0 {
+		t.Fatalf("malformed event authority in pre-delivery prefix: %d %v", delivered, err)
+	}
+	store, err := sqlite.Open(ctx, path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer store.Close()
+	// The rejected delivery attempt must not create a sixth commit.
+	var commits int
+	if err := db.QueryRowContext(ctx, "SELECT COUNT(*) FROM committed_cycles").Scan(&commits); err != nil || commits != 5 {
+		t.Fatalf("faulted delivery wrote partial causal commit: %d %v", commits, err)
 	}
 }

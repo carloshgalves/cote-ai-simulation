@@ -16,6 +16,7 @@ func TestResourceDecisionBoundaryHasNoMutableStoreDependency(t *testing.T) {
  paths:=[]string{
   "internal/csf/decision/kernel.go",
   "internal/csf/decision/run.go",
+  "internal/csf/decision/workers.go",
   "internal/csf/decision/claims.go",
   "internal/csf/extensions/testresourcev1/fixture.go",
  }

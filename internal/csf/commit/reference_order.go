@@ -3,6 +3,8 @@ package commit
 import (
 	"hash/fnv"
 	"sort"
+
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/decision"
 )
 
 // referenceOrder is host-only experiment metadata, never a normative RNG
@@ -10,9 +12,10 @@ import (
 // Each phase gets its own deterministic stream; adding a phase cannot
 // silently change another phase's physical/causal inputs.
 type referenceOrder struct {
-	seed    int64
-	reverse bool
-	trace   map[string][]int
+	seed        int64
+	reverse     bool
+	trace       map[string][]int
+	parallelism int
 }
 
 func referencePermute[T any](order *referenceOrder, phase string, values []T) {
@@ -64,4 +67,14 @@ func referenceWorkerOrder(order *referenceOrder, phase string, n int) []int {
 	}
 	referencePermute(order, phase, indices)
 	return indices
+}
+
+// referenceDecisionRun selects only the host execution strategy, never a
+// causal policy. Default/legacy callers retain the serial kernel.
+func referenceDecisionRun(input decision.Input, order *referenceOrder, phase string) (decision.Result, error) {
+	workers := referenceWorkerOrder(order, phase, len(input.Admitted))
+	if order == nil || order.parallelism == 0 {
+		return decision.RunWithWorkerOrder(input, workers)
+	}
+	return decision.RunWithParallelism(input, workers, order.parallelism)
 }

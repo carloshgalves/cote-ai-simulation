@@ -44,11 +44,26 @@ func (c *Coordinator) DispatchFencedWorkV1(ctx context.Context, ledger *inputled
 	if err != nil || !bytes.Equal(persisted, fence.Canonical) {
 		return empty, errors.New("registered dispatcher refuses an unsealed or altered fence")
 	}
+	// The exported DTO is mutable even when its Canonical bytes remain intact.
+	// Never dispatch using fields that differ from the verified persisted fence.
+	fieldsBytes, err := codec.CanonicalPayload(fence.Fields)
+	if err != nil || len(fence.Fields) != 18 || !bytes.Equal(fieldsBytes, persisted) {
+		return empty, errors.New("registered dispatcher refuses altered fence fields")
+	}
 	units, ok := fence.Fields[11].([]any)
-	if !ok || len(units) == 0 {
-		return empty, errors.New("empty or malformed V1 WORK fence")
+	if !ok {
+		return empty, errors.New("malformed V1 admitted roster")
 	}
 	_, sources, _, _, byRound, run := view.Snapshot()
+	if cycle.Plan != nil {
+		if len(units) != 0 {
+			return empty, errors.New("CLOCK_ADVANCE cannot admit WORK units")
+		}
+		return c.resumeFrozenClockAdvance(ctx, run, cycle, fence)
+	}
+	if len(units) == 0 {
+		return empty, errors.New("empty V1 WORK fence")
+	}
 	responses := map[domain.ID]inputledger.Response{}
 	for _, slots := range byRound {
 		for _, response := range slots {

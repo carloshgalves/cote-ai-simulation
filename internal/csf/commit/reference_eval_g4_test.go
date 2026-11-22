@@ -8,6 +8,7 @@ import (
 	"errors"
 	"os"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
@@ -238,10 +239,12 @@ func TestReferenceG4ForeignRegisteredPolicyRejectsSignedPhysicalEpochBeforeCommi
 	if err == nil || proof.Status == "RUN_LOCAL_10D2" {
 		t.Fatal("cut from a different installed physical signer/policy was committed")
 	}
-	if _, statErr := os.Stat(db); statErr == nil {
-		referenceD2AssertPhysicalPrefix(t, db, hexRun(genesis.RunID), 0)
-	} else if !errors.Is(statErr, os.ErrNotExist) {
-		t.Fatalf("cannot inspect rejected physical run: %v", statErr)
+	if !strings.Contains(err.Error(), "A1 cut failed Genesis-bound signer authentication") {
+		t.Fatalf("unexpected early error substituted for authenticated ingress denial: %v", err)
 	}
+	if _, statErr := os.Stat(db); statErr != nil {
+		t.Fatalf("foreign-policy test never reached a real committed C4 prerequisite: %v", statErr)
+	}
+	referenceD2AssertPhysicalPrefix(t, db, hexRun(genesis.RunID), 0)
 }
 

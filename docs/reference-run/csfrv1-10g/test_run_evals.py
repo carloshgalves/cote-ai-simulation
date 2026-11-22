@@ -31,6 +31,12 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(len(self.validate()), 109)
         self.assertEqual(sum(r["state"] == "READY" for r in self.registry["rows"]), 51)
         self.assertEqual(sum(r["state"] == "BLOCKED" for r in self.registry["rows"]), 8)
+        # F3 executes seven nested adversarial cases: omitting any child
+        # would invalidate the strict go test -json execution inventory.
+        self.assertEqual(self.registry["witnesses"]["g5-f3-cross"]["subtests"], [
+            "physical-event", "knowledge-input", "foreign-holder",
+            "swapped-dispatch", "changed-live-dispatch",
+            "unsupported-public-view", "cancellation"])
 
     def test_invalid_manifest(self):
         def row(m, rid):

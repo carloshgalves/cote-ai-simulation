@@ -17,12 +17,12 @@ func TestKnowledgeBoundaryG5CoherentlyRehashedForbiddenEvidence(t *testing.T) {
 	positiveObs, positiveInput := buildCommunicationTestPair(t)
 	if view, err := Build(ctx, testInboxReader{
 		observations: []ports.CanonicalRecord{positiveObs},
-		inputs: []ports.CanonicalRecord{positiveInput},
+		inputs:       []ports.CanonicalRecord{positiveInput},
 	}, [2]string{"school", "b"}); err != nil || len(view.Inbox) != 1 {
 		t.Fatalf("valid received unverified claim missing from addressed context: %v", err)
 	}
 	for _, tc := range []struct {
-		name string
+		name  string
 		alter func(*testing.T, []any)
 	}{
 		{"actual-sender-revealed", func(_ *testing.T, o []any) {
@@ -90,7 +90,7 @@ func TestKnowledgeBoundaryG5CoherentlyRehashedForbiddenEvidence(t *testing.T) {
 			input := ports.CanonicalRecord{Identity: positiveInput.Identity, Canonical: inputRaw}
 			if _, err := Build(ctx, testInboxReader{
 				observations: []ports.CanonicalRecord{obs},
-				inputs: []ports.CanonicalRecord{input},
+				inputs:       []ports.CanonicalRecord{input},
 			}, [2]string{"school", "b"}); err == nil {
 				t.Fatal("coherently rehashed privileged or truth-promoting input bypassed semantic allowlist")
 			}

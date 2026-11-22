@@ -713,16 +713,6 @@
       "kind": "INTEGRATED",
       "subtests": []
     },
-    "g5-f5-equivalence": {
-      "path": "internal/csf/commit/reference_observatory_f5_test.go",
-      "name": "TestReferenceF5EquivalentIntegratedViews",
-      "kind": "INTEGRATED",
-      "subtests": [
-        "normal",
-        "reverse",
-        "recovered"
-      ]
-    },
     "g5-c4": {
       "path": "internal/csf/commit/reference_cross_c4_test.go",
       "name": "TestReferenceC4SameRunAllThreeSlicesAndSafeReport",
@@ -1764,7 +1754,7 @@
       "eval": "knowledge",
       "state": "READY",
       "witnesses": [
-        "g5-f5-equivalence",
+        "g3-f5-metrics",
         "g5-f3-cross"
       ],
       "reason": "Actual F5/D3 four scoped reader views including privileged audit, actor POV and public projection are compared before/after reads; exact E1 causal and private owner DB bytes are invariant, including source/worker permutation and restart-equivalent runs."
@@ -2007,7 +1997,7 @@
         "g5-rehashed",
         "g5-f3-cross",
         "g5-f3-allowlists",
-        "g5-f5-equivalence",
+        "g3-f5-metrics",
         "g5-c4",
         "g5-c1",
         "g5-c2-owners",

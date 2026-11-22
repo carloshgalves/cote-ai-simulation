@@ -673,6 +673,131 @@
       "name": "TestReferenceD3ImmutablePrefixesUnderSourceWorkerPermutation",
       "kind": "INTEGRATED",
       "subtests": []
+    },
+    "g5-real-context": {
+      "path": "internal/csf/commit/reference_eval_g5_test.go",
+      "name": "TestReferenceG5RealFourViewActorContextsAndFalseClaim",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-in-transit": {
+      "path": "internal/csf/commit/reference_eval_g5_test.go",
+      "name": "TestReferenceG5InTransitClaimHasNoRecipientKnowledge",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-rehashed": {
+      "path": "internal/csf/contextboundary/g5_adversarial_test.go",
+      "name": "TestKnowledgeBoundaryG5CoherentlyRehashedForbiddenEvidence",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "actual-sender-revealed",
+        "claim-promoted-to-world-truth",
+        "duplicate-world-truth-reference",
+        "privileged-physical-domain",
+        "future-canon-domain",
+        "vip-exam-secret-domain",
+        "white-room-background-domain",
+        "privileged-observatory-domain"
+      ]
+    },
+    "g5-f3-cross": {
+      "path": "internal/csf/commit/reference_observatory_f3_test.go",
+      "name": "TestReferenceF3CrossedViews",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-f3-allowlists": {
+      "path": "internal/csf/commit/reference_observatory_f3_test.go",
+      "name": "TestReferenceF3RestrictedAllowlists",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-f5-equivalence": {
+      "path": "internal/csf/commit/reference_observatory_f5_test.go",
+      "name": "TestReferenceF5EquivalentIntegratedViews",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "normal",
+        "reverse",
+        "recovered"
+      ]
+    },
+    "g5-c4": {
+      "path": "internal/csf/commit/reference_cross_c4_test.go",
+      "name": "TestReferenceC4SameRunAllThreeSlicesAndSafeReport",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-c1": {
+      "path": "internal/csf/commit/reference_communication_c1_test.go",
+      "name": "TestReferenceCommunicationC1SameRunAndDueDelivery",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-c2-owners": {
+      "path": "internal/csf/commit/reference_epistemic_c2_test.go",
+      "name": "TestReferenceC2IntegratedOwnerAndPOV",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-c2-barrier": {
+      "path": "internal/csf/commit/reference_epistemic_c2_adversarial_test.go",
+      "name": "TestReferenceC2MissingObservationRouteHoldsBarrierAndDispatch",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-c2-completion": {
+      "path": "internal/csf/commit/reference_epistemic_c2_adversarial_test.go",
+      "name": "TestReferenceC2MissingCompletionBlocksReopen",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-secret-task": {
+      "path": "internal/csf/commit/epistemic_delivery_test.go",
+      "name": "TestCSFRV16ResourceSecretAndAddressedRoundEndToEnd",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-context-origin": {
+      "path": "internal/csf/contextboundary/builder_test.go",
+      "name": "TestKnowledgeBoundaryRejectsUnauthorizedOrigins",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "VIP-secret",
+        "White-Room",
+        "canon-future",
+        "physical-telemetry",
+        "Observatory",
+        "unredacted-source",
+        "arbitrary-claim",
+        "worker-latency"
+      ]
+    },
+    "g5-context-receipt": {
+      "path": "internal/csf/contextboundary/builder_test.go",
+      "name": "TestKnowledgeBoundaryRequiresOwnDurableReceipts",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-communication-context": {
+      "path": "internal/csf/contextboundary/communication_test.go",
+      "name": "TestCSFRV17KnowledgeBoundaryAllowsClaimButNotWorldTruth",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g5-communication-mutants": {
+      "path": "internal/csf/contextboundary/communication_test.go",
+      "name": "TestCSFRV17KnowledgeBoundaryRejectsClaimForging",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "hidden-actual-author",
+        "pretend-is-true",
+        "extra-world-claim",
+        "physical-modality",
+        "unregistered-channel",
+        "backdated-inbox"
+      ]
     }
   },
   "rows": [
@@ -758,25 +883,37 @@
       "id": "INV-09",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-real-context",
+        "g5-c4",
+        "g5-communication-context"
+      ],
+      "reason": "In real C4/D3, exactly one unverified B-only allegation is delivered after causal send; the engine independently rejects resource.stolen as world fact, and the addressed context preserves Claim/reference not truth. Scoped observed event and claim separation, not a general RAG fact model."
     },
     {
       "id": "INV-10",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-f3-cross",
+        "g5-real-context",
+        "g5-secret-task"
+      ],
+      "reason": "Real ENGINE_ONLY physical events and hidden resource event exist in committed EventStore without actor observation or automatic world-to-context route; F3 compares all persisted evidence edges and actor POV to the authoritative SQL source and prohibits unauthorised EventStore leak."
     },
     {
       "id": "INV-11",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-in-transit",
+        "g5-c1",
+        "g5-real-context"
+      ],
+      "reason": "Real C1 delivery fault leaves committed Transmission IN_TRANSIT and no B school.message.v1 KnowledgeInput; normally completed C4/D3 has one B receipt only after independent delivered event, with unchanged world-truth stock."
     },
     {
       "id": "INV-12",
@@ -849,17 +986,26 @@
       "id": "INV-18",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-c2-barrier",
+        "g5-c2-completion",
+        "g5-secret-task"
+      ],
+      "reason": "Actual C2 replay/dispatch barrier refuses missing B Observation route, absent perception completion and incomplete task; completed secret empty task alone cannot release next round; actual paired A receipt plus empty internal completion permits barrier."
     },
     {
       "id": "INV-19",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-real-context",
+        "g5-f3-cross",
+        "g5-rehashed",
+        "g5-f3-allowlists"
+      ],
+      "reason": "Registered D3/F3 A/B SlotDispatch POV only; live actor Build receives exact addressed records. Real private B Claim absent A/public, fresh/stale dispatch cut and forbidden VIP, canon-future, physical, Observatory, background payloads are denied with coherently rehashed canonical controls; no global truth-to-context projection."
     },
     {
       "id": "INV-20",
@@ -932,9 +1078,13 @@
       "id": "INV-27",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-c2-owners",
+        "g5-c2-barrier",
+        "g5-c4"
+      ],
+      "reason": "C2/C4 jointly snapshot both independent A/B signed owner checkpoints and receipts, reopen and restore ACK before cognitive work, and deny partial/missing addressed evidence; exact SnapshotV1 replay and two-key binding. Only synthetic local owner, not actual LLM belief memory."
     },
     {
       "id": "INV-28",
@@ -1021,7 +1171,7 @@
       "eval": "knowledge",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Local CSFRV1-6 perception transaction, F3 route and C2 barrier prove registered round and physical subsets; full event-producer inventory, all task/output identity and recovery linearization are not jointly attested by G5."
     },
     {
       "id": "INV-37",
@@ -1071,7 +1221,7 @@
       "eval": "knowledge",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "The real delivered claim is received at causal instant 35; full operational latency experiment with the *same* PerceptionTask processed both before and after later logical instant u is missing (STRESS-66)."
     },
     {
       "id": "STRESS-01",
@@ -1455,7 +1605,7 @@
       "eval": "knowledge",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "C2 synthetic owner checkpoint/ACK is authenticated but no LLM-formed belief or model-free resumption of that belief is implemented. Must not claim completed."
     },
     {
       "id": "STRESS-41",
@@ -1481,9 +1631,12 @@
       "id": "STRESS-43",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-secret-task",
+        "g5-f3-cross"
+      ],
+      "reason": "Real secret resource.consumed event has a committed internal PerceptionTask but exactly empty completion and no Observation/KnowledgeInput for ineligible actor; F3 confirms genuine two ENGINE_ONLY physical events have no route."
     },
     {
       "id": "STRESS-44",
@@ -1491,15 +1644,18 @@
       "eval": "knowledge",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Typed VIP-secret envelope is denied by Build, but no genuine registered exam VIP world truth/disclosure source is exercised across a real actor dispatch. Cannot claim full scenario."
     },
     {
       "id": "STRESS-45",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-f3-cross",
+        "g5-real-context"
+      ],
+      "reason": "Real A-only private lifecycle evidence is paired under A route/dispatch and present in A's context, absent B's addressed context; F3 independently joins all route IDs and denies altered holder and forged dispatch."
     },
     {
       "id": "STRESS-46",
@@ -1507,7 +1663,7 @@
       "eval": "knowledge",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "White Room type is refused even with coherent signed-like records, but no real world/background White Room source and actor-specific retrieval gate are registered."
     },
     {
       "id": "STRESS-47",
@@ -1515,23 +1671,29 @@
       "eval": "knowledge",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Future-canon type is denied but no versioned simulated divergence timeline with source retrieval and future canonical record is integrated."
     },
     {
       "id": "STRESS-48",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-c4",
+        "g5-real-context"
+      ],
+      "reason": "Actual A-origin false theft allegation delivered to B as an unverified Claim, one send+delivery event, zero resource.stolen world events, unchanged WorldState stock and full committed C4 snapshot/replay."
     },
     {
       "id": "STRESS-49",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-f3-cross",
+        "g5-real-context"
+      ],
+      "reason": "Actual B-directed message presents sender C but preserves true sender privately in Claim/Transmission; no physical/privileged actual sender appears in B's real POV/Build; tamper/rehashed claim escalation denied."
     },
     {
       "id": "STRESS-50",
@@ -1539,7 +1701,7 @@
       "eval": "knowledge",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Real in-transit interruption shows no pre-delivery KnowledgeInput; missing resumed *same* SQLite transmission after paused crash with exactly one resulting B delivery. Independent successful C1 run is not a resume proof."
     },
     {
       "id": "STRESS-51",
@@ -1600,9 +1762,12 @@
       "id": "STRESS-57",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-f5-equivalence",
+        "g5-f3-cross"
+      ],
+      "reason": "Actual F5/D3 four scoped reader views including privileged audit, actor POV and public projection are compared before/after reads; exact E1 causal and private owner DB bytes are invariant, including source/worker permutation and restart-equivalent runs."
     },
     {
       "id": "STRESS-58",
@@ -1610,7 +1775,7 @@
       "eval": "knowledge",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Reflection/LLM rumor-to-hypothesis memory builder is not integrated; no claim-preserving model output or no-world-event proof exists."
     },
     {
       "id": "STRESS-59",
@@ -1686,15 +1851,17 @@
       "eval": "knowledge",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "Real event and received-at t validated, but no delayed worker running after the logical clock advances to u on a single identical pending task and comparing full canonical observation, input and completion bytes."
     },
     {
       "id": "STRESS-67",
       "owner_issue": 164,
       "eval": "knowledge",
-      "state": "NOT_RUN",
-      "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "state": "READY",
+      "witnesses": [
+        "g5-secret-task"
+      ],
+      "reason": "Actual secret resource event produces committed PerceptionTask then empty completion with zero Observation/KnowledgeInput; barrier remains blocked until independent addressed task completes, then allows next work without fallback disclosure."
     },
     {
       "id": "STRESS-68",
@@ -1828,13 +1995,29 @@
       ]
     },
     "knowledge": {
-      "scope": "PILOT_ONLY",
-      "description": "Actual Observatory read capability and concurrent immutable authority; complete knowledge boundaries are G5.",
+      "scope": "SCOPED_WITH_GAPS",
+      "description": "G5 actual C1-C4+D3/F3/F5 local knowledge-boundary scope: durable private A/B owner checkpoints and dispatch-bound POV projected into the real context builder; live false Claim only to B, actual/presented sender separated, IN_TRANSIT failure leaves zero message KnowledgeInput; producer-independent strictly typed rehashed hostile context, task/completion/barrier and four-view read-only E1 equality. VIP/White Room/world-canon sources lack real registered world-truth/retrieval gates; delayed perception beyond clock, post-crash transmission resume and reflection remain NOT_RUN. No LLM/RAG evaluation or external attestation.",
       "witnesses": [
         "f4-concurrent",
         "f4-imports",
         "f4-capability",
-        "f4-pager"
+        "f4-pager",
+        "g5-real-context",
+        "g5-in-transit",
+        "g5-rehashed",
+        "g5-f3-cross",
+        "g5-f3-allowlists",
+        "g5-f5-equivalence",
+        "g5-c4",
+        "g5-c1",
+        "g5-c2-owners",
+        "g5-c2-barrier",
+        "g5-c2-completion",
+        "g5-secret-task",
+        "g5-context-origin",
+        "g5-context-receipt",
+        "g5-communication-context",
+        "g5-communication-mutants"
       ]
     }
   }

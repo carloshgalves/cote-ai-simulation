@@ -705,7 +705,15 @@
       "path": "internal/csf/commit/reference_observatory_f3_test.go",
       "name": "TestReferenceF3CrossedViews",
       "kind": "INTEGRATED",
-      "subtests": []
+      "subtests": [
+        "physical-event",
+        "knowledge-input",
+        "foreign-holder",
+        "swapped-dispatch",
+        "changed-live-dispatch",
+        "unsupported-public-view",
+        "cancellation"
+      ]
     },
     "g5-f3-allowlists": {
       "path": "internal/csf/commit/reference_observatory_f3_test.go",

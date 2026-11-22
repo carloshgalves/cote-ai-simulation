@@ -4,7 +4,6 @@ package commit
 
 import (
 	"context"
-	"database/sql"
 	"encoding/json"
 	"errors"
 	"os"
@@ -246,4 +245,3 @@ func TestReferenceG4ForeignRegisteredPolicyRejectsSignedPhysicalEpochBeforeCommi
 	}
 }
 
-var _ *sql.DB // Document that source ledger assertions use persisted SQLite.

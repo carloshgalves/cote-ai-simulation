@@ -6,15 +6,14 @@ import (
 	"bytes"
 	"context"
 	"errors"
-	"reflect"
 	"path/filepath"
+	"reflect"
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/contextboundary"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/ports"
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 )
 
 // This adapter exists only in the G5 test: it cannot query a global ledger,
@@ -180,15 +179,47 @@ func TestReferenceG5InTransitClaimHasNoRecipientKnowledge(t *testing.T) {
 	if receivedMessages != 0 {
 		t.Fatalf("IN_TRANSIT false claim became %d recipient KnowledgeInputs", receivedMessages)
 	}
-	var delivered int
-	if err := db.QueryRowContext(ctx, "SELECT COUNT(*) FROM event_store WHERE canonical IS NULL").Scan(&delivered); err != nil || delivered != 0 {
-		t.Fatalf("malformed event authority in pre-delivery prefix: %d %v", delivered, err)
-	}
-	store, err := sqlite.Open(ctx, path)
+	rows, err = db.QueryContext(ctx, "SELECT canonical FROM event_store")
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer store.Close()
+	sentEvents, deliveredEvents := 0, 0
+	for rows.Next() {
+		var raw []byte
+		if err := rows.Scan(&raw); err != nil {
+			rows.Close()
+			t.Fatal(err)
+		}
+		v, err := codec.StrictDecodePayload(raw)
+		if err != nil {
+			rows.Close()
+			t.Fatal(err)
+		}
+		fields, ok := v.([]any)
+		if !ok || len(fields) != 19 {
+			rows.Close()
+			t.Fatal("noncanonical committed event before delivery")
+		}
+		switch fields[3] {
+		case "communication.sent":
+			sentEvents++
+		case "communication.delivered", "communication.delivery_failed":
+			deliveredEvents++
+		case "resource.stolen":
+			rows.Close()
+			t.Fatal("false claim minted as world event before delivery")
+		}
+	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		t.Fatal(err)
+	}
+	if err := rows.Close(); err != nil {
+		t.Fatal(err)
+	}
+	if sentEvents != 1 || deliveredEvents != 0 {
+		t.Fatalf("pre-delivery causal prefix is not sent-only: sent=%d delivered=%d", sentEvents, deliveredEvents)
+	}
 	// The rejected delivery attempt must not create a sixth commit.
 	var commits int
 	if err := db.QueryRowContext(ctx, "SELECT COUNT(*) FROM committed_cycles").Scan(&commits); err != nil || commits != 5 {

@@ -29,7 +29,7 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(g.git_blob((ROOT / g.ADR).read_bytes()), g.PIN_ADR)
         self.assertEqual(g.git_blob((ROOT / g.TRACE).read_bytes()), g.PIN_TRACE)
         self.assertEqual(len(self.validate()), 109)
-        self.assertEqual(sum(r["state"] == "READY" for r in self.registry["rows"]), 39)
+        self.assertEqual(sum(r["state"] == "READY" for r in self.registry["rows"]), 51)
         self.assertEqual(sum(r["state"] == "BLOCKED" for r in self.registry["rows"]), 8)
 
     def test_invalid_manifest(self):
@@ -69,15 +69,15 @@ class RegistryTests(unittest.TestCase):
         normative = self.validate()
         no_runs = g.report(self.registry, normative, {}, "a" * 40, "b" * 64)
         self.assertFalse(no_runs["matrix_complete"])
-        self.assertEqual(no_runs["counts"]["INV"]["FAIL"], 14)
-        self.assertEqual(no_runs["counts"]["STRESS"]["FAIL"], 25)
+        self.assertEqual(no_runs["counts"]["INV"]["FAIL"], 20)
+        self.assertEqual(no_runs["counts"]["STRESS"]["FAIL"], 31)
         # Test certificate aggregation only: synthetic results are NEVER
         # written as simulation evidence, only run by this verifier unit test.
         successes = {w: {mode: {"status": "PASS"} for mode in ("normal", "race")}
                      for w in self.registry["witnesses"]}
         report = g.report(self.registry, normative, successes, "a" * 40, "b" * 64)
-        self.assertEqual(report["counts"]["INV"]["PASS_INTEGRATED_TEST"], 14)
-        self.assertEqual(report["counts"]["STRESS"]["PASS_INTEGRATED_TEST"], 25)
+        self.assertEqual(report["counts"]["INV"]["PASS_INTEGRATED_TEST"], 20)
+        self.assertEqual(report["counts"]["STRESS"]["PASS_INTEGRATED_TEST"], 31)
         self.assertFalse(report["matrix_complete"])
         self.assertFalse(report["evals_complete"])
         self.assertEqual(next(r for r in report["rows"] if r["id"] == "STRESS-61")["status"], "PASS_INTEGRATED_TEST")
@@ -89,6 +89,12 @@ class RegistryTests(unittest.TestCase):
         # even if both of its runs pass. Its failure gates its eval even
         # though it is not credited to any normative row.
         self.assertEqual(next(r for r in report["rows"] if r["id"] == "STRESS-39")["status"], "NOT_RUN")
+        # G5 cannot turn typed-envelope refusal into a real LLM/RAG,
+        # model-memory reflection, late-worker or resumed-transmission proof.
+        for uncovered in ("INV-36", "INV-41", "STRESS-40", "STRESS-44",
+                          "STRESS-46", "STRESS-47", "STRESS-50",
+                          "STRESS-58", "STRESS-66"):
+            self.assertEqual(next(r for r in report["rows"] if r["id"] == uncovered)["status"], "NOT_RUN")
         del successes["physical-d3"]["normal"]
         bad_eval = g.report(self.registry, normative, successes, "a" * 40, "b" * 64)
         self.assertEqual(bad_eval["evals"]["embodiment"]["status"], "FAIL")

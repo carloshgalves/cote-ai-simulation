@@ -247,4 +247,3 @@ func TestReferenceG4ForeignRegisteredPolicyRejectsSignedPhysicalEpochBeforeCommi
 	}
 	referenceD2AssertPhysicalPrefix(t, db, hexRun(genesis.RunID), 0)
 }
-

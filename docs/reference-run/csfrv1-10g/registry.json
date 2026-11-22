@@ -611,6 +611,68 @@
       "name": "TestPostFenceEarlierRoundIsRejectedAndClockCanCommit",
       "kind": "INTEGRATED",
       "subtests": []
+    },
+    "g4-two-epoch": {
+      "path": "internal/csf/commit/reference_eval_g4_test.go",
+      "name": "TestReferenceG4AuthenticatedTwoEpochsAndFullLedgerPermutation",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g4-signed-mutants": {
+      "path": "internal/csf/commit/reference_eval_g4_test.go",
+      "name": "TestReferenceG4SignedCutMutationMatrix",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "run-id",
+        "genesis-digest",
+        "source-id",
+        "executable-hash",
+        "snapshot-hash",
+        "events-hash",
+        "epoch",
+        "a2-evidence-hash",
+        "completed-body-hash",
+        "signature"
+      ]
+    },
+    "g4-cross-policy": {
+      "path": "internal/csf/commit/reference_eval_g4_test.go",
+      "name": "TestReferenceG4ForeignRegisteredPolicyRejectsSignedPhysicalEpochBeforeCommit",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g4-source-import": {
+      "path": "internal/csf/commit/reference_physical_d2_adversarial_test.go",
+      "name": "TestReferenceD2RejectsUnpinnedExecutableAndImportRoot",
+      "kind": "INTEGRATED",
+      "subtests": [
+        "tampered-executable",
+        "foreign-import-root"
+      ]
+    },
+    "g4-source-epoch": {
+      "path": "internal/csf/commit/reference_physical_d2_adversarial_test.go",
+      "name": "TestReferenceD2WrongEpochCannotReuseRealSignedA1Cut",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g4-source-foreign": {
+      "path": "internal/csf/commit/reference_physical_d2_adversarial_test.go",
+      "name": "TestReferenceD2RejectsAuthenticSignedCutFromForeignRunID",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g4-disclosure-mutants": {
+      "path": "internal/csf/commit/reference_disclosure_d3_test.go",
+      "name": "TestReferenceD3AdversarialEventTaskAndHolderMutationsFailClosed",
+      "kind": "INTEGRATED",
+      "subtests": []
+    },
+    "g4-disclosure-order": {
+      "path": "internal/csf/commit/reference_disclosure_d3_test.go",
+      "name": "TestReferenceD3ImmutablePrefixesUnderSourceWorkerPermutation",
+      "kind": "INTEGRATED",
+      "subtests": []
     }
   },
   "rows": [
@@ -1385,7 +1447,7 @@
       "eval": "embodiment",
       "state": "NOT_RUN",
       "witnesses": [],
-      "reason": "Full normative proof has not yet been mapped and reviewed in this slice."
+      "reason": "G4 proves two signed A1 physical WORK epochs and D3 disclosure, NOT the normative CLOCK_ADVANCE body.advanced triggering case: activation floor (u,0), pending P=(u,3), next-cycle at (u,0) and absence of overdue work require a separate integrated witness. Do not promote from physical D1-D3 alone."
     },
     {
       "id": "STRESS-40",
@@ -1751,10 +1813,18 @@
       ]
     },
     "embodiment": {
-      "scope": "PILOT_ONLY",
-      "description": "Real supervised A1 physical epochs with engine-only disclosure; policy/tamper/recovery coverage is G4. No direct normative row credit for this partial eval.",
+      "scope": "SCOPED_WITH_GAPS",
+      "description": "G4 authentic supervised A1 Python two-epoch Go D1-D3 integration: Genesis-pinned signed source, exact input/event/revision/owner transcript under fixed-cut source/response permutation, canonical signature mutation negatives, changed policy/key rejection before physical commit, executable/import integrity and ENGINE_ONLY disclosure negatives. The Go causal clock remains authoritative. STRESS-39 advance-induced body/trigger successor is NOT_RUN; this is not full embodiment acceptance or external attestation.",
       "witnesses": [
-        "physical-d3"
+        "physical-d3",
+        "g4-two-epoch",
+        "g4-signed-mutants",
+        "g4-cross-policy",
+        "g4-source-import",
+        "g4-source-epoch",
+        "g4-source-foreign",
+        "g4-disclosure-mutants",
+        "g4-disclosure-order"
       ]
     },
     "knowledge": {

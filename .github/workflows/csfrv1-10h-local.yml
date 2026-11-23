@@ -67,6 +67,192 @@ jobs:
           go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local ./internal/physicalhost
           go test -race -count=1 -timeout=10m -run '^TestH2IndependentD3Replay' ./internal/csf/commit
           go vet ./cmd/csf-reference-run-local ./internal/physicalhost ./internal/csf/commit
+      - name: H2-F same-A1 real crash and pending-barrier fault matrix
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+          CSF_E2_EVIDENCE_PATH: ${{ runner.temp }}/h2-f-exact-head-e2.json
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          test ! -e "$CSF_E2_EVIDENCE_PATH"
+          # These E2 cases use two ORIGINAL supervised signed A1 cuts ONCE
+          # for the continuous and all fourteen crashed full C4+D3 runs.
+          # The crash-recovery subprocess receives only public registration,
+          # immutable RunID and snapshot; never the producer signing key.
+          go test -v -count=1 -timeout=25m -run '^TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          out="$RUNNER_TEMP/h-private-${{ github.run_id }}"
+          go run ./cmd/csf-reference-run-local --out "$out" | tee "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_GENESIS_BOUND_SIGNED_INGRESS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_RAW_PYTHON_A1_CUTS=SEALED_AND_VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_SAME_SIGNED_A1_INDEPENDENT_GO_D3=BYTE_IDENTICAL_AUTHORITIES' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'CSFRV1_10_V1_DOD_ACCEPTED=NO' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'FIRST_REAL_RUN_PRODUCTION_GO=NO' "$RUNNER_TEMP/h-summary.txt"
+          go run ./cmd/csf-reference-run-local --verify "$out"
+          H2_REAL_PRIVATE_ARCHIVE="$out" go test -v -count=1 -run TestH2RejectsRehashedSemanticCorruption ./cmd/csf-reference-run-local
+          if go run ./cmd/csf-reference-run-local --out "$out"; then
+            echo "SECURITY ERROR: overwritten local archive"
+            exit 1
+          fi
+          cp -a "$out" "$RUNNER_TEMP/h-tampered"
+          printf x >> "$RUNNER_TEMP/h-tampered/owner/actor-b.db"
+          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-tampered"; then
+            echo "SECURITY ERROR: altered owner checkpoint accepted"
+            exit 1
+          fi
+          cp -a "$out" "$RUNNER_TEMP/h-tampered-ledger"
+          printf x >> "$RUNNER_TEMP/h-tampered-ledger/ledger-export/input_ledger.bin"
+          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-tampered-ledger"; then
+            echo "SECURITY ERROR: tampered canonical ledger accepted"
+            exit 1
+          fi
+          cp -a "$out" "$RUNNER_TEMP/h-missing-ledger"
+          rm "$RUNNER_TEMP/h-missing-ledger/ledger-export/event_store.bin"
+          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-missing-ledger"; then
+            echo "SECURITY ERROR: missing normative ledger accepted"
+            exit 1
+          fi
+          echo 'H_LOCAL_SOURCE=REAL_PYTHON_A1_D3'
+          echo 'H2_FIVE_LEDGER_EXPORT=REAL_PRIVATE_REPLAY'
+          echo 'H2_TWO_OWNER_SIGNED_RECEIPTS=REAL_PRIVATE_REPLAY'
+          echo 'H2_RAW_A1_ARCHIVE=PRIVATE_EXACT_SOURCE_BYTES_TWO_EPOCHS'
+          echo 'H2_A1_ARCHIVE_SEALED_COLD_SOURCE=VERIFIED'
+          echo 'H2_SAME_SOURCE_TWO_FULL_C4_D2_D3_DATABASES=BYTE_IDENTICAL_ALL_SQLITE_TABLES'
+          echo 'H2_SIGNED_SOURCE_RECEIPTS=2_EPOCHS_EIGHT_RECEIPTS_FINAL_CLOSURE'
+          echo 'H2_NO_REINGRESS_ON_DURABLE_RECOVERY=VERIFIED'
+          echo 'H2_SNAPSHOT_SEAL=VERIFIED_THREE_TAIL_COMMITS'
+          echo 'H_MUTANTS=REJECTED'
+          echo 'H_RELEASE=NO_GO'
+          # Never upload private ledgers, physical source, owner DBs or raw cuts.
+ ./internal/csf/commit
+          python - <<'PY'
+          import json, os
+          with open(os.environ["CSF_E2_EVIDENCE_PATH"], encoding="utf-8") as fp:
+              report = json.load(fp)
+          assert report["Status"] == "E2_LOCAL_C4_D3_RECOVERY_BYTES_EQUAL"
+          assert report["Reference"] == "CSFRV1-10/E2 #141"
+          assert report["VerifiedBaselineCommits"] == 9
+          assert report["AuthenticatedA1Cuts"] == 2
+          assert report["IndependentCrashResumeCases"] == 14
+          assert report["PhysicalSQLRollbackSteps"] == 7
+          assert report["SignerReexecution"] is False
+          assert len(report["CanonicalManifest"]) > 0
+          print("H2_F_2x7_RESTART_MATRIX=14_OF_14_SAME_SIGNED_A1")
+          PY
+          # Separate E2 controls prove pre-fence idempotence, 7 cold child
+          # process crash exits, corrupt ingress denial, terminal-only source
+          # recovery and no duplicate WorldRevision/KnowledgeInput.
+          go test -count=1 -timeout=25m -run '^TestReferenceE2(PreFenceReopenAndAdmitSameSignedSource|SevenPhysicalAtomicFaultsNewProcessRecovery|RecoveredCutCannotCreateNewSourceOrCrossRun|CorruptSavedIngressRefusesRecoveryBeforeCommit)
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          out="$RUNNER_TEMP/h-private-${{ github.run_id }}"
+          go run ./cmd/csf-reference-run-local --out "$out" | tee "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_GENESIS_BOUND_SIGNED_INGRESS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_RAW_PYTHON_A1_CUTS=SEALED_AND_VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_SAME_SIGNED_A1_INDEPENDENT_GO_D3=BYTE_IDENTICAL_AUTHORITIES' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'CSFRV1_10_V1_DOD_ACCEPTED=NO' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'FIRST_REAL_RUN_PRODUCTION_GO=NO' "$RUNNER_TEMP/h-summary.txt"
+          go run ./cmd/csf-reference-run-local --verify "$out"
+          H2_REAL_PRIVATE_ARCHIVE="$out" go test -v -count=1 -run TestH2RejectsRehashedSemanticCorruption ./cmd/csf-reference-run-local
+          if go run ./cmd/csf-reference-run-local --out "$out"; then
+            echo "SECURITY ERROR: overwritten local archive"
+            exit 1
+          fi
+          cp -a "$out" "$RUNNER_TEMP/h-tampered"
+          printf x >> "$RUNNER_TEMP/h-tampered/owner/actor-b.db"
+          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-tampered"; then
+            echo "SECURITY ERROR: altered owner checkpoint accepted"
+            exit 1
+          fi
+          cp -a "$out" "$RUNNER_TEMP/h-tampered-ledger"
+          printf x >> "$RUNNER_TEMP/h-tampered-ledger/ledger-export/input_ledger.bin"
+          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-tampered-ledger"; then
+            echo "SECURITY ERROR: tampered canonical ledger accepted"
+            exit 1
+          fi
+          cp -a "$out" "$RUNNER_TEMP/h-missing-ledger"
+          rm "$RUNNER_TEMP/h-missing-ledger/ledger-export/event_store.bin"
+          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-missing-ledger"; then
+            echo "SECURITY ERROR: missing normative ledger accepted"
+            exit 1
+          fi
+          echo 'H_LOCAL_SOURCE=REAL_PYTHON_A1_D3'
+          echo 'H2_FIVE_LEDGER_EXPORT=REAL_PRIVATE_REPLAY'
+          echo 'H2_TWO_OWNER_SIGNED_RECEIPTS=REAL_PRIVATE_REPLAY'
+          echo 'H2_RAW_A1_ARCHIVE=PRIVATE_EXACT_SOURCE_BYTES_TWO_EPOCHS'
+          echo 'H2_A1_ARCHIVE_SEALED_COLD_SOURCE=VERIFIED'
+          echo 'H2_SAME_SOURCE_TWO_FULL_C4_D2_D3_DATABASES=BYTE_IDENTICAL_ALL_SQLITE_TABLES'
+          echo 'H2_SIGNED_SOURCE_RECEIPTS=2_EPOCHS_EIGHT_RECEIPTS_FINAL_CLOSURE'
+          echo 'H2_NO_REINGRESS_ON_DURABLE_RECOVERY=VERIFIED'
+          echo 'H2_SNAPSHOT_SEAL=VERIFIED_THREE_TAIL_COMMITS'
+          echo 'H_MUTANTS=REJECTED'
+          echo 'H_RELEASE=NO_GO'
+          # Never upload private ledgers, physical source, owner DBs or raw cuts.
+ ./internal/csf/commit
+          # Historical pending barrier: compare frozen semantic fence before
+          # admitting; do not auto-advance a halted or partial perception.
+          go test -count=1 -timeout=15m -run '^TestCSFRV18(RehydrateFrozenFenceInsteadOfReselectingCoordinate|PartialPerceptionBeforeCrashResumesWithoutDuplicateReceipt|HaltedNeverAutoResumesOnReconnect|ResumeDrainsCausallyCommittedPerceptionExactlyOnce)
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          out="$RUNNER_TEMP/h-private-${{ github.run_id }}"
+          go run ./cmd/csf-reference-run-local --out "$out" | tee "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_GENESIS_BOUND_SIGNED_INGRESS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_RAW_PYTHON_A1_CUTS=SEALED_AND_VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_SAME_SIGNED_A1_INDEPENDENT_GO_D3=BYTE_IDENTICAL_AUTHORITIES' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'CSFRV1_10_V1_DOD_ACCEPTED=NO' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'FIRST_REAL_RUN_PRODUCTION_GO=NO' "$RUNNER_TEMP/h-summary.txt"
+          go run ./cmd/csf-reference-run-local --verify "$out"
+          H2_REAL_PRIVATE_ARCHIVE="$out" go test -v -count=1 -run TestH2RejectsRehashedSemanticCorruption ./cmd/csf-reference-run-local
+          if go run ./cmd/csf-reference-run-local --out "$out"; then
+            echo "SECURITY ERROR: overwritten local archive"
+            exit 1
+          fi
+          cp -a "$out" "$RUNNER_TEMP/h-tampered"
+          printf x >> "$RUNNER_TEMP/h-tampered/owner/actor-b.db"
+          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-tampered"; then
+            echo "SECURITY ERROR: altered owner checkpoint accepted"
+            exit 1
+          fi
+          cp -a "$out" "$RUNNER_TEMP/h-tampered-ledger"
+          printf x >> "$RUNNER_TEMP/h-tampered-ledger/ledger-export/input_ledger.bin"
+          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-tampered-ledger"; then
+            echo "SECURITY ERROR: tampered canonical ledger accepted"
+            exit 1
+          fi
+          cp -a "$out" "$RUNNER_TEMP/h-missing-ledger"
+          rm "$RUNNER_TEMP/h-missing-ledger/ledger-export/event_store.bin"
+          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-missing-ledger"; then
+            echo "SECURITY ERROR: missing normative ledger accepted"
+            exit 1
+          fi
+          echo 'H_LOCAL_SOURCE=REAL_PYTHON_A1_D3'
+          echo 'H2_FIVE_LEDGER_EXPORT=REAL_PRIVATE_REPLAY'
+          echo 'H2_TWO_OWNER_SIGNED_RECEIPTS=REAL_PRIVATE_REPLAY'
+          echo 'H2_RAW_A1_ARCHIVE=PRIVATE_EXACT_SOURCE_BYTES_TWO_EPOCHS'
+          echo 'H2_A1_ARCHIVE_SEALED_COLD_SOURCE=VERIFIED'
+          echo 'H2_SAME_SOURCE_TWO_FULL_C4_D2_D3_DATABASES=BYTE_IDENTICAL_ALL_SQLITE_TABLES'
+          echo 'H2_SIGNED_SOURCE_RECEIPTS=2_EPOCHS_EIGHT_RECEIPTS_FINAL_CLOSURE'
+          echo 'H2_NO_REINGRESS_ON_DURABLE_RECOVERY=VERIFIED'
+          echo 'H2_SNAPSHOT_SEAL=VERIFIED_THREE_TAIL_COMMITS'
+          echo 'H_MUTANTS=REJECTED'
+          echo 'H_RELEASE=NO_GO'
+          # Never upload private ledgers, physical source, owner DBs or raw cuts.
+ ./internal/csf/commit
+          echo 'H2_F_PREFENCE_SOURCE_RETRY=IDEMPOTENT'
+          echo 'H2_F_CRASH_RESTART_CHILD=EXACT_TERMINAL_NO_DUPLICATES'
+          echo 'H2_F_PENDING_PERCEPTION_BARRIER=FROZEN_AND_RESUMED_ONCE'
+          echo 'H2_F_RELEASE=NO_GO'
+          # Never upload the private E2 report or raw signed source bytes.
       - name: Real A1+D3 and detached owner, snapshot and ledger semantic mutants
         run: |
           set -euo pipefail

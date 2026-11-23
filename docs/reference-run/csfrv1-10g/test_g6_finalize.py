@@ -27,6 +27,13 @@ class G6DecisionTests(unittest.TestCase):
             "cases": [{"id": ident, "status": "pass"} for ident in self.ids],
         }
 
+    def test_pinned_node_major_is_required(self):
+        self.assertEqual(g6.verify_node_version("v22.14.0"), "v22.14.0")
+        for invalid in (None, "", "NOT_ATTESTED", "v20.13.1", "v24.0.0",
+                        "v22x14x0", "v22.1.1-dev", 22):
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                g6.verify_node_version(invalid)
+
     def test_621_roster_and_byte_agreement_are_all_required(self):
         valid = json.dumps(self.fake_conformance()).encode()
         actual = g6.check_conformance(ROOT, valid, valid)

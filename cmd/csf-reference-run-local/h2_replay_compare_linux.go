@@ -119,6 +119,31 @@ func snapshotTableSetH2(ctx context.Context, db *sql.DB) (map[string]replayTable
 			Rows:len(individual),OrderedMultisetSHA256:hashBytes(canonical),
 		}
 	}
+	// Also compare the complete SQLite schema registry: indexes, triggers
+	// and views are authorities even if they own no persisted table rows.
+	metadata,err:=db.QueryContext(ctx,
+		"SELECT type,name,tbl_name,COALESCE(sql,'') FROM sqlite_master ORDER BY type,name")
+	if err!=nil{return nil,err}
+	objects:=make([][4]string,0)
+	for metadata.Next(){
+		if len(objects)>=500{metadata.Close();return nil,errors.New("H2 excessive SQLite schema objects")}
+		var record [4]string
+		if err:=metadata.Scan(&record[0],&record[1],&record[2],&record[3]);err!=nil{
+			metadata.Close();return nil,err
+		}
+		objects=append(objects,record)
+	}
+	if err:=metadata.Err();err!=nil{metadata.Close();return nil,err}
+	if err:=metadata.Close();err!=nil{return nil,err}
+	rawObjects,err:=json.Marshal([]any{"H2-SQLITE-FULL-SCHEMA-REGISTRY-V1",objects})
+	if err!=nil{return nil,err}
+	if _,ok:=result["__sqlite_schema_registry__"];ok{
+		return nil,errors.New("H2 collision with reserved schema registry evidence name")
+	}
+	result["__sqlite_schema_registry__"]=replayTableH2{
+		DDL:hashBytes(rawObjects),Columns:hashBytes([]byte("type,name,tbl_name,sql")),
+		Rows:len(objects),OrderedMultisetSHA256:hashBytes(rawObjects),
+	}
 	return result,nil
 }
 

@@ -144,6 +144,7 @@ func auditOwnersH2(ctx context.Context, out, sha, run string) (ownerAuditH2, err
 	}
 	defer rows.Close()
 	receipts, acked := 0, 0
+	pendingSnapshotIDs := make([][]byte, 0)
 	matched := make([]int, len(owners))
 	var runID [32]byte
 	copy(runID[:], id)
@@ -188,14 +189,9 @@ func auditOwnersH2(ctx context.Context, out, sha, run string) (ownerAuditH2, err
 				return zero, err
 			}
 			if match {
-				for _, snapshot := range snapshots {
-					var exists int
-					if err := causal.QueryRowContext(ctx,
-						"SELECT COUNT(*) FROM snapshot_seals WHERE run_id=? AND snapshot_id=?",
-						id, snapshot).Scan(&exists); err != nil || exists != 1 {
-						return zero, errors.New("private owner ACK references a foreign or unsealed snapshot")
-					}
-				}
+				// Do not issue a nested query on the same single-connection
+				// causal reader while its outer receipt cursor is live.
+				pendingSnapshotIDs = append(pendingSnapshotIDs, snapshots...)
 				ownerMatches++
 				matched[i]++
 				acked += len(snapshots)
@@ -208,6 +204,17 @@ func auditOwnersH2(ctx context.Context, out, sha, run string) (ownerAuditH2, err
 	}
 	if err := rows.Err(); err != nil {
 		return zero, err
+	}
+	if err := rows.Close(); err != nil {
+		return zero, err
+	}
+	for _, snapshot := range pendingSnapshotIDs {
+		var exists int
+		if err := causal.QueryRowContext(ctx,
+			"SELECT COUNT(*) FROM snapshot_seals WHERE run_id=? AND snapshot_id=?",
+			id, snapshot).Scan(&exists); err != nil || exists != 1 {
+			return zero, errors.New("private owner ACK references a foreign or unsealed snapshot")
+		}
 	}
 	if receipts != 2 || matched[0] != 1 || matched[1] != 1 || acked < 2 {
 		return zero, fmt.Errorf("incomplete distinct owner receipt/ACK coverage: receipts=%d", receipts)

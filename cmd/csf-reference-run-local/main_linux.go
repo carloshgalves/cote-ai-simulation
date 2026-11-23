@@ -79,7 +79,7 @@ func main() {
 }
 
 func runLocal(ctx context.Context, output string) error {
-	root, err := os.Getwd()
+	root, err := gitOutput(".", "rev-parse", "--show-toplevel")
 	if err != nil { return err }
 	sha, err := gitOutput(root, "rev-parse", "HEAD")
 	if err != nil || len(sha) != 40 { return errors.New("exact source SHA unavailable") }
@@ -87,6 +87,10 @@ func runLocal(ctx context.Context, output string) error {
 	if err != nil || dirty != "" { return errors.New("unclean checkout; refuse unversioned reference run") }
 	out, err := filepath.Abs(output)
 	if err != nil { return err }
+	rel, err := filepath.Rel(root, out)
+	if err != nil || rel == "." || (rel != ".." && !strings.HasPrefix(rel, ".."+string(filepath.Separator))) {
+		return errors.New("private evidence must be outside the source checkout")
+	}
 	if err := os.Mkdir(out, 0700); err != nil { return fmt.Errorf("requires fresh directory: %w", err) }
 	if err := os.Mkdir(filepath.Join(out, "owner"), 0700); err != nil { return err }
 	// The per-run signer is used only inside the A1 supervisor. No private

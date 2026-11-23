@@ -48,6 +48,7 @@ type runManifest struct {
 	HostCPUs           int    `json:"host_cpus"`
 	HostRAMBytes       uint64 `json:"host_ram_bytes"`
 	StartedAtUTC       string `json:"started_at_utc"`
+	EvidenceProfile    string `json:"evidence_profile,omitempty"`
 	ReviewStatus       string `json:"review_status"`
 }
 
@@ -160,8 +161,9 @@ func runLocal(ctx context.Context, output string) error {
 		GoVersion: runtime.Version(), PythonVersion: pyVersion,
 		SQLiteVersion: "3.53.4", HostOS: runtime.GOOS, HostArch: runtime.GOARCH,
 		HostCPUs: runtime.NumCPU(), HostRAMBytes: localRAMBytes(),
-		StartedAtUTC: time.Now().UTC().Format(time.RFC3339Nano),
-		ReviewStatus: "NOT_INDEPENDENTLY_ATTESTED",
+		StartedAtUTC:    time.Now().UTC().Format(time.RFC3339Nano),
+		EvidenceProfile: "H2_SIGNED_INGRESS_V1",
+		ReviewStatus:    "NOT_INDEPENDENTLY_ATTESTED",
 	}
 	if err := exclusiveJSON(filepath.Join(out, "run-manifest.json"), manifest); err != nil {
 		return err
@@ -171,6 +173,9 @@ func runLocal(ctx context.Context, output string) error {
 	}
 	if err := exportOwnersH2(ctx, out, sha, public.RunID); err != nil {
 		return fmt.Errorf("H2 signed owner proof: %w", err)
+	}
+	if err := exportSignedIngressH2(ctx, out, sha, public.RunID, host.Bundle); err != nil {
+		return fmt.Errorf("H2-S signed ingress provenance: %w", err)
 	}
 	finalSHA, err := gitOutput(root, "rev-parse", "HEAD")
 	if err != nil || finalSHA != sha {
@@ -203,6 +208,7 @@ func runLocal(ctx context.Context, output string) error {
 	}
 	fmt.Println("FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED")
 	fmt.Println("H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE")
+	fmt.Println("H2_GENESIS_BOUND_SIGNED_INGRESS=VERIFIED_PRIVATE")
 	fmt.Println("CSFRV1_10_V1_DOD_ACCEPTED=NO")
 	fmt.Println("FIRST_REAL_RUN_PRODUCTION_GO=NO")
 	fmt.Println("PRIVATE_EVIDENCE_DIRECTORY=" + out)

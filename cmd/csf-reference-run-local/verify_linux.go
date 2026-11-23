@@ -47,6 +47,11 @@ func collectedPaths(out string) ([]string, error) {
 			return nil, errors.New("H2 evidence must use a private real directory")
 		}
 		paths = append(paths, h2PrivatePaths...)
+		if _, err := os.Lstat(filepath.Join(out, signedIngressProofPathH2)); err == nil {
+			paths = append(paths, signedIngressProofPathH2)
+		} else if !errors.Is(err, os.ErrNotExist) {
+			return nil, err
+		}
 	} else if !errors.Is(err, os.ErrNotExist) {
 		return nil, err
 	}
@@ -113,6 +118,7 @@ func rejectExtraneous(out string) error {
 	for _, name := range h2PrivatePaths {
 		seen[name] = true
 	}
+	seen[signedIngressProofPathH2] = true
 	seen["ledger-export"] = true
 	seen["checksums.json"] = true
 	seen["owner"] = true
@@ -278,6 +284,7 @@ func verifyLocal(ctx context.Context, dir string) error {
 		meta.Disposition != "EXPERIMENTAL_LOCAL_ONLY_NO_PRODUCTION_GO" ||
 		meta.ReviewStatus != "NOT_INDEPENDENTLY_ATTESTED" ||
 		meta.SourceSHA != sha || meta.Seed != 42 ||
+		(meta.EvidenceProfile != "" && meta.EvidenceProfile != "H2_SIGNED_INGRESS_V1") ||
 		meta.CodecPolicyHash != policy.CodecPolicyHashHex ||
 		meta.SchemaBundleHash != policy.SchemaBundleHashHex ||
 		meta.GoVersion != runtime.Version() ||
@@ -341,12 +348,32 @@ func verifyLocal(ctx context.Context, dir string) error {
 	if genesisHash != meta.GenesisSHA256 || len(meta.GenesisSHA256) != 64 {
 		return errors.New("Genesis differs from archived run manifest")
 	}
+	if meta.EvidenceProfile == "H2_SIGNED_INGRESS_V1" {
+		if _, err := os.Lstat(filepath.Join(out, "ledger-export")); err != nil {
+			return errors.New("H2-S requires non-optional private ledger export directory")
+		}
+	}
 	if _, err := os.Lstat(filepath.Join(out, "ledger-export")); err == nil {
 		if err := verifyH2Ledgers(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
 			return fmt.Errorf("H2 full canonical ledger verification: %w", err)
 		}
 		if err := verifyOwnersH2(ctx, out, meta.SourceSHA, public.RunID); err != nil {
 			return fmt.Errorf("H2 independent signed owner verification: %w", err)
+		}
+		present := false
+		if _, err := os.Lstat(filepath.Join(out, signedIngressProofPathH2)); err == nil {
+			present = true
+		} else if !errors.Is(err, os.ErrNotExist) {
+			return err
+		}
+		if present != (meta.EvidenceProfile == "H2_SIGNED_INGRESS_V1") {
+			return errors.New("H2-S signed ingress profile does not match evidence contents")
+		}
+		if present {
+			if err := verifySignedIngressH2(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
+				return fmt.Errorf("H2-S source receipt and Genesis-bound signature audit: %w", err)
+			}
+			fmt.Println("H2_GENESIS_BOUND_SIGNED_INGRESS=VERIFIED_PRIVATE")
 		}
 		fmt.Println("H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE")
 		fmt.Println("H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE")

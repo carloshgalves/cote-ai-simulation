@@ -52,7 +52,8 @@ jobs:
             cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go
             cmd/csf-reference-run-local/h2_owner_linux.go cmd/csf-reference-run-local/h2_integrated_mutants_linux_test.go
             cmd/csf-reference-run-local/h2_ingress_linux.go cmd/csf-reference-run-local/h2_raw_source_linux.go
-            internal/physicalhost/supervisor_linux.go internal/physicalhost/private_capture_linux.go)
+            internal/physicalhost/supervisor_linux.go internal/physicalhost/private_capture_linux.go
+            internal/physicalhost/private_capture_linux_test.go)
           if [ -n "$(gofmt -l "${files[@]}")" ]; then
             gofmt -d "${files[@]}"
             exit 1

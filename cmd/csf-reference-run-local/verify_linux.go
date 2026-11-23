@@ -42,6 +42,14 @@ var optionalFiles = []string{
 
 func collectedPaths(out string) ([]string, error) {
 	paths := append([]string(nil), expectedFiles...)
+	if info, err := os.Lstat(filepath.Join(out, "ledger-export")); err == nil {
+		if !info.IsDir() || info.Mode()&os.ModeSymlink != 0 || info.Mode().Perm()&0077 != 0 {
+			return nil, errors.New("H2 evidence must use a private real directory")
+		}
+		paths = append(paths, h2PrivatePaths...)
+	} else if !errors.Is(err, os.ErrNotExist) {
+		return nil, err
+	}
 	for _, name := range optionalFiles {
 		_, err := os.Lstat(filepath.Join(out, filepath.FromSlash(name)))
 		if err == nil {
@@ -102,6 +110,10 @@ func rejectExtraneous(out string) error {
 	for _, name := range optionalFiles {
 		seen[name] = true
 	}
+	for _, name := range h2PrivatePaths {
+		seen[name] = true
+	}
+	seen["ledger-export"] = true
 	seen["checksums.json"] = true
 	seen["owner"] = true
 	return filepath.WalkDir(out, func(path string, info os.DirEntry, err error) error {
@@ -120,7 +132,7 @@ func rejectExtraneous(out string) error {
 			return fmt.Errorf("unknown or symlink evidence path: %s", rel)
 		}
 		if info.IsDir() {
-			if rel != "owner" {
+			if rel != "owner" && rel != "ledger-export" {
 				return errors.New("unexpected evidence directory")
 			}
 			stat, err := info.Info()
@@ -328,6 +340,18 @@ func verifyLocal(ctx context.Context, dir string) error {
 	}
 	if genesisHash != meta.GenesisSHA256 || len(meta.GenesisSHA256) != 64 {
 		return errors.New("Genesis differs from archived run manifest")
+	}
+	if _, err := os.Lstat(filepath.Join(out, "ledger-export")); err == nil {
+		if err := verifyH2Ledgers(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
+			return fmt.Errorf("H2 full canonical ledger verification: %w", err)
+		}
+		if err := verifyOwnersH2(ctx, out, meta.SourceSHA, public.RunID); err != nil {
+			return fmt.Errorf("H2 independent signed owner verification: %w", err)
+		}
+		fmt.Println("H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE")
+		fmt.Println("H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE")
+	} else if !errors.Is(err, os.ErrNotExist) {
+		return err
 	}
 	fmt.Println("LOCAL_REFERENCE_ARCHIVE_VERIFIED=YES")
 	fmt.Println("PRODUCTION_APPROVAL=NO")

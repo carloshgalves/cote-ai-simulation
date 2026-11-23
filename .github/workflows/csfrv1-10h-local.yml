@@ -48,6 +48,13 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check
+          files=(cmd/csf-reference-run-local/main_linux.go cmd/csf-reference-run-local/verify_linux.go cmd/csf-reference-run-local/main_linux_test.go
+            cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go
+            cmd/csf-reference-run-local/h2_owner_linux.go cmd/csf-reference-run-local/h2_integrated_mutants_linux_test.go)
+          if [ -n "$(gofmt -l "${files[@]}")" ]; then
+            gofmt -d "${files[@]}"
+            exit 1
+          fi
           go test -count=1 -timeout=10m ./cmd/csf-reference-run-local
           go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local
           go vet ./cmd/csf-reference-run-local
@@ -93,15 +100,3 @@ jobs:
           echo 'H_MUTANTS=REJECTED'
           echo 'H_RELEASE=NO_GO'
           # Never upload private ledgers, physical source, owner DBs or raw cuts.
-      - name: Emit formatting evidence for new Go source only
-        if: ${{ always() }}
-        shell: bash
-        run: |
-          for file in cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go cmd/csf-reference-run-local/h2_owner_linux.go cmd/csf-reference-run-local/h2_integrated_mutants_linux_test.go; do
-            if ! cmp -s "$file" <(gofmt "$file"); then
-              echo "H2_GO_FMT_BEGIN:$file"
-              gofmt "$file" | base64 -w0
-              echo
-              echo "H2_GO_FMT_END:$file"
-            fi
-          done

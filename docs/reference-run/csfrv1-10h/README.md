@@ -16,7 +16,7 @@ On success the command prints `FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED`, 
 
 ## Private archive format
 
-The directory and owner subdirectory have 0700 permissions. Files are 0600 and never overwritten:
+The directory and owner subdirectory have 0700 permissions. Files are 0600 and never overwritten. The expected file names below are required; if SQLite has left a legitimate private `-wal` or `-shm` sidecar for any database, the archive also records and hashes that sidecar rather than deleting it or ignoring uncheckpointed data:
 
 | Artifact | Meaning |
 | --- | --- |
@@ -35,7 +35,7 @@ The A1 signer is **ephemeral and in host memory only**, never passed to Python. 
 go run ./cmd/csf-reference-run-local --verify /tmp/csf-h-new-01
 ```
 
-The verifier refuses extra, missing, symlinked or world-readable evidence files; checks the fixed index ordering, file sizes, SHA-256, source SHA, no-release classification, public disclosure matrix and physical registration. It copies the original causal database to a fresh private scratch directory, then verifies the installed policy, exact Genesis hash, linked SQLite core/runtime, nine-commit `ReplayClock`, persisted clock equality and final world revision on the **detached copy** only. It **does not call Python again** and does not modify the original causal SQLite. Permission, path and checksum negative controls, overwrite refusal, forged archive data and a separate real CI run are part of the H1 workflow.
+The verifier refuses extra, missing, symlinked or world-readable evidence files; checks the fixed index ordering (including any present SQLite WAL/SHM sidecars), file sizes, SHA-256, source SHA, no-release classification, public disclosure matrix and physical registration. It copies the original causal database **and any original WAL/SHM sidecars** to a fresh private scratch directory, then verifies the installed policy, exact Genesis hash, linked SQLite core/runtime, nine-commit `ReplayClock`, persisted clock equality and final world revision on the **detached copy** only. It **does not call Python again** and does not modify the original causal SQLite. Permission, path and checksum negative controls, overwrite refusal, forged archive data and a separate real CI run are part of the H1 workflow.
 
 The per-file hash index is **not a trusted external signature**. An adversary able to replace the entire archive and checksum file or compromise the same-UID host is outside this local single-operator check. No completed audit package can be issued solely because the JSON says PASS.
 

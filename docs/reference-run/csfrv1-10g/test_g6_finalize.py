@@ -1,6 +1,9 @@
 """RED/negative controls for G6 certification; synthetic data is never CI evidence."""
 import copy
 import json
+import os
+import platform
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -33,6 +36,93 @@ class G6DecisionTests(unittest.TestCase):
                         "v22x14x0", "v22.1.1-dev", 22):
             with self.subTest(invalid=invalid), self.assertRaises(ValueError):
                 g6.verify_node_version(invalid)
+
+    def test_replay_original_private_logs_and_reject_forged_evidence(self):
+        # Synthetic negative-control generator only. It never creates G6
+        # artifacts nor substitutes for actual go test -json in Actions.
+        with tempfile.TemporaryDirectory() as directory:
+            logs = Path(directory)
+            sha = "a" * 40
+            results = {}
+            for wid, spec in self.registry["witnesses"].items():
+                package_dir = str(Path(spec["path"]).parent)
+                package = g.PREFIX + package_dir
+                names = [spec["name"], *[
+                    spec["name"] + "/" + child for child in spec["subtests"]]]
+                history = [{"Action": "start", "Package": package}]
+
+                def emit(name):
+                    history.append({"Action": "run", "Package": package, "Test": name})
+                    for child in names:
+                        if child.startswith(name + "/") and "/" not in child[len(name) + 1:]:
+                            emit(child)
+                    history.append({"Action": "pass", "Package": package, "Test": name})
+
+                emit(spec["name"])
+                history.append({"Action": "pass", "Package": package})
+                safe = [{
+                    "action": event["Action"], "package": event["Package"],
+                    **({"test": event["Test"]} if "Test" in event else {}),
+                } for event in history]
+                stdout = ("\\n".join(json.dumps(event) for event in history) + "\\n").encode()
+                result = {
+                    "source": spec["path"], "name": spec["name"],
+                    "kind": spec["kind"],
+                    "source_git_blob": g.git_blob((ROOT / spec["path"]).read_bytes()),
+                }
+                for mode in ("normal", "race"):
+                    (logs / (wid + "-" + mode + ".jsonl")).write_bytes(stdout)
+                    (logs / (wid + "-" + mode + ".stderr")).write_bytes(b"")
+                    args = ["go", "test", "-json", "-count=1",
+                            "-timeout=" + g.witness_timeout(wid, mode)]
+                    if mode == "race":
+                        args.append("-race")
+                    args += ["./" + package_dir, "-run", "^" + spec["name"] + "$"]
+                    result[mode] = {
+                        "status": "PASS", "command": args, "exit_status": 0,
+                        "failed_registered_tests": [], "log_sha256": g.digest(stdout),
+                        "stderr_sha256": g.digest(b""), "test_names": sorted(names),
+                        "reason": "", "sanitized_events": safe,
+                        "sanitized_events_sha256": g.digest(json.dumps(
+                            safe, sort_keys=True, separators=(",", ":")).encode()),
+                    }
+                results[wid] = result
+            report = g.report(self.registry, self.normative, results, sha,
+                              g.digest((ROOT / g.REGISTRY).read_bytes()))
+            report.update({
+                "go_version": "go version go1.27.2 linux/amd64",
+                "python_version": platform.python_version(),
+                "ci_run": os.getenv("GITHUB_RUN_ID"),
+                "ci_attempt": os.getenv("GITHUB_RUN_ATTEMPT"),
+            })
+            def read_source(path):
+                return (ROOT / path).read_text()
+            original = json.dumps(report).encode()
+            recomputed, failures = g6.check_attested_evidence(
+                ROOT, original, sha, self.registry, self.normative, read_source, logs)
+            self.assertFalse(failures)
+            self.assertEqual(recomputed["counts"], report["counts"])
+            mutant = copy.deepcopy(report)
+            mutant["rows"][0]["status"] = "PASS_EXISTING_TEST"
+            with self.assertRaises(ValueError):
+                g6.check_attested_evidence(ROOT, json.dumps(mutant).encode(), sha,
+                    self.registry, self.normative, read_source, logs)
+            mutant = copy.deepcopy(report)
+            mutant["sha"] = "b" * 40
+            with self.assertRaises(ValueError):
+                g6.check_attested_evidence(ROOT, json.dumps(mutant).encode(), sha,
+                    self.registry, self.normative, read_source, logs)
+            mutant = copy.deepcopy(report)
+            first = sorted(results)[0]
+            mutant["witnesses"][first]["race"]["command"].append("-count=0")
+            with self.assertRaises(ValueError):
+                g6.check_attested_evidence(ROOT, json.dumps(mutant).encode(), sha,
+                    self.registry, self.normative, read_source, logs)
+            log = logs / (first + "-race.jsonl")
+            log.write_bytes(log.read_bytes() + b"forged")
+            with self.assertRaises(ValueError):
+                g6.check_attested_evidence(ROOT, original, sha,
+                    self.registry, self.normative, read_source, logs)
 
     def test_621_roster_and_byte_agreement_are_all_required(self):
         valid = json.dumps(self.fake_conformance()).encode()

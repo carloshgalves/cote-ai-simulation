@@ -51,14 +51,15 @@ jobs:
           files=(cmd/csf-reference-run-local/main_linux.go cmd/csf-reference-run-local/verify_linux.go cmd/csf-reference-run-local/main_linux_test.go
             cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go
             cmd/csf-reference-run-local/h2_owner_linux.go cmd/csf-reference-run-local/h2_integrated_mutants_linux_test.go
-            cmd/csf-reference-run-local/h2_ingress_linux.go)
+            cmd/csf-reference-run-local/h2_ingress_linux.go cmd/csf-reference-run-local/h2_raw_source_linux.go
+            internal/physicalhost/supervisor_linux.go internal/physicalhost/private_capture_linux.go)
           if [ -n "$(gofmt -l "${files[@]}")" ]; then
             gofmt -d "${files[@]}"
             exit 1
           fi
-          go test -count=1 -timeout=10m ./cmd/csf-reference-run-local
-          go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local
-          go vet ./cmd/csf-reference-run-local
+          go test -count=1 -timeout=10m ./cmd/csf-reference-run-local ./internal/physicalhost
+          go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local ./internal/physicalhost
+          go vet ./cmd/csf-reference-run-local ./internal/physicalhost
       - name: Real A1+D3 and detached owner, snapshot and ledger semantic mutants
         run: |
           set -euo pipefail
@@ -69,6 +70,7 @@ jobs:
           grep -Fx 'H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_GENESIS_BOUND_SIGNED_INGRESS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_RAW_PYTHON_A1_CUTS=SEALED_AND_VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'CSFRV1_10_V1_DOD_ACCEPTED=NO' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'FIRST_REAL_RUN_PRODUCTION_GO=NO' "$RUNNER_TEMP/h-summary.txt"
           go run ./cmd/csf-reference-run-local --verify "$out"
@@ -98,6 +100,8 @@ jobs:
           echo 'H_LOCAL_SOURCE=REAL_PYTHON_A1_D3'
           echo 'H2_FIVE_LEDGER_EXPORT=REAL_PRIVATE_REPLAY'
           echo 'H2_TWO_OWNER_SIGNED_RECEIPTS=REAL_PRIVATE_REPLAY'
+          echo 'H2_RAW_A1_ARCHIVE=PRIVATE_EXACT_SOURCE_BYTES_TWO_EPOCHS'
+          echo 'H2_A1_ARCHIVE_SEALED_COLD_SOURCE=VERIFIED'
           echo 'H2_SIGNED_SOURCE_RECEIPTS=2_EPOCHS_EIGHT_RECEIPTS_FINAL_CLOSURE'
           echo 'H2_NO_REINGRESS_ON_DURABLE_RECOVERY=VERIFIED'
           echo 'H2_SNAPSHOT_SEAL=VERIFIED_THREE_TAIL_COMMITS'

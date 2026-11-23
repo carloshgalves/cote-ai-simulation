@@ -38,6 +38,16 @@ class RegistryTests(unittest.TestCase):
             "swapped-dispatch", "changed-live-dispatch",
             "unsupported-public-view", "cancellation"])
 
+    def test_only_long_e2_race_gets_extended_execution_budget(self):
+        # A shared CI runner can make the 14-fault DB reopen audit exceed
+        # 15m under -race. Keep every other test at the original cap.
+        self.assertEqual(g.witness_timeout("g3-e2-physical-atomic", "race"), "25m")
+        self.assertEqual(g.witness_timeout("g3-e2-physical-atomic", "normal"), "15m")
+        for wid in self.registry["witnesses"]:
+            for mode in ("normal", "race"):
+                if (wid, mode) != ("g3-e2-physical-atomic", "race"):
+                    self.assertEqual(g.witness_timeout(wid, mode), "15m")
+
     def test_invalid_manifest(self):
         def row(m, rid):
             return next(r for r in m["rows"] if r["id"] == rid)

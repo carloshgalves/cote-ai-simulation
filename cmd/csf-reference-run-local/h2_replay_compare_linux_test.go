@@ -3,6 +3,7 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"database/sql"
 	"os"
@@ -86,6 +87,31 @@ func TestH2SameSignedSourceMultisetComparesEveryTypedRow(t *testing.T) {
 	}
 	if reflect.DeepEqual(left, extra) {
 		t.Fatal("injected auxiliary schema not detected")
+	}
+}
+
+func TestH2ReplayRefusesOversizedMultiColumnPrivateRows(t *testing.T) {
+	ctx := context.Background()
+	path := filepath.Join(t.TempDir(), "large.db")
+	db, err := sql.Open("sqlite", path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := db.Exec("CREATE TABLE authoritative (part_a BLOB, part_b BLOB)"); err != nil {
+		t.Fatal(err)
+	}
+	chunk := bytes.Repeat([]byte{0x42}, 5<<20)
+	if _, err := db.Exec("INSERT INTO authoritative VALUES (?,?)", chunk, chunk); err != nil {
+		t.Fatal(err)
+	}
+	if err := db.Close(); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Chmod(path, 0600); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := replayDbTableSetH2(ctx, path); err == nil {
+		t.Fatal("large multi-column private row bypassed global H2 memory bound")
 	}
 }
 

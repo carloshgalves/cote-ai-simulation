@@ -226,6 +226,12 @@ func TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs(t *testing
 			}
 		})
 	}
+	// Never mint a success-shaped evidence report if any subordinate
+	// crash/recovery case failed. The Go test exit status alone is not a
+	// durable auditor certificate and this file must remain fail-closed.
+	if t.Failed() {
+		return
+	}
 	// Engine-privileged transcript bytes must never become CI artifacts.
 	// Only counts, run shape and hashes are safe evidence for this oracle.
 	if artifact := os.Getenv("CSF_E2_EVIDENCE_PATH"); artifact != "" {

@@ -32,13 +32,14 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 	defer syscall.Umask(previous)
 	for _, variant := range []string{"owner-plaintext", "sealed-snapshot", "framed-ledger", "signed-ingress-proof",
 		"missing-signed-ingress-proof", "raw-snapshot", "raw-events", "raw-evidence",
-		"raw-signature", "raw-cut", "raw-private-proof"} {
+		"raw-signature", "raw-cut", "raw-private-proof",
+		"replay-causal-row", "replay-owner-checkpoint", "replay-compare-proof", "replay-extra-table"} {
 		t.Run(variant, func(t *testing.T) {
 			out := t.TempDir()
 			if err := os.Chmod(out, 0700); err != nil {
 				t.Fatal(err)
 			}
-			for _, subdir := range []string{"owner", "ledger-export", "physical-cuts", "physical-cuts/epoch-1", "physical-cuts/epoch-2"} {
+			for _, subdir := range []string{"owner", "ledger-export", "physical-cuts", "physical-cuts/epoch-1", "physical-cuts/epoch-2", "replay", "replay/owner"} {
 				if err := os.Mkdir(filepath.Join(out, subdir), 0700); err != nil {
 					t.Fatal(err)
 				}
@@ -153,6 +154,37 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 				if err := os.WriteFile(path, append(changed, '\n'), 0600); err != nil {
 					t.Fatal(err)
 				}
+			case "replay-causal-row", "replay-extra-table", "replay-owner-checkpoint":
+				target := filepath.Join(out, "replay", "causal.db")
+				if variant == "replay-owner-checkpoint" {
+					target = filepath.Join(out, "replay", "owner", "actor-b.db")
+				}
+				db, err := sql.Open("sqlite", target)
+				if err != nil { t.Fatal(err) }
+				statement := "UPDATE input_ledger SET canonical=x'00' WHERE rowid=(SELECT MIN(rowid) FROM input_ledger)"
+				if variant == "replay-owner-checkpoint" {
+					statement = "UPDATE checkpoints SET content=x'00' WHERE locator=(SELECT locator FROM checkpoints ORDER BY locator LIMIT 1)"
+				}
+				if variant == "replay-extra-table" {
+					statement = "CREATE TABLE injected_noncanonical_auxiliary (id BLOB)"
+				}
+				result, execErr := db.Exec(statement)
+				closeErr := db.Close()
+				if execErr != nil || closeErr != nil { t.Fatalf("invalid real replay mutation: %v / %v",execErr,closeErr) }
+				if variant != "replay-extra-table" {
+					n, err := result.RowsAffected()
+					if err != nil || n != 1 { t.Fatalf("failed to mutate exact real replay row: %d / %v",n,err) }
+				}
+			case "replay-compare-proof":
+				path := filepath.Join(out, filepath.FromSlash(replayComparisonPathH2))
+				data, err := os.ReadFile(path)
+				if err != nil { t.Fatal(err) }
+				var proof replayComparisonH2
+				if err := json.Unmarshal(data, &proof); err != nil { t.Fatal(err) }
+				proof.InputsIdentical = false
+				changed, err := json.MarshalIndent(proof,"","  ")
+				if err != nil { t.Fatal(err) }
+				if err := os.WriteFile(path,append(changed,'\n'),0600);err != nil { t.Fatal(err) }
 			}
 			// Forge a new fully consistent *local SHA256 index* to prove that
 			// private record signatures/snapshot seals/full byte replay are
@@ -195,6 +227,10 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 				"raw-signature":                "H2-R original Python A1 cold source validation",
 				"raw-cut":                      "H2-R original Python A1 cold source validation",
 				"raw-private-proof":            "H2-R original Python A1 cold source validation",
+				"replay-causal-row":            "H2 same A1 second independent D3 verification",
+				"replay-owner-checkpoint":      "H2 same A1 second independent D3 verification",
+				"replay-compare-proof":         "H2 same A1 second independent D3 verification",
+				"replay-extra-table":           "H2 same A1 second independent D3 verification",
 			}[variant]
 			if !strings.Contains(err.Error(), required) {
 				t.Fatalf("unexpected rejection path, not target cryptographic invariant %s: %v", required, err)

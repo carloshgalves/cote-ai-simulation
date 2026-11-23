@@ -47,6 +47,11 @@ jobs:
       - name: Tests and negative verification controls
         run: |
           git diff --check
+          files=(cmd/csf-reference-run-local/main_linux.go cmd/csf-reference-run-local/verify_linux.go cmd/csf-reference-run-local/main_linux_test.go)
+          if [ -n "$(gofmt -l "${files[@]}")" ]; then
+            gofmt -d "${files[@]}"
+            exit 1
+          fi
           go test -count=1 -timeout=10m ./cmd/csf-reference-run-local
           go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local
           go vet ./cmd/csf-reference-run-local
@@ -75,14 +80,3 @@ jobs:
           echo 'H_MUTANTS=REJECTED'
           echo 'H_RELEASE=NO_GO'
           # No private db, raw A1, owner, signed cut or evidence output is uploaded.
-      - name: Capture source-only gofmt review suggestions
-        if: ${{ always() }}
-        run: |
-          for file in cmd/csf-reference-run-local/main_linux.go cmd/csf-reference-run-local/verify_linux.go cmd/csf-reference-run-local/main_linux_test.go; do
-            if ! cmp -s "$file" <(gofmt "$file"); then
-              echo "GOFMT_BEGIN:$file"
-              gofmt "$file" | base64 -w0
-              echo
-              echo "GOFMT_END:$file"
-            fi
-          done

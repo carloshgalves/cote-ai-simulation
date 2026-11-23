@@ -3,7 +3,6 @@
 package main
 
 import (
-	"bytes"
 	"context"
 	"crypto/sha256"
 	"database/sql"
@@ -155,7 +154,7 @@ func compareSameSignedSourcesH2(ctx context.Context, out,sha,run string, install
 	replayGenesis,err:=replayAndGenesis(ctx,filepath.Join(out,"replay","causal.db"),installed,run)
 	if err!=nil||originalGenesis!=replayGenesis{return zero,errors.New("H2 replay Genesis/reconstructed clocks differ")}
 	for _,root:=range []string{out,filepath.Join(out,"replay")}{
-		if _,err:=verifiedSnapshotH2(ctx,filepath.Join(root,"causal.db"),run,installed);err!=nil{
+		if _,_,_,err:=verifiedSnapshotH2(ctx,filepath.Join(root,"causal.db"),run,installed);err!=nil{
 			return zero,fmt.Errorf("H2 replay sealed C4 snapshot: %w",err)
 		}
 		if _,err:=auditOwnersH2(ctx,root,sha,run);err!=nil{

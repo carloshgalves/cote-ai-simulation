@@ -68,21 +68,23 @@ func RunReferenceD3OfflineSameSignedA1(
 	}
 	// A standalone replay cannot mutate, append to or re-open an already
 	// existing causal/owner authority. Reject supplied paths before C4 writes.
-	for _,target := range []string{dbPath,ownerPath,ownerPath+".actor-a"}{
+	for _, target := range []string{dbPath, ownerPath, ownerPath + ".actor-a"} {
 		targetAbs, err := filepath.Abs(target)
-		if err != nil {return zero,err}
-		parent,err:=os.Lstat(filepath.Dir(targetAbs))
-		if err!=nil || !parent.IsDir() || parent.Mode()&os.ModeSymlink!=0 ||
-			parent.Mode().Perm()&0077!=0 {
+		if err != nil {
+			return zero, err
+		}
+		parent, err := os.Lstat(filepath.Dir(targetAbs))
+		if err != nil || !parent.IsDir() || parent.Mode()&os.ModeSymlink != 0 ||
+			parent.Mode().Perm()&0077 != 0 {
 			return zero, errors.New("H2 same-cut replay needs a private real destination directory")
 		}
-		if _,err:=os.Lstat(targetAbs);!errors.Is(err,os.ErrNotExist) {
+		if _, err := os.Lstat(targetAbs); !errors.Is(err, os.ErrNotExist) {
 			return zero, errors.New("H2 same-cut replay refuses an existing causal or owner database")
 		}
 	}
-	absDb,_:=filepath.Abs(dbPath)
-	absOwner,_:=filepath.Abs(ownerPath)
-	if absDb==absOwner || absDb==absOwner+".actor-a" {
+	absDb, _ := filepath.Abs(dbPath)
+	absOwner, _ := filepath.Abs(ownerPath)
+	if absDb == absOwner || absDb == absOwner+".actor-a" {
 		return zero, errors.New("H2 same-cut replay cannot alias causal and owner authorities")
 	}
 	g, err := buildReferenceGenesis(cfg.Host.Bundle)

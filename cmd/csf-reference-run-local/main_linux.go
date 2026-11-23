@@ -169,6 +169,9 @@ func runLocal(ctx context.Context, output string) error {
 	if err := exportH2Ledgers(ctx, out, sha, public.RunID, host.Bundle); err != nil {
 		return fmt.Errorf("independent H2 canonical ledger export: %w", err)
 	}
+	if err := exportOwnersH2(ctx, out, sha, public.RunID); err != nil {
+		return fmt.Errorf("H2 signed owner proof: %w", err)
+	}
 	finalSHA, err := gitOutput(root, "rev-parse", "HEAD")
 	if err != nil || finalSHA != sha {
 		return errors.New("source SHA changed during local A1/D3 run")

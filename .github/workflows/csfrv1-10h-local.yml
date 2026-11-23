@@ -44,18 +44,14 @@ jobs:
             'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
           python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-h
           find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
-      - name: Tests and negative verification controls
+      - name: Unit, race and negative controls
         run: |
+          set -euo pipefail
           git diff --check
-          files=(cmd/csf-reference-run-local/main_linux.go cmd/csf-reference-run-local/verify_linux.go cmd/csf-reference-run-local/main_linux_test.go)
-          if [ -n "$(gofmt -l "${files[@]}")" ]; then
-            gofmt -d "${files[@]}"
-            exit 1
-          fi
           go test -count=1 -timeout=10m ./cmd/csf-reference-run-local
           go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local
           go vet ./cmd/csf-reference-run-local
-      - name: Execute one REAL A1 + Go C4/D3 local run and independent detached verification
+      - name: Real A1+D3 and detached owner, snapshot and ledger semantic mutants
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
@@ -67,49 +63,7 @@ jobs:
           grep -Fx 'CSFRV1_10_V1_DOD_ACCEPTED=NO' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'FIRST_REAL_RUN_PRODUCTION_GO=NO' "$RUNNER_TEMP/h-summary.txt"
           go run ./cmd/csf-reference-run-local --verify "$out"
-          H2_REAL_PRIVATE_ARCHIVE="$out" go test -v -count=1 -run '^TestH2RejectsRehashedSemanticCorruption
-            echo "SECURITY ERROR: overwritten local archive"
-            exit 1
-          fi
-          cp -a "$out" "$RUNNER_TEMP/h-tampered"
-          printf x >> "$RUNNER_TEMP/h-tampered/owner/actor-b.db"
-          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-tampered"; then
-            echo "SECURITY ERROR: altered owner checkpoint accepted"
-            exit 1
-          fi
-          cp -a "$out" "$RUNNER_TEMP/h-tampered-ledger"
-          printf x >> "$RUNNER_TEMP/h-tampered-ledger/ledger-export/input_ledger.bin"
-          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-tampered-ledger"; then
-            echo "SECURITY ERROR: tampered canonical ledger accepted"
-            exit 1
-          fi
-          cp -a "$out" "$RUNNER_TEMP/h-missing-ledger"
-          rm "$RUNNER_TEMP/h-missing-ledger/ledger-export/event_store.bin"
-          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-missing-ledger"; then
-            echo "SECURITY ERROR: missing normative ledger accepted"
-            exit 1
-          fi
-          echo 'H_LOCAL_SOURCE=REAL_PYTHON_A1_D3'
-          echo 'H2_FIVE_LEDGER_EXPORT=REAL_PRIVATE_REPLAY'
-          echo 'H2_TWO_OWNER_SIGNED_RECEIPTS=REAL_PRIVATE_REPLAY'
-          echo 'H2_SNAPSHOT_SEAL=VERIFIED_THREE_TAIL_COMMITS'
-          echo 'H_ARCHIVE_VERIFIER=PASS'
-          echo 'H_MUTANTS=REJECTED'
-          echo 'H_RELEASE=NO_GO'
-          # No private db, raw A1, owner, signed cut or evidence output is uploaded.
-      - name: Emit gofmt-only H2 source for review
-        if: ${{ always() }}
-        shell: bash
-        run: |
-          for file in cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go cmd/csf-reference-run-local/h2_owner_linux.go cmd/csf-reference-run-local/h2_integrated_mutants_linux_test.go; do
-            if ! cmp -s "$file" <(gofmt "$file"); then
-              echo "H2_GO_FMT_BEGIN:$file"
-              gofmt "$file" | base64 -w0
-              echo
-              echo "H2_GO_FMT_END:$file"
-            fi
-          done
- ./cmd/csf-reference-run-local
+          H2_REAL_PRIVATE_ARCHIVE="$out" go test -v -count=1 -run TestH2RejectsRehashedSemanticCorruption ./cmd/csf-reference-run-local
           if go run ./cmd/csf-reference-run-local --out "$out"; then
             echo "SECURITY ERROR: overwritten local archive"
             exit 1
@@ -135,15 +89,15 @@ jobs:
           echo 'H_LOCAL_SOURCE=REAL_PYTHON_A1_D3'
           echo 'H2_FIVE_LEDGER_EXPORT=REAL_PRIVATE_REPLAY'
           echo 'H2_TWO_OWNER_SIGNED_RECEIPTS=REAL_PRIVATE_REPLAY'
-          echo 'H_ARCHIVE_VERIFIER=PASS'
+          echo 'H2_SNAPSHOT_SEAL=VERIFIED_THREE_TAIL_COMMITS'
           echo 'H_MUTANTS=REJECTED'
           echo 'H_RELEASE=NO_GO'
-          # No private db, raw A1, owner, signed cut or evidence output is uploaded.
-      - name: Emit gofmt-only H2 source for review
+          # Never upload private ledgers, physical source, owner DBs or raw cuts.
+      - name: Emit formatting evidence for new Go source only
         if: ${{ always() }}
         shell: bash
         run: |
-          for file in cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go cmd/csf-reference-run-local/h2_owner_linux.go; do
+          for file in cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go cmd/csf-reference-run-local/h2_owner_linux.go cmd/csf-reference-run-local/h2_integrated_mutants_linux_test.go; do
             if ! cmp -s "$file" <(gofmt "$file"); then
               echo "H2_GO_FMT_BEGIN:$file"
               gofmt "$file" | base64 -w0

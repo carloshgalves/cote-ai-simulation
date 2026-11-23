@@ -85,9 +85,13 @@ func collectedPaths(out string) ([]string, error) {
 		for _, name := range replaySidecarPathsH2 {
 			if _, err := os.Lstat(filepath.Join(out, filepath.FromSlash(name))); err == nil {
 				paths = append(paths, name)
-			} else if !errors.Is(err, os.ErrNotExist) {return nil,err}
+			} else if !errors.Is(err, os.ErrNotExist) {
+				return nil, err
+			}
 		}
-	} else if !errors.Is(err, os.ErrNotExist) {return nil,err}
+	} else if !errors.Is(err, os.ErrNotExist) {
+		return nil, err
+	}
 	for _, name := range optionalFiles {
 		_, err := os.Lstat(filepath.Join(out, filepath.FromSlash(name)))
 		if err == nil {
@@ -450,13 +454,15 @@ func verifyLocal(ctx context.Context, dir string) error {
 		replayPresent := false
 		if _, err := os.Lstat(filepath.Join(out, "replay")); err == nil {
 			replayPresent = true
-		} else if !errors.Is(err, os.ErrNotExist) {return err}
+		} else if !errors.Is(err, os.ErrNotExist) {
+			return err
+		}
 		if replayPresent != (meta.EvidenceProfile == "H2_SAME_A1_REPLAY_V1") {
 			return errors.New("H2 same-cut replay profile mismatches the private second DB authority")
 		}
 		if replayPresent {
-			if err := coldVerifyReplayH2(ctx,out,meta.SourceSHA,public.RunID,installed);err!=nil {
-				return fmt.Errorf("H2 same A1 second independent D3 verification: %w",err)
+			if err := coldVerifyReplayH2(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
+				return fmt.Errorf("H2 same A1 second independent D3 verification: %w", err)
 			}
 			fmt.Println("H2_SAME_SIGNED_A1_INDEPENDENT_GO_D3=BYTE_IDENTICAL_AUTHORITIES")
 		}

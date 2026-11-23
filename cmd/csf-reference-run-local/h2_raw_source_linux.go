@@ -37,25 +37,25 @@ func rawA1PathsH2() []string {
 }
 
 type rawA1EpochProofH2 struct {
-	Epoch               int    `json:"epoch"`
-	SnapshotBytes       int    `json:"snapshot_bytes"`
-	EventsBytes         int    `json:"events_bytes"`
-	EvidenceBytes       int    `json:"evidence_bytes"`
-	SnapshotSHA256      string `json:"snapshot_sha256"`
-	EventsSHA256        string `json:"events_sha256"`
-	EvidenceSHA256      string `json:"evidence_sha256"`
-	CutSHA256           string `json:"cut_sha256"`
-	SignatureSHA256     string `json:"signature_sha256"`
+	Epoch                int    `json:"epoch"`
+	SnapshotBytes        int    `json:"snapshot_bytes"`
+	EventsBytes          int    `json:"events_bytes"`
+	EvidenceBytes        int    `json:"evidence_bytes"`
+	SnapshotSHA256       string `json:"snapshot_sha256"`
+	EventsSHA256         string `json:"events_sha256"`
+	EvidenceSHA256       string `json:"evidence_sha256"`
+	CutSHA256            string `json:"cut_sha256"`
+	SignatureSHA256      string `json:"signature_sha256"`
 	CompletedStateSHA256 string `json:"completed_state_sha256"`
 }
 type rawA1ProofH2 struct {
-	Schema        string             `json:"schema"`
-	SourceSHA     string             `json:"source_sha"`
-	RunID         string             `json:"run_id"`
-	GenesisDigest string             `json:"genesis_digest"`
-	SourceID      string             `json:"source_id"`
+	Schema        string               `json:"schema"`
+	SourceSHA     string               `json:"source_sha"`
+	RunID         string               `json:"run_id"`
+	GenesisDigest string               `json:"genesis_digest"`
+	SourceID      string               `json:"source_id"`
 	Epochs        [2]rawA1EpochProofH2 `json:"epochs"`
-	Disposition   string             `json:"disposition"`
+	Disposition   string               `json:"disposition"`
 }
 
 func sealPrivateRawA1H2(raw []byte) (*os.File, error) {
@@ -130,15 +130,25 @@ func inspectRawA1H2(ctx context.Context, out, sha, run string, installed *policy
 			return filepath.Join(out, "physical-cuts", fmt.Sprintf("epoch-%d", epoch), file)
 		}
 		snapshot, err := readPrivateRegular(name("snapshot.yaml"))
-		if err != nil { return zero, err }
+		if err != nil {
+			return zero, err
+		}
 		events, err := readPrivateRegular(name("events.jsonl"))
-		if err != nil { return zero, err }
+		if err != nil {
+			return zero, err
+		}
 		evidence, err := readPrivateRegular(name("evidence.json"))
-		if err != nil { return zero, err }
+		if err != nil {
+			return zero, err
+		}
 		cutRaw, err := readPrivateRegular(name("cut.cbor"))
-		if err != nil { return zero, err }
+		if err != nil {
+			return zero, err
+		}
 		signature, err := readPrivateRegular(name("signature.bin"))
-		if err != nil { return zero, err }
+		if err != nil {
+			return zero, err
+		}
 		if len(snapshot) > 16*1024*1024 || len(events) > 64*1024*1024 ||
 			len(evidence) > 4_194_304 || len(signature) != 64 ||
 			len(cutRaw) == 0 || len(cutRaw) > 4096 {
@@ -158,9 +168,14 @@ func inspectRawA1H2(ctx context.Context, out, sha, run string, installed *policy
 			return zero, errors.New("H2-R archived original Python source hash differs from signed cut")
 		}
 		snapshotFD, err := sealPrivateRawA1H2(snapshot)
-		if err != nil { return zero, err }
+		if err != nil {
+			return zero, err
+		}
 		eventsFD, err := sealPrivateRawA1H2(events)
-		if err != nil { _ = snapshotFD.Close(); return zero, err }
+		if err != nil {
+			_ = snapshotFD.Close()
+			return zero, err
+		}
 		verified, inspectErr := embodimentv1.InspectSignedSealedUnadmitted(
 			snapshotFD, eventsFD, evidence, canonical, installed, cut)
 		_ = eventsFD.Close()
@@ -169,9 +184,13 @@ func inspectRawA1H2(ctx context.Context, out, sha, run string, installed *policy
 			return zero, fmt.Errorf("H2-R raw A1 sealed source/A2 completion check: %w", inspectErr)
 		}
 		typed, err := verified.PhysicalCompletedState()
-		if err != nil { return zero, err }
+		if err != nil {
+			return zero, err
+		}
 		derivedCanonical, err := codec.CanonicalPayload(typed)
-		if err != nil { return zero, err }
+		if err != nil {
+			return zero, err
+		}
 		expected := signed.Epochs[epoch-1]
 		if expected.Epoch != uint64(epoch) ||
 			expected.CanonicalCutSHA256 != hashBytes(cutRaw) ||
@@ -180,16 +199,22 @@ func inspectRawA1H2(ctx context.Context, out, sha, run string, installed *policy
 			return zero, errors.New("H2-R original A1 raw source is not the one durably ingressed")
 		}
 		id, err := hex.DecodeString(expected.InputID)
-		if err != nil || len(id) != 32 { return zero, errors.New("H2-R missing signed source identity") }
+		if err != nil || len(id) != 32 {
+			return zero, errors.New("H2-R missing signed source identity")
+		}
 		var ledgerCanonical []byte
 		if err := db.QueryRowContext(ctx,
 			"SELECT canonical FROM input_ledger WHERE id=?", id).Scan(&ledgerCanonical); err != nil {
 			return zero, err
 		}
 		value, err := codec.StrictDecodePayload(ledgerCanonical)
-		if err != nil { return zero, err }
+		if err != nil {
+			return zero, err
+		}
 		fields, ok := value.([]any)
-		if !ok || len(fields) != 13 { return zero, errors.New("H2-R malformed durable source") }
+		if !ok || len(fields) != 13 {
+			return zero, errors.New("H2-R malformed durable source")
+		}
 		envelope, ok := fields[7].([]any)
 		if !ok || len(envelope) != 5 || envelope[0] != "physical.source-cut.v1" ||
 			!bytes.Equal(bytesH2(envelope[2]), cutRaw) ||
@@ -213,20 +238,28 @@ func inspectRawA1H2(ctx context.Context, out, sha, run string, installed *policy
 
 func exportRawA1H2(ctx context.Context, out, sha, run string, installed *policy.Bundle) error {
 	proof, err := inspectRawA1H2(ctx, out, sha, run, installed)
-	if err != nil { return err }
+	if err != nil {
+		return err
+	}
 	return exclusiveJSON(filepath.Join(out, rawA1ProofPathH2), proof)
 }
 
 func verifyRawA1H2(ctx context.Context, out, sha, run string, installed *policy.Bundle) error {
 	raw, err := readPrivateRegular(filepath.Join(out, rawA1ProofPathH2))
-	if err != nil { return err }
+	if err != nil {
+		return err
+	}
 	var captured rawA1ProofH2
-	if err := json.Unmarshal(raw, &captured); err != nil { return err }
+	if err := json.Unmarshal(raw, &captured); err != nil {
+		return err
+	}
 	if !exactLocalJSON(raw, captured) {
 		return errors.New("H2-R private A1 proof contains unknown, duplicate or noncanonical JSON")
 	}
 	reconstructed, err := inspectRawA1H2(ctx, out, sha, run, installed)
-	if err != nil { return err }
+	if err != nil {
+		return err
+	}
 	if captured != reconstructed {
 		return errors.New("H2-R stored original Python source does not match independently reconstructed signed proof")
 	}

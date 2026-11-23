@@ -124,6 +124,22 @@ func extractSignedIngressH2(ctx context.Context, archive, sourceSHA, run string,
 	if err := rows.Close(); err != nil {
 		return zero, err
 	}
+	// Frozen source-prefix contract from C4 plus D2:
+	// C4 closes physical.a1 at Genesis, due time and next actor round,
+	// then D2 admits exactly two signed epochs with local closures and
+	// a single final closure. These are not six physical outputs.
+	expectedKinds := [...]uint64{2, 2, 2, 1, 2, 1, 2, 2}
+	expectedClosure := map[uint64]struct {
+		producer string
+		final    bool
+	}{
+		0: {"physical.a1.partial", false},
+		1: {"physical.a1.final", false},
+		2: {"physical.a1.c4-through-next-round", false},
+		4: {"physical.a1.closed.1", false},
+		6: {"physical.a1.closed.2", false},
+		7: {"physical.a1.final.epoch-2", true},
+	}
 	seenEpochs := map[uint64]bool{}
 	var lastClosed bool
 	for _, entry := range receiptRows {
@@ -151,8 +167,9 @@ func extractSignedIngressH2(ctx context.Context, archive, sourceSHA, run string,
 			return zero, errors.New("H2-S receipt identity does not reference persisted source record")
 		}
 		kind, ok := ref[0].(uint64)
-		if !ok || (kind != 1 && kind != 2) || len(bytesH2(ref[2])) != 32 {
-			return zero, errors.New("H2-S unknown receipt kind or digest")
+		if !ok || (kind != 1 && kind != 2) || len(bytesH2(ref[2])) != 32 ||
+			uint64(sequence) >= uint64(len(expectedKinds)) || kind != expectedKinds[sequence] {
+			return zero, errors.New("H2-S unknown, reordered or mutated registered ingress/closure")
 		}
 		var recordCanonical []byte
 		if err := db.QueryRowContext(ctx, "SELECT canonical FROM input_ledger WHERE id=?", recordID).Scan(&recordCanonical); err != nil {
@@ -223,6 +240,10 @@ func extractSignedIngressH2(ctx context.Context, archive, sourceSHA, run string,
 			if !ok {
 				return zero, errors.New("H2-S untyped final source closure")
 			}
+			expected, present := expectedClosure[uint64(sequence)]
+			if !present || fields[3] != expected.producer || final != expected.final {
+				return zero, errors.New("H2-S physical source closure producer/order/finalness differs from frozen C4/D2 contract")
+			}
 			wantID, _, err := identity.New(installed).Sum("cote.csf.id.source-closure",
 				"cote.csf.schema.source-closure-id-preimage", 1, []any{fields[1], fields[2], fields[3]})
 			if err != nil || !bytes.Equal(recordID, wantID[:]) {
@@ -240,7 +261,7 @@ func extractSignedIngressH2(ctx context.Context, archive, sourceSHA, run string,
 		}
 		proof.IngressCount++
 	}
-	if proof.IngressCount != 5 || proof.ClosureCount != 3 || !lastClosed ||
+	if proof.IngressCount != 8 || proof.ClosureCount != 6 || !lastClosed ||
 		!seenEpochs[1] || !seenEpochs[2] || proof.Epochs[0].Epoch != 1 || proof.Epochs[1].Epoch != 2 {
 		return zero, fmt.Errorf("H2-S incomplete authenticated physical prefix: receipts=%d closures=%d final=%t epoch1=%t epoch2=%t", proof.IngressCount, proof.ClosureCount, lastClosed, seenEpochs[1], seenEpochs[2])
 	}

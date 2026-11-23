@@ -64,7 +64,7 @@ class G6DecisionTests(unittest.TestCase):
                     "action": event["Action"], "package": event["Package"],
                     **({"test": event["Test"]} if "Test" in event else {}),
                 } for event in history]
-                stdout = ("\\n".join(json.dumps(event) for event in history) + "\\n").encode()
+                stdout = ("\n".join(json.dumps(event) for event in history) + "\n").encode()
                 result = {
                     "source": spec["path"], "name": spec["name"],
                     "kind": spec["kind"],

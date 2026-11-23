@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -64,6 +65,25 @@ func RunReferenceD3OfflineSameSignedA1(
 		cfg.FailPhysicalAtEpoch != 0 || cfg.FailPhysicalAfterStep != 0 ||
 		cfg.frozenSupervisedCuts != nil || len(cfg.Host.GenesisCanonical) != 0 {
 		return zero, errors.New("H2 same-cut replay requires a fresh offline-only signed-source configuration")
+	}
+	// A standalone replay cannot mutate, append to or re-open an already
+	// existing causal/owner authority. Reject supplied paths before C4 writes.
+	for _,target := range []string{dbPath,ownerPath,ownerPath+".actor-a"}{
+		targetAbs, err := filepath.Abs(target)
+		if err != nil {return zero,err}
+		parent,err:=os.Lstat(filepath.Dir(targetAbs))
+		if err!=nil || !parent.IsDir() || parent.Mode()&os.ModeSymlink!=0 ||
+			parent.Mode().Perm()&0077!=0 {
+			return zero, errors.New("H2 same-cut replay needs a private real destination directory")
+		}
+		if _,err:=os.Lstat(targetAbs);!errors.Is(err,os.ErrNotExist) {
+			return zero, errors.New("H2 same-cut replay refuses an existing causal or owner database")
+		}
+	}
+	absDb,_:=filepath.Abs(dbPath)
+	absOwner,_:=filepath.Abs(ownerPath)
+	if absDb==absOwner || absDb==absOwner+".actor-a" {
+		return zero, errors.New("H2 same-cut replay cannot alias causal and owner authorities")
 	}
 	g, err := buildReferenceGenesis(cfg.Host.Bundle)
 	if err != nil {

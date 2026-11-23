@@ -46,6 +46,7 @@ func TestHRejectsUnexpectedFilesAndPrivateOwnerSymlink(t *testing.T) {
 
 func TestHManifestDetectsOneByteCorruptionBeforeAnyReplay(t *testing.T) {
 	dir := t.TempDir()
+	if err := os.Chmod(dir, 0700); err != nil { t.Fatal(err) }
 	if err := os.Mkdir(filepath.Join(dir, "owner"), 0700); err != nil { t.Fatal(err) }
 	index := archiveIndex{Schema: "csfrv1-10h.local-hashes.v1"}
 	for _, name := range expectedFiles {

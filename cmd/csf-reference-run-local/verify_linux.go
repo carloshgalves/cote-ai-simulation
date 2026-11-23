@@ -3,6 +3,7 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/hex"
 	"encoding/json"
@@ -12,6 +13,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"syscall"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/commit"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
@@ -65,6 +67,10 @@ func readPrivateRegular(path string) ([]byte, error) {
 	if err != nil || !os.SameFile(stat, actual) {
 		return nil, errors.New("evidence file identity changed during read")
 	}
+	native, ok := actual.Sys().(*syscall.Stat_t)
+	if !ok || native.Nlink != 1 {
+		return nil, errors.New("hardlinked or unverifiable private artifact")
+	}
 	raw, err := io.ReadAll(io.LimitReader(file, stat.Size()+1))
 	if err != nil || int64(len(raw)) != stat.Size() {
 		return nil, errors.New("cannot read complete evidence")
@@ -74,6 +80,14 @@ func readPrivateRegular(path string) ([]byte, error) {
 		return nil, errors.New("evidence inode changed during read")
 	}
 	return raw, nil
+}
+
+// Every JSON artifact is produced by a closed Go struct and its exact
+// MarshalIndent representation. A document with extra fields, duplicate JSON
+// keys, or noncanonical serialization cannot silently pass as a safe report.
+func exactLocalJSON(raw []byte, decoded any) bool {
+	canonical, err := json.MarshalIndent(decoded, "", "  ")
+	return err == nil && bytes.Equal(raw, append(canonical, '\n'))
 }
 
 func rejectExtraneous(out string) error {
@@ -162,6 +176,9 @@ func verifyLocal(ctx context.Context, dir string) error {
 	if err := json.Unmarshal(indexBytes, &index); err != nil { return err }
 	paths, err := collectedPaths(out)
 	if err != nil { return err }
+	if !exactLocalJSON(indexBytes, index) {
+		return errors.New("noncanonical or extended archive checksum registry")
+	}
 	if index.Schema != "csfrv1-10h.local-hashes.v1" || len(index.Files) != len(paths) {
 		return errors.New("unrecognized evidence digest registry or omitted SQLite sidecar")
 	}
@@ -180,12 +197,15 @@ func verifyLocal(ctx context.Context, dir string) error {
 	if err != nil { return err }
 	var meta runManifest
 	if err := json.Unmarshal(metaRaw, &meta); err != nil { return err }
+	if !exactLocalJSON(metaRaw, meta) { return errors.New("noncanonical or extended run manifest") }
 	sha, err := gitOutput(root, "rev-parse", "HEAD")
 	if err != nil { return err }
 	if meta.Schema != "csfrv1-10h.local-manifest.v1" ||
 		meta.Disposition != "EXPERIMENTAL_LOCAL_ONLY_NO_PRODUCTION_GO" ||
 		meta.ReviewStatus != "NOT_INDEPENDENTLY_ATTESTED" ||
 		meta.SourceSHA != sha || meta.Seed != 42 ||
+		meta.GoVersion != runtime.Version() ||
+		meta.PythonVersion != "Python 3.13.18" ||
 		meta.HostOS != "linux" || meta.HostArch != runtime.GOARCH ||
 		meta.SQLiteVersion != sqlite.ExpectedVersion {
 		return errors.New("wrong source policy, runtime or unapproved release disposition")
@@ -194,6 +214,7 @@ func verifyLocal(ctx context.Context, dir string) error {
 	if err != nil { return err }
 	var public commit.ReferenceD3PublicReport
 	if err := json.Unmarshal(publicRaw, &public); err != nil { return err }
+	if !exactLocalJSON(publicRaw, public) { return errors.New("noncanonical or extended public D3 report") }
 	d := public.Disclosure
 	if public.Status != "RUN_LOCAL_10D3" || public.RunID != meta.RunID ||
 		d.PhysicalEvents != 2 || d.PhysicalPerceptionTasks != 0 ||
@@ -207,6 +228,12 @@ func verifyLocal(ctx context.Context, dir string) error {
 	if err != nil { return err }
 	if hashBytes(registration) != meta.RegistrationSHA256 {
 		return errors.New("altered A1 public registration")
+	}
+	var registrationSpec policy.PhysicalManifest
+	if err := json.Unmarshal(registration, &registrationSpec); err != nil { return err }
+	reencoded, err := json.Marshal(registrationSpec)
+	if err != nil || !bytes.Equal(reencoded, registration) {
+		return errors.New("noncanonical or extended physical registration")
 	}
 	base, err := policy.Load(filepath.Join(root, bundleRelative))
 	if err != nil { return err }

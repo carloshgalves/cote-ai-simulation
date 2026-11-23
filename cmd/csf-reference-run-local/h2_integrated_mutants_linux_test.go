@@ -94,18 +94,28 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 			case "signed-ingress-proof":
 				path := filepath.Join(out, filepath.FromSlash(signedIngressProofPathH2))
 				data, err := os.ReadFile(path)
-				if err != nil { t.Fatal(err) }
+				if err != nil {
+					t.Fatal(err)
+				}
 				var proof signedIngressProofH2
-				if err := json.Unmarshal(data, &proof); err != nil { t.Fatal(err) }
+				if err := json.Unmarshal(data, &proof); err != nil {
+					t.Fatal(err)
+				}
 				if len(proof.Epochs[0].CanonicalCutSHA256) != 64 {
 					t.Fatal("real signed ingress evidence absent")
 				}
-				proof.Epochs[0].CanonicalCutSHA256 = strings.Repeat("0",64)
-				mutated, err := json.MarshalIndent(proof,"","  ")
-				if err != nil { t.Fatal(err) }
-				if err := os.WriteFile(path,append(mutated,'\n'),0600); err != nil { t.Fatal(err) }
+				proof.Epochs[0].CanonicalCutSHA256 = strings.Repeat("0", 64)
+				mutated, err := json.MarshalIndent(proof, "", "  ")
+				if err != nil {
+					t.Fatal(err)
+				}
+				if err := os.WriteFile(path, append(mutated, '\n'), 0600); err != nil {
+					t.Fatal(err)
+				}
 			case "missing-signed-ingress-proof":
-				if err := os.Remove(filepath.Join(out,filepath.FromSlash(signedIngressProofPathH2))); err != nil { t.Fatal(err) }
+				if err := os.Remove(filepath.Join(out, filepath.FromSlash(signedIngressProofPathH2))); err != nil {
+					t.Fatal(err)
+				}
 			}
 			// Forge a new fully consistent *local SHA256 index* to prove that
 			// private record signatures/snapshot seals/full byte replay are
@@ -137,10 +147,10 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 				t.Fatalf("mutation only tested local file hash/absence, not independent semantics: %v", err)
 			}
 			required := map[string]string{
-				"owner-plaintext": "H2 independent signed owner verification",
-				"sealed-snapshot": "H2 full canonical ledger verification",
-				"framed-ledger":   "H2 full canonical ledger verification",
-				"signed-ingress-proof": "H2-S source receipt and Genesis-bound signature audit",
+				"owner-plaintext":              "H2 independent signed owner verification",
+				"sealed-snapshot":              "H2 full canonical ledger verification",
+				"framed-ledger":                "H2 full canonical ledger verification",
+				"signed-ingress-proof":         "H2-S source receipt and Genesis-bound signature audit",
 				"missing-signed-ingress-proof": "H2-S signed ingress profile does not match evidence",
 			}[variant]
 			if !strings.Contains(err.Error(), required) {

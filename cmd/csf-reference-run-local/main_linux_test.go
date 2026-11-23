@@ -4,6 +4,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"os"
 	"path/filepath"
 	"strings"
@@ -81,18 +82,57 @@ func TestHIncludesWALSidecarAndRefusesSymlink(t *testing.T) {
 	if err := rejectExtraneous(dir); err == nil { t.Fatal("symbolic sidecar accepted") }
 }
 
+func TestHRejectsHardlinkedEvidence(t *testing.T) {
+	dir := t.TempDir()
+	original := filepath.Join(dir, "private.db")
+	external := filepath.Join(dir, "alias.db")
+	if err := os.WriteFile(original, []byte("private"), 0600); err != nil { t.Fatal(err) }
+	if err := os.Link(original, external); err != nil { t.Fatal(err) }
+	if _, err := readPrivateRegular(original); err == nil {
+		t.Fatal("hardlinked private SQLite artifact accepted")
+	}
+}
+
+func TestHStrictJSONAcceptsOnlyExactClosedReportShape(t *testing.T) {
+	sample := archiveIndex{Schema: "csfrv1-10h.local-hashes.v1", Files: []fileRecord{}}
+	raw, err := json.MarshalIndent(sample, "", "  ")
+	if err != nil { t.Fatal(err) }
+	raw = append(raw, '\n')
+	if !exactLocalJSON(raw, sample) { t.Fatal("generated closed report unexpectedly refused") }
+	withUnknown := []byte(strings.Replace(string(raw), "\\"schema\\":", "\\"hidden_actor\\": true, \\"schema\\":", 1))
+	var parsed archiveIndex
+	if err := json.Unmarshal(withUnknown, &parsed); err != nil { t.Fatal(err) }
+	if exactLocalJSON(withUnknown, parsed) {
+		t.Fatal("unregistered actor field accepted in checksum index")
+	}
+	withDuplicate := []byte(strings.Replace(string(raw), "\\"schema\\":", "\\"schema\\": \\"forged\\", \\"schema\\":", 1))
+	if err := json.Unmarshal(withDuplicate, &parsed); err != nil { t.Fatal(err) }
+	if exactLocalJSON(withDuplicate, parsed) {
+		t.Fatal("duplicate JSON object key silently admitted")
+	}
+}
+
 func TestHRefusesExistingOrSourceCheckoutOutput(t *testing.T) {
 	exists := t.TempDir()
-	if err := runLocal(context.Background(), exists); err == nil {
-		t.Fatal("overwrote existing archive")
+	if err := runLocal(context.Background(), exists); err == nil ||
+		!strings.Contains(err.Error(), "requires fresh directory") {
+		t.Fatalf("existing archive not rejected for expected reason: %v", err)
 	}
 	root, err := gitOutput(".", "rev-parse", "--show-toplevel")
 	if err != nil { t.Fatal(err) }
 	target := filepath.Join(root, "untracked-secret-h-output")
-	if err := runLocal(context.Background(), target); err == nil {
-		t.Fatal("permitted private owner DB or A1 evidence inside source checkout")
+	if err := runLocal(context.Background(), target); err == nil ||
+		!strings.Contains(err.Error(), "private evidence must be outside") {
+		t.Fatalf("in-repo archive not rejected for expected reason: %v", err)
 	}
 	if _, err := os.Lstat(target); !os.IsNotExist(err) {
 		t.Fatalf("created rejected in-repository archive: %v", err)
+	}
+	alias := filepath.Join(t.TempDir(), "link")
+	if err := os.Symlink(root, alias); err != nil { t.Fatal(err) }
+	escape := filepath.Join(alias, "untracked-private")
+	if err := runLocal(context.Background(), escape); err == nil ||
+		!strings.Contains(err.Error(), "resolved private evidence") {
+		t.Fatalf("in-repository symlink alias bypassed privacy guard: %v", err)
 	}
 }

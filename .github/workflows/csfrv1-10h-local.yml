@@ -63,6 +63,7 @@ jobs:
           go run ./cmd/csf-reference-run-local --out "$out" | tee "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'CSFRV1_10_V1_DOD_ACCEPTED=NO' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'FIRST_REAL_RUN_PRODUCTION_GO=NO' "$RUNNER_TEMP/h-summary.txt"
           go run ./cmd/csf-reference-run-local --verify "$out"
@@ -90,6 +91,7 @@ jobs:
           fi
           echo 'H_LOCAL_SOURCE=REAL_PYTHON_A1_D3'
           echo 'H2_FIVE_LEDGER_EXPORT=REAL_PRIVATE_REPLAY'
+          echo 'H2_TWO_OWNER_SIGNED_RECEIPTS=REAL_PRIVATE_REPLAY'
           echo 'H_ARCHIVE_VERIFIER=PASS'
           echo 'H_MUTANTS=REJECTED'
           echo 'H_RELEASE=NO_GO'
@@ -98,7 +100,7 @@ jobs:
         if: ${{ always() }}
         shell: bash
         run: |
-          for file in cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go; do
+          for file in cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go cmd/csf-reference-run-local/h2_owner_linux.go; do
             if ! cmp -s "$file" <(gofmt "$file"); then
               echo "H2_GO_FMT_BEGIN:$file"
               gofmt "$file" | base64 -w0

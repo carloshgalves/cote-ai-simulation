@@ -242,7 +242,7 @@ func extractSignedIngressH2(ctx context.Context, archive, sourceSHA, run string,
 	}
 	if proof.IngressCount != 5 || proof.ClosureCount != 3 || !lastClosed ||
 		!seenEpochs[1] || !seenEpochs[2] || proof.Epochs[0].Epoch != 1 || proof.Epochs[1].Epoch != 2 {
-		return zero, errors.New("H2-S did not find exactly two Genesis-authenticated signed ingress cuts and final closure")
+		return zero, fmt.Errorf("H2-S incomplete authenticated physical prefix: receipts=%d closures=%d final=%t epoch1=%t epoch2=%t", proof.IngressCount, proof.ClosureCount, lastClosed, seenEpochs[1], seenEpochs[2])
 	}
 	proof.FinalSourceClosure = true
 	return proof, nil

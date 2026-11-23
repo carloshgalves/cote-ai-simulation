@@ -405,7 +405,9 @@ func verifyLocal(ctx context.Context, dir string) error {
 		rawRootPresent := false
 		if _, err := os.Lstat(filepath.Join(out, "physical-cuts")); err == nil {
 			rawRootPresent = true
-		} else if !errors.Is(err, os.ErrNotExist) { return err }
+		} else if !errors.Is(err, os.ErrNotExist) {
+			return err
+		}
 		if rawRootPresent != (meta.EvidenceProfile == "H2_RAW_SOURCE_V1") {
 			return errors.New("H2-R original A1 source archive/profile mismatch")
 		}

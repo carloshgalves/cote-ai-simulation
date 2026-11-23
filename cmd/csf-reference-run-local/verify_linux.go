@@ -49,7 +49,9 @@ func collectedPaths(out string) ([]string, error) {
 		paths = append(paths, h2PrivatePaths...)
 		if _, err := os.Lstat(filepath.Join(out, signedIngressProofPathH2)); err == nil {
 			paths = append(paths, signedIngressProofPathH2)
-		} else if !errors.Is(err, os.ErrNotExist) { return nil, err }
+		} else if !errors.Is(err, os.ErrNotExist) {
+			return nil, err
+		}
 	} else if !errors.Is(err, os.ErrNotExist) {
 		return nil, err
 	}
@@ -361,7 +363,9 @@ func verifyLocal(ctx context.Context, dir string) error {
 		present := false
 		if _, err := os.Lstat(filepath.Join(out, signedIngressProofPathH2)); err == nil {
 			present = true
-		} else if !errors.Is(err, os.ErrNotExist) { return err }
+		} else if !errors.Is(err, os.ErrNotExist) {
+			return err
+		}
 		if present != (meta.EvidenceProfile == "H2_SIGNED_INGRESS_V1") {
 			return errors.New("H2-S signed ingress profile does not match evidence contents")
 		}

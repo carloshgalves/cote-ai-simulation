@@ -65,6 +65,22 @@ func TestHManifestDetectsOneByteCorruptionBeforeAnyReplay(t *testing.T) {
 	}
 }
 
+func TestHIncludesWALSidecarAndRefusesSymlink(t *testing.T) {
+	dir := t.TempDir()
+	if err := os.Mkdir(filepath.Join(dir, "owner"), 0700); err != nil { t.Fatal(err) }
+	sidecar := filepath.Join(dir, "causal.db-shm")
+	if err := os.WriteFile(sidecar, []byte("private sqlite index"), 0600); err != nil { t.Fatal(err) }
+	paths, err := collectedPaths(dir)
+	if err != nil { t.Fatal(err) }
+	if paths[len(paths)-1] != "causal.db-shm" {
+		t.Fatal("retained SQLite sidecar omitted from archive inventory")
+	}
+	if err := rejectExtraneous(dir); err != nil { t.Fatalf("safe SQLite sidecar refused: %v", err) }
+	if err := os.Remove(sidecar); err != nil { t.Fatal(err) }
+	if err := os.Symlink(filepath.Join(dir, "owner"), sidecar); err != nil { t.Fatal(err) }
+	if err := rejectExtraneous(dir); err == nil { t.Fatal("symbolic sidecar accepted") }
+}
+
 func TestHRefusesExistingOrSourceCheckoutOutput(t *testing.T) {
 	exists := t.TempDir()
 	if err := runLocal(context.Background(), exists); err == nil {

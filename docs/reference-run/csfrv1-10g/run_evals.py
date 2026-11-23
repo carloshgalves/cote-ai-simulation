@@ -183,6 +183,17 @@ def verify_events(raw, package, names, *, transcript=None):
     return sorted(passed)
 
 
+
+def witness_timeout(witness_id, mode):
+    """Only the 14-fault E2 recovery under Go's race detector gets extra time.
+
+    It has passed exact-source CI in 11–12 minutes, but a loaded shared
+    runner reached the original 15-minute deadline. This is not a retry,
+    skipped scenario, disabled race detector or relaxed evidence check.
+    """
+    return "25m" if (witness_id, mode) == ("g3-e2-physical-atomic", "race") else "15m"
+
+
 def execute(root, directory, witnesses):
     results = {}
     env = dict(os.environ)
@@ -195,7 +206,7 @@ def execute(root, directory, witnesses):
             "source_git_blob": git_blob((root / w["path"]).read_bytes()),
         }
         for mode in ("normal", "race"):
-            args = ["go", "test", "-json", "-count=1", "-timeout=15m"]
+            args = ["go", "test", "-json", "-count=1", "-timeout=" + witness_timeout(wid, mode)]
             if mode == "race":
                 args.append("-race")
             args.extend(["./" + package, "-run", "^" + w["name"] + "$"])
@@ -205,6 +216,10 @@ def execute(root, directory, witnesses):
                 with (directory / f"{wid}-{mode}.{suffix}").open("xb") as f:
                     f.write(content)
             status, reason, tests = "FAIL", "nonzero exit", []
+            # Explain genuine Go test-deadline exits without publishing
+            # arbitrary raw test output/actor evidence into the CI log.
+            if proc.returncode != 0 and (b"test timed out after" in proc.stdout or b"test timed out after" in proc.stderr):
+                reason = "Go test exceeded the declared per-witness deadline"
             events = []
             if proc.returncode == 0:
                 try:

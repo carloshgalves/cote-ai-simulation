@@ -51,7 +51,7 @@ jobs:
         run: |
           test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
           git diff --check 902ff115b5008b6d33dec314eeb4a9a5c805412e...HEAD
-          files=(internal/csf/commit/reference_eval_g1_test.go internal/csf/commit/reference_eval_g2_test.go internal/csf/admission/reference_eval_g2_test.go internal/csf/decision/workers.go internal/csf/decision/workers_test.go internal/csf/commit/reference_eval_g3_parallel_test.go internal/csf/commit/reference_eval_g3_control_test.go internal/csf/commit/reference_eval_g4_test.go internal/csf/commit/reference_order.go)
+          files=(internal/csf/commit/reference_eval_g1_test.go internal/csf/commit/reference_eval_g2_test.go internal/csf/admission/reference_eval_g2_test.go internal/csf/decision/workers.go internal/csf/decision/workers_test.go internal/csf/commit/reference_eval_g3_parallel_test.go internal/csf/commit/reference_eval_g3_control_test.go internal/csf/commit/reference_eval_g4_test.go internal/csf/commit/reference_eval_g5_test.go internal/csf/contextboundary/g5_adversarial_test.go internal/csf/commit/reference_order.go)
           if [ -n "$(gofmt -l "${files[@]}")" ]; then
             gofmt -d "${files[@]}"
             exit 1
@@ -70,6 +70,12 @@ jobs:
         run: |
           PHYSICAL_A1_PRODUCER_TEST=1 go test -count=1 -timeout=15m ./internal/csf/commit -run '^TestReferenceG4'
           PHYSICAL_A1_PRODUCER_TEST=1 go test -race -count=1 -timeout=15m ./internal/csf/commit -run '^TestReferenceG4'
+      - name: G5 real POV-to-context and coherent security mutants
+        run: |
+          go test -count=1 -timeout=15m ./internal/csf/contextboundary -run '^TestKnowledgeBoundaryG5'
+          go test -race -count=1 -timeout=15m ./internal/csf/contextboundary -run '^TestKnowledgeBoundaryG5'
+          PHYSICAL_A1_PRODUCER_TEST=1 go test -count=1 -timeout=15m ./internal/csf/commit -run '^TestReferenceG5'
+          PHYSICAL_A1_PRODUCER_TEST=1 go test -race -count=1 -timeout=15m ./internal/csf/commit -run '^TestReferenceG5'
       - name: Execute all registered witnesses normal and race
         run: |
           python -B docs/reference-run/csfrv1-10g/run_evals.py --sha "$SOURCE_SHA" --out "$RUNNER_TEMP/csf-g-evidence"

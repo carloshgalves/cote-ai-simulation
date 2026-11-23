@@ -29,6 +29,28 @@ var expectedFiles = []string{
 	"run-manifest.json",
 }
 
+// A correctly closed SQLite WAL database may retain a -shm or -wal sidecar.
+// Include exact optional files in the sealed archive; NEVER silently delete
+// them or copy only the main db and omit a still-uncheckpointed WAL.
+var optionalFiles = []string{
+	"causal.db-wal", "causal.db-shm",
+	"owner/actor-b.db-wal", "owner/actor-b.db-shm",
+	"owner/actor-b.db.actor-a-wal", "owner/actor-b.db.actor-a-shm",
+}
+
+func collectedPaths(out string) ([]string, error) {
+	paths := append([]string(nil), expectedFiles...)
+	for _, name := range optionalFiles {
+		_, err := os.Lstat(filepath.Join(out, filepath.FromSlash(name)))
+		if err == nil {
+			paths = append(paths, name)
+		} else if !os.IsNotExist(err) {
+			return nil, err
+		}
+	}
+	return paths, nil
+}
+
 func readPrivateRegular(path string) ([]byte, error) {
 	stat, err := os.Lstat(path)
 	if err != nil { return nil, err }
@@ -57,6 +79,7 @@ func readPrivateRegular(path string) ([]byte, error) {
 func rejectExtraneous(out string) error {
 	seen := map[string]bool{}
 	for _, name := range expectedFiles { seen[name] = true }
+	for _, name := range optionalFiles { seen[name] = true }
 	seen["checksums.json"] = true
 	seen["owner"] = true
 	return filepath.WalkDir(out, func(path string, info os.DirEntry, err error) error {
@@ -88,6 +111,12 @@ func replayAndGenesis(ctx context.Context, original string, installed *policy.Bu
 	if err := os.Chmod(tmp, 0700); err != nil { return "", err }
 	copyPath := filepath.Join(tmp, "detached.db")
 	if err := os.WriteFile(copyPath, raw, 0600); err != nil { return "", err }
+	for _, suffix := range []string{"-wal", "-shm"} {
+		sidecar, err := readPrivateRegular(original + suffix)
+		if os.IsNotExist(err) { continue }
+		if err != nil { return "", err }
+		if err := os.WriteFile(copyPath + suffix, sidecar, 0600); err != nil { return "", err }
+	}
 	// sqlite.Open uses WAL and may create tables. Run it ONLY on the detached
 	// copy; never open the original reference archive for mutation.
 	store, err := sqlite.Open(ctx, copyPath)
@@ -131,10 +160,12 @@ func verifyLocal(ctx context.Context, dir string) error {
 	if err != nil { return err }
 	var index archiveIndex
 	if err := json.Unmarshal(indexBytes, &index); err != nil { return err }
-	if index.Schema != "csfrv1-10h.local-hashes.v1" || len(index.Files) != len(expectedFiles) {
-		return errors.New("unrecognized evidence digest registry")
+	paths, err := collectedPaths(out)
+	if err != nil { return err }
+	if index.Schema != "csfrv1-10h.local-hashes.v1" || len(index.Files) != len(paths) {
+		return errors.New("unrecognized evidence digest registry or omitted SQLite sidecar")
 	}
-	for i, name := range expectedFiles {
+	for i, name := range paths {
 		entry := index.Files[i]
 		if entry.Path != name || len(entry.SHA256) != 64 {
 			return errors.New("archive has foreign, reordered or missing files")

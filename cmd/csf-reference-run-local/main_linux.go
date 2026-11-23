@@ -124,6 +124,9 @@ func runLocal(ctx context.Context, output string) error {
 	if err := os.Mkdir(filepath.Join(out, "owner"), 0700); err != nil {
 		return err
 	}
+	if err := os.Mkdir(filepath.Join(out, "physical-cuts"), 0700); err != nil {
+		return fmt.Errorf("cannot initialize private A1 original source archive: %w", err)
+	}
 	// The per-run signer is used only inside the A1 supervisor. No private
 	// key is put in an environment variable, manifest, archive, or model.
 	host, plans, registration, pyVersion, cleanup, err := localPhysicalHost(root)
@@ -131,6 +134,9 @@ func runLocal(ctx context.Context, output string) error {
 		return err
 	}
 	defer cleanup()
+	// Host-owned trusted archive target: A1 writes only AFTER sealed A2 and
+	// registered Ed25519 verification, never to an actor-provided directory.
+	host.PrivateCaptureRoot = filepath.Join(out, "physical-cuts")
 	proof, err := commit.RunReferenceD3(ctx, filepath.Join(out, "causal.db"),
 		filepath.Join(out, "owner", "actor-b.db"), filepath.Join(root, bundleRelative),
 		commit.ReferenceD2Config{Host: host, EpochPlans: plans}, commit.ReferenceOptions{})
@@ -162,7 +168,7 @@ func runLocal(ctx context.Context, output string) error {
 		SQLiteVersion: "3.53.4", HostOS: runtime.GOOS, HostArch: runtime.GOARCH,
 		HostCPUs: runtime.NumCPU(), HostRAMBytes: localRAMBytes(),
 		StartedAtUTC:    time.Now().UTC().Format(time.RFC3339Nano),
-		EvidenceProfile: "H2_SIGNED_INGRESS_V1",
+		EvidenceProfile: "H2_RAW_SOURCE_V1",
 		ReviewStatus:    "NOT_INDEPENDENTLY_ATTESTED",
 	}
 	if err := exclusiveJSON(filepath.Join(out, "run-manifest.json"), manifest); err != nil {
@@ -176,6 +182,9 @@ func runLocal(ctx context.Context, output string) error {
 	}
 	if err := exportSignedIngressH2(ctx, out, sha, public.RunID, host.Bundle); err != nil {
 		return fmt.Errorf("H2-S signed ingress provenance: %w", err)
+	}
+	if err := exportRawA1H2(ctx, out, sha, public.RunID, host.Bundle); err != nil {
+		return fmt.Errorf("H2-R cold A1 original source archive verification: %w", err)
 	}
 	finalSHA, err := gitOutput(root, "rev-parse", "HEAD")
 	if err != nil || finalSHA != sha {
@@ -209,6 +218,7 @@ func runLocal(ctx context.Context, output string) error {
 	fmt.Println("FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED")
 	fmt.Println("H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE")
 	fmt.Println("H2_GENESIS_BOUND_SIGNED_INGRESS=VERIFIED_PRIVATE")
+	fmt.Println("H2_RAW_PYTHON_A1_CUTS=SEALED_AND_VERIFIED_PRIVATE")
 	fmt.Println("CSFRV1_10_V1_DOD_ACCEPTED=NO")
 	fmt.Println("FIRST_REAL_RUN_PRODUCTION_GO=NO")
 	fmt.Println("PRIVATE_EVIDENCE_DIRECTORY=" + out)

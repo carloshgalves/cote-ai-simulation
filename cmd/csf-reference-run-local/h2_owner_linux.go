@@ -266,4 +266,3 @@ func verifyOwnersH2(ctx context.Context, out, sha, run string) error {
 	}
 	return nil
 }
-

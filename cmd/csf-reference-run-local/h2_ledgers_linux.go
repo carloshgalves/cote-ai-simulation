@@ -207,7 +207,7 @@ func verifiedSnapshotH2(ctx context.Context, detached, run string, p *policy.Bun
 		verified.TailCommits != 3 {
 		return "", 0, 0, errors.New("H2 snapshot prefix or three-tail commit mismatch")
 	}
-	return hex.EncodeToString(snapshotBytes), revision, verified.TailCommits, nil
+	return hex.EncodeToString(snapshotBytes), revision, int(verified.TailCommits), nil
 }
 
 func exportH2Ledgers(ctx context.Context, out, sha, run string, p *policy.Bundle) error {

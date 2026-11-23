@@ -37,6 +37,8 @@ type runManifest struct {
 	RunID              string `json:"run_id"`
 	GenesisSHA256      string `json:"genesis_sha256"`
 	RegistrationSHA256 string `json:"registration_sha256"`
+	CodecPolicyHash    string `json:"codec_policy_hash"`
+	SchemaBundleHash   string `json:"schema_bundle_hash"`
 	Seed               int64  `json:"seed"`
 	GoVersion          string `json:"go_version"`
 	PythonVersion      string `json:"python_version"`
@@ -44,6 +46,7 @@ type runManifest struct {
 	HostOS             string `json:"host_os"`
 	HostArch           string `json:"host_arch"`
 	HostCPUs           int    `json:"host_cpus"`
+	HostRAMBytes       uint64 `json:"host_ram_bytes"`
 	StartedAtUTC       string `json:"started_at_utc"`
 	ReviewStatus       string `json:"review_status"`
 }
@@ -123,10 +126,13 @@ func runLocal(ctx context.Context, output string) error {
 		Schema: "csfrv1-10h.local-manifest.v1",
 		Disposition: "EXPERIMENTAL_LOCAL_ONLY_NO_PRODUCTION_GO",
 		SourceSHA: sha, RunID: public.RunID, GenesisSHA256: genesisSHA,
-		RegistrationSHA256: hashBytes(registration), Seed: 42,
+		RegistrationSHA256: hashBytes(registration),
+		CodecPolicyHash: hex.EncodeToString(host.Bundle.CodecPolicyHash[:]),
+		SchemaBundleHash: hex.EncodeToString(host.Bundle.SchemaHash[:]), Seed: 42,
 		GoVersion: runtime.Version(), PythonVersion: pyVersion,
 		SQLiteVersion: "3.53.4", HostOS: runtime.GOOS, HostArch: runtime.GOARCH,
-		HostCPUs: runtime.NumCPU(), StartedAtUTC: time.Now().UTC().Format(time.RFC3339Nano),
+		HostCPUs: runtime.NumCPU(), HostRAMBytes: localRAMBytes(),
+		StartedAtUTC: time.Now().UTC().Format(time.RFC3339Nano),
 		ReviewStatus: "NOT_INDEPENDENTLY_ATTESTED",
 	}
 	if err := exclusiveJSON(filepath.Join(out, "run-manifest.json"), manifest); err != nil { return err }
@@ -225,6 +231,12 @@ func localPhysicalHost(root string) (physicalhost.ProducerHost, [2]physicalhost.
 		ImportRoot: importRoot, DependencyRoot: depRoot, PrivateStagingRoot: tmp,
 	}
 	return host, plans, registration, strings.TrimSpace(string(version)), cleanup, nil
+}
+
+func localRAMBytes() uint64 {
+	var info syscall.Sysinfo_t
+	if err := syscall.Sysinfo(&info); err != nil { return 0 }
+	return info.Totalram * uint64(info.Unit)
 }
 
 func gitOutput(root string, args ...string) (string, error) {

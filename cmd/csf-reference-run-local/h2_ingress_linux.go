@@ -17,7 +17,6 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
-	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 )
 
@@ -86,12 +85,24 @@ func extractSignedIngressH2(ctx context.Context, archive, sourceSHA, run string,
 		registration.SourceID)
 	if err != nil { return zero, err }
 	defer rows.Close()
+	// Fully finish the source receipt cursor before making another query on
+	// the single read-only SQLite connection. Nested QueryRow would deadlock.
+	type receiptRow struct { seq int64; id, canonical []byte }
+	receiptRows := make([]receiptRow, 0, 5)
+	for rows.Next() {
+		var entry receiptRow
+		if err := rows.Scan(&entry.seq, &entry.id, &entry.canonical); err != nil { return zero, err }
+		if len(receiptRows) >= 8 || len(entry.canonical) == 0 || len(entry.canonical) > 1<<20 {
+			return zero, errors.New("H2-S unbounded or empty signed ingress receipt")
+		}
+		receiptRows = append(receiptRows, entry)
+	}
+	if err := rows.Err(); err != nil { return zero, err }
+	if err := rows.Close(); err != nil { return zero, err }
 	seenEpochs := map[uint64]bool{}
 	var lastClosed bool
-	for rows.Next() {
-		var sequence int64
-		var recordID, receiptCanonical []byte
-		if err := rows.Scan(&sequence, &recordID, &receiptCanonical); err != nil { return zero, err }
+	for _, entry := range receiptRows {
+		sequence, recordID, receiptCanonical := entry.seq, entry.id, entry.canonical
 		if sequence < 0 || uint64(sequence) != uint64(proof.IngressCount) || len(recordID) != 32 || lastClosed {
 			return zero, errors.New("H2-S source receipts have a gap, duplicate, or post-final write")
 		}
@@ -115,8 +126,8 @@ func extractSignedIngressH2(ctx context.Context, archive, sourceSHA, run string,
 		value, err := codec.StrictDecodePayload(recordCanonical)
 		if err != nil { return zero, err }
 		fields, ok := value.([]any)
-		if !ok || !bytes.Equal(bytesH2(fields[0]), recordID) || !bytes.Equal(bytesH2(fields[1]), runBytes) ||
-			len(fields) < 7 || fields[2] != registration.SourceID {
+		if !ok || len(fields) < 7 || !bytes.Equal(bytesH2(fields[0]), recordID) ||
+			!bytes.Equal(bytesH2(fields[1]), runBytes) || fields[2] != registration.SourceID {
 			return zero, errors.New("H2-S source record identity/run/source mismatch")
 		}
 		if kind == 1 {
@@ -176,8 +187,6 @@ func extractSignedIngressH2(ctx context.Context, archive, sourceSHA, run string,
 		}
 		proof.IngressCount++
 	}
-	if err := rows.Err(); err != nil { return zero, err }
-	if err := rows.Close(); err != nil { return zero, err }
 	if proof.IngressCount != 5 || proof.ClosureCount != 3 || !lastClosed ||
 		!seenEpochs[1] || !seenEpochs[2] || proof.Epochs[0].Epoch != 1 || proof.Epochs[1].Epoch != 2 {
 		return zero, errors.New("H2-S did not find exactly two Genesis-authenticated signed ingress cuts and final closure")
@@ -206,4 +215,3 @@ func verifySignedIngressH2(ctx context.Context, out, sha, run string, bundle *po
 	return nil
 }
 
-var _ = sqlite.ExpectedVersion

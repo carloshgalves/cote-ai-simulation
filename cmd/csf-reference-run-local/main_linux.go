@@ -19,6 +19,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+	"syscall"
 	"time"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/commit"
@@ -68,6 +69,7 @@ func main() {
 	}
 	var err error
 	if *out != "" {
+		syscall.Umask(0077) // SQLite -wal/-shm and A1 staging must not be group/world readable.
 		err = runLocal(context.Background(), *out)
 	} else {
 		err = verifyLocal(context.Background(), *check)
@@ -90,6 +92,15 @@ func runLocal(ctx context.Context, output string) error {
 	rel, err := filepath.Rel(root, out)
 	if err != nil || rel == "." || (rel != ".." && !strings.HasPrefix(rel, ".."+string(filepath.Separator))) {
 		return errors.New("private evidence must be outside the source checkout")
+	}
+	realParent, err := filepath.EvalSymlinks(filepath.Dir(out))
+	if err != nil { return err }
+	realRoot, err := filepath.EvalSymlinks(root)
+	if err != nil { return err }
+	resolved := filepath.Join(realParent, filepath.Base(out))
+	realRel, err := filepath.Rel(realRoot, resolved)
+	if err != nil || realRel == "." || (realRel != ".." && !strings.HasPrefix(realRel, ".."+string(filepath.Separator))) {
+		return errors.New("resolved private evidence path enters source checkout")
 	}
 	if err := os.Mkdir(out, 0700); err != nil { return fmt.Errorf("requires fresh directory: %w", err) }
 	if err := os.Mkdir(filepath.Join(out, "owner"), 0700); err != nil { return err }
@@ -119,6 +130,10 @@ func runLocal(ctx context.Context, output string) error {
 		ReviewStatus: "NOT_INDEPENDENTLY_ATTESTED",
 	}
 	if err := exclusiveJSON(filepath.Join(out, "run-manifest.json"), manifest); err != nil { return err }
+	finalSHA, err := gitOutput(root, "rev-parse", "HEAD")
+	if err != nil || finalSHA != sha { return errors.New("source SHA changed during local A1/D3 run") }
+	finalDirty, err := gitOutput(root, "status", "--porcelain", "--untracked-files=all")
+	if err != nil || finalDirty != "" { return errors.New("source changed during local A1/D3 run") }
 	paths, err := collectedPaths(out)
 	if err != nil { return err }
 	files := make([]fileRecord, 0, len(paths))

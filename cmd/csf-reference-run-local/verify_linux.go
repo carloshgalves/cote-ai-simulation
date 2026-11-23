@@ -345,7 +345,11 @@ func verifyLocal(ctx context.Context, dir string) error {
 		if err := verifyH2Ledgers(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
 			return fmt.Errorf("H2 full canonical ledger verification: %w", err)
 		}
+		if err := verifyOwnersH2(ctx, out, meta.SourceSHA, public.RunID); err != nil {
+			return fmt.Errorf("H2 independent signed owner verification: %w", err)
+		}
 		fmt.Println("H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE")
+		fmt.Println("H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE")
 	} else if !errors.Is(err, os.ErrNotExist) {
 		return err
 	}

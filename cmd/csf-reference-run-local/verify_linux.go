@@ -204,6 +204,8 @@ func verifyLocal(ctx context.Context, dir string) error {
 		meta.Disposition != "EXPERIMENTAL_LOCAL_ONLY_NO_PRODUCTION_GO" ||
 		meta.ReviewStatus != "NOT_INDEPENDENTLY_ATTESTED" ||
 		meta.SourceSHA != sha || meta.Seed != 42 ||
+		meta.CodecPolicyHash != policy.CodecPolicyHashHex ||
+		meta.SchemaBundleHash != policy.SchemaBundleHashHex ||
 		meta.GoVersion != runtime.Version() ||
 		meta.PythonVersion != "Python 3.13.18" ||
 		meta.HostOS != "linux" || meta.HostArch != runtime.GOARCH ||

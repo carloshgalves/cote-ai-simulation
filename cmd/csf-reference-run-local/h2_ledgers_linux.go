@@ -33,6 +33,7 @@ var h2PrivatePaths = []string{
  "ledger-export/evidence_ledger.bin",
  "ledger-export/causal_outbox.bin",
  "ledger-export/ledger-proof.json",
+ "ledger-export/owner-audit.json",
 }
 
 const ledgerMagicH2 = "CSF-H2-LEDGER-V1\x00"

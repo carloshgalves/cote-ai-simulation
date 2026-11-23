@@ -55,6 +55,22 @@ func collectedPaths(out string) ([]string, error) {
 	} else if !errors.Is(err, os.ErrNotExist) {
 		return nil, err
 	}
+	if info, err := os.Lstat(filepath.Join(out, "physical-cuts")); err == nil {
+		if !info.IsDir() || info.Mode()&os.ModeSymlink != 0 || info.Mode().Perm()&0077 != 0 {
+			return nil, errors.New("H2-R original source must use a private real directory")
+		}
+		for epoch := 1; epoch <= 2; epoch++ {
+			epochDir := filepath.Join(out, "physical-cuts", fmt.Sprintf("epoch-%d", epoch))
+			child, err := os.Lstat(epochDir)
+			if err != nil || !child.IsDir() || child.Mode()&os.ModeSymlink != 0 ||
+				child.Mode().Perm()&0077 != 0 {
+				return nil, errors.New("H2-R original source epoch must be private and complete")
+			}
+		}
+		paths = append(paths, rawA1PathsH2()...)
+	} else if !errors.Is(err, os.ErrNotExist) {
+		return nil, err
+	}
 	for _, name := range optionalFiles {
 		_, err := os.Lstat(filepath.Join(out, filepath.FromSlash(name)))
 		if err == nil {
@@ -119,6 +135,12 @@ func rejectExtraneous(out string) error {
 		seen[name] = true
 	}
 	seen[signedIngressProofPathH2] = true
+	for _, name := range rawA1PathsH2() {
+		seen[name] = true
+	}
+	seen["physical-cuts"] = true
+	seen["physical-cuts/epoch-1"] = true
+	seen["physical-cuts/epoch-2"] = true
 	seen["ledger-export"] = true
 	seen["checksums.json"] = true
 	seen["owner"] = true
@@ -138,7 +160,8 @@ func rejectExtraneous(out string) error {
 			return fmt.Errorf("unknown or symlink evidence path: %s", rel)
 		}
 		if info.IsDir() {
-			if rel != "owner" && rel != "ledger-export" {
+			if rel != "owner" && rel != "ledger-export" &&
+				rel != "physical-cuts" && rel != "physical-cuts/epoch-1" && rel != "physical-cuts/epoch-2" {
 				return errors.New("unexpected evidence directory")
 			}
 			stat, err := info.Info()
@@ -284,7 +307,9 @@ func verifyLocal(ctx context.Context, dir string) error {
 		meta.Disposition != "EXPERIMENTAL_LOCAL_ONLY_NO_PRODUCTION_GO" ||
 		meta.ReviewStatus != "NOT_INDEPENDENTLY_ATTESTED" ||
 		meta.SourceSHA != sha || meta.Seed != 42 ||
-		(meta.EvidenceProfile != "" && meta.EvidenceProfile != "H2_SIGNED_INGRESS_V1") ||
+		(meta.EvidenceProfile != "" &&
+			meta.EvidenceProfile != "H2_SIGNED_INGRESS_V1" &&
+			meta.EvidenceProfile != "H2_RAW_SOURCE_V1") ||
 		meta.CodecPolicyHash != policy.CodecPolicyHashHex ||
 		meta.SchemaBundleHash != policy.SchemaBundleHashHex ||
 		meta.GoVersion != runtime.Version() ||
@@ -348,7 +373,8 @@ func verifyLocal(ctx context.Context, dir string) error {
 	if genesisHash != meta.GenesisSHA256 || len(meta.GenesisSHA256) != 64 {
 		return errors.New("Genesis differs from archived run manifest")
 	}
-	if meta.EvidenceProfile == "H2_SIGNED_INGRESS_V1" {
+	if meta.EvidenceProfile == "H2_SIGNED_INGRESS_V1" ||
+		meta.EvidenceProfile == "H2_RAW_SOURCE_V1" {
 		if _, err := os.Lstat(filepath.Join(out, "ledger-export")); err != nil {
 			return errors.New("H2-S requires non-optional private ledger export directory")
 		}
@@ -366,7 +392,8 @@ func verifyLocal(ctx context.Context, dir string) error {
 		} else if !errors.Is(err, os.ErrNotExist) {
 			return err
 		}
-		if present != (meta.EvidenceProfile == "H2_SIGNED_INGRESS_V1") {
+		if present != (meta.EvidenceProfile == "H2_SIGNED_INGRESS_V1" ||
+			meta.EvidenceProfile == "H2_RAW_SOURCE_V1") {
 			return errors.New("H2-S signed ingress profile does not match evidence contents")
 		}
 		if present {
@@ -374,6 +401,19 @@ func verifyLocal(ctx context.Context, dir string) error {
 				return fmt.Errorf("H2-S source receipt and Genesis-bound signature audit: %w", err)
 			}
 			fmt.Println("H2_GENESIS_BOUND_SIGNED_INGRESS=VERIFIED_PRIVATE")
+		}
+		rawRootPresent := false
+		if _, err := os.Lstat(filepath.Join(out, "physical-cuts")); err == nil {
+			rawRootPresent = true
+		} else if !errors.Is(err, os.ErrNotExist) { return err }
+		if rawRootPresent != (meta.EvidenceProfile == "H2_RAW_SOURCE_V1") {
+			return errors.New("H2-R original A1 source archive/profile mismatch")
+		}
+		if rawRootPresent {
+			if err := verifyRawA1H2(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
+				return fmt.Errorf("H2-R original Python A1 cold source validation: %w", err)
+			}
+			fmt.Println("H2_RAW_PYTHON_A1_CUTS=SEALED_AND_VERIFIED_PRIVATE")
 		}
 		fmt.Println("H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE")
 		fmt.Println("H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE")

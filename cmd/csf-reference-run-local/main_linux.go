@@ -119,8 +119,10 @@ func runLocal(ctx context.Context, output string) error {
 		ReviewStatus: "NOT_INDEPENDENTLY_ATTESTED",
 	}
 	if err := exclusiveJSON(filepath.Join(out, "run-manifest.json"), manifest); err != nil { return err }
-	files := make([]fileRecord, 0, len(expectedFiles))
-	for _, path := range expectedFiles {
+	paths, err := collectedPaths(out)
+	if err != nil { return err }
+	files := make([]fileRecord, 0, len(paths))
+	for _, path := range paths {
 		raw, err := readPrivateRegular(filepath.Join(out, filepath.FromSlash(path)))
 		if err != nil { return fmt.Errorf("missing completed D3 evidence %s: %w", path, err) }
 		files = append(files, fileRecord{Path: path, Size: int64(len(raw)), SHA256: hashBytes(raw)})

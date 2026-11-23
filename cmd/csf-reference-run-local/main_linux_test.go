@@ -99,13 +99,13 @@ func TestHStrictJSONAcceptsOnlyExactClosedReportShape(t *testing.T) {
 	if err != nil { t.Fatal(err) }
 	raw = append(raw, '\n')
 	if !exactLocalJSON(raw, sample) { t.Fatal("generated closed report unexpectedly refused") }
-	withUnknown := []byte(strings.Replace(string(raw), "\\"schema\\":", "\\"hidden_actor\\": true, \\"schema\\":", 1))
+	withUnknown := []byte(strings.Replace(string(raw), "\"schema\":", "\"hidden_actor\": true, \"schema\":", 1))
 	var parsed archiveIndex
 	if err := json.Unmarshal(withUnknown, &parsed); err != nil { t.Fatal(err) }
 	if exactLocalJSON(withUnknown, parsed) {
 		t.Fatal("unregistered actor field accepted in checksum index")
 	}
-	withDuplicate := []byte(strings.Replace(string(raw), "\\"schema\\":", "\\"schema\\": \\"forged\\", \\"schema\\":", 1))
+	withDuplicate := []byte(strings.Replace(string(raw), "\"schema\":", "\"schema\": \"forged\", \"schema\":", 1))
 	if err := json.Unmarshal(withDuplicate, &parsed); err != nil { t.Fatal(err) }
 	if exactLocalJSON(withDuplicate, parsed) {
 		t.Fatal("duplicate JSON object key silently admitted")

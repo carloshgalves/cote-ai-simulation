@@ -86,6 +86,14 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 				errors.Is(err,os.ErrNotExist){
 				t.Fatalf("mutation only tested local file hash/absence, not independent semantics: %v",err)
 			}
+			required := map[string]string{
+				"owner-plaintext": "H2 independent signed owner verification",
+				"sealed-snapshot": "H2 full canonical ledger verification",
+				"framed-ledger": "H2 full canonical ledger verification",
+			}[variant]
+			if !strings.Contains(err.Error(), required) {
+				t.Fatalf("unexpected rejection path, not target cryptographic invariant %s: %v",required,err)
+			}
 			t.Logf("SEMANTIC_H2_MUTANT_REJECTED=%s",variant)
 		})
 	}

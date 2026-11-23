@@ -186,8 +186,8 @@ func runLocal(ctx context.Context, output string) error {
 	if err := exportRawA1H2(ctx, out, sha, public.RunID, host.Bundle); err != nil {
 		return fmt.Errorf("H2-R cold A1 original source archive verification: %w", err)
 	}
-	if err := runExactSameA1H2(ctx,out,root,sha,public.RunID,host,plans);err!=nil {
-		return fmt.Errorf("H2 independently re-executed same original A1 cuts: %w",err)
+	if err := runExactSameA1H2(ctx, out, root, sha, public.RunID, host, plans); err != nil {
+		return fmt.Errorf("H2 independently re-executed same original A1 cuts: %w", err)
 	}
 	finalSHA, err := gitOutput(root, "rev-parse", "HEAD")
 	if err != nil || finalSHA != sha {

@@ -8,10 +8,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"runtime"
-	"strings"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/commit"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
@@ -43,9 +43,13 @@ func readPrivateRegular(path string) ([]byte, error) {
 	if err != nil || !os.SameFile(stat, actual) {
 		return nil, errors.New("evidence file identity changed during read")
 	}
-	raw, err := os.ReadFile(path)
+	raw, err := io.ReadAll(io.LimitReader(file, stat.Size()+1))
 	if err != nil || int64(len(raw)) != stat.Size() {
 		return nil, errors.New("cannot read complete evidence")
+	}
+	after, err := file.Stat()
+	if err != nil || !os.SameFile(stat, after) || after.Size() != stat.Size() {
+		return nil, errors.New("evidence inode changed during read")
 	}
 	return raw, nil
 }
@@ -113,7 +117,7 @@ func replayAndGenesis(ctx context.Context, original string, installed *policy.Bu
 
 func verifyLocal(ctx context.Context, dir string) error {
 	if ctx == nil { return errors.New("nil audit context") }
-	root, err := os.Getwd()
+	root, err := gitOutput(".", "rev-parse", "--show-toplevel")
 	if err != nil { return err }
 	out, err := filepath.Abs(dir)
 	if err != nil { return err }
@@ -195,4 +199,3 @@ func verifyLocal(ctx context.Context, dir string) error {
 // The index is not an external signature or independent operator attestation.
 // It detects accidental and uncoordinated byte modifications; an attacker
 // able to rewrite the entire archive/checksums must be addressed separately.
-var _ = strings.TrimSpace

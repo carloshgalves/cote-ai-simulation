@@ -40,6 +40,9 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13.18"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - name: Pinned real A1 supervisor
         run: |
           python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
@@ -57,6 +60,7 @@ jobs:
             exit 1
           fi
           python -B docs/reference-run/csfrv1-10g/test_run_evals.py
+          python -B docs/reference-run/csfrv1-10g/test_g6_finalize.py
       - name: G2 real focused controls (synthetic fixtures)
         run: |
           go test -count=1 -timeout=5m ./internal/csf/commit ./internal/csf/admission -run '^TestReferenceG2'
@@ -79,11 +83,32 @@ jobs:
       - name: Execute all registered witnesses normal and race
         run: |
           python -B docs/reference-run/csfrv1-10g/run_evals.py --sha "$SOURCE_SHA" --out "$RUNNER_TEMP/csf-g-evidence"
+      - name: G6 independent 621-case Go/TS V1 conformance and final NO-GO disposition
+        run: |
+          go run ./cmd/csf-harness \
+            --bundle docs/architecture/canonical-codec-v1-bundle \
+            --report "$RUNNER_TEMP/csf-g-evidence/g6-go-v1-report.json"
+          node --no-warnings --experimental-loader ./tools/csf-conformance-ts/loader.mjs \
+            tools/csf-conformance-ts/runner.ts \
+            docs/architecture/canonical-codec-v1-bundle \
+            "$RUNNER_TEMP/csf-g-evidence/g6-ts-v1-report.json"
+          cmp "$RUNNER_TEMP/csf-g-evidence/g6-go-v1-report.json" \
+              "$RUNNER_TEMP/csf-g-evidence/g6-ts-v1-report.json"
+          export G6_NODE_VERSION="$(node --version)"
+          python -B docs/reference-run/csfrv1-10g/g6_finalize.py \
+            --sha "$SOURCE_SHA" \
+            --evidence "$RUNNER_TEMP/csf-g-evidence/evidence.json" \
+            --go-report "$RUNNER_TEMP/csf-g-evidence/g6-go-v1-report.json" \
+            --ts-report "$RUNNER_TEMP/csf-g-evidence/g6-ts-v1-report.json" \
+            --out "$RUNNER_TEMP/csf-g-evidence"
       - name: Publish digest-only matrix even on test failure
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v6
         with:
           name: csfrv1-10g-evidence-${{ env.SOURCE_SHA }}
-          path: ${{ runner.temp }}/csf-g-evidence/evidence.json
+          path: |
+            ${{ runner.temp }}/csf-g-evidence/evidence.json
+            ${{ runner.temp }}/csf-g-evidence/g6-decision.json
+            ${{ runner.temp }}/csf-g-evidence/g6-gaps.json
           if-no-files-found: error
           retention-days: 90

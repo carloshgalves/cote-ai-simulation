@@ -62,8 +62,10 @@ jobs:
             gofmt -d "${files[@]}"
             exit 1
           fi
-          go test -count=1 -timeout=10m ./cmd/csf-reference-run-local ./internal/physicalhost ./internal/csf/commit
-          go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local ./internal/physicalhost ./internal/csf/commit
+          go test -count=1 -timeout=10m ./cmd/csf-reference-run-local ./internal/physicalhost
+          go test -count=1 -timeout=10m -run '^TestH2IndependentD3Replay' ./internal/csf/commit
+          go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local ./internal/physicalhost
+          go test -race -count=1 -timeout=10m -run '^TestH2IndependentD3Replay' ./internal/csf/commit
           go vet ./cmd/csf-reference-run-local ./internal/physicalhost ./internal/csf/commit
       - name: Real A1+D3 and detached owner, snapshot and ledger semantic mutants
         run: |

@@ -78,6 +78,9 @@ func snapshotTableSetH2(ctx context.Context, db *sql.DB) (map[string]replayTable
 		return nil, errors.New("H2 replay has no authoritative tables")
 	}
 	result := make(map[string]replayTableH2, len(names))
+	// The inventory is operator-private but could still be compromised.
+	// Budgets are GLOBAL, not only per table, to reject memory exhaustion.
+	totalRows, totalSourceBytes := 0, 0
 	for _, t := range names {
 		// The table identifier was checked above, before interpolating SQL.
 		r, err := db.QueryContext(ctx, "SELECT * FROM \""+t.name+"\"")
@@ -106,9 +109,10 @@ func snapshotTableSetH2(ctx context.Context, db *sql.DB) (map[string]replayTable
 		// ambiguities; the digest is NOT a normative CSF ledger digest.
 		individual := make([]string, 0)
 		for r.Next() {
-			if len(individual) >= 100000 {
+			totalRows++
+			if len(individual) >= 100000 || totalRows > 250000 {
 				r.Close()
-				return nil, errors.New("H2 table row ceiling")
+				return nil, errors.New("H2 table/global row ceiling")
 			}
 			raw := make([]any, len(cols))
 			scans := make([]any, len(cols))
@@ -118,6 +122,27 @@ func snapshotTableSetH2(ctx context.Context, db *sql.DB) (map[string]replayTable
 			if err := r.Scan(scans...); err != nil {
 				r.Close()
 				return nil, err
+			}
+			// Bound aggregate binary/text lengths BEFORE hex/JSON encoding.
+			// A per-cell ceiling alone allows a large multi-column row to
+			// amplify memory use. Never silently skip an oversized row.
+			rowSourceBytes := 0
+			for _, cell := range raw {
+				switch v := cell.(type) {
+				case []byte:
+					rowSourceBytes += len(v)
+				case string:
+					rowSourceBytes += len(v)
+				}
+				if rowSourceBytes > 8<<20 {
+					r.Close()
+					return nil, errors.New("H2 oversized aggregate private row")
+				}
+			}
+			totalSourceBytes += rowSourceBytes
+			if totalSourceBytes > 128<<20 {
+				r.Close()
+				return nil, errors.New("H2 all-table private source byte ceiling")
 			}
 			cells := make([][2]string, len(raw))
 			for i, cell := range raw {

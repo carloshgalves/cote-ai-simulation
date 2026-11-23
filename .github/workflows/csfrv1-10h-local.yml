@@ -1,0 +1,77 @@
+name: CSFRV1-10H private local reference run and detached replay
+"on":
+  pull_request:
+    branches: [main]
+    paths:
+      - "cmd/csf-reference-run-local/**"
+      - "internal/csf/**"
+      - "internal/physicalhost/**"
+      - "src/embodiment/**"
+      - "docs/reference-run/csfrv1-10h/**"
+      - ".github/workflows/csfrv1-10h-local.yml"
+      - "go.mod"
+      - "go.sum"
+      - "pyproject.toml"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: csfrv1-10h-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  private-local:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27.2"
+          cache: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13.18"
+      - name: Pinned real Python A1 runtime and private fixture
+        run: |
+          python -m pip install --disable-pip-version-check --no-input -e '.[dev]' \
+            'numpy==2.5.4' 'pydantic==2.14.3' 'PyYAML==6.0.3' \
+            'pytest==9.2.0' 'jsonschema==4.26.0' 'hypothesis==6.170.15'
+          python -m tests.architecture.emit_go_physical_fixture --out /tmp/physical-go-fixture-h
+          find src/embodiment -type d -name __pycache__ -prune -exec rm -rf {} +
+      - name: Tests and negative verification controls
+        run: |
+          git diff --check
+          go test -count=1 -timeout=10m ./cmd/csf-reference-run-local
+          go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local
+          go vet ./cmd/csf-reference-run-local
+      - name: Execute one REAL A1 + Go C4/D3 local run and independent detached verification
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          out="$RUNNER_TEMP/h-private-${{ github.run_id }}"
+          go run ./cmd/csf-reference-run-local --out "$out" | tee "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'CSFRV1_10_V1_DOD_ACCEPTED=NO' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'FIRST_REAL_RUN_PRODUCTION_GO=NO' "$RUNNER_TEMP/h-summary.txt"
+          go run ./cmd/csf-reference-run-local --verify "$out"
+          if go run ./cmd/csf-reference-run-local --out "$out"; then
+            echo "SECURITY ERROR: overwritten local archive"
+            exit 1
+          fi
+          cp -a "$out" "$RUNNER_TEMP/h-tampered"
+          printf x >> "$RUNNER_TEMP/h-tampered/owner/actor-b.db"
+          if go run ./cmd/csf-reference-run-local --verify "$RUNNER_TEMP/h-tampered"; then
+            echo "SECURITY ERROR: altered owner checkpoint accepted"
+            exit 1
+          fi
+          echo 'H_LOCAL_SOURCE=REAL_PYTHON_A1_D3'
+          echo 'H_ARCHIVE_VERIFIER=PASS'
+          echo 'H_MUTANTS=REJECTED'
+          echo 'H_RELEASE=NO_GO'
+          # No private db, raw A1, owner, signed cut or evidence output is uploaded.

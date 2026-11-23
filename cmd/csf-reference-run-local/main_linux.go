@@ -168,7 +168,7 @@ func runLocal(ctx context.Context, output string) error {
 		SQLiteVersion: "3.53.4", HostOS: runtime.GOOS, HostArch: runtime.GOARCH,
 		HostCPUs: runtime.NumCPU(), HostRAMBytes: localRAMBytes(),
 		StartedAtUTC:    time.Now().UTC().Format(time.RFC3339Nano),
-		EvidenceProfile: "H2_RAW_SOURCE_V1",
+		EvidenceProfile: "H2_SAME_A1_REPLAY_V1",
 		ReviewStatus:    "NOT_INDEPENDENTLY_ATTESTED",
 	}
 	if err := exclusiveJSON(filepath.Join(out, "run-manifest.json"), manifest); err != nil {
@@ -185,6 +185,9 @@ func runLocal(ctx context.Context, output string) error {
 	}
 	if err := exportRawA1H2(ctx, out, sha, public.RunID, host.Bundle); err != nil {
 		return fmt.Errorf("H2-R cold A1 original source archive verification: %w", err)
+	}
+	if err := runExactSameA1H2(ctx, out, root, sha, public.RunID, host, plans); err != nil {
+		return fmt.Errorf("H2 independently re-executed same original A1 cuts: %w", err)
 	}
 	finalSHA, err := gitOutput(root, "rev-parse", "HEAD")
 	if err != nil || finalSHA != sha {
@@ -219,6 +222,7 @@ func runLocal(ctx context.Context, output string) error {
 	fmt.Println("H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE")
 	fmt.Println("H2_GENESIS_BOUND_SIGNED_INGRESS=VERIFIED_PRIVATE")
 	fmt.Println("H2_RAW_PYTHON_A1_CUTS=SEALED_AND_VERIFIED_PRIVATE")
+	fmt.Println("H2_SAME_SIGNED_A1_INDEPENDENT_GO_D3=BYTE_IDENTICAL_AUTHORITIES")
 	fmt.Println("CSFRV1_10_V1_DOD_ACCEPTED=NO")
 	fmt.Println("FIRST_REAL_RUN_PRODUCTION_GO=NO")
 	fmt.Println("PRIVATE_EVIDENCE_DIRECTORY=" + out)

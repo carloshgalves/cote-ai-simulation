@@ -71,6 +71,27 @@ func collectedPaths(out string) ([]string, error) {
 	} else if !errors.Is(err, os.ErrNotExist) {
 		return nil, err
 	}
+	if replayDir, err := os.Lstat(filepath.Join(out, "replay")); err == nil {
+		if !replayDir.IsDir() || replayDir.Mode()&os.ModeSymlink != 0 ||
+			replayDir.Mode().Perm()&0077 != 0 {
+			return nil, errors.New("H2 same-cut replay directory is not private")
+		}
+		ownerDir, err := os.Lstat(filepath.Join(out, "replay", "owner"))
+		if err != nil || !ownerDir.IsDir() || ownerDir.Mode()&os.ModeSymlink != 0 ||
+			ownerDir.Mode().Perm()&0077 != 0 {
+			return nil, errors.New("H2 same-cut replay owner directory missing or exposed")
+		}
+		paths = append(paths, replayRequiredPathsH2[:]...)
+		for _, name := range replaySidecarPathsH2 {
+			if _, err := os.Lstat(filepath.Join(out, filepath.FromSlash(name))); err == nil {
+				paths = append(paths, name)
+			} else if !errors.Is(err, os.ErrNotExist) {
+				return nil, err
+			}
+		}
+	} else if !errors.Is(err, os.ErrNotExist) {
+		return nil, err
+	}
 	for _, name := range optionalFiles {
 		_, err := os.Lstat(filepath.Join(out, filepath.FromSlash(name)))
 		if err == nil {
@@ -141,6 +162,14 @@ func rejectExtraneous(out string) error {
 	seen["physical-cuts"] = true
 	seen["physical-cuts/epoch-1"] = true
 	seen["physical-cuts/epoch-2"] = true
+	for _, name := range replayRequiredPathsH2 {
+		seen[name] = true
+	}
+	for _, name := range replaySidecarPathsH2 {
+		seen[name] = true
+	}
+	seen["replay"] = true
+	seen["replay/owner"] = true
 	seen["ledger-export"] = true
 	seen["checksums.json"] = true
 	seen["owner"] = true
@@ -161,7 +190,8 @@ func rejectExtraneous(out string) error {
 		}
 		if info.IsDir() {
 			if rel != "owner" && rel != "ledger-export" &&
-				rel != "physical-cuts" && rel != "physical-cuts/epoch-1" && rel != "physical-cuts/epoch-2" {
+				rel != "physical-cuts" && rel != "physical-cuts/epoch-1" && rel != "physical-cuts/epoch-2" &&
+				rel != "replay" && rel != "replay/owner" {
 				return errors.New("unexpected evidence directory")
 			}
 			stat, err := info.Info()
@@ -309,7 +339,8 @@ func verifyLocal(ctx context.Context, dir string) error {
 		meta.SourceSHA != sha || meta.Seed != 42 ||
 		(meta.EvidenceProfile != "" &&
 			meta.EvidenceProfile != "H2_SIGNED_INGRESS_V1" &&
-			meta.EvidenceProfile != "H2_RAW_SOURCE_V1") ||
+			meta.EvidenceProfile != "H2_RAW_SOURCE_V1" &&
+			meta.EvidenceProfile != "H2_SAME_A1_REPLAY_V1") ||
 		meta.CodecPolicyHash != policy.CodecPolicyHashHex ||
 		meta.SchemaBundleHash != policy.SchemaBundleHashHex ||
 		meta.GoVersion != runtime.Version() ||
@@ -374,7 +405,8 @@ func verifyLocal(ctx context.Context, dir string) error {
 		return errors.New("Genesis differs from archived run manifest")
 	}
 	if meta.EvidenceProfile == "H2_SIGNED_INGRESS_V1" ||
-		meta.EvidenceProfile == "H2_RAW_SOURCE_V1" {
+		meta.EvidenceProfile == "H2_RAW_SOURCE_V1" ||
+		meta.EvidenceProfile == "H2_SAME_A1_REPLAY_V1" {
 		if _, err := os.Lstat(filepath.Join(out, "ledger-export")); err != nil {
 			return errors.New("H2-S requires non-optional private ledger export directory")
 		}
@@ -393,7 +425,8 @@ func verifyLocal(ctx context.Context, dir string) error {
 			return err
 		}
 		if present != (meta.EvidenceProfile == "H2_SIGNED_INGRESS_V1" ||
-			meta.EvidenceProfile == "H2_RAW_SOURCE_V1") {
+			meta.EvidenceProfile == "H2_RAW_SOURCE_V1" ||
+			meta.EvidenceProfile == "H2_SAME_A1_REPLAY_V1") {
 			return errors.New("H2-S signed ingress profile does not match evidence contents")
 		}
 		if present {
@@ -408,7 +441,8 @@ func verifyLocal(ctx context.Context, dir string) error {
 		} else if !errors.Is(err, os.ErrNotExist) {
 			return err
 		}
-		if rawRootPresent != (meta.EvidenceProfile == "H2_RAW_SOURCE_V1") {
+		if rawRootPresent != (meta.EvidenceProfile == "H2_RAW_SOURCE_V1" ||
+			meta.EvidenceProfile == "H2_SAME_A1_REPLAY_V1") {
 			return errors.New("H2-R original A1 source archive/profile mismatch")
 		}
 		if rawRootPresent {
@@ -416,6 +450,21 @@ func verifyLocal(ctx context.Context, dir string) error {
 				return fmt.Errorf("H2-R original Python A1 cold source validation: %w", err)
 			}
 			fmt.Println("H2_RAW_PYTHON_A1_CUTS=SEALED_AND_VERIFIED_PRIVATE")
+		}
+		replayPresent := false
+		if _, err := os.Lstat(filepath.Join(out, "replay")); err == nil {
+			replayPresent = true
+		} else if !errors.Is(err, os.ErrNotExist) {
+			return err
+		}
+		if replayPresent != (meta.EvidenceProfile == "H2_SAME_A1_REPLAY_V1") {
+			return errors.New("H2 same-cut replay profile mismatches the private second DB authority")
+		}
+		if replayPresent {
+			if err := coldVerifyReplayH2(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
+				return fmt.Errorf("H2 same A1 second independent D3 verification: %w", err)
+			}
+			fmt.Println("H2_SAME_SIGNED_A1_INDEPENDENT_GO_D3=BYTE_IDENTICAL_AUTHORITIES")
 		}
 		fmt.Println("H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE")
 		fmt.Println("H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE")

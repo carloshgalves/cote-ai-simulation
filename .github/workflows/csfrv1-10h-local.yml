@@ -52,6 +52,10 @@ jobs:
             cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go
             cmd/csf-reference-run-local/h2_owner_linux.go cmd/csf-reference-run-local/h2_integrated_mutants_linux_test.go
             cmd/csf-reference-run-local/h2_ingress_linux.go cmd/csf-reference-run-local/h2_raw_source_linux.go
+            cmd/csf-reference-run-local/h2_replay_linux.go cmd/csf-reference-run-local/h2_replay_compare_linux.go
+            cmd/csf-reference-run-local/h2_replay_compare_linux_test.go
+            internal/csf/commit/reference_d3_offline_same_a1_linux.go
+            internal/csf/commit/reference_d3_offline_same_a1_linux_test.go
             internal/physicalhost/supervisor_linux.go internal/physicalhost/private_capture_linux.go
             internal/physicalhost/private_capture_linux_test.go)
           if [ -n "$(gofmt -l "${files[@]}")" ]; then
@@ -59,8 +63,10 @@ jobs:
             exit 1
           fi
           go test -count=1 -timeout=10m ./cmd/csf-reference-run-local ./internal/physicalhost
+          go test -count=1 -timeout=10m -run '^TestH2IndependentD3Replay' ./internal/csf/commit
           go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local ./internal/physicalhost
-          go vet ./cmd/csf-reference-run-local ./internal/physicalhost
+          go test -race -count=1 -timeout=10m -run '^TestH2IndependentD3Replay' ./internal/csf/commit
+          go vet ./cmd/csf-reference-run-local ./internal/physicalhost ./internal/csf/commit
       - name: Real A1+D3 and detached owner, snapshot and ledger semantic mutants
         run: |
           set -euo pipefail
@@ -72,6 +78,7 @@ jobs:
           grep -Fx 'H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_GENESIS_BOUND_SIGNED_INGRESS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_RAW_PYTHON_A1_CUTS=SEALED_AND_VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_SAME_SIGNED_A1_INDEPENDENT_GO_D3=BYTE_IDENTICAL_AUTHORITIES' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'CSFRV1_10_V1_DOD_ACCEPTED=NO' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'FIRST_REAL_RUN_PRODUCTION_GO=NO' "$RUNNER_TEMP/h-summary.txt"
           go run ./cmd/csf-reference-run-local --verify "$out"
@@ -103,6 +110,7 @@ jobs:
           echo 'H2_TWO_OWNER_SIGNED_RECEIPTS=REAL_PRIVATE_REPLAY'
           echo 'H2_RAW_A1_ARCHIVE=PRIVATE_EXACT_SOURCE_BYTES_TWO_EPOCHS'
           echo 'H2_A1_ARCHIVE_SEALED_COLD_SOURCE=VERIFIED'
+          echo 'H2_SAME_SOURCE_TWO_FULL_C4_D2_D3_DATABASES=BYTE_IDENTICAL_ALL_SQLITE_TABLES'
           echo 'H2_SIGNED_SOURCE_RECEIPTS=2_EPOCHS_EIGHT_RECEIPTS_FINAL_CLOSURE'
           echo 'H2_NO_REINGRESS_ON_DURABLE_RECOVERY=VERIFIED'
           echo 'H2_SNAPSHOT_SEAL=VERIFIED_THREE_TAIL_COMMITS'

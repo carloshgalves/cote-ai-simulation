@@ -42,7 +42,7 @@ type h2Receipt struct {
 	Signature, Public         []byte
 }
 
-func sameOwnerH2(ctx context.Context, db *sql.DB, receipt h2Receipt) (bool, int, error) {
+func sameOwnerH2(ctx context.Context, db *sql.DB, receipt h2Receipt) (bool, [][]byte, error) {
 	var run, content, hash, signer []byte
 	var ns, actor, store, producer string
 	var schema, producerVersion, instant, revision, cursor int64
@@ -52,10 +52,10 @@ func sameOwnerH2(ctx context.Context, db *sql.DB, receipt h2Receipt) (bool, int,
 		receipt.Locator).Scan(&run, &ns, &actor, &store, &schema, &content, &hash, &producer,
 		&producerVersion, &instant, &revision, &cursor, &signer)
 	if errors.Is(err, sql.ErrNoRows) {
-		return false, 0, nil
+		return false, nil, nil
 	}
 	if err != nil {
-		return false, 0, err
+		return false, nil, err
 	}
 	if !bytes.Equal(run, receipt.Run) || ns != receipt.Namespace || actor != receipt.Actor ||
 		store != receipt.StoreID || schema != receipt.SchemaVersion ||
@@ -63,34 +63,34 @@ func sameOwnerH2(ctx context.Context, db *sql.DB, receipt h2Receipt) (bool, int,
 		producer != receipt.Producer || producerVersion != receipt.ProducerVersion ||
 		instant != receipt.Instant || revision != receipt.Revision || cursor != receipt.Cursor ||
 		!bytes.Equal(signer, receipt.Public) {
-		return false, 0, errors.New("private owner checkpoint differs from signed causal escrow")
+		return false, nil, errors.New("private owner checkpoint differs from signed causal escrow")
 	}
 	rows, err := db.QueryContext(ctx, `SELECT snapshot_id, locator, content_hash FROM restore_acks
  WHERE run_id=? AND actor_namespace=? AND actor_id=? AND receipt_id=?`,
 		receipt.Run, receipt.Namespace, receipt.Actor, receipt.ID)
 	if err != nil {
-		return false, 0, err
+		return false, nil, err
 	}
 	defer rows.Close()
-	ack := 0
+	ackIDs := make([][]byte, 0)
 	for rows.Next() {
 		var snapshot, locatorHash []byte
 		var locator string
 		if err := rows.Scan(&snapshot, &locator, &locatorHash); err != nil {
-			return false, 0, err
+			return false, nil, err
 		}
 		if len(snapshot) != 32 || locator != receipt.Locator || !bytes.Equal(locatorHash, receipt.Hash) {
-			return false, 0, errors.New("private owner restore ACK has foreign receipt or content")
+			return false, nil, errors.New("private owner restore ACK has foreign receipt or content")
 		}
-		ack++
+		ackIDs = append(ackIDs, bytes.Clone(snapshot))
 	}
 	if err := rows.Err(); err != nil {
-		return false, 0, err
+		return false, nil, err
 	}
-	if ack == 0 {
-		return false, 0, errors.New("private owner checkpoint was never restored and ACKed")
+	if len(ackIDs) == 0 {
+		return false, nil, errors.New("private owner checkpoint was never restored and ACKed")
 	}
-	return true, ack, nil
+	return true, ackIDs, nil
 }
 
 func auditOwnersH2(ctx context.Context, out, sha, run string) (ownerAuditH2, error) {
@@ -183,14 +183,22 @@ func auditOwnersH2(ctx context.Context, out, sha, run string) (ownerAuditH2, err
 		}
 		ownerMatches := 0
 		for i, db := range owners {
-			match, count, err := sameOwnerH2(ctx, db, r)
+			match, snapshots, err := sameOwnerH2(ctx, db, r)
 			if err != nil {
 				return zero, err
 			}
 			if match {
+				for _, snapshot := range snapshots {
+					var exists int
+					if err := causal.QueryRowContext(ctx,
+						"SELECT COUNT(*) FROM snapshot_seals WHERE run_id=? AND snapshot_id=?",
+						id, snapshot).Scan(&exists); err != nil || exists != 1 {
+						return zero, errors.New("private owner ACK references a foreign or unsealed snapshot")
+					}
+				}
 				ownerMatches++
 				matched[i]++
-				acked += count
+				acked += len(snapshots)
 			}
 		}
 		if ownerMatches != 1 {

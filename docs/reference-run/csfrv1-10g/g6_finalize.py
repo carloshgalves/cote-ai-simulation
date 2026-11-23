@@ -25,7 +25,7 @@ def require(condition, message):
 
 
 def verify_node_version(value):
-    require(type(value) is str and re.fullmatch(r"v22\\.\\d+\\.\\d+", value) is not None,
+    require(type(value) is str and re.fullmatch(r"v22\.\d+\.\d+", value) is not None,
             "G6 requires the pinned Node 22 conformance toolchain")
     return value
 

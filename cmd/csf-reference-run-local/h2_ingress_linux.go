@@ -106,6 +106,12 @@ func extractSignedIngressH2(ctx context.Context, archive, sourceSHA, run string,
 		if sequence < 0 || uint64(sequence) != uint64(proof.IngressCount) || len(recordID) != 32 || lastClosed {
 			return zero, errors.New("H2-S source receipts have a gap, duplicate, or post-final write")
 		}
+		receiptHash := identity.OpaqueContentHash(receiptCanonical)
+		var mirroredReceipt []byte
+		if err := db.QueryRowContext(ctx, "SELECT canonical FROM input_ledger WHERE id=?",
+			receiptHash[:]).Scan(&mirroredReceipt); err != nil || !bytes.Equal(mirroredReceipt, receiptCanonical) {
+			return zero, errors.New("H2-S source ingress receipt is not mirrored in canonical InputLedger")
+		}
 		envelope, err := codec.StrictDecodeEnvelope(receiptCanonical)
 		if err != nil || envelope.DomainTag != "cote.csf.record.source-ingress-receipt" { return zero, errors.New("H2-S malformed source receipt") }
 		receipt, ok := envelope.Value.([]any)

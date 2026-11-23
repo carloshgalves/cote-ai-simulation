@@ -30,7 +30,7 @@ private-run/
 
 ## Independent cold verification
 
-The mandatory new `run-manifest.json.evidence_profile = H2_RAW_SOURCE_V1` binds the archive layout; deleting `physical-cuts/`, either epoch, any of its ten files, or the raw proof is a hard failure, **even if the local checksum file is recalculated**. All files are indexed by length and SHA256, alongside H2's original five-ledger and owner/receipt evidence. Older profiles remain verifiable under their original, narrower claims, but are not silently promoted to H2-R.
+The mandatory new `run-manifest.json.evidence_profile = H2_RAW_SOURCE_V1` binds the archive layout; with this evidence profile retained, deleting `physical-cuts/`, either epoch, any of its ten files, or the raw proof is a hard failure, **even if the local checksum file is recalculated**. A coordinated attacker who can rewrite the *manifest profile itself* and the whole local archive could roll back to a valid older evidence profile; preventing that requires a separately retained, immutable external auditor attestation and remains an unresolved #177/#123 requirement. All files are indexed by length and SHA256, alongside H2's original five-ledger and owner/receipt evidence. Older profiles remain verifiable under their original, narrower claims, but are not silently promoted to H2-R.
 
 The fresh detached read-only verifier:
 

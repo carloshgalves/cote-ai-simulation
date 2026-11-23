@@ -8,6 +8,7 @@ import (
  "database/sql"
  "encoding/binary"
  "encoding/hex"
+ "encoding/json"
  "errors"
  "fmt"
  "net/url"
@@ -155,7 +156,7 @@ func verifyH2Ledgers(ctx context.Context,out,sha,run string,p *policy.Bundle)err
  originalProof,err:=readPrivateRegular(filepath.Join(dir,"ledger-proof.json"))
  if err!=nil{return err}
  var proof ledgerProofH2
- if err:=jsonUnmarshalH2(originalProof,&proof);err!=nil{return err}
+ if err:=json.Unmarshal(originalProof,&proof);err!=nil{return err}
  if !exactLocalJSON(originalProof,proof)||
   proof.Schema!="csfrv1-10h.ledger-evidence.v1" ||
   proof.SourceSHA!=sha || proof.RunID!=run ||

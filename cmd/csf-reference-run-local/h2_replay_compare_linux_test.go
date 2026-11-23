@@ -36,6 +36,11 @@ func TestH2SameSignedSourceMultisetComparesEveryTypedRow(t *testing.T) {
 		if err := db.Close(); err != nil {
 			t.Fatal(err)
 		}
+		// The private replay verifier intentionally rejects world-readable
+		// SQLite files. The synthetic test must honor the same 0600 invariant.
+		if err := os.Chmod(path, 0600); err != nil {
+			t.Fatal(err)
+		}
 	}
 	left, err := replayDbTableSetH2(ctx, dbs[0])
 	if err != nil {

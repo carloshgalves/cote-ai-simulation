@@ -285,7 +285,9 @@ def main():
     conf = check_conformance(root, go_raw, ts_raw)
     decision, gaps = finalize(args.sha, base, failures, conf, registry)
     decision["evidence_sha256"] = sha256(evidence_raw)
-    decision["go_version"] = base.get("go_version", "go1.27.2")
+    # `base` is the independently recomputed normative report and does not
+    # include toolchain metadata. Read the already-validated original record.
+    decision["go_version"] = strict(evidence_raw)["go_version"]
     decision["python_version"] = platform.python_version()
     decision["node_version"] = verify_node_version(os.getenv("G6_NODE_VERSION"))
     decision["ci_run"] = os.getenv("GITHUB_RUN_ID")

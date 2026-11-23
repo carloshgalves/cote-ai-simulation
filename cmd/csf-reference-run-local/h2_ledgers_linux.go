@@ -9,6 +9,7 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 	"encoding/json"
+	"crypto/sha256"
 	"errors"
 	"fmt"
 	"net/url"
@@ -17,6 +18,7 @@ import (
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
+	csfsqlite "github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	_ "modernc.org/sqlite"
 )
@@ -49,6 +51,9 @@ type ledgerProofH2 struct {
 	SourceSHA   string                  `json:"source_sha"`
 	RunID       string                  `json:"run_id"`
 	PolicyHash  string                  `json:"policy_hash"`
+	SealedSnapshotID string              `json:"sealed_snapshot_id"`
+	SealedRevision int64                 `json:"sealed_revision"`
+	TailCommitCount int                  `json:"tail_commit_count"`
 	Ledgers     map[string]ledgerHeadH2 `json:"ledgers"`
 	Disposition string                  `json:"disposition"`
 }
@@ -169,6 +174,42 @@ func readOnlyDBH2(ctx context.Context, path string) (*sql.DB, error) {
 	return db, nil
 }
 
+// Audit the frozen C4 snapshot on the COPY, not on the operator's archive.
+// This links the five exported complete ledgers to the independently verified
+// snapshot-prefix members, owner roster seal and the three real D2 tail commits.
+func verifiedSnapshotH2(ctx context.Context, detached, run string, p *policy.Bundle) (string, int64, int, error) {
+	idBytes, err := hex.DecodeString(run)
+	if err != nil || len(idBytes) != sha256.Size {
+		return "", 0, 0, errors.New("invalid sealed snapshot RunID")
+	}
+	db, err := readOnlyDBH2(ctx, detached)
+	if err != nil { return "", 0, 0, err }
+	var snapshotBytes []byte
+	var revision int64
+	queryErr := db.QueryRowContext(ctx,
+		"SELECT snapshot_id,revision FROM snapshot_seals WHERE run_id=? ORDER BY revision DESC LIMIT 1",
+		idBytes).Scan(&snapshotBytes, &revision)
+	closeErr := db.Close()
+	if queryErr != nil { return "", 0, 0, queryErr }
+	if closeErr != nil { return "", 0, 0, closeErr }
+	if len(snapshotBytes) != 32 || revision != 6 {
+		return "", 0, 0, errors.New("unexpected C4 checkpoint identity or revision")
+	}
+	store, err := csfsqlite.Open(ctx, detached)
+	if err != nil { return "", 0, 0, err }
+	defer store.Close()
+	var runID, snapshotID [32]byte
+	copy(runID[:], idBytes)
+	copy(snapshotID[:], snapshotBytes)
+	verified, err := store.VerifySnapshotV1(ctx, runID, snapshotID, p)
+	if err != nil { return "", 0, 0, fmt.Errorf("independent sealed C4 snapshot verification: %w", err) }
+	if verified.Snapshot.ID != snapshotID || verified.Snapshot.Revision != uint64(revision) ||
+		verified.TailCommits != 3 {
+		return "", 0, 0, errors.New("H2 snapshot prefix or three-tail commit mismatch")
+	}
+	return hex.EncodeToString(snapshotBytes), revision, verified.TailCommits, nil
+}
+
 func exportH2Ledgers(ctx context.Context, out, sha, run string, p *policy.Bundle) error {
 	if p == nil {
 		return errors.New("missing H2 policy")
@@ -182,6 +223,8 @@ func exportH2Ledgers(ctx context.Context, out, sha, run string, p *policy.Bundle
 		return err
 	}
 	defer cleanup()
+	snapshotID, snapshotRev, tail, err := verifiedSnapshotH2(ctx, detached, run, p)
+	if err != nil { return err }
 	db, err := readOnlyDBH2(ctx, detached)
 	if err != nil {
 		return err
@@ -189,6 +232,7 @@ func exportH2Ledgers(ctx context.Context, out, sha, run string, p *policy.Bundle
 	defer db.Close()
 	proof := ledgerProofH2{Schema: "csfrv1-10h.ledger-evidence.v1", SourceSHA: sha, RunID: run,
 		PolicyHash: hex.EncodeToString(p.CodecPolicyHash[:]),
+		SealedSnapshotID: snapshotID, SealedRevision: snapshotRev, TailCommitCount: tail,
 		Ledgers:    make(map[string]ledgerHeadH2, 5), Disposition: "PRIVATE_LOCAL_ONLY_NO_PRODUCTION_GO"}
 	for _, name := range ledgerNamesH2 {
 		raw, head, err := captureLedgerH2(ctx, db, name, p)
@@ -226,6 +270,12 @@ func verifyH2Ledgers(ctx context.Context, out, sha, run string, p *policy.Bundle
 		return err
 	}
 	defer cleanup()
+	snapshotID, snapshotRev, tail, err := verifiedSnapshotH2(ctx, detached, run, p)
+	if err != nil { return err }
+	if proof.SealedSnapshotID != snapshotID || proof.SealedRevision != snapshotRev ||
+		proof.TailCommitCount != tail {
+		return errors.New("H2 foreign or unverified sealed C4 snapshot identity")
+	}
 	db, err := readOnlyDBH2(ctx, detached)
 	if err != nil {
 		return err

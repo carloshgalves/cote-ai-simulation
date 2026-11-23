@@ -11,7 +11,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"os"
 	"path/filepath"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/identity"
@@ -158,7 +157,8 @@ func auditOwnersH2(ctx context.Context, out, sha, run string) (ownerAuditH2, err
 		}
 		if len(r.ID) != 32 || !bytes.Equal(r.Run, id) || len(r.Public) != 32 || len(r.Signature) != 64 ||
 			len(r.Hash) != 32 || r.SchemaVersion < 1 || r.ProducerVersion < 1 ||
-			r.Revision < 0 || r.Cursor < 0 {
+			r.Revision < 0 || r.Cursor < 0 ||
+			r.SchemaVersion > int64(^uint32(0)) || r.ProducerVersion > int64(^uint32(0)) {
 			return zero, errors.New("malformed owner escrow identity")
 		}
 		contentHash := identity.OpaqueContentHash(r.Content)
@@ -260,4 +260,3 @@ func verifyOwnersH2(ctx context.Context, out, sha, run string) error {
 	return nil
 }
 
-var _ = os.ErrNotExist

@@ -68,7 +68,7 @@ def replay_sanitized(events, package, names):
     return g.verify_events(b"\n".join(formatted) + b"\n", package, names)
 
 
-def check_attested_evidence(root, raw, sha, registry, normative, source):
+def check_attested_evidence(root, raw, sha, registry, normative, source, logs_dir):
     doc = strict(raw)
     require(type(doc) is dict and doc.get("schema") == "csfrv1-10g.evidence.v1",
             "missing G1–G5 evidence schema")
@@ -121,6 +121,25 @@ def check_attested_evidence(root, raw, sha, registry, normative, source):
             require(row["sanitized_events_sha256"] == g.digest(json.dumps(
                 row["sanitized_events"], sort_keys=True, separators=(",", ":")).encode()),
                 "sanitized event digest changed")
+            # Re-read PRIVATE raw Go -json stdout/stderr from this same CI
+            # invocation. The G6 artifact never uploads them, but the
+            # independent aggregator must not merely trust a green label or
+            # a self-reported digest inside the G1-G5 certificate.
+            raw_files = {}
+            for suffix, key in (("jsonl", "log_sha256"), ("stderr", "stderr_sha256")):
+                log = logs_dir / (wid + "-" + mode + "." + suffix)
+                require(log.is_file() and not log.is_symlink(),
+                        "private original witness log missing")
+                payload = log.read_bytes()
+                require(sha256(payload) == row[key], "private original witness digest mismatch")
+                raw_files[suffix] = payload
+            if row["status"] == "PASS":
+                direct_history = []
+                actual_tests = g.verify_events(raw_files["jsonl"], package, names,
+                                               transcript=direct_history)
+                require(actual_tests == row["test_names"] and
+                        direct_history == row["sanitized_events"],
+                        "sanitized execution diverges from private Go event source")
             if row["status"] == "PASS":
                 require(row["exit_status"] == 0 and row["reason"] == "" and
                         row["failed_registered_tests"] == [] and row["test_names"] == sorted(names),
@@ -225,7 +244,8 @@ def finalize(sha, evidence, failures, conformance, registry):
         },
         "external_gates": {"93": "NOT_ATTESTED", "94": "NOT_ATTESTED", "113": "NOT_ATTESTED"},
         "independent_review": "NOT_ATTESTED",
-        "matrix_complete": False, "evals_complete": False,
+        "matrix_complete": bool(evidence["matrix_complete"]),
+        "evals_complete": bool(evidence["evals_complete"]),
         "dod_accepted": False, "release_authorized": False,
         "disposition": status,
     }
@@ -252,7 +272,7 @@ def main():
     trace = strict((root / g.TRACE).read_bytes())
     normative, source = source_roster(root, registry, trace)
     evidence_raw = args.evidence.read_bytes()
-    base, failures = check_attested_evidence(root, evidence_raw, args.sha, registry, normative, source)
+    base, failures = check_attested_evidence(root, evidence_raw, args.sha, registry, normative, source, args.evidence.parent)
     go_raw, ts_raw = args.go_report.read_bytes(), args.ts_report.read_bytes()
     conf = check_conformance(root, go_raw, ts_raw)
     decision, gaps = finalize(args.sha, base, failures, conf, registry)

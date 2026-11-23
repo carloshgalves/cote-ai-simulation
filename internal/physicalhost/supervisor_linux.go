@@ -87,6 +87,10 @@ type ProducerHost struct {
 	ImportRoot         string
 	DependencyRoot     string
 	PrivateStagingRoot string
+	// PrivateCaptureRoot is an optional trusted host-owned 0700 directory.
+	// The verified raw A1 sources and original signed cut are stored here
+	// only AFTER A2/Ed25519 verification; never an actor-provided path.
+	PrivateCaptureRoot string
 	Epoch              uint64
 	Plan               ProducerPlan
 }
@@ -384,6 +388,16 @@ func RunSupervisedPhysical(ctx context.Context, host ProducerHost) (ApprovedCut,
 		return zero, err
 	}
 	copy(cut.Signature[:], ed25519.Sign(host.PrivateKey, message))
-	return InspectSignedSealedAuthorized(snapshotFD, eventsFD, evidence,
+	approved, err := InspectSignedSealedAuthorized(snapshotFD, eventsFD, evidence,
 		host.GenesisCanonical, host.Bundle, cut)
+	if err != nil {
+		return zero, err
+	}
+	if host.PrivateCaptureRoot != "" {
+		if err := writePrivateA1Capture(host.PrivateCaptureRoot, host.Epoch,
+			snapshot, events, evidence, cut); err != nil {
+			return zero, fmt.Errorf("%w: A1_RAW_CAPTURE_ARCHIVE: %v", ErrUnadmitted, err)
+		}
+	}
+	return approved, nil
 }

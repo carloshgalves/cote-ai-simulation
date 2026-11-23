@@ -160,7 +160,9 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 					target = filepath.Join(out, "replay", "owner", "actor-b.db")
 				}
 				db, err := sql.Open("sqlite", target)
-				if err != nil { t.Fatal(err) }
+				if err != nil {
+					t.Fatal(err)
+				}
 				statement := "UPDATE input_ledger SET canonical=x'00' WHERE rowid=(SELECT MIN(rowid) FROM input_ledger)"
 				if variant == "replay-owner-checkpoint" {
 					statement = "UPDATE checkpoints SET content=x'00' WHERE locator=(SELECT locator FROM checkpoints ORDER BY locator LIMIT 1)"
@@ -170,21 +172,33 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 				}
 				result, execErr := db.Exec(statement)
 				closeErr := db.Close()
-				if execErr != nil || closeErr != nil { t.Fatalf("invalid real replay mutation: %v / %v",execErr,closeErr) }
+				if execErr != nil || closeErr != nil {
+					t.Fatalf("invalid real replay mutation: %v / %v", execErr, closeErr)
+				}
 				if variant != "replay-extra-table" {
 					n, err := result.RowsAffected()
-					if err != nil || n != 1 { t.Fatalf("failed to mutate exact real replay row: %d / %v",n,err) }
+					if err != nil || n != 1 {
+						t.Fatalf("failed to mutate exact real replay row: %d / %v", n, err)
+					}
 				}
 			case "replay-compare-proof":
 				path := filepath.Join(out, filepath.FromSlash(replayComparisonPathH2))
 				data, err := os.ReadFile(path)
-				if err != nil { t.Fatal(err) }
+				if err != nil {
+					t.Fatal(err)
+				}
 				var proof replayComparisonH2
-				if err := json.Unmarshal(data, &proof); err != nil { t.Fatal(err) }
+				if err := json.Unmarshal(data, &proof); err != nil {
+					t.Fatal(err)
+				}
 				proof.InputsIdentical = false
-				changed, err := json.MarshalIndent(proof,"","  ")
-				if err != nil { t.Fatal(err) }
-				if err := os.WriteFile(path,append(changed,'\n'),0600);err != nil { t.Fatal(err) }
+				changed, err := json.MarshalIndent(proof, "", "  ")
+				if err != nil {
+					t.Fatal(err)
+				}
+				if err := os.WriteFile(path, append(changed, '\n'), 0600); err != nil {
+					t.Fatal(err)
+				}
 			}
 			// Forge a new fully consistent *local SHA256 index* to prove that
 			// private record signatures/snapshot seals/full byte replay are

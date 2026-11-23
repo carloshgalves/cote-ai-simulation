@@ -120,27 +120,39 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 				}
 			case "raw-snapshot", "raw-events", "raw-evidence", "raw-signature", "raw-cut":
 				name := map[string]string{
-					"raw-snapshot": "snapshot.yaml",
-					"raw-events": "events.jsonl",
-					"raw-evidence": "evidence.json",
+					"raw-snapshot":  "snapshot.yaml",
+					"raw-events":    "events.jsonl",
+					"raw-evidence":  "evidence.json",
 					"raw-signature": "signature.bin",
-					"raw-cut": "cut.cbor",
+					"raw-cut":       "cut.cbor",
 				}[variant]
 				path := filepath.Join(out, "physical-cuts", "epoch-1", name)
 				raw, err := os.ReadFile(path)
-				if err != nil || len(raw) == 0 { t.Fatal("real A1 source missing", err) }
+				if err != nil || len(raw) == 0 {
+					t.Fatal("real A1 source missing", err)
+				}
 				raw[len(raw)-1] ^= 0x55
-				if err := os.WriteFile(path, raw, 0600); err != nil { t.Fatal(err) }
+				if err := os.WriteFile(path, raw, 0600); err != nil {
+					t.Fatal(err)
+				}
 			case "raw-private-proof":
 				path := filepath.Join(out, filepath.FromSlash(rawA1ProofPathH2))
 				data, err := os.ReadFile(path)
-				if err != nil { t.Fatal(err) }
+				if err != nil {
+					t.Fatal(err)
+				}
 				var proof rawA1ProofH2
-				if err := json.Unmarshal(data, &proof); err != nil { t.Fatal(err) }
+				if err := json.Unmarshal(data, &proof); err != nil {
+					t.Fatal(err)
+				}
 				proof.Epochs[0].SnapshotSHA256 = strings.Repeat("0", 64)
 				changed, err := json.MarshalIndent(proof, "", "  ")
-				if err != nil { t.Fatal(err) }
-				if err := os.WriteFile(path, append(changed, '\n'), 0600); err != nil { t.Fatal(err) }
+				if err != nil {
+					t.Fatal(err)
+				}
+				if err := os.WriteFile(path, append(changed, '\n'), 0600); err != nil {
+					t.Fatal(err)
+				}
 			}
 			// Forge a new fully consistent *local SHA256 index* to prove that
 			// private record signatures/snapshot seals/full byte replay are
@@ -177,12 +189,12 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 				"framed-ledger":                "H2 full canonical ledger verification",
 				"signed-ingress-proof":         "H2-S source receipt and Genesis-bound signature audit",
 				"missing-signed-ingress-proof": "H2-S signed ingress profile does not match evidence",
-				"raw-snapshot": "H2-R original Python A1 cold source validation",
-				"raw-events": "H2-R original Python A1 cold source validation",
-				"raw-evidence": "H2-R original Python A1 cold source validation",
-				"raw-signature": "H2-R original Python A1 cold source validation",
-				"raw-cut": "H2-R original Python A1 cold source validation",
-				"raw-private-proof": "H2-R original Python A1 cold source validation",
+				"raw-snapshot":                 "H2-R original Python A1 cold source validation",
+				"raw-events":                   "H2-R original Python A1 cold source validation",
+				"raw-evidence":                 "H2-R original Python A1 cold source validation",
+				"raw-signature":                "H2-R original Python A1 cold source validation",
+				"raw-cut":                      "H2-R original Python A1 cold source validation",
+				"raw-private-proof":            "H2-R original Python A1 cold source validation",
 			}[variant]
 			if !strings.Contains(err.Error(), required) {
 				t.Fatalf("unexpected rejection path, not target cryptographic invariant %s: %v", required, err)

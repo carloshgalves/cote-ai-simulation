@@ -24,6 +24,12 @@ def require(condition, message):
         raise ValueError(message)
 
 
+def verify_node_version(value):
+    require(type(value) is str and re.fullmatch(r"v22\\.\\d+\\.\\d+", value) is not None,
+            "G6 requires the pinned Node 22 conformance toolchain")
+    return value
+
+
 def sha256(raw):
     return hashlib.sha256(raw).hexdigest()
 
@@ -214,6 +220,8 @@ def finalize(sha, evidence, failures, conformance, registry):
                 "blocker_issue": item.get("blocker_issue"),
                 "followup_issue": EXPECTED_GAP_ISSUES[item["eval"]],
                 "normative_source": item["normative_source"],
+                "normative_statement": item["normative_statement"],
+                "required_proof": item.get("required_proof"),
             })
     require(len(evidence["rows"]) == 109 and
             sum(row["id"].startswith("INV-") for row in evidence["rows"]) == 41 and
@@ -279,7 +287,7 @@ def main():
     decision["evidence_sha256"] = sha256(evidence_raw)
     decision["go_version"] = base.get("go_version", "go1.27.2")
     decision["python_version"] = platform.python_version()
-    decision["node_version"] = os.getenv("G6_NODE_VERSION", "NOT_ATTESTED")
+    decision["node_version"] = verify_node_version(os.getenv("G6_NODE_VERSION"))
     decision["ci_run"] = os.getenv("GITHUB_RUN_ID")
     require(args.out.is_dir() and root not in args.out.resolve().parents and
             args.out.resolve() != root, "private output directory required")

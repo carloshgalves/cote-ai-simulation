@@ -64,3 +64,7 @@ The normative G6 decision remains `NO_GO_INCOMPLETE_MATRIX`, with #168/#169/#172
 ## H2-O executable operational runbook
 
 See [H2-operational-runbook.md](H2-operational-runbook.md) for the direct executable contract, typed stop states, operator-confirmed crash semantics, quiescent-only diagnosis and validation requirements. Do not use `go run` to inspect the actual process exit number: the Go wrapper returns its own status.
+
+## H2-E detached operational receipt
+
+See [H2-operational-evidence.md](H2-operational-evidence.md) for the exact binary command/exit chronology, redacted marker receipt, external receipt hash pin and cold verification. The receipt is stored separately from causal authority and remains private and non-attested.

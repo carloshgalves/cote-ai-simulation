@@ -71,6 +71,7 @@ func main() {
 }
 
 func runLocal(ctx context.Context, output string) error {
+	startedAt := time.Now().UTC().Format(time.RFC3339Nano)
 	root, err := gitOutput(".", "rev-parse", "--show-toplevel")
 	if err != nil {
 		return err
@@ -165,7 +166,7 @@ func runLocal(ctx context.Context, output string) error {
 		GoVersion: runtime.Version(), PythonVersion: pyVersion,
 		SQLiteVersion: "3.53.4", HostOS: runtime.GOOS, HostArch: runtime.GOARCH,
 		HostCPUs: runtime.NumCPU(), HostRAMBytes: localRAMBytes(),
-		StartedAtUTC:    time.Now().UTC().Format(time.RFC3339Nano),
+		StartedAtUTC:    startedAt,
 		EvidenceProfile: "H2_SAME_A1_REPLAY_V1",
 		ReviewStatus:    "NOT_INDEPENDENTLY_ATTESTED",
 	}

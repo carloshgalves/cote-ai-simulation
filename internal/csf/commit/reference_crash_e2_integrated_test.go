@@ -45,6 +45,19 @@ func TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs(t *testing
 		}
 	}
 	host.GenesisCanonical = nil
+	runReferenceE2IntegratedMatrix(t, host, plans, cuts, nil)
+}
+
+// Both H2-F and H2-C exercise the same complete fault matrix. H2-C supplies
+// the original CLI archive as the oracle, rather than capturing new A1 cuts.
+func runReferenceE2IntegratedMatrix(t *testing.T, host physicalhost.ProducerHost, plans [2]physicalhost.ProducerPlan,
+	cuts [2]embodimentv1.ApprovedCut, archived *referenceE1Snapshot) {
+	t.Helper()
+	ctx := context.Background()
+	g, err := buildReferenceGenesis(host.Bundle)
+	if err != nil {
+		t.Fatal(err)
+	}
 	paths := func() (string, string) {
 		root := t.TempDir()
 		private := filepath.Join(root, "owner")
@@ -68,13 +81,18 @@ func TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs(t *testing
 		}
 		return s
 	}
-	baselineDB, baselineOwner := paths()
-	baseline, err := RunReferenceD3(ctx, baselineDB, baselineOwner, bundlePath,
-		ReferenceD2Config{Host: host, EpochPlans: plans, frozenSupervisedCuts: &cuts}, ReferenceOptions{})
-	if err != nil || baseline.Status != "RUN_LOCAL_10D3" {
-		t.Fatalf("baseline D3: %v", err)
+	var expected referenceE1Snapshot
+	if archived != nil {
+		expected = *archived
+	} else {
+		baselineDB, baselineOwner := paths()
+		baseline, err := RunReferenceD3(ctx, baselineDB, baselineOwner, bundlePath,
+			ReferenceD2Config{Host: host, EpochPlans: plans, frozenSupervisedCuts: &cuts}, ReferenceOptions{})
+		if err != nil || baseline.Status != "RUN_LOCAL_10D3" {
+			t.Fatalf("baseline D3: %v", err)
+		}
+		expected = capture(baselineDB, baselineOwner)
 	}
-	expected := capture(baselineDB, baselineOwner)
 	manifest, err := host.Bundle.PhysicalManifestCanonical()
 	if err != nil {
 		t.Fatal(err)
@@ -221,7 +239,7 @@ func TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs(t *testing
 			if err := referenceE1Compare(expected, actual); err != nil {
 				t.Fatalf("E2 C4+D3 resumed result differs from continuous input-identical baseline: %v", err)
 			}
-			if beforeCount := len(partial.Databases["causal"].Tables["committed_cycles"].Rows); beforeCount != 7 && beforeCount != 8 {
+			if beforeCount := len(partial.Databases["causal"].Tables["committed_cycles"].Rows); beforeCount != 6+tc.epoch {
 				t.Fatalf("E2 failed fault left invalid prefix of %d commits", beforeCount)
 			}
 		})

@@ -191,7 +191,8 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 	var zero ReferenceD2Proof
 	if ctx == nil || dbPath == "" || ownerPath == "" || cfg.Host.Bundle == nil ||
 		len(cfg.Host.GenesisCanonical) != 0 ||
-		len(cfg.Host.PrivateKey) != ed25519.PrivateKeySize ||
+		(cfg.frozenSupervisedCuts == nil && len(cfg.Host.PrivateKey) != ed25519.PrivateKeySize) ||
+		(len(cfg.Host.PrivateKey) != 0 && len(cfg.Host.PrivateKey) != ed25519.PrivateKeySize) ||
 		(cfg.FailPhysicalAtEpoch != 0 && cfg.FailPhysicalAtEpoch != 1 && cfg.FailPhysicalAtEpoch != 2) ||
 		(cfg.FailPhysicalAtEpoch == 0 && cfg.FailPhysicalAfterStep != 0) ||
 		(cfg.FailPhysicalAtEpoch != 0 && (cfg.FailPhysicalAfterStep < 1 || cfg.FailPhysicalAfterStep > 7)) {
@@ -205,7 +206,7 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 		return zero, err
 	}
 	if reg.Disclosure != "ENGINE_ONLY" ||
-		!bytes.Equal(cfg.Host.PrivateKey.Public().(ed25519.PublicKey), reg.PublicKeyEd25519[:]) {
+		(len(cfg.Host.PrivateKey) != 0 && !bytes.Equal(cfg.Host.PrivateKey.Public().(ed25519.PublicKey), reg.PublicKeyEd25519[:])) {
 		return zero, errors.New("D2 signer is not the Genesis-registration issuer")
 	}
 	if options.physicalBundle != nil {

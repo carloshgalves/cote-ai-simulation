@@ -129,6 +129,8 @@ jobs:
           grep -Fx 'H2_E_REAL_COMMANDS=OBSERVED_OUT_AND_VERIFY_EXIT_0' "$RUNNER_TEMP/h-summary.txt"
           python docs/reference-run/csfrv1-10h/operational_evidence.py verify \
             --binary "$binary" --archive "$out" --evidence "$evidence" --receipt-sha256 "$receipt_sha"
+          H2E_REAL_ARCHIVE="$out" H2E_REAL_BINARY="$binary" H2E_REAL_EVIDENCE="$evidence" \
+            python docs/reference-run/csfrv1-10h/test_operational_evidence.py EvidenceTests.test_real_receipt_rejects_semantic_mutants_and_failed_process
           # Neither the archive nor the operational receipt is uploaded.
           grep -Fx 'FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"

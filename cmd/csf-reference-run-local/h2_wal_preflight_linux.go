@@ -77,6 +77,14 @@ func verifySQLiteSidecarsH2(original string) (sqliteWALProofH2, error) {
 	if db[18] != 2 || db[19] != 2 {
 		return proof, errors.New("H2 WAL preflight: journal conflicts with main SQLite WAL mode")
 	}
+	// A zero-length WAL sidecar is a legal checkpointed SQLite state.
+	// It contains NO frames to validate. All nine authenticated commits,
+	// both private owners and the sealed prefix must still be verified from
+	// the SQLite main DB by the existing detached causal replay. A NONEMPTY
+	// truncated header is never permitted, even if a local SHA is updated.
+	if len(wal) == 0 {
+		return proof, nil
+	}
 	if len(wal) < 32 {
 		return proof, errors.New("H2 WAL preflight: missing or truncated WAL header")
 	}

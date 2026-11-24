@@ -115,7 +115,12 @@ func verifySQLiteSidecarsH2(original string) (sqliteWALProofH2, error) {
 	salt2 := binary.BigEndian.Uint32(wal[20:24])
 	for off := 32; off < len(wal); off += frameSize {
 		frame := wal[off : off+frameSize]
-		if binary.BigEndian.Uint32(frame[:4]) == 0 ||
+		// SQLite page numbers are 1..2^32-2; 0 and 2^32-1 are
+		// invalid even when a hostile source recomputes WAL checksums.
+		pageNumber := binary.BigEndian.Uint32(frame[:4])
+		commitPages := binary.BigEndian.Uint32(frame[4:8])
+		if pageNumber == 0 || pageNumber == ^uint32(0) ||
+			commitPages == ^uint32(0) ||
 			binary.BigEndian.Uint32(frame[8:12]) != salt1 ||
 			binary.BigEndian.Uint32(frame[12:16]) != salt2 {
 			return proof, errors.New("H2 WAL preflight: invalid page number or stale WAL frame salt")

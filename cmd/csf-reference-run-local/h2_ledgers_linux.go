@@ -124,6 +124,11 @@ func captureLedgerH2(ctx context.Context, db *sql.DB, name string, p *policy.Bun
 }
 
 func detachedDBH2(original string) (string, func(), error) {
+	// Refuse a truncated or stale WAL BEFORE copying or asking SQLite to
+	// recover its valid prefix. Verify all original private sidecar bytes.
+	if _, err := verifySQLiteSidecarsH2(original); err != nil {
+		return "", nil, err
+	}
 	dir, err := os.MkdirTemp("", "csf-h2-detached-")
 	if err != nil {
 		return "", nil, err

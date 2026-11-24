@@ -40,6 +40,8 @@ type ReferenceOptions struct {
 	order *referenceOrder
 	stopAfterAuthorizedRetry bool // reference harness cut only; no new terminal or admission
 	stopAfterClockAdvance bool // reference harness cut before pending trigger execution
+	// Internal reference harness only; never a caller-supplied actor capability.
+	referenceBeforeDeliveryPerception func(context.Context, string) error
 	ReverseSources   bool
 	ReverseResponses bool
 	LeaveSourceOpen  bool  // negative control; must stop before the first fence

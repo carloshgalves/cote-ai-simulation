@@ -83,6 +83,10 @@ func TestH2ArchivedSourceCrashRecovery(t *testing.T) {
 	if t.Failed() {
 		return
 	}
+	h2ArchivedBarrierRecovery(t, root, indexHash, host, cuts, expected)
+	if t.Failed() {
+		return
+	}
 	// Recheck all consumed originals and the digest registry after the matrix.
 	for _, name := range []string{"registration.json", "run-manifest.json"} {
 		read(name)
@@ -115,7 +119,8 @@ func TestH2ArchivedSourceCrashRecovery(t *testing.T) {
 			ArchiveIndexSHA256 string `json:"archive_index_sha256"`
 			Cases              int    `json:"cases"`
 			Commits            int    `json:"commits"`
-		}{"H2_C_ARCHIVED_SOURCE_RECOVERY", hex.EncodeToString(digest[:]), completed, 9})
+			BarrierCases       int    `json:"barrier_cases"`
+		}{"H2_C_ARCHIVED_SOURCE_RECOVERY", hex.EncodeToString(digest[:]), completed, 9, 1})
 		if err != nil {
 			t.Fatal(err)
 		}

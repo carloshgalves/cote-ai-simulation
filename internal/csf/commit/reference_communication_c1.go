@@ -276,6 +276,11 @@ func extendReferenceC1(ctx context.Context,store *sqlite.Store,ledger *inputledg
     stock,err:=reducer.DecodeStock(world);if err!=nil||stock.Available!=0||finalHash!=sentHash{
         return errors.New("C1 claim/delivery changed committed inventory")
     }
+    // Package-private reference fault hook only: the delivery commit is
+    // durable, but its addressed perception is not completed yet.
+    if opt.referenceBeforeDeliveryPerception != nil {
+        if err := opt.referenceBeforeDeliveryPerception(ctx, dbPath); err != nil {return err}
+    }
     if err:=referenceCompleteC1Tasks(ctx,store,bundle,dbPath,g.RunID,6);err!=nil{return err}
     bAfter,err:=referenceC1BInputs(ctx,dbPath);if err!=nil{return err}
     if bAfter!=bBefore+1{return fmt.Errorf("C1 B KnowledgeInput delta %d, expected 1",bAfter-bBefore)}

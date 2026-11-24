@@ -61,6 +61,7 @@ jobs:
             internal/csf/commit/reference_physical_d2.go
             internal/csf/commit/reference_crash_e2_integrated_test.go
             internal/csf/commit/reference_h2_archived_recovery_linux_test.go
+            internal/csf/commit/reference_h2_archived_barrier_linux_test.go
             internal/physicalhost/supervisor_linux.go internal/physicalhost/private_capture_linux.go
             internal/physicalhost/private_capture_linux_test.go)
           if [ -n "$(gofmt -l "${files[@]}")" ]; then
@@ -181,7 +182,9 @@ jobs:
               "archive_index_sha256": hashlib.sha256(index.read_bytes()).hexdigest(),
               "cases": 14,
               "commits": 9,
+              "barrier_cases": 1,
           }
           print("H2_C_SAME_CLI_ARCHIVE_RECOVERY=14_OF_14_NORMAL_AND_RACE")
+          print("H2_C_SAME_CLI_ARCHIVE_PENDING_BARRIER=WORKER_RESTART_EXACTLY_ONCE_NORMAL_AND_RACE")
           PY
           # Private archive and digest-only reports stay on this runner.

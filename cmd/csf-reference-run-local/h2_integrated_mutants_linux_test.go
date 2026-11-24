@@ -257,8 +257,8 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 				"replay-owner-checkpoint":      "H2 same A1 second independent D3 verification",
 				"replay-compare-proof":         "H2 same A1 second independent D3 verification",
 				"replay-extra-table":           "H2 same A1 second independent D3 verification",
-				"wal-invalid-header":          "H2 WAL preflight",
-				"shm-truncated-region":        "H2 WAL preflight",
+				"wal-invalid-header":           "H2 WAL preflight",
+				"shm-truncated-region":         "H2 WAL preflight",
 			}[variant]
 			if !strings.Contains(err.Error(), required) {
 				t.Fatalf("unexpected rejection path, not target cryptographic invariant %s: %v", required, err)

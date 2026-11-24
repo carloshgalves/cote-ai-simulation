@@ -31,7 +31,13 @@ func h2ArchivedBarrierRecovery(t *testing.T, root, indexHash string,
 	ctx := context.Background()
 	dir := t.TempDir()
 	db := filepath.Join(dir, "causal.db")
-	owner := filepath.Join(dir, "owner.db")
+	// testing.T.TempDir may create its numbered child with 0755. C2
+	// deliberately refuses a non-private immediate owner directory.
+	private := filepath.Join(dir, "owner")
+	if err := os.Mkdir(private, 0700); err != nil {
+		t.Fatal("H2-C could not create private owner directory")
+	}
+	owner := filepath.Join(private, "actor-b.db")
 	hookCalls := 0
 	opts := ReferenceOptions{
 		referenceBeforeDeliveryPerception: func(_ context.Context, path string) error {
@@ -57,8 +63,28 @@ func h2ArchivedBarrierRecovery(t *testing.T, root, indexHash string,
 	}
 	proof, err := RunReferenceD3(ctx, db, owner, bundlePath,
 		ReferenceD2Config{Host: host, frozenSupervisedCuts: &cuts}, opts)
-	if err != nil || proof.Status != "RUN_LOCAL_10D3" || hookCalls != 1 {
-		t.Fatal("H2-C pending-barrier scenario did not finish the real D3 run")
+	if err != nil {
+		// Preserve stage-level diagnostics without exposing private record
+		// contents in GitHub Actions logs.
+		stage := "unclassified reference failure"
+		for _, candidate := range []string{
+			"C2 owner store requires a private 0700 directory",
+			"H2-C barrier hook invoked outside the intended reference cut",
+			"H2-C interrupted perception worker changed pending authority",
+			"C1 send barrier", "C1 terminal clock coordinate invalid",
+			"C1 B KnowledgeInput delta", "C1 integrated causal replay mismatch",
+			"C4 restored perception barrier", "D2 prerequisite C4 failed",
+			"D2 atomic CommitPhysical", "D3 missing real D2 baseline",
+		} {
+			if strings.Contains(err.Error(), candidate) {
+				stage = candidate
+				break
+			}
+		}
+		t.Fatalf("H2-C pending-barrier D3 failed: stage=%s hook_calls=%d", stage, hookCalls)
+	}
+	if proof.Status != "RUN_LOCAL_10D3" || hookCalls != 1 {
+		t.Fatalf("H2-C pending-barrier scenario did not finish the real D3 run: hook_calls=%d", hookCalls)
 	}
 	if _, err := proof.PublicReport(); err != nil {
 		t.Fatal("H2-C pending-barrier scenario did not pass disclosure")

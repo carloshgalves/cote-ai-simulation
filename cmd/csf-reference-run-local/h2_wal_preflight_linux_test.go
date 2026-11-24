@@ -88,7 +88,7 @@ func TestH2LiveSQLiteWALProvesCommittedFramesBeforeDetachedOpen(t *testing.T) {
 	}
 	// A fresh standalone copy must recover the uncheckpointed committed row,
 	// with zero modifications to the original archived bytes.
-	originalWAL, err := readPrivateRegular(source+"-wal")
+	originalWAL, err := readPrivateRegular(source + "-wal")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -108,7 +108,7 @@ func TestH2LiveSQLiteWALProvesCommittedFramesBeforeDetachedOpen(t *testing.T) {
 	if err := db.Close(); err != nil {
 		t.Fatal(err)
 	}
-	after, err := readPrivateRegular(source+"-wal")
+	after, err := readPrivateRegular(source + "-wal")
 	if err != nil || !bytes.Equal(originalWAL, after) {
 		t.Fatalf("detached WAL verification mutated the real original: %v", err)
 	}

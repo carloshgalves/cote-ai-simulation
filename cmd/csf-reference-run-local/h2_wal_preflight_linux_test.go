@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"database/sql"
+	"encoding/binary"
 	"os"
 	"path/filepath"
 	"strings"
@@ -160,6 +161,47 @@ func TestH2ZeroByteWALAfterRealCheckpointKeepsCommittedRows(t *testing.T) {
 	var count int
 	if err := ro.QueryRow("SELECT count(*) FROM wal_authority").Scan(&count); err != nil || count != 2 {
 		t.Fatalf("zero-length post-checkpoint WAL lost committed main-db rows: %d %v", count, err)
+	}
+}
+
+func TestH2WALRejectsImpossiblePagesEvenWithRecomputedRollingChecksums(t *testing.T) {
+	source := liveWALFixtureH2(t)
+	for _, variant := range []string{"page-number-overflow", "commit-size-overflow"} {
+		t.Run(variant, func(t *testing.T) {
+			path := copyLiveWALH2(t, source)
+			wal, err := os.ReadFile(path + "-wal")
+			if err != nil {
+				t.Fatal(err)
+			}
+			// Deliberately forge a new fully self-consistent SQLite rolling
+			// checksum sequence (and, in an H2 archive, rehash the local
+			// SHA256 index). Only strict frame semantics may reject it.
+			offset := 32
+			if variant == "page-number-overflow" {
+				binary.BigEndian.PutUint32(wal[offset:offset+4], ^uint32(0))
+			} else {
+				binary.BigEndian.PutUint32(wal[offset+4:offset+8], ^uint32(0))
+			}
+			var order binary.ByteOrder = binary.LittleEndian
+			if binary.BigEndian.Uint32(wal[:4]) == 0x377f0683 {
+				order = binary.BigEndian
+			}
+			s0, s1 := walChecksumH2(wal[:24], order, 0, 0)
+			pageSize := int(binary.BigEndian.Uint32(wal[8:12]))
+			for off := 32; off < len(wal); off += 24 + pageSize {
+				s0, s1 = walChecksumH2(wal[off:off+8], order, s0, s1)
+				s0, s1 = walChecksumH2(wal[off+24:off+24+pageSize], order, s0, s1)
+				binary.BigEndian.PutUint32(wal[off+16:off+20], s0)
+				binary.BigEndian.PutUint32(wal[off+20:off+24], s1)
+			}
+			if err := os.WriteFile(path+"-wal", wal, 0600); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := verifySQLiteSidecarsH2(path); err == nil ||
+				!strings.Contains(err.Error(), "invalid page number") {
+				t.Fatalf("correctly rechecksummed impossible WAL frame accepted: %v", err)
+			}
+		})
 	}
 }
 

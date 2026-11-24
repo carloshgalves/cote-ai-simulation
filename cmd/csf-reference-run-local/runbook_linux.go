@@ -247,11 +247,7 @@ func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourc
 		return runbook.Unknown, closeErr
 	}
 	stage = "VERIFIED_REPORT"
-	result := runbook.Report(report, crash)
-	if result == runbook.Unverified {
-		return runbook.Unknown, runbook.ErrUnverified
-	}
-	return result, nil
+	return runbook.ReportForRun(report, run, crash)
 }
 
 // exactBuildRevision uses Go's executable metadata, not a caller-supplied
@@ -293,6 +289,12 @@ func diagnosticReason(err error) string {
 		return "ACCESS_DENIED"
 	case errors.Is(err, observatory.ErrSourceChanged):
 		return "SOURCE_CHANGED"
+	case errors.Is(err, runbook.ErrReportRun):
+		return "REPORT_RUN_ID_MISMATCH"
+	case errors.Is(err, runbook.ErrReportControl):
+		return "REPORT_CONTROL_INVALID"
+	case errors.Is(err, runbook.ErrReportPending):
+		return "REPORT_PENDING_COUNT_INVALID"
 	}
 	for _, item := range []struct {
 		text   string

@@ -17,6 +17,7 @@ import (
 	"time"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/runbook"
 )
 
@@ -99,6 +100,40 @@ func TestH2ORunbookRealCuts(t *testing.T) {
 				t.Fatal(err)
 			}
 			before := h2oFileDigests(t, dir)
+			// Verify the native projection and classifier on a separate
+			// disposable copy before testing the real executable. This
+			// localizes projection failures without opening the original.
+			probe := filepath.Join(t.TempDir(), "probe")
+			if err := os.Mkdir(probe, 0700); err != nil {
+				t.Fatal(err)
+			}
+			for _, suffix := range []string{"", "-wal", "-shm"} {
+				raw, err := h2ArchivedRead(db + suffix)
+				if errors.Is(err, os.ErrNotExist) && suffix != "" {
+					continue
+				}
+				if err != nil {
+					t.Fatal("H2-O cannot read private probe source")
+				}
+				if err := os.WriteFile(filepath.Join(probe, "causal.db"+suffix), raw, 0600); err != nil {
+					t.Fatal(err)
+				}
+			}
+			reader, err := sqlite.OpenPrivilegedObservatory(context.Background(), filepath.Join(probe, "causal.db"), host.Bundle)
+			if err != nil {
+				t.Fatal("H2-O native probe could not open verified copy")
+			}
+			report, readErr := reader.ReadOperationalReport(context.Background(), [32]byte(g.RunID))
+			closeErr := reader.Close()
+			if readErr != nil || closeErr != nil {
+				t.Fatal("H2-O native operational projection failed")
+			}
+			got, err := runbook.ReportForRun(report, [32]byte(g.RunID), tc.crash)
+			if err != nil || got != tc.expect {
+				// These booleans contain no IDs, actor data or raw records.
+				t.Fatalf("H2-O native report classification failed: outcome=%s run_matches=%t control_present=%t pending_nonnegative=%t",
+					got.State, report.State.Run == [32]byte(g.RunID), report.State.Control.Status != "", report.PendingPerceptionTasks >= 0)
+			}
 			diagnose(t, dir, tc.crash, sha, regHash, tc.expect)
 			if tc.crash {
 				// The same durable fence does not itself prove process death.

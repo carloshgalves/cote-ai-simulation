@@ -56,7 +56,7 @@ func TestReferenceF2ColdOperationalCuts(t *testing.T) {
 				q.Close()
 				t.Fatal(err)
 			}
-			if report.State.Control.Status != tc.status || uint64(report.State.Clock.Revision) != tc.revision ||
+			if report.State.Run != run || report.State.Control.Status != tc.status || uint64(report.State.Clock.Revision) != tc.revision ||
 				report.NextPendingEligibility == nil || report.RejectedIngress != "NOT_PERSISTED" {
 				t.Fatalf("wrong durable diagnostic: %+v", report)
 			}
@@ -133,7 +133,7 @@ func TestReferenceF2FinalAndCorruptedAuthority(t *testing.T) {
 	defer q.Close()
 	report, err := q.ReadOperationalReport(ctx,run)
 	if err != nil { t.Fatal(err) }
-	if report.State.Control.Status!=observatory.IDLE || report.State.Clock.Revision!=9 ||
+	if report.State.Run!=run || report.State.Control.Status!=observatory.IDLE || report.State.Clock.Revision!=9 ||
 		report.NextPendingEligibility!=nil || len(report.Pending)!=0 || report.PendingPerceptionTasks!=0 || len(report.Sources)!=2 {
 		t.Fatalf("completed run reported phantom work: %+v",report)
 	}

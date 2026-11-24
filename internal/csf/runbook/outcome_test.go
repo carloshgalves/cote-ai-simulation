@@ -70,3 +70,32 @@ func TestReportStopPrecedenceAndCrashAssertion(t *testing.T) {
 		t.Fatal("zero-value report was accepted")
 	}
 }
+
+func TestReportForRunRejectsMismatchedIdentityAndInvalidProjection(t *testing.T) {
+	run := [32]byte{1}
+	valid := observatory.OperationalReport{State: observatory.RunState{
+		Run: run, Control: observatory.CycleControl{Status: observatory.IDLE},
+	}}
+	for _, tc := range []struct {
+		name string
+		edit func(*observatory.OperationalReport)
+		want error
+	}{
+		{"zero-run", func(r *observatory.OperationalReport) { r.State.Run = [32]byte{} }, ErrReportRun},
+		{"foreign-run", func(r *observatory.OperationalReport) { r.State.Run = [32]byte{2} }, ErrReportRun},
+		{"negative-pending", func(r *observatory.OperationalReport) { r.PendingPerceptionTasks = -1 }, ErrReportPending},
+		{"missing-control", func(r *observatory.OperationalReport) { r.State.Control.Status = "" }, ErrReportControl},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			report := valid
+			tc.edit(&report)
+			outcome, err := ReportForRun(report, run, false)
+			if outcome != Unverified || !errors.Is(err, tc.want) || Error(err) != Unverified {
+				t.Fatal("invalid verified projection was accepted")
+			}
+		})
+	}
+	if outcome, err := ReportForRun(valid, run, false); outcome != NoStop || err != nil {
+		t.Fatal("valid idle projection refused")
+	}
+}

@@ -20,6 +20,9 @@ var (
 	ErrRejectedSource = errors.New("reference physical source rejected by supervisor")
 	ErrIncompatible   = errors.New("reference source, policy or runtime incompatible")
 	ErrUnverified     = errors.New("reference authority corrupt or unverified")
+	ErrReportRun      = errors.New("operational report run identity mismatch")
+	ErrReportControl  = errors.New("operational report control status invalid")
+	ErrReportPending  = errors.New("operational report pending task count invalid")
 )
 
 var (
@@ -51,7 +54,8 @@ func Error(err error) Outcome {
 		return SourceChanged
 	case errors.Is(err, ErrIncompatible), errors.Is(err, observatory.ErrInvalidPolicy):
 		return Incompatible
-	case errors.Is(err, ErrUnverified), errors.Is(err, observatory.ErrInvalidReplay):
+	case errors.Is(err, ErrUnverified), errors.Is(err, observatory.ErrInvalidReplay),
+		errors.Is(err, ErrReportRun), errors.Is(err, ErrReportControl), errors.Is(err, ErrReportPending):
 		return Unverified
 	case errors.Is(err, admission.ErrWaitingForClosure):
 		return WaitClosure
@@ -67,37 +71,47 @@ func Error(err error) Outcome {
 // can prove. A halted attempt is never treated as automatically executable.
 // An unresolved perception barrier takes precedence over admission/retry.
 func Report(report observatory.OperationalReport, crashConfirmed bool) Outcome {
-	if report.PendingPerceptionTasks < 0 || report.State.Run == ([32]byte{}) {
-		return Unverified
+	outcome, _ := ReportForRun(report, report.State.Run, crashConfirmed)
+	return outcome
+}
+
+// ReportForRun validates the exact operator-pinned identity, not merely a
+// nonzero RunID, and returns a typed failure for each invalid projection.
+func ReportForRun(report observatory.OperationalReport, run [32]byte, crashConfirmed bool) (Outcome, error) {
+	if run == ([32]byte{}) || report.State.Run != run {
+		return Unverified, ErrReportRun
+	}
+	if report.PendingPerceptionTasks < 0 {
+		return Unverified, ErrReportPending
 	}
 	status := report.State.Control.Status
 	switch status {
 	case observatory.IDLE, observatory.ATTEMPT_IN_FLIGHT, observatory.RETRY_AUTHORIZED, observatory.HALTED_ON_ABORT:
 	default:
-		return Unverified
+		return Unverified, ErrReportControl
 	}
 	if status == observatory.HALTED_ON_ABORT {
-		return Halted
+		return Halted, nil
 	}
 	if report.PendingPerceptionTasks > 0 {
-		return Barrier
+		return Barrier, nil
 	}
 	switch status {
 	case observatory.ATTEMPT_IN_FLIGHT:
 		if crashConfirmed {
-			return Crash
+			return Crash, nil
 		}
-		return InFlight
+		return InFlight, nil
 	case observatory.RETRY_AUTHORIZED:
-		return Retry
+		return Retry, nil
 	}
 	if report.NextPendingEligibility != nil {
 		for _, source := range report.Sources {
 			if source.Coverage == "GAP" {
-				return WaitClosure
+				return WaitClosure, nil
 			}
 		}
 	}
 	// IDLE does not imply completed D3 or permission to start a new run.
-	return NoStop
+	return NoStop, nil
 }

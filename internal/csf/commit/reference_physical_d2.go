@@ -19,6 +19,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/runbook"
 	"github.com/carloshgalves/cote-ai-simulation/internal/physicalhost"
 )
 
@@ -314,7 +315,7 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 		} else {
 			approved, err = physicalhost.RunSupervisedPhysical(ctx, host)
 			if err != nil {
-				return zero, fmt.Errorf("D2 real Python A1 epoch %d refused: %w", i+1, err)
+				return zero, fmt.Errorf("D2 real Python A1 epoch %d refused: %w: %w", i+1, runbook.ErrRejectedSource, err)
 			}
 		}
 		cutRaw, signature, _, err := approved.CanonicalProof()

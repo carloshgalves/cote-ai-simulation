@@ -188,6 +188,22 @@ func buildReferenceGenesis(bundle *policy.Bundle) (*genesis.Genesis, error) {
 	return nil, errors.New("normative Genesis source vector missing")
 }
 
+// ReferenceRunID derives the expected experimental RunID from the same
+// installed reference Genesis, before creating any causal authority.
+func ReferenceRunID(bundle *policy.Bundle) ([32]byte, error) {
+	if bundle == nil {
+		return [32]byte{}, errors.New("reference run requires installed policy")
+	}
+	if err := bundle.VerifyInstalledBundle(); err != nil {
+		return [32]byte{}, err
+	}
+	g, err := buildReferenceGenesis(bundle)
+	if err != nil {
+		return [32]byte{}, err
+	}
+	return [32]byte(g.RunID), nil
+}
+
 // validateReferenceGenesisFixture pins the second read against the frozen
 // conformance manifest's raw fixture digest (V1). A semantic-equivalent JSON
 // rewrite or a concurrent file replacement is not an acceptable source.

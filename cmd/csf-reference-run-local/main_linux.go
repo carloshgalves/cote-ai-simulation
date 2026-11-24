@@ -12,7 +12,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
-	"flag"
 	"fmt"
 	"os"
 	"os/exec"
@@ -25,6 +24,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/commit"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/runbook"
 	"github.com/carloshgalves/cote-ai-simulation/internal/physicalhost"
 )
 
@@ -64,24 +64,7 @@ type archiveIndex struct {
 }
 
 func main() {
-	out := flag.String("out", "", "fresh private output directory")
-	check := flag.String("verify", "", "read-only verify a completed local archive")
-	flag.Parse()
-	if flag.NArg() != 0 || (*out == "") == (*check == "") {
-		fmt.Fprintln(os.Stderr, "use exactly one of --out FRESH_DIR or --verify EXISTING_DIR")
-		os.Exit(2)
-	}
-	var err error
-	if *out != "" {
-		syscall.Umask(0077) // SQLite -wal/-shm and A1 staging must not be group/world readable.
-		err = runLocal(context.Background(), *out)
-	} else {
-		err = verifyLocal(context.Background(), *check)
-	}
-	if err != nil {
-		fmt.Fprintln(os.Stderr, "LOCAL_REFERENCE_NO_GO:", err)
-		os.Exit(1)
-	}
+	os.Exit(localCommand(context.Background(), os.Args[1:], os.Stdout, os.Stderr))
 }
 
 func runLocal(ctx context.Context, output string) error {
@@ -134,6 +117,18 @@ func runLocal(ctx context.Context, output string) error {
 		return err
 	}
 	defer cleanup()
+	// Preserve the public registration before the first causal write, so a
+	// stopped run can be diagnosed without reconstructing a signing key.
+	if err := exclusiveBytes(filepath.Join(out, "registration.json"), registration); err != nil {
+		return err
+	}
+	run, err := commit.ReferenceRunID(host.Bundle)
+	if err != nil {
+		return err
+	}
+	fmt.Println("LOCAL_REFERENCE_SOURCE_SHA=" + sha)
+	fmt.Println("LOCAL_REFERENCE_RUN_ID=" + hex.EncodeToString(run[:]))
+	fmt.Println("LOCAL_REFERENCE_REGISTRATION_SHA256=" + hashBytes(registration))
 	// Host-owned trusted archive target: A1 writes only AFTER sealed A2 and
 	// registered Ed25519 verification, never to an actor-provided directory.
 	host.PrivateCaptureRoot = filepath.Join(out, "physical-cuts")
@@ -150,8 +145,8 @@ func runLocal(ctx context.Context, output string) error {
 	if err := exclusiveJSON(filepath.Join(out, "report.json"), public); err != nil {
 		return err
 	}
-	if err := exclusiveBytes(filepath.Join(out, "registration.json"), registration); err != nil {
-		return err
+	if public.RunID != hex.EncodeToString(run[:]) {
+		return errors.New("completed reference run differs from the initial run pin")
 	}
 	genesisSHA, err := replayAndGenesis(ctx, filepath.Join(out, "causal.db"), host.Bundle, public.RunID)
 	if err != nil {
@@ -216,7 +211,7 @@ func runLocal(ctx context.Context, output string) error {
 	// Independent verification operates on a detached copy. The original
 	// causal database and actor-owner roots are never reopened for writing.
 	if err := verifyLocal(ctx, out); err != nil {
-		return err
+		return fmt.Errorf("%w: %w", runbook.ErrUnverified, err)
 	}
 	fmt.Println("FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED")
 	fmt.Println("H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE")
@@ -239,7 +234,7 @@ func localPhysicalHost(root string) (physicalhost.ProducerHost, [2]physicalhost.
 	}
 	python, err := exec.LookPath("python")
 	if err != nil {
-		return noHost, noPlans, nil, "", noCleanup, err
+		return noHost, noPlans, nil, "", noCleanup, fmt.Errorf("%w: %w", runbook.ErrIncompatible, err)
 	}
 	python, err = filepath.EvalSymlinks(python)
 	if err != nil {
@@ -283,6 +278,10 @@ func localPhysicalHost(root string) (physicalhost.ProducerHost, [2]physicalhost.
 	if err != nil {
 		cleanup()
 		return noHost, noPlans, nil, "", noCleanup, err
+	}
+	if strings.TrimSpace(string(version)) != "Python 3.13.18" {
+		cleanup()
+		return noHost, noPlans, nil, "", noCleanup, runbook.ErrIncompatible
 	}
 	depRoot := strings.TrimSpace(string(deps))
 	if !filepath.IsAbs(depRoot) {

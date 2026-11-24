@@ -159,6 +159,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
           export H2_ARCHIVED_SOURCE="$RUNNER_TEMP/h-private-${{ github.run_id }}"
           export H2_ARCHIVED_SOURCE_REQUIRED=1
+          export H2_ARCHIVED_INDEX_SHA256="$(sha256sum "$H2_ARCHIVED_SOURCE/checksums.json" | cut -d ' ' -f 1)"
           # Cold verification binds the complete archive, installed policy,
           # raw signatures and original SQLite authorities before testing.
           go run ./cmd/csf-reference-run-local --verify "$H2_ARCHIVED_SOURCE"
@@ -174,6 +175,7 @@ jobs:
           with open(os.environ["H2_ARCHIVED_RECOVERY_REPORT"], encoding="utf-8") as f:
               proof = json.load(f)
           index = Path(os.environ["H2_ARCHIVED_SOURCE"]) / "checksums.json"
+          assert hashlib.sha256(index.read_bytes()).hexdigest() == os.environ["H2_ARCHIVED_INDEX_SHA256"]
           assert proof == {
               "status": "H2_C_ARCHIVED_SOURCE_RECOVERY",
               "archive_index_sha256": hashlib.sha256(index.read_bytes()).hexdigest(),

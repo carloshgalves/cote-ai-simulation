@@ -54,3 +54,18 @@ func TestH2IndependentD3ReplayRejectsActiveOriginalArchiveCapability(t *testing.
 // Compile-time separation: the offline replay source is strictly an in-memory
 // copy of authenticated operator evidence. No ordinary actor port is created.
 var _ physicalhost.ApprovedCut
+
+func TestH2IndependentD3ReplayLivePathStillRequiresSigner(t *testing.T) {
+	host, plans := referenceD2TestHost(t)
+	host.PrivateKey = nil
+	dir := t.TempDir()
+	db := filepath.Join(dir, "causal.db")
+	owner := filepath.Join(dir, "owner.db")
+	if _, err := RunReferenceD2(context.Background(), db, owner, bundlePath,
+		ReferenceD2Config{Host: host, EpochPlans: plans}, ReferenceOptions{}); err == nil {
+		t.Fatal("live D2 accepted a missing producer signing key")
+	}
+	if _, err := os.Lstat(db); !os.IsNotExist(err) {
+		t.Fatal("live D2 touched causal state before rejecting missing signer")
+	}
+}

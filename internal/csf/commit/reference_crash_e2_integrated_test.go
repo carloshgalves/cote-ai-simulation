@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
@@ -45,13 +46,13 @@ func TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs(t *testing
 		}
 	}
 	host.GenesisCanonical = nil
-	runReferenceE2IntegratedMatrix(t, host, plans, cuts, nil)
+	runReferenceE2IntegratedMatrix(t, host, plans, cuts, nil, nil)
 }
 
 // Both H2-F and H2-C exercise the same complete fault matrix. H2-C supplies
 // the original CLI archive as the oracle, rather than capturing new A1 cuts.
 func runReferenceE2IntegratedMatrix(t *testing.T, host physicalhost.ProducerHost, plans [2]physicalhost.ProducerPlan,
-	cuts [2]embodimentv1.ApprovedCut, archived *referenceE1Snapshot) {
+	cuts [2]embodimentv1.ApprovedCut, archived *referenceE1Snapshot, faultProcess func(*testing.T, string, string, int, uint8)) int {
 	t.Helper()
 	ctx := context.Background()
 	g, err := buildReferenceGenesis(host.Bundle)
@@ -114,6 +115,7 @@ func runReferenceE2IntegratedMatrix(t *testing.T, host physicalhost.ProducerHost
 			}{name: fmt.Sprintf("epoch%d-atomic-step%d", epoch, step), epoch: epoch, step: step})
 		}
 	}
+	completed := 0
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
 			dbPath, ownerPath := paths()
@@ -121,8 +123,10 @@ func runReferenceE2IntegratedMatrix(t *testing.T, host physicalhost.ProducerHost
 				Host: host, EpochPlans: plans, frozenSupervisedCuts: &cuts,
 				FailPhysicalAtEpoch: tc.epoch, FailPhysicalAfterStep: tc.step,
 			}
-			if _, err := RunReferenceD2(ctx, dbPath, ownerPath, bundlePath, bad, ReferenceOptions{}); err == nil {
-				t.Fatal("E2 integrated SQL failpoint did not abort C4+D2 run")
+			if faultProcess != nil {
+				faultProcess(t, dbPath, ownerPath, tc.epoch, tc.step)
+			} else if _, err := RunReferenceD2(ctx, dbPath, ownerPath, bundlePath, bad, ReferenceOptions{}); !referenceE2ExpectedFault(err, tc.epoch) {
+				t.Fatal("E2 did not reach the selected physical atomic failpoint:", err)
 			}
 			run := domain.ID(g.RunID)
 			// The C4 snapshot was recorded at revision six, before both
@@ -242,13 +246,17 @@ func runReferenceE2IntegratedMatrix(t *testing.T, host physicalhost.ProducerHost
 			if beforeCount := len(partial.Databases["causal"].Tables["committed_cycles"].Rows); beforeCount != 6+tc.epoch {
 				t.Fatalf("E2 failed fault left invalid prefix of %d commits", beforeCount)
 			}
+			completed++
 		})
 	}
 	// Never mint a success-shaped evidence report if any subordinate
 	// crash/recovery case failed. The Go test exit status alone is not a
 	// durable auditor certificate and this file must remain fail-closed.
 	if t.Failed() {
-		return
+		return completed
+	}
+	if (archived != nil || os.Getenv("CSF_E2_EVIDENCE_PATH") != "") && completed != len(cases) {
+		t.Fatalf("incomplete E2 fault matrix: %d/%d actually completed", completed, len(cases))
 	}
 	// Engine-privileged transcript bytes must never become CI artifacts.
 	// Only counts, run shape and hashes are safe evidence for this oracle.
@@ -267,7 +275,7 @@ func runReferenceE2IntegratedMatrix(t *testing.T, host physicalhost.ProducerHost
 			Reference:                   "CSFRV1-10/E2 #141",
 			VerifiedBaselineCommits:     9,
 			AuthenticatedA1Cuts:         2,
-			IndependentCrashResumeCases: len(cases),
+			IndependentCrashResumeCases: completed,
 			PhysicalSQLRollbackSteps:    7,
 			SignerReexecution:           false,
 			CanonicalManifest:           expected.Manifest(),
@@ -288,4 +296,11 @@ func runReferenceE2IntegratedMatrix(t *testing.T, host physicalhost.ProducerHost
 			t.Fatal(err)
 		}
 	}
+	return completed
+}
+
+func referenceE2ExpectedFault(err error, epoch int) bool {
+	return err != nil &&
+		strings.Contains(err.Error(), fmt.Sprintf("D2 atomic CommitPhysical epoch %d:", epoch)) &&
+		strings.HasSuffix(err.Error(), "injected clock commit failure")
 }

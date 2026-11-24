@@ -9,7 +9,7 @@ From a clean exact-SHA checkout with the pinned Go/Python dependencies already i
 ```sh
 umask 077
 work=$(mktemp -d)
-go build -o "$work/csf-reference-run-local" ./cmd/csf-reference-run-local
+go build -buildvcs=true -o "$work/csf-reference-run-local" ./cmd/csf-reference-run-local
 "$work/csf-reference-run-local" --out "$work/archive" >"$work/run.log" 2>&1
 rc=$?
 printf 'run_exit=%s\n' "$rc"
@@ -30,11 +30,11 @@ rc=$?
 printf 'diagnostic_exit=%s\n' "$rc"
 ```
 
-Use `--crash-confirmed` only if an operator has independently established process interruption. A persisted in-flight fence alone cannot prove that its writer died. Neither flag is a lock or a liveness detector. The tool verifies the current checkout, registration pin, expected reference Genesis RunID, preflights WAL/SHM and reads the detached SQLite copy through the privileged read-only Observatory. It rechecks the input hashes before returning. This is causal-state diagnosis, **not** full archive/owner/cut verification, a recovery command, a proof of safe live copying, or a substitute for external authentication. No raw error text, actor payload or key is emitted.
+Use `--crash-confirmed` only if an operator has independently established process interruption. A persisted in-flight fence alone cannot prove that its writer died. Neither flag is a lock or a liveness detector. The tool verifies the VCS-stamped executable and the current checkout, registration pin, expected reference Genesis RunID, preflights WAL/SHM and reads the detached SQLite copy through the privileged read-only Observatory. It rechecks the input hashes before returning. This is causal-state diagnosis, **not** full archive/owner/cut verification, a recovery command, a proof of safe live copying, or a substitute for external authentication. No raw error text, actor payload or key is emitted.
 
 | Exit | State | Required operator action |
 | --- | --- | --- |
-| 0 | LOCAL_REFERENCE_OK | Only successful out/verify; still local NO-GO for production |
+| 0 | LOCAL_REFERENCE_OK | Successful out/verify (or help); still local NO-GO for production |
 | 1 | UNCLASSIFIED_FAILURE | Preserve evidence; investigate typed failure before retry |
 | 2 | INVALID_ARGUMENTS | Correct invocation; no operation selected |
 | 10 | WAIT_FOR_SOURCE_CLOSURE | Inspect verified source gap; never fabricate closure |
@@ -53,6 +53,6 @@ The halted state takes precedence over the barrier; otherwise pending perception
 
 ## Evidence and tests
 
-The private H job builds the real command, runs it on actual durable cuts of the same archived signed A1 inputs (source gap, in-flight, halted, authorized retry, physical fault, pending perception), checks direct process exit codes and original bytes, verifies the complete archive separately, and rejects wrong source version, registration digest, corrupt DB and invalid arguments. Real supervisor rejection and closure wait are tested at their typed boundaries. Unknown failures never masquerade as one of these states. Normal/race H2-C remains intact; exact-HEAD H2-O evidence must come from the CI, not from this prose.
+The private H job builds the real command, runs it on actual durable cuts of the same archived signed A1 inputs (source gap, in-flight, halted, authorized retry, physical fault, pending perception), checks direct process exit codes and original bytes, verifies the complete archive separately, and rejects wrong source version, registration digest, corrupt DB and invalid arguments. Real supervisor rejection and closure wait are tested at their typed boundaries; a deliberately invalid interpreter must also yield direct process exits for incompatible version and rejected source. The direct operational process grid runs normal and race. Unknown failures never masquerade as one of these states. Normal/race H2-C remains intact; exact-HEAD H2-O evidence must come from the CI, not from this prose.
 
 Remaining: durable chronological operator reports with source/commands/exit codes and redacted logs (H2-E), external independent review and outstanding normative/production gates. Full driver death, power-loss and untrusted same-UID filesystem isolation are not established by this harness.

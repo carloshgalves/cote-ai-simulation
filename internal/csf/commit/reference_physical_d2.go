@@ -320,14 +320,14 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 		}
 		cutRaw, signature, _, err := approved.CanonicalProof()
 		if err != nil {
-			return zero, err
+			return zero, fmt.Errorf("%w: %w", runbook.ErrRejectedSource, err)
 		}
 		signed, err := embodimentv1.DecodeSignedCut(cutRaw, signature)
 		if err != nil || signed.Epoch != uint64(i+1) {
-			return zero, errors.New("D2 A1 cut identity/epoch was swapped")
+			return zero, fmt.Errorf("%w: D2 A1 cut identity/epoch was swapped", runbook.ErrRejectedSource)
 		}
 		if err := embodimentv1.VerifySignedCut(signed, reg, run, g.Digest); err != nil {
-			return zero, errors.New("D2 A1 cut failed Genesis-bound signer authentication")
+			return zero, fmt.Errorf("%w: D2 A1 cut failed Genesis-bound signer authentication", runbook.ErrRejectedSource)
 		}
 		state, err = store.LoadClock(ctx, rawRun)
 		if err != nil {

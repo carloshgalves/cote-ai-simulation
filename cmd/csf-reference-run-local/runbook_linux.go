@@ -14,9 +14,11 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"runtime/debug"
 	"syscall"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/commit"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/observatory"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/runbook"
@@ -120,6 +122,11 @@ func captureDiagnosisFiles(dir string) (map[string]string, error) {
 // verifier and not a resume command. The source SHA, public registration
 // digest and RunID must come from a previously trusted operator record.
 func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourceSHA string, crash bool) (runbook.Outcome, error) {
+	// A clean checkout alone is not enough: a stale executable could read
+	// newer source metadata. Require the direct VCS-stamped binary.
+	if !exactBuildRevision(sourceSHA) {
+		return runbook.Unknown, runbook.ErrIncompatible
+	}
 	root, err := gitOutput(".", "rev-parse", "--show-toplevel")
 	if err != nil {
 		return runbook.Unknown, err
@@ -189,7 +196,7 @@ func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourc
 			continue
 		}
 		if !present || err != nil || hashBytes(data) != expectedHash {
-			return runbook.Unknown, runbook.ErrUnverified
+			return runbook.Unknown, observatory.ErrSourceChanged
 		}
 	}
 	reader, err := sqlite.OpenPrivilegedObservatory(ctx, copyDB, bundle)
@@ -200,7 +207,7 @@ func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourc
 	closeErr := reader.Close()
 	after, err := captureDiagnosisFiles(dir)
 	if err != nil || !reflect.DeepEqual(before, after) {
-		return runbook.Unknown, runbook.ErrUnverified
+		return runbook.Unknown, observatory.ErrSourceChanged
 	}
 	if readErr != nil {
 		return runbook.Unknown, readErr
@@ -209,4 +216,23 @@ func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourc
 		return runbook.Unknown, closeErr
 	}
 	return runbook.Report(report, crash), nil
+}
+
+// exactBuildRevision uses Go's executable metadata, not a caller-supplied
+// environment string or a version read from the current working directory.
+func exactBuildRevision(sourceSHA string) bool {
+	info, ok := debug.ReadBuildInfo()
+	if !ok {
+		return false
+	}
+	revision, modified := "", ""
+	for _, setting := range info.Settings {
+		switch setting.Key {
+		case "vcs.revision":
+			revision = setting.Value
+		case "vcs.modified":
+			modified = setting.Value
+		}
+	}
+	return revision == sourceSHA && modified == "false"
 }

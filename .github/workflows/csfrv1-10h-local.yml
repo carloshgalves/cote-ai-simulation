@@ -203,9 +203,24 @@ jobs:
           export H2_ARCHIVED_INDEX_SHA256="$(sha256sum "$H2_ARCHIVED_SOURCE/checksums.json" | cut -d ' ' -f 1)"
           export H2_ARCHIVED_SOURCE_REQUIRED=1
           export H2O_RUNBOOK_BINARY="$RUNNER_TEMP/csf-reference-run-local"
-          go build -o "$H2O_RUNBOOK_BINARY" ./cmd/csf-reference-run-local
+          go build -buildvcs=true -o "$H2O_RUNBOOK_BINARY" ./cmd/csf-reference-run-local
           "$H2O_RUNBOOK_BINARY" --verify "$H2_ARCHIVED_SOURCE"
-          go test -count=1 -timeout=15m -run '^TestH2ORunbookRealCuts$' ./internal/csf/commit
+          go test -v -count=1 -timeout=15m -run '^TestH2ORunbookRealCuts
+          PHYSICAL_A1_PRODUCER_TEST=1 go test -count=1 -timeout=10m -run '^TestReferenceD2(RejectsUnpinnedExecutableAndImportRoot|OpenPhysicalSourcePreventsC4Admission)$' ./internal/csf/commit
+          "$H2O_RUNBOOK_BINARY" --verify "$H2_ARCHIVED_SOURCE"
+          echo 'H2_O_REAL_CUTS=VERIFIED_EXIT_CODES_NO_WRITE_NO_GO'
+          # No private database, source cut, or actor state leaves the runner.
+ ./internal/csf/commit | tee "$RUNNER_TEMP/h2-o-normal.log"
+          grep -F 'H2_O_REAL_CUTS=6_OF_6_AND_NEGATIVE_PROCESS_EXITS' "$RUNNER_TEMP/h2-o-normal.log"
+          export H2O_RUNBOOK_BINARY="$RUNNER_TEMP/csf-reference-run-local-race"
+          go build -buildvcs=true -race -o "$H2O_RUNBOOK_BINARY" ./cmd/csf-reference-run-local
+          go test -race -v -count=1 -timeout=25m -run '^TestH2ORunbookRealCuts
+          PHYSICAL_A1_PRODUCER_TEST=1 go test -count=1 -timeout=10m -run '^TestReferenceD2(RejectsUnpinnedExecutableAndImportRoot|OpenPhysicalSourcePreventsC4Admission)$' ./internal/csf/commit
+          "$H2O_RUNBOOK_BINARY" --verify "$H2_ARCHIVED_SOURCE"
+          echo 'H2_O_REAL_CUTS=VERIFIED_EXIT_CODES_NO_WRITE_NO_GO'
+          # No private database, source cut, or actor state leaves the runner.
+ ./internal/csf/commit | tee "$RUNNER_TEMP/h2-o-race.log"
+          grep -F 'H2_O_REAL_CUTS=6_OF_6_AND_NEGATIVE_PROCESS_EXITS' "$RUNNER_TEMP/h2-o-race.log"
           PHYSICAL_A1_PRODUCER_TEST=1 go test -count=1 -timeout=10m -run '^TestReferenceD2(RejectsUnpinnedExecutableAndImportRoot|OpenPhysicalSourcePreventsC4Admission)$' ./internal/csf/commit
           "$H2O_RUNBOOK_BINARY" --verify "$H2_ARCHIVED_SOURCE"
           echo 'H2_O_REAL_CUTS=VERIFIED_EXIT_CODES_NO_WRITE_NO_GO'

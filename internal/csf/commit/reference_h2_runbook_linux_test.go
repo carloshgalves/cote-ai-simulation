@@ -52,6 +52,7 @@ func TestH2ORunbookRealCuts(t *testing.T) {
 		h2oAssertProcess(t, binary, args, want)
 	}
 	barrierStop := errors.New("H2-O deliberate stop after delivery before perception")
+	completed := 0
 	for _, tc := range []struct {
 		name   string
 		opts   ReferenceOptions
@@ -105,7 +106,11 @@ func TestH2ORunbookRealCuts(t *testing.T) {
 			if !reflect.DeepEqual(before, h2oFileDigests(t, dir)) {
 				t.Fatal("H2-O diagnostic changed its source database or sidecars")
 			}
+			completed++
 		})
+	}
+	if t.Failed() || completed != 6 {
+		t.Fatalf("H2-O real stop grid incomplete: %d/6", completed)
 	}
 	// An idle, complete archive is NOT accepted as a D3 certificate by the
 	// diagnostic command. Complete verification is its own operation.
@@ -130,13 +135,43 @@ func TestH2ORunbookRealCuts(t *testing.T) {
 		}
 	}
 	diagnose(t, damaged, false, sha, regHash, runbook.Unverified)
+
+	// Exercise immediate process failures through the real --out command.
+	// The intentionally invalid interpreter advertises a version and a
+	// private dependency directory but never produces a valid physical cut.
+	// Do not introduce fault flags into the operator-facing CLI.
+	for _, tc := range []struct {
+		version string
+		want    runbook.Outcome
+	}{
+		{"Python 0.0.0", runbook.Incompatible},
+		{"Python 3.13.18", runbook.Rejected},
+	} {
+		fake := t.TempDir()
+		script := "#!/bin/sh\ncase \"$1\" in\n--version) printf '%s\\n' '" + tc.version + "';;\n-S) printf '%s\\n' '" + fake + "';;\n*) exit 42;;\nesac\n"
+		if err := os.WriteFile(filepath.Join(fake, "python"), []byte(script), 0700); err != nil {
+			t.Fatal(err)
+		}
+		out := filepath.Join(t.TempDir(), "failed")
+		h2oAssertProcessEnv(t, binary, []string{"--out", out}, tc.want, []string{"PATH=" + fake + string(os.PathListSeparator) + os.Getenv("PATH")})
+		if _, err := os.Lstat(filepath.Join(out, "checksums.json")); !errors.Is(err, os.ErrNotExist) {
+			t.Fatal("H2-O rejected producer minted a completed archive")
+		}
+	}
+	t.Log("H2_O_REAL_CUTS=6_OF_6_AND_NEGATIVE_PROCESS_EXITS")
 }
 
 func h2oAssertProcess(t *testing.T, binary string, args []string, want runbook.Outcome) {
 	t.Helper()
+	h2oAssertProcessEnv(t, binary, args, want, nil)
+}
+
+func h2oAssertProcessEnv(t *testing.T, binary string, args []string, want runbook.Outcome, env []string) {
+	t.Helper()
 	ctx, cancel := context.WithTimeout(context.Background(), 90*time.Second)
 	defer cancel()
 	cmd := exec.CommandContext(ctx, binary, args...)
+	cmd.Env = append(os.Environ(), env...)
 	output, err := cmd.CombinedOutput()
 	code := 0
 	if err != nil {
@@ -147,7 +182,8 @@ func h2oAssertProcess(t *testing.T, binary string, args []string, want runbook.O
 		code = exited.ExitCode()
 	}
 	if ctx.Err() != nil || code != want.Code || !strings.Contains(string(output), "LOCAL_REFERENCE_STATE="+want.State+"\n") ||
-		strings.Contains(string(output), "PRIVATE_PAYLOAD") {
+		strings.Contains(string(output), "PRIVATE_PAYLOAD") ||
+		(want.Code != 0 && strings.Contains(string(output), "FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED")) {
 		t.Fatalf("H2-O wrong executable outcome: got code %d want %d (%s)", code, want.Code, want.State)
 	}
 }

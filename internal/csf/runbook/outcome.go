@@ -4,6 +4,7 @@
 package runbook
 
 import (
+	"context"
 	"errors"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
@@ -44,6 +45,8 @@ func Error(err error) Outcome {
 	switch {
 	case err == nil:
 		return Success
+	case errors.Is(err, context.Canceled), errors.Is(err, context.DeadlineExceeded):
+		return Unknown
 	case errors.Is(err, observatory.ErrSourceChanged):
 		return SourceChanged
 	case errors.Is(err, ErrIncompatible), errors.Is(err, observatory.ErrInvalidPolicy):

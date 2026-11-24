@@ -60,3 +60,7 @@ Two fresh Python captures legitimately contain independent `wall_time` in their 
 H1 verifies that the CLI can execute and package one **genuine** A1/D3 run, and that a detached replay detects unsound temporal or Genesis state. It does **not yet** independently export and compare every canonical ledger, snapshot/owner trust root and signed cut from *outside* the original D3 proof. It does not give a signed WORM archive, durable source-cut reuse across independent commands or comprehensive stop-state fault injection in this CLI. H1 CI must run before claiming even this scoped pass. Additional H tests and complete owner/ledger export or recorded-source replay are required before #122 can close.
 
 The normative G6 decision remains `NO_GO_INCOMPLETE_MATRIX`, with #168/#169/#172/#174 and #22 unresolved; #93/#94/#113 and independent final reviewer #123 are separate gates. Merge remains human-only after adverse review. This H1 tool never claims DoD accepted, independent review or A1 operational/production GO.
+
+## H2-O executable operational runbook
+
+See [H2-operational-runbook.md](H2-operational-runbook.md) for the direct executable contract, typed stop states, operator-confirmed crash semantics, quiescent-only diagnosis and validation requirements. Do not use `go run` to inspect the actual process exit number: the Go wrapper returns its own status.

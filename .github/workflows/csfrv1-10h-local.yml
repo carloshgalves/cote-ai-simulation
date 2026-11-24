@@ -56,6 +56,10 @@ jobs:
             cmd/csf-reference-run-local/h2_replay_compare_linux_test.go
             cmd/csf-reference-run-local/h2_wal_preflight_linux.go
             cmd/csf-reference-run-local/h2_wal_preflight_linux_test.go
+            cmd/csf-reference-run-local/runbook_linux.go
+            cmd/csf-reference-run-local/runbook_linux_test.go
+            internal/csf/runbook/outcome.go internal/csf/runbook/outcome_test.go
+            internal/csf/commit/reference_h2_runbook_linux_test.go
             internal/csf/commit/reference_d3_offline_same_a1_linux.go
             internal/csf/commit/reference_d3_offline_same_a1_linux_test.go
             internal/csf/commit/reference_physical_d2.go
@@ -72,7 +76,9 @@ jobs:
           go test -count=1 -timeout=10m -run '^TestH2IndependentD3Replay' ./internal/csf/commit
           go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local ./internal/physicalhost
           go test -race -count=1 -timeout=10m -run '^TestH2IndependentD3Replay' ./internal/csf/commit
-          go vet ./cmd/csf-reference-run-local ./internal/physicalhost ./internal/csf/commit
+          go test -count=1 ./internal/csf/runbook
+          go test -race -count=1 ./internal/csf/runbook
+          go vet ./cmd/csf-reference-run-local ./internal/physicalhost ./internal/csf/commit ./internal/csf/runbook
       - name: H2-F same-A1 real crash and pending-barrier fault matrix
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"
@@ -188,3 +194,19 @@ jobs:
           print("H2_C_SAME_CLI_ARCHIVE_PENDING_BARRIER=WORKER_RESTART_EXACTLY_ONCE_NORMAL_AND_RACE")
           PY
           # Private archive and digest-only reports stay on this runner.
+      - name: H2-O real operational cuts and exact process exit codes
+        run: |
+          set -euo pipefail
+          umask 077
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          export H2_ARCHIVED_SOURCE="$RUNNER_TEMP/h-private-${{ github.run_id }}"
+          export H2_ARCHIVED_INDEX_SHA256="$(sha256sum "$H2_ARCHIVED_SOURCE/checksums.json" | cut -d ' ' -f 1)"
+          export H2_ARCHIVED_SOURCE_REQUIRED=1
+          export H2O_RUNBOOK_BINARY="$RUNNER_TEMP/csf-reference-run-local"
+          go build -o "$H2O_RUNBOOK_BINARY" ./cmd/csf-reference-run-local
+          "$H2O_RUNBOOK_BINARY" --verify "$H2_ARCHIVED_SOURCE"
+          go test -count=1 -timeout=15m -run '^TestH2ORunbookRealCuts$' ./internal/csf/commit
+          PHYSICAL_A1_PRODUCER_TEST=1 go test -count=1 -timeout=10m -run '^TestReferenceD2(RejectsUnpinnedExecutableAndImportRoot|OpenPhysicalSourcePreventsC4Admission)$' ./internal/csf/commit
+          "$H2O_RUNBOOK_BINARY" --verify "$H2_ARCHIVED_SOURCE"
+          echo 'H2_O_REAL_CUTS=VERIFIED_EXIT_CODES_NO_WRITE_NO_GO'
+          # No private database, source cut, or actor state leaves the runner.

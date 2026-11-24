@@ -10,10 +10,12 @@ import (
 	"testing"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/adapter/embodimentv1"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/admission"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/codec"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/genesis"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/runbook"
 	"github.com/carloshgalves/cote-ai-simulation/internal/physicalhost"
 )
 
@@ -174,8 +176,8 @@ func TestReferenceD2RejectsUnpinnedExecutableAndImportRoot(t *testing.T) {
 			tc.alter(&local)
 			db, owner := referenceD2AdversarialPaths(t)
 			if _, err := RunReferenceD2(context.Background(), db, owner, bundlePath,
-				ReferenceD2Config{Host: local, EpochPlans: localPlans}, ReferenceOptions{}); err == nil {
-				t.Fatal("unregistered A1 executable or import root was admitted")
+				ReferenceD2Config{Host: local, EpochPlans: localPlans}, ReferenceOptions{}); !errors.Is(err, runbook.ErrRejectedSource) || runbook.Error(err) != runbook.Rejected {
+				t.Fatal("unregistered A1 executable or import root did not produce typed rejection")
 			}
 			g, err := buildReferenceGenesis(local.Bundle)
 			if err != nil {
@@ -192,8 +194,8 @@ func TestReferenceD2OpenPhysicalSourcePreventsC4Admission(t *testing.T) {
 	db, owner := referenceD2AdversarialPaths(t)
 	if _, err := RunReferenceD2(context.Background(), db, owner, bundlePath,
 		ReferenceD2Config{Host: host, EpochPlans: plans},
-		ReferenceOptions{LeaveSourceOpen: true}); err == nil {
-		t.Fatal("C4 ran without closed physical source horizon")
+		ReferenceOptions{LeaveSourceOpen: true}); !errors.Is(err, admission.ErrWaitingForClosure) || runbook.Error(err) != runbook.WaitClosure {
+		t.Fatal("C4 did not return typed source-closure wait")
 	}
 	store, err := sqlite.Open(context.Background(), db)
 	if err != nil {

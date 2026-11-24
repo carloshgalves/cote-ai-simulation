@@ -18,6 +18,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/commit"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/policy"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/runbook"
 )
 
 // All files are private operational material. Never upload the database,
@@ -339,20 +340,22 @@ func verifyLocal(ctx context.Context, dir string) error {
 		return err
 	}
 	if meta.Schema != "csfrv1-10h.local-manifest.v1" ||
-		meta.Disposition != "EXPERIMENTAL_LOCAL_ONLY_NO_PRODUCTION_GO" ||
-		meta.ReviewStatus != "NOT_INDEPENDENTLY_ATTESTED" ||
-		meta.SourceSHA != sha || meta.Seed != 42 ||
-		(meta.EvidenceProfile != "" &&
-			meta.EvidenceProfile != "H2_SIGNED_INGRESS_V1" &&
-			meta.EvidenceProfile != "H2_RAW_SOURCE_V1" &&
-			meta.EvidenceProfile != "H2_SAME_A1_REPLAY_V1") ||
+		meta.SourceSHA != sha ||
 		meta.CodecPolicyHash != policy.CodecPolicyHashHex ||
 		meta.SchemaBundleHash != policy.SchemaBundleHashHex ||
 		meta.GoVersion != runtime.Version() ||
 		meta.PythonVersion != "Python 3.13.18" ||
 		meta.HostOS != "linux" || meta.HostArch != runtime.GOARCH ||
 		meta.SQLiteVersion != sqlite.ExpectedVersion {
-		return errors.New("wrong source policy, runtime or unapproved release disposition")
+		return runbook.ErrIncompatible
+	}
+	if meta.Disposition != "EXPERIMENTAL_LOCAL_ONLY_NO_PRODUCTION_GO" ||
+		meta.ReviewStatus != "NOT_INDEPENDENTLY_ATTESTED" || meta.Seed != 42 ||
+		(meta.EvidenceProfile != "" &&
+			meta.EvidenceProfile != "H2_SIGNED_INGRESS_V1" &&
+			meta.EvidenceProfile != "H2_RAW_SOURCE_V1" &&
+			meta.EvidenceProfile != "H2_SAME_A1_REPLAY_V1") {
+		return errors.New("wrong source policy or unapproved release disposition")
 	}
 	publicRaw, err := readPrivateRegular(filepath.Join(out, "report.json"))
 	if err != nil {

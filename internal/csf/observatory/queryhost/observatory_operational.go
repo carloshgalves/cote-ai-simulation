@@ -40,8 +40,15 @@ func (q *PrivilegedReader) ReadOperationalReport(ctx context.Context, run [32]by
 	if err != nil {
 		return zero, operationalAuthorityError(ctx, err)
 	}
+	// Both projections must refer to the requested authenticated Genesis.
+	// The canonical V1 fixture uses an all-zero RunID, which is a valid
+	// 32-byte domain.ID. Never interpret it as an absent identity.
+	state, err := bindOperationalState(run, verified)
+	if err != nil {
+		return zero, err
+	}
 	out := observatory.OperationalReport{
-		State: verified.State, PendingPerceptionTasks: verified.PendingPerceptionTasks,
+		State: state, PendingPerceptionTasks: verified.PendingPerceptionTasks,
 		RejectedIngress: verified.RejectedIngress,
 	}
 	pending, err := q.audit.PendingClock(ctx, run)
@@ -250,4 +257,15 @@ func (q *PrivilegedReader) operationalPins(ctx context.Context, run [32]byte) er
 		return observatory.ErrInvalidPolicy
 	}
 	return nil
+}
+
+// bindOperationalState requires equality between independently verified
+// authorities. Do not synthesize an ID or use an all-zero sentinel: every
+// 32-byte value, including the V1 reference RunID, is valid in domain.NewID.
+func bindOperationalState(run [32]byte, verified observatory.PrivilegedReport) (observatory.RunState, error) {
+	var zero observatory.RunState
+	if verified.Genesis.Run != run || verified.State.Run != run {
+		return zero, fmt.Errorf("%w: operational run identity conflicts with Genesis", observatory.ErrInvalidReplay)
+	}
+	return verified.State, nil
 }

@@ -19,6 +19,7 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/inputledger"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/persistence/sqlite"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/reducer"
+	"github.com/carloshgalves/cote-ai-simulation/internal/csf/runbook"
 	"github.com/carloshgalves/cote-ai-simulation/internal/physicalhost"
 )
 
@@ -314,19 +315,19 @@ func RunReferenceD2(ctx context.Context, dbPath, ownerPath, bundlePath string,
 		} else {
 			approved, err = physicalhost.RunSupervisedPhysical(ctx, host)
 			if err != nil {
-				return zero, fmt.Errorf("D2 real Python A1 epoch %d refused: %w", i+1, err)
+				return zero, fmt.Errorf("D2 real Python A1 epoch %d refused: %w: %w", i+1, runbook.ErrRejectedSource, err)
 			}
 		}
 		cutRaw, signature, _, err := approved.CanonicalProof()
 		if err != nil {
-			return zero, err
+			return zero, fmt.Errorf("%w: %w", runbook.ErrRejectedSource, err)
 		}
 		signed, err := embodimentv1.DecodeSignedCut(cutRaw, signature)
 		if err != nil || signed.Epoch != uint64(i+1) {
-			return zero, errors.New("D2 A1 cut identity/epoch was swapped")
+			return zero, fmt.Errorf("%w: D2 A1 cut identity/epoch was swapped", runbook.ErrRejectedSource)
 		}
 		if err := embodimentv1.VerifySignedCut(signed, reg, run, g.Digest); err != nil {
-			return zero, errors.New("D2 A1 cut failed Genesis-bound signer authentication")
+			return zero, fmt.Errorf("%w: D2 A1 cut failed Genesis-bound signer authentication", runbook.ErrRejectedSource)
 		}
 		state, err = store.LoadClock(ctx, rawRun)
 		if err != nil {

@@ -5,6 +5,7 @@ package commit
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
@@ -78,15 +79,24 @@ func TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs(t *testing
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, tc := range []struct {
+	// H2-F complete Cartesian fault grid: both original real signed
+	// Python A1 epochs x every one of the seven Go atomic SQL steps.
+	// Capture both epochs ONCE above; never resample Python wall_time here.
+	cases := make([]struct {
 		name  string
 		epoch int
 		step  uint8
-	}{
-		{"epoch1-rollback-first", 1, 1}, {"epoch1-rollback-mid", 1, 4},
-		{"epoch1-rollback-last", 1, 7}, {"epoch2-rollback-first", 2, 1},
-		{"epoch2-rollback-mid", 2, 4}, {"epoch2-rollback-last", 2, 7},
-	} {
+	}, 0, 14)
+	for epoch := 1; epoch <= 2; epoch++ {
+		for step := uint8(1); step <= 7; step++ {
+			cases = append(cases, struct {
+				name  string
+				epoch int
+				step  uint8
+			}{name: fmt.Sprintf("epoch%d-atomic-step%d", epoch, step), epoch: epoch, step: step})
+		}
+	}
+	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
 			dbPath, ownerPath := paths()
 			bad := ReferenceD2Config{
@@ -216,6 +226,12 @@ func TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs(t *testing
 			}
 		})
 	}
+	// Never mint a success-shaped evidence report if any subordinate
+	// crash/recovery case failed. The Go test exit status alone is not a
+	// durable auditor certificate and this file must remain fail-closed.
+	if t.Failed() {
+		return
+	}
 	// Engine-privileged transcript bytes must never become CI artifacts.
 	// Only counts, run shape and hashes are safe evidence for this oracle.
 	if artifact := os.Getenv("CSF_E2_EVIDENCE_PATH"); artifact != "" {
@@ -233,7 +249,7 @@ func TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs(t *testing
 			Reference:                   "CSFRV1-10/E2 #141",
 			VerifiedBaselineCommits:     9,
 			AuthenticatedA1Cuts:         2,
-			IndependentCrashResumeCases: 6,
+			IndependentCrashResumeCases: len(cases),
 			PhysicalSQLRollbackSteps:    7,
 			SignerReexecution:           false,
 			CanonicalManifest:           expected.Manifest(),

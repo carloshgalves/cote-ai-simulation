@@ -67,6 +67,37 @@ jobs:
           go test -race -count=1 -timeout=10m ./cmd/csf-reference-run-local ./internal/physicalhost
           go test -race -count=1 -timeout=10m -run '^TestH2IndependentD3Replay' ./internal/csf/commit
           go vet ./cmd/csf-reference-run-local ./internal/physicalhost ./internal/csf/commit
+      - name: H2-F same-A1 real crash and pending-barrier fault matrix
+        env:
+          PHYSICAL_A1_PRODUCER_TEST: "1"
+          CSF_E2_EVIDENCE_PATH: ${{ runner.temp }}/h2-f-exact-head-e2.json
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          test ! -e "$CSF_E2_EVIDENCE_PATH"
+          # Reuse two original supervised signed A1 sources; no resampling.
+          go test -v -count=1 -timeout=25m -run '^TestReferenceE2IntegratedC4D3CrashResumeByteExactAfterBothEpochs$' ./internal/csf/commit
+          python - <<'PY'
+          import json, os
+          with open(os.environ["CSF_E2_EVIDENCE_PATH"], encoding="utf-8") as fp:
+              report = json.load(fp)
+          assert report["Status"] == "E2_LOCAL_C4_D3_RECOVERY_BYTES_EQUAL"
+          assert report["Reference"] == "CSFRV1-10/E2 #141"
+          assert report["VerifiedBaselineCommits"] == 9
+          assert report["AuthenticatedA1Cuts"] == 2
+          assert report["IndependentCrashResumeCases"] == 14
+          assert report["PhysicalSQLRollbackSteps"] == 7
+          assert report["SignerReexecution"] is False
+          assert len(report["CanonicalManifest"]) > 0
+          print("H2_F_2x7_RESTART_MATRIX=14_OF_14_SAME_SIGNED_A1")
+          PY
+          go test -count=1 -timeout=25m -run '^TestReferenceE2(PreFenceReopenAndAdmitSameSignedSource|SevenPhysicalAtomicFaultsNewProcessRecovery|RecoveredCutCannotCreateNewSourceOrCrossRun|CorruptSavedIngressRefusesRecoveryBeforeCommit)$' ./internal/csf/commit
+          go test -count=1 -timeout=15m -run '^TestCSFRV18(RehydrateFrozenFenceInsteadOfReselectingCoordinate|PartialPerceptionBeforeCrashResumesWithoutDuplicateReceipt|HaltedNeverAutoResumesOnReconnect|ResumeDrainsCausallyCommittedPerceptionExactlyOnce)$' ./internal/csf/commit
+          echo 'H2_F_PREFENCE_SOURCE_RETRY=IDEMPOTENT'
+          echo 'H2_F_CRASH_RESTART_CHILD=EXACT_TERMINAL_NO_DUPLICATES'
+          echo 'H2_F_PENDING_PERCEPTION_BARRIER=FROZEN_AND_RESUMED_ONCE'
+          echo 'H2_F_RELEASE=NO_GO'
+          # No upload of raw cuts, owner stores or private E2 report.
       - name: Real A1+D3 and detached owner, snapshot and ledger semantic mutants
         run: |
           set -euo pipefail

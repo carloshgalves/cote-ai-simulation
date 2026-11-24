@@ -63,8 +63,13 @@ jobs:
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"
         run: |
-          go test -race -count=1 ./internal/csf/commit -run '^TestReferenceE2(RecoveredCutCannotCreateNewSourceOrCrossRun|IntegratedC4D3CrashResumeByteExactAfterBothEpochs)$'
-          go test -race -count=1 ./internal/csf/commit -run '^TestCSFRV18RegisteredResume'
+          # H2-F expanded the exact same-input integrated E2 oracle from
+          # 6 to 14 independent crash/restart cases. Under -race, all fourteen
+          # exceed the Go test default 10m timeout (observed at epoch2/step6).
+          # Keep the complete matrix and all assertions; only raise the
+          # explicit per-command watchdog. Workflow's 50m hard limit remains.
+          go test -race -count=1 -timeout=25m ./internal/csf/commit -run '^TestReferenceE2(RecoveredCutCannotCreateNewSourceOrCrossRun|IntegratedC4D3CrashResumeByteExactAfterBothEpochs)$'
+          go test -race -count=1 -timeout=15m ./internal/csf/commit -run '^TestCSFRV18RegisteredResume'
       - name: Existing abort/retry, perception/ACK and physical regressions
         env:
           PHYSICAL_A1_PRODUCER_TEST: "1"

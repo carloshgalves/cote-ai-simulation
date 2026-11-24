@@ -37,6 +37,12 @@ func TestH2ORunbookRealCuts(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	// The frozen genesis.pinning fixture has a zero-valued, valid RunID.
+	// Keep this explicit regression premise: changing the fixture to a
+	// nonzero ID would conceal the original H2-O classifier defect.
+	if [32]byte(g.RunID) != ([32]byte{}) {
+		t.Fatal("H2-O lost the normative zero-RunID regression premise")
+	}
 	run := hex.EncodeToString(g.RunID[:])
 	reg := read("registration.json")
 	regHash := identityHashH2O(reg)

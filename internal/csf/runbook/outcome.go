@@ -78,7 +78,10 @@ func Report(report observatory.OperationalReport, crashConfirmed bool) Outcome {
 // ReportForRun validates the exact operator-pinned identity, not merely a
 // nonzero RunID, and returns a typed failure for each invalid projection.
 func ReportForRun(report observatory.OperationalReport, run [32]byte, crashConfirmed bool) (Outcome, error) {
-	if run == ([32]byte{}) || report.State.Run != run {
+	// domain.NewID accepts all 32-byte values, including the normative
+	// reference fixture's zero RunID. Identity is checked by equality,
+	// not by a nonzero sentinel. An empty report still fails control validation.
+	if report.State.Run != run {
 		return Unverified, ErrReportRun
 	}
 	if report.PendingPerceptionTasks < 0 {

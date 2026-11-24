@@ -40,10 +40,9 @@ func (q *PrivilegedReader) ReadOperationalReport(ctx context.Context, run [32]by
 	if err != nil {
 		return zero, operationalAuthorityError(ctx, err)
 	}
-	// Bind the returned operational projection to the independently
-	// authenticated Genesis authority, not an incidental RunState field.
-	// A nonzero conflicting identity is corruption; an omitted identity
-	// in the projection can only be populated from the verified Genesis.
+	// Both projections must refer to the requested authenticated Genesis.
+	// The canonical V1 fixture uses an all-zero RunID, which is a valid
+	// 32-byte domain.ID. Never interpret it as an absent identity.
 	state, err := bindOperationalState(run, verified)
 	if err != nil {
 		return zero, err
@@ -260,20 +259,13 @@ func (q *PrivilegedReader) operationalPins(ctx context.Context, run [32]byte) er
 	return nil
 }
 
-// bindOperationalState binds a projected state to the actual verified
-// Genesis. It never chooses a control status or invents a pending count.
+// bindOperationalState requires equality between independently verified
+// authorities. Do not synthesize an ID or use an all-zero sentinel: every
+// 32-byte value, including the V1 reference RunID, is valid in domain.NewID.
 func bindOperationalState(run [32]byte, verified observatory.PrivilegedReport) (observatory.RunState, error) {
 	var zero observatory.RunState
-	if run == ([32]byte{}) || verified.Genesis.Run != run ||
-		verified.Genesis.GenesisID == ([32]byte{}) ||
-		verified.Genesis.Digest == ([32]byte{}) ||
-		verified.Genesis.ContentHash == ([32]byte{}) {
-		return zero, fmt.Errorf("%w: operational Genesis identity unavailable", observatory.ErrInvalidReplay)
+	if verified.Genesis.Run != run || verified.State.Run != run {
+		return zero, fmt.Errorf("%w: operational run identity conflicts with Genesis", observatory.ErrInvalidReplay)
 	}
-	state := verified.State
-	if state.Run != ([32]byte{}) && state.Run != verified.Genesis.Run {
-		return zero, fmt.Errorf("%w: operational state identity conflicts with Genesis", observatory.ErrInvalidReplay)
-	}
-	state.Run = verified.Genesis.Run
-	return state, nil
+	return verified.State, nil
 }

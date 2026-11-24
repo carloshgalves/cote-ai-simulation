@@ -149,7 +149,7 @@ func TestF5LiveWriterVersionFence(t *testing.T) {
 		t.Fatal("positive real Genesis control failed", err)
 	}
 	original, err := audit.ReadOperationalReport(ctx, run)
-	if err != nil {
+	if err != nil || original.State.Run != run || original.State.Control.Status != observatory.IDLE {
 		t.Fatal("positive real operational control failed", err)
 	}
 	seq, err := writer.NextIngressSequence(ctx, "driver")

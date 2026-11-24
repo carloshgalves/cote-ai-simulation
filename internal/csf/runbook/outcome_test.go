@@ -51,19 +51,24 @@ func TestReportStopPrecedenceAndCrashAssertion(t *testing.T) {
 		{"UNKNOWN", 0, false, false, Unverified},
 		{observatory.IDLE, -1, false, false, Unverified},
 	} {
-		report := observatory.OperationalReport{
-			State: observatory.RunState{
-				Run:     [32]byte{1},
-				Control: observatory.CycleControl{Status: tc.control},
-			},
-			PendingPerceptionTasks: tc.pending,
-		}
-		if tc.gap {
-			report.NextPendingEligibility = &domain.EligibilityCoordinate{}
-			report.Sources = []observatory.SourceDiagnostic{{Coverage: "GAP"}}
-		}
-		if got := Report(report, tc.crash); got != tc.want {
-			t.Fatalf("wrong operational outcome: got %v want %v", got, tc.want)
+		for _, run := range [][32]byte{{}, {1}} {
+			report := observatory.OperationalReport{
+				State: observatory.RunState{
+					Run:     run,
+					Control: observatory.CycleControl{Status: tc.control},
+				},
+				PendingPerceptionTasks: tc.pending,
+			}
+			if tc.gap {
+				report.NextPendingEligibility = &domain.EligibilityCoordinate{}
+				report.Sources = []observatory.SourceDiagnostic{{Coverage: "GAP"}}
+			}
+			if got, err := ReportForRun(report, run, tc.crash); got != tc.want || (err != nil) != (tc.want == Unverified) {
+				t.Fatalf("wrong operational outcome: got %v want %v", got, tc.want)
+			}
+			if got := Report(report, tc.crash); got != tc.want {
+				t.Fatal("compatibility classifier diverged")
+			}
 		}
 	}
 	if got := Report(observatory.OperationalReport{}, false); got != Unverified {
@@ -97,5 +102,13 @@ func TestReportForRunRejectsMismatchedIdentityAndInvalidProjection(t *testing.T)
 	}
 	if outcome, err := ReportForRun(valid, run, false); outcome != NoStop || err != nil {
 		t.Fatal("valid idle projection refused")
+	}
+	zeroRun := [32]byte{}
+	valid.State.Run = zeroRun
+	if outcome, err := ReportForRun(valid, zeroRun, false); outcome != NoStop || err != nil {
+		t.Fatal("valid zero RunID refused")
+	}
+	if outcome, err := ReportForRun(observatory.OperationalReport{}, zeroRun, false); outcome != Unverified || !errors.Is(err, ErrReportControl) {
+		t.Fatal("empty projection accepted for zero RunID")
 	}
 }

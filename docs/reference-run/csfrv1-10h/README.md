@@ -68,3 +68,7 @@ See [H2-operational-runbook.md](H2-operational-runbook.md) for the direct execut
 ## H2-E detached operational receipt
 
 See [H2-operational-evidence.md](H2-operational-evidence.md) for the exact binary command/exit chronology, redacted marker receipt, external receipt hash pin and cold verification. The receipt is stored separately from causal authority and remains private and non-attested.
+
+## Final H2 causal report
+
+`ledger-export/causal-report.json` is a private, closed, reference-only projection of the authenticated privileged Observatory. It contains Genesis, committed cycles, fences, decisions, attempts including abort/retry, event and perception authority references, world revision hashes and logical coordinates; no raw canonical payload. It is not a write port or actor context. The full H2 same-A1 profile requires the report, and cold verification recomputes it on detached SQLite from both primary and independently replayed authorities, rejecting rehashed edits or omission. The H2-E receipt also requires its verified marker. Earlier SHA archives must use their own exact source checkout. The report is private and never uploaded. Neither H2 nor the human merge replaces the independent review in #123 or the unresolved G matrix.

@@ -176,6 +176,9 @@ func runLocal(ctx context.Context, output string) error {
 	if err := exportH2Ledgers(ctx, out, sha, public.RunID, host.Bundle); err != nil {
 		return fmt.Errorf("independent H2 canonical ledger export: %w", err)
 	}
+	if err := exportCausalReportH2(ctx, out, sha, public.RunID, host.Bundle); err != nil {
+		return fmt.Errorf("H2 private causal report: %w", err)
+	}
 	if err := exportOwnersH2(ctx, out, sha, public.RunID); err != nil {
 		return fmt.Errorf("H2 signed owner proof: %w", err)
 	}

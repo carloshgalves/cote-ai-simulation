@@ -34,7 +34,7 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 		"missing-signed-ingress-proof", "raw-snapshot", "raw-events", "raw-evidence",
 		"raw-signature", "raw-cut", "raw-private-proof",
 		"replay-causal-row", "replay-owner-checkpoint", "replay-compare-proof", "replay-extra-table",
-		"wal-invalid-header", "shm-truncated-region"} {
+		"wal-invalid-header", "shm-truncated-region", "causal-report-digest", "missing-causal-report"} {
 		t.Run(variant, func(t *testing.T) {
 			out := t.TempDir()
 			if err := os.Chmod(out, 0700); err != nil {
@@ -55,6 +55,28 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 				}
 			}
 			switch variant {
+			case "causal-report-digest":
+				path := filepath.Join(out, causalReportPathH2)
+				raw, err := os.ReadFile(path)
+				if err != nil {
+					t.Fatal(err)
+				}
+				var proof causalReportH2
+				if err := json.Unmarshal(raw, &proof); err != nil || len(proof.Report.Commits) != 9 {
+					t.Fatal("missing actual causal report")
+				}
+				proof.Report.Commits[0].DecisionDigest[0] ^= 1
+				changed, err := json.MarshalIndent(proof, "", "  ")
+				if err != nil {
+					t.Fatal(err)
+				}
+				if err := os.WriteFile(path, append(changed, '\n'), 0600); err != nil {
+					t.Fatal(err)
+				}
+			case "missing-causal-report":
+				if err := os.Remove(filepath.Join(out, causalReportPathH2)); err != nil {
+					t.Fatal(err)
+				}
 			case "owner-plaintext":
 				path := filepath.Join(out, "owner", "actor-b.db")
 				db, err := sql.Open("sqlite", path)
@@ -259,6 +281,8 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 				"replay-extra-table":           "H2 same A1 second independent D3 verification",
 				"wal-invalid-header":           "H2 WAL preflight",
 				"shm-truncated-region":         "H2 WAL preflight",
+				"causal-report-digest":          "H2 private causal report verification",
+				"missing-causal-report":         "H2 private causal report verification",
 			}[variant]
 			if !strings.Contains(err.Error(), required) {
 				t.Fatalf("unexpected rejection path, not target cryptographic invariant %s: %v", required, err)

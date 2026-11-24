@@ -51,6 +51,7 @@ jobs:
           python docs/reference-run/csfrv1-10h/test_operational_evidence.py
           files=(cmd/csf-reference-run-local/main_linux.go cmd/csf-reference-run-local/verify_linux.go cmd/csf-reference-run-local/main_linux_test.go
             cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go
+            cmd/csf-reference-run-local/h2_causal_report_linux.go
             cmd/csf-reference-run-local/h2_owner_linux.go cmd/csf-reference-run-local/h2_integrated_mutants_linux_test.go
             cmd/csf-reference-run-local/h2_ingress_linux.go cmd/csf-reference-run-local/h2_raw_source_linux.go
             cmd/csf-reference-run-local/h2_replay_linux.go cmd/csf-reference-run-local/h2_replay_compare_linux.go
@@ -134,6 +135,7 @@ jobs:
           # Neither the archive nor the operational receipt is uploaded.
           grep -Fx 'FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
+          grep -Fx 'H2_CAUSAL_REPORT=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_GENESIS_BOUND_SIGNED_INGRESS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_RAW_PYTHON_A1_CUTS=SEALED_AND_VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"

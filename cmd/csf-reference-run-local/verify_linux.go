@@ -48,6 +48,11 @@ func collectedPaths(out string) ([]string, error) {
 			return nil, errors.New("H2 evidence must use a private real directory")
 		}
 		paths = append(paths, h2PrivatePaths...)
+		if _, err := os.Lstat(filepath.Join(out, causalReportPathH2)); err == nil {
+			paths = append(paths, causalReportPathH2)
+		} else if !errors.Is(err, os.ErrNotExist) {
+			return nil, err
+		}
 		if _, err := os.Lstat(filepath.Join(out, signedIngressProofPathH2)); err == nil {
 			paths = append(paths, signedIngressProofPathH2)
 		} else if !errors.Is(err, os.ErrNotExist) {
@@ -157,6 +162,7 @@ func rejectExtraneous(out string) error {
 		seen[name] = true
 	}
 	seen[signedIngressProofPathH2] = true
+	seen[causalReportPathH2] = true
 	for _, name := range rawA1PathsH2() {
 		seen[name] = true
 	}
@@ -422,6 +428,14 @@ func verifyLocal(ctx context.Context, dir string) error {
 	if _, err := os.Lstat(filepath.Join(out, "ledger-export")); err == nil {
 		if err := verifyH2Ledgers(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
 			return fmt.Errorf("H2 full canonical ledger verification: %w", err)
+		}
+		if meta.EvidenceProfile == "H2_SAME_A1_REPLAY_V1" {
+			if err := verifyCausalReportH2(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
+				return fmt.Errorf("H2 private causal report verification: %w", err)
+			}
+			fmt.Println("H2_CAUSAL_REPORT=VERIFIED_PRIVATE")
+		} else if _, err := os.Lstat(filepath.Join(out, causalReportPathH2)); !errors.Is(err, os.ErrNotExist) {
+			return errors.New("H2 private causal report/profile mismatch")
 		}
 		if err := verifyOwnersH2(ctx, out, meta.SourceSHA, public.RunID); err != nil {
 			return fmt.Errorf("H2 independent signed owner verification: %w", err)

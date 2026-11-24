@@ -124,6 +124,45 @@ func TestH2LiveSQLiteWALProvesCommittedFramesBeforeDetachedOpen(t *testing.T) {
 	}
 }
 
+func TestH2ZeroByteWALAfterRealCheckpointKeepsCommittedRows(t *testing.T) {
+	source := liveWALFixtureH2(t)
+	conn, err := sql.Open("sqlite", "file:"+filepath.ToSlash(source))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var busy, logFrames, checkpointed int
+	if err := conn.QueryRow("PRAGMA wal_checkpoint(TRUNCATE)").
+		Scan(&busy, &logFrames, &checkpointed); err != nil || busy != 0 {
+		conn.Close()
+		t.Fatalf("real checkpoint could not drain WAL: %v busy=%d", err, busy)
+	}
+	if err := conn.Close(); err != nil {
+		t.Fatal(err)
+	}
+	walInfo, err := os.Stat(source + "-wal")
+	if err != nil || walInfo.Size() != 0 {
+		t.Fatalf("real SQLite did not produce the checkpointed empty WAL witness: %v", err)
+	}
+	p, err := verifySQLiteSidecarsH2(source)
+	if err != nil || !p.HasWAL || p.Frames != 0 || p.Commits != 0 {
+		t.Fatalf("legitimate checkpointed SQLite WAL refused: %+v %v", p, err)
+	}
+	copied, cleanup, err := detachedDBH2(source)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer cleanup()
+	ro, err := readOnlyDBH2(context.Background(), copied)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer ro.Close()
+	var count int
+	if err := ro.QueryRow("SELECT count(*) FROM wal_authority").Scan(&count); err != nil || count != 2 {
+		t.Fatalf("zero-length post-checkpoint WAL lost committed main-db rows: %d %v", count, err)
+	}
+}
+
 func TestH2LiveSQLiteWALTruncationsAndTamperedFramesFailBeforeRecovery(t *testing.T) {
 	source := liveWALFixtureH2(t)
 	type mutant struct {
@@ -133,6 +172,7 @@ func TestH2LiveSQLiteWALTruncationsAndTamperedFramesFailBeforeRecovery(t *testin
 	}
 	cases := []mutant{
 		{"wal-truncated-header", "-wal", func(b []byte) []byte { return append([]byte(nil), b[:29]...) }},
+		{"wal-truncated-to-one-byte", "-wal", func(b []byte) []byte { return append([]byte(nil), b[:1]...) }},
 		{"wal-truncated-final-frame", "-wal", func(b []byte) []byte { return append([]byte(nil), b[:len(b)-1]...) }},
 		{"wal-invalid-magic", "-wal", func(b []byte) []byte { b[0] ^= 0x55; return b }},
 		{"wal-invalid-header-checksum", "-wal", func(b []byte) []byte { b[24] ^= 0x55; return b }},

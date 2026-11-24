@@ -204,6 +204,11 @@ func rejectExtraneous(out string) error {
 }
 
 func replayAndGenesis(ctx context.Context, original string, installed *policy.Bundle, runID string) (string, error) {
+	// SQLite WAL recovery may discard malformed trailing frames. For an
+	// archived reference-run oracle that would constitute silent data loss.
+	if _, err := verifySQLiteSidecarsH2(original); err != nil {
+		return "", err
+	}
 	raw, err := readPrivateRegular(original)
 	if err != nil {
 		return "", err

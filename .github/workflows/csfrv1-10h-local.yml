@@ -54,6 +54,8 @@ jobs:
             cmd/csf-reference-run-local/h2_ingress_linux.go cmd/csf-reference-run-local/h2_raw_source_linux.go
             cmd/csf-reference-run-local/h2_replay_linux.go cmd/csf-reference-run-local/h2_replay_compare_linux.go
             cmd/csf-reference-run-local/h2_replay_compare_linux_test.go
+            cmd/csf-reference-run-local/h2_wal_preflight_linux.go
+            cmd/csf-reference-run-local/h2_wal_preflight_linux_test.go
             internal/csf/commit/reference_d3_offline_same_a1_linux.go
             internal/csf/commit/reference_d3_offline_same_a1_linux_test.go
             internal/physicalhost/supervisor_linux.go internal/physicalhost/private_capture_linux.go

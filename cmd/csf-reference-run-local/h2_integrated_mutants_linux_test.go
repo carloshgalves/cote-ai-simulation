@@ -33,7 +33,8 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 	for _, variant := range []string{"owner-plaintext", "sealed-snapshot", "framed-ledger", "signed-ingress-proof",
 		"missing-signed-ingress-proof", "raw-snapshot", "raw-events", "raw-evidence",
 		"raw-signature", "raw-cut", "raw-private-proof",
-		"replay-causal-row", "replay-owner-checkpoint", "replay-compare-proof", "replay-extra-table"} {
+		"replay-causal-row", "replay-owner-checkpoint", "replay-compare-proof", "replay-extra-table",
+		"wal-invalid-header", "shm-truncated-region"} {
 		t.Run(variant, func(t *testing.T) {
 			out := t.TempDir()
 			if err := os.Chmod(out, 0700); err != nil {
@@ -181,6 +182,17 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 						t.Fatalf("failed to mutate exact real replay row: %d / %v", n, err)
 					}
 				}
+			case "wal-invalid-header":
+				// Add an invalid sidecar to the genuine archived causal DB.
+				// Rebuild the complete SHA index below: the independent WAL
+				// preflight must reject it before SQLite opens for recovery.
+				if err := os.WriteFile(filepath.Join(out, "causal.db-wal"), make([]byte, 32), 0600); err != nil {
+					t.Fatal(err)
+				}
+			case "shm-truncated-region":
+				if err := os.WriteFile(filepath.Join(out, "causal.db-shm"), []byte{0x01}, 0600); err != nil {
+					t.Fatal(err)
+				}
 			case "replay-compare-proof":
 				path := filepath.Join(out, filepath.FromSlash(replayComparisonPathH2))
 				data, err := os.ReadFile(path)
@@ -245,6 +257,8 @@ func TestH2RejectsRehashedSemanticCorruption(t *testing.T) {
 				"replay-owner-checkpoint":      "H2 same A1 second independent D3 verification",
 				"replay-compare-proof":         "H2 same A1 second independent D3 verification",
 				"replay-extra-table":           "H2 same A1 second independent D3 verification",
+				"wal-invalid-header":           "H2 WAL preflight",
+				"shm-truncated-region":         "H2 WAL preflight",
 			}[variant]
 			if !strings.Contains(err.Error(), required) {
 				t.Fatalf("unexpected rejection path, not target cryptographic invariant %s: %v", required, err)

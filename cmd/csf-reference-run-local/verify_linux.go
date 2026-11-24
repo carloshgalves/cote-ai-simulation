@@ -429,14 +429,6 @@ func verifyLocal(ctx context.Context, dir string) error {
 		if err := verifyH2Ledgers(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
 			return fmt.Errorf("H2 full canonical ledger verification: %w", err)
 		}
-		if meta.EvidenceProfile == "H2_SAME_A1_REPLAY_V1" {
-			if err := verifyCausalReportH2(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
-				return fmt.Errorf("H2 private causal report verification: %w", err)
-			}
-			fmt.Println("H2_CAUSAL_REPORT=VERIFIED_PRIVATE")
-		} else if _, err := os.Lstat(filepath.Join(out, causalReportPathH2)); !errors.Is(err, os.ErrNotExist) {
-			return errors.New("H2 private causal report/profile mismatch")
-		}
 		if err := verifyOwnersH2(ctx, out, meta.SourceSHA, public.RunID); err != nil {
 			return fmt.Errorf("H2 independent signed owner verification: %w", err)
 		}
@@ -487,6 +479,14 @@ func verifyLocal(ctx context.Context, dir string) error {
 				return fmt.Errorf("H2 same A1 second independent D3 verification: %w", err)
 			}
 			fmt.Println("H2_SAME_SIGNED_A1_INDEPENDENT_GO_D3=BYTE_IDENTICAL_AUTHORITIES")
+		}
+		if meta.EvidenceProfile == "H2_SAME_A1_REPLAY_V1" {
+			if err := verifyCausalReportH2(ctx, out, meta.SourceSHA, public.RunID, installed); err != nil {
+				return fmt.Errorf("H2 private causal report verification: %w", err)
+			}
+			fmt.Println("H2_CAUSAL_REPORT=VERIFIED_PRIVATE")
+		} else if _, err := os.Lstat(filepath.Join(out, causalReportPathH2)); !errors.Is(err, os.ErrNotExist) {
+			return errors.New("H2 private causal report/profile mismatch")
 		}
 		fmt.Println("H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE")
 		fmt.Println("H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE")

@@ -49,9 +49,13 @@ PIN_LABELS = {"LOCAL_REFERENCE_SOURCE_SHA": ("source_sha", 40),
               "LOCAL_REFERENCE_REGISTRATION_SHA256": ("registration_sha256", 64)}
 
 
+class EvidenceError(ValueError):
+    """Only fixed source-code validation reasons; never raw exceptions."""
+
+
 def require(condition, message):
     if not condition:
-        raise ValueError(message)
+        raise EvidenceError(message)
 
 
 def now():
@@ -78,6 +82,7 @@ def digest(path, private=False):
     require(stat.S_ISREG(info.st_mode) and info.st_nlink == 1, "unsafe file identity")
     if private:
         require(info.st_mode & 0o077 == 0, "exposed evidence file")
+        require(info.st_size <= 128 * 1024 * 1024, "oversized evidence file")
     with path.open("rb") as stream:
         actual = os.fstat(stream.fileno())
         require((actual.st_dev, actual.st_ino) == (info.st_dev, info.st_ino), "file replaced")
@@ -198,7 +203,9 @@ def snapshot(archive):
 
 
 def archive_pins(archive, files, sha):
-    raw = (archive / "run-manifest.json").read_bytes()
+    manifest_path = archive / "run-manifest.json"
+    require(manifest_path.stat().st_size <= 64 * 1024, "oversized run manifest")
+    raw = manifest_path.read_bytes()
     require(hashlib.sha256(raw).hexdigest() == files["run-manifest.json"], "manifest changed")
     manifest = json.loads(raw)
     require(manifest["source_sha"] == sha and hex_digest(manifest["run_id"])
@@ -234,8 +241,18 @@ def validate(receipt, sha, binary_sha, pins):
 
 def write_receipt(evidence, receipt):
     raw = canonical(receipt)
-    with (evidence / "operational-receipt.json").open("xb") as stream:
+    require(len(raw) <= 64 * 1024, "oversized receipt")
+    fd = os.open(evidence / "operational-receipt.json",
+                 os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    with os.fdopen(fd, "wb") as stream:
         stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    directory_fd = os.open(evidence, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        os.fsync(directory_fd)
+    finally:
+        os.close(directory_fd)
     return hashlib.sha256(raw).hexdigest()
 
 
@@ -279,6 +296,7 @@ def verify(binary, archive, evidence, root, sha, binary_sha, receipt_sha):
     require({item.name for item in evidence.iterdir()} == {path.name}, "unexpected receipt files")
     require(hex_digest(receipt_sha) and digest(path, private=True) == receipt_sha,
             "receipt differs from external pin")
+    require(path.stat().st_size <= 64 * 1024, "oversized receipt")
     raw = path.read_bytes()
     require(hashlib.sha256(raw).hexdigest() == receipt_sha, "receipt changed")
     receipt = json.loads(raw)
@@ -317,8 +335,13 @@ def main():
             record(binary, archive, evidence, root, sha, binary_sha)
         else:
             verify(binary, archive, evidence, root, sha, binary_sha, args.receipt_sha256)
+    except EvidenceError as error:
+        # Only require() creates this exception with a fixed source literal.
+        print("H2_E_FAILURE_REASON=" + str(error), file=sys.stderr)
+        print("H2_E_NO_GO=OPERATIONAL_EVIDENCE_UNVERIFIED", file=sys.stderr)
+        return 1
     except (OSError, ValueError, TypeError, KeyError, subprocess.SubprocessError):
-        # Never emit exception text, filesystem paths, or arbitrary child output.
+        # Never emit raw OS/JSON/process exception text or paths.
         print("H2_E_NO_GO=OPERATIONAL_EVIDENCE_UNVERIFIED", file=sys.stderr)
         return 1
     return 0

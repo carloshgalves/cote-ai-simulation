@@ -99,6 +99,7 @@ class EvidenceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as work:
             path = Path(work)
             h.write_receipt(path, receipt)
+            self.assertEqual((path / "operational-receipt.json").stat().st_mode & 0o777, 0o600)
             with self.assertRaises(FileExistsError):
                 h.write_receipt(path, receipt)
 

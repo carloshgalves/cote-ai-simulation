@@ -21,7 +21,7 @@ concurrency:
 jobs:
   private-local:
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    timeout-minutes: 100
     env:
       PYTHONDONTWRITEBYTECODE: "1"
     steps:
@@ -58,6 +58,9 @@ jobs:
             cmd/csf-reference-run-local/h2_wal_preflight_linux_test.go
             internal/csf/commit/reference_d3_offline_same_a1_linux.go
             internal/csf/commit/reference_d3_offline_same_a1_linux_test.go
+            internal/csf/commit/reference_physical_d2.go
+            internal/csf/commit/reference_crash_e2_integrated_test.go
+            internal/csf/commit/reference_h2_archived_recovery_linux_test.go
             internal/physicalhost/supervisor_linux.go internal/physicalhost/private_capture_linux.go
             internal/physicalhost/private_capture_linux_test.go)
           if [ -n "$(gofmt -l "${files[@]}")" ]; then
@@ -150,3 +153,33 @@ jobs:
           echo 'H_MUTANTS=REJECTED'
           echo 'H_RELEASE=NO_GO'
           # Never upload private ledgers, physical source, owner DBs or raw cuts.
+      - name: H2-C recovery against the exact existing CLI archive
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          export H2_ARCHIVED_SOURCE="$RUNNER_TEMP/h-private-${{ github.run_id }}"
+          export H2_ARCHIVED_SOURCE_REQUIRED=1
+          # Cold verification binds the complete archive, installed policy,
+          # raw signatures and original SQLite authorities before testing.
+          go run ./cmd/csf-reference-run-local --verify "$H2_ARCHIVED_SOURCE"
+          export H2_ARCHIVED_RECOVERY_REPORT="$RUNNER_TEMP/h2-c-normal.json"
+          go test -count=1 -timeout=25m -run '^TestH2ArchivedSourceCrashRecovery$' ./internal/csf/commit
+          export H2_ARCHIVED_RECOVERY_REPORT="$RUNNER_TEMP/h2-c-race.json"
+          go test -race -count=1 -timeout=35m -run '^TestH2ArchivedSourceCrashRecovery$' ./internal/csf/commit
+          cmp "$RUNNER_TEMP/h2-c-normal.json" "$H2_ARCHIVED_RECOVERY_REPORT"
+          go run ./cmd/csf-reference-run-local --verify "$H2_ARCHIVED_SOURCE"
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          with open(os.environ["H2_ARCHIVED_RECOVERY_REPORT"], encoding="utf-8") as f:
+              proof = json.load(f)
+          index = Path(os.environ["H2_ARCHIVED_SOURCE"]) / "checksums.json"
+          assert proof == {
+              "status": "H2_C_ARCHIVED_SOURCE_RECOVERY",
+              "archive_index_sha256": hashlib.sha256(index.read_bytes()).hexdigest(),
+              "cases": 14,
+              "commits": 9,
+          }
+          print("H2_C_SAME_CLI_ARCHIVE_RECOVERY=14_OF_14_NORMAL_AND_RACE")
+          PY
+          # Private archive and digest-only reports stay on this runner.

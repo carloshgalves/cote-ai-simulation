@@ -87,6 +87,23 @@ func RunReferenceD3OfflineSameSignedA1(
 	if absDb == absOwner || absDb == absOwner+".actor-a" {
 		return zero, errors.New("H2 same-cut replay cannot alias causal and owner authorities")
 	}
+	verified, err := verifyOfflineOriginalA1(cfg, original)
+	if err != nil {
+		return zero, err
+	}
+	// An offline consumer needs no producer signing capability.
+	cfg.Host.PrivateKey = nil
+	cfg.frozenSupervisedCuts = &verified
+	return RunReferenceD3(ctx, dbPath, ownerPath, bundlePath, cfg, options)
+}
+
+// verifyOfflineOriginalA1 validates fresh sealed copies without calling a
+// producer or granting durable recovery records new ingress authority.
+func verifyOfflineOriginalA1(cfg ReferenceD2Config, original [2]OfflineOriginalA1Epoch) ([2]embodimentv1.ApprovedCut, error) {
+	var zero [2]embodimentv1.ApprovedCut
+	if cfg.Host.Bundle == nil {
+		return zero, errors.New("H2 offline source needs installed policy")
+	}
 	g, err := buildReferenceGenesis(cfg.Host.Bundle)
 	if err != nil {
 		return zero, fmt.Errorf("H2 offline Genesis creation: %w", err)
@@ -133,6 +150,5 @@ func RunReferenceD3OfflineSameSignedA1(
 		}
 		verified[i] = approved
 	}
-	cfg.frozenSupervisedCuts = &verified
-	return RunReferenceD3(ctx, dbPath, ownerPath, bundlePath, cfg, options)
+	return verified, nil
 }

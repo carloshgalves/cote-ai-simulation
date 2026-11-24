@@ -37,3 +37,15 @@ func TestH2ORunbookErrorOutputIsRedacted(t *testing.T) {
 		t.Fatal("untrusted verification error leaked or was misclassified")
 	}
 }
+
+func TestH2ODiagnosticStageAndReasonDoNotExposePrivateErrors(t *testing.T) {
+	var out, err bytes.Buffer
+	failure := &diagnosisError{stage: "OBSERVATORY_REPLAY", cause: errors.New("privileged causal replay: PRIVATE_PAYLOAD")}
+	code := emitOutcomeForError(&out, &err, failure, true)
+	if code != runbook.Unverified.Code ||
+		!strings.Contains(err.String(), "LOCAL_REFERENCE_DIAGNOSTIC_STAGE=OBSERVATORY_REPLAY") ||
+		!strings.Contains(err.String(), "LOCAL_REFERENCE_DIAGNOSTIC_REASON=CAUSAL_REPLAY_REJECTED") ||
+		strings.Contains(out.String()+err.String(), "PRIVATE_PAYLOAD") {
+		t.Fatal("diagnostic stage failed closed or exposed private material")
+	}
+}

@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"runtime/debug"
+	"strings"
 	"syscall"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/commit"
@@ -97,6 +98,11 @@ func emitOutcomeForError(stdout, stderr io.Writer, err error, verification bool)
 		outcome = runbook.Unverified
 	}
 	fmt.Fprintln(stderr, "LOCAL_REFERENCE_NO_GO: "+outcome.State)
+	var diagnostic *diagnosisError
+	if errors.As(err, &diagnostic) {
+		fmt.Fprintln(stderr, "LOCAL_REFERENCE_DIAGNOSTIC_STAGE="+diagnostic.stage)
+		fmt.Fprintln(stderr, "LOCAL_REFERENCE_DIAGNOSTIC_REASON="+diagnosticReason(diagnostic.cause))
+	}
 	return emitOutcome(stderr, outcome)
 }
 
@@ -111,7 +117,7 @@ func captureDiagnosisFiles(dir string) (map[string]string, error) {
 			continue
 		}
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("diagnostic source family unreadable: %w", err)
 		}
 		out[name] = hashBytes(raw)
 	}
@@ -121,12 +127,19 @@ func captureDiagnosisFiles(dir string) (map[string]string, error) {
 // diagnoseLocal is a human-only read projection, not the complete archive
 // verifier and not a resume command. The source SHA, public registration
 // digest and RunID must come from a previously trusted operator record.
-func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourceSHA string, crash bool) (runbook.Outcome, error) {
+func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourceSHA string, crash bool) (outcome runbook.Outcome, failure error) {
+	stage := "BUILD_REVISION"
+	defer func() {
+		if failure != nil {
+			failure = &diagnosisError{stage: stage, cause: failure}
+		}
+	}()
 	// A clean checkout alone is not enough: a stale executable could read
 	// newer source metadata. Require the direct VCS-stamped binary.
 	if !exactBuildRevision(sourceSHA) {
 		return runbook.Unknown, runbook.ErrIncompatible
 	}
+	stage = "CHECKOUT"
 	root, err := gitOutput(".", "rev-parse", "--show-toplevel")
 	if err != nil {
 		return runbook.Unknown, err
@@ -139,6 +152,7 @@ func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourc
 	if err != nil || dirty != "" {
 		return runbook.Unknown, runbook.ErrIncompatible
 	}
+	stage = "SOURCE_DIRECTORY"
 	dir, err = filepath.Abs(dir)
 	if err != nil {
 		return runbook.Unknown, err
@@ -151,8 +165,13 @@ func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourc
 	if err != nil || !info.IsDir() || info.Mode().Perm()&0077 != 0 {
 		return runbook.Unknown, runbook.ErrUnverified
 	}
+	stage = "SOURCE_FILES"
 	before, err := captureDiagnosisFiles(dir)
-	if err != nil || before["registration.json"] != regHash {
+	if err != nil {
+		return runbook.Unknown, fmt.Errorf("%w: %w", runbook.ErrUnverified, err)
+	}
+	stage = "REGISTRATION_PIN"
+	if before["registration.json"] != regHash {
 		return runbook.Unknown, runbook.ErrUnverified
 	}
 	reg, err := readPrivateRegular(filepath.Join(dir, "registration.json"))
@@ -167,6 +186,7 @@ func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourc
 	if err != nil || !bytes.Equal(reg, canonical) {
 		return runbook.Unknown, runbook.ErrUnverified
 	}
+	stage = "INSTALLED_POLICY"
 	base, err := policy.Load(filepath.Join(root, bundleRelative))
 	if err != nil {
 		return runbook.Unknown, runbook.ErrIncompatible
@@ -175,6 +195,7 @@ func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourc
 	if err != nil {
 		return runbook.Unknown, runbook.ErrIncompatible
 	}
+	stage = "REFERENCE_RUN_ID"
 	expected, err := commit.ReferenceRunID(bundle)
 	if err != nil {
 		return runbook.Unknown, runbook.ErrIncompatible
@@ -182,13 +203,19 @@ func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourc
 	if run != expected {
 		return runbook.Unknown, runbook.ErrUnverified
 	}
+	stage = "DETACHED_COPY_PREFLIGHT"
 	copyDB, cleanup, err := detachedDBH2(filepath.Join(dir, "causal.db"))
 	if err != nil {
 		return runbook.Unknown, err
 	}
 	defer cleanup()
+	copyDB, err = filepath.EvalSymlinks(copyDB)
+	if err != nil {
+		return runbook.Unknown, err
+	}
 	// Verify the detached bytes before opening SQLite, which may change
 	// its scratch sidecars during recovery. The original is never opened.
+	stage = "DETACHED_COPY_DIGESTS"
 	for _, suffix := range []string{"", "-wal", "-shm"} {
 		data, err := readPrivateRegular(copyDB + suffix)
 		expectedHash, present := before["causal.db"+suffix]
@@ -199,23 +226,32 @@ func diagnoseLocal(ctx context.Context, dir string, run [32]byte, regHash, sourc
 			return runbook.Unknown, observatory.ErrSourceChanged
 		}
 	}
+	stage = "OBSERVATORY_OPEN"
 	reader, err := sqlite.OpenPrivilegedObservatory(ctx, copyDB, bundle)
 	if err != nil {
 		return runbook.Unknown, err
 	}
 	report, readErr := reader.ReadOperationalReport(ctx, run)
 	closeErr := reader.Close()
+	stage = "SOURCE_RECHECK"
 	after, err := captureDiagnosisFiles(dir)
 	if err != nil || !reflect.DeepEqual(before, after) {
 		return runbook.Unknown, observatory.ErrSourceChanged
 	}
 	if readErr != nil {
+		stage = "OBSERVATORY_REPLAY"
 		return runbook.Unknown, readErr
 	}
 	if closeErr != nil {
+		stage = "OBSERVATORY_CLOSE"
 		return runbook.Unknown, closeErr
 	}
-	return runbook.Report(report, crash), nil
+	stage = "VERIFIED_REPORT"
+	result := runbook.Report(report, crash)
+	if result == runbook.Unverified {
+		return runbook.Unknown, runbook.ErrUnverified
+	}
+	return result, nil
 }
 
 // exactBuildRevision uses Go's executable metadata, not a caller-supplied
@@ -235,4 +271,51 @@ func exactBuildRevision(sourceSHA string) bool {
 		}
 	}
 	return revision == sourceSHA && modified == "false"
+}
+
+// diagnosisError carries only a closed code-level stage. Its underlying
+// error is never printed; it may contain privileged paths or record IDs.
+type diagnosisError struct {
+	stage string
+	cause error
+}
+
+func (e *diagnosisError) Error() string { return "local diagnosis failed at " + e.stage }
+func (e *diagnosisError) Unwrap() error { return e.cause }
+
+// diagnosticReason is an allowlist of fixed labels, not a second error
+// classifier. Unrecognized error strings never appear in logs.
+func diagnosticReason(err error) string {
+	switch {
+	case errors.Is(err, os.ErrNotExist):
+		return "FILE_MISSING"
+	case errors.Is(err, os.ErrPermission):
+		return "ACCESS_DENIED"
+	case errors.Is(err, observatory.ErrSourceChanged):
+		return "SOURCE_CHANGED"
+	}
+	for _, item := range []struct {
+		text   string
+		reason string
+	}{
+		{"refuse nonregular, exposed or oversized evidence", "UNSAFE_EVIDENCE_FILE"},
+		{"hardlinked or unverifiable private artifact", "UNSAFE_FILE_IDENTITY"},
+		{"database ancestor is not a trusted directory", "UNTRUSTED_SCRATCH_ANCESTOR"},
+		{"SQLite parent must be operator-owned", "UNTRUSTED_SCRATCH_PARENT"},
+		{"SQLite workspace requires an operator-owned private ancestor", "NONPRIVATE_SCRATCH"},
+		{"unsafe database/pager file", "UNSAFE_PAGER_FILE"},
+		{"H2 WAL preflight:", "WAL_PREFLIGHT_REJECTED"},
+		{"open existing CSF database in read-only mode", "READONLY_OPEN_REJECTED"},
+		{"privileged causal replay:", "CAUSAL_REPLAY_REJECTED"},
+		{"unsupported SQLite identity:", "SQLITE_RUNTIME_MISMATCH"},
+		{"SQLite runtime manifest identity mismatch", "SQLITE_RUNTIME_MISMATCH"},
+		{"journal_mode must be WAL", "SQLITE_JOURNAL_MODE"},
+		{"synchronous must be FULL", "SQLITE_SYNCHRONOUS_MODE"},
+		{"readonly SQL", "READONLY_DRIVER_REJECTED"},
+	} {
+		if strings.Contains(err.Error(), item.text) {
+			return item.reason
+		}
+	}
+	return "UNCLASSIFIED"
 }

@@ -160,6 +160,27 @@ jobs:
           echo 'H_MUTANTS=REJECTED'
           echo 'H_RELEASE=NO_GO'
           # Never upload private ledgers, physical source, owner DBs or raw cuts.
+      - name: H2-O real operational cuts and exact process exit codes
+        run: |
+          set -euo pipefail
+          umask 077
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          export H2_ARCHIVED_SOURCE="$RUNNER_TEMP/h-private-${{ github.run_id }}"
+          export H2_ARCHIVED_INDEX_SHA256="$(sha256sum "$H2_ARCHIVED_SOURCE/checksums.json" | cut -d ' ' -f 1)"
+          export H2_ARCHIVED_SOURCE_REQUIRED=1
+          export H2O_RUNBOOK_BINARY="$RUNNER_TEMP/csf-reference-run-local"
+          go build -buildvcs=true -o "$H2O_RUNBOOK_BINARY" ./cmd/csf-reference-run-local
+          "$H2O_RUNBOOK_BINARY" --verify "$H2_ARCHIVED_SOURCE"
+          go test -v -count=1 -timeout=15m -run '^TestH2ORunbookRealCuts$' ./internal/csf/commit | tee "$RUNNER_TEMP/h2-o-normal.log"
+          grep -F 'H2_O_REAL_CUTS=6_OF_6_AND_NEGATIVE_PROCESS_EXITS' "$RUNNER_TEMP/h2-o-normal.log"
+          export H2O_RUNBOOK_BINARY="$RUNNER_TEMP/csf-reference-run-local-race"
+          go build -buildvcs=true -race -o "$H2O_RUNBOOK_BINARY" ./cmd/csf-reference-run-local
+          go test -race -v -count=1 -timeout=25m -run '^TestH2ORunbookRealCuts$' ./internal/csf/commit | tee "$RUNNER_TEMP/h2-o-race.log"
+          grep -F 'H2_O_REAL_CUTS=6_OF_6_AND_NEGATIVE_PROCESS_EXITS' "$RUNNER_TEMP/h2-o-race.log"
+          PHYSICAL_A1_PRODUCER_TEST=1 go test -count=1 -timeout=10m -run '^TestReferenceD2(RejectsUnpinnedExecutableAndImportRoot|OpenPhysicalSourcePreventsC4Admission)$' ./internal/csf/commit
+          "$H2O_RUNBOOK_BINARY" --verify "$H2_ARCHIVED_SOURCE"
+          echo 'H2_O_REAL_CUTS=VERIFIED_EXIT_CODES_NO_WRITE_NO_GO'
+          # No private database, source cut, or actor state leaves the runner.
       - name: H2-C recovery against the exact existing CLI archive
         run: |
           set -euo pipefail
@@ -194,24 +215,3 @@ jobs:
           print("H2_C_SAME_CLI_ARCHIVE_PENDING_BARRIER=WORKER_RESTART_EXACTLY_ONCE_NORMAL_AND_RACE")
           PY
           # Private archive and digest-only reports stay on this runner.
-      - name: H2-O real operational cuts and exact process exit codes
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
-          export H2_ARCHIVED_SOURCE="$RUNNER_TEMP/h-private-${{ github.run_id }}"
-          export H2_ARCHIVED_INDEX_SHA256="$(sha256sum "$H2_ARCHIVED_SOURCE/checksums.json" | cut -d ' ' -f 1)"
-          export H2_ARCHIVED_SOURCE_REQUIRED=1
-          export H2O_RUNBOOK_BINARY="$RUNNER_TEMP/csf-reference-run-local"
-          go build -buildvcs=true -o "$H2O_RUNBOOK_BINARY" ./cmd/csf-reference-run-local
-          "$H2O_RUNBOOK_BINARY" --verify "$H2_ARCHIVED_SOURCE"
-          go test -v -count=1 -timeout=15m -run '^TestH2ORunbookRealCuts$' ./internal/csf/commit | tee "$RUNNER_TEMP/h2-o-normal.log"
-          grep -F 'H2_O_REAL_CUTS=6_OF_6_AND_NEGATIVE_PROCESS_EXITS' "$RUNNER_TEMP/h2-o-normal.log"
-          export H2O_RUNBOOK_BINARY="$RUNNER_TEMP/csf-reference-run-local-race"
-          go build -buildvcs=true -race -o "$H2O_RUNBOOK_BINARY" ./cmd/csf-reference-run-local
-          go test -race -v -count=1 -timeout=25m -run '^TestH2ORunbookRealCuts$' ./internal/csf/commit | tee "$RUNNER_TEMP/h2-o-race.log"
-          grep -F 'H2_O_REAL_CUTS=6_OF_6_AND_NEGATIVE_PROCESS_EXITS' "$RUNNER_TEMP/h2-o-race.log"
-          PHYSICAL_A1_PRODUCER_TEST=1 go test -count=1 -timeout=10m -run '^TestReferenceD2(RejectsUnpinnedExecutableAndImportRoot|OpenPhysicalSourcePreventsC4Admission)$' ./internal/csf/commit
-          "$H2O_RUNBOOK_BINARY" --verify "$H2_ARCHIVED_SOURCE"
-          echo 'H2_O_REAL_CUTS=VERIFIED_EXIT_CODES_NO_WRITE_NO_GO'
-          # No private database, source cut, or actor state leaves the runner.

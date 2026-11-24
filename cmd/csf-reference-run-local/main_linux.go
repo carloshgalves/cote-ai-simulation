@@ -64,6 +64,9 @@ type archiveIndex struct {
 }
 
 func main() {
+	// All operations may create private scratch pager files, including
+	// read-only detached diagnosis. Do not rely on the caller's umask.
+	syscall.Umask(0077)
 	os.Exit(localCommand(context.Background(), os.Args[1:], os.Stdout, os.Stderr))
 }
 

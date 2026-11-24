@@ -11,6 +11,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"reflect"
+	"regexp"
 	"strings"
 	"testing"
 	"time"
@@ -184,7 +185,10 @@ func h2oAssertProcessEnv(t *testing.T, binary string, args []string, want runboo
 	if ctx.Err() != nil || code != want.Code || !strings.Contains(string(output), "LOCAL_REFERENCE_STATE="+want.State+"\n") ||
 		strings.Contains(string(output), "PRIVATE_PAYLOAD") ||
 		(want.Code != 0 && strings.Contains(string(output), "FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED")) {
-		t.Fatalf("H2-O wrong executable outcome: got code %d want %d (%s)", code, want.Code, want.State)
+		// Only fixed uppercase stage/reason labels can leave this test.
+		// The child may have returned private errors: never print output.
+		safe := regexp.MustCompile("(?m)^LOCAL_REFERENCE_DIAGNOSTIC_(STAGE|REASON)=[A-Z_]+$")
+		t.Fatalf("H2-O wrong executable outcome: got code %d want %d (%s); diagnostics=%q", code, want.Code, want.State, safe.FindAllString(string(output), -1))
 	}
 }
 
@@ -198,7 +202,7 @@ func h2oFileDigests(t *testing.T, dir string) map[string]string {
 	out := make(map[string]string)
 	for _, name := range []string{"registration.json", "causal.db", "causal.db-wal", "causal.db-shm"} {
 		path := filepath.Join(dir, name)
-		raw, err := os.ReadFile(path)
+		raw, err := h2ArchivedRead(path)
 		if errors.Is(err, os.ErrNotExist) && strings.HasPrefix(name, "causal.db-") {
 			continue
 		}

@@ -48,6 +48,7 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check
+          python docs/reference-run/csfrv1-10h/test_operational_evidence.py
           files=(cmd/csf-reference-run-local/main_linux.go cmd/csf-reference-run-local/verify_linux.go cmd/csf-reference-run-local/main_linux_test.go
             cmd/csf-reference-run-local/h2_ledgers_linux.go cmd/csf-reference-run-local/h2_ledgers_linux_test.go
             cmd/csf-reference-run-local/h2_owner_linux.go cmd/csf-reference-run-local/h2_integrated_mutants_linux_test.go
@@ -117,7 +118,20 @@ jobs:
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
           out="$RUNNER_TEMP/h-private-${{ github.run_id }}"
-          go run ./cmd/csf-reference-run-local --out "$out" | tee "$RUNNER_TEMP/h-summary.txt"
+          umask 077
+          binary="$RUNNER_TEMP/h2-e-reference-binary"
+          evidence="$RUNNER_TEMP/h2-e-operational-${{ github.run_id }}"
+          go build -buildvcs=true -o "$binary" ./cmd/csf-reference-run-local
+          python docs/reference-run/csfrv1-10h/operational_evidence.py record \
+            --binary "$binary" --archive "$out" --evidence "$evidence" | tee "$RUNNER_TEMP/h-summary.txt"
+          receipt_sha="$(sed -n 's/^H2_E_RECEIPT_SHA256=//p' "$RUNNER_TEMP/h-summary.txt")"
+          test "${#receipt_sha}" = 64
+          grep -Fx 'H2_E_REAL_COMMANDS=OBSERVED_OUT_AND_VERIFY_EXIT_0' "$RUNNER_TEMP/h-summary.txt"
+          python docs/reference-run/csfrv1-10h/operational_evidence.py verify \
+            --binary "$binary" --archive "$out" --evidence "$evidence" --receipt-sha256 "$receipt_sha"
+          H2E_REAL_ARCHIVE="$out" H2E_REAL_BINARY="$binary" H2E_REAL_EVIDENCE="$evidence" \
+            python docs/reference-run/csfrv1-10h/test_operational_evidence.py EvidenceTests.test_real_receipt_rejects_semantic_mutants_and_failed_process
+          # Neither the archive nor the operational receipt is uploaded.
           grep -Fx 'FIRST_REFERENCE_RUN_LOCAL=EXECUTED_AND_CHECKED' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_FIVE_CANONICAL_LEDGERS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"
           grep -Fx 'H2_SIGNED_OWNER_CHECKPOINTS=VERIFIED_PRIVATE' "$RUNNER_TEMP/h-summary.txt"

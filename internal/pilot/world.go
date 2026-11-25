@@ -112,7 +112,7 @@ func schoolView(j Journal,s State,id string)*SchoolView{
   v.Catalog=clone(shopPrices)
   for _,item:=range []string{"notebook","pen","snack","water"}{if m.Wallet>=shopPrices[item]{add("buy",item)}}
  }
- if m.Location=="library"||strings.HasPrefix(m.Location,"class-"){add("study","")}
+ if m.Location=="library"||strings.HasPrefix(m.Location,"class-")||(j.Version>=PopulationVersion&&strings.HasPrefix(m.Location,"senior-class-")){add("study","")}
  if m.Location=="class-"+strings.ToLower(classOf(j,id))&&(v.Period=="aulas da manhã"||v.Period=="aulas da tarde"){add("lesson","")}
  if m.Location=="cafeteria"{add("eat","free");if m.Wallet>=500{add("eat","paid")}}
  if m.Location=="dormitory-"+id{add("rest","");if v.Period=="repouso"{add("sleep","")}}
@@ -187,6 +187,7 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
    mt:=Meeting{ID:fmt.Sprintf("meeting-%d",len(s.World.Meetings)+1),Host:id,Guest:d.Target,Location:m.Location,At:s.Minute+30,Status:"pending"}
    s.World.Meetings=append(s.World.Meetings,mt)
    appendEvent(s,Event{Kind:"meeting",Actor:id,Target:d.Target,Text:fmt.Sprintf("Convite %s em %s às %s; aguarda aceite.",mt.ID,mt.Location,reportTime(mt.At)),Audience:[]string{id,d.Target}})
+   if j.Version>=PopulationVersion{activateInvite(s,d.Target)}
    wakeWaiting(s,d.Target,"Recebeu convite")
   case "accept","decline","attend":
    for i,mt:=range s.World.Meetings{if mt.ID==d.Target{
@@ -273,7 +274,7 @@ func advanceWorld(j Journal,s *State){
   h:=sha256.Sum256([]byte(j.WorldSeed+"/vip"))
   vip:=group[int(h[0])%len(group)]
   s.World.Exam=&VIPExam{Phase:"early",Group:group,VIP:vip,Submitted:map[string]bool{}}
-  announce("Início do Zodiac/VIP adaptado: grupo único. Janela antecipada até 14:30; janela final 14:30–15:00; publicação às 16:00. Consulte as regras privadas.")
+  if j.Version>=PopulationVersion{announce("Início do Zodiac/VIP experimental, restrito aos seis participantes designados. Publicação às 16:00.")}else{announce("Início do Zodiac/VIP adaptado: grupo único. Janela antecipada até 14:30; janela final 14:30–15:00; publicação às 16:00. Consulte as regras privadas.")}
   for _,id:=range group{appendEvent(s,Event{Kind:"exam",Actor:"school",Text:fmt.Sprintf("Sua função VIP: %t",id==vip),Audience:[]string{id}})}
  case 1440+840:announce("Fim do período ativo do exame; submissões antecipadas continuam até 14:30.")
  case 1440+870:if e:=s.World.Exam;e!=nil&&e.Outcome==0{e.Phase="final"};announce("Janela final de submissões do exame aberta.")

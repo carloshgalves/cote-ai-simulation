@@ -12,6 +12,7 @@ import (
 type ActorCycle struct {
 	Cycle int `json:"cycle"`
 	Consulted bool `json:"consulted"`
+ Routine bool `json:"routine,omitempty"`
 	StartMinute int64 `json:"start_minute"`
 	EndMinute int64 `json:"end_minute"`
 	Before Mind `json:"before"`
@@ -56,15 +57,20 @@ func buildReport(o OperatorReport)([]byte,error){
 		choices:=map[string]Chosen{}
 		for _,c:=range round.Choices{choices[c.Actor]=c}
 		for _,id:=range ids(j.Profiles){
-			choice,consulted:=choices[id]
-			if !consulted{choice=Chosen{Actor:id}}
+			choice,chosen:=choices[id]
+   routine:=chosen&&j.Version>=PopulationVersion&&choice.Decision.Source==routineSource
+   consulted:=chosen&&!routine
+			if !chosen{choice=Chosen{Actor:id}}
 			events:=[]Event{}
 			for _,e:=range next.Events[len(s.Events):]{if has(e.Audience,id){events=append(events,e)}}
 			// Failure markers are operator diagnostics, not character knowledge.
 			c:=clone(choice)
 			c.Decision.Source="";c.Decision.Ignored=nil
 			if c.Failure!=""{c=Chosen{Actor:id}}
-			actors[id].Cycles=append(actors[id].Cycles,ActorCycle{Cycle:round.Number,Consulted:consulted,StartMinute:s.Minute,EndMinute:next.Minute,Before:clone(s.Minds[id]),Choice:c,Events:events,After:clone(next.Minds[id]),AvailableContext:actorContext(j,s,id)})
+			if j.Version>=PopulationVersion&&!chosen&&len(events)==0&&equalMind(s.Minds[id],next.Minds[id]){continue}
+   contextView:=Context{}
+   if j.Version<PopulationVersion||consulted{contextView=actorContext(j,s,id)}
+   actors[id].Cycles=append(actors[id].Cycles,ActorCycle{Cycle:round.Number,Consulted:consulted,Routine:routine,StartMinute:s.Minute,EndMinute:next.Minute,Before:clone(s.Minds[id]),Choice:c,Events:events,After:clone(next.Minds[id]),AvailableContext:contextView})
 		}
 		s=next
 	}
@@ -80,7 +86,8 @@ func buildReport(o OperatorReport)([]byte,error){
 	if err:=writeJSON("operador.json",o);err!=nil{return nil,err}
 	var b strings.Builder
 	fmt.Fprintf(&b,"# Operador — COTE\n\nCiclos confirmados: %d | Horário: %s | Registro: %s\n\n",o.State.Round,reportTime(o.State.Minute),o.Digest)
-	fmt.Fprintln(&b,"## Eventos iniciais");for _,e:=range o.State.Events{if e.Round==0{writeEvent(&b,e)}}
+	if j.Version>=PopulationVersion{fmt.Fprintln(&b,"## População");for _,id:=range ids(j.Profiles){a:=j.Population[id];fmt.Fprintf(&b,"- %s: %s; ano %d; resolução %s; fonte %s\n",id,a.Role,a.Year,o.State.Minds[id].Tier,a.Source)};for _,co:=range o.State.Cohorts{fmt.Fprintf(&b,"- %s: %d estudantes agregados, em %s\n",co.ID,co.Count,co.Location)}}
+ fmt.Fprintln(&b,"## Eventos iniciais");for _,e:=range o.State.Events{if e.Round==0{writeEvent(&b,e)}}
 	for _,r:=range j.Rounds{
 		fmt.Fprintf(&b,"\n## Ciclo %d — %s\n\n",r.Number,reportTime(r.Minute))
 		for _,c:=range r.Choices{writeChoice(&b,c)}
@@ -100,7 +107,7 @@ func buildReport(o OperatorReport)([]byte,error){
 		for _,c:=range a.Cycles{
 			fmt.Fprintf(&b,"\n## Ciclo %d — %s a %s\n\n",c.Cycle,reportTime(c.StartMinute),reportTime(c.EndMinute))
 			fmt.Fprintln(&b,"### Antes da decisão");writeMind(&b,c.Before)
-			fmt.Fprintln(&b,"\n### Decisão própria");if c.Consulted{writeChoice(&b,c.Choice)}else{fmt.Fprintln(&b,"- Sem nova consulta ao modelo neste ciclo; consulte os acontecimentos e o estado de atividade.")}
+			fmt.Fprintln(&b,"\n### Decisão própria");if c.Routine{fmt.Fprintln(&b,"- Rotina determinística do motor, sem consulta ao LLM.");writeChoice(&b,c.Choice)}else if c.Consulted{writeChoice(&b,c.Choice)}else{fmt.Fprintln(&b,"- Sem nova consulta ao modelo neste ciclo; consulte os acontecimentos e o estado de atividade.")}
 			fmt.Fprintln(&b,"\n### Acontecimentos percebidos");for _,e:=range c.Events{writeEvent(&b,e)}
 			fmt.Fprintln(&b,"\n### Depois da decisão");writeMind(&b,c.After)
 		}

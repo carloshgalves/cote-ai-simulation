@@ -182,6 +182,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 		var d Decision
 		failure:=""
   if journal.Version>=PopulationVersion&&!needsModel(state,id){
+   s.mu.Lock();s.progress.Actor=id;s.progress.Attempt=0;s.progress.ActorStartedAt=time.Now();s.progress.LastError="";s.mu.Unlock()
    d=routineDecision(journal,state,id)
    if err:=validateDecision(view,d);err!=nil{return Snapshot{},fmt.Errorf("rotina %s: %w",id,err)}
   }else{

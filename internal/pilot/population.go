@@ -165,3 +165,11 @@ func updateCohorts(j Journal,s *State){
   s.Cohorts=append(s.Cohorts,Cohort{ID:"cohort-y1-"+strings.ToLower(class),Class:class,Count:n,Location:loc,Tier:CohortTier})
  }
 }
+
+func activateInvite(s *State,id string){
+ m:=s.Minds[id]
+ if m.Tier==LatentTier{m.Tier=LightTier;m.LastEngagement=s.Minute;s.Minds[id]=m
+ appendEvent(s,Event{Kind:"resolution",Actor:id,Text:"LATENT → LIGHTWEIGHT: convite recebido",Audience:[]string{id}})}
+}
+
+func equalMind(a,b Mind)bool{return reflect.DeepEqual(a,b)}

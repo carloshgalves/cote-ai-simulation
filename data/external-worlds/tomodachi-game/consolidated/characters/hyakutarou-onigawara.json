@@ -1,0 +1,58 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.hyakutarou-onigawara",
+  "display_name": "Hyakutarou Onigawara",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "Group K roster entry; individual characterization not established.",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.hyakutarou-onigawara.identity"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [
+        "tg.case.hyakutarou-onigawara.assist-vulnerable-person"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.hyakutarou-onigawara.assist-vulnerable-person"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [
+        "tg.case.hyakutarou-onigawara.assist-vulnerable-person"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.hyakutarou-onigawara.assist-vulnerable-person"
+      ]
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Characters",
+    "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+    "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+  ],
+  "historical_context_only": false,
+  "uncertainties": [
+    "No actor-owned demonstrated case yet"
+  ],
+  "generation_policy": "One pack per actor; append sourced cases",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only; strip narrative details before agent context",
+    "contextual_facts": "require acquisition",
+    "post_divergence_memory": "simulation events only"
+  },
+  "fidelity_eval": null
+}

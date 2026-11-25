@@ -1,0 +1,25 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.tg.all-bet",
+  "name": "all-bet",
+  "authority": "SECONDARY_REFERENCE_WITH_SEPARATE_EXECUTABLE_MODEL",
+  "source_coverage": [
+    "https://tomodachi-game.fandom.com/wiki/All_Bet"
+  ],
+  "runtime_model": "data/external-worlds/tomodachi-game/runtime/resolver.mjs",
+  "parameters": {
+    "source": "All_Bet",
+    "days": 7,
+    "boardingFee": 1000000,
+    "feePenalty": 100000000,
+    "breachPenalty": 100000000000,
+    "model": [
+      "voyage duration configurable; balances denominated in yen; arbitrary wager games need external trusted resolver, built-in coin and RPS outcomes; contracts use explicit consent and escrow-equivalent balance checks"
+    ]
+  },
+  "not_canon": [
+    "voyage duration configurable; balances denominated in yen; arbitrary wager games need external trusted resolver, built-in coin and RPS outcomes; contracts use explicit consent and escrow-equivalent balance checks"
+  ],
+  "execution_scope": "STANDALONE_REFERENCE_ONLY",
+  "native_csf_registered": false
+}

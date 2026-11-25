@@ -1,0 +1,373 @@
+{
+  "world": "tomodachi-game",
+  "source_revision": "ef329a612b42e7f2ecdfe121d682115ffd6a0b22",
+  "source_status": "SECONDARY_SOURCE_OPERATOR_ADMITTED_EXTERNAL_REVIEW_PENDING",
+  "characters": [
+    {
+      "id": "actor.akira-nishizawa",
+      "display_name": "Akira Nishizawa",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/akira-nishizawa.json"
+    },
+    {
+      "id": "actor.banri-niwa",
+      "display_name": "Banri Niwa",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/banri-niwa.json"
+    },
+    {
+      "id": "actor.chisato-hashiratani",
+      "display_name": "Chisato Hashiratani",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/chisato-hashiratani.json"
+    },
+    {
+      "id": "actor.fujii",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/fujii.json"
+    },
+    {
+      "id": "actor.gaku-subaru",
+      "display_name": "Gaku Subaru",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/gaku-subaru.json"
+    },
+    {
+      "id": "actor.genzou-tagami",
+      "display_name": "Genzou Tagami",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/genzou-tagami.json"
+    },
+    {
+      "id": "actor.hayato-nomura",
+      "display_name": "",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/hayato-nomura.json"
+    },
+    {
+      "id": "actor.hokuto-taneda",
+      "display_name": "Hokuto Taneda",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/hokuto-taneda.json"
+    },
+    {
+      "id": "actor.humi-uzaki",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/humi-uzaki.json"
+    },
+    {
+      "id": "actor.hyakutarou-onigawara",
+      "display_name": "Hyakutarou Onigawara",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/hyakutarou-onigawara.json"
+    },
+    {
+      "id": "actor.imamura",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/imamura.json"
+    },
+    {
+      "id": "actor.juuzou-kadokura",
+      "display_name": "Juuzou Kadokura",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/juuzou-kadokura.json"
+    },
+    {
+      "id": "actor.kaede-chigusa",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/kaede-chigusa.json"
+    },
+    {
+      "id": "actor.kaito-sakashita",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/kaito-sakashita.json"
+    },
+    {
+      "id": "actor.kawauchi-tarou",
+      "display_name": "Kawauchi Tarou",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/kawauchi-tarou.json"
+    },
+    {
+      "id": "actor.kei-shinomiya",
+      "display_name": "Kei Shinomiya",
+      "tier": "FULL_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/kei-shinomiya.json"
+    },
+    {
+      "id": "actor.keiko-mizutani",
+      "display_name": "Keiko Mizutani",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/keiko-mizutani.json"
+    },
+    {
+      "id": "actor.kenji-yamashita",
+      "display_name": "Kenji Yamashita",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/kenji-yamashita.json"
+    },
+    {
+      "id": "actor.kimiko-kyouguchi",
+      "display_name": "Kimiko Kyouguchi",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/kimiko-kyouguchi.json"
+    },
+    {
+      "id": "actor.kuroki",
+      "display_name": "Kuroki",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/kuroki.json"
+    },
+    {
+      "id": "actor.makoto-shibe",
+      "display_name": "Makoto Shibe",
+      "tier": "FULL_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/makoto-shibe.json"
+    },
+    {
+      "id": "actor.manabu",
+      "display_name": "Manabu",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/manabu.json"
+    },
+    {
+      "id": "actor.maria-mizuse",
+      "display_name": "Maria Mizuse",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/maria-mizuse.json"
+    },
+    {
+      "id": "actor.masakazu-shibe",
+      "display_name": "Masakazu Shibe",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/masakazu-shibe.json"
+    },
+    {
+      "id": "actor.michiru-kawashita",
+      "display_name": "Michiru Kawashita",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/michiru-kawashita.json"
+    },
+    {
+      "id": "actor.minami-hudo",
+      "display_name": "Minami Hudo",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/minami-hudo.json"
+    },
+    {
+      "id": "actor.minami-kawakami",
+      "display_name": "Minami Kawakami",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/minami-kawakami.json"
+    },
+    {
+      "id": "actor.mitsu-amari",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/mitsu-amari.json"
+    },
+    {
+      "id": "actor.mitsuru-hanamiya",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/mitsuru-hanamiya.json"
+    },
+    {
+      "id": "actor.momona-hashimoto",
+      "display_name": "Momona Hashimoto",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/momona-hashimoto.json"
+    },
+    {
+      "id": "actor.mr-hiratsuka",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/mr-hiratsuka.json"
+    },
+    {
+      "id": "actor.mrs-hiratsuka",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/mrs-hiratsuka.json"
+    },
+    {
+      "id": "actor.nagi-araya",
+      "display_name": "Nagi Araya",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/nagi-araya.json"
+    },
+    {
+      "id": "actor.natori",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/natori.json"
+    },
+    {
+      "id": "actor.reika-araya",
+      "display_name": "Reika Araya",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/reika-araya.json"
+    },
+    {
+      "id": "actor.reiko-tamae",
+      "display_name": "Reiko Tamae",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/reiko-tamae.json"
+    },
+    {
+      "id": "actor.ren-toujou",
+      "display_name": "Ren Toujou",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/ren-toujou.json"
+    },
+    {
+      "id": "actor.rihito-gouri",
+      "display_name": "Rihito Gouri",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/rihito-gouri.json"
+    },
+    {
+      "id": "actor.ryousuke-ikechi",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/ryousuke-ikechi.json"
+    },
+    {
+      "id": "actor.ryusei-taneda",
+      "display_name": "Ryusei Taneda",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/ryusei-taneda.json"
+    },
+    {
+      "id": "actor.saika-kamishiro",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/saika-kamishiro.json"
+    },
+    {
+      "id": "actor.saori-miyabe",
+      "display_name": "Saori Miyabe",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/saori-miyabe.json"
+    },
+    {
+      "id": "actor.satone-kaidou",
+      "display_name": "Satone Kaidou",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/satone-kaidou.json"
+    },
+    {
+      "id": "actor.shiho-sawaragi",
+      "display_name": "Shiho Sawaragi",
+      "tier": "FULL_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/shiho-sawaragi.json"
+    },
+    {
+      "id": "actor.shinji-shiba",
+      "display_name": "Shinji Shiba",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/shinji-shiba.json"
+    },
+    {
+      "id": "actor.sora-namiragawa",
+      "display_name": "Sora Namiragawa",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/sora-namiragawa.json"
+    },
+    {
+      "id": "actor.taizen-shiba",
+      "display_name": "Taizen Shiba",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/taizen-shiba.json"
+    },
+    {
+      "id": "actor.takeshi-nanri",
+      "display_name": "",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/takeshi-nanri.json"
+    },
+    {
+      "id": "actor.tenji-mikasa",
+      "display_name": "Tenji Mikasa",
+      "tier": "FULL_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/tenji-mikasa.json"
+    },
+    {
+      "id": "actor.tsuchiya",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/tsuchiya.json"
+    },
+    {
+      "id": "actor.tsukasa-kaidou",
+      "display_name": "Tsukasa Kaidou",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/tsukasa-kaidou.json"
+    },
+    {
+      "id": "actor.tsukino",
+      "display_name": "Tsukino",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/tsukino.json"
+    },
+    {
+      "id": "actor.umeko-shirasuna",
+      "display_name": "Umeko Shirasuna",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/umeko-shirasuna.json"
+    },
+    {
+      "id": "actor.wataru-sawaragi",
+      "display_name": "Wataru Sawaragi",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/wataru-sawaragi.json"
+    },
+    {
+      "id": "actor.wataru-ushiroda",
+      "display_name": "Wataru Ushiroda",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/wataru-ushiroda.json"
+    },
+    {
+      "id": "actor.yasushi-mishima",
+      "display_name": "Yasushi Mishima",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/yasushi-mishima.json"
+    },
+    {
+      "id": "actor.yuka-katagiri",
+      "display_name": "",
+      "tier": "MINIMAL_ENTITY",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/yuka-katagiri.json"
+    },
+    {
+      "id": "actor.yutaka-mikasa",
+      "display_name": "Yutaka Mikasa",
+      "tier": "INTERMEDIATE_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/yutaka-mikasa.json"
+    },
+    {
+      "id": "actor.yutori-kokorogi",
+      "display_name": "Yutori Kokorogi",
+      "tier": "FULL_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/yutori-kokorogi.json"
+    },
+    {
+      "id": "actor.yuuichi-katagiri",
+      "display_name": "Yuuichi Katagiri",
+      "tier": "FULL_CANDIDATE",
+      "pack": "data/external-worlds/tomodachi-game/consolidated/characters/yuuichi-katagiri.json"
+    }
+  ],
+  "execution": {
+    "mode": "separate_native_go_experiment",
+    "game": "Kokkuri",
+    "reference_games": 10,
+    "native_games": 1
+  }
+}

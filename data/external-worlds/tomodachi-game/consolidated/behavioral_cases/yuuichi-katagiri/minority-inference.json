@@ -1,0 +1,37 @@
+{
+  "id": "tg.case.yuuichi-katagiri.minority-inference",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "minority inference",
+  "context": "KOKKURI; secondary-source account",
+  "observed_actions": "Notices reactions inconsistent with apparently cooperative answers; inspects the private question-card incentive.",
+  "observed_result": "Infers self-interest may explain the group's surprising outcomes.",
+  "epistemic_limits": "A facial reaction is not proof of individual votes; alternative explanations remain.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://intelscaling.com/items/my-entire-analysis-of-yuuichi-and-tomodachi-game/",
+    "locator": "KOKKURI",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "observation",
+    "epistemics"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. A facial reaction is not proof of individual votes; alternative explanations remain. Allow failure.",
+  "topics": [
+    "strategy",
+    "observation",
+    "epistemics"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.minority-inference"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

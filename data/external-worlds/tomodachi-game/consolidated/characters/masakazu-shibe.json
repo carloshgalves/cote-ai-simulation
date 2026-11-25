@@ -1,0 +1,82 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.masakazu-shibe",
+  "display_name": "Masakazu Shibe",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "Makoto's father; concealed involvement in organization",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "deception": {
+      "behavioral_case_refs": [
+        "tg.case.masakazu-shibe.false-attribution"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.masakazu-shibe.false-attribution"
+      ]
+    },
+    "institution": {
+      "behavioral_case_refs": [
+        "tg.case.masakazu-shibe.false-attribution"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.masakazu-shibe.false-attribution"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.masakazu-shibe.identity"
+      ]
+    },
+    "cognition": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Control of institutional information",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "False accounts and concealment",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "limitations": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Personal motives may conflict with management",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "body": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "No calibrated physical measurements; use population prior.",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Masakazu_Shibe"
+  ],
+  "historical_context_only": true,
+  "uncertainties": [
+    "No direct manga audit; behavioral transfer is probabilistic"
+  ],
+  "generation_policy": "One pack per actor; append sourced cases",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only; strip narrative details before agent context",
+    "contextual_facts": "require acquisition",
+    "post_divergence_memory": "simulation events only"
+  },
+  "fidelity_eval": {
+    "anti_case": "Boss identity restricted until acquired"
+  }
+}

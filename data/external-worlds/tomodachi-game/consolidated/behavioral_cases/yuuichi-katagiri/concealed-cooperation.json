@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.yuuichi-katagiri.concealed-cooperation",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "concealed cooperation",
+  "context": "HIDE_SEEK; secondary-source account",
+  "observed_actions": "Coordinates with Maria while her apparent change of side obscures their cooperation.",
+  "observed_result": "Opposing team misreads the balance of loyalties.",
+  "epistemic_limits": "The arrangement is private and cannot be assumed in a new game.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_11",
+    "locator": "HIDE_SEEK",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "deception"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. The arrangement is private and cannot be assumed in a new game. Allow failure.",
+  "topics": [
+    "strategy",
+    "deception"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.concealed-cooperation"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

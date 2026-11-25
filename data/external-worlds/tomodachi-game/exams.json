@@ -1,0 +1,216 @@
+{
+  "schema_version": "tg-exam-corpus-v0",
+  "exams": [
+    {
+      "exam_id": "tg.exam.kokkuri-san",
+      "display_name": "Kokkuri-san",
+      "stage": "regular",
+      "chapter_range": [
+        1,
+        3
+      ],
+      "participants": "Group C",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/%22Kokkuri-San%22_Game",
+        "https://www.reddit.com/r/TomodachiGame/comments/1gh0zsm"
+      ],
+      "mechanic_summary": "Collective answers to questions under hidden disagreement; cooperation reduces debt, betrayal may redistribute it.",
+      "private_information": "Private debt and individual intentions",
+      "action_phase_sketch": "Question, simultaneous answer, resolve, advance",
+      "unresolved_mechanics": "Exact coin movement and penalty table require reconstruction.",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "runtime_ready": false,
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
+    },
+    {
+      "exam_id": "tg.exam.backbiting-sugoroku",
+      "display_name": "Backbiting Sugoroku",
+      "stage": "regular",
+      "chapter_range": [
+        4,
+        11
+      ],
+      "participants": "Group C",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Backbiting_Sugoroku",
+        "https://www.reddit.com/r/TomodachiGame/comments/1gh0zsm"
+      ],
+      "mechanic_summary": "Anonymous accusations and audience judgments affect board progression; reaching the end first carries adverse debt consequences.",
+      "private_information": "Authorship and truth of accusations",
+      "action_phase_sketch": "Submit accusation, reveal, audience judgment, movement",
+      "unresolved_mechanics": "Exact movement and false accusation rules require extraction.",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "runtime_ready": false,
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
+    },
+    {
+      "exam_id": "tg.exam.hide-and-seek",
+      "display_name": "Friendship Hide-and-Seek",
+      "stage": "regular",
+      "chapter_range": [
+        12,
+        20
+      ],
+      "participants": "Groups C and K",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Friendship_Hide-And-Seek",
+        "https://www.reddit.com/r/TomodachiGame/comments/1gh0zsm"
+      ],
+      "mechanic_summary": "Teams assign a hidden player and seekers; protection, surrender and discovery determine contest outcome.",
+      "private_information": "Hider location and private team plans",
+      "action_phase_sketch": "Choose hider, search, communicate, surrender or resolve discovery",
+      "unresolved_mechanics": "Source reports 2 million yen prize; full transfer/deadline rules pending.",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "runtime_ready": false,
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
+    },
+    {
+      "exam_id": "tg.exam.fake-game",
+      "display_name": "Fake Tomodachi Game",
+      "stage": "unofficial",
+      "chapter_range": [
+        21,
+        25
+      ],
+      "participants": "Group C / external antagonist",
+      "source_documents": [
+        "https://www.reddit.com/r/TomodachiGame/comments/1gh0zsm"
+      ],
+      "mechanic_summary": "Unofficial coercive imitation, not a sanctioned examination.",
+      "private_information": "Organizer legitimacy",
+      "action_phase_sketch": "Narrative scenario only",
+      "unresolved_mechanics": "Do not place in official progression.",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "runtime_ready": false,
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
+    },
+    {
+      "exam_id": "tg.exam.friend-sin-trial",
+      "display_name": "Friend-Sin Trial",
+      "stage": "regular",
+      "chapter_range": [
+        26,
+        34
+      ],
+      "participants": "Group C",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Friend-Sin_Trial",
+        "https://www.reddit.com/r/TomodachiGame/comments/1gh0zsm"
+      ],
+      "mechanic_summary": "Trial-like examination tests testimony, loyalty and willingness to support accused participant.",
+      "private_information": "Witness motives and private evidence",
+      "action_phase_sketch": "Hear testimony, evaluate claims, choose support, resolve",
+      "unresolved_mechanics": "Exact financial and voting thresholds pending.",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "runtime_ready": false,
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
+    },
+    {
+      "exam_id": "tg.exam.friends-prison",
+      "display_name": "Friend's Prison Game",
+      "stage": "adult",
+      "chapter_range": [
+        35,
+        47
+      ],
+      "participants": "Adult contestants",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Friend%27s_Prison_Game",
+        "https://www.reddit.com/r/TomodachiGame/comments/1gh0zsm"
+      ],
+      "mechanic_summary": "Confinement-based cooperation and betrayal contest; escape and collective decisions affect progression.",
+      "private_information": "Private plans and individual incentives",
+      "action_phase_sketch": "Coordinate, negotiate, perform permitted game actions, resolve escape",
+      "unresolved_mechanics": "Exact labor, voting and escape rules pending.",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "runtime_ready": false,
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
+    },
+    {
+      "exam_id": "tg.exam.all-bet",
+      "display_name": "All Bet",
+      "stage": "adult",
+      "chapter_range": [
+        48,
+        65
+      ],
+      "participants": "Adult contestants",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/All_Bet",
+        "https://www.reddit.com/r/TomodachiGame/comments/1gh0zsm"
+      ],
+      "mechanic_summary": "Participants negotiate and create wagers to accumulate money; agreed game terms govern outcomes.",
+      "private_information": "Private bankroll and strategies as defined by subgame",
+      "action_phase_sketch": "Propose wager, accept, escrow, resolve, settle",
+      "unresolved_mechanics": "Each subgame needs separate deterministic rule contract.",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "runtime_ready": false,
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
+    },
+    {
+      "exam_id": "tg.exam.friend-murder",
+      "display_name": "Friend Murder Game",
+      "stage": "adult",
+      "chapter_range": [
+        66,
+        87
+      ],
+      "participants": "Adult contestants",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://www.reddit.com/r/TomodachiGame/comments/1gh0zsm"
+      ],
+      "mechanic_summary": "Competitive elimination scenario with shifting alliances and survival incentives.",
+      "private_information": "Private alliances and participant knowledge",
+      "action_phase_sketch": "Form alliances, select permitted contest actions, resolve elimination",
+      "unresolved_mechanics": "Exact elimination and scoring mechanisms pending.",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "runtime_ready": false,
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
+    },
+    {
+      "exam_id": "tg.exam.friendless",
+      "display_name": "The Friendless Game",
+      "stage": "adult",
+      "chapter_range": [
+        88,
+        127
+      ],
+      "participants": "Final contestants",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game",
+        "https://www.reddit.com/r/TomodachiGame/comments/1gh0zsm"
+      ],
+      "mechanic_summary": "Individually disclosed rules, passwords, tasks and exclusion decisions produce final selection.",
+      "private_information": "Individual instructions, passwords, boss identity",
+      "action_phase_sketch": "Deliver private rules, submit permitted task actions, vote, resolve",
+      "unresolved_mechanics": "Source reports 4.5 billion yen prize; full phase and task contract pending.",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "runtime_ready": false,
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
+    },
+    {
+      "exam_id": "tg.exam.friendship-janken",
+      "display_name": "Friendship Janken",
+      "stage": "bonus",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Tomodachi_Game"
+      ],
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "runtime_ready": false,
+      "mechanic_summary": "Bonus chapter game, separate from main sequence.",
+      "unresolved_mechanics": "Full rules and provenance pending.",
+      "reference_runtime": "runtime/resolver.mjs"
+    }
+  ],
+  "status": "LEGACY_DISCOVERY_INDEX; consolidated/exams and runtime are authoritative for reference execution"
+}

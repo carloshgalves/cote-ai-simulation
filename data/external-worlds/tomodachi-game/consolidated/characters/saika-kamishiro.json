@@ -1,0 +1,38 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.saika-kamishiro",
+  "display_name": "Saika Kamishiro",
+  "modeling_tier": "MINIMAL_ENTITY",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "Cult leader and All Bet team leader",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.saika-kamishiro.identity"
+      ]
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Saika_Kamishiro"
+  ],
+  "historical_context_only": false,
+  "uncertainties": [
+    "Limited secondary evidence"
+  ],
+  "generation_policy": "One pack per actor",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only",
+    "contextual_facts": "require acquisition"
+  }
+}

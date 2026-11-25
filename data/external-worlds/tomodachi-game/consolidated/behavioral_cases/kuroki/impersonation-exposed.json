@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.kuroki.impersonation-exposed",
+  "actor_id": "actor.kuroki",
+  "primary_actor_id": "actor.kuroki",
+  "title": "impersonation exposed",
+  "context": "Unofficial game relies on apparent organizational authority.",
+  "observed_actions": "Poses as administrator and is later confronted by genuine staff.",
+  "observed_result": "False authority is exposed.",
+  "epistemic_limits": "No actual authority over official game rules.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_12",
+    "locator": "FAKE_GAME",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "deception",
+    "risk_management"
+  ],
+  "information_available": "Unofficial game relies on apparent organizational authority.",
+  "counterfactual_test": "A rival can make unsupported institutional claims in a private contest. May attempt misleading presentation; independent verification can expose it. Reject: Grants himself administrator privileges.",
+  "topics": [
+    "deception",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "tg.ev.kuroki.impersonation-exposed"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A rival can make unsupported institutional claims in a private contest.",
+    "expected_tendency": "May attempt misleading presentation; independent verification can expose it.",
+    "anti_case": "Grants himself administrator privileges.",
+    "canon_outcome_as_instruction": false
+  }
+}

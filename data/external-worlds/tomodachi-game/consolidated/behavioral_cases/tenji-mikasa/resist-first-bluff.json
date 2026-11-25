@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.tenji-mikasa.resist-first-bluff",
+  "actor_id": "actor.tenji-mikasa",
+  "primary_actor_id": "actor.tenji-mikasa",
+  "title": "resist first bluff",
+  "context": "Opponent claims to know the identity of a hidden participant.",
+  "observed_actions": "Does not immediately reveal himself under an unsupported challenge.",
+  "observed_result": "Avoids exposure during that particular attempt.",
+  "epistemic_limits": "Later confession does not imply earlier inability to detect bluff.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://mangagift.com/%E6%BC%AB%E7%94%BB%E3%80%8C%E3%83%88%E3%83%A2%E3%83%80%E3%83%81%E3%82%B2%E3%83%BC%E3%83%A0%E3%80%8D%E3%81%AE%E3%81%82%E3%82%89%E3%81%99%E3%81%98%EF%BC%88%E3%83%8D%E3%82%BF%E3%83%90%E3%83%AC%EF%BC%89/",
+    "locator": "SUGOROKU",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "epistemics",
+    "self_control"
+  ],
+  "information_available": "Opponent claims to know the identity of a hidden participant.",
+  "counterfactual_test": "A rival declares that it has proof but provides none. Separates signal from evidence, keeps private information until incentives change. Reject: Confesses immediately because canonical identity is known to the reader.",
+  "topics": [
+    "epistemics",
+    "self_control"
+  ],
+  "evidence_refs": [
+    "tg.ev.tenji-mikasa.resist-first-bluff"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": true,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A rival declares that it has proof but provides none.",
+    "expected_tendency": "Separates signal from evidence, keeps private information until incentives change.",
+    "anti_case": "Confesses immediately because canonical identity is known to the reader.",
+    "canon_outcome_as_instruction": false
+  }
+}

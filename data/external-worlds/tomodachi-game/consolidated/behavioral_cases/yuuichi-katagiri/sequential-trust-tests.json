@@ -1,0 +1,48 @@
+{
+  "id": "tg.case.yuuichi-katagiri.sequential-trust-tests",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "sequential trust tests",
+  "context": "Private card submission and hidden authorship; uncertain number of collaborators.",
+  "observed_actions": "Uses sequential private checks with classmates before committing to a public accusation.",
+  "observed_result": "Narrows suspects and gains a basis for confronting Tenji.",
+  "epistemic_limits": "Each check constrains only the hypotheses it can distinguish; collusion may defeat it.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_6",
+    "locator": "SUGOROKU",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "observation",
+    "strategy",
+    "cooperation"
+  ],
+  "information_available": "Private card submission and hidden authorship; uncertain number of collaborators.",
+  "counterfactual_test": "Four agents share inconsistent information; a private authenticated channel exists, but one agent may be colluding. Designs bounded tests and treats matching evidence as provisional. Reject: Reads all agents' private messages or uses the manga's culprit identity.",
+  "topics": [
+    "observation",
+    "strategy",
+    "cooperation"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.sequential-trust-tests"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": true,
+    "information_calibration": true,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "Four agents share inconsistent information; a private authenticated channel exists, but one agent may be colluding.",
+    "expected_tendency": "Designs bounded tests and treats matching evidence as provisional.",
+    "anti_case": "Reads all agents' private messages or uses the manga's culprit identity.",
+    "canon_outcome_as_instruction": false
+  }
+}

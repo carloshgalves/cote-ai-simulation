@@ -1,0 +1,120 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.kei-shinomiya",
+  "display_name": "Kei Shinomiya",
+  "modeling_tier": "FULL_CANDIDATE",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "Younger strategic talent in opposing team",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "observation": {
+      "behavioral_case_refs": [
+        "tg.case.kei-shinomiya.detect-side-change",
+        "tg.case.kei-shinomiya.exploit-opponent-observation",
+        "tg.case.kei-shinomiya.revise-after-ambush"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kei-shinomiya.detect-side-change",
+        "tg.ev.kei-shinomiya.exploit-opponent-observation",
+        "tg.ev.kei-shinomiya.revise-after-ambush"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [
+        "tg.case.kei-shinomiya.detect-side-change",
+        "tg.case.kei-shinomiya.exploit-opponent-observation",
+        "tg.case.kei-shinomiya.underestimate-team-values"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kei-shinomiya.detect-side-change",
+        "tg.ev.kei-shinomiya.exploit-opponent-observation",
+        "tg.ev.kei-shinomiya.underestimate-team-values"
+      ],
+      "description": "Can revise alliances after observing competence",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "motivation": {
+      "behavioral_case_refs": [
+        "tg.case.kei-shinomiya.enter-adult-game",
+        "tg.case.kei-shinomiya.compete-despite-disadvantage"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kei-shinomiya.enter-adult-game",
+        "tg.ev.kei-shinomiya.compete-despite-disadvantage"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "tg.case.kei-shinomiya.enter-adult-game",
+        "tg.case.kei-shinomiya.revise-after-ambush",
+        "tg.case.kei-shinomiya.compete-despite-disadvantage"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kei-shinomiya.enter-adult-game",
+        "tg.ev.kei-shinomiya.revise-after-ambush",
+        "tg.ev.kei-shinomiya.compete-despite-disadvantage"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.kei-shinomiya.identity"
+      ]
+    },
+    "cognition": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Deduction, contingency planning, coordination",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "limitations": {
+      "behavioral_case_refs": [
+        "tg.case.kei-shinomiya.underestimate-team-values"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kei-shinomiya.underestimate-team-values"
+      ],
+      "description": "Limited information and dependence on teammates",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "body": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "No calibrated physical measurements; use population prior.",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "deception": {
+      "behavioral_case_refs": [
+        "tg.case.kei-shinomiya.exploit-opponent-observation"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kei-shinomiya.exploit-opponent-observation"
+      ]
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Kei_Shinomiya"
+  ],
+  "historical_context_only": false,
+  "uncertainties": [
+    "No direct manga audit; behavioral transfer is probabilistic"
+  ],
+  "generation_policy": "One pack per actor; append sourced cases",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only; strip narrative details before agent context",
+    "contextual_facts": "require acquisition",
+    "post_divergence_memory": "simulation events only"
+  },
+  "fidelity_eval": {
+    "anti_case": "No automatic knowledge of Yuuichi's intentions"
+  }
+}

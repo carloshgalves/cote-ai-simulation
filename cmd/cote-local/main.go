@@ -25,6 +25,9 @@ import (
 //go:embed index.html
 var page []byte
 
+//go:embed tomodachi-catalog.json
+var tomodachiCatalog []byte
+
 func main() {
 	provider:=flag.String("provider","ollama","ollama, groq, custom or ui")
 	configDir,configErr:=os.UserConfigDir();if configErr!=nil{log.Fatal(configErr)}
@@ -135,6 +138,8 @@ func main() {
 		w.Header().Set("Content-Disposition","attachment; filename=cote-relatorio.zip")
 		_,_=w.Write(data)
 	})
+	catalog,packs,err:=loadTomodachiCatalog();if err!=nil{log.Fatal(err)}
+	registerTomodachiEndpoints(mux,catalog,packs)
 	mux.HandleFunc("GET /api/state",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Snapshot())})
 	mux.HandleFunc("GET /api/progress",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Progress())})
 	mux.HandleFunc("POST /api/cancel",func(w http.ResponseWriter,r *http.Request){

@@ -1,0 +1,22 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.tg.fake-game",
+  "name": "fake-game",
+  "authority": "SECONDARY_REFERENCE_WITH_SEPARATE_EXECUTABLE_MODEL",
+  "source_coverage": [
+    "https://tomodachi-game.fandom.com/wiki/Episode_12"
+  ],
+  "runtime_model": "data/external-worlds/tomodachi-game/runtime/resolver.mjs",
+  "parameters": {
+    "source": "Episode_12",
+    "rounds": 1,
+    "model": [
+      "unofficial optional symbolic RPS encounter; no injury execution; no official debt progression"
+    ]
+  },
+  "not_canon": [
+    "unofficial optional symbolic RPS encounter; no injury execution; no official debt progression"
+  ],
+  "execution_scope": "STANDALONE_REFERENCE_ONLY",
+  "native_csf_registered": false
+}

@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.chisato-hashiratani.guard-food",
+  "actor_id": "actor.chisato-hashiratani",
+  "primary_actor_id": "actor.chisato-hashiratani",
+  "title": "guard food",
+  "context": "HIDE_SEEK; secondary-source account",
+  "observed_actions": "Helps monitor the shared food station with a teammate.",
+  "observed_result": "Supports team coordination around provisioning.",
+  "epistemic_limits": "No claim of knowing the rival hiding place.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Chisato_Hashiratani",
+    "locator": "HIDE_SEEK",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "resources",
+    "cooperation"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. No claim of knowing the rival hiding place. Allow failure.",
+  "topics": [
+    "resources",
+    "cooperation"
+  ],
+  "evidence_refs": [
+    "tg.ev.chisato-hashiratani.guard-food"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

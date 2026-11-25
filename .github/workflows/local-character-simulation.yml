@@ -18,7 +18,7 @@ concurrency:
 jobs:
   pilot:
     runs-on: ubuntu-24.04
-    timeout-minutes: 35
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v6
         with:
@@ -39,3 +39,8 @@ jobs:
         env:
           COTE_COST_BENCHMARK: "1"
         run: go test -v -count=1 -timeout=12m ./internal/pilot -run '^TestPilotCostQualityBenchmark$'
+      - name: Current V16 longitudinal stack validation
+        if: ${{ always() && !cancelled() }}
+        env:
+          COTE_V16_STACK_EVAL: "1"
+        run: go test -v -count=1 -timeout=12m ./internal/pilot -run '^TestV16StackLongitudinal$'

@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.yuuichi-katagiri.failed-early-accusation",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "failed early accusation",
+  "context": "Suspected insider; insufficient discriminating evidence.",
+  "observed_actions": "Tests a suspicion with an early bluff that does not expose Tenji.",
+  "observed_result": "Initial attempt fails; more discriminating evidence is necessary.",
+  "epistemic_limits": "Reassess after failure rather than retroactively making all failures deliberate.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://mangagift.com/%E6%BC%AB%E7%94%BB%E3%80%8C%E3%83%88%E3%83%A2%E3%83%80%E3%83%81%E3%82%B2%E3%83%BC%E3%83%A0%E3%80%8D%E3%81%AE%E3%81%82%E3%82%89%E3%81%99%E3%81%98%EF%BC%88%E3%83%8D%E3%82%BF%E3%83%90%E3%83%AC%EF%BC%89/",
+    "locator": "SUGOROKU",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "epistemics",
+    "strategy"
+  ],
+  "information_available": "Suspected insider; insufficient discriminating evidence.",
+  "counterfactual_test": "A suspected insider ignores an accusation designed to provoke a reaction. Updates uncertainty; seeks an independent test. Reject: Declares the unresponsive suspect guilty or pretends the failure was guaranteed.",
+  "topics": [
+    "epistemics",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.failed-early-accusation"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": true,
+    "information_calibration": true,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A suspected insider ignores an accusation designed to provoke a reaction.",
+    "expected_tendency": "Updates uncertainty; seeks an independent test.",
+    "anti_case": "Declares the unresponsive suspect guilty or pretends the failure was guaranteed.",
+    "canon_outcome_as_instruction": false
+  }
+}

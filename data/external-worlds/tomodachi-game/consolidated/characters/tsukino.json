@@ -1,0 +1,66 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.tsukino",
+  "display_name": "Tsukino",
+  "modeling_tier": "MINIMAL_ENTITY",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "Observer and staff member",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.tsukino.identity"
+      ]
+    },
+    "cognition": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Monitors games and contestant behavior",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Administrative rather than contestant incentives",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "limitations": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Bound by role and disclosed rules",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "body": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "No calibrated physical measurements; use population prior.",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Tsukino"
+  ],
+  "historical_context_only": false,
+  "uncertainties": [
+    "No actor-owned demonstrated case yet"
+  ],
+  "generation_policy": "One pack per actor; append sourced cases",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only; strip narrative details before agent context",
+    "contextual_facts": "require acquisition",
+    "post_divergence_memory": "simulation events only"
+  },
+  "fidelity_eval": {
+    "anti_case": "No arbitrary outcome override"
+  }
+}

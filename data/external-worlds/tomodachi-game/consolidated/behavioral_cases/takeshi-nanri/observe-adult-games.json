@@ -1,0 +1,41 @@
+{
+  "id": "tg.case.takeshi-nanri.observe-adult-games",
+  "actor_id": "actor.takeshi-nanri",
+  "primary_actor_id": "actor.takeshi-nanri",
+  "title": "observe adult games",
+  "context": "Assigned oversight of a ship and later island game.",
+  "observed_actions": "Performs observation duties.",
+  "observed_result": "Role gives bounded access to game events.",
+  "epistemic_limits": "No power to arbitrarily settle a wager.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Takeshi_Nanri",
+    "locator": "ALL_BET",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "institution",
+    "observation"
+  ],
+  "information_available": "Assigned oversight of a ship and later island game.",
+  "counterfactual_test": "A trusted host assigns an observer to a single contest. Keeps observations and rule authority scoped. No power to arbitrarily settle a wager.",
+  "topics": [
+    "institution",
+    "observation"
+  ],
+  "evidence_refs": [
+    "tg.ev.takeshi-nanri.observe-adult-games"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "transfer": {
+    "scenario": "A trusted host assigns an observer to a single contest.",
+    "expected_tendency": "Keeps observations and rule authority scoped.",
+    "anti_case": "No power to arbitrarily settle a wager.",
+    "canon_outcome_as_instruction": false
+  }
+}

@@ -1,0 +1,3 @@
+# V16 stack evaluation
+
+A dedicated opt-in 24-hour two-seed trajectory checks current opportunity delivery, staff meal/sleep and absence of terminal collapse, transition invariants, qualitative body projection and exact replay. Use `COTE_V16_STACK_EVAL=1 go test -v -count=1 -timeout=12m ./internal/pilot -run '^TestV16StackLongitudinal$'`. CI runs it even if an earlier historical evaluation fails. The V9 witness remains active: seed b previously failed endogenous-only initiative, and must not be described as passing. This harness measures considered opportunities, not actual proactivity or dialogue quality. No real provider used. V16 results NOT_RUN until CI or local evidence.

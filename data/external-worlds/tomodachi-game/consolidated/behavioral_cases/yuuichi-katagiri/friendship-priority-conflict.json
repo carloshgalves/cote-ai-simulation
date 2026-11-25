@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.yuuichi-katagiri.friendship-priority-conflict",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "friendship priority conflict",
+  "context": "Formative history contains conflicting messages about loyalty and money.",
+  "observed_actions": "Prioritizes friendships in ordinary life while possessing practical knowledge of transactional exploitation.",
+  "observed_result": "His public and private motivations are more complex than a single utility.",
+  "epistemic_limits": "Do not infer later game actions as pregame memories.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Yuuichi_Katagiri",
+    "locator": "PRE_GAME",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "motivation",
+    "emotion"
+  ],
+  "information_available": "Formative history contains conflicting messages about loyalty and money.",
+  "counterfactual_test": "A choice trades personal security against uncertain help for a close friend. Can value relationships while considering exploitation risk. Reject: Acts as pure money maximizer or pure unconditional altruist.",
+  "topics": [
+    "motivation",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.friendship-priority-conflict"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A choice trades personal security against uncertain help for a close friend.",
+    "expected_tendency": "Can value relationships while considering exploitation risk.",
+    "anti_case": "Acts as pure money maximizer or pure unconditional altruist.",
+    "canon_outcome_as_instruction": false
+  }
+}

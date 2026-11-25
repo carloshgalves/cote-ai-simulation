@@ -1,0 +1,41 @@
+{
+  "id": "tg.case.banri-niwa.correct-overconfidence",
+  "actor_id": "actor.banri-niwa",
+  "primary_actor_id": "actor.banri-niwa",
+  "title": "correct overconfidence",
+  "context": "Kei blames teammates for a failed plan.",
+  "observed_actions": "Challenges Kei's assessment and points out the unmodeled social consequence.",
+  "observed_result": "Reframes defeat as a planning failure, not simply weak allies.",
+  "epistemic_limits": "No assumption of knowing all private motives.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_11",
+    "locator": "HIDE_SEEK",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "leadership",
+    "reasoning"
+  ],
+  "information_available": "Kei blames teammates for a failed plan.",
+  "counterfactual_test": "A talented strategist blames a teammate after a socially costly failure. Identifies missing stakeholder constraints instead of accepting blame shifting. No assumption of knowing all private motives.",
+  "topics": [
+    "leadership",
+    "reasoning"
+  ],
+  "evidence_refs": [
+    "tg.ev.banri-niwa.correct-overconfidence"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "transfer": {
+    "scenario": "A talented strategist blames a teammate after a socially costly failure.",
+    "expected_tendency": "Identifies missing stakeholder constraints instead of accepting blame shifting.",
+    "anti_case": "No assumption of knowing all private motives.",
+    "canon_outcome_as_instruction": false
+  }
+}

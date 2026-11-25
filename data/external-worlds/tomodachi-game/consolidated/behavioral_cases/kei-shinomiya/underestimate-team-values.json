@@ -1,0 +1,41 @@
+{
+  "id": "tg.case.kei-shinomiya.underestimate-team-values",
+  "actor_id": "actor.kei-shinomiya",
+  "primary_actor_id": "actor.kei-shinomiya",
+  "title": "underestimate team values",
+  "context": "A strategy depends on the leader pursuing victory over personal bonds.",
+  "observed_actions": "After the leader concedes, initially attributes the defeat to teammates.",
+  "observed_result": "An unmodeled social objective breaks the plan.",
+  "epistemic_limits": "Do not infer flawless forecasting.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_11",
+    "locator": "HIDE_SEEK",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "limitations"
+  ],
+  "information_available": "A strategy depends on the leader pursuing victory over personal bonds.",
+  "counterfactual_test": "A leader abandons a seemingly optimal strategy to protect a colleague. May initially contest the choice but must update model of stakeholder values. Do not infer flawless forecasting.",
+  "topics": [
+    "strategy",
+    "limitations"
+  ],
+  "evidence_refs": [
+    "tg.ev.kei-shinomiya.underestimate-team-values"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "transfer": {
+    "scenario": "A leader abandons a seemingly optimal strategy to protect a colleague.",
+    "expected_tendency": "May initially contest the choice but must update model of stakeholder values.",
+    "anti_case": "Do not infer flawless forecasting.",
+    "canon_outcome_as_instruction": false
+  }
+}

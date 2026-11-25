@@ -1,0 +1,48 @@
+{
+  "id": "tg.case.yuuichi-katagiri.costly-rule-bluff",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "costly rule bluff",
+  "context": "Repeated failed questions; personal benefit from negative outcomes; rule violation costs personal debt.",
+  "observed_actions": "Challenges the assumed incentive structure publicly at his own expense, changing how peers evaluate self-interest.",
+  "observed_result": "Group eventually clears; the bluff's efficacy depends on credibility.",
+  "epistemic_limits": "Compare group and personal payoffs, account for own cost and model how others respond; never assume authority changed a rule.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_2",
+    "locator": "KOKKURI",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "risk_management",
+    "economy"
+  ],
+  "information_available": "Repeated failed questions; personal benefit from negative outcomes; rule violation costs personal debt.",
+  "counterfactual_test": "A novel five-agent resource game rewards individual defection but punishes collective failure; speaking carries a cost. May accept a personal penalty to coordinate a change in incentives if expected benefit exceeds it. Reject: Claims unilateral ability to change rules or blindly sacrifices resources.",
+  "topics": [
+    "strategy",
+    "risk_management",
+    "economy"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.costly-rule-bluff"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": true,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A novel five-agent resource game rewards individual defection but punishes collective failure; speaking carries a cost.",
+    "expected_tendency": "May accept a personal penalty to coordinate a change in incentives if expected benefit exceeds it.",
+    "anti_case": "Claims unilateral ability to change rules or blindly sacrifices resources.",
+    "canon_outcome_as_instruction": false
+  }
+}

@@ -78,18 +78,20 @@ function render(){
 function renderRoutes(){
  $("route-status").textContent=routes.length?routes.filter(r=>r.enabled).length+" rota(s) habilitada(s) · "+(routes.find(r=>r.status==="consultando")?.model||"fallback por prioridade"):"Nenhuma rota configurada";
  if(!$("settings-dialog").open)return;
- const sig=JSON.stringify([routes,routeBusy]);if(sig===routeSignature)return;routeSignature=sig;
+ const sig=JSON.stringify([routes,routeBusy,busy,running]);if(sig===routeSignature)return;routeSignature=sig;
  $("routes").replaceChildren();
  for(const [i,r] of routes.entries()){
  const row=node("div",undefined,"route"),description=node("div"),actions=node("div",undefined,"route-actions");
  const blocked=Date.parse(r.retry_at)>Date.now();
- description.append(node("strong",(i+1)+". "+(presets[r.provider]?.[0]||r.provider)+" · "+r.model),node("p",(r.enabled?r.status:"Desativada")+(blocked?" · nova tentativa após "+new Date(r.retry_at).toLocaleTimeString():""),blocked?"pending":"muted"),node("small",(r.has_key?"Chave configurada":"Sem chave")+" · "+r.format));
- for(const [op,label] of [["up","↑"],["down","↓"],["toggle",r.enabled?"Desativar":"Ativar"],["remove","Remover"]]){const b=node("button",label);b.disabled=routeBusy||(op==="up"&&i===0)||(op==="down"&&i===routes.length-1);b.onclick=()=>routeAction({action:op,id:r.id});actions.append(b)}
+ description.append(node("strong",(i+1)+". "+(presets[r.provider]?.[0]||r.provider)+" · "+r.model),node("p",(r.enabled?r.status:"Desativada")+(blocked?" · nova tentativa após "+new Date(r.retry_at).toLocaleTimeString():""),blocked?"pending":"muted"),node("small",(r.has_key?"Chave configurada":"Sem chave")+" · "+(r.effective_format||r.format)));
+ if(r.attempts)description.append(node("p",r.attempts+" consultas · "+r.accepted+" decisões válidas"+(r.last_latency_ms?" · última "+(r.last_latency_ms/1000).toFixed(1)+" s":""),"muted"));
+ if(r.last_error&&r.last_error!==r.status)description.append(node("p","Último erro: "+r.last_error,"error"));
+ for(const [op,label] of [["up","↑"],["down","↓"],["test","Testar"],["toggle",r.enabled?"Desativar":"Ativar"],["remove","Remover"]]){const b=node("button",label);b.disabled=routeBusy||(op==="test"&&(busy||running||blocked))||(op==="up"&&i===0)||(op==="down"&&i===routes.length-1);b.onclick=()=>{if(op==="test"&&!confirm("Testar este modelo com uma geração curta? Pode consumir cota."))return;routeAction({action:op,id:r.id})};actions.append(b)}
  row.append(description,actions);$("routes").append(row)
  }
  if(!routes.length)$("routes").append(node("p","Adicione pelo menos um modelo para iniciar.","muted"))
 }
-async function routeAction(data){if(routeBusy)return;routeBusy=true;routeRevision++;modelControls();$("settings-error").textContent="";try{routes=await post("/api/routes",data);if(data.action==="save")$("save-status").textContent="Configuração gravada localmente.";else $("save-status").textContent="Alterações em memória.";if(data.action==="add"){$("key").value="";invalidateCatalog("Chave cadastrada. Informe uma chave para consultar outro catálogo.")}}catch(e){$("settings-error").textContent=e.message;$("settings-error").className="error"}finally{routeBusy=false;renderRoutes();controls();modelControls()}}
+async function routeAction(data){if(routeBusy)return;routeBusy=true;routeRevision++;modelControls();$("settings-error").textContent="";try{routes=await post("/api/routes",data);if(data.action==="save")$("save-status").textContent="Configuração gravada localmente.";else if(data.action==="test"){$("settings-error").textContent="Teste concluído; consulte o estado e as métricas da rota.";$("settings-error").className="muted"}else $("save-status").textContent="Alterações em memória.";if(data.action==="add"){$("key").value="";invalidateCatalog("Chave cadastrada. Informe uma chave para consultar outro catálogo.")}}catch(e){$("settings-error").textContent=e.message;$("settings-error").className="error"}finally{routeBusy=false;renderRoutes();controls();modelControls()}}
 async function poll(){if(polling)return;polling=true;const revision=routeRevision;try{const [p,r]=await Promise.all([api("/api/progress"),api("/api/routes")]);progress=p;if(!routeBusy&&revision===routeRevision)routes=r;renderProgress();renderRoutes()}catch{}finally{polling=false}}
 setInterval(poll,1000);
 async function step(){if(busy||!snapshot)return false;busy=true;controls();status("Consultando personagens…");try{snapshot=await post("/api/step",{round:snapshot.state.round});render();status(snapshot.done?"Manhã concluída.":"Ciclo salvo.");return true}catch(e){running=false;try{snapshot=await api("/api/state");render()}catch{}status(e.message,e.message!=="context canceled");return false}finally{busy=false;await poll();controls()}}
@@ -123,7 +125,7 @@ async function discover(){
  if(rev!==catalogRevision)return;
  catalogModels=result.models||[];$("catalog-model").replaceChildren(new Option("Selecione um modelo",""));
  for(const m of catalogModels){
-  const label=(m.name===m.id?m.id:m.name+" · "+m.id)+(m.price_hint?" · "+m.price_hint:"");
+  const label=(m.recommended?"Sugestão · ":"")+(m.name===m.id?m.id:m.name+" · "+m.id)+(m.price_hint?" · "+m.price_hint:"");
   $("catalog-model").append(new Option(label,m.id))
  }
  $("catalog-status").textContent=catalogModels.length?catalogModels.length+" modelos encontrados"+(result.partial?" (catálogo parcial)":"")+". Listagem não confirma cota nem gratuidade.":"Nenhum modelo de texto encontrado. Use o modo manual se necessário.";

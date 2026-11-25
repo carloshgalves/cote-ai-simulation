@@ -98,6 +98,9 @@ func decodeLocalChoice(view Context,raw []byte)(Decision,error) {
 	if err:=json.Unmarshal(raw,&fields);err!=nil||fields==nil{return Decision{},responseError{"JSON da decisão ilegível"}}
 	var c localChoice
 	if json.Unmarshal(fields["choice"],&c.Choice)!=nil{return Decision{},responseError{"campo choice ausente ou inválido"}}
+	// Normalize superficial casing/spacing only; never substitute an action.
+	c.Choice=strings.ToLower(strings.TrimSpace(c.Choice))
+	if left,right,ok:=strings.Cut(c.Choice,":");ok{c.Choice=strings.TrimSpace(left)+":"+strings.TrimSpace(right)}
 	if raw,ok:=fields["text"];ok{_ = json.Unmarshal(raw,&c.Text)}
 	if raw,ok:=fields["reason"];ok{_ = json.Unmarshal(raw,&c.Reason)}
 	var d Decision
@@ -147,6 +150,7 @@ type providerError struct {
 	Status int
 	RetryAt time.Time
 	Message string
+	FormatRejected bool
 }
 func (e providerError) Error() string {return e.Message}
 func retryAt(header string,now time.Time) time.Time {
@@ -159,9 +163,12 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	raw,err:=json.Marshal(struct{Context;Options []offeredAction `json:"options"`}{view,offeredActions(view)});if err!=nil{return zero,err}
 	prompt:="Interprete somente self em Classroom of the Elite. Use personalidade, objetivos atuais, plano, fatos vividos e hipóteses. Não use acontecimentos futuros nem segredos alheios. Escolha um ID de options que ajude um objetivo ou responda a uma novidade; não repita observação sem informação nova. Esperar é legítimo se não houver motivo para agir. Explique em reason, em primeira pessoa e uma ou duas frases, a intenção ficcional específica do personagem: o que deseja obter, testar, evitar ou descobrir. Não narre fatos novos nem raciocínio detalhado. Se talk, text é a fala real dirigida ao destinatário; para outras ações deixe text vazio. Responda JSON com choice, reason, text. Não copie exemplos nem invente IDs."
 	prompt+=" Todos os seis alunos deste cenário são do primeiro ano, colegas da mesma série; a classe não indica senioridade. Não chame o destinatário de senpai, sempai, veterano ou superior por ser de outra turma. Use nome, sobrenome, -san ou -kun conforme a personalidade. Não introduza relações de autoridade não estabelecidas."
+	choices:=[]string{}
+	for _, option:=range offeredActions(view){choices=append(choices,option.ID)}
+	prompt+=" IDs autorizados, copie exatamente um: "+strings.Join(choices," | ")+"."
 	if problem=="" {
 		prompt+=" Opcionalmente adicione beliefs [{text,evidence,confidence (0-100)}], goal {replace,with,evidence}, plan {steps,evidence} ou relation {person,delta (-1 ou 1),evidence}. Evidência deve ser ID da própria memória; omita campos sem fundamento. Uma fala recebida é alegação, não fato."
-	} else {prompt+=" A resposta anterior foi rejeitada: "+problem+". Retorne apenas choice, reason e text se conversar."}
+	} else {prompt+=" A resposta anterior foi rejeitada: "+problem+". Retorne um único objeto JSON com choice (um dos IDs autorizados), reason (uma frase em primeira pessoa) e text (fala se talk, caso contrário vazio). Não acrescente outros campos."}
 	format:=map[string]any{"type":"json_object"}
 	u,_:=url.Parse(m.Endpoint)
 	local:=u!=nil && has([]string{"127.0.0.1","localhost","::1"},u.Hostname())
@@ -201,9 +208,15 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	if err!=nil{return zero,errors.New("modelo indisponível ou timeout")}
 	defer res.Body.Close()
 	if res.StatusCode==400 {
-		var problem struct{Error struct{Code string `json:"code"`} `json:"error"`}
-		if json.NewDecoder(io.LimitReader(res.Body,64<<10)).Decode(&problem)==nil&&problem.Error.Code=="json_validate_failed"{return zero,responseError{"provedor não conseguiu gerar JSON válido"}}
-		return zero,providerError{Status:400,Message:"provedor rejeitou a configuração da consulta (HTTP 400)"}
+		// Inspect provider error only for known categories; never echo arbitrary
+		// bodies, which can include credentials or generated character content.
+		raw,_:=io.ReadAll(io.LimitReader(res.Body,64<<10))
+		lower:=strings.ToLower(string(raw))
+		if strings.Contains(lower,"json_validate_failed"){return zero,responseError{"provedor não conseguiu gerar JSON válido"}}
+		formatRejected:=strings.Contains(lower,"response_format")||strings.Contains(lower,"responseformat")||strings.Contains(lower,"json_schema")||strings.Contains(lower,"response_mime_type")||strings.Contains(lower,"responsemimetype")||strings.Contains(lower,"json mode")
+		message:="provedor rejeitou a configuração da consulta (HTTP 400)"
+		if formatRejected{message="provedor rejeitou o formato JSON (HTTP 400)"}else if strings.Contains(lower,"model")&&(strings.Contains(lower,"not supported")||strings.Contains(lower,"not found")||strings.Contains(lower,"unsupported")){message="modelo incompatível com o endpoint (HTTP 400)"}
+		return zero,providerError{Status:400,Message:message,FormatRejected:formatRejected}
 	}
 	if res.StatusCode==429{return zero,providerError{Status:429,RetryAt:retryAt(res.Header.Get("Retry-After"),time.Now()),Message:"limite de requisições do provedor (HTTP 429)"}}
 	if res.StatusCode==401||res.StatusCode==403{return zero,providerError{Status:res.StatusCode,Message:"chave de API ausente, inválida ou sem permissão"}}
@@ -221,8 +234,10 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 		Message struct{Content string `json:"content"`} `json:"message"`
 		FinishReason string `json:"finish_reason"`
 	} `json:"choices"`}
-	if err:=json.Unmarshal(data,&envelope);err!=nil||len(envelope.Choices)!=1||
-		!has([]string{"stop",""},envelope.Choices[0].FinishReason){return zero,responseError{"modelo não produziu uma resposta completa"}}
+	if err:=json.Unmarshal(data,&envelope);err!=nil||len(envelope.Choices)!=1{return zero,responseError{"resposta HTTP 200 sem uma escolha reconhecível"}}
+	if envelope.Choices[0].FinishReason=="length"{return zero,responseError{"resposta truncada pelo limite de tokens"}}
+	if !has([]string{"stop",""},envelope.Choices[0].FinishReason){return zero,responseError{"modelo terminou sem completar a decisão"}}
+	if strings.TrimSpace(envelope.Choices[0].Message.Content)==""{return zero,responseError{"resposta HTTP 200 sem conteúdo textual"}}
 	return decodeLocalChoice(view,unwrapJSON(envelope.Choices[0].Message.Content))
 }
 

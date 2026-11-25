@@ -101,6 +101,7 @@ func main() {
 		case "add":_,err=router.Add(input.Route)
 		case "remove","up","down","toggle":err=router.Change(input.ID,input.Action)
 		case "save":err=router.Save(*routesPath)
+		case "test":_,err=router.Test(r.Context(),input.ID)
 		default:err=errors.New("unknown route action")
 		}
 		if err!=nil{fail(w,400,err);return};reply(w,200,router.Routes())

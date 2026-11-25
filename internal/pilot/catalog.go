@@ -17,6 +17,7 @@ type CatalogModel struct {
 	ID string `json:"id"`
 	Name string `json:"name"`
 	PriceHint string `json:"price_hint,omitempty"`
+	Recommended bool `json:"recommended,omitempty"`
 }
 type ModelCatalog struct {
 	Models []CatalogModel `json:"models"`
@@ -82,7 +83,7 @@ func discoverModels(ctx context.Context,in RouteInput,client *http.Client)(Model
 		add:=func(id,name,hint string){
 			if !validText(id,200){return}
 			if !validText(name,250){name=id}
-			models[id]=CatalogModel{ID:id,Name:name,PriceHint:hint}
+			models[id]=CatalogModel{ID:id,Name:name,PriceHint:hint,Recommended:recommendedModel(in.Provider,id)}
 		}
 		next:=""
 		if in.Provider=="gemini"{
@@ -118,6 +119,7 @@ func discoverModels(ctx context.Context,in RouteInput,client *http.Client)(Model
 	sort.Slice(out.Models,func(i,j int)bool{
 		a,b:=out.Models[i],out.Models[j]
 		if (a.PriceHint!="")!=(b.PriceHint!=""){return a.PriceHint!=""}
+		if a.Recommended!=b.Recommended{return a.Recommended}
 		return strings.ToLower(a.ID)<strings.ToLower(b.ID)
 	})
 	return out,nil
@@ -128,4 +130,13 @@ func nonChatModel(id string)bool{
 		if strings.Contains(id,term){return true}
 	}
 	return false
+}
+
+func recommendedModel(provider,id string)bool{
+	id=strings.ToLower(id)
+	switch provider{
+	case "groq":return id=="qwen/qwen3.8-27b"
+	case "gemini":return strings.HasPrefix(id,"gemini-")&&strings.Contains(id,"flash")&&!strings.Contains(id,"preview")&&!nonChatModel(id)
+	default:return false
+	}
 }

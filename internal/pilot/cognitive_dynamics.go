@@ -41,6 +41,7 @@ func advanceBodies(j Journal,s *State,previous int64){
   e,h,f:=1,1,1
   if kind=="move"||kind=="task"&&target=="exercise:"{e=3;h=3;f=4}
   if kind=="task"&&target=="rest:"{f=-3}
+  if j.Version>=AutonomyVersion&&kind=="task"&&target=="relax:"{f=-2}
   if kind=="task"&&target=="sleep:"{e=0;h=0;f=-3}
   m.Body.Energy=clampMeter(old.Energy-e*dt)
   m.Body.Hydration=clampMeter(old.Hydration-h*dt)

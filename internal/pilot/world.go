@@ -96,7 +96,7 @@ func pay(s *State,from,to string,amount int64,category,cause string)bool{
  return true
 }
 var shopPrices=map[string]int64{"notebook":300,"pen":100,"snack":200,"water":100}
-func isWorldAction(a string)bool{return has([]string{"buy","transfer","study","lesson","eat","rest","sleep","exercise","recreation","use","work","invite","accept","decline","attend","guess"},a)}
+func isWorldAction(a string)bool{return has([]string{"buy","transfer","study","lesson","eat","rest","sleep","exercise","recreation","read","relax","socialize","use","work","invite","accept","decline","attend","guess"},a)}
 func schoolView(j Journal,s State,id string)*SchoolView{
  m:=s.Minds[id]
  v:=&SchoolView{Wallet:m.Wallet,Inventory:clone(m.Inventory),Meetings:[]Meeting{},Rules:[]string{"PP próprios persistem; o motor é autoridade sobre transações. Não há despesa obrigatória.","Regras completas da escola ainda não foram divulgadas."},Options:[]offeredAction{}}
@@ -127,6 +127,11 @@ func schoolView(j Journal,s State,id string)*SchoolView{
  if m.Location=="cafeteria"{add("eat","free");if m.Wallet>=500{add("eat","paid")}}
  if m.Location=="dormitory-"+id{add("rest","");if v.Period=="repouso"{add("sleep","")}}
  if m.Location=="gym"||m.Location=="park"{add("exercise","")}
+ if j.Version>=AutonomyVersion{
+  if m.Location=="library"{add("read","")}
+  if m.Location=="park"||m.Location=="courtyard"{add("relax","")}
+  if m.Location=="courtyard"{add("socialize","")}
+ }
  if m.Location=="mall"&&m.Wallet>=800{add("recreation","")}
  for _,item:=range []string{"snack","water"}{if m.Inventory[item]>0{add("use",item)}}
  for _,other:=range ids(j.Profiles){
@@ -190,6 +195,7 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
   case "rest":duration=60;kind="task"
   case "sleep":duration=480-s.Minute%1440;if duration<=0{duration+=1440};kind="task"
   case "exercise":duration=30;kind="task"
+  case "read","relax","socialize":duration=20;kind="task"
   case "recreation":duration=40;kind="task";pay(s,id,"school",800,"event","Atividade de lazer");m=s.Minds[id]
   case "use":
    if m.Inventory[d.Target]>0{m.Inventory[d.Target]--;if j.Version>=CognitionVersion&&m.Body!=nil{if d.Target=="water"{m.Body.Hydration=clampMeter(m.Body.Hydration+250)}else{m.Body.Energy=clampMeter(m.Body.Energy+200)}};appendEvent(s,Event{Kind:"task",Actor:id,Text:"Consumiu "+d.Target,Audience:[]string{id}})}
@@ -211,6 +217,14 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
    }}
   case "guess": // resolved as one cohort below
   }
+  // A routine segment must not overrun a public period or an upcoming
+  // accepted appointment's departure window. Sleep spans midnight.
+  if j.Version>=AutonomyVersion&&c.Decision.Source==routineSource&&kind=="task"&&d.Action!="sleep"&&d.Action!="attend"{
+   boundary:=nextPublicSchedule(s.Minute)
+   if at:=nextCommitmentDeparture(j,before,id);at>before.Minute&&at<boundary{boundary=at}
+   // Meals, paid leisure and consumption are indivisible effects.
+   if d.Action!="eat"&&d.Action!="recreation"&&boundary>s.Minute&&s.Minute+duration>boundary{duration=boundary-s.Minute}
+  }
   m.Activity=&Activity{Kind:kind,Target:d.Action+":"+d.Target,Until:s.Minute+duration};s.Minds[id]=m
  }
  settleGuesses(j,before,s,choices)
@@ -218,7 +232,9 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
 func completeTask(j Journal,s *State,id string,m *Mind,a *Activity){
  m.WakeReason="Atividade concluída"
  if j.Version>=CognitionVersion&&m.Body!=nil&&strings.HasPrefix(a.Target,"eat:"){m.Body.Energy=clampMeter(m.Body.Energy+450);m.Body.Hydration=clampMeter(m.Body.Hydration+350)}
- appendEvent(s,Event{Kind:"task",Actor:id,Text:"Concluiu "+a.Target,Audience:[]string{id}})
+ text:="Concluiu "+a.Target
+ if j.Version>=AutonomyVersion&&a.Target=="socialize:"{text="Permaneceu em área de convivência"}
+ appendEvent(s,Event{Kind:"task",Actor:id,Text:text,Audience:[]string{id}})
  if strings.HasPrefix(a.Target,"attend:"){
   for i,mt:=range s.World.Meetings{if mt.ID==strings.TrimPrefix(a.Target,"attend:")&&mt.Status=="accepted"&&s.Minute<=mt.At+15&&m.Location==mt.Location{
    if mt.Host==id{mt.HostAttended=true;if j.Version>=CognitionVersion{mt.HostAttendanceStart=a.Until-5}}else if mt.Guest==id{mt.GuestAttended=true;if j.Version>=CognitionVersion{mt.GuestAttendanceStart=a.Until-5}}

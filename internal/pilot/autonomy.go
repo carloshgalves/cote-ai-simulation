@@ -57,12 +57,20 @@ func initiativeDue(j Journal,s State,id string) bool {
  return minute>=900+int64(h[1]%60)&&minute<1080
 }
 
+// The historical scheduler counted staff opportunities too. Keep accounting
+// distinct from the V8/V9 student-only endogenous routing predicate.
+func initiativeAccountingDue(j Journal,s State,id string)bool{
+ if j.Version<AutonomyVersion{return lightInitiativeDue(s,id)}
+ return initiativeDue(j,s,id)
+}
+
 func nextCommitmentDeparture(j Journal,s State,id string) int64 {
  if s.World==nil{return 0}
  at:=int64(0)
  m:=s.Minds[id]
  for _,mt:=range s.World.Meetings{
   if mt.Status!="accepted"||(mt.Host!=id&&mt.Guest!=id)||mt.At<=s.Minute{continue}
+  if mt.Host==id&&mt.HostAttended||mt.Guest==id&&mt.GuestAttended{continue}
   travel:=walkMinutes(m.Location,mt.Location)
   if m.Location==mt.Location{travel=0}
   depart:=mt.At-travel
@@ -82,6 +90,7 @@ func autonomousRoutine(j Journal,s State,id string) Decision {
   d.WaitMinutes=int(minutes);return d
  }
  if m.NextDeliberation>s.Minute{return waitFor(m.NextDeliberation-s.Minute)}
+ if at:=nextCommitmentDeparture(j,s,id);at>s.Minute&&at-s.Minute<60{d.WaitMinutes=int(at-s.Minute)}
  v:=Context{Location:m.Location,Locations:worldLocations(id),School:schoolView(j,s,id)}
  projectPopulation(j,s,id,&v)
  offered:=func(action,target string)bool{
@@ -105,7 +114,7 @@ func autonomousRoutine(j Journal,s State,id string) Decision {
  if meeting!=nil{
   travel:=walkMinutes(m.Location,meeting.Location)
   if m.Location==meeting.Location{travel=0}
-  if s.Minute+travel>=meeting.At&&s.Minute+travel<=meeting.At+10{
+  if s.Minute+travel>=meeting.At-15&&s.Minute+travel<=meeting.At+10{
    if travel>0&&has(v.Locations,meeting.Location){return choose("move",meeting.Location)}
   }
   if travel==0&&meeting.At>s.Minute&&meeting.At-s.Minute<=15{return waitFor(meeting.At-s.Minute)}
@@ -143,7 +152,7 @@ func autonomousRoutine(j Journal,s State,id string) Decision {
   // prior, not a canonical spending habit. Preserve an ample balance.
   day:=s.Minute/1440+1
   h:=sha256.Sum256([]byte(fmt.Sprintf("%s/pilot-v9/leisure/%s/%d",j.WorldSeed,id,day)))
-  if m.LastRoutinePurchaseDay!=day&&m.Wallet>=10000&&h[0]%7==0&&s.Minute%1440<1020{
+  if m.LastRoutinePurchaseDay!=day&&m.Wallet>=10000&&h[0]%7==0&&s.Minute%1440<1020&&(meeting==nil||meeting.At-s.Minute>60){
    return goOr("mall","recreation","")
   }
   switch personalPrior(j,s,id).leisure{
@@ -169,8 +178,18 @@ func completeSharedLeisure(j Journal,s *State){
  }
  for i,a:=range groups{
   for _,b:=range groups[i+1:]{
-   recordExchange(s,a,b)
-   appendEvent(s,Event{Kind:"social",Actor:a,Target:b,Text:"Compartilharam tempo de convivência no pátio.",Audience:[]string{a,b}})
+   day:=s.Minute/1440+1
+   if s.Minds[a].Social[b].LastSharedLeisureDay==day{continue}
+   for _,pair:=range [][2]string{{a,b},{b,a}}{
+    m:=s.Minds[pair[0]]
+    if m.Social==nil{m.Social=map[string]SocialBond{}}
+    bond:=m.Social[pair[1]]
+    bond.SharedLeisureDays++
+    bond.LastSharedLeisureDay=day
+    m.Social[pair[1]]=bond
+    s.Minds[pair[0]]=m
+   }
+   appendEvent(s,Event{Kind:"social",Actor:a,Target:b,Text:"Estiveram no pátio durante uma atividade de convivência no mesmo período.",Audience:[]string{a,b}})
   }
  }
 }

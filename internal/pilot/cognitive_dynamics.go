@@ -15,6 +15,8 @@ type SocialBond struct{
  Fulfilled int `json:"fulfilled"`
  Missed int `json:"missed"`
  LastMinute int64 `json:"last_minute"`
+ SharedLeisureDays int `json:"shared_leisure_days,omitempty"`
+ LastSharedLeisureDay int64 `json:"last_shared_leisure_day,omitempty"`
 }
 func clampMeter(x int)int{if x<0{return 0};if x>1000{return 1000};return x}
 func recognizes(j Journal,id,other string)bool{for _,f:=range j.Identities[id].Background{if f.Person==other{return true}};return false}

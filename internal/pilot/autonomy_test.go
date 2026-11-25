@@ -48,8 +48,11 @@ func TestAutonomySharedLeisurePrivacyAndCompletion(t *testing.T){
  }
  completeSharedLeisure(j,&s)
  a:=s.Minds["hirata"].Social["kushida"];b:=s.Minds["kushida"].Social["hirata"]
- if a.Interactions!=1||b.Interactions!=1||a.Trust!=0||b.Trust!=0{t.Fatal("invalid social effects")}
- if s.Minds["ryuen"].Social["hirata"].Interactions!=0{t.Fatal("uncompleted task counted")}
+ if a.SharedLeisureDays!=1||b.SharedLeisureDays!=1||a.Interactions!=0||b.Interactions!=0||a.Trust!=0||b.Trust!=0{t.Fatal("invalid social effects")}
+ if s.Minds["ryuen"].Social["hirata"].SharedLeisureDays!=0{t.Fatal("uncompleted task counted")}
+ count:=len(s.Events)
+ completeSharedLeisure(j,&s)
+ if len(s.Events)!=count||s.Minds["hirata"].Social["kushida"].SharedLeisureDays!=1{t.Fatal("duplicated shared leisure")}
  for _,e:=range visible(s,"ryuen"){if e.Kind=="social"{t.Fatal("private encounter leaked")}}
 }
 func TestAutonomyNewAndLegacyJournalsReplay(t *testing.T){
@@ -67,4 +70,35 @@ func TestAutonomyNewAndLegacyJournalsReplay(t *testing.T){
  prior:=old.Snapshot();old.Close()
  old,err=OpenAutonomy(legacyPath,"test",model);if err!=nil{t.Fatal(err)};defer old.Close()
  if old.Snapshot().Version!=SelectiveVersion||!reflect.DeepEqual(prior,old.Snapshot()){t.Fatal("legacy save migrated")}
+}
+
+
+func TestAutonomyLegacyStaffAccounting(t *testing.T){
+ j:=populationJournal(t)
+ s,err:=initial(j);if err!=nil{t.Fatal(err)}
+ s.Minute=900
+ id:="sae-chiyabashira"
+ m:=s.Minds[id];m.Tier=LightTier;m.Activity=nil;s.Minds[id]=m
+ if !decisionNeedsModel(j,s,id){t.Fatal("legacy staff opportunity missing")}
+ choices:=[]Chosen{}
+ for _,actor:=range eligibleActors(j,s){
+  d:=routineDecision(j,s,actor)
+  if decisionNeedsModel(j,s,actor){d=Decision{Action:"wait"}}
+  choices=append(choices,Chosen{Actor:actor,Decision:d})
+ }
+ next,err:=scheduledAdvance(j,s,choices);if err!=nil{t.Fatal(err)}
+ if next.Minds[id].LastLightInitiativeDay!=1{t.Fatal("legacy staff initiative accounting changed")}
+}
+
+func TestAutonomyEarlyCommitmentDeparture(t *testing.T){
+ j:=autonomyJournal(t);s,err:=initial(j);if err!=nil{t.Fatal(err)}
+ s.Minute=960
+ id:="kushida"
+ m:=s.Minds[id];m.Location="hall";m.PendingStimulus="";s.Minds[id]=m
+ s.World.Meetings=[]Meeting{{ID:"meeting-1",Host:id,Guest:"hirata",Status:"accepted",Location:"library",At:976}}
+ d:=routineDecision(j,s,id)
+ if d.Action!="move"||d.Target!="library"{t.Fatal("missed early travel opportunity",d)}
+ m.Location="library";s.Minds[id]=m;s.Minute=964
+ d=routineDecision(j,s,id)
+ if d.Action!="wait"||d.WaitMinutes!=12{t.Fatal("did not wait at accepted appointment",d)}
 }

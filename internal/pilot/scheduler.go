@@ -115,7 +115,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		m.Activity=&Activity{Kind:"move",Target:d.Target,Until:s.Minute+walkMinutes(m.Location,d.Target)}
 		out.Minds[x.Actor]=m
 		appendEvent(&out,Event{Kind:"departure",Actor:x.Actor,Target:d.Target,Text:"Partiu de "+m.Location+" para "+d.Target,Audience:[]string{x.Actor}})
-		for _,id:=range ids(j.Profiles){if id!=x.Actor&&s.Minds[id].Location==m.Location&&(s.Minds[id].Activity==nil||s.Minds[id].Activity.Kind!="move"){appendEvent(&out,Event{Kind:"observation",Actor:x.Actor,Text:"Saiu de "+m.Location,Audience:[]string{id}});wakeOnMovement(j,&out,id,x.Actor,"Um colega saiu do ambiente")}}
+		if j.Version>=ObservationVersion{publishMovementObservation(j,&out,s,x.Actor,m.Location,false)}else{for _,id:=range ids(j.Profiles){if id!=x.Actor&&s.Minds[id].Location==m.Location&&(s.Minds[id].Activity==nil||s.Minds[id].Activity.Kind!="move"){appendEvent(&out,Event{Kind:"observation",Actor:x.Actor,Text:"Saiu de "+m.Location,Audience:[]string{id}});wakeOnMovement(j,&out,id,x.Actor,"Um colega saiu do ambiente")}}}
 	}}
 	// Rotate priority to avoid systematic alphabetical advantage.
 	for i:=0;i<len(order);i++{
@@ -188,7 +188,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	for _,id:=range arrivals{
 		m:=out.Minds[id]
 		appendEvent(&out,Event{Kind:"arrival",Actor:id,Target:m.Location,Text:"Chegou a "+m.Location,Audience:[]string{id}})
-		for _,other:=range ids(j.Profiles){if other==id{continue};p:=out.Minds[other];if p.Location==m.Location&&(p.Activity==nil||p.Activity.Kind!="move"){appendEvent(&out,Event{Kind:"observation",Actor:id,Text:"Chegou a "+m.Location,Audience:[]string{other}});wakeOnMovement(j,&out,other,id,"Um colega chegou ao ambiente")}}
+		if j.Version>=ObservationVersion{publishMovementObservation(j,&out,out,id,m.Location,true)}else{for _,other:=range ids(j.Profiles){if other==id{continue};p:=out.Minds[other];if p.Location==m.Location&&(p.Activity==nil||p.Activity.Kind!="move"){appendEvent(&out,Event{Kind:"observation",Actor:id,Text:"Chegou a "+m.Location,Audience:[]string{other}});wakeOnMovement(j,&out,other,id,"Um colega chegou ao ambiente")}}}
 	}
 	for _,id:=range ids(j.Profiles){
 		m:=out.Minds[id];a:=m.Activity

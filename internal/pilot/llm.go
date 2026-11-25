@@ -181,7 +181,7 @@ func retryAt(header string,now time.Time) time.Time {
 }
 func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (Decision,error) {
 	var zero Decision
-	raw,err:=json.Marshal(struct{Context;Options []offeredAction `json:"options"`}{view,offeredActions(view)});if err!=nil{return zero,err}
+	raw,err:=modelContextPayload(view);if err!=nil{return zero,err}
 	prompt:="Interprete somente self em Classroom of the Elite. Use personalidade, objetivos atuais, plano, fatos vividos e hipóteses. Não use acontecimentos futuros nem segredos alheios. Escolha um ID de options que ajude um objetivo ou responda a uma novidade; não repita observação sem informação nova. Esperar é legítimo se não houver motivo para agir. Explique em reason, em primeira pessoa e uma ou duas frases, a intenção ficcional específica do personagem: o que deseja obter, testar, evitar ou descobrir. Não narre fatos novos nem raciocínio detalhado. Se talk, text é a fala real dirigida ao destinatário; para outras ações deixe text vazio. Responda JSON com choice, reason, text. Não copie exemplos nem invente IDs."
 	if view.Version>=PopulationVersion{prompt+=" population contém função e ano; consulte a função de self antes de decidir. Professores devem cumprir sua responsabilidade pedagógica e funcionários devem manter o serviço de sua estação; não são alunos, não competem em exames nem inventam sanções, notas ou autoridades. Estudantes consideram aulas, refeições, descanso e interesses próprios. Professores são sensei, alunos de anos superiores podem ser senpai. Perfis provisórios não autorizam memórias futuras. Não invente efeitos institucionais."}else{prompt+=" Todos os seis alunos deste cenário são do primeiro ano, colegas da mesma série; a classe não indica senioridade. Não chame o destinatário de senpai, sempai, veterano ou superior por ser de outra turma. Use nome, sobrenome, -san ou -kun conforme a personalidade. Não introduza relações de autoridade não estabelecidas."}
 	prompt+=" Escreva reason, text e toda cognição em português brasileiro. Não presuma materiais, reuniões, cargos ou presença de pessoas que o contexto não estabelece."
@@ -193,7 +193,12 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	for _, option:=range offeredActions(view){choices=append(choices,option.ID)}
 	if view.Version>=MotivationVersion&&view.Opportunity!=nil{prompt+=" opportunity indica uma ocasião concreta para um objetivo seu, não uma obrigação de agir. Considere agir mesmo sem ameaça ou novidade estratégica; se decidir esperar, fundamente em obstáculos concretos. Não invente resultados ou conhecimentos. "}
 	if view.Version>=VeteranVersion&&view.SchoolYear>1{prompt+=" Você é veterano; a chegada de ingressantes não é sua própria matrícula. Use a experiência institucional disponível, sem inventar episódios, relações ou resultados de anos anteriores. "}
-	prompt+=" IDs autorizados, copie exatamente um: "+strings.Join(choices," | ")+"."
+	if view.Version>=CompactContextVersion{
+  prompt=strings.ReplaceAll(prompt,"population contém função e ano; consulte a função de self antes de decidir.","people contém cadastro com função e ano (self também consta da lista); consulte sua função antes de decidir.")
+  prompt=strings.ReplaceAll(prompt,"body contém energia, hidratação e fadiga (0–1000), não poderes ou desempenho garantido.","interoception contém sensações corporais qualitativas próprias, não telemetria, poderes ou desempenho garantido.")
+  prompt=strings.ReplaceAll(prompt,"tarefas e opções executáveis","tarefas; options contém as opções executáveis")
+  prompt+=" options contém todos os IDs autorizados; copie exatamente um, sem criar alternativas."
+ }else{prompt+=" IDs autorizados, copie exatamente um: "+strings.Join(choices," | ")+"."}
 	if problem=="" {
 		prompt+=" Opcionalmente adicione beliefs [{text,evidence,confidence (0-100)}], goal {replace,with,evidence}, plan {steps,evidence} ou relation {person,delta (-1 ou 1),evidence}. Evidência deve ser ID da própria memória; omita campos sem fundamento. Uma fala recebida é alegação, não fato."
 	} else {prompt+=" A resposta anterior foi rejeitada: "+problem+". Retorne um único objeto JSON com choice (um dos IDs autorizados), reason (uma frase em primeira pessoa) e text (fala se talk, caso contrário vazio). Não acrescente outros campos."}

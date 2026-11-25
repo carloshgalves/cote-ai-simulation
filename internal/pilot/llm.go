@@ -47,6 +47,40 @@ func decodeStrict[T any](raw []byte) (T,error) {
 // A schema constrains local Ollama output before parsing; validation still owns effects.
 const decisionSchema = `{"type":"object","additionalProperties":false,"required":["action","target","text","reason","beliefs","goal","relation","plan"],"properties":{"action":{"type":"string","enum":["wait","observe","move","talk"]},"target":{"type":"string"},"text":{"type":"string","maxLength":800},"reason":{"type":"string","minLength":1,"maxLength":300},"beliefs":{"type":"array","maxItems":3,"items":{"type":"object","additionalProperties":false,"required":["text","evidence","confidence"],"properties":{"text":{"type":"string","maxLength":300},"evidence":{"type":"string"},"confidence":{"type":"integer","minimum":0,"maximum":100}}}},"goal":{"anyOf":[{"type":"null"},{"type":"object","additionalProperties":false,"required":["replace","with","evidence"],"properties":{"replace":{"type":"string"},"with":{"type":"string","maxLength":180},"evidence":{"type":"string"}}}]},"relation":{"anyOf":[{"type":"null"},{"type":"object","additionalProperties":false,"required":["person","delta","evidence"],"properties":{"person":{"type":"string"},"delta":{"type":"integer","enum":[-1,1]},"evidence":{"type":"string"}}}]},"plan":{"anyOf":[{"type":"null"},{"type":"object","additionalProperties":false,"required":["steps","evidence"],"properties":{"steps":{"type":"array","maxItems":5,"items":{"type":"string","maxLength":180}},"evidence":{"type":"string"}}}]}}}`
 
+// Restrict identifiers to the actor's actual context, not arbitrary model inventions.
+func localDecisionSchema(view Context) (json.RawMessage,error) {
+	var schema map[string]any
+	if err:=json.Unmarshal([]byte(decisionSchema),&schema);err!=nil{return nil,err}
+	props:=schema["properties"].(map[string]any)
+	targets:=[]string{""}
+	for _, location:=range view.Locations {if location!=view.Location{targets=append(targets,location)}}
+	for _, person:=range view.Present {targets=append(targets,person.ID)}
+	props["target"].(map[string]any)["enum"]=targets
+	actions:=[]string{"wait","observe"}
+	if len(view.Locations)>1{actions=append(actions,"move")}
+	if len(view.Present)>0{actions=append(actions,"talk")}
+	props["action"].(map[string]any)["enum"]=actions
+	// In the pilot there is always at least one addressed announcement.
+	evidenceIDs:=[]string{}
+	for _, e:=range view.Memory {evidenceIDs=append(evidenceIDs,e.ID)}
+	if len(evidenceIDs)>0 {
+		beliefProps:=props["beliefs"].(map[string]any)["items"].(map[string]any)["properties"].(map[string]any)
+		beliefProps["evidence"].(map[string]any)["enum"]=evidenceIDs
+		for _, name:=range []string{"goal","plan","relation"}{
+			obj:=props[name].(map[string]any)["anyOf"].([]any)[1].(map[string]any)["properties"].(map[string]any)
+			obj["evidence"].(map[string]any)["enum"]=evidenceIDs
+			if name=="goal"&&len(view.Goals)>0{obj["replace"].(map[string]any)["enum"]=view.Goals}
+			if name=="relation" {
+				people:=[]string{}
+				for _, p:=range view.People {people=append(people,p.ID)}
+				if len(people)>0{obj["person"].(map[string]any)["enum"]=people}
+			}
+		}
+	}
+	raw,err:=json.Marshal(schema)
+	return json.RawMessage(raw),err
+}
+
 type responseError struct{ message string }
 func (e responseError) Error() string {return e.message}
 
@@ -67,7 +101,8 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	format:=map[string]any{"type":"json_object"}
 	u,_:=url.Parse(m.Endpoint)
 	if u!=nil && has([]string{"127.0.0.1","localhost","::1"},u.Hostname()) {
-		format=map[string]any{"type":"json_schema","json_schema":map[string]any{"name":"decision","strict":true,"schema":json.RawMessage(decisionSchema)}}
+		schema,err:=localDecisionSchema(view);if err!=nil{return zero,err}
+		format=map[string]any{"type":"json_schema","json_schema":map[string]any{"name":"decision","strict":true,"schema":schema}}
 	}
 	payload:=struct{
 		Model string `json:"model"`

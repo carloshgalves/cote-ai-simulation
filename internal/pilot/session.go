@@ -167,6 +167,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 		for attempt:=1;attempt<=3;attempt++ {
 			if err:=ctx.Err();err!=nil{return Snapshot{},err}
 			s.mu.Lock()
+			if ctx.Err()!=nil{s.mu.Unlock();return Snapshot{},ctx.Err()}
 			s.progress.Actor=id;s.progress.Attempt=attempt;s.progress.ActorStartedAt=time.Now();s.progress.LastError=problem
 			s.mu.Unlock()
 			if attempt==1 {d,err=s.model.Decide(ctx,view)} else {
@@ -183,8 +184,9 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 			_,repairable:=s.model.(interface{Repair(context.Context,Context,string)(Decision,error)})
 			if !repairable||!retryable||attempt==3{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
 		}
-		r.Choices=append(r.Choices,Chosen{Actor:id,Decision:d})
-		s.pending=append(s.pending,Chosen{Actor:id,Decision:d})
+		chosen:=Chosen{Actor:id,Decision:clone(d)}
+		r.Choices=append(r.Choices,chosen)
+		s.pending=append(s.pending,chosen)
 		s.mu.Lock();s.progress.Completed=len(r.Choices);s.progress.LastError="";s.mu.Unlock()
 	}
 	next,err:=apply(journal,state,r);if err!=nil{return Snapshot{},err}

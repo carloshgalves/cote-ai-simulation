@@ -12,6 +12,7 @@ import (
 	"strings"
 	"sync/atomic"
 	"testing"
+	"time"
 )
 
 type modelFunc func(context.Context, Context) (Decision,error)
@@ -125,7 +126,7 @@ func TestHTTPRepairKeepsCompletedActorsAndProgress(t *testing.T) {
 	s,err:=Open(filepath.Join(t.TempDir(),"run.json"),"test",model);if err!=nil{t.Fatal(err)};defer s.Close()
 	done:=make(chan error,1)
 	go func(){_,err:=s.Step(context.Background(),0);done<-err}()
-	<-seen
+	select{case <-seen:case <-time.After(5*time.Second):close(release);t.Fatal("model never reached Horikita")}
 	p:=s.Progress()
 	if !p.Active||p.Actor!="horikita"||p.Completed!=2||s.Snapshot().State.Round!=0{t.Error("incorrect live progress")}
 	close(release)
@@ -144,10 +145,25 @@ func TestCanceledRoundRetainsOnlyValidatedChoices(t *testing.T){
 	s,err:=Open(filepath.Join(t.TempDir(),"run.json"),"test",m);if err!=nil{t.Fatal(err)};defer s.Close()
 	done:=make(chan error,1)
 	go func(){_,err:=s.Step(context.Background(),0);done<-err}()
-	<-started
+	select{case <-started:case <-time.After(5*time.Second):t.Fatal("model never started second actor")}
 	if !s.Cancel(1){t.Error("cancel rejected")}
 	if err:=<-done;err==nil{t.Fatal("canceled step committed")}
 	if s.Snapshot().State.Round!=0||s.Progress().Completed!=1{t.Fatal("partial state or lost valid decision")}
 	if _,err:=s.Step(context.Background(),0);err!=nil{t.Fatal(err)}
 	if calls.Load()!=7||s.Snapshot().State.Round!=1{t.Fatal("failed to resume cached decisions")}
+}
+
+func TestLocalSchemaLimitsIdentifiersToCurrentContext(t *testing.T){
+	j:=Journal{Version:Version,Model:"test"}
+	j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	s,err:=initial(j);if err!=nil{t.Fatal(err)}
+	m:=s.Minds["horikita"];m.Location="library";s.Minds["horikita"]=m
+	view:=actorContext(j,s,"horikita")
+	raw,err:=localDecisionSchema(view);if err!=nil{t.Fatal(err)}
+	var schema map[string]any
+	if err:=json.Unmarshal(raw,&schema);err!=nil{t.Fatal(err)}
+	props:=schema["properties"].(map[string]any)
+	targets:=props["target"].(map[string]any)["enum"].([]any)
+	for _,v:=range targets {if v=="ryuen"||v=="library"{t.Fatal("schema permitted inaccessible target")}}
+	for _,v:=range props["action"].(map[string]any)["enum"].([]any){if v=="talk"{t.Fatal("schema permitted conversation without recipient")}}
 }

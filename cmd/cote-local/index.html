@@ -22,7 +22,12 @@ function status(text,error=false){$("status").textContent=text;$("status").class
 async function api(url,options){const r=await fetch(url,options);const result=await r.json();if(!r.ok)throw Error(result.error||"Falha de comunicação");return result}
 function controls(){const done=snapshot&&snapshot.state.round>=snapshot.limit;$("run").disabled=running||busy||done||!snapshot;$("pause").disabled=!running;$("step").disabled=running||busy||done||!snapshot;$("cancel").disabled=!busy||!progress?.active||progress.phase==="canceling"||progress.phase==="saving"}
 function renderProgress(){
- const p=progress;if(!p?.active){$("progress").textContent=p?.completed>0&&p.round>snapshot?.state.round?("Decisões válidas guardadas nesta sessão: "+p.completed+"/"+p.total+". Próxima tentativa continua do ponto de falha."):"";controls();return}
+ const p=progress;if(!p?.active){
+ const pending=p?.completed>0&&p.round>snapshot?.state.round;
+ $("progress").textContent=pending?("Decisões válidas guardadas nesta sessão: "+p.completed+"/"+p.total+". Próxima tentativa continua do ponto de falha."):"";
+ for(const label of $("people").querySelectorAll("[data-progress]")){const i=Object.keys(snapshot.state.minds).sort().indexOf(label.dataset.progress);label.textContent=pending&&i<p.completed?"Decisão guardada":""}
+ controls();return
+ }
  const elapsed=Math.max(0,Math.floor((Date.now()-Date.parse(p.started_at))/1000));
  const actorElapsed=p.actor?Math.max(0,Math.floor((Date.now()-Date.parse(p.actor_started_at))/1000)):0;
  $("progress").textContent=p.completed+"/"+p.total+" concluídos · "+elapsed+" s · "+(p.phase==="canceling"?"Cancelando":p.phase==="saving"?"Salvando":name(p.actor)+" · tentativa "+p.attempt+" · "+actorElapsed+" s")+(p.last_error?" · "+p.last_error:"");
@@ -49,7 +54,7 @@ function render(){
 async function step(){
  if(busy||!snapshot)return false;busy=true;controls();status("Consultando os agentes. A rodada só é publicada quando todas as decisões forem válidas.");
  try{snapshot=await api("/api/step",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({round:snapshot.state.round})});render();status("Rodada "+snapshot.state.round+" salva.");return true}
- catch(e){running=false;try{snapshot=await api("/api/state");render()}catch{}status(e.message+" · confira o estado salvo. Decisões já validadas podem ser reaproveitadas na próxima tentativa.",true);return false}
+ catch(e){running=false;try{snapshot=await api("/api/state");render()}catch{}status(e.message==="context canceled"?"Rodada cancelada. Decisões já validadas permanecem nesta sessão.":e.message+" · confira o estado salvo. Decisões já validadas podem ser reaproveitadas na próxima tentativa.",e.message!=="context canceled");return false}
  finally{busy=false;await poll();controls()}
 }
 $("step").onclick=()=>step();$("pause").onclick=()=>{running=false;controls();status(busy?"Pausa solicitada; finalizando a rodada atual.":"Pausado.")};

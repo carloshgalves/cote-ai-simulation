@@ -25,15 +25,30 @@ import (
 var page []byte
 
 func main() {
+	provider:=flag.String("provider","ollama","ollama, groq or custom")
 	modelName:=flag.String("model",os.Getenv("COTE_MODEL"),"LLM model ID")
 	endpoint:=flag.String("endpoint","http://127.0.0.1:11434/v1","OpenAI-compatible base URL")
 	save:=flag.String("save","cote-local.json","local simulation journal")
 	port:=flag.Int("port",8765,"loopback HTTP port")
 	steps:=flag.Int("steps",0,"run N rounds in terminal instead of browser")
 	flag.Parse()
-	if v:=os.Getenv("COTE_LLM_URL");v!="" { *endpoint=v }
+	key:=os.Getenv("COTE_API_KEY")
+	switch *provider {
+	case "ollama":
+		key=""
+		if *modelName==""{*modelName="qwen2.5:3b"}
+		if v:=os.Getenv("COTE_LLM_URL");v!=""{*endpoint=v}
+	case "groq":
+		*endpoint="https://api.groq.com/openai/v1"
+		if *modelName==""{*modelName="qwen/qwen3.8-27b"}
+		if v:=os.Getenv("GROQ_API_KEY");v!=""{key=v}
+		if key==""{log.Fatal("configure GROQ_API_KEY")}
+	case "custom":
+		if v:=os.Getenv("COTE_LLM_URL");v!=""{*endpoint=v}
+	default:log.Fatal("unknown provider")
+	}
 	if *steps<0||*steps>pilot.MaxRounds||*port<1||*port>65535 {log.Fatal("invalid rounds or port")}
-	model,err:=pilot.NewHTTPModel(*endpoint,*modelName,os.Getenv("COTE_API_KEY"));if err!=nil{log.Fatal(err)}
+	model,err:=pilot.NewHTTPModel(*endpoint,*modelName,key);if err!=nil{log.Fatal(err)}
 	session,err:=pilot.Open(*save,*modelName,model);if err!=nil{log.Fatal(err)}
 	defer session.Close()
 	ctx,cancel:=signal.NotifyContext(context.Background(),os.Interrupt,syscall.SIGTERM);defer cancel()

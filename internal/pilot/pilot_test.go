@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -223,4 +224,67 @@ func TestAllInvalidAgentsDoNotAdvanceAndRetryFresh(t *testing.T){
 	if s.Snapshot().State.Round!=0||calls.Load()!=18||len(s.Progress().Choices)!=6{t.Fatal("missing failures or bad round state")}
 	if _,err:=s.Step(context.Background(),0);err!=nil{t.Fatal(err)}
 	if calls.Load()!=24||s.Snapshot().State.Round!=1{t.Fatal("all-failed retry did not start fresh")}
+}
+
+func TestEventClockIdleJumpAndNoRepeatedObservation(t *testing.T) {
+	j:=Journal{Version:Version,Model:"test"};j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	s,err:=initial(j);if err!=nil{t.Fatal(err)}
+	choices:=[]Chosen{}
+	for _,id:=range ids(j.Profiles){choices=append(choices,Chosen{Actor:id,Decision:Decision{Action:"observe",Reason:"Conhecer o ambiente"}})}
+	minute,err:=nextEventMinute(j,s,choices);if err!=nil||minute!=481{t.Fatal("observation duration",minute,err)}
+	r:=Round{Number:1,Minute:minute,Choices:choices}
+	s,err=apply(j,s,r);if err!=nil{t.Fatal(err)}
+	view:=actorContext(j,s,"ayanokoji")
+	for _,o:=range offeredActions(view){if o.ID=="observe"{t.Fatal("repetitive observation offered")}}
+	count:=len(s.Events)
+	minute,err=nextEventMinute(j,s,choices);if err!=nil||minute!=490{t.Fatal("idle must jump to next school event",minute,err)}
+	// An old or injected observer can still replay without adding repeated memories.
+	s,err=apply(j,s,Round{Number:2,Minute:minute,Choices:choices});if err!=nil{t.Fatal(err)}
+	if len(s.Events)!=count+1||s.Events[len(s.Events)-1].Kind!="announcement"{t.Fatal("repeated memories or missing school event")}
+	if s.Minds["ayanokoji"].Thought!="Conhecer o ambiente"{t.Fatal("missing intention")}
+}
+func TestLegacyClockStillReplays(t *testing.T) {
+	j:=Journal{Version:LegacyVersion,Model:"test"};j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	choices:=[]Chosen{};for _,id:=range ids(j.Profiles){choices=append(choices,Chosen{Actor:id,Decision:wait()})}
+	j.Rounds=[]Round{{Number:1,Minute:485,Choices:choices}}
+	s,err:=Replay(j);if err!=nil||s.Minute!=485||len(s.Events)!=13{t.Fatal("legacy replay changed",err)}
+}
+func TestNonSpeechTextPreservedAsUnverifiedPrivateNote(t *testing.T){
+	j:=Journal{Version:Version,Model:"test"};j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	s,_:=initial(j);view:=actorContext(j,s,"ayanokoji")
+	d,err:=decodeLocalChoice(view,[]byte(`{"choice":"observe","text":"Quero identificar os líderes."}`))
+	if err!=nil||d.Note==""||d.Text!=""||len(d.Ignored)!=0{t.Fatal("private note discarded",d,err)}
+}
+
+type roundTripperFunc func(*http.Request)(*http.Response,error)
+func (f roundTripperFunc) RoundTrip(r *http.Request)(*http.Response,error){return f(r)}
+func TestGroqChoiceProtocolAndQuota(t *testing.T){
+	j:=Journal{Version:Version,Model:"test"};j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	s,_:=initial(j);view:=actorContext(j,s,"ayanokoji")
+	model,err:=NewHTTPModel("https://api.groq.com/openai/v1","qwen/qwen3.8-27b","test-key");if err!=nil{t.Fatal(err)}
+	status:=200
+	model.Client.Transport=roundTripperFunc(func(r *http.Request)(*http.Response,error){
+		if r.URL.Host!="api.groq.com"||r.Header.Get("Authorization")!="Bearer test-key"{t.Fatal("wrong provider configuration")}
+		var req map[string]any
+		if err:=json.NewDecoder(r.Body).Decode(&req);err!=nil{t.Fatal(err)}
+		if req["reasoning_effort"]!="none"||req["response_format"].(map[string]any)["type"]!="json_object"{t.Fatal("wrong Qwen request")}
+		body:=`{"choices":[{"message":{"content":"{\"choice\":\"talk:horikita\",\"text\":\"Bom dia.\",\"reason\":\"Quero entender suas prioridades.\"}"},"finish_reason":"stop"}]}`
+		if status==429{body="{}"}
+		return &http.Response{StatusCode:status,Body:io.NopCloser(strings.NewReader(body)),Header:make(http.Header)},nil
+	})
+	d,err:=model.Decide(context.Background(),view)
+	if err!=nil||d.Action!="talk"||d.Target!="horikita"||d.Reason==""{t.Fatalf("bad cloud decision: %+v %v",d,err)}
+	status=429
+	if _,err:=model.Decide(context.Background(),view);err==nil||!strings.Contains(err.Error(),"429"){t.Fatal("quota not explained")}
+}
+func TestWorldAgendaStopsAtEndWithoutDuplicateAnnouncements(t *testing.T){
+	model:=modelFunc(func(_ context.Context,_ Context)(Decision,error){return wait(),nil})
+	s,err:=Open(filepath.Join(t.TempDir(),"run.json"),"test",model);if err!=nil{t.Fatal(err)};defer s.Close()
+	for i,minute:=range []int64{490,505,540}{
+		snap,err:=s.Step(context.Background(),i)
+		if err!=nil||snap.State.Minute!=minute||snap.Done!=(minute==540){t.Fatalf("unexpected agenda: %+v %v",snap,err)}
+	}
+	if _,err:=s.Step(context.Background(),3);err==nil{t.Fatal("advanced past end of morning")}
+	n:=0;for _,e:=range s.Snapshot().State.Events{if e.Kind=="announcement"{n++}}
+	if n!=4{t.Fatal("world announcement missing or repeated")}
 }

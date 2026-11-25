@@ -15,7 +15,9 @@ import (
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
 )
 
-const Version = 1
+const Version = 2
+const LegacyVersion = 1
+const EndMinute = 540
 const MaxRounds = 200
 const RoundMinutes = 5
 
@@ -66,6 +68,7 @@ type Decision struct {
 	Relation *RelationChange `json:"relation"`
 	Plan *PlanChange `json:"plan"`
 	Ignored []string `json:"ignored,omitempty"`
+	Note string `json:"note,omitempty"`
 }
 type Event struct {
 	ID string `json:"id"`
@@ -84,6 +87,8 @@ type Mind struct {
 	Beliefs []Belief `json:"beliefs"`
 	Relations map[string]int `json:"relations"`
 	Plan *PlanChange `json:"plan"`
+	Thought string `json:"thought,omitempty"`
+	LastAction string `json:"last_action,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -120,6 +125,10 @@ type Context struct {
 	Relations map[string]int `json:"relations"`
 	Memory []Event `json:"memory"`
 	Plan *PlanChange `json:"plan"`
+	Thought string `json:"thought,omitempty"`
+	LastAction string `json:"last_action,omitempty"`
+	CanObserve bool `json:"can_observe"`
+	Version int `json:"version"`
 }
 type Model interface {
 	Decide(context.Context, Context) (Decision,error)
@@ -157,7 +166,7 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if j.Version!=Version || !validText(j.Model,200) || validateProfiles(j.Profiles)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion) || !validText(j.Model,200) || validateProfiles(j.Profiles)!=nil {return State{},errors.New("unsupported journal")}
 	s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
 	for _, p:=range j.Profiles { s.Minds[p.ID]=Mind{Location:"hall",Goals:clone(p.Goals),Beliefs:[]Belief{},Relations:map[string]int{}} }
 	appendEvent(&s,Event{Kind:"announcement",Actor:"school",Text:"Primeiro dia. A escola abriu o hall, as salas, a biblioteca e o pátio. Os estudantes têm um período livre para conhecer o ambiente e os colegas. A lista de nomes e classes dos seis participantes está disponível a todos. As regras detalhadas serão anunciadas depois.",Audience:ids(j.Profiles)})
@@ -179,13 +188,14 @@ func visible(s State,id string) []Event {
 }
 func actorContext(j Journal,s State,id string) Context {
 	m:=s.Minds[id]
-	c:=Context{Round:s.Round+1,Minute:s.Minute,Location:m.Location,Locations:clone(locations),Goals:clone(m.Goals),Beliefs:clone(m.Beliefs),Relations:clone(m.Relations),Plan:clone(m.Plan),Memory:[]Event{},People:[]Person{},Present:[]Presence{}}
+	c:=Context{Version:j.Version,CanObserve:true,Thought:m.Thought,LastAction:m.LastAction,Round:s.Round+1,Minute:s.Minute,Location:m.Location,Locations:clone(locations),Goals:clone(m.Goals),Beliefs:clone(m.Beliefs),Relations:clone(m.Relations),Plan:clone(m.Plan),Memory:[]Event{},People:[]Person{},Present:[]Presence{}}
 	for _, p:=range j.Profiles {
 		if p.ID==id {c.Self=clone(p);continue}
 		person:=Person{p.ID,p.Name,p.Class}
 		c.People=append(c.People,person)
 		if s.Minds[p.ID].Location==m.Location {c.Present=append(c.Present,Presence{person,m.Location})}
 	}
+	if j.Version==Version {c.CanObserve=observationChanged(s,id,roster(s,id))}
 	// Recent lived memories plus older evidence currently referenced by cognition.
 	// Do not retrieve any event outside the actor's audience.
 	all:=visible(s,id)
@@ -206,7 +216,11 @@ func actorContext(j Journal,s State,id string) Context {
 			}
 		}
 	}
-	for i,e:=range all {if i>=len(all)-20 || keep[e.ID] || e.Kind=="announcement" {c.Memory=append(c.Memory,clone(e))}}
+	recent:=[]Event{}
+	for _, e:=range all {
+		if j.Version==LegacyVersion||e.Kind=="announcement"||e.Kind=="claim"||e.Kind=="move"||e.Kind=="observation"||keep[e.ID]{recent=append(recent,e)}
+	}
+	for i,e:=range recent {if i>=len(recent)-20 || keep[e.ID] || e.Kind=="announcement" {c.Memory=append(c.Memory,clone(e))}}
 	return c
 }
 func evidence(c Context,id string) (Event,bool) {
@@ -214,7 +228,7 @@ func evidence(c Context,id string) (Event,bool) {
 	return Event{},false
 }
 func validateDecision(c Context,d Decision) error {
-	if (d.Reason!=""&&!validText(d.Reason,300)) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
+	if (d.Note!=""&&!validText(d.Note,500)) || (d.Reason!=""&&!validText(d.Reason,300)) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
 	if len(d.Ignored)>7 {return errors.New("invalid ignored field count")}
 	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","campo extra"},key){return errors.New("invalid ignored field")}}
 	if d.Action!="wait" && d.Action!="observe" && d.Action!="move" && d.Action!="talk" {return errors.New("unsupported action")}
@@ -244,6 +258,51 @@ func validateDecision(c Context,d Decision) error {
 	}
 	return nil
 }
+// A bounded, authored school morning; no claim these events are canon.
+var schoolAgenda = []struct{ Minute int64; Text string }{
+	{490,"Anúncio de orientação: os estudantes podem visitar as instalações e trocar informações entre turmas. A escola convida cada aluno a conhecer pelo menos um colega de outra classe antes da próxima orientação. A participação é voluntária."},
+	{505,"A escola anuncia que, às 09:00, haverá uma reunião de orientação nas salas de cada turma. Até lá, os estudantes podem conversar e organizar seus planos. Nenhuma pontuação é atribuída nesta atividade."},
+	{540,"O período livre terminou. A reunião de orientação começa; este piloto da manhã se encerra."},
+}
+func roster(s State,id string) string {
+	m:=s.Minds[id]
+	names:=[]string{}
+	for other, mind:=range s.Minds {if other!=id&&mind.Location==m.Location{names=append(names,other)}}
+	sort.Strings(names)
+	return "Presentes em "+m.Location+": "+strings.Join(names,", ")
+}
+func observationChanged(s State,id,text string) bool {
+	for i:=len(s.Events)-1;i>=0;i--{
+		e:=s.Events[i]
+		if e.Actor==id&&e.Kind=="observation"&&strings.HasPrefix(e.Text,"Presentes em "){return e.Text!=text}
+	}
+	return true
+}
+func nextWorld(s State) int64 {
+	for _, e:=range schoolAgenda{if e.Minute>s.Minute{return e.Minute}}
+	return EndMinute
+}
+func nextEventMinute(j Journal,s State,choices []Chosen)(int64,error){
+	if j.Version==LegacyVersion{return nextMinute(s)}
+	if s.Minute>=EndMinute{return 0,errors.New("manhã concluída")}
+	target:=nextWorld(s)
+	duration:=int64(0)
+	for _, x:=range choices{
+		if x.Failure!=""{continue}
+		d:=x.Decision
+		switch d.Action {
+		case "talk":if duration<1{duration=1}
+		case "move":if duration<2{duration=2}
+		case "observe":if observationChanged(s,x.Actor,roster(s,x.Actor))&&duration<1{duration=1}
+		}
+	}
+	if duration>0&&s.Minute+duration<target{target=s.Minute+duration}
+	state:=clock.State{Instant:domain.SimulationInstant(s.Minute),Revision:domain.WorldRevision(s.Round),LastOrdinal:0}
+	plan,ok,err:=clock.Next(state,[]clock.Pending{{Eligibility:domain.EligibilityCoordinate{NotBeforeInstant:domain.SimulationInstant(target)}}})
+	if err!=nil||!ok||plan.Kind!=clock.ClockAdvance{return 0,errors.New("invalid event advance")}
+	next,err:=clock.ApplyAdvance(state,plan)
+	return int64(next.Instant),err
+}
 func nextMinute(s State) (int64,error) {
 	// Reuse the existing CSF logical clock planner, not wall time.
 	state:=clock.State{Instant:domain.SimulationInstant(s.Minute),Revision:domain.WorldRevision(s.Round),LastOrdinal:0}
@@ -254,7 +313,7 @@ func nextMinute(s State) (int64,error) {
 	return int64(next.Instant),err
 }
 func apply(j Journal,s State,r Round) (State,error) {
-	minute,err:=nextMinute(s)
+	minute,err:=nextEventMinute(j,s,r.Choices)
 	if err!=nil||r.Number!=s.Round+1||r.Minute!=minute||r.Number>MaxRounds {return State{},errors.New("invalid round coordinate")}
 	order:=ids(j.Profiles)
 	if len(r.Choices)!=len(order){return State{},errors.New("incomplete round")}
@@ -262,7 +321,7 @@ func apply(j Journal,s State,r Round) (State,error) {
 		if x.Actor!=order[i] {return State{},errors.New("noncanonical actor order")}
 		if x.Failure!="" {
 			d:=x.Decision
-			if d.Action!="wait"||d.Target!=""||d.Text!=""||d.Reason!="Sem decisão válida do modelo"||len(d.Beliefs)!=0||d.Goal!=nil||d.Plan!=nil||d.Relation!=nil||len(d.Ignored)!=0||!validText(x.Failure,500){return State{},errors.New("invalid model failure marker")}
+			if d.Action!="wait"||d.Target!=""||d.Text!=""||d.Reason!="Sem decisão válida do modelo"||len(d.Beliefs)!=0||d.Goal!=nil||d.Plan!=nil||d.Relation!=nil||len(d.Ignored)!=0||d.Note!=""||!validText(x.Failure,500){return State{},errors.New("invalid model failure marker")}
 		}
 		if err:=validateDecision(actorContext(j,s,x.Actor),x.Decision);err!=nil {return State{},fmt.Errorf("%s: %w",x.Actor,err)}
 	}
@@ -279,6 +338,7 @@ func apply(j Journal,s State,r Round) (State,error) {
 			continue
 		}
 		if len(d.Ignored)>0{appendEvent(&out,Event{Kind:"ignored_cognition",Actor:x.Actor,Text:strings.Join(d.Ignored,", "),Audience:[]string{}})}
+		oldMind:=clone(m)
 		for _, b:=range d.Beliefs {
 			found:=false;for i, old:=range m.Beliefs {if old.Text==b.Text {m.Beliefs[i]=b;found=true}}
 			if !found {m.Beliefs=append(m.Beliefs,b)}
@@ -289,14 +349,23 @@ func apply(j Journal,s State,r Round) (State,error) {
 			v:=m.Relations[d.Relation.Person]+d.Relation.Delta
 			if v>5 {v=5};if v< -5 {v= -5};m.Relations[d.Relation.Person]=v
 		}
-		if d.Reason!=""{appendEvent(&out,Event{Kind:"intention",Actor:x.Actor,Text:d.Reason,Audience:[]string{x.Actor}})}
+		if j.Version==Version {
+			thought:=d.Reason
+			if d.Note!="" {if thought!=""{thought+=" · "};thought+=d.Note}
+			if thought!=""&&thought!=m.Thought{appendEvent(&out,Event{Kind:"intention",Actor:x.Actor,Text:thought,Audience:[]string{x.Actor}})}
+			m.Thought=thought;m.LastAction=d.Action
+			if d.Target!=""{m.LastAction+=":"+d.Target}
+		} else if d.Reason!=""{appendEvent(&out,Event{Kind:"intention",Actor:x.Actor,Text:d.Reason,Audience:[]string{x.Actor}})}
 		if d.Goal!=nil {appendEvent(&out,Event{Kind:"goal",Actor:x.Actor,Text:d.Goal.Replace+" → "+d.Goal.With,Audience:[]string{x.Actor},Evidence:d.Goal.Evidence})}
 		if d.Plan!=nil {
 			m.Plan=clone(d.Plan)
-			appendEvent(&out,Event{Kind:"plan",Actor:x.Actor,Text:strings.Join(d.Plan.Steps," → "),Audience:[]string{x.Actor},Evidence:d.Plan.Evidence})
+			if j.Version==LegacyVersion||oldMind.Plan==nil||strings.Join(oldMind.Plan.Steps,"\x00")!=strings.Join(d.Plan.Steps,"\x00")||oldMind.Plan.Evidence!=d.Plan.Evidence{appendEvent(&out,Event{Kind:"plan",Actor:x.Actor,Text:strings.Join(d.Plan.Steps," → "),Audience:[]string{x.Actor},Evidence:d.Plan.Evidence})}
 		}
-		for _, b:=range d.Beliefs {appendEvent(&out,Event{Kind:"belief",Actor:x.Actor,Text:b.Text,Audience:[]string{x.Actor},Evidence:b.Evidence})}
-		if d.Relation!=nil {appendEvent(&out,Event{Kind:"relation",Actor:x.Actor,Target:d.Relation.Person,Text:fmt.Sprintf("Relação: %+d",d.Relation.Delta),Audience:[]string{x.Actor},Evidence:d.Relation.Evidence})}
+		for _, b:=range d.Beliefs {
+			same:=false;for _, old:=range oldMind.Beliefs{if old==b{same=true;break}}
+			if j.Version==LegacyVersion||!same{appendEvent(&out,Event{Kind:"belief",Actor:x.Actor,Text:b.Text,Audience:[]string{x.Actor},Evidence:b.Evidence})}
+		}
+		if d.Relation!=nil&&(j.Version==LegacyVersion||oldMind.Relations[d.Relation.Person]!=m.Relations[d.Relation.Person]) {appendEvent(&out,Event{Kind:"relation",Actor:x.Actor,Target:d.Relation.Person,Text:fmt.Sprintf("Relação: %+d",d.Relation.Delta),Audience:[]string{x.Actor},Evidence:d.Relation.Evidence})}
 		switch d.Action {
 		case "talk":
 			appendEvent(&out,Event{Kind:"claim",Actor:x.Actor,Target:d.Target,Text:d.Text,Audience:[]string{x.Actor,d.Target}})
@@ -314,12 +383,15 @@ func apply(j Journal,s State,r Round) (State,error) {
 			}
 			m.Location=d.Target
 		case "observe":
-			names:=[]string{};for _, id:=range order {if id!=x.Actor&&s.Minds[id].Location==m.Location {names=append(names,id)}}
-			appendEvent(&out,Event{Kind:"observation",Actor:x.Actor,Text:"Presentes em "+m.Location+": "+strings.Join(names,", "),Audience:[]string{x.Actor}})
+			text:=roster(s,x.Actor)
+			if j.Version==LegacyVersion||observationChanged(s,x.Actor,text){appendEvent(&out,Event{Kind:"observation",Actor:x.Actor,Text:text,Audience:[]string{x.Actor}})}
 		case "wait":
-			appendEvent(&out,Event{Kind:"wait",Actor:x.Actor,Text:"Aguardou.",Audience:[]string{x.Actor}})
+			if j.Version==LegacyVersion{appendEvent(&out,Event{Kind:"wait",Actor:x.Actor,Text:"Aguardou.",Audience:[]string{x.Actor}})}
 		}
 		out.Minds[x.Actor]=m
+	}
+	if j.Version==Version {
+		for _, e:=range schoolAgenda{if e.Minute==out.Minute{appendEvent(&out,Event{Kind:"announcement",Actor:"school",Text:e.Text,Audience:ids(j.Profiles)})}}
 	}
 	return out,nil
 }

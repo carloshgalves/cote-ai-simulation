@@ -92,6 +92,7 @@ func OpenCalibrated(path,name string,model Model)(*Session,error){return openVer
 func OpenCrossover(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CrossoverVersion)}
 func OpenCalendar(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CalendarVersion)}
 func OpenPortfolio(path,name string,model Model)(*Session,error){return openVersion(path,name,model,PortfolioVersion)}
+func OpenMultiresolution(path,name string,model Model)(*Session,error){return openVersion(path,name,model,MultiresolutionVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
@@ -293,6 +294,7 @@ func(s *Session) AdvanceUntilEvent(ctx context.Context,expected int)(AdvanceResu
   result:=AdvanceResult{Snapshot:s.Snapshot()}
   if result.Snapshot.Version<CognitionVersion{return result,errors.New("avanço por data requer v7")}
   if result.Snapshot.State.Round!=expected{return result,errors.New("rodada já alterada")}
+  if result.Snapshot.Version>=MultiresolutionVersion{return s.advanceRoutineMacro(ctx,expected,target)}
   if target<=result.Snapshot.State.Minute||target>result.Snapshot.State.Minute+7*1440+480||target>endMinute(result.Snapshot.Version)||target%1440!=480{return result,errors.New("data de destino inválida")}
   for i:=0;i<64;i++{
    if err:=ctx.Err();err!=nil{return result,err}

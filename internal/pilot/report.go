@@ -40,6 +40,7 @@ func (s *Session) ReportZIP()([]byte,error){
 	s.mu.Lock()
 	j,state,p:=clone(s.journal),clone(s.state),clone(s.progress)
 	s.mu.Unlock()
+	if p.Round<=state.Round{p=Progress{}}
 	o:=OperatorReport{GeneratedAt:time.Now(),Journal:j,State:state,Digest:Digest(j),Progress:p}
 	if r,ok:=s.model.(*Router);ok{o.Routes=r.Routes();o.Calls,o.DroppedCalls=r.Telemetry()}
 	return buildReport(o)
@@ -75,12 +76,13 @@ func buildReport(o OperatorReport)([]byte,error){
 	if err:=writeJSON("operador.json",o);err!=nil{return nil,err}
 	var b strings.Builder
 	fmt.Fprintf(&b,"# Operador — COTE\n\nCiclos confirmados: %d | Horário: %s | Registro: %s\n\n",o.State.Round,reportTime(o.State.Minute),o.Digest)
+	fmt.Fprintln(&b,"## Eventos iniciais");for _,e:=range o.State.Events{if e.Round==0{writeEvent(&b,e)}}
 	for _,r:=range j.Rounds{
-		fmt.Fprintf(&b,"## Ciclo %d — %s\n\n",r.Number,reportTime(r.Minute))
+		fmt.Fprintf(&b,"\n## Ciclo %d — %s\n\n",r.Number,reportTime(r.Minute))
 		for _,c:=range r.Choices{writeChoice(&b,c)}
 		for _,e:=range o.State.Events{if e.Round==r.Number{writeEvent(&b,e)}}
 	}
-	fmt.Fprintln(&b,"\n## Eventos iniciais");for _,e:=range o.State.Events{if e.Round==0{writeEvent(&b,e)}}
+
 	if o.Progress.Round>o.State.Round{fmt.Fprintln(&b,"\n## Propostas pendentes (não executadas)");for _,c:=range o.Progress.Choices{writeChoice(&b,c)}}
 	fmt.Fprintln(&b,"\n## Chamadas do processo atual")
 	for _,c:=range o.Calls{fmt.Fprintf(&b,"- %s | ciclo %d | %s | %s / %s | HTTP %d | %d ms | aceita: %t | %s",c.StartedAt.Format(time.RFC3339),c.Cycle,c.Actor,c.Provider,c.Model,c.HTTPStatus,c.LatencyMS,c.Accepted,c.Error);if c.Usage!=nil{fmt.Fprintf(&b," | tokens entrada/saída: %d/%d",c.Usage.Input,c.Usage.Output)};fmt.Fprintln(&b)}
@@ -89,7 +91,8 @@ func buildReport(o OperatorReport)([]byte,error){
 		a:=actors[id]
 		if err:=writeJSON("personagens/"+id+".json",a);err!=nil{return nil,err}
 		b.Reset();fmt.Fprintf(&b,"# %s — perspectiva individual\n\n",a.Profile.Name)
-		fmt.Fprintln(&b,"## Acontecimentos iniciais");for _,e:=range a.Events{if e.Round==0{writeEvent(&b,e)}}
+		fmt.Fprintln(&b,"## Perfil inicial");writeJSONText(&b,a.Profile)
+		fmt.Fprintln(&b,"\n## Acontecimentos iniciais");for _,e:=range a.Events{if e.Round==0{writeEvent(&b,e)}}
 		for _,c:=range a.Cycles{
 			fmt.Fprintf(&b,"\n## Ciclo %d — %s a %s\n\n",c.Cycle,reportTime(c.StartMinute),reportTime(c.EndMinute))
 			fmt.Fprintln(&b,"### Antes da decisão");writeMind(&b,c.Before)
@@ -124,4 +127,9 @@ func writeMind(b *strings.Builder,m Mind){
 	if m.Plan!=nil{fmt.Fprintf(b,"- Plano: %s (%s)\n",strings.Join(m.Plan.Steps," → "),m.Plan.Evidence)}
 	for _,v:=range m.Beliefs{fmt.Fprintf(b,"- Hipótese: %s (%d%%; %s)\n",v.Text,v.Confidence,v.Evidence)}
 	raw,_:=json.Marshal(m.Relations);fmt.Fprintf(b,"- Relações: %s\n",raw)
+}
+
+func writeJSONText(b *strings.Builder,v any){
+	raw,_:=json.MarshalIndent(v,"","  ")
+	for _,line:=range strings.Split(string(raw),"\n"){fmt.Fprintln(b,"    "+line)}
 }

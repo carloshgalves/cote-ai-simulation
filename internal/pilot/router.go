@@ -256,13 +256,14 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 	}
 	d,err:=call(problem)
 	var pe providerError
-	if ctx.Err()==nil&&rt.view.Format=="auto"&&m.Format!="plain"&&errors.As(err,&pe)&&pe.FormatRejected{
+	r.mu.Lock();blocked:=!r.blocked(rt,time.Now()).until.IsZero();r.mu.Unlock()
+	if ctx.Err()==nil&&!blocked&&rt.view.Format=="auto"&&m.Format!="plain"&&errors.As(err,&pe)&&pe.FormatRejected{
 		// One compatibility downgrade, not a retry storm on quota/auth errors.
 		m.Format="plain"
 		d,err=call(problem)
 	}
 	var malformed responseError
-	r.mu.Lock();blocked:=!r.blocked(rt,time.Now()).until.IsZero();r.mu.Unlock()
+	r.mu.Lock();blocked=!r.blocked(rt,time.Now()).until.IsZero();r.mu.Unlock()
 	if ctx.Err()==nil&&!blocked&&errors.As(err,&malformed){
 		d,err=call(malformed.Error())
 	}
@@ -297,7 +298,7 @@ func (r *Router) Test(ctx context.Context,id string)(RouteView,error){
 		rt.view.Status=err.Error()
 		var pe providerError
 		if errors.As(err,&pe){
-			if pe.Status==429{r.cooldowns["quota:"+rt.quotaScope]=cooldown{pe.RetryAt,err.Error()}}
+			if pe.Status==429{scope:="quota:"+rt.quotaScope;if r.cooldowns[scope].until.Before(pe.RetryAt){r.cooldowns[scope]=cooldown{pe.RetryAt,err.Error()}}}
 			if pe.Status==401||pe.Status==403{r.cooldowns["auth:"+rt.authScope]=cooldown{time.Now().Add(10*time.Minute),err.Error()}}
 		}
 	}else{rt.view.Status="disponível"}

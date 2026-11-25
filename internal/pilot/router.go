@@ -132,7 +132,12 @@ func (r *Router) decide(ctx context.Context,view Context,problem string)(Decisio
 		r.mu.Unlock()
 		if !available{continue}
 		d,err:=rt.model.decide(ctx,view,problem)
-		if err==nil{err=validateDecision(view,d)}
+		if err==nil{if validation:=validateDecision(view,d);validation!=nil{err=responseError{validation.Error()}}}
+		var malformed responseError
+		if ctx.Err()==nil&&errors.As(err,&malformed){
+			d,err=rt.model.Repair(ctx,view,malformed.Error())
+			if err==nil{if validation:=validateDecision(view,d);validation!=nil{err=responseError{validation.Error()}}}
+		}
 		if ctx.Err()!=nil{
 			r.mu.Lock();rt.view.Status="cancelado";r.mu.Unlock()
 			return Decision{},ctx.Err()
@@ -152,7 +157,7 @@ func (r *Router) decide(ctx context.Context,view Context,problem string)(Decisio
 			switch pe.Status{
 			case 429:scope="quota:"+rt.quotaScope;until=pe.RetryAt;if !until.After(now){until=now.Add(time.Second)}
 			case 401,403:scope="auth:"+rt.authScope;until=now.Add(10*time.Minute)
-			case 400,404:until=now.Add(5*time.Minute)
+			case 400,402,404:until=now.Add(5*time.Minute)
 			}
 		}
 		rt.view.Status=err.Error()

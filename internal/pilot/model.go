@@ -122,6 +122,7 @@ type Context struct {
 	Present []Presence `json:"present"`
 	SchoolYear int `json:"school_year"`
 	PeerRelationship string `json:"peer_relationship"`
+	OwnCanon CanonProjection `json:"own_canon"`
 	Locations []string `json:"locations"`
 	Goals []string `json:"goals"`
 	Beliefs []Belief `json:"beliefs"`
@@ -191,7 +192,7 @@ func visible(s State,id string) []Event {
 }
 func actorContext(j Journal,s State,id string) Context {
 	m:=s.Minds[id]
-	c:=Context{SchoolYear:1,PeerRelationship:"Todos os participantes são alunos do primeiro ano; nenhuma senioridade decorre da classe.",Version:j.Version,CanObserve:true,Thought:m.Thought,LastAction:m.LastAction,Round:s.Round+1,Minute:s.Minute,Location:m.Location,Locations:clone(locations),Goals:clone(m.Goals),Beliefs:clone(m.Beliefs),Relations:clone(m.Relations),Plan:clone(m.Plan),Memory:[]Event{},People:[]Person{},Present:[]Presence{}}
+	c:=Context{OwnCanon:canonFor(id),SchoolYear:1,PeerRelationship:"Todos os participantes são alunos do primeiro ano; nenhuma senioridade decorre da classe.",Version:j.Version,CanObserve:true,Thought:m.Thought,LastAction:m.LastAction,Round:s.Round+1,Minute:s.Minute,Location:m.Location,Locations:clone(locations),Goals:clone(m.Goals),Beliefs:clone(m.Beliefs),Relations:clone(m.Relations),Plan:clone(m.Plan),Memory:[]Event{},People:[]Person{},Present:[]Presence{}}
 	for _, p:=range j.Profiles {
 		if p.ID==id {c.Self=clone(p);continue}
 		person:=Person{p.ID,p.Name,p.Class}

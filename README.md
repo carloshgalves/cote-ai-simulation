@@ -36,7 +36,7 @@ export GROQ_API_KEY
 go run ./cmd/cote-local --provider groq --model qwen/qwen3.8-27b --save "$HOME/cote-groq-v2.json"
 ```
 
-A cota depende da conta; não habilite cobrança para o experimento gratuito. O contexto é enviado ao provedor remoto. [Escopo, limitações e testes do piloto](docs/pilot-local.md).
+A cota depende da conta; não habilite cobrança para o experimento gratuito. O contexto é enviado ao provedor remoto. O botão **Modelos e APIs** permite configurar provedores e fallback sem reiniciar; use `--provider ui` para iniciar sem credencial. [Escopo, limitações e testes do piloto](docs/pilot-local.md).
 
 ## Estado histórico (apurado em 2026-11-12; `main@78bfd267`)
 

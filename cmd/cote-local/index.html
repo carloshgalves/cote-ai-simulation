@@ -20,7 +20,7 @@
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
-let snapshot=null,progress=null,routes=[],selected="",busy=false,running=false,polling=false,routeBusy=false,choiceSignature="";
+let snapshot=null,progress=null,routes=[],selected="",busy=false,running=false,polling=false,routeBusy=false,choiceSignature="",routeSignature="",routeRevision=0;
 const place={hall:"Hall","class-b":"Sala B","class-c":"Sala C","class-d":"Sala D",library:"Biblioteca",courtyard:"Pátio"};
 const kind={announcement:"Anúncio escolar",intention:"Intenção privada",claim:"Conversa privada",move:"Deslocamento",observation:"Observação",wait:"Espera",goal:"Objetivo atualizado",plan:"Plano",belief:"Hipótese",relation:"Relação",model_failure:"Falha técnica",ignored_cognition:"Diagnóstico"};
 const presets={ollama:["Ollama (local)","http://127.0.0.1:11434/v1","qwen2.5:3b"],groq:["Groq","https://api.groq.com/openai/v1","qwen/qwen3.8-27b"],gemini:["Google Gemini","https://generativelanguage.googleapis.com/v1beta/openai",""],openrouter:["OpenRouter","https://openrouter.ai/api/v1",""],openai:["OpenAI","https://api.openai.com/v1",""],anthropic:["Anthropic (Messages)","https://api.anthropic.com/v1",""],cerebras:["Cerebras","https://api.cerebras.ai/v1",""],nvidia:["NVIDIA NIM","https://integrate.api.nvidia.com/v1",""],mistral:["Mistral","https://api.mistral.ai/v1",""],deepseek:["DeepSeek","https://api.deepseek.com/v1",""],"openai-compatible":["Outro · compatível OpenAI","",""]};
@@ -78,6 +78,7 @@ function render(){
 function renderRoutes(){
  $("route-status").textContent=routes.length?routes.filter(r=>r.enabled).length+" rota(s) habilitada(s) · "+(routes.find(r=>r.status==="consultando")?.model||"fallback por prioridade"):"Nenhuma rota configurada";
  if(!$("settings-dialog").open)return;
+ const sig=JSON.stringify([routes,routeBusy]);if(sig===routeSignature)return;routeSignature=sig;
  $("routes").replaceChildren();
  for(const [i,r] of routes.entries()){
  const row=node("div",undefined,"route"),description=node("div"),actions=node("div",undefined,"route-actions");
@@ -88,8 +89,8 @@ function renderRoutes(){
  }
  if(!routes.length)$("routes").append(node("p","Adicione pelo menos um modelo para iniciar.","muted"))
 }
-async function routeAction(data){if(routeBusy)return;routeBusy=true;$("settings-error").textContent="";try{routes=await post("/api/routes",data);if(data.action==="save")$("save-status").textContent="Configuração gravada localmente.";else $("save-status").textContent="Alterações em memória.";if(data.action==="add")$("key").value=""}catch(e){$("settings-error").textContent=e.message;$("settings-error").className="error"}finally{routeBusy=false;renderRoutes();controls()}}
-async function poll(){if(polling)return;polling=true;try{const [p,r]=await Promise.all([api("/api/progress"),api("/api/routes")]);progress=p;if(!routeBusy)routes=r;renderProgress();renderRoutes()}catch{}finally{polling=false}}
+async function routeAction(data){if(routeBusy)return;routeBusy=true;routeRevision++;$("settings-error").textContent="";try{routes=await post("/api/routes",data);if(data.action==="save")$("save-status").textContent="Configuração gravada localmente.";else $("save-status").textContent="Alterações em memória.";if(data.action==="add")$("key").value=""}catch(e){$("settings-error").textContent=e.message;$("settings-error").className="error"}finally{routeBusy=false;renderRoutes();controls()}}
+async function poll(){if(polling)return;polling=true;const revision=routeRevision;try{const [p,r]=await Promise.all([api("/api/progress"),api("/api/routes")]);progress=p;if(!routeBusy&&revision===routeRevision)routes=r;renderProgress();renderRoutes()}catch{}finally{polling=false}}
 setInterval(poll,1000);
 async function step(){if(busy||!snapshot)return false;busy=true;controls();status("Consultando personagens…");try{snapshot=await post("/api/step",{round:snapshot.state.round});render();status(snapshot.done?"Manhã concluída.":"Ciclo salvo.");return true}catch(e){running=false;try{snapshot=await api("/api/state");render()}catch{}status(e.message,e.message!=="context canceled");return false}finally{busy=false;await poll();controls()}}
 $("run").onclick=async()=>{if(running||busy)return;running=true;controls();while(running&&!snapshot.done){if(!await step())break}running=false;controls()};
@@ -98,7 +99,7 @@ $("who").onchange=e=>{selected=e.target.value;render()};$("technical").onchange=
 for(const [id,preset] of Object.entries(presets)){const o=node("option",preset[0]);o.value=id;$("provider").append(o)}
 function preset(){const p=presets[$("provider").value];$("endpoint").value=p[1];$("endpoint").readOnly=!["ollama","openai-compatible"].includes($("provider").value);$("route-model").value=p[2];$("format").value="auto"}
 $("provider").onchange=preset;$("provider").value="groq";preset();
-$("settings").onclick=()=>{$("settings-dialog").showModal();renderRoutes();poll()};$("close-settings").onclick=()=>$("settings-dialog").close();
+$("settings").onclick=()=>{$("settings-dialog").showModal();routeSignature="";renderRoutes();poll()};$("close-settings").onclick=()=>$("settings-dialog").close();
 $("route-form").onsubmit=e=>{e.preventDefault();routeAction({action:"add",route:{provider:$("provider").value,endpoint:$("endpoint").value,model:$("route-model").value,key:$("key").value,format:$("format").value}})};
 $("save-routes").onclick=()=>{if(confirm("Salvar também as chaves em arquivo local privado, sem criptografia?"))routeAction({action:"save"})};
 (async()=>{try{[snapshot,routes,progress]=await Promise.all([api("/api/state"),api("/api/routes"),api("/api/progress")]);for(const p of snapshot.people){const o=node("option",p.name);o.value=p.id;$("who").append(o)}render();renderRoutes();status(routes.some(r=>r.enabled)?"Pronto para simular.":"Configure Modelos e APIs para iniciar.")}catch(e){status(e.message,true)}})();

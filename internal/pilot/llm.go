@@ -33,7 +33,7 @@ func NewHTTPModel(endpoint,name,key string) (*HTTPModel,error) {
 		return nil,errors.New("endpoint HTTP deve ser local; use HTTPS fora da máquina")
 	}
 	return &HTTPModel{Endpoint:strings.TrimRight(endpoint,"/")+"/chat/completions",Name:name,Key:key,
-		Client:&http.Client{Timeout:120*time.Second,CheckRedirect:func(*http.Request,[]*http.Request)error{return http.ErrUseLastResponse}}},nil
+		Client:&http.Client{Timeout:240*time.Second,CheckRedirect:func(*http.Request,[]*http.Request)error{return http.ErrUseLastResponse}}},nil
 }
 
 func decodeStrict[T any](raw []byte) (T,error) {
@@ -44,16 +44,38 @@ func decodeStrict[T any](raw []byte) (T,error) {
 	return v,nil
 }
 
+// A schema constrains local Ollama output before parsing; validation still owns effects.
+const decisionSchema = `{"type":"object","additionalProperties":false,"required":["action","target","text","reason","beliefs","goal","relation","plan"],"properties":{"action":{"type":"string","enum":["wait","observe","move","talk"]},"target":{"type":"string"},"text":{"type":"string","maxLength":800},"reason":{"type":"string","minLength":1,"maxLength":300},"beliefs":{"type":"array","maxItems":3,"items":{"type":"object","additionalProperties":false,"required":["text","evidence","confidence"],"properties":{"text":{"type":"string","maxLength":300},"evidence":{"type":"string"},"confidence":{"type":"integer","minimum":0,"maximum":100}}}},"goal":{"anyOf":[{"type":"null"},{"type":"object","additionalProperties":false,"required":["replace","with","evidence"],"properties":{"replace":{"type":"string"},"with":{"type":"string","maxLength":180},"evidence":{"type":"string"}}}]},"relation":{"anyOf":[{"type":"null"},{"type":"object","additionalProperties":false,"required":["person","delta","evidence"],"properties":{"person":{"type":"string"},"delta":{"type":"integer","enum":[-1,1]},"evidence":{"type":"string"}}}]},"plan":{"anyOf":[{"type":"null"},{"type":"object","additionalProperties":false,"required":["steps","evidence"],"properties":{"steps":{"type":"array","maxItems":5,"items":{"type":"string","maxLength":180}},"evidence":{"type":"string"}}}]}}}`
+
+type responseError struct{ message string }
+func (e responseError) Error() string {return e.message}
+
 func (m *HTTPModel) Decide(ctx context.Context, view Context) (Decision,error) {
+	return m.decide(ctx,view,"")
+}
+
+// Repair retries only a malformed/invalid model decision, not a failed network request.
+func (m *HTTPModel) Repair(ctx context.Context,view Context,problem string)(Decision,error){
+	return m.decide(ctx,view,problem)
+}
+
+func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (Decision,error) {
 	var zero Decision
 	raw,err:=json.Marshal(view);if err!=nil{return zero,err}
+	prompt:=systemPrompt+"\nSeja breve: reason em uma frase, text até duas frases; alterações cognitivas são opcionais. Use [] e null quando não houver evidência suficiente. Não invente ações ou campos."
+	if problem!="" {prompt+="\nA tentativa anterior foi rejeitada pelo motor: "+problem+". Gere uma nova decisão válida, simples, sem mudanças cognitivas desnecessárias."}
+	format:=map[string]any{"type":"json_object"}
+	u,_:=url.Parse(m.Endpoint)
+	if u!=nil && has([]string{"127.0.0.1","localhost","::1"},u.Hostname()) {
+		format=map[string]any{"type":"json_schema","json_schema":map[string]any{"name":"decision","strict":true,"schema":json.RawMessage(decisionSchema)}}
+	}
 	payload:=struct{
 		Model string `json:"model"`
 		Messages []map[string]string `json:"messages"`
 		Temperature float64 `json:"temperature"`
-		ResponseFormat map[string]string `json:"response_format"`
+		ResponseFormat map[string]any `json:"response_format"`
 		MaxTokens int `json:"max_tokens"`
-	}{m.Name,[]map[string]string{{"role":"system","content":systemPrompt},{"role":"user","content":string(raw)}},0.7,map[string]string{"type":"json_object"},1200}
+	}{m.Name,[]map[string]string{{"role":"system","content":prompt},{"role":"user","content":string(raw)}},0.35,format,512}
 	body,err:=json.Marshal(payload);if err!=nil{return zero,err}
 	req,err:=http.NewRequestWithContext(ctx,http.MethodPost,m.Endpoint,bytes.NewReader(body));if err!=nil{return zero,errors.New("invalid model request")}
 	req.Header.Set("Content-Type","application/json")
@@ -69,8 +91,8 @@ func (m *HTTPModel) Decide(ctx context.Context, view Context) (Decision,error) {
 		FinishReason string `json:"finish_reason"`
 	} `json:"choices"`}
 	if err:=json.Unmarshal(data,&envelope);err!=nil||len(envelope.Choices)!=1||
-		!has([]string{"stop",""},envelope.Choices[0].FinishReason){return zero,errors.New("modelo não produziu uma resposta completa")}
+		!has([]string{"stop",""},envelope.Choices[0].FinishReason){return zero,responseError{"modelo não produziu uma resposta completa"}}
 	d,err:=decodeStrict[Decision]([]byte(envelope.Choices[0].Message.Content))
-	if err!=nil{return zero,errors.New("modelo retornou JSON fora do contrato")}
+	if err!=nil{return zero,responseError{"modelo retornou JSON fora do contrato"}}
 	return d,nil
 }

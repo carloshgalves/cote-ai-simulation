@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"sync"
 	"syscall"
+	"time"
 )
 
 //go:embed profiles.json
@@ -18,11 +19,39 @@ var defaultProfiles []byte
 
 type Session struct {
 	mu sync.Mutex
+	stepMu sync.Mutex
+	progress Progress
+	cancel context.CancelFunc
+	pending []Chosen
 	path string
 	journal Journal
 	state State
 	model Model
 	lock *os.File
+}
+
+type Progress struct {
+	Active bool `json:"active"`
+	Round int `json:"round"`
+	Actor string `json:"actor"`
+	Attempt int `json:"attempt"`
+	Completed int `json:"completed"`
+	Total int `json:"total"`
+	StartedAt time.Time `json:"started_at"`
+	ActorStartedAt time.Time `json:"actor_started_at"`
+	Phase string `json:"phase"`
+	LastError string `json:"last_error,omitempty"`
+}
+func (s *Session) Progress() Progress {
+	s.mu.Lock();defer s.mu.Unlock()
+	return s.progress
+}
+func (s *Session) Cancel(round int) bool {
+	s.mu.Lock();defer s.mu.Unlock()
+	if !s.progress.Active||s.progress.Round!=round||s.cancel==nil||s.progress.Phase=="saving"{return false}
+	s.cancel()
+	s.progress.Phase="canceling"
+	return true
 }
 
 type Snapshot struct {
@@ -67,6 +96,7 @@ func Open(path,name string,model Model) (*Session,error) {
 }
 
 func (s *Session) Close() error {
+	s.stepMu.Lock();defer s.stepMu.Unlock()
 	s.mu.Lock();defer s.mu.Unlock()
 	if s.lock==nil{return nil}
 	err:=s.lock.Close();s.lock=nil
@@ -108,27 +138,63 @@ func (s *Session) POV(id string) (Context,error) {
 	if !known(s.journal.Profiles,id){return Context{},errors.New("unknown actor")}
 	return actorContext(s.journal,s.state,id),nil
 }
-func (s *Session) Step(ctx context.Context,expected int) (Snapshot,error) {
-	if !s.mu.TryLock(){return Snapshot{},errors.New("uma rodada já está em execução")}
-	defer s.mu.Unlock()
-	if s.lock==nil{return Snapshot{},errors.New("sessão encerrada")}
-	if s.state.Round!=expected{return Snapshot{},errors.New("rodada já alterada; atualize o estado")}
-	if expected>=MaxRounds{return Snapshot{},errors.New("limite do piloto atingido")}
-	minute,err:=nextMinute(s.state);if err!=nil{return Snapshot{},err}
-	r:=Round{Number:expected+1,Minute:minute,Choices:[]Chosen{}}
-	for _, id:=range ids(s.journal.Profiles) {
+func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr error) {
+	if !s.stepMu.TryLock(){return Snapshot{},errors.New("uma rodada já está em execução")}
+	defer s.stepMu.Unlock()
+	s.mu.Lock()
+	if s.lock==nil{s.mu.Unlock();return Snapshot{},errors.New("sessão encerrada")}
+	if s.state.Round!=expected{s.mu.Unlock();return Snapshot{},errors.New("rodada já alterada; atualize o estado")}
+	if expected>=MaxRounds{s.mu.Unlock();return Snapshot{},errors.New("limite do piloto atingido")}
+	ctx,cancel:=context.WithCancel(ctx)
+	s.cancel=cancel
+	s.progress=Progress{Active:true,Round:expected+1,Total:len(s.journal.Profiles),Completed:len(s.pending),StartedAt:time.Now(),Phase:"thinking"}
+	journal,state:=s.journal,s.state
+	s.mu.Unlock()
+	defer func(){
+		cancel()
+		s.mu.Lock();defer s.mu.Unlock()
+		s.cancel=nil;s.progress.Active=false;s.progress.Actor="";s.progress.Phase="idle"
+		if retErr!=nil{s.progress.LastError=retErr.Error()}
+	}()
+	minute,err:=nextMinute(state);if err!=nil{return Snapshot{},err}
+	r:=Round{Number:expected+1,Minute:minute,Choices:append([]Chosen{},s.pending...)}
+	order:=ids(journal.Profiles)
+	for _, id:=range order[len(r.Choices):] {
 		if err:=ctx.Err();err!=nil{return Snapshot{},err}
-		view:=actorContext(s.journal,s.state,id)
-		d,err:=s.model.Decide(ctx,view)
-		if err!=nil{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
-		if err:=validateDecision(view,d);err!=nil{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
+		view:=actorContext(journal,state,id)
+		var problem string
+		var d Decision
+		for attempt:=1;attempt<=3;attempt++ {
+			if err:=ctx.Err();err!=nil{return Snapshot{},err}
+			s.mu.Lock()
+			s.progress.Actor=id;s.progress.Attempt=attempt;s.progress.ActorStartedAt=time.Now();s.progress.LastError=problem
+			s.mu.Unlock()
+			if attempt==1 {d,err=s.model.Decide(ctx,view)} else {
+				d,err=s.model.(interface{Repair(context.Context,Context,string)(Decision,error)}).Repair(ctx,view,problem)
+			}
+			if ctx.Err()!=nil{return Snapshot{},ctx.Err()}
+			retryable:=false
+			if err==nil {err=validateDecision(view,d);retryable=err!=nil} else {
+				var malformed responseError
+				retryable=errors.As(err,&malformed)
+			}
+			if err==nil {break}
+			problem=err.Error()
+			_,repairable:=s.model.(interface{Repair(context.Context,Context,string)(Decision,error)})
+			if !repairable||!retryable||attempt==3{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
+		}
 		r.Choices=append(r.Choices,Chosen{Actor:id,Decision:d})
+		s.pending=append(s.pending,Chosen{Actor:id,Decision:d})
+		s.mu.Lock();s.progress.Completed=len(r.Choices);s.progress.LastError="";s.mu.Unlock()
 	}
-	next,err:=apply(s.journal,s.state,r);if err!=nil{return Snapshot{},err}
-	if err:=ctx.Err();err!=nil{return Snapshot{},err}
-	j:=s.journal
+	next,err:=apply(journal,state,r);if err!=nil{return Snapshot{},err}
+	j:=journal
 	j.Rounds=append(append([]Round(nil),j.Rounds...),r)
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if err:=ctx.Err();err!=nil{return Snapshot{},err}
+	s.progress.Phase="saving"
 	if err:=replaceJournal(s.path,j);err!=nil{return Snapshot{},errors.New("falha ao salvar rodada; estado não publicado")}
-	s.journal=j;s.state=next
+	s.journal=j;s.state=next;s.pending=nil
 	return s.snapshot(),nil
 }

@@ -56,6 +56,15 @@ func main() {
 		w.Header().Set("Content-Type","text/html; charset=utf-8");_,_=w.Write(page)
 	})
 	mux.HandleFunc("GET /api/state",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Snapshot())})
+	mux.HandleFunc("GET /api/progress",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Progress())})
+	mux.HandleFunc("POST /api/cancel",func(w http.ResponseWriter,r *http.Request){
+		if r.Header.Get("Origin")!="http://"+addr||!strings.HasPrefix(r.Header.Get("Content-Type"),"application/json"){fail(w,403,errors.New("local browser request required"));return}
+		var input struct{Round int `json:"round"`}
+		d:=json.NewDecoder(http.MaxBytesReader(w,r.Body,1024));d.DisallowUnknownFields()
+		if err:=d.Decode(&input);err!=nil||input.Round<1{fail(w,400,errors.New("expected round required"));return}
+		if err:=d.Decode(new(any));err!=io.EOF{fail(w,400,errors.New("trailing request data"));return}
+		reply(w,200,map[string]bool{"canceled":session.Cancel(input.Round)})
+	})
 	mux.HandleFunc("GET /api/pov",func(w http.ResponseWriter,r *http.Request){
 		c,err:=session.POV(r.URL.Query().Get("actor"));if err!=nil{fail(w,400,err);return};reply(w,200,c)
 	})

@@ -166,7 +166,7 @@ func nextDue(j Journal,s State)int64{
  base:=examBase(j.Version)
  for _,n:=range []int64{base+600,base+840,base+870,base+900,base+960}{if n>s.Minute&&n<next{next=n}}
  for _,mt:=range s.World.Meetings{if mt.Status=="pending"||mt.Status=="accepted"{for _,n:=range []int64{mt.At,mt.At+15}{if n>s.Minute&&n<next{next=n}}}}
- if j.Version>=CognitionVersion{for _,m:=range s.Minds{for _,p:=range m.Plans{if p.Deadline>s.Minute&&p.Deadline<next{next=p.Deadline}}}}
+ if j.Version>=CognitionVersion{for _,m:=range s.Minds{for _,p:=range m.Plans{if p.Deadline>s.Minute&&p.Deadline<next{next=p.Deadline}};if j.Version>=SelectiveVersion&&m.NextDeliberation>s.Minute&&m.NextDeliberation<next{next=m.NextDeliberation}}}
  return next
 }
 func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){

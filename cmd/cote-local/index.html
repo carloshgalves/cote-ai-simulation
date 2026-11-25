@@ -14,7 +14,7 @@
 "use strict";
 const $=id=>document.getElementById(id);let snapshot=null,running=false,busy=false,selected="";
 const place={"hall":"Hall","class-b":"Sala B","class-c":"Sala C","class-d":"Sala D","library":"Biblioteca","courtyard":"Pátio"};
-const kind={announcement:"Anúncio",intention:"Intenção privada",claim:"Conversa privada",move:"Deslocamento",observation:"Observação",wait:"Espera",goal:"Mudança de objetivo"};
+const kind={announcement:"Anúncio",intention:"Intenção privada",claim:"Conversa privada",move:"Deslocamento",observation:"Observação",wait:"Espera",goal:"Mudança de objetivo",plan:"Plano",belief:"Crença",relation:"Relação"};
 function node(tag,text,klass){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(klass)e.className=klass;return e}
 function name(id){return snapshot?.people.find(p=>p.id===id)?.name||id}
 function time(m){return String(Math.floor(m/60)%24).padStart(2,"0")+":"+String(m%60).padStart(2,"0")}
@@ -31,7 +31,7 @@ function render(){
  const events=s.events.filter(e=>!selected||e.audience.includes(selected));$("timeline").replaceChildren();
  for(const e of events.slice(-150).reverse()){const box=node("div",undefined,"event "+e.kind);box.append(node("div",time(e.minute)+" · "+(kind[e.kind]||e.kind)+" · "+name(e.actor)+(e.kind==="claim"?" → "+name(e.target):""),"meta"),node("div",e.text));$("timeline").append(box)}
  $("mind").replaceChildren();
- if(selected){const m=s.minds[selected];$("mind").append(node("strong",name(selected)),node("p","Local: "+(place[m.location]||m.location)));list($("mind"),"Objetivos",m.goals);list($("mind"),"Crenças (hipóteses)",m.beliefs.map(b=>b.text+" · confiança "+b.confidence+"% · "+b.evidence));list($("mind"),"Relações",Object.entries(m.relations).map(([id,v])=>name(id)+": "+v));list($("mind"),"Memórias recentes",events.slice(-12).reverse().map(e=>time(e.minute)+" · "+e.id+" · "+e.text))}
+ if(selected){const m=s.minds[selected];$("mind").append(node("strong",name(selected)),node("p","Local: "+(place[m.location]||m.location)));list($("mind"),"Objetivos",m.goals);list($("mind"),"Plano atual",m.plan?.steps||[]);list($("mind"),"Crenças (hipóteses)",m.beliefs.map(b=>b.text+" · confiança "+b.confidence+"% · "+b.evidence));list($("mind"),"Relações",Object.entries(m.relations).map(([id,v])=>name(id)+": "+v));list($("mind"),"Memórias recentes",events.slice(-12).reverse().map(e=>time(e.minute)+" · "+e.id+" · "+e.text))}
  else{$("mind").append(node("p","Selecione um personagem para inspecionar sua cognição.","muted"))}
  controls()
 }

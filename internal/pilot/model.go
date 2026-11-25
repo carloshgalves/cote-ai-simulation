@@ -52,6 +52,10 @@ type RelationChange struct {
 	Delta int `json:"delta"`
 	Evidence string `json:"evidence"`
 }
+type PlanChange struct {
+	Steps []string `json:"steps"`
+	Evidence string `json:"evidence"`
+}
 type Decision struct {
 	Action string `json:"action"`
 	Target string `json:"target"`
@@ -60,6 +64,7 @@ type Decision struct {
 	Beliefs []Belief `json:"beliefs"`
 	Goal *GoalChange `json:"goal"`
 	Relation *RelationChange `json:"relation"`
+	Plan *PlanChange `json:"plan"`
 }
 type Event struct {
 	ID string `json:"id"`
@@ -70,12 +75,14 @@ type Event struct {
 	Target string `json:"target,omitempty"`
 	Text string `json:"text"`
 	Audience []string `json:"audience"`
+	Evidence string `json:"evidence,omitempty"`
 }
 type Mind struct {
 	Location string `json:"location"`
 	Goals []string `json:"goals"`
 	Beliefs []Belief `json:"beliefs"`
 	Relations map[string]int `json:"relations"`
+	Plan *PlanChange `json:"plan"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -110,6 +117,7 @@ type Context struct {
 	Beliefs []Belief `json:"beliefs"`
 	Relations map[string]int `json:"relations"`
 	Memory []Event `json:"memory"`
+	Plan *PlanChange `json:"plan"`
 }
 type Model interface {
 	Decide(context.Context, Context) (Decision,error)
@@ -169,7 +177,7 @@ func visible(s State,id string) []Event {
 }
 func actorContext(j Journal,s State,id string) Context {
 	m:=s.Minds[id]
-	c:=Context{Round:s.Round+1,Minute:s.Minute,Location:m.Location,Locations:clone(locations),Goals:clone(m.Goals),Beliefs:clone(m.Beliefs),Relations:clone(m.Relations),Memory:[]Event{},People:[]Person{},Present:[]Presence{}}
+	c:=Context{Round:s.Round+1,Minute:s.Minute,Location:m.Location,Locations:clone(locations),Goals:clone(m.Goals),Beliefs:clone(m.Beliefs),Relations:clone(m.Relations),Plan:clone(m.Plan),Memory:[]Event{},People:[]Person{},Present:[]Presence{}}
 	for _, p:=range j.Profiles {
 		if p.ID==id {c.Self=clone(p);continue}
 		person:=Person{p.ID,p.Name,p.Class}
@@ -181,6 +189,8 @@ func actorContext(j Journal,s State,id string) Context {
 	all:=visible(s,id)
 	keep:=map[string]bool{}
 	for _, b:=range m.Beliefs {keep[b.Evidence]=true}
+	if m.Plan!=nil {keep[m.Plan.Evidence]=true}
+	for _, e:=range all {if e.Kind=="goal"&&e.Evidence!="" {keep[e.Evidence]=true}}
 	for i,e:=range all {if i>=len(all)-20 || keep[e.ID] || e.Kind=="announcement" {c.Memory=append(c.Memory,clone(e))}}
 	return c
 }
@@ -203,6 +213,10 @@ func validateDecision(c Context,d Decision) error {
 	if d.Goal!=nil {
 		g:=d.Goal
 		if _,ok:=evidence(c,g.Evidence);!ok||!has(c.Goals,g.Replace)||has(c.Goals,g.With)||!validText(g.With,180) {return errors.New("goal change requires accessible evidence and existing goal")}
+	}
+	if d.Plan!=nil {
+		if _,ok:=evidence(c,d.Plan.Evidence);!ok||len(d.Plan.Steps)>5{return errors.New("plan requires accessible evidence")}
+		for _, step:=range d.Plan.Steps {if !validText(step,180){return errors.New("invalid plan step")}}
 	}
 	if d.Relation!=nil {
 		r:=d.Relation;e,ok:=evidence(c,r.Evidence)
@@ -247,7 +261,13 @@ func apply(j Journal,s State,r Round) (State,error) {
 			if v>5 {v=5};if v< -5 {v= -5};m.Relations[d.Relation.Person]=v
 		}
 		appendEvent(&out,Event{Kind:"intention",Actor:x.Actor,Text:d.Reason,Audience:[]string{x.Actor}})
-		if d.Goal!=nil {appendEvent(&out,Event{Kind:"goal",Actor:x.Actor,Text:d.Goal.Replace+" → "+d.Goal.With,Audience:[]string{x.Actor}})}
+		if d.Goal!=nil {appendEvent(&out,Event{Kind:"goal",Actor:x.Actor,Text:d.Goal.Replace+" → "+d.Goal.With,Audience:[]string{x.Actor},Evidence:d.Goal.Evidence})}
+		if d.Plan!=nil {
+			m.Plan=clone(d.Plan)
+			appendEvent(&out,Event{Kind:"plan",Actor:x.Actor,Text:strings.Join(d.Plan.Steps," → "),Audience:[]string{x.Actor},Evidence:d.Plan.Evidence})
+		}
+		for _, b:=range d.Beliefs {appendEvent(&out,Event{Kind:"belief",Actor:x.Actor,Text:b.Text,Audience:[]string{x.Actor},Evidence:b.Evidence})}
+		if d.Relation!=nil {appendEvent(&out,Event{Kind:"relation",Actor:x.Actor,Target:d.Relation.Person,Text:fmt.Sprintf("Relação: %+d",d.Relation.Delta),Audience:[]string{x.Actor},Evidence:d.Relation.Evidence})}
 		switch d.Action {
 		case "talk":
 			appendEvent(&out,Event{Kind:"claim",Actor:x.Actor,Target:d.Target,Text:d.Text,Audience:[]string{x.Actor,d.Target}})

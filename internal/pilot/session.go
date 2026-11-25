@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
+	"syscall"
 )
 
 //go:embed profiles.json
@@ -21,6 +22,7 @@ type Session struct {
 	journal Journal
 	state State
 	model Model
+	lock *os.File
 }
 
 type Snapshot struct {
@@ -34,6 +36,13 @@ type Snapshot struct {
 func Open(path,name string,model Model) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
+	parent,err:=filepath.EvalSymlinks(filepath.Dir(path));if err!=nil{return nil,err}
+	path=filepath.Join(parent,filepath.Base(path))
+	lock,err:=os.OpenFile(path+".lock",os.O_CREATE|os.O_RDWR|syscall.O_NOFOLLOW,0600)
+	if err!=nil{return nil,errors.New("cannot open local session lock")}
+	if err:=syscall.Flock(int(lock.Fd()),syscall.LOCK_EX|syscall.LOCK_NB);err!=nil{lock.Close();return nil,errors.New("save already open in another process")}
+	opened:=false
+	defer func(){if !opened{lock.Close()}}()
 	j:=Journal{}
 	info,err:=os.Lstat(path)
 	switch {
@@ -45,7 +54,7 @@ func Open(path,name string,model Model) (*Session,error) {
 	case err!=nil:
 		return nil,err
 	default:
-		if !info.Mode().IsRegular()||info.Size()>32<<20{return nil,errors.New("invalid save file")}
+		if !info.Mode().IsRegular()||info.Mode().Perm()&0077!=0||info.Size()>32<<20{return nil,errors.New("invalid or exposed save file")}
 		f,err:=os.Open(path);if err!=nil{return nil,err}
 		raw,err:=io.ReadAll(io.LimitReader(f,32<<20+1));closeErr:=f.Close()
 		if err!=nil||closeErr!=nil||len(raw)>32<<20{return nil,errors.New("cannot read save")}
@@ -53,7 +62,15 @@ func Open(path,name string,model Model) (*Session,error) {
 		if j.Model!=name{return nil,errors.New("save uses a different model; select its original model or a new save")}
 	}
 	s,err:=Replay(j);if err!=nil{return nil,err}
-	return &Session{path:path,journal:j,state:s,model:model},nil
+	opened=true
+	return &Session{path:path,journal:j,state:s,model:model,lock:lock},nil
+}
+
+func (s *Session) Close() error {
+	s.mu.Lock();defer s.mu.Unlock()
+	if s.lock==nil{return nil}
+	err:=s.lock.Close();s.lock=nil
+	return err
 }
 
 func writeJournal(file *os.File,j Journal) error {
@@ -94,6 +111,7 @@ func (s *Session) POV(id string) (Context,error) {
 func (s *Session) Step(ctx context.Context,expected int) (Snapshot,error) {
 	if !s.mu.TryLock(){return Snapshot{},errors.New("uma rodada já está em execução")}
 	defer s.mu.Unlock()
+	if s.lock==nil{return Snapshot{},errors.New("sessão encerrada")}
 	if s.state.Round!=expected{return Snapshot{},errors.New("rodada já alterada; atualize o estado")}
 	if expected>=MaxRounds{return Snapshot{},errors.New("limite do piloto atingido")}
 	minute,err:=nextMinute(s.state);if err!=nil{return Snapshot{},err}

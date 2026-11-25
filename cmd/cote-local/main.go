@@ -35,6 +35,7 @@ func main() {
 	if *steps<0||*steps>pilot.MaxRounds||*port<1||*port>65535 {log.Fatal("invalid rounds or port")}
 	model,err:=pilot.NewHTTPModel(*endpoint,*modelName,os.Getenv("COTE_API_KEY"));if err!=nil{log.Fatal(err)}
 	session,err:=pilot.Open(*save,*modelName,model);if err!=nil{log.Fatal(err)}
+	defer session.Close()
 	ctx,cancel:=signal.NotifyContext(context.Background(),os.Interrupt,syscall.SIGTERM);defer cancel()
 	if *steps>0 {
 		for i:=0;i<*steps;i++ {

@@ -84,7 +84,10 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	for _,x:=range choices{
 		byID[x.Actor]=x.Decision
 		m:=out.Minds[x.Actor]
-  if j.Version<PopulationVersion||x.Decision.Source!=routineSource{m=applyCognition(j,&out,x.Actor,m,x.Decision)}else{m.LastAction=x.Decision.Action}
+  if j.Version<PopulationVersion||x.Decision.Source!=routineSource{
+   if j.Version>=PopulationVersion&&m.Tier==LightTier&&lightInitiativeDue(s,x.Actor){m.LastLightInitiativeDay=s.Minute/1440+1}
+   m=applyCognition(j,&out,x.Actor,m,x.Decision)
+  }else{m.LastAction=x.Decision.Action}
 		m.WakeReason="";out.Minds[x.Actor]=m
 	}
 	if j.Version>=ConversationVersion{

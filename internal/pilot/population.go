@@ -12,7 +12,7 @@ const FullTier="FULL"
 const LightTier="LIGHTWEIGHT"
 const LatentTier="LATENT"
 const CohortTier="COHORT"
-const maxFull=33
+const maxFull=18
 const routineSource="motor/rotina"
 //go:embed population.json
 var populationData []byte
@@ -52,7 +52,7 @@ func validateJournalProfiles(j Journal)error{
  for _,p:=range j.Profiles{
   a,ok:=j.Population[p.ID]
   if !ok||seen[p.ID]||domain.ValidateMachineID(p.ID)!=nil||!validText(p.Name,100)||!validText(a.Source,300)||!has([]string{FullTier,LightTier,LatentTier},a.InitialTier)||!has([]string{"student","teacher","staff"},a.Role)||len(p.Goals)<1||len(p.Goals)>5||len(p.Traits)<1||len(p.Traits)>8||len(p.Background)>8{return errors.New("invalid population member")}
-  if a.Role=="student"{if a.Year<1||a.Year>3||!has([]string{"A","B","C","D"},p.Class){return errors.New("invalid student")}}else if a.Year!=0||a.Station==""{return errors.New("invalid staff")}
+  if a.Role=="student"{if a.Year<1||a.Year>3||(!has([]string{"A","B","C","D"},p.Class)&&!(a.Year>1&&p.Class=="")){return errors.New("invalid student")}}else if a.Year!=0||a.Station==""{return errors.New("invalid staff")}
   if a.Core{core++;if a.Role!="student"||a.Year!=1||a.InitialTier!=FullTier{return errors.New("invalid core")}}
   if a.InitialTier==FullTier{full++}
   for _,list:=range [][]string{p.Goals,p.Traits,p.Background}{for _,x:=range list{if !validText(x,500){return errors.New("invalid profile text")}}}
@@ -67,7 +67,7 @@ func initializePopulation(j Journal,s *State){
  for _,id:=range ids(j.Profiles){
   a:=j.Population[id];m:=s.Minds[id];m.Tier=a.InitialTier
   if !a.Core{
-   if a.Role=="student"{m.Location="class-"+strings.ToLower(classOf(j,id));if a.Year>1{m.Location="senior-class-"+strings.ToLower(classOf(j,id))}}else{m.Location=a.Station}
+   if a.Role=="student"{m.Location="class-"+strings.ToLower(classOf(j,id));if a.Year>1{m.Location=seniorClassroom(classOf(j,id))}}else{m.Location=a.Station}
   }
   s.Minds[id]=m
  }
@@ -85,7 +85,7 @@ func projectPopulation(j Journal,s State,id string,c *Context){
  c.Population=publicPopulation(j,s)
  for k,v:=range c.Population{v.Tier="";c.Population[k]=v}
  if !a.Core{c.OwnCanon=CanonProjection{Source:a.Source,SchoolYear:a.Year,Status:"Identidade provisória; sem episódios posteriores à divergência"}}
- c.Locations=append(c.Locations,"class-a","staffroom","senior-class-a","senior-class-b","senior-class-c","senior-class-d")
+ c.Locations=append(c.Locations,"class-a","staffroom","senior-class-a","senior-class-b","senior-class-c","senior-class-d","senior-common")
  if a.Role!="student"{
   filtered:=[]string{};for _,loc:=range c.Locations{if !strings.HasPrefix(loc,"dormitory-"){filtered=append(filtered,loc)}};c.Locations=filtered
  }else{
@@ -103,7 +103,7 @@ func needsModel(s State,id string)bool{
  if m.Tier!=LightTier{return false}
  if m.Conversation!=nil&&m.Conversation.Turn==id{return true}
  if s.World!=nil{for _,mt:=range s.World.Meetings{if mt.Guest==id&&mt.Status=="pending"&&s.Minute<mt.At{return true}}}
- return m.WakeReason=="Recebeu convite"||m.WakeReason=="Atualização de compromisso"||m.WakeReason=="Compromisso agendado"
+ return m.WakeReason=="Recebeu convite"||m.WakeReason=="Atualização de compromisso"||m.WakeReason=="Compromisso agendado"||lightInitiativeDue(s,id)
 }
 func equalDecision(a,b Decision)bool{return reflect.DeepEqual(a,b)}
 func routineDecision(j Journal,s State,id string)Decision{
@@ -116,7 +116,7 @@ func routineDecision(j Journal,s State,id string)Decision{
  period:=periodAt(s.Minute)
  dest:="";action:="";target:=""
  if a.Role!="student"{dest=a.Station;if period=="aulas da manhã"||period=="aulas da tarde"||a.Role=="staff"&&period!="repouso"{action="work"}else if period=="repouso"{dest="staffroom"}}else{
-  classroom:="class-"+strings.ToLower(classOf(j,id));if a.Year>1{classroom="senior-"+classroom}
+  classroom:="class-"+strings.ToLower(classOf(j,id));if a.Year>1{classroom=seniorClassroom(classOf(j,id))}
   switch period{
   case "aulas da manhã","aulas da tarde":dest=classroom;action="lesson";if a.Year>1{action="study"}
   case "almoço":dest="cafeteria";action="eat";target="free"
@@ -138,7 +138,7 @@ func engage(j Journal,s *State,from,to string){
  for _,id:=range []string{from,to}{
   m:=s.Minds[id];m.LastEngagement=s.Minute;m.Engagements++
   old:=m.Tier
-  if old==LatentTier{m.Tier=LightTier}else if old==LightTier&&m.Engagements>=3{
+  if old==LatentTier{m.Tier=LightTier}else if old==LightTier&&strategicPromotion(s,id,m){
    full:=0;for _,x:=range s.Minds{if x.Tier==FullTier{full++}}
    if full<maxFull{m.Tier=FullTier}
   }
@@ -177,3 +177,16 @@ func activateInvite(s *State,id string){
 }
 
 func equalMind(a,b Mind)bool{return reflect.DeepEqual(a,b)}
+
+func seniorClassroom(class string)string{if class==""{return "senior-common"};return "senior-class-"+strings.ToLower(class)}
+// At most one autonomous free-period consultation per day, in addition to
+// addressed conversations and commitments. No repeated polling during routine.
+func lightInitiativeDue(s State,id string)bool{
+ m:=s.Minds[id];return periodAt(s.Minute)=="atividades livres"&&m.LastLightInitiativeDay!=s.Minute/1440+1
+}
+func strategicPromotion(s State,id string,m Mind)bool{
+ if m.Engagements<6||m.Plan==nil||len(m.Plan.Steps)==0{return false}
+ peers:=map[string]bool{}
+ for i:=len(s.Events)-1;i>=0;i--{e:=s.Events[i];if s.Minute-e.Minute>2880{break};if e.Kind!="claim"{continue};if e.Actor==id&&e.Target!=id{peers[e.Target]=true};if e.Target==id&&e.Actor!=id{peers[e.Actor]=true}}
+ return len(peers)>=3
+}

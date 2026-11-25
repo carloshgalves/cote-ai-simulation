@@ -1,0 +1,767 @@
+[
+  {
+    "pack": "airi-sakura",
+    "source": "data/canon/consolidated/characters/airi-sakura.json",
+    "actor": "airi-sakura",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Class D; disposição reservada e interesse por conexão social."
+  },
+  {
+    "pack": "amasawa-president",
+    "source": "data/canon/consolidated/characters/amasawa-president.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Financiador externo; contexto histórico."
+  },
+  {
+    "pack": "arisu-sakayanagi",
+    "source": "data/canon/consolidated/characters/arisu-sakayanagi.json",
+    "actor": "arisu-sakayanagi",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Identidade do pack histórico; classe e presença são premissas do cenário."
+  },
+  {
+    "pack": "asama",
+    "source": "data/canon/consolidated/characters/asama.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Operador político externo."
+  },
+  {
+    "pack": "atsuomi-ayanokoji",
+    "source": "data/canon/consolidated/characters/atsuomi-ayanokoji.json",
+    "tier": "FULL",
+    "admission": "external",
+    "reason": "Principal agente estratégico externo; requer integração da política/White Room."
+  },
+  {
+    "pack": "ayase-natsu",
+    "source": "data/canon/consolidated/characters/ayase-natsu.json",
+    "actor": "ayase-natsu",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante do terceiro ano; classe não estabelecida no pack."
+  },
+  {
+    "pack": "beppu",
+    "source": "data/canon/consolidated/characters/beppu.json",
+    "actor": "beppu",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Identidade de estudante da Classe B."
+  },
+  {
+    "pack": "chie-hoshinomiya",
+    "source": "data/canon/consolidated/characters/chie-hoshinomiya.json",
+    "actor": "chie-hoshinomiya",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Professora responsável pela Classe B."
+  },
+  {
+    "pack": "chihiro-unidentified",
+    "source": "data/canon/consolidated/characters/chihiro-unidentified.json",
+    "actor": "chihiro-unidentified",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante; classe B e ano adotados como premissas provisórias, sem importar acontecimentos posteriores."
+  },
+  {
+    "pack": "fuji",
+    "source": "data/canon/consolidated/characters/fuji.json",
+    "tier": "LATENT",
+    "admission": "historical",
+    "reason": "Criança em episódio histórico; situação atual não estabelecida."
+  },
+  {
+    "pack": "goro-ishigami",
+    "source": "data/canon/consolidated/characters/goro-ishigami.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Empresário externo."
+  },
+  {
+    "pack": "hamaguchi",
+    "source": "data/canon/consolidated/characters/hamaguchi.json",
+    "actor": "hamaguchi",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante da Classe B; disposição para coordenação coletiva é uma interpretação de perfil, não memória de exame."
+  },
+  {
+    "pack": "haruki-yamauchi",
+    "source": "data/canon/consolidated/characters/haruki-yamauchi.json",
+    "actor": "haruki-yamauchi",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Class D; identidade consolidada."
+  },
+  {
+    "pack": "hasebe",
+    "source": "data/canon/consolidated/characters/hasebe.json",
+    "actor": "hasebe",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante da Classe D; não presumir grupo de amizades posterior."
+  },
+  {
+    "pack": "hashimoto",
+    "source": "data/canon/consolidated/characters/hashimoto.json",
+    "actor": "hashimoto",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Class A; disposição para contatos discretos."
+  },
+  {
+    "pack": "hiyori-shiina",
+    "source": "data/canon/consolidated/characters/hiyori-shiina.json",
+    "actor": "hiyori-shiina",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Identidade consolidada; classe C é premissa de cenário."
+  },
+  {
+    "pack": "honami-ichinose",
+    "source": "data/canon/consolidated/characters/honami-ichinose.json",
+    "actor": "ichinose",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Agente principal do piloto."
+  },
+  {
+    "pack": "hondou",
+    "source": "data/canon/consolidated/characters/hondou.json",
+    "actor": "hondou",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe D."
+  },
+  {
+    "pack": "ikari-momoko",
+    "source": "data/canon/consolidated/characters/ikari-momoko.json",
+    "actor": "ikari-momoko",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante veterana da Classe B; não importar resultado de exame futuro."
+  },
+  {
+    "pack": "ishida",
+    "source": "data/canon/consolidated/characters/ishida.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Pesquisador da White Room."
+  },
+  {
+    "pack": "ishikura",
+    "source": "data/canon/consolidated/characters/ishikura.json",
+    "actor": "ishikura",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante veterano da Classe B; sem presumir coordenação política posterior."
+  },
+  {
+    "pack": "ishizaki",
+    "source": "data/canon/consolidated/characters/ishizaki.json",
+    "actor": "ishizaki",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Class C; identidade consolidada."
+  },
+  {
+    "pack": "isomaru",
+    "source": "data/canon/consolidated/characters/isomaru.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Político; atividade contemporânea não estabelecida."
+  },
+  {
+    "pack": "jinnosuke-naoe",
+    "source": "data/canon/consolidated/characters/jinnosuke-naoe.json",
+    "tier": "FULL",
+    "admission": "external",
+    "reason": "Agente político estratégico; contexto histórico."
+  },
+  {
+    "pack": "kakeru-ryuen",
+    "source": "data/canon/consolidated/characters/kakeru-ryuen.json",
+    "actor": "ryuen",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Agente principal do piloto."
+  },
+  {
+    "pack": "kamogawa-toshizou",
+    "source": "data/canon/consolidated/characters/kamogawa-toshizou.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Político de contexto histórico."
+  },
+  {
+    "pack": "kamogawa",
+    "source": "data/canon/consolidated/characters/kamogawa.json",
+    "tier": "FULL",
+    "admission": "external",
+    "reason": "Agente político estratégico externo."
+  },
+  {
+    "pack": "kaneda",
+    "source": "data/canon/consolidated/characters/kaneda.json",
+    "actor": "kaneda",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Identidade consolidada; classe C é premissa de cenário."
+  },
+  {
+    "pack": "kanji-ike",
+    "source": "data/canon/consolidated/characters/kanji-ike.json",
+    "actor": "kanji-ike",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Class D; identidade consolidada."
+  },
+  {
+    "pack": "katsuragi",
+    "source": "data/canon/consolidated/characters/katsuragi.json",
+    "actor": "katsuragi",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Class A; disposição estratégica cautelosa."
+  },
+  {
+    "pack": "kazuya",
+    "source": "data/canon/consolidated/characters/kazuya.json",
+    "tier": "LATENT",
+    "admission": "historical",
+    "reason": "Celebridade citada em episódio histórico."
+  },
+  {
+    "pack": "kei-karuizawa",
+    "source": "data/canon/consolidated/characters/kei-karuizawa.json",
+    "actor": "kei-karuizawa",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Class D; identidade consolidada."
+  },
+  {
+    "pack": "ken-sudo",
+    "source": "data/canon/consolidated/characters/ken-sudo.json",
+    "actor": "ken-sudo",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Class D; identidade consolidada."
+  },
+  {
+    "pack": "kijima",
+    "source": "data/canon/consolidated/characters/kijima.json",
+    "tier": "FULL",
+    "admission": "external",
+    "reason": "Agente político estratégico externo."
+  },
+  {
+    "pack": "kikuchi",
+    "source": "data/canon/consolidated/characters/kikuchi.json",
+    "actor": "kikuchi",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe D; prenome não confirmado."
+  },
+  {
+    "pack": "kikyo-kushida",
+    "source": "data/canon/consolidated/characters/kikyo-kushida.json",
+    "actor": "kushida",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Agente principal do piloto."
+  },
+  {
+    "pack": "kinoshita",
+    "source": "data/canon/consolidated/characters/kinoshita.json",
+    "actor": "kinoshita",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante identificada no festival; classe C e ano são premissas provisórias."
+  },
+  {
+    "pack": "kiriyama",
+    "source": "data/canon/consolidated/characters/kiriyama.json",
+    "actor": "kiriyama",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante veterano; classe B é premissa provisória; não importar disputa posterior."
+  },
+  {
+    "pack": "kisarazu",
+    "source": "data/canon/consolidated/characters/kisarazu.json",
+    "tier": "LATENT",
+    "admission": "historical",
+    "reason": "Político citado em contexto histórico."
+  },
+  {
+    "pack": "kiyotaka-ayanokoji",
+    "source": "data/canon/consolidated/characters/kiyotaka-ayanokoji.json",
+    "actor": "ayanokoji",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Agente principal do piloto."
+  },
+  {
+    "pack": "kokoro-inogashira",
+    "source": "data/canon/consolidated/characters/kokoro-inogashira.json",
+    "actor": "kokoro-inogashira",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe D."
+  },
+  {
+    "pack": "komiya",
+    "source": "data/canon/consolidated/characters/komiya.json",
+    "actor": "komiya",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe C com interesse em basquete."
+  },
+  {
+    "pack": "kondou",
+    "source": "data/canon/consolidated/characters/kondou.json",
+    "actor": "kondou",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe C com interesse em basquete."
+  },
+  {
+    "pack": "kyo-ishigami",
+    "source": "data/canon/consolidated/characters/kyo-ishigami.json",
+    "tier": "FULL",
+    "admission": "future",
+    "reason": "Identidade de infância; ingresso e estado contemporâneo exigem admissão temporal."
+  },
+  {
+    "pack": "machida",
+    "source": "data/canon/consolidated/characters/machida.json",
+    "actor": "machida",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante da Classe A; disposição cautelosa, não memória de exame."
+  },
+  {
+    "pack": "manabe-shiho",
+    "source": "data/canon/consolidated/characters/manabe-shiho.json",
+    "actor": "manabe-shiho",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante da Classe C; sem memórias de conflitos posteriores."
+  },
+  {
+    "pack": "manabu-horikita",
+    "source": "data/canon/consolidated/characters/manabu-horikita.json",
+    "actor": "manabu-horikita",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Identidade do pack; terceiro ano e classe A são premissas do cenário."
+  },
+  {
+    "pack": "mashima",
+    "source": "data/canon/consolidated/characters/mashima.json",
+    "actor": "mashima",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Professor responsável pela Classe A."
+  },
+  {
+    "pack": "masumi-kamuro",
+    "source": "data/canon/consolidated/characters/masumi-kamuro.json",
+    "actor": "masumi-kamuro",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Identidade e classe A; pack de contexto histórico."
+  },
+  {
+    "pack": "matsuo",
+    "source": "data/canon/consolidated/characters/matsuo.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "historical",
+    "reason": "Mordomo de contexto histórico; destino contemporâneo não estabelecido."
+  },
+  {
+    "pack": "matsushita",
+    "source": "data/canon/consolidated/characters/matsushita.json",
+    "actor": "matsushita",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante da Classe D; perfil de iniciativa seletiva é premissa de simulação."
+  },
+  {
+    "pack": "maya-sato",
+    "source": "data/canon/consolidated/characters/maya-sato.json",
+    "actor": "maya-sato",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Identidade do pack; classe D e ano são premissas provisórias."
+  },
+  {
+    "pack": "mei-yu-wang",
+    "source": "data/canon/consolidated/characters/mei-yu-wang.json",
+    "actor": "mei-yu-wang",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante da Classe D; disposição de apoio social, sem memória de eventos posteriores."
+  },
+  {
+    "pack": "mika",
+    "source": "data/canon/consolidated/characters/mika.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Mãe biológica e agente de rede externa; sem integração atual."
+  },
+  {
+    "pack": "mikuru",
+    "source": "data/canon/consolidated/characters/mikuru.json",
+    "tier": "LATENT",
+    "admission": "historical",
+    "reason": "Criança da White Room em contexto histórico."
+  },
+  {
+    "pack": "mio-ibuki",
+    "source": "data/canon/consolidated/characters/mio-ibuki.json",
+    "actor": "mio-ibuki",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Class C; identidade consolidada."
+  },
+  {
+    "pack": "miyake",
+    "source": "data/canon/consolidated/characters/miyake.json",
+    "actor": "miyake",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante da Classe D; interesse por estudo e vínculos sociais."
+  },
+  {
+    "pack": "miyako",
+    "source": "data/canon/consolidated/characters/miyako.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "historical",
+    "reason": "Autoridade política da época de lançamento do projeto."
+  },
+  {
+    "pack": "miyamoto",
+    "source": "data/canon/consolidated/characters/miyamoto.json",
+    "actor": "miyamoto",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe D."
+  },
+  {
+    "pack": "mori",
+    "source": "data/canon/consolidated/characters/mori.json",
+    "actor": "mori",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe D."
+  },
+  {
+    "pack": "morishige",
+    "source": "data/canon/consolidated/characters/morishige.json",
+    "actor": "morishige",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe A; não importar suspeitas posteriores."
+  },
+  {
+    "pack": "nagumo",
+    "source": "data/canon/consolidated/characters/nagumo.json",
+    "actor": "nagumo",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Segundo ano, classe A; sem importar sucessão futura."
+  },
+  {
+    "pack": "nazuna-asahina",
+    "source": "data/canon/consolidated/characters/nazuna-asahina.json",
+    "actor": "nazuna-asahina",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante veterana da Classe A; perfil social provisório."
+  },
+  {
+    "pack": "ninomiya",
+    "source": "data/canon/consolidated/characters/ninomiya.json",
+    "actor": "ninomiya",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante do terceiro ano; classe não estabelecida no pack."
+  },
+  {
+    "pack": "nogi",
+    "source": "data/canon/consolidated/characters/nogi.json",
+    "tier": "LATENT",
+    "admission": "historical",
+    "reason": "Criança em evento de patrocínio."
+  },
+  {
+    "pack": "okiya",
+    "source": "data/canon/consolidated/characters/okiya.json",
+    "tier": "LATENT",
+    "admission": "unresolved",
+    "reason": "Pack não estabelece ano, classe ou função suficientes."
+  },
+  {
+    "pack": "onodera",
+    "source": "data/canon/consolidated/characters/onodera.json",
+    "actor": "onodera",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante da Classe D com interesse em natação."
+  },
+  {
+    "pack": "ooba",
+    "source": "data/canon/consolidated/characters/ooba.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Ator externo de contexto histórico."
+  },
+  {
+    "pack": "rokusuke-koenji",
+    "source": "data/canon/consolidated/characters/rokusuke-koenji.json",
+    "actor": "rokusuke-koenji",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Class D; identidade consolidada."
+  },
+  {
+    "pack": "ryuji-kanzaki",
+    "source": "data/canon/consolidated/characters/ryuji-kanzaki.json",
+    "actor": "ryuji-kanzaki",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Identidade do pack histórico; classe B é premissa de cenário."
+  },
+  {
+    "pack": "sae-chiyabashira",
+    "source": "data/canon/consolidated/characters/sae-chiyabashira.json",
+    "actor": "sae-chiyabashira",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Professora responsável pela Classe D."
+  },
+  {
+    "pack": "sakagami",
+    "source": "data/canon/consolidated/characters/sakagami.json",
+    "actor": "sakagami",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Professor responsável pela Classe C."
+  },
+  {
+    "pack": "sakayanagi-father",
+    "source": "data/canon/consolidated/characters/sakayanagi-father.json",
+    "tier": "FULL",
+    "admission": "institutional",
+    "reason": "Pai de Arisu; autoridade institucional contemporânea exige projeção própria e motor de autoridade."
+  },
+  {
+    "pack": "sasada",
+    "source": "data/canon/consolidated/characters/sasada.json",
+    "tier": "LATENT",
+    "admission": "historical",
+    "reason": "Figura política mencionada em contexto histórico."
+  },
+  {
+    "pack": "shibata-so",
+    "source": "data/canon/consolidated/characters/shibata-so.json",
+    "actor": "shibata-so",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Identidade consolidada; classe B é premissa de cenário."
+  },
+  {
+    "pack": "shinohara",
+    "source": "data/canon/consolidated/characters/shinohara.json",
+    "actor": "shinohara",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante da Classe D; interesses por convivência e privacidade."
+  },
+  {
+    "pack": "shiro",
+    "source": "data/canon/consolidated/characters/shiro.json",
+    "tier": "FULL",
+    "admission": "historical",
+    "reason": "Ex-aluno da White Room; paradeiro e condições atuais não estabelecidos."
+  },
+  {
+    "pack": "sonezaki",
+    "source": "data/canon/consolidated/characters/sonezaki.json",
+    "tier": "LATENT",
+    "admission": "historical",
+    "reason": "Ator mencionado em contexto histórico."
+  },
+  {
+    "pack": "sophia",
+    "source": "data/canon/consolidated/characters/sophia.json",
+    "tier": "LATENT",
+    "admission": "historical",
+    "reason": "Contato externo de Mika."
+  },
+  {
+    "pack": "sotomura",
+    "source": "data/canon/consolidated/characters/sotomura.json",
+    "actor": "sotomura",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe D."
+  },
+  {
+    "pack": "souya",
+    "source": "data/canon/consolidated/characters/souya.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Pesquisador da White Room."
+  },
+  {
+    "pack": "suzukake",
+    "source": "data/canon/consolidated/characters/suzukake.json",
+    "tier": "FULL",
+    "admission": "external",
+    "reason": "Liderança de pesquisa/educação externa."
+  },
+  {
+    "pack": "suzune-horikita",
+    "source": "data/canon/consolidated/characters/suzune-horikita.json",
+    "actor": "horikita",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Agente principal do piloto."
+  },
+  {
+    "pack": "tabuchi",
+    "source": "data/canon/consolidated/characters/tabuchi.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Administrador externo da White Room."
+  },
+  {
+    "pack": "tachibana",
+    "source": "data/canon/consolidated/characters/tachibana.json",
+    "actor": "tachibana",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Identidade do conselho estudantil; ano e classe são premissas do cenário."
+  },
+  {
+    "pack": "tomohiro-kanzaki",
+    "source": "data/canon/consolidated/characters/tomohiro-kanzaki.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Empresário e pai de Kanzaki."
+  },
+  {
+    "pack": "tsukishiro",
+    "source": "data/canon/consolidated/characters/tsukishiro.json",
+    "tier": "FULL",
+    "admission": "future",
+    "reason": "Agente estratégico externo; sua função futura não deve ser antecipada."
+  },
+  {
+    "pack": "unidentified-electronics-clerk",
+    "source": "data/canon/consolidated/characters/unidentified-electronics-clerk.json",
+    "actor": "unidentified-electronics-clerk",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Funcionário da loja; não importar acontecimentos futuros."
+  },
+  {
+    "pack": "unidentified-third-year-test-seller",
+    "source": "data/canon/consolidated/characters/unidentified-third-year-test-seller.json",
+    "actor": "unidentified-third-year-test-seller",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante do terceiro ano; nome e classe não estabelecidos; não presumir venda futura."
+  },
+  {
+    "pack": "yabu",
+    "source": "data/canon/consolidated/characters/yabu.json",
+    "actor": "yabu",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe C."
+  },
+  {
+    "pack": "yahiko",
+    "source": "data/canon/consolidated/characters/yahiko.json",
+    "actor": "yahiko",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe A."
+  },
+  {
+    "pack": "yajima",
+    "source": "data/canon/consolidated/characters/yajima.json",
+    "tier": "LATENT",
+    "admission": "unresolved",
+    "reason": "Participante de festival; ano/classe não confirmados no pack consultado."
+  },
+  {
+    "pack": "yamada-albert",
+    "source": "data/canon/consolidated/characters/yamada-albert.json",
+    "actor": "yamada-albert",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Identidade consolidada; classe C é premissa de cenário."
+  },
+  {
+    "pack": "yamashita",
+    "source": "data/canon/consolidated/characters/yamashita.json",
+    "actor": "yamashita",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe C."
+  },
+  {
+    "pack": "yamawaki",
+    "source": "data/canon/consolidated/characters/yamawaki.json",
+    "actor": "yamawaki",
+    "tier": "LATENT",
+    "admission": "active",
+    "reason": "Estudante da Classe C."
+  },
+  {
+    "pack": "yosuke-hirata",
+    "source": "data/canon/consolidated/characters/yosuke-hirata.json",
+    "actor": "hirata",
+    "tier": "FULL",
+    "admission": "active",
+    "reason": "Agente principal do piloto."
+  },
+  {
+    "pack": "yuki-father",
+    "source": "data/canon/consolidated/characters/yuki-father.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "external",
+    "reason": "Pai e doador; contexto histórico."
+  },
+  {
+    "pack": "yuki-younger-sister-unidentified",
+    "source": "data/canon/consolidated/characters/yuki-younger-sister-unidentified.json",
+    "tier": "LATENT",
+    "admission": "historical",
+    "reason": "Identidade e estado contemporâneo não estabelecidos."
+  },
+  {
+    "pack": "yuki",
+    "source": "data/canon/consolidated/characters/yuki.json",
+    "tier": "LIGHTWEIGHT",
+    "admission": "historical",
+    "reason": "Ex-aluna da White Room; estado contemporâneo requer projeção específica."
+  },
+  {
+    "pack": "yukimura",
+    "source": "data/canon/consolidated/characters/yukimura.json",
+    "actor": "yukimura",
+    "tier": "LIGHTWEIGHT",
+    "admission": "active",
+    "reason": "Estudante da Classe D; interesse acadêmico. Não presumir amizade posterior."
+  }
+]

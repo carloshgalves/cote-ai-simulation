@@ -109,6 +109,7 @@ type Mind struct {
  Tier string `json:"tier,omitempty"`
  Engagements int `json:"engagements,omitempty"`
  LastEngagement int64 `json:"last_engagement,omitempty"`
+ LastLightInitiativeDay int64 `json:"last_light_initiative_day,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`

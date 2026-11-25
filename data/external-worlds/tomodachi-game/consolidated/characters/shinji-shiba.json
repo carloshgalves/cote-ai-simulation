@@ -1,0 +1,66 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.shinji-shiba",
+  "display_name": "Shinji Shiba",
+  "modeling_tier": "MINIMAL_ENTITY",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "Son of Taizen; adult-game participant",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.shinji-shiba.identity"
+      ]
+    },
+    "cognition": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Strategic opposition; links to Yuuichi's history",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Instrumental cooperation",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "limitations": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Specific capabilities require further evidence",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "body": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "No calibrated physical measurements; use population prior.",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Shinji_Shiba"
+  ],
+  "historical_context_only": false,
+  "uncertainties": [
+    "No actor-owned demonstrated case yet"
+  ],
+  "generation_policy": "One pack per actor; append sourced cases",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only; strip narrative details before agent context",
+    "contextual_facts": "require acquisition",
+    "post_divergence_memory": "simulation events only"
+  },
+  "fidelity_eval": {
+    "anti_case": "No public knowledge of family history"
+  }
+}

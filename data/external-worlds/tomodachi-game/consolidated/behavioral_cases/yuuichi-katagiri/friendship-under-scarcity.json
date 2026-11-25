@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.yuuichi-katagiri.friendship-under-scarcity",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "friendship under scarcity",
+  "context": "PRE_GAME; secondary-source account",
+  "observed_actions": "Works with limited finances while maintaining his school friendships.",
+  "observed_result": "Participates in a social circle despite unequal resources.",
+  "epistemic_limits": "No assumption that friendship overrides every objective.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Manga",
+    "locator": "PRE_GAME",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "motivation",
+    "ethics"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. No assumption that friendship overrides every objective. Allow failure.",
+  "topics": [
+    "motivation",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.friendship-under-scarcity"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

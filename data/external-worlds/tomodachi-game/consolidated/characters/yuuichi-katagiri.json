@@ -1,0 +1,150 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.yuuichi-katagiri",
+  "display_name": "Yuuichi Katagiri",
+  "modeling_tier": "FULL_CANDIDATE",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "Friendship is a professed priority; impoverished upbringing and prior experience with exploitative transactions",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "strategy": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.minority-inference",
+        "tg.case.yuuichi-katagiri.support-isolated-ally",
+        "tg.case.yuuichi-katagiri.concealed-cooperation",
+        "tg.case.yuuichi-katagiri.documented-wager"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.minority-inference",
+        "tg.ev.yuuichi-katagiri.support-isolated-ally",
+        "tg.ev.yuuichi-katagiri.concealed-cooperation",
+        "tg.ev.yuuichi-katagiri.documented-wager"
+      ],
+      "description": "Selective disclosure, strategic deception, willingness to bear costs for allies",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "observation": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.minority-inference"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.minority-inference"
+      ]
+    },
+    "epistemics": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.minority-inference"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.minority-inference"
+      ]
+    },
+    "reasoning": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.verify-incentive"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.verify-incentive"
+      ]
+    },
+    "economy": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.verify-incentive",
+        "tg.case.yuuichi-katagiri.documented-wager"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.verify-incentive",
+        "tg.ev.yuuichi-katagiri.documented-wager"
+      ]
+    },
+    "cooperation": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.support-isolated-ally"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.support-isolated-ally"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.concealed-cooperation"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.concealed-cooperation"
+      ]
+    },
+    "negotiation": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.documented-wager"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.documented-wager"
+      ]
+    },
+    "motivation": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.friendship-under-scarcity"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.friendship-under-scarcity"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.friendship-under-scarcity"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.friendship-under-scarcity"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.identity"
+      ]
+    },
+    "cognition": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Reads incentives, conceals plans, reframes dilemmas",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "limitations": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Physical vulnerability and attachment can constrain choices",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "body": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "No calibrated physical measurements; use population prior.",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Yuuichi_Katagiri"
+  ],
+  "historical_context_only": false,
+  "uncertainties": [
+    "No direct manga audit; behavioral transfer is probabilistic"
+  ],
+  "generation_policy": "One pack per actor; append sourced cases",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only; strip narrative details before agent context",
+    "contextual_facts": "require acquisition",
+    "post_divergence_memory": "simulation events only"
+  },
+  "fidelity_eval": {
+    "anti_case": "Do not grant omniscience or automatic victory"
+  }
+}

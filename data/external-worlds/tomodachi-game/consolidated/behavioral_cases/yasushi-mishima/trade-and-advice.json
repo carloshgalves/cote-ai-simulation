@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.yasushi-mishima.trade-and-advice",
+  "actor_id": "actor.yasushi-mishima",
+  "primary_actor_id": "actor.yasushi-mishima",
+  "title": "trade and advice",
+  "context": "ALL_BET; secondary-source account",
+  "observed_actions": "Trades contestants and offers information about a rival's gambling challenge.",
+  "observed_result": "Pursues amusement and strategic leverage rather than solely money.",
+  "epistemic_limits": "Interpretation of motive is provisional.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Yasushi_Mishima",
+    "locator": "ALL_BET",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "negotiation",
+    "motivation"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Interpretation of motive is provisional. Allow failure.",
+  "topics": [
+    "negotiation",
+    "motivation"
+  ],
+  "evidence_refs": [
+    "tg.ev.yasushi-mishima.trade-and-advice"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

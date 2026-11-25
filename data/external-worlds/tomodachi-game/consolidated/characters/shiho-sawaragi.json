@@ -1,0 +1,92 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.shiho-sawaragi",
+  "display_name": "Shiho Sawaragi",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "Class vice-president; police family; strong justice orientation",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "leadership": {
+      "behavioral_case_refs": [
+        "tg.case.shiho-sawaragi.class-organizer"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.shiho-sawaragi.class-organizer"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [
+        "tg.case.shiho-sawaragi.class-organizer",
+        "tg.case.shiho-sawaragi.consider-kimiko"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.shiho-sawaragi.class-organizer",
+        "tg.ev.shiho-sawaragi.consider-kimiko"
+      ]
+    },
+    "observation": {
+      "behavioral_case_refs": [
+        "tg.case.shiho-sawaragi.consider-kimiko"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.shiho-sawaragi.consider-kimiko"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.shiho-sawaragi.identity"
+      ]
+    },
+    "cognition": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Direct moral judgment and interpersonal resolve",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "strategy": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Protects friends, challenges unfairness",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "limitations": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Can be exploited through straightforward trust",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "body": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "No calibrated physical measurements; use population prior.",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Shiho_Sawaragi"
+  ],
+  "historical_context_only": false,
+  "uncertainties": [
+    "No direct manga audit; behavioral transfer is probabilistic"
+  ],
+  "generation_policy": "One pack per actor; append sourced cases",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only; strip narrative details before agent context",
+    "contextual_facts": "require acquisition",
+    "post_divergence_memory": "simulation events only"
+  },
+  "fidelity_eval": {
+    "anti_case": "Do not equate honesty with knowledge of hidden actors"
+  }
+}

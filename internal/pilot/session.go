@@ -69,8 +69,8 @@ type Snapshot struct {
 }
 
 func Open(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,Version)}
-// OpenScheduled creates v3 saves; existing saves retain their original semantics.
-func OpenScheduled(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,ScheduledVersion)}
+// OpenScheduled creates v4 saves; existing saves retain their original semantics.
+func OpenScheduled(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,ConversationVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
@@ -196,7 +196,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 			_,repairable:=s.model.(interface{Repair(context.Context,Context,string)(Decision,error)})
 			if !repairable||!retryable{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
 			if attempt==3 {
-				if journal.Version==ScheduledVersion{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
+				if journal.Version>=ScheduledVersion{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
 				failure="Modelo não produziu uma ação válida após três tentativas: "+problem
 				d=Decision{Action:"wait",Reason:"Sem decisão válida do modelo",Beliefs:[]Belief{}}
 			}

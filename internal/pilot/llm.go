@@ -26,6 +26,8 @@ type HTTPModel struct {
 	Format string
 	Protocol string
 	telemetry *CallTelemetry
+	chat *ChatGPTAccount
+	largeOutput bool
 }
 
 func NewHTTPModel(endpoint,name,key string) (*HTTPModel,error) {
@@ -61,7 +63,7 @@ func offeredActions(view Context) []offeredAction {
 	for _, location:=range view.Locations {
 		if location!=view.Location {out=append(out,offeredAction{"move:"+location,"move",location})}
 	}
-	for _, person:=range view.Present {out=append(out,offeredAction{"talk:"+person.ID,"talk",person.ID})}
+	for _, person:=range view.Present {if view.Version<ConversationVersion||has(view.Contactable,person.ID){out=append(out,offeredAction{"talk:"+person.ID,"talk",person.ID})}}
 	return out
 }
 type localChoice struct {
@@ -87,7 +89,15 @@ func localDecisionSchema(view Context) (json.RawMessage,error) {
 		"plan":optionalObject([]string{"steps","evidence"},map[string]any{"steps":map[string]any{"type":"array","items":map[string]string{"type":"string"}},"evidence":map[string]string{"type":"string"}}),
 		"relation":optionalObject([]string{"person","delta","evidence"},map[string]any{"person":map[string]string{"type":"string"},"delta":map[string]string{"type":"integer"},"evidence":map[string]string{"type":"string"}}),
 	}
-	if view.Version==ScheduledVersion{props["wait_minutes"]=map[string]any{"type":"integer","minimum":1,"maximum":60}}
+	if view.Version>=ConversationVersion{
+		bp:=props["beliefs"].(map[string]any)["items"].(map[string]any)
+		bp["properties"].(map[string]any)["subject"]=map[string]string{"type":"string"}
+		bp["properties"].(map[string]any)["grounding"]=map[string]string{"type":"string"}
+		bp["required"]=[]string{"text","evidence","confidence","grounding"}
+		pp:=props["plan"].(map[string]any)["anyOf"].([]any)[1].(map[string]any)["properties"].(map[string]any)
+		pp["progress_note"]=map[string]string{"type":"string"}
+	}
+	if view.Version>=ScheduledVersion{props["wait_minutes"]=map[string]any{"type":"integer","minimum":1,"maximum":60}}
 	raw,err:=json.Marshal(map[string]any{"type":"object","properties":props,"required":[]string{"choice"},"additionalProperties":false})
 	return json.RawMessage(raw),err
 }
@@ -114,7 +124,7 @@ func decodeLocalChoice(view Context,raw []byte)(Decision,error) {
 		if view.Version>=Version&&validText(c.Text,500){d.Note=c.Text}else{d.Ignored=append(d.Ignored,"text")}
 	}
 	d.Beliefs=[]Belief{}
-	if view.Version==ScheduledVersion&&d.Action=="wait"{var n int;if json.Unmarshal(fields["wait_minutes"],&n)==nil&&n>=1&&n<=60{d.WaitMinutes=n}}
+	if view.Version>=ScheduledVersion&&d.Action=="wait"{var n int;if json.Unmarshal(fields["wait_minutes"],&n)==nil&&n>=1&&n<=60{d.WaitMinutes=n}}
 	if d.Action=="talk"&&invalidPeerAddress(d.Text,d.Target){return Decision{},responseError{"destinatário é colega do primeiro ano, não senpai; reformule a fala"}}
 	if err:=validateDecision(view,d);err!=nil{return Decision{},responseError{err.Error()}}
 	for _, key:=range []string{"beliefs","goal","relation","plan"} {
@@ -167,18 +177,19 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	prompt:="Interprete somente self em Classroom of the Elite. Use personalidade, objetivos atuais, plano, fatos vividos e hipóteses. Não use acontecimentos futuros nem segredos alheios. Escolha um ID de options que ajude um objetivo ou responda a uma novidade; não repita observação sem informação nova. Esperar é legítimo se não houver motivo para agir. Explique em reason, em primeira pessoa e uma ou duas frases, a intenção ficcional específica do personagem: o que deseja obter, testar, evitar ou descobrir. Não narre fatos novos nem raciocínio detalhado. Se talk, text é a fala real dirigida ao destinatário; para outras ações deixe text vazio. Responda JSON com choice, reason, text. Não copie exemplos nem invente IDs."
 	prompt+=" Todos os seis alunos deste cenário são do primeiro ano, colegas da mesma série; a classe não indica senioridade. Não chame o destinatário de senpai, sempai, veterano ou superior por ser de outra turma. Use nome, sobrenome, -san ou -kun conforme a personalidade. Não introduza relações de autoridade não estabelecidas."
 	prompt+=" Escreva reason, text e toda cognição em português brasileiro. Não presuma materiais, reuniões, cargos ou presença de pessoas que o contexto não estabelece."
-	if view.Version==ScheduledVersion{prompt+=" wake_reason indica por que você voltou a decidir. Se escolher wait, pode indicar wait_minutes (1 a 60) para reavaliar; sem esse campo, aguarda até um estímulo ou o próximo anúncio. Conversas e deslocamentos levam tempo e só ocorrem após validação pelo motor. Uma intenção não executa uma tarefa automaticamente. Não repita um plano que depende de alguém ausente."}
+	if view.Version>=ScheduledVersion{prompt+=" wake_reason indica por que você voltou a decidir. Se escolher wait, pode indicar wait_minutes (1 a 60) para reavaliar; sem esse campo, aguarda até um estímulo ou o próximo anúncio. Conversas e deslocamentos levam tempo e só ocorrem após validação pelo motor. Uma intenção não executa uma tarefa automaticamente. Não repita um plano que depende de alguém ausente."}
+	if view.Version>=ConversationVersion{prompt+=" present indica presença física; contactable indica disponibilidade. Se conversation estiver ativa, responda ao interlocutor para continuar ou escolha outra ação para encerrá-la. Para crenças, grounding deve copiar trecho literal do evento e subject deve indicar ID do colega quando a hipótese é sobre alguém. Anúncio geral não prova características individuais. Confiança sobre alegações até 70. Preserve o plano vigente; proponha plan apenas para criar, avançar ou revisar passos, com progress_note explicando a mudança. Nunca declare que um passo foi executado sem acontecimento que o sustente."}
 	choices:=[]string{}
 	for _, option:=range offeredActions(view){choices=append(choices,option.ID)}
 	prompt+=" IDs autorizados, copie exatamente um: "+strings.Join(choices," | ")+"."
 	if problem=="" {
 		prompt+=" Opcionalmente adicione beliefs [{text,evidence,confidence (0-100)}], goal {replace,with,evidence}, plan {steps,evidence} ou relation {person,delta (-1 ou 1),evidence}. Evidência deve ser ID da própria memória; omita campos sem fundamento. Uma fala recebida é alegação, não fato."
 	} else {prompt+=" A resposta anterior foi rejeitada: "+problem+". Retorne um único objeto JSON com choice (um dos IDs autorizados), reason (uma frase em primeira pessoa) e text (fala se talk, caso contrário vazio). Não acrescente outros campos."}
+	if m.Protocol=="chatgpt"{return m.chatDecision(ctx,view,prompt,string(raw))}
 	format:=map[string]any{"type":"json_object"}
 	u,_:=url.Parse(m.Endpoint)
 	local:=u!=nil && has([]string{"127.0.0.1","localhost","::1"},u.Hostname())
-	maxTokens:=700
-	if problem!=""{maxTokens=300}
+	maxTokens:=generationBudget(m.Name,problem!="",m.largeOutput)
 	if m.Format=="schema"||(m.Format==""&&local) {
 		schema,err:=localDecisionSchema(view);if err!=nil{return zero,err}
 		var simplified map[string]any
@@ -200,7 +211,10 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	}{m.Name,[]map[string]string{{"role":"system","content":prompt},{"role":"user","content":string(raw)}},0.65,format,maxTokens,""}
 	// Groq Qwen's instruct mode keeps the short structured output budget
 	// for the fictional decision rather than hidden reasoning tokens.
-	if u!=nil&&u.Hostname()=="api.groq.com"&&m.Name=="qwen/qwen3.8-27b"{payload.ReasoningEffort="none"}
+	if u!=nil&&u.Hostname()=="api.groq.com"{
+		if m.Name=="qwen/qwen3.8-27b"{payload.ReasoningEffort="none"}
+		if strings.Contains(m.Name,"gpt-oss"){payload.ReasoningEffort="low"}
+	}
 	var body []byte
 	if m.Protocol=="anthropic" {
 		body,err=json.Marshal(map[string]any{"model":m.Name,"system":prompt,"messages":[]map[string]string{{"role":"user","content":string(raw)}},"max_tokens":maxTokens,"temperature":0.65})
@@ -267,4 +281,13 @@ func invalidPeerAddress(text,target string) bool {
 	s=strings.TrimLeft(strings.TrimSpace(s),"“\"'‘")
 	for _,prefix:=range []string{"senpai,","senpai!","senpai?","sempai,","sempai!","sempai?"}{if strings.HasPrefix(s,prefix){return true}}
 	return false
+}
+
+func generationBudget(name string,repair,expanded bool)int{
+ n:=strings.ToLower(name)
+ budget:=700
+ if strings.Contains(n,"gpt-oss")||strings.Contains(n,"ernie")||strings.Contains(n,"reason")||strings.Contains(n,"thinking")||strings.Contains(n,"deepseek-r1"){budget=2048}
+ if repair&&budget==700{budget=512}
+ if expanded{if budget<2048{budget=2048}else{budget=4096}}
+ return budget
 }

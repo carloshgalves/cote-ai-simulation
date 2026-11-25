@@ -41,6 +41,7 @@ type RouteView struct {
 	PromptTokens int64 `json:"prompt_tokens"`
 	CompletionTokens int64 `json:"completion_tokens"`
 	UsageReports int `json:"usage_reports"`
+	Prevented int `json:"prevented_requests"`
 }
 type route struct {
 	view RouteView
@@ -57,14 +58,17 @@ type Router struct {
 	cooldowns map[string]cooldown
 	telemetry []CallTelemetry
 	telemetryDropped int
+	chat *ChatGPTAccount
+	budgets map[string]minuteBudget
 }
-func NewRouter()*Router{return &Router{cooldowns:map[string]cooldown{}}}
+func NewRouter()*Router{return &Router{cooldowns:map[string]cooldown{},budgets:map[string]minuteBudget{}}}
 var providerEndpoints=map[string]string{
 	"ollama":"http://127.0.0.1:11434/v1",
 	"groq":"https://api.groq.com/openai/v1",
 	"gemini":"https://generativelanguage.googleapis.com/v1beta/openai",
 	"openrouter":"https://openrouter.ai/api/v1",
 	"openai":"https://api.openai.com/v1",
+	"chatgpt":"https://api.openai.com/v1",
 	"cerebras":"https://api.cerebras.ai/v1",
 	"nvidia":"https://integrate.api.nvidia.com/v1",
 	"anthropic":"https://api.anthropic.com/v1",
@@ -83,7 +87,8 @@ func normalizeRoute(in RouteInput,requireModel bool)(RouteInput,*HTTPModel,error
 		if in.Provider!="ollama"||in.Endpoint==""{in.Endpoint=endpoint}
 	}
 	if len(in.Key)>4096||strings.ContainsAny(in.Key,"\r\n")||len(in.Endpoint)>500||(requireModel&&!validText(in.Model,200)){return in,nil,errors.New("configuração de modelo inválida")}
-	if in.Provider!="ollama"&&in.Provider!="openai-compatible"&&in.Key==""{return in,nil,errors.New("informe uma chave")}
+	if in.Provider=="chatgpt"&&in.Key!=""{return in,nil,errors.New("ChatGPT usa autorização OAuth, não chave")}
+	if in.Provider!="ollama"&&in.Provider!="chatgpt"&&in.Provider!="openai-compatible"&&in.Key==""{return in,nil,errors.New("informe uma chave")}
 	name:=in.Model;if !requireModel{name="catalog"}
 	m,err:=NewHTTPModel(in.Endpoint,name,in.Key);if err!=nil{return in,nil,err}
 	if in.Format!="auto"{m.Format=in.Format}
@@ -91,6 +96,7 @@ func normalizeRoute(in RouteInput,requireModel bool)(RouteInput,*HTTPModel,error
 		// Remote routes should not monopolize a cycle for four minutes.
 		m.Client.Timeout=45*time.Second
 	}
+	if in.Provider=="chatgpt"{m.Protocol="chatgpt";m.Endpoint=chatResource+"/responses";m.Client.Timeout=90*time.Second}
 	if in.Provider=="anthropic"{m.Protocol="anthropic";m.Endpoint=strings.TrimRight(in.Endpoint,"/")+"/messages"}
 	u,_:=url.Parse(m.Endpoint)
 	if u.Scheme=="http"&&in.Key!=""{return in,nil,errors.New("chave de API requer HTTPS")}
@@ -107,7 +113,9 @@ func (r *Router) Add(in RouteInput)(RouteView,error){
 	// Same provider/model can share account-level quota across keys. Respect
 	// its cooldown rather than repeatedly probing other keys for that model.
 	quota:=u.Hostname()+"|"+in.Model
+	if in.Provider=="chatgpt"{quota="chatgpt-plan"}
 	auth:=fmt.Sprintf("%s|%x",u.Hostname(),sha256.Sum256([]byte(in.Key)))
+	if in.Provider=="chatgpt"{auth="chatgpt-plan"}
 	r.routes=append(r.routes,&route{view:view,model:m,quotaScope:quota,authScope:auth})
 	return view,nil
 }
@@ -223,10 +231,18 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 	// changed by negotiation. Only the effective format is cached in memory.
 	r.mu.Lock()
 	m:=*rt.model
+	m.chat=r.chat
 	if rt.view.EffectiveFormat!=""&&rt.view.EffectiveFormat!="auto"{m.Format=rt.view.EffectiveFormat}
 	r.mu.Unlock()
 	call:=func(repair string)(Decision,error){
 		start:=time.Now()
+		r.mu.Lock()
+		if until:=r.admit(rt,view,start,repair!="",m.largeOutput);until.After(start){
+			rt.view.Prevented++
+			r.mu.Unlock()
+			return Decision{},providerError{Status:429,RetryAt:until,Message:"limite preventivo de tokens por minuto; aguardando renovação"}
+		}
+		r.mu.Unlock()
 		t:=CallTelemetry{StartedAt:start,Actor:view.Self.ID,Cycle:view.Round,Provider:rt.view.Provider,Model:rt.view.Model,RouteID:rt.view.ID,Repair:repair!="",Format:m.Format}
 		m.telemetry=&t
 		r.mu.Lock();rt.view.Attempts++;r.mu.Unlock()
@@ -238,6 +254,7 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 		rt.view.LastLatencyMS=t.LatencyMS
 		if err!=nil{rt.view.LastError=err.Error();t.Error=err.Error()}
 		if t.Quota.Observed {rt.view.Quota=t.Quota}
+		r.observeBudget(rt,t)
 		if t.Usage!=nil{rt.view.PromptTokens+=t.Usage.Input;rt.view.CompletionTokens+=t.Usage.Output;rt.view.UsageReports++}
 		// The provider's own explicit exhaustion signal is authoritative;
 		// do not guess at remaining quota from local call counts.
@@ -265,6 +282,7 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 	var malformed responseError
 	r.mu.Lock();blocked=!r.blocked(rt,time.Now()).until.IsZero();r.mu.Unlock()
 	if ctx.Err()==nil&&!blocked&&errors.As(err,&malformed){
+		if strings.Contains(malformed.Error(),"truncada"){m.largeOutput=true}
 		d,err=call(malformed.Error())
 	}
 	r.mu.Lock()
@@ -303,4 +321,11 @@ func (r *Router) Test(ctx context.Context,id string)(RouteView,error){
 		}
 	}else{rt.view.Status="disponível"}
 	return rt.view,nil
+}
+
+func(r *Router) AttachChatGPT(a *ChatGPTAccount){
+	r.mu.Lock();defer r.mu.Unlock();r.chat=a
+	delete(r.cooldowns,"auth:chatgpt-plan")
+	delete(r.cooldowns,"quota:chatgpt-plan")
+	for _,rt:=range r.routes{if rt.view.Provider=="chatgpt"{delete(r.cooldowns,"route:"+rt.view.ID);rt.view.Status="não testado"}}
 }

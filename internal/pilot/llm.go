@@ -82,7 +82,7 @@ func localDecisionSchema(view Context) (json.RawMessage,error) {
 		"plan":optionalObject([]string{"steps","evidence"},map[string]any{"steps":map[string]any{"type":"array","items":map[string]string{"type":"string"}},"evidence":map[string]string{"type":"string"}}),
 		"relation":optionalObject([]string{"person","delta","evidence"},map[string]any{"person":map[string]string{"type":"string"},"delta":map[string]string{"type":"integer"},"evidence":map[string]string{"type":"string"}}),
 	}
-	raw,err:=json.Marshal(map[string]any{"type":"object","properties":props,"required":[]string{"choice","text","reason"},"additionalProperties":false})
+	raw,err:=json.Marshal(map[string]any{"type":"object","properties":props,"required":[]string{"choice"},"additionalProperties":false})
 	return json.RawMessage(raw),err
 }
 func optionalObject(required []string,properties map[string]any) map[string]any {
@@ -93,16 +93,15 @@ func decodeLocalChoice(view Context,raw []byte)(Decision,error) {
 	var fields map[string]json.RawMessage
 	if err:=json.Unmarshal(raw,&fields);err!=nil||fields==nil{return Decision{},responseError{"JSON da decisão ilegível"}}
 	var c localChoice
-	for _, key:=range []string{"choice","text","reason"} {
-		if _,ok:=fields[key];!ok{return Decision{},responseError{"campo obrigatório ausente: "+key}}
-	}
-	if json.Unmarshal(fields["choice"],&c.Choice)!=nil||json.Unmarshal(fields["text"],&c.Text)!=nil||json.Unmarshal(fields["reason"],&c.Reason)!=nil{return Decision{},responseError{"campos da ação inválidos"}}
+	if json.Unmarshal(fields["choice"],&c.Choice)!=nil{return Decision{},responseError{"campo choice ausente ou inválido"}}
+	if raw,ok:=fields["text"];ok{_ = json.Unmarshal(raw,&c.Text)}
+	if raw,ok:=fields["reason"];ok{_ = json.Unmarshal(raw,&c.Reason)}
 	var d Decision
 	found:=false
 	for _, o:=range offeredActions(view){if o.ID==c.Choice{d.Action=o.Action;d.Target=o.Target;found=true;break}}
 	if !found{return Decision{},responseError{"ação não consta nas opções disponíveis"}}
-	d.Reason=c.Reason
-	if d.Action=="talk"{d.Text=c.Text}
+	if validText(c.Reason,300){d.Reason=c.Reason}else if c.Reason!=""{d.Ignored=append(d.Ignored,"reason")}
+	if d.Action=="talk"{d.Text=c.Text}else if c.Text!=""{d.Ignored=append(d.Ignored,"text")}
 	d.Beliefs=[]Belief{}
 	if err:=validateDecision(view,d);err!=nil{return Decision{},responseError{err.Error()}}
 	for _, key:=range []string{"beliefs","goal","relation","plan"} {
@@ -119,7 +118,7 @@ func decodeLocalChoice(view Context,raw []byte)(Decision,error) {
 	}
 	// Do not interpret extra fields as actions or world facts.
 	for key:=range fields {
-		if !has([]string{"choice","text","reason","beliefs","goal","relation","plan"},key){d.Ignored=append(d.Ignored,"campo extra: "+key)}
+		if !has([]string{"choice","text","reason","beliefs","goal","relation","plan"},key){d.Ignored=append(d.Ignored,"campo extra");break}
 	}
 	sort.Strings(d.Ignored)
 	return d,nil
@@ -146,10 +145,10 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	local:=u!=nil && has([]string{"127.0.0.1","localhost","::1"},u.Hostname())
 	maxTokens:=512
 	if local {
-		prompt="Interprete somente self no primeiro dia de Classroom of the Elite. Use personalidade, metas, plano e memória; não use fatos futuros nem segredos alheios. Falas são alegações, não fatos. Escolha exatamente um ID de options. Responda em português com JSON: {\"choice\":\"observe\",\"text\":\"\",\"reason\":\"intenção breve\"}. Se escolher talk, text é a fala real em até duas frases; senão deixe vazio. Não invente IDs. Não escreva raciocínio longo."
+		prompt="Interprete somente self no primeiro dia de Classroom of the Elite. Use personalidade, metas, plano e memória; não use fatos futuros nem segredos alheios. Falas são alegações, não fatos. Escolha exatamente um ID de options. Responda em português com JSON: {\"choice\":\"observe\",\"text\":\"\",\"reason\":\"intenção breve\"}. Somente choice é obrigatório; se escolher talk, text é obrigatório e contém a fala real em até duas frases. Para outras ações text pode ser omitido. reason é uma intenção curta opcional. Não invente IDs. Não escreva raciocínio longo."
 		if problem=="" {
 			prompt+=" Opcionalmente adicione beliefs [{text,evidence,confidence (0-100)}], goal {replace,with,evidence}, plan {steps,evidence} ou relation {person,delta (-1 ou 1),evidence}. Cite IDs reais da memória; omita campos sem evidência."
-		} else {prompt+=" A resposta anterior foi rejeitada: "+problem+". Nesta tentativa use apenas choice, text, reason."}
+		} else {prompt+=" A resposta anterior foi rejeitada: "+problem+". Nesta tentativa use somente choice e, para talk, text. reason é opcional."}
 		raw,err=json.Marshal(struct{Context;Options []offeredAction `json:"options"`}{view,offeredActions(view)});if err!=nil{return zero,err}
 		schema,err:=localDecisionSchema(view);if err!=nil{return zero,err}
 		if problem!="" {

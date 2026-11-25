@@ -200,3 +200,27 @@ func TestInvalidAgentDoesNotBlockOtherAgents(t *testing.T){
 	reopened,err:=Open(path,"test",model);if err!=nil{t.Fatal(err)};defer reopened.Close()
 	if !reflect.DeepEqual(snap,reopened.Snapshot()){t.Fatal("failure replay diverged")}
 }
+
+func TestMinimalActionDoesNotRequireIntention(t *testing.T){
+	j:=Journal{Version:Version,Model:"test"};j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	s,err:=initial(j);if err!=nil{t.Fatal(err)}
+	view:=actorContext(j,s,"ayanokoji")
+	d,err:=decodeLocalChoice(view,[]byte(`{"choice":"move:library"}`))
+	if err!=nil||d.Action!="move"||d.Target!="library"||d.Reason!=""{t.Fatalf("minimal choice failed: %+v %v",d,err)}
+	if _,err:=decodeLocalChoice(view,[]byte(`{"choice":"talk:horikita"}`));err==nil{t.Fatal("empty speech accepted")}
+}
+func TestAllInvalidAgentsDoNotAdvanceAndRetryFresh(t *testing.T){
+	var calls atomic.Int32
+	server:=httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter,r *http.Request){
+		n:=calls.Add(1)
+		content:=`{"choice":"invented"}`
+		if n>18{content=`{"choice":"observe"}`}
+		_ = json.NewEncoder(w).Encode(map[string]any{"choices":[]any{map[string]any{"message":map[string]string{"content":content},"finish_reason":"stop"}}})
+	}));defer server.Close()
+	model,err:=NewHTTPModel(server.URL+"/v1","test","");if err!=nil{t.Fatal(err)}
+	s,err:=Open(filepath.Join(t.TempDir(),"run.json"),"test",model);if err!=nil{t.Fatal(err)};defer s.Close()
+	if _,err:=s.Step(context.Background(),0);err==nil{t.Fatal("all invalid round advanced")}
+	if s.Snapshot().State.Round!=0||calls.Load()!=18||len(s.Progress().Choices)!=6{t.Fatal("missing failures or bad round state")}
+	if _,err:=s.Step(context.Background(),0);err!=nil{t.Fatal(err)}
+	if calls.Load()!=24||s.Snapshot().State.Round!=1{t.Fatal("all-failed retry did not start fresh")}
+}

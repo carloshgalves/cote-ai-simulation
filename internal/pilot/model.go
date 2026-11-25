@@ -214,7 +214,9 @@ func evidence(c Context,id string) (Event,bool) {
 	return Event{},false
 }
 func validateDecision(c Context,d Decision) error {
-	if !validText(d.Reason,300) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
+	if (d.Reason!=""&&!validText(d.Reason,300)) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
+	if len(d.Ignored)>7 {return errors.New("invalid ignored field count")}
+	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","campo extra"},key){return errors.New("invalid ignored field")}}
 	if d.Action!="wait" && d.Action!="observe" && d.Action!="move" && d.Action!="talk" {return errors.New("unsupported action")}
 	if d.Action=="talk" {
 		found:=false;for _, p:=range c.Present {if p.ID==d.Target {found=true}}
@@ -287,7 +289,7 @@ func apply(j Journal,s State,r Round) (State,error) {
 			v:=m.Relations[d.Relation.Person]+d.Relation.Delta
 			if v>5 {v=5};if v< -5 {v= -5};m.Relations[d.Relation.Person]=v
 		}
-		appendEvent(&out,Event{Kind:"intention",Actor:x.Actor,Text:d.Reason,Audience:[]string{x.Actor}})
+		if d.Reason!=""{appendEvent(&out,Event{Kind:"intention",Actor:x.Actor,Text:d.Reason,Audience:[]string{x.Actor}})}
 		if d.Goal!=nil {appendEvent(&out,Event{Kind:"goal",Actor:x.Actor,Text:d.Goal.Replace+" → "+d.Goal.With,Audience:[]string{x.Actor},Evidence:d.Goal.Evidence})}
 		if d.Plan!=nil {
 			m.Plan=clone(d.Plan)

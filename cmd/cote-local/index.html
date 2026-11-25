@@ -32,7 +32,7 @@ function renderChoices(){
   if(x.failure){box.append(node("div",x.failure,"error"))}
   else{
    const action={wait:"Aguardar",observe:"Observar",move:"Ir para "+(place[d.target]||d.target),talk:"Conversar com "+name(d.target)}[d.action]||d.action;
-   box.append(node("strong",action),node("p",d.reason));
+   box.append(node("strong",action));if(d.reason)box.append(node("p",d.reason));
    if(d.text)box.append(node("p","“"+d.text+"”"));
    for(const b of d.beliefs||[])box.append(node("div","Hipótese: "+b.text+" ("+b.confidence+"%)"));
    if(d.goal)box.append(node("div","Meta proposta: "+d.goal.with));
@@ -48,7 +48,8 @@ function renderProgress(){
  renderChoices();
  const p=progress;if(!p?.active){
  const pending=p?.completed>0&&p.round>snapshot?.state.round;
- $("progress").textContent=pending?("Resultados guardados nesta sessão: "+p.completed+"/"+p.total+". Próxima tentativa continua do ponto de falha."):"";
+ const allFailed=pending&&p.completed===p.total&&p.choices?.every(x=>x.failure);
+ $("progress").textContent=allFailed?"Todos os agentes falharam; a próxima tentativa recomeça.":pending?("Resultados guardados nesta sessão: "+p.completed+"/"+p.total+". Próxima tentativa continua do ponto de falha."):"";
  for(const label of $("people").querySelectorAll("[data-progress]")){const i=Object.keys(snapshot.state.minds).sort().indexOf(label.dataset.progress);label.textContent=pending&&i<p.completed?(p.choices?.find(x=>x.actor===label.dataset.progress)?.failure?"Falha do modelo":"Decisão guardada"):""}
  controls();return
  }

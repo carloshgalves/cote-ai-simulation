@@ -200,7 +200,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 	valid:=0
 	for _,x:=range r.Choices{if x.Failure==""{valid++}}
 	if valid==0 {
-		s.mu.Lock();s.pending=nil;s.progress.Choices=nil;s.progress.Completed=0;s.mu.Unlock()
+		s.mu.Lock();s.pending=nil;s.mu.Unlock()
 		return Snapshot{},errors.New("nenhum agente produziu decisão válida; rodada não avançou")
 	}
 	next,err:=apply(journal,state,r);if err!=nil{return Snapshot{},err}

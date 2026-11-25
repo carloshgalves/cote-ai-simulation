@@ -7,7 +7,7 @@ const configs={
     "prize": 2000000,
     "initialDebt": 4000000,
     "model": [
-      "questioner order configured by roster; integer rounding down on half-debt; failed-game tie shares liability; final subjective question uses configured answer"
+      "questioner order configured by roster; integer rounding down on half-debt; prize applied to debt; failed-game tie shares liability; final subjective question uses configured answer"
     ]
   },
   "backbiting-sugoroku": {
@@ -105,7 +105,7 @@ function clone(x){return JSON.parse(JSON.stringify(x))}
 function amount(x){assert(Number.isSafeInteger(x)&&x>=0,"invalid money/quantity");return x}
 
 function create(game,players,setup={}){
- const c=configs[game];assert(c,"unknown game");assert(Array.isArray(players)&&players.length>=2&&new Set(players).size===players.length&&players.every(p=>typeof p==="string"&&/^[a-zA-Z0-9_.-]+$/.test(p)&&!["__proto__","constructor","prototype"].includes(p)),"bad roster");
+ assert(Object.hasOwn(configs,game),"unknown game");const c=configs[game];assert(Array.isArray(players)&&players.length>=2&&new Set(players).size===players.length&&players.every(p=>typeof p==="string"&&/^[a-zA-Z0-9_.-]+$/.test(p)&&!Object.hasOwn(Object.prototype,p)&&p!=="prototype"),"bad roster");
  if(c.players)assert(players.length===c.players,"wrong roster size");if(["fake-game","friendship-janken"].includes(game))assert(players.length===2,"two players required");
  const s={game,round:0,terminal:false,winners:[],players:[...players],active:[...players],debt:{},cash:{},publicLog:[],private:{},config:clone(c),data:{}};
  for(const p of players){s.debt[p]=amount(setup.debt?.[p]??c.initialDebt??0);s.cash[p]=amount(setup.cash?.[p]??0);s.private[p]={};}
@@ -122,12 +122,12 @@ function create(game,players,setup={}){
 
 function rps(a,b){assert(["rock","paper","scissors"].includes(a)&&["rock","paper","scissors"].includes(b),"invalid hand");return a===b?0:((a==="rock"&&b==="scissors")||(a==="scissors"&&b==="paper")||(a==="paper"&&b==="rock"))?1:-1}
 
-function view(s,actor){assert(s.players.includes(actor),"unknown viewer");const out={game:s.game,round:s.round,terminal:s.terminal,active:[...s.active],winners:[...s.winners],ownCash:s.cash[actor],ownDebt:s.debt[actor],publicLog:clone(s.publicLog),private:clone(s.private[actor]),publicRules:clone(s.config)};if(s.game==="backbiting-sugoroku")out.positions=clone(s.data.pos);if(s.game==="hide-and-seek")out.team=s.data.teams[actor];if(s.game==="friends-prison")out.dominoes=s.data.dominoes;if(s.game==="friendship-janken")out.cards=clone(s.data.hands[actor]);return out}
+function view(s,actor){assert(s.players.includes(actor),"unknown viewer");const out={game:s.game,round:s.round,terminal:s.terminal,active:[...s.active],winners:[...s.winners],ownCash:s.cash[actor],ownDebt:s.debt[actor],publicLog:clone(s.publicLog),private:clone(s.private[actor]),publicRules:clone(s.config)};if(s.game==="kokkuri-san"&&!s.terminal){out.questioner=s.players[s.round];out.private.questionCard=actor===out.questioner?(s.round<4?"A yes result clears the game; a no result halves your own debt.":"Final question concerns continued friendship.") : null;}if(s.game==="backbiting-sugoroku")out.positions=clone(s.data.pos);if(s.game==="hide-and-seek")out.team=s.data.teams[actor];if(s.game==="friends-prison")out.dominoes=s.data.dominoes;if(s.game==="friendship-janken")out.cards=clone(s.data.hands[actor]);return out}
 
 function step(before,actions={},host={}){
  assert(!before.terminal,"terminal");const s=clone(before),c=s.config,d=s.data,p=s.players,a=s.active;
- assert(actions&&typeof actions==="object"&&!Array.isArray(actions),"bad actions");for(const k of Object.keys(actions))assert(a.includes(k),"inactive or unknown actor");
- const act=id=>actions[id]??{}, log=(event,details={})=>s.publicLog.push({round:s.round,event,...details});
+ assert(actions&&typeof actions==="object"&&!Array.isArray(actions),"bad actions");for(const k of Object.keys(actions))assert(a.includes(k)&&actions[k]&&typeof actions[k]==="object"&&!Array.isArray(actions[k]),"inactive, unknown or malformed actor action");
+ const act=id=>Object.hasOwn(actions,id)?actions[id]:{}, log=(event,details={})=>s.publicLog.push({round:s.round,event,...details});
  const debt=(id,n)=>{assert(p.includes(id),"unknown debtor");s.debt[id]=amount(s.debt[id]+n)};
  const credit=(id,n)=>{assert(p.includes(id),"unknown account");s.cash[id]=amount(s.cash[id]+n)};
  const finish=(winners)=>{assert(new Set(winners).size===winners.length&&winners.every(x=>p.includes(x)),"bad winners");s.terminal=true;s.winners=[...winners];log("terminal",{winners:[...winners]})};
@@ -142,7 +142,7 @@ function step(before,actions={},host={}){
  for(const id of a)if(id!==q&&act(id).spoke===true)debt(id,s.debt[id]);
  if(answer==="no"&&s.round<5)s.debt[q]=Math.floor(s.debt[q]/2);
  const correct=s.round<5?"yes":host.finalAnswer;assert(["yes","no"].includes(correct),"final answer required");
- log("coin_result",{answer,questioner:q});if(yes===0||yes===p.length||answer===correct){split(c.prize,p,(id,n)=>credit(id,n));finish(p)}else if(s.round===c.rounds){const max=Math.max(...p.map(id=>s.debt[id])),worst=p.filter(id=>s.debt[id]===max),total=p.reduce((n,id)=>n+s.debt[id],0);for(const id of p)s.debt[id]=0;split(total,worst,debt);finish([])}break;}
+ log("coin_result",{answer,questioner:q});if(answer===correct){split(c.prize,p,(id,n)=>{s.debt[id]=Math.max(0,s.debt[id]-n)});finish(p)}else if(s.round===c.rounds){const max=Math.max(...p.map(id=>s.debt[id])),worst=p.filter(id=>s.debt[id]===max),total=p.reduce((n,id)=>n+s.debt[id],0);for(const id of p)s.debt[id]=0;split(total,worst,debt);finish([])}break;}
  case "backbiting-sugoroku":{
  requireAll();for(const id of a)assert(Array.isArray(act(id).cards)&&act(id).cards.every(x=>typeof x==="string"),"invalid cards");let moves={};
  if(a.every(id=>act(id).cards.length===0))for(const id of a)moves[id]=1;
@@ -158,9 +158,9 @@ function step(before,actions={},host={}){
  const surrender=a.filter(id=>act(id).surrender===true);assert(surrender.every(id=>Object.values(d.hiders).includes(id)),"only hider can surrender");
  const discoveries=host.discoveredHiders??[];assert(discoveries.every(id=>Object.values(d.hiders).includes(id)),"invalid discovery");
  const lost=new Set([...violations,...surrender,...discoveries].map(id=>d.teams[id]));
- if(lost.size===2){finish([]);break}
+ if(lost.size===2){for(const id of a.filter(x=>violations.some(v=>d.teams[v]===d.teams[x])))debt(id,s.debt[id]);finish([]);break}
  if(lost.size===1)losing=[...lost][0];
- if(losing){const w=a.filter(id=>d.teams[id]!==losing),l=a.filter(id=>d.teams[id]===losing);if(violations.length)for(const id of l)debt(id,s.debt[id]);split(c.loserPenalty,l,debt);split(c.prize,w,credit);for(const id of d.switched){if(w.includes(id)){const orig=p.filter(x=>x!==id&&d.originalTeams[x]===d.originalTeams[id]);if(orig.length)split(c.loserPenalty,orig,debt)} }finish(w)}
+ if(losing){const w=a.filter(id=>d.teams[id]!==losing),l=a.filter(id=>d.teams[id]===losing);if(violations.some(id=>d.teams[id]===losing))for(const id of l)debt(id,s.debt[id]);split(c.loserPenalty,l,debt);split(c.prize,w,credit);for(const id of d.switched){if(w.includes(id)){const orig=p.filter(x=>x!==id&&d.originalTeams[x]===d.originalTeams[id]);if(orig.length)split(c.loserPenalty,orig,debt)} }finish(w)}
  else if(s.round>=c.deadline)finish([]);break;}
  case "friend-sin-trial":{
  if(s.round===1&&host.accepted===false){finish([]);break}
@@ -169,13 +169,13 @@ function step(before,actions={},host={}){
  if(d.paid.length*c.jurorFunds>=c.target){split(c.accusedDebt,p,debt);finish(p)}else if(s.round>=c.days)finish([]);break;}
  case "friends-prison":{
  const viol=host.violators??[];for(const id of viol){remove(id);debt(id,c.exilePenalty);d.exiled.push(id)}
- for(const e of host.escapes??[]){assert(e&&typeof e.key==="string"&&e.key.length&&!d.usedKeys.includes(e.key)&&s.active.includes(e.actor)&&act(e.actor).escape===true,"invalid escape");d.usedKeys.push(e.key);remove(e.actor);credit(e.actor,c.escapePrize);d.escaped.push(e.actor);for(const id of s.active)debt(id,c.escapePenalty)}
+ for(const e of host.escapes??[]){assert(e&&typeof e.key==="string"&&e.key.length&&!d.usedKeys.includes(e.key)&&s.active.includes(e.actor)&&act(e.actor).escape===true&&e.keyAcquired===true&&e.guardsAbsent===true,"invalid escape");d.usedKeys.push(e.key);remove(e.actor);credit(e.actor,c.escapePrize);d.escaped.push(e.actor);for(const id of s.active)debt(id,c.escapePenalty)}
  const voters=s.active,counts={};for(const id of voters){const t=act(id).vote;if(t!==undefined){assert(voters.includes(t),"bad vote");counts[t]=(counts[t]??0)+1}}
  const exile=voters.find(id=>(counts[id]??0)>voters.length/2);if(exile){remove(exile);debt(exile,c.exilePenalty);d.exiled.push(exile);log("exile",{actor:exile})}
  d.dominoes=Math.min(c.dominoes,d.dominoes+amount(host.dominoesPlaced??0));if(!s.active.length||d.dominoes>=c.dominoes||s.round>=c.days){for(const id of s.active)credit(id,c.clearPrize);finish([...d.escaped,...s.active])}break;}
  case "all-bet":{
  for(const id of a){const x=act(id);if(x.sell!==undefined){assert(!d.sold[id]&&a.includes(x.sell)&&x.sell!==id&&!d.sold[x.sell]&&act(x.sell).consentSale===id,"invalid sale");d.sold[x.sell]={buyer:id,price:d.valuations[x.sell]};credit(id,d.valuations[x.sell])}if(x.buyback!==undefined){const t=x.buyback,sale=d.sold[t];assert(sale&&sale.buyer===id&&s.cash[id]>=sale.price,"invalid buyback");credit(id,-sale.price);delete d.sold[t]}}
- for(const b of host.settlements??[]){assert(typeof b.id==="string"&&b.id.length&&!Object.hasOwn(d.contracts,b.id)&&a.includes(b.a)&&a.includes(b.b)&&b.a!==b.b&&!d.sold[b.a]&&!d.sold[b.b],"invalid/replayed wager");amount(b.stake);assert(b.stake>0&&s.cash[b.a]>=b.stake&&s.cash[b.b]>=b.stake,"unfunded wager");
+ for(const b of host.settlements??[]){assert(typeof b.id==="string"&&/^[a-zA-Z0-9_.-]+$/.test(b.id)&&!Object.hasOwn(Object.prototype,b.id)&&b.id!=="prototype"&&!Object.hasOwn(d.contracts,b.id)&&a.includes(b.a)&&a.includes(b.b)&&b.a!==b.b&&!d.sold[b.a]&&!d.sold[b.b],"invalid/replayed wager");amount(b.stake);assert(b.stake>0&&s.cash[b.a]>=b.stake&&s.cash[b.b]>=b.stake,"unfunded wager");
  const terms=JSON.stringify([b.id,b.a,b.b,b.stake,b.kind]);assert(act(b.a).contract===terms&&act(b.b).contract===terms,"missing consent");
  let win=b.winner;if(b.kind==="rps"){const v=rps(act(b.a).hand,act(b.b).hand);win=v===0?null:v>0?b.a:b.b}else if(b.kind==="coin"){assert(["heads","tails"].includes(b.coin)&&["heads","tails"].includes(act(b.a).guess)&&["heads","tails"].includes(act(b.b).guess)&&act(b.a).guess!==act(b.b).guess,"bad coin");win=act(b.a).guess===b.coin?b.a:b.b}else assert(b.kind==="adjudicated","unsupported wager");
  assert(win===null||win===b.a||win===b.b,"invalid winner");if(win!==null)transfer(win===b.a?b.b:b.a,win,b.stake);d.contracts[b.id]=true;log("wager_settled",{id:b.id,winner:win})}
@@ -186,7 +186,7 @@ function step(before,actions={},host={}){
  for(const id of host.captured??[]){remove(id);s.cash[id]=0;d.forfeiture.push(id);log("capture",{actor:id})}
  if(s.round>=c.days||!s.active.length)finish(s.active);break;}
  case "friendless":{
- for(const id of a){const x=act(id);if(x.report!==undefined){const t=x.report.target;assert(s.active.includes(t)&&t!==id&&s.active.includes(id)&&typeof x.report.password==="string","bad report");if(x.report.password===s.private[t].password){remove(t);d.excluded.push(t);log("excluded",{actor:t})}else{remove(id);d.excluded.push(id);log("excluded",{actor:id})}}}
+ const eliminated=new Set();for(const id of a){const x=act(id);if(x.report!==undefined){const t=x.report.target;assert(a.includes(t)&&t!==id&&typeof x.report.password==="string","bad report");eliminated.add(x.report.password===s.private[t].password?t:id)}}for(const id of a){if(eliminated.has(id)){remove(id);d.excluded.push(id);log("excluded",{actor:id})}}
  for(const e of host.completedTasks??[]){assert(s.active.includes(e.actor)&&typeof e.task==="string","invalid task");(d.completed[e.actor]??=[]).push(e.task)}
  if(s.round>=c.days||s.active.length<=1){const active=s.active;const count=Object.fromEntries(active.map(id=>[id,0]));for(const id of active){const t=act(id).vote;if(t!==undefined){assert(active.includes(t)&&t!==id,"invalid election vote");count[t]++}}if(active.length){const max=Math.max(...Object.values(count)),w=active.filter(id=>count[id]===max);for(const id of active)s.debt[id]=0;split(c.prize,w,credit);finish(w)}else finish([])}break;}
  case "friendship-janken":
@@ -203,7 +203,7 @@ function step(before,actions={},host={}){
 function smoke(){
  let n=0;const eq=(a,b)=>{assert(JSON.stringify(a)===JSON.stringify(b),`mismatch ${JSON.stringify(a)} / ${JSON.stringify(b)}`);n++};const reject=fn=>{let ok=false;try{fn()}catch{ok=true}assert(ok,"expected rejection");n++};
  const P=["a","b","c","d","e"], ballots=(p,v)=>Object.fromEntries(p.map(x=>[x,v]));
- let s=create("kokkuri-san",P),t=step(s,ballots(P,{answer:"yes"}));eq(t.winners,P);eq(t.cash.a,400000);eq(s.round,0);eq(step(s,ballots(P,{answer:"yes"})),t);reject(()=>step(t,{}));reject(()=>step(s,{a:{answer:"yes"}}));
+ let s=create("kokkuri-san",P),t=step(s,ballots(P,{answer:"yes"}));eq(t.winners,P);eq(t.debt.a,3600000);eq(s.round,0);eq(step(s,ballots(P,{answer:"yes"})),t);reject(()=>step(t,{}));reject(()=>step(s,{a:{answer:"yes"}}));
  s=create("backbiting-sugoroku",P);for(let i=0;i<20&&!s.terminal;i++)s=step(s,ballots(P,{cards:[]}));eq(s.terminal,true);eq(s.winners,[]);
  s=create("hide-and-seek",["a","b","c","d"],{teams:{a:"A",b:"A",c:"B",d:"B"},hiders:{A:"a",B:"c"}});reject(()=>step(s,{b:{surrender:true}}));eq(step(s,{a:{surrender:true}}).winners,["c","d"]);eq(view(s,"b").private,{role:"seeker"});reject(()=>step(s,{b:{betray:"c"}}));
  let jury=Array.from({length:28},(_,i)=>"j"+i);s=create("friend-sin-trial",P,{jurors:jury});t=step(s,{}, {jurorPayments:jury});eq(t.winners,P);eq(t.debt.a,100000000);reject(()=>step(s,{}, {jurorPayments:[jury[0],jury[0]]}));

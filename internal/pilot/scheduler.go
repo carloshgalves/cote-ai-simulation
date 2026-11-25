@@ -86,6 +86,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		m:=out.Minds[x.Actor]
   if j.Version<PopulationVersion||x.Decision.Source!=routineSource{
    if j.Version>=PopulationVersion&&(m.Tier==LightTier||j.Version>=SelectiveVersion&&m.Tier==FullTier)&&initiativeAccountingDue(j,s,x.Actor){m.LastLightInitiativeDay=s.Minute/1440+1}
+   if j.Version>=MotivationVersion&&personalOpportunity(j,s,x.Actor)!=nil{m.LastOpportunityMinute=s.Minute}
    if j.Version>=SelectiveVersion{
     m.NextDeliberation=0
     switch x.Decision.Action{

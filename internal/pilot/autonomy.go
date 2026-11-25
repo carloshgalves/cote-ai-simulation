@@ -41,6 +41,7 @@ func personalPrior(j Journal,s State,id string) routinePrior {
 }
 
 func initiativeDue(j Journal,s State,id string) bool {
+ if j.Version>=MotivationVersion{return personalOpportunity(j,s,id)!=nil}
  if j.Version<AutonomyVersion{return isStudent(j,id)&&lightInitiativeDue(s,id)}
  if !isStudent(j,id){return false}
  m:=s.Minds[id]

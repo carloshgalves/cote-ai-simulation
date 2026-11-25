@@ -91,3 +91,48 @@ func TestSelectiveSessionRoutesAndReplays(t *testing.T) {
  defer session.Close()
  if !reflect.DeepEqual(after,session.Snapshot()) || calls != n { t.Fatal("replay diverged or called provider") }
 }
+
+
+// A deliberate trip to inspect a location must resume cognition on arrival;
+// an engine-owned trip must not acquire that privilege.
+func TestSelectiveDeliberateMovementContinuation(t *testing.T) {
+ j:=selectiveJournal(t)
+ s,err:=initial(j)
+ if err!=nil{t.Fatal(err)}
+ id:="ayanokoji"
+ m:=s.Minds[id]
+ m.PendingStimulus="Avaliar biblioteca"
+ s.Minds[id]=m
+ choices:=[]Chosen{}
+ for _,actor:=range eligibleActors(j,s){
+  d:=routineDecision(j,s,actor)
+  if decisionNeedsModel(j,s,actor){d=Decision{Action:"wait"}}
+  if actor==id{d=Decision{Action:"move",Target:"library"}}
+  choices=append(choices,Chosen{Actor:actor,Decision:d})
+ }
+ next,err:=scheduledAdvance(j,s,choices)
+ if err!=nil{t.Fatal(err)}
+ due:=s.Minute+walkMinutes(m.Location,"library")
+ if next.Minds[id].NextDeliberation!=due{t.Fatal("deliberate move lost follow-up")}
+ for actor,other:=range next.Minds{
+  if actor!=id&&other.LastAction=="move"&&other.NextDeliberation!=0{t.Fatal("routine move gained follow-up",actor)}
+ }
+}
+
+func TestSelectiveRecheckSurvivesEarlierScheduleBoundary(t *testing.T) {
+ j:=selectiveJournal(t)
+ s,err:=initial(j)
+ if err!=nil{t.Fatal(err)}
+ id:="ayanokoji"
+ m:=s.Minds[id]
+ m.PendingStimulus=""
+ m.Activity=nil
+ m.NextDeliberation=550
+ s.Minds[id]=m
+ s.Minute=540
+ if decisionNeedsModel(j,s,id){t.Fatal("premature deliberation")}
+ d:=routineDecision(j,s,id)
+ if d.Action!="wait"||d.WaitMinutes!=10||d.Source!=routineSource{t.Fatalf("explicit recheck replaced by routine: %+v",d)}
+ s.Minute=550
+ if !decisionNeedsModel(j,s,id){t.Fatal("recheck did not activate at its deadline")}
+}

@@ -110,6 +110,13 @@ func equalDecision(a,b Decision)bool{return reflect.DeepEqual(a,b)}
 func routineDecision(j Journal,s State,id string)Decision{
  a,m:=j.Population[id],s.Minds[id]
  d:=Decision{Action:"wait",WaitMinutes:60,Source:routineSource}
+ // A public schedule boundary may shorten a previously chosen deliberate
+ // wait. Do not replace its remaining interval with an unrelated task.
+ if j.Version>=SelectiveVersion&&m.NextDeliberation>s.Minute{
+  remaining:=m.NextDeliberation-s.Minute
+  if remaining<60{d.WaitMinutes=int(remaining)}
+  return d
+ }
  v:=Context{Location:m.Location,Locations:worldLocations(id),School:schoolView(j,s,id)}
  projectPopulation(j,s,id,&v)
  choose:=func(action,target string)Decision{d.Action=action;d.Target=target;d.WaitMinutes=0;return d}

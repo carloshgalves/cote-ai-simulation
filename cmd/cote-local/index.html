@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>COTE · Simulação local</title>
+<style>
+:root{color-scheme:dark;background:#11141b;color:#eef0f6;font:15px system-ui,sans-serif}*{box-sizing:border-box}body{margin:0}main{max-width:1280px;margin:auto;padding:28px}header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}h1{font-size:26px;margin:0}h2{font-size:17px;margin:0 0 12px}p{line-height:1.5}small,.muted{color:#a8b0c2}button,select{font:inherit;padding:10px 14px;color:inherit;border:1px solid #3e4656;border-radius:8px;background:#252b37}button{cursor:pointer}button:disabled{opacity:.45;cursor:default}#run{background:#c9da9c;color:#182118;border:0;font-weight:650}#status{min-height:24px;margin:12px 0}.error{color:#ffac9f}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:20px 0}.panel,.person{background:#1c212c;border:1px solid #313847;border-radius:12px;padding:16px}.person strong{display:block;margin-bottom:6px}.person button{margin-top:10px;width:100%;text-align:left}.columns{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}.event{border-top:1px solid #313847;padding:12px 0;overflow-wrap:anywhere}.event:first-child{border:0}.event .meta{font-size:12px;color:#aab6c8;margin-bottom:4px}.event.claim{border-left:2px solid #8ca6dc;padding-left:10px}.scroll{max-height:64vh;overflow:auto}ul{padding-left:22px}li{margin:6px 0}#who{max-width:100%}#clock{font-size:21px;font-weight:650}.private{color:#d7bd93;font-size:12px}@media(max-width:800px){.columns{grid-template-columns:1fr}main{padding:15px}.scroll{max-height:55vh}}
+</style></head>
+<body><main>
+<header><div><h1>COTE · Simulação local</h1><p class="muted">Piloto cognitivo · primeiro dia · seis personagens</p></div><div><span id="clock">08:00</span> <span id="round" class="muted"></span></div><div><button id="run">▶ Executar</button> <button id="pause" disabled>Pausar</button> <button id="step">Avançar uma rodada</button></div></header>
+<div id="status" role="status">Carregando…</div><div id="people" class="grid"></div>
+<div class="columns"><section class="panel"><h2>Linha do tempo <span class="private">· visão do operador</span></h2><label>Perspectiva <select id="who"><option value="">Todos (operador)</option></select></label><div id="timeline" class="scroll"></div></section><section class="panel"><h2>Cognição do personagem</h2><div id="mind" class="scroll"><p class="muted">Selecione um personagem para inspecionar suas metas, hipóteses, relações e memórias.</p></div></section></div>
+<p class="muted" id="model"></p><p class="muted">O motor decide os efeitos; as falas são alegações, não fatos. A pausa ocorre entre rodadas. O progresso é salvo localmente a cada rodada concluída.</p>
+</main>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);let snapshot=null,running=false,busy=false,selected="";
+const place={"hall":"Hall","class-b":"Sala B","class-c":"Sala C","class-d":"Sala D","library":"Biblioteca","courtyard":"Pátio"};
+const kind={announcement:"Anúncio",intention:"Intenção privada",claim:"Conversa privada",move:"Deslocamento",observation:"Observação",wait:"Espera",goal:"Mudança de objetivo"};
+function node(tag,text,klass){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(klass)e.className=klass;return e}
+function name(id){return snapshot?.people.find(p=>p.id===id)?.name||id}
+function time(m){return String(Math.floor(m/60)%24).padStart(2,"0")+":"+String(m%60).padStart(2,"0")}
+function status(text,error=false){$("status").textContent=text;$("status").className=error?"error":"muted"}
+async function api(url,options){const r=await fetch(url,options);const result=await r.json();if(!r.ok)throw Error(result.error||"Falha de comunicação");return result}
+function controls(){const done=snapshot&&snapshot.state.round>=snapshot.limit;$("run").disabled=running||busy||done||!snapshot;$("pause").disabled=!running;$("step").disabled=running||busy||done||!snapshot}
+function list(parent,label,items){parent.append(node("h3",label));const ul=node("ul");if(!items.length)ul.append(node("li","Nenhum registro","muted"));for(const item of items)ul.append(node("li",item));parent.append(ul)}
+function render(){
+ if(!snapshot)return;const s=snapshot.state;
+ $("clock").textContent="Dia "+(Math.floor(s.minute/1440)+1)+" · "+time(s.minute);$("round").textContent="Rodada "+s.round+" / "+snapshot.limit;
+ $("model").textContent="Modelo: "+snapshot.model+" · registro "+snapshot.digest.slice(0,12);
+ $("people").replaceChildren();
+ for(const p of snapshot.people){const m=s.minds[p.id],card=node("div",undefined,"person");card.append(node("strong",p.name),node("small","Classe "+p.class+" · "+(place[m.location]||m.location)));const b=node("button","Inspecionar");b.onclick=()=>{$("who").value=p.id;selected=p.id;render()};card.append(b);$("people").append(card)}
+ const events=s.events.filter(e=>!selected||e.audience.includes(selected));$("timeline").replaceChildren();
+ for(const e of events.slice(-150).reverse()){const box=node("div",undefined,"event "+e.kind);box.append(node("div",time(e.minute)+" · "+(kind[e.kind]||e.kind)+" · "+name(e.actor)+(e.kind==="claim"?" → "+name(e.target):""),"meta"),node("div",e.text));$("timeline").append(box)}
+ $("mind").replaceChildren();
+ if(selected){const m=s.minds[selected];$("mind").append(node("strong",name(selected)),node("p","Local: "+(place[m.location]||m.location)));list($("mind"),"Objetivos",m.goals);list($("mind"),"Crenças (hipóteses)",m.beliefs.map(b=>b.text+" · confiança "+b.confidence+"% · "+b.evidence));list($("mind"),"Relações",Object.entries(m.relations).map(([id,v])=>name(id)+": "+v));list($("mind"),"Memórias recentes",events.slice(-12).reverse().map(e=>time(e.minute)+" · "+e.id+" · "+e.text))}
+ else{$("mind").append(node("p","Selecione um personagem para inspecionar sua cognição.","muted"))}
+ controls()
+}
+async function step(){
+ if(busy||!snapshot)return false;busy=true;controls();status("Consultando os seis agentes. A rodada só é publicada quando todas as decisões forem válidas.");
+ try{snapshot=await api("/api/step",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({round:snapshot.state.round})});render();status("Rodada "+snapshot.state.round+" salva.");return true}
+ catch(e){running=false;status(e.message+" · nenhuma nova rodada foi publicada. Se necessário, recarregue para conferir o registro.",true);return false}
+ finally{busy=false;controls()}
+}
+$("step").onclick=()=>step();$("pause").onclick=()=>{running=false;controls();status(busy?"Pausa solicitada; finalizando a rodada atual.":"Pausado.")};
+$("run").onclick=async()=>{if(running||busy)return;running=true;controls();while(running&&snapshot.state.round<snapshot.limit){if(!await step())break}running=false;controls()};
+$("who").onchange=e=>{selected=e.target.value;render()};
+(async()=>{try{snapshot=await api("/api/state");for(const p of snapshot.people){const o=node("option",p.name);o.value=p.id;$("who").append(o)}render();status("Pronto. Execute ou avance uma rodada.")}catch(e){status(e.message,true)}})();
+</script></body></html>

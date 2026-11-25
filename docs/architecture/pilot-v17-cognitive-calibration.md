@@ -1,0 +1,3 @@
+# V17 cognitive calibration
+
+Provisional daily discretionary opportunity budgets: FULL 3, LIGHTWEIGHT 1, with 120-minute cooldown. Addressed stimuli, dialogue turns, commitments, active exam and explicit timed deliberation retain priority. No automatic follow-up after unplanned move or failed social contact; retry remains recorded. Known-person movement reactivation has a 180-minute cooldown. Peer rotation is seed-derived rather than alphabetic. These are not hard provider-call quotas. Compare matched trajectories, per-hour attempts, output diversity and blind quality before claiming savings. Legacy journals remain unchanged.

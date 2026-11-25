@@ -155,6 +155,7 @@ type Context struct {
 	Contactable []string `json:"contactable,omitempty"`
 	Version int `json:"version"`
 	School *SchoolView `json:"school,omitempty"`
+ Discoveries []Discovery `json:"discoveries,omitempty"`
 }
 type Model interface {
 	Decide(context.Context, Context) (Decision,error)
@@ -231,7 +232,7 @@ func actorContext(j Journal,s State,id string) Context {
 	}
 	if j.Version>=Version {c.CanObserve=observationChanged(s,id,roster(s,id))}
 	if j.Version>=ScheduledVersion{c.WakeReason=m.WakeReason;c.Activity=clone(m.Activity);if j.Version>=ConversationVersion{c.Conversation=clone(m.Conversation)}}
-	if j.Version>=WorldVersion{c.School=schoolView(j,s,id);c.Locations=worldLocations(id)}
+	if j.Version>=WorldVersion{c.School=schoolView(j,s,id);c.Locations=worldLocations(id);c.Discoveries=clone(m.Discoveries)}
 	// Recent lived memories plus older evidence currently referenced by cognition.
 	// Do not retrieve any event outside the actor's audience.
 	all:=visible(s,id)
@@ -257,7 +258,7 @@ func actorContext(j Journal,s State,id string) Context {
 	for _, e:=range all {
 		if (j.Version>=WorldVersion&&has([]string{"resource","exam","meeting","task","conversation_end"},e.Kind))||j.Version==LegacyVersion||e.Kind=="announcement"||e.Kind=="claim"||e.Kind=="move"||e.Kind=="departure"||e.Kind=="arrival"||e.Kind=="obstacle"||e.Kind=="observation"||keep[e.ID]{recent=append(recent,e)}
 	}
-	for i,e:=range recent {if i>=len(recent)-20 || keep[e.ID] || e.Kind=="announcement" {c.Memory=append(c.Memory,clone(e))}}
+	for i,e:=range recent {if i>=len(recent)-20 || keep[e.ID] || (j.Version<WorldVersion&&e.Kind=="announcement") {c.Memory=append(c.Memory,clone(e))}}
 	return c
 }
 func evidence(c Context,id string) (Event,bool) {

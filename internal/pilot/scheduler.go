@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"unicode/utf8"
+ "strings"
 
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/clock"
 	"github.com/carloshgalves/cote-ai-simulation/internal/csf/domain"
@@ -47,6 +48,8 @@ func closeConversation(s *State,id string){
 }
 func availableForContact(m Mind)bool{return m.Activity==nil||m.Activity.Kind=="wait"||m.Activity.Kind=="observe"||m.Activity.Kind=="conversation_hold"}
 func walkMinutes(from,to string)int64{
+	if strings.HasPrefix(from,"dormitory-")||strings.HasPrefix(to,"dormitory-"){return 12}
+	if has([]string{"shop","mall","seafront","park","gym","cafeteria"},from)||has([]string{"shop","mall","seafront","park","gym","cafeteria"},to){return 8}
 	isClass:=func(s string)bool{return s=="class-b"||s=="class-c"||s=="class-d"}
 	if from==to{return 0}
 	if isClass(from)&&isClass(to){return 2}

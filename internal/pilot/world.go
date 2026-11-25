@@ -71,7 +71,7 @@ type SchoolView struct{
  NextAnnouncement int64 `json:"next_announcement"`
  Exam *ExamView `json:"exam,omitempty"`
 }
-func worldLocations(id string)[]string{return append(clone(locations),"shop","cafeteria","dormitory")}
+func worldLocations(id string)[]string{return append(clone(locations),"shop","cafeteria","gym","park","mall","seafront","dormitory-"+id)}
 func initializeWorld(j Journal,s *State){
  s.World=&SchoolWorld{ClassPoints:map[string]int64{"A":1000,"B":1000,"C":1000,"D":1000},Ledger:[]LedgerEntry{},Meetings:[]Meeting{}}
  for _,id:=range ids(j.Profiles){
@@ -92,12 +92,12 @@ func pay(s *State,from,to string,amount int64,category,cause string)bool{
  return true
 }
 var shopPrices=map[string]int64{"notebook":300,"pen":100,"snack":200,"water":100}
-func isWorldAction(a string)bool{return has([]string{"buy","transfer","study","lesson","eat","rest","invite","accept","decline","attend","guess"},a)}
+func isWorldAction(a string)bool{return has([]string{"buy","transfer","study","lesson","eat","rest","sleep","exercise","recreation","use","invite","accept","decline","attend","guess"},a)}
 func schoolView(j Journal,s State,id string)*SchoolView{
  m:=s.Minds[id]
  v:=&SchoolView{Wallet:m.Wallet,Inventory:clone(m.Inventory),Meetings:[]Meeting{},Rules:[]string{"PP próprios persistem; o motor é autoridade sobre transações. Não há despesa obrigatória.","Regras completas da escola ainda não foram divulgadas."},Options:[]offeredAction{}}
  add:=func(a,target string){k:=a;if target!=""{k+=":"+target};v.Options=append(v.Options,offeredAction{k,a,target})}
- v.Period=periodAt(s.Minute);v.NextAnnouncement=nextDue(j,s)
+ v.Period=periodAt(s.Minute);v.NextAnnouncement=nextPublicSchedule(s.Minute)
  if s.Minute>=540{v.Rules[1]="Transferências voluntárias de 1.000 PP são permitidas; sem saldo negativo. Subsistência gratuita disponível. A fórmula mensal de pontos ainda não foi revelada."}
  if s.Minute>=30*1440+480{v.Rules[1]="Renda mensal = CP atuais da classe × 100; saldo anterior permanece. Transferências voluntárias de 1.000 PP permitidas."}
  v.Rules=append(v.Rules,"Convites são para daqui a 30 minutos, no local atual. O destinatário deve aceitar e os dois devem comparecer. Estudar ocupa 25 minutos, refeição 20, descanso 60.")
@@ -108,7 +108,10 @@ func schoolView(j Journal,s State,id string)*SchoolView{
  if m.Location=="library"||strings.HasPrefix(m.Location,"class-"){add("study","")}
  if m.Location=="class-"+strings.ToLower(classOf(j,id))&&(v.Period=="aulas da manhã"||v.Period=="aulas da tarde"){add("lesson","")}
  if m.Location=="cafeteria"{add("eat","free");if m.Wallet>=500{add("eat","paid")}}
- if m.Location=="dormitory"{add("rest","")}
+ if m.Location=="dormitory-"+id{add("rest","");if v.Period=="repouso"{add("sleep","")}}
+ if m.Location=="gym"||m.Location=="park"{add("exercise","")}
+ if m.Location=="mall"&&m.Wallet>=800{add("recreation","")}
+ for _,item:=range []string{"snack","water"}{if m.Inventory[item]>0{add("use",item)}}
  for _,other:=range ids(j.Profiles){
   if other==id{continue}
   p:=s.Minds[other]
@@ -156,7 +159,7 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
   duration:=int64(1);kind:="world_action"
   switch d.Action{
   case "buy":
-   if pay(s,id,"school",shopPrices[d.Target],"durable","Compra: "+d.Target){
+   if pay(s,id,"school",shopPrices[d.Target],purchaseCategory(d.Target),"Compra: "+d.Target){
     m=s.Minds[id];m.Inventory[d.Target]++;s.Minds[id]=m
    }
   case "transfer":pay(s,id,d.Target,1000,"transfer","Transferência voluntária");m=s.Minds[id]
@@ -164,7 +167,15 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
   case "lesson":duration=50;kind="task"
   case "eat":duration=20;kind="task";if d.Target=="paid"{pay(s,id,"school",500,"ordinary","Refeição paga");m=s.Minds[id]}
   case "rest":duration=60;kind="task"
+  case "sleep":duration=480-s.Minute%1440;if duration<=0{duration+=1440};kind="task"
+  case "exercise":duration=30;kind="task"
+  case "recreation":duration=40;kind="task";pay(s,id,"school",800,"event","Atividade de lazer");m=s.Minds[id]
+  case "use":
+   if m.Inventory[d.Target]>0{m.Inventory[d.Target]--;appendEvent(s,Event{Kind:"task",Actor:id,Text:"Consumiu "+d.Target,Audience:[]string{id}})}
   case "invite":
+   duplicate:=false
+   for _,mt:=range s.World.Meetings{if (mt.Status=="pending"||mt.Status=="accepted")&&((mt.Host==id&&mt.Guest==d.Target)||(mt.Host==d.Target&&mt.Guest==id)){duplicate=true}}
+   if duplicate{appendEvent(s,Event{Kind:"obstacle",Actor:id,Text:"Já existe convite ativo para esse colega.",Audience:[]string{id}});break}
    mt:=Meeting{ID:fmt.Sprintf("meeting-%d",len(s.World.Meetings)+1),Host:id,Guest:d.Target,Location:m.Location,At:s.Minute+30,Status:"pending"}
    s.World.Meetings=append(s.World.Meetings,mt)
    appendEvent(s,Event{Kind:"meeting",Actor:id,Target:d.Target,Text:fmt.Sprintf("Convite %s em %s às %s; aguarda aceite.",mt.ID,mt.Location,reportTime(mt.At)),Audience:[]string{id,d.Target}})
@@ -258,7 +269,7 @@ func advanceWorld(j Journal,s *State){
  case 1440+840:announce("Fim do período ativo do exame; submissões antecipadas continuam até 14:30.")
  case 1440+870:if e:=s.World.Exam;e!=nil&&e.Outcome==0{e.Phase="final"};announce("Janela final de submissões do exame aberta.")
  case 1440+900:if e:=s.World.Exam;e!=nil&&e.Outcome==0{settleExam(j,s,2,"")};announce("Submissões encerradas.")
- case 1440+960:if e:=s.World.Exam;e!=nil{announce(fmt.Sprintf("Resultado do grupo Zodiac/VIP: Outcome %d. CP: A=%d B=%d C=%d D=%d.",e.Outcome,s.World.ClassPoints["A"],s.World.ClassPoints["B"],s.World.ClassPoints["C"],s.World.ClassPoints["D"]))}
+ case 1440+960:if e:=s.World.Exam;e!=nil{announce(fmt.Sprintf("Resultado do grupo Zodiac/VIP: Outcome %d. Variações de CP desde o início: A=%+d B=%+d C=%+d D=%+d.",e.Outcome,s.World.ClassPoints["A"]-1000,s.World.ClassPoints["B"]-1000,s.World.ClassPoints["C"]-1000,s.World.ClassPoints["D"]-1000))}
  default:
   switch now%1440{
   case 480:
@@ -287,4 +298,11 @@ func dialogueStale(events []Event,id,peer,text string,old int)int{
 func periodAt(minute int64)string{
  t:=minute%1440
  switch{case t<480||t>=1320:return "repouso";case t<540:return "período livre";case t<720:return "aulas da manhã";case t<780:return "almoço";case t<900:return "aulas da tarde";case t<1080:return "atividades livres";default:return "jantar e repouso"}
+}
+
+func purchaseCategory(id string)string{if id=="snack"||id=="water"{return "ordinary"};return "durable"}
+func nextPublicSchedule(now int64)int64{
+ day:=now/1440*1440
+ for _,at:=range []int64{480,540,720,780,900,1080,1320}{if day+at>now{return day+at}}
+ return day+1440+480
 }

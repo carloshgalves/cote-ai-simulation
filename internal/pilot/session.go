@@ -196,6 +196,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 			_,repairable:=s.model.(interface{Repair(context.Context,Context,string)(Decision,error)})
 			if !repairable||!retryable{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
 			if attempt==3 {
+				if journal.Version==ScheduledVersion{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
 				failure="Modelo não produziu uma ação válida após três tentativas: "+problem
 				d=Decision{Action:"wait",Reason:"Sem decisão válida do modelo",Beliefs:[]Belief{}}
 			}

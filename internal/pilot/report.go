@@ -100,7 +100,7 @@ func buildReport(o OperatorReport)([]byte,error){
 		for _,c:=range a.Cycles{
 			fmt.Fprintf(&b,"\n## Ciclo %d — %s a %s\n\n",c.Cycle,reportTime(c.StartMinute),reportTime(c.EndMinute))
 			fmt.Fprintln(&b,"### Antes da decisão");writeMind(&b,c.Before)
-			fmt.Fprintln(&b,"\n### Decisão própria");if c.Consulted{writeChoice(&b,c.Choice)}else{fmt.Fprintln(&b,"- Sem nova consulta ao modelo; atividade anterior mantida.")}
+			fmt.Fprintln(&b,"\n### Decisão própria");if c.Consulted{writeChoice(&b,c.Choice)}else{fmt.Fprintln(&b,"- Sem nova consulta ao modelo neste ciclo; consulte os acontecimentos e o estado de atividade.")}
 			fmt.Fprintln(&b,"\n### Acontecimentos percebidos");for _,e:=range c.Events{writeEvent(&b,e)}
 			fmt.Fprintln(&b,"\n### Depois da decisão");writeMind(&b,c.After)
 		}

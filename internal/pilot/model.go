@@ -229,7 +229,7 @@ func actorContext(j Journal,s State,id string) Context {
 	}
 	recent:=[]Event{}
 	for _, e:=range all {
-		if j.Version==LegacyVersion||e.Kind=="announcement"||e.Kind=="claim"||e.Kind=="move"||e.Kind=="observation"||keep[e.ID]{recent=append(recent,e)}
+		if j.Version==LegacyVersion||e.Kind=="announcement"||e.Kind=="claim"||e.Kind=="move"||e.Kind=="departure"||e.Kind=="arrival"||e.Kind=="obstacle"||e.Kind=="observation"||keep[e.ID]{recent=append(recent,e)}
 	}
 	for i,e:=range recent {if i>=len(recent)-20 || keep[e.ID] || e.Kind=="announcement" {c.Memory=append(c.Memory,clone(e))}}
 	return c

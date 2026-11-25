@@ -94,6 +94,15 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		}
 		out.Minds[id]=m
 	}
+	// Departures were published at the current instant. A newly selected
+	// wait also reacts to those events, rather than sleeping through them.
+	for _,e:=range out.Events[len(s.Events):]{
+		if e.Kind!="observation"||e.Text==""{continue}
+		for _,id:=range e.Audience{wakeWaiting(&out,id,"Um colega saiu do ambiente")}
+	}
+	// An immediate stimulus can make another decision due at the same
+	// simulated minute. Publish this cycle before advancing any clock.
+	if len(eligibleActors(j,out))>0{return out,nil}
 	// Next actual due time, not the longest action in the cohort.
 	minute:=nextWorld(s)
 	for _,m:=range out.Minds{if m.Activity!=nil&&m.Activity.Until<minute{minute=m.Activity.Until}}
@@ -104,10 +113,15 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	advanced,err:=clock.ApplyAdvance(cs,plan);if err!=nil{return State{},err}
 	out.Minute=int64(advanced.Instant)
 	// Complete arrivals first, then publish messages and observations.
+	arrivals:=[]string{}
 	for _,id:=range ids(j.Profiles){
 		m:=out.Minds[id];a:=m.Activity
 		if a==nil||a.Until>minute||a.Kind!="move"{continue}
 		m.Location=a.Target;m.Activity=nil;m.WakeReason="Deslocamento concluído";out.Minds[id]=m
+		arrivals=append(arrivals,id)
+	}
+	for _,id:=range arrivals{
+		m:=out.Minds[id]
 		appendEvent(&out,Event{Kind:"arrival",Actor:id,Target:m.Location,Text:"Chegou a "+m.Location,Audience:[]string{id}})
 		for _,other:=range ids(j.Profiles){if other==id{continue};p:=out.Minds[other];if p.Location==m.Location&&(p.Activity==nil||p.Activity.Kind!="move"){appendEvent(&out,Event{Kind:"observation",Actor:id,Text:"Chegou a "+m.Location,Audience:[]string{other}});wakeWaiting(&out,other,"Um colega chegou ao ambiente")}}
 	}
@@ -118,7 +132,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		case "talk":appendEvent(&out,Event{Kind:"claim",Actor:id,Target:a.Target,Text:a.Text,Audience:[]string{id,a.Target}});m.WakeReason="Conversa concluída"
 		case "listen":m.WakeReason="Recebeu uma fala"
 		case "observe":text:=roster(out,id);if observationChanged(out,id,text){appendEvent(&out,Event{Kind:"observation",Actor:id,Text:text,Audience:[]string{id}})};m.WakeReason="Observação concluída"
-		case "wait":m.WakeReason="Prazo de reavaliação atingido"
+		case "wait":m.WakeReason="Prazo de reavaliação atingido";if minute==nextWorld(s){m.WakeReason="Novo anúncio escolar"}
 		case "retry":m.WakeReason="Interlocutor indisponível"
 		}
 		m.Activity=nil;out.Minds[id]=m

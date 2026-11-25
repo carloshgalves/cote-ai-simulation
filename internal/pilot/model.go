@@ -65,6 +65,9 @@ type PlanChange struct {
 	Steps []string `json:"steps"`
 	Evidence string `json:"evidence"`
 	ProgressNote string `json:"progress_note,omitempty"`
+ Horizon string `json:"horizon,omitempty"`
+ Deadline int64 `json:"deadline,omitempty"`
+ Scope string `json:"scope,omitempty"`
 }
 type Decision struct {
 	Action string `json:"action"`
@@ -111,6 +114,11 @@ type Mind struct {
  Engagements int `json:"engagements,omitempty"`
  LastEngagement int64 `json:"last_engagement,omitempty"`
  LastLightInitiativeDay int64 `json:"last_light_initiative_day,omitempty"`
+ Body *PilotBody `json:"body,omitempty"`
+ Social map[string]SocialBond `json:"social,omitempty"`
+ Plans map[string]PlanChange `json:"plans,omitempty"`
+ AwaitEvent bool `json:"await_event,omitempty"`
+ PendingStimulus string `json:"pending_stimulus,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -169,6 +177,9 @@ type Context struct {
  NearbyCohorts []Cohort `json:"nearby_cohorts,omitempty"`
  Identity *CharacterIdentity `json:"identity,omitempty"`
  Recognized []string `json:"recognized,omitempty"`
+ Body *PilotBody `json:"body,omitempty"`
+ Social map[string]SocialBond `json:"social,omitempty"`
+ Plans map[string]PlanChange `json:"plans,omitempty"`
 }
 type Model interface {
 	Decide(context.Context, Context) (Decision,error)
@@ -259,6 +270,7 @@ func actorContext(j Journal,s State,id string) Context {
 	keep:=map[string]bool{}
 	for _, b:=range m.Beliefs {keep[b.Evidence]=true}
 	if m.Plan!=nil {keep[m.Plan.Evidence]=true}
+ if j.Version>=CognitionVersion{for _,p:=range m.Plans{keep[p.Evidence]=true}}
 	// Keep only the most recent goal-change evidence for each active goal.
 	pinnedGoals:=map[string]bool{}
 	for i:=len(all)-1;i>=0;i-- {
@@ -276,7 +288,7 @@ func actorContext(j Journal,s State,id string) Context {
 	recent:=[]Event{}
 	if j.Version>=WorldVersion{for _,d:=range m.Discoveries{keep[d.Evidence]=true}}
 	for _, e:=range all {
-		if (j.Version>=WorldVersion&&has([]string{"resource","exam","meeting","task","conversation_end"},e.Kind))||j.Version==LegacyVersion||e.Kind=="announcement"||e.Kind=="claim"||e.Kind=="move"||e.Kind=="departure"||e.Kind=="arrival"||e.Kind=="obstacle"||e.Kind=="observation"||keep[e.ID]{recent=append(recent,e)}
+		if (j.Version>=WorldVersion&&has([]string{"resource","exam","meeting","task","conversation_end","revelation","body_alert","plan_end","social"},e.Kind))||j.Version==LegacyVersion||e.Kind=="announcement"||e.Kind=="claim"||e.Kind=="move"||e.Kind=="departure"||e.Kind=="arrival"||e.Kind=="obstacle"||e.Kind=="observation"||keep[e.ID]{recent=append(recent,e)}
 	}
 	if j.Version>=CognitionVersion{c.Memory=retrieveMemory(j,s,id,recent,keep)}else{for i,e:=range recent {if i>=len(recent)-20 || keep[e.ID] || (j.Version<WorldVersion&&e.Kind=="announcement") {c.Memory=append(c.Memory,clone(e))}}}
 	return c
@@ -324,7 +336,12 @@ func validateDecision(c Context,d Decision) error {
 	}
 	if d.Plan!=nil {
 		if _,ok:=evidence(c,d.Plan.Evidence);!ok||len(d.Plan.Steps)>5{return errors.New("plan requires accessible evidence")}
-		if c.Version>=ConversationVersion&&c.Plan!=nil&&strings.Join(c.Plan.Steps,"\x00")!=strings.Join(d.Plan.Steps,"\x00")&&!validText(d.Plan.ProgressNote,240){return errors.New("explique a mudança ou conclusão do plano")}
+		previous:=c.Plan
+  if c.Version>=CognitionVersion{
+   if err:=validateHorizon(c,*d.Plan);err!=nil{return err}
+   previous=nil;if p,ok:=c.Plans[planHorizon(*d.Plan)];ok{previous=&p}
+  }else if d.Plan.Horizon!=""||d.Plan.Deadline!=0||d.Plan.Scope!=""{return errors.New("plan extension requires v7")}
+  if c.Version>=ConversationVersion&&previous!=nil&&strings.Join(previous.Steps,"\x00")!=strings.Join(d.Plan.Steps,"\x00")&&!validText(d.Plan.ProgressNote,240){return errors.New("explique a mudança ou conclusão do plano")}
 		for _, step:=range d.Plan.Steps {if !validText(step,180){return errors.New("invalid plan step")}}
 	}
 	if d.Relation!=nil {
@@ -489,6 +506,7 @@ func applyCognition(j Journal,out *State,actor string,m Mind,d Decision)Mind {
 		if d.Goal!=nil {appendEvent(out,Event{Kind:"goal",Actor:actor,Text:d.Goal.Replace+" → "+d.Goal.With,Audience:[]string{actor},Evidence:d.Goal.Evidence})}
 		if d.Plan!=nil {
 			m.Plan=clone(d.Plan)
+   if j.Version>=CognitionVersion{applyHorizon(&m,*d.Plan)}
 			if j.Version==LegacyVersion||oldMind.Plan==nil||strings.Join(oldMind.Plan.Steps,"\x00")!=strings.Join(d.Plan.Steps,"\x00")||oldMind.Plan.Evidence!=d.Plan.Evidence||(j.Version>=WorldVersion&&oldMind.Plan.ProgressNote!=d.Plan.ProgressNote){appendEvent(out,Event{Kind:"plan",Actor:actor,Text:strings.Join(d.Plan.Steps," → "),Audience:[]string{actor},Evidence:d.Plan.Evidence})}
 		}
 		for _, b:=range d.Beliefs {

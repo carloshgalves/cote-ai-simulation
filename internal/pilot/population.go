@@ -99,8 +99,9 @@ func sameYearPeer(c Context,target string)bool{
 }
 func needsModel(s State,id string)bool{
  m:=s.Minds[id]
- if m.Tier==FullTier{return true}
+ if m.Tier==FullTier{return m.Body==nil||!m.AwaitEvent||hasCognitiveStimulus(s,id)}
  if m.Tier!=LightTier{return false}
+ if m.Body!=nil&&hasCognitiveStimulus(s,id){return true}
  if m.Conversation!=nil&&m.Conversation.Turn==id{return true}
  if s.World!=nil{for _,mt:=range s.World.Meetings{if mt.Guest==id&&mt.Status=="pending"&&s.Minute<mt.At{return true}}}
  return m.WakeReason=="Recebeu convite"||m.WakeReason=="Atualização de compromisso"||m.WakeReason=="Compromisso agendado"||lightInitiativeDue(s,id)
@@ -113,6 +114,17 @@ func routineDecision(j Journal,s State,id string)Decision{
  projectPopulation(j,s,id,&v)
  choose:=func(action,target string)Decision{d.Action=action;d.Target=target;d.WaitMinutes=0;return d}
  if v.School!=nil{for _,o:=range v.School.Options{if o.Action=="attend"{return choose(o.Action,o.Target)}}}
+ if j.Version>=CognitionVersion&&a.Role=="student"&&m.Body!=nil{
+  if m.Body.Energy<350||m.Body.Hydration<350{
+   if m.Location!="cafeteria"{return choose("move","cafeteria")}
+   return choose("eat","free")
+  }
+  if m.Body.Fatigue>850{
+   if m.Location!="dormitory-"+id{return choose("move","dormitory-"+id)}
+   if periodAt(s.Minute)=="repouso"{return choose("sleep","")}
+   return choose("rest","")
+  }
+ }
  period:=periodAt(s.Minute)
  dest:="";action:="";target:=""
  if a.Role!="student"{dest=a.Station;if period=="aulas da manhã"||period=="aulas da tarde"||a.Role=="staff"&&period!="repouso"{action="work"}else if period=="repouso"{dest="staffroom"}}else{
@@ -131,6 +143,10 @@ func routineDecision(j Journal,s State,id string)Decision{
  return d
 }
 func wakeOnMovement(j Journal,s *State,id,actor,reason string){
+ if j.Version>=CognitionVersion{
+  if strings.Contains(reason,"chegou")&&recognizes(j,id,actor)&&s.Minds[id].Social[actor].Interactions==0{stimulate(s,id,"Presença de pessoa conhecida antes da matrícula");return}
+  if s.Minds[id].AwaitEvent{return}
+ }
  if j.Version>=PopulationVersion&&(s.Minds[actor].Tier!=FullTier||s.Minds[id].Tier!=FullTier){return}
  wakeWaiting(s,id,reason)
 }

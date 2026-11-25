@@ -44,6 +44,7 @@ func initializeIdentities(j *Journal){
   }
   j.Profiles[i]=p
   ident:=CharacterIdentity{Values:clone(p.Traits),Motivations:clone(p.Goals),Vulnerabilities:[]string{},Capacities:[]string{"Capacidade específica não estabelecida; não presumir desempenho excepcional."},Background:[]BackgroundFact{},Memory:MemoryCapabilityProfile{Encoding:65,RetentionDays:7,Accessibility:65,Retrieval:65,WorkingMemory:12,Reasoning:"Contextual, compatível com a identidade."},Status:"PROVISIONAL: perfil inicial; parâmetros de memória são escolhas do simulador, não medidas canônicas."}
+  ident.Values=append(ident.Values,canonFor(p.ID).Dispositions...)
   for i,x:=range p.Background{if !strings.Contains(x,"Perfil provisório"){ident.Background=append(ident.Background,BackgroundFact{ID:"bio-"+p.ID+"-"+string(rune('a'+i)),Text:x,Source:j.Population[p.ID].Source})}}
   switch p.ID{
   case "ayanokoji":
@@ -65,8 +66,9 @@ func initializeIdentities(j *Journal){
     BackgroundFact{"bio-kushida-horikita","Suzune Horikita estudou na mesma escola de ensino fundamental que eu. Reconheço-a e não sei quanto ela sabe do meu passado.","y1v6.ev.016; evt.y1.v06.kushida-juniorhigh-secret-breach","horikita"},
     BackgroundFact{"bio-kushida-past","Antes da ANHS, escrevi reclamações anônimas num blog; após a exposição, divulguei confidências de colegas, provocando conflitos. Conheço meus próprios atos e quero preservar minha reputação.","y1v6.ev.001; y1v6.ev.002; y1v6.ev.051",""})
   case "arisu-sakayanagi":
+   p.Goals=[]string{"Investigar a natureza do talento e enfrentar desafios intelectuais"}
    ident.Memory=MemoryCapabilityProfile{95,90,95,95,30,"Estratégico e analítico; valoriza a hipótese de talento inato."}
-   ident.Motivations=[]string{"Investigar a natureza do talento e enfrentar desafios intelectuais."}
+   ident.Motivations=clone(p.Goals)
    ident.Background=append(ident.Background,BackgroundFact{"bio-arisu-kiyotaka","Na infância observei Kiyotaka resolvendo tarefas de xadrez em uma instalação branca acompanhada de meu pai. Ele não me viu. Quero testar minha crença sobre talento inato e educação.","evt.pre-y1.arisu-white-room-observation","ayanokoji"})
   case "hirata":
    ident.Background=append(ident.Background,BackgroundFact{"bio-hirata-friend","Antes da ANHS um amigo sofreu bullying e sobreviveu a uma tentativa de suicídio; tentei conter conflitos de forma coercitiva e essa experiência afetou minha maneira de lidar com colegas.","evt.pre-y1.hirata-bullied-friend-attempted-suicide",""})
@@ -94,11 +96,18 @@ func validateIdentities(j Journal)error{
  return nil
 }
 func initializeCognition(j Journal,s *State){
- // Biographical facts are persisted in the journal identity, not added as
- // current-world episodes and not transmitted to other characters.
+ // Biographical facts stay in identity, not in the run's episodes.
+ for _,id:=range ids(j.Profiles){
+  m:=s.Minds[id]
+  m.Body=&PilotBody{Energy:850,Hydration:900,Fatigue:100}
+  m.Social=map[string]SocialBond{};m.Plans=map[string]PlanChange{}
+  s.Minds[id]=m
+ }
 }
 func projectIdentity(j Journal,s State,id string,c *Context){
  x:=clone(j.Identities[id]);c.Identity=&x
+ m:=s.Minds[id];c.Body=clone(m.Body);c.Social=clone(m.Social);c.Plans=clone(m.Plans)
+ if m.PendingStimulus!=""{c.WakeReason=m.PendingStimulus}
  c.OwnCanon.PrivateKnowledge=nil;c.OwnCanon.Dispositions=nil
  c.OwnCanon.Status="Perfil inicial em identity; não recuperar acontecimentos futuros."
  // Do not expose old self.goals or background fields containing redundant
@@ -116,8 +125,9 @@ func retrieveMemory(j Journal,s State,id string,events []Event,keep map[string]b
   if keep[e.ID]||e.Kind=="revelation"{out=append(out,clone(e));continue}
   age:=s.Minute-e.Minute
   if age>p.RetentionDays*1440{continue}
-  score:=int64(p.Retrieval)*10-age/60
-  if has([]string{"claim","meeting","exam","resource"},e.Kind){score+=int64(p.Encoding)}
+  score:=-age*int64(101-p.Accessibility)/60
+  if has([]string{"claim","meeting","exam","resource","social"},e.Kind){score+=int64(p.Encoding)*2}
+  if e.Actor!=id&&e.Actor!=""&&s.Minds[e.Actor].Location==s.Minds[id].Location{score+=int64(p.Retrieval)}
   if age<120{score+=int64(p.Accessibility)}
   pool=append(pool,candidate{e,score})
  }

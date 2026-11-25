@@ -86,6 +86,7 @@ func OpenContact(path,name string,model Model)(*Session,error){return openVersio
 func OpenMotivation(path,name string,model Model)(*Session,error){return openVersion(path,name,model,MotivationVersion)}
 func OpenObservation(path,name string,model Model)(*Session,error){return openVersion(path,name,model,ObservationVersion)}
 func OpenVeteran(path,name string,model Model)(*Session,error){return openVersion(path,name,model,VeteranVersion)}
+func OpenPhysical(path,name string,model Model)(*Session,error){return openVersion(path,name,model,PhysicalVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}

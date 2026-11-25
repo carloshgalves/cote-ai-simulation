@@ -32,6 +32,7 @@ type CharacterIdentity struct{
  Background []BackgroundFact `json:"background"`
  Memory MemoryCapabilityProfile `json:"memory_profile"`
  Status string `json:"status"`
+ Physical *PilotPhysicalPolicy `json:"physical_policy,omitempty"`
 }
 func initializeIdentities(j *Journal){
  j.Identities=map[string]CharacterIdentity{}
@@ -104,6 +105,7 @@ func initializeIdentities(j *Journal){
    j.Profiles[i]=p;ident.Motivations=clone(p.Goals)
   }
   if j.Version>=VeteranVersion{seedVeteranIdentity(*j,p.ID,&ident)}
+  if j.Version>=PhysicalVersion{ident.Physical=physicalPolicyFor(p.ID)}
   j.Identities[p.ID]=ident
  }
 }

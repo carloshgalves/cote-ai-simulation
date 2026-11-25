@@ -37,6 +37,10 @@ type RouteView struct {
 	LastError string `json:"last_error,omitempty"`
 	LastLatencyMS int64 `json:"last_latency_ms,omitempty"`
 	EffectiveFormat string `json:"effective_format,omitempty"`
+	Quota QuotaReading `json:"quota"`
+	PromptTokens int64 `json:"prompt_tokens"`
+	CompletionTokens int64 `json:"completion_tokens"`
+	UsageReports int `json:"usage_reports"`
 }
 type route struct {
 	view RouteView
@@ -51,6 +55,8 @@ type Router struct {
 	next int
 	routes []*route
 	cooldowns map[string]cooldown
+	telemetry []CallTelemetry
+	telemetryDropped int
 }
 func NewRouter()*Router{return &Router{cooldowns:map[string]cooldown{}}}
 var providerEndpoints=map[string]string{
@@ -221,24 +227,44 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 	r.mu.Unlock()
 	call:=func(repair string)(Decision,error){
 		start:=time.Now()
+		t:=CallTelemetry{StartedAt:start,Actor:view.Self.ID,Cycle:view.Round,Provider:rt.view.Provider,Model:rt.view.Model,RouteID:rt.view.ID,Repair:repair!="",Format:m.Format}
+		m.telemetry=&t
 		r.mu.Lock();rt.view.Attempts++;r.mu.Unlock()
 		d,err:=m.decide(ctx,view,repair)
 		if err==nil{if validation:=validateDecision(view,d);validation!=nil{err=responseError{validation.Error()}}}
 		r.mu.Lock()
-		rt.view.LastLatencyMS=time.Since(start).Milliseconds()
-		if err!=nil{rt.view.LastError=err.Error()}
+		t.LatencyMS=time.Since(start).Milliseconds()
+		t.Accepted=err==nil&&ctx.Err()==nil
+		rt.view.LastLatencyMS=t.LatencyMS
+		if err!=nil{rt.view.LastError=err.Error();t.Error=err.Error()}
+		if t.Quota.Observed {rt.view.Quota=t.Quota}
+		if t.Usage!=nil{rt.view.PromptTokens+=t.Usage.Input;rt.view.CompletionTokens+=t.Usage.Output;rt.view.UsageReports++}
+		// The provider's own explicit exhaustion signal is authoritative;
+		// do not guess at remaining quota from local call counts.
+		if t.Quota.Observed {
+			now:=time.Now()
+			until:=t.Quota.ExhaustedUntil(now)
+			if until.After(now){
+				scope:="quota:"+rt.quotaScope
+				if r.cooldowns[scope].until.Before(until){r.cooldowns[scope]=cooldown{until,"cota indicada pelo provedor esgotada; aguardando renovação"}}
+			}
+		}
+		r.telemetry=append(r.telemetry,t)
+		if len(r.telemetry)>10000{r.telemetry=r.telemetry[1:];r.telemetryDropped++}
 		r.mu.Unlock()
 		return d,err
 	}
 	d,err:=call(problem)
 	var pe providerError
-	if ctx.Err()==nil&&rt.view.Format=="auto"&&m.Format!="plain"&&errors.As(err,&pe)&&pe.FormatRejected{
+	r.mu.Lock();blocked:=!r.blocked(rt,time.Now()).until.IsZero();r.mu.Unlock()
+	if ctx.Err()==nil&&!blocked&&rt.view.Format=="auto"&&m.Format!="plain"&&errors.As(err,&pe)&&pe.FormatRejected{
 		// One compatibility downgrade, not a retry storm on quota/auth errors.
 		m.Format="plain"
 		d,err=call(problem)
 	}
 	var malformed responseError
-	if ctx.Err()==nil&&errors.As(err,&malformed){
+	r.mu.Lock();blocked=!r.blocked(rt,time.Now()).until.IsZero();r.mu.Unlock()
+	if ctx.Err()==nil&&!blocked&&errors.As(err,&malformed){
 		d,err=call(malformed.Error())
 	}
 	r.mu.Lock()
@@ -272,7 +298,7 @@ func (r *Router) Test(ctx context.Context,id string)(RouteView,error){
 		rt.view.Status=err.Error()
 		var pe providerError
 		if errors.As(err,&pe){
-			if pe.Status==429{r.cooldowns["quota:"+rt.quotaScope]=cooldown{pe.RetryAt,err.Error()}}
+			if pe.Status==429{scope:="quota:"+rt.quotaScope;if r.cooldowns[scope].until.Before(pe.RetryAt){r.cooldowns[scope]=cooldown{pe.RetryAt,err.Error()}}}
 			if pe.Status==401||pe.Status==403{r.cooldowns["auth:"+rt.authScope]=cooldown{time.Now().Add(10*time.Minute),err.Error()}}
 		}
 	}else{rt.view.Status="disponível"}

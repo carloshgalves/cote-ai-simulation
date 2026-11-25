@@ -106,6 +106,12 @@ func main() {
 		}
 		if err!=nil{fail(w,400,err);return};reply(w,200,router.Routes())
 	})
+	mux.HandleFunc("GET /api/report",func(w http.ResponseWriter,r *http.Request){
+		data,err:=session.ReportZIP();if err!=nil{fail(w,500,errors.New("não foi possível gerar relatório"));return}
+		w.Header().Set("Content-Type","application/zip")
+		w.Header().Set("Content-Disposition","attachment; filename=cote-relatorio.zip")
+		_,_=w.Write(data)
+	})
 	mux.HandleFunc("GET /api/state",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Snapshot())})
 	mux.HandleFunc("GET /api/progress",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Progress())})
 	mux.HandleFunc("POST /api/cancel",func(w http.ResponseWriter,r *http.Request){

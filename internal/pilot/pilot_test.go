@@ -12,6 +12,7 @@ import (
 	"strings"
 	"sync/atomic"
 	"testing"
+	"time"
 )
 
 type modelFunc func(context.Context, Context) (Decision,error)
@@ -100,4 +101,69 @@ func TestHTTPModelSendsOnlyActorContextAndParsesRealWire(t *testing.T) {
 	s,err:=Open(filepath.Join(t.TempDir(),"run.json"),"test",model);if err!=nil{t.Fatal(err)};defer s.Close()
 	snap,err:=s.Step(context.Background(),0);if err!=nil{t.Fatal(err)}
 	if calls.Load()!=6||snap.State.Round!=1{t.Fatal("not six actual HTTP decisions")}
+}
+
+func TestHTTPRepairKeepsCompletedActorsAndProgress(t *testing.T) {
+	var calls atomic.Int32
+	var bad atomic.Int32
+	seen:=make(chan struct{})
+	release:=make(chan struct{})
+	server:=httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter,r *http.Request){
+		calls.Add(1)
+		var req struct{Messages []struct{Role,Content string};ResponseFormat map[string]any `json:"response_format"`}
+		if err:=json.NewDecoder(r.Body).Decode(&req);err!=nil{t.Error(err);return}
+		if req.ResponseFormat["type"]!="json_schema"{t.Error("local schema missing")}
+		var view Context
+		if err:=json.Unmarshal([]byte(req.Messages[1].Content),&view);err!=nil{t.Error(err);return}
+		content,_:=json.Marshal(wait())
+		if view.Self.ID=="horikita"&&bad.Add(1)==1{
+			close(seen);<-release
+			content=[]byte("{\"world-assets\":true}")
+		}
+		_ = json.NewEncoder(w).Encode(map[string]any{"choices":[]any{map[string]any{"message":map[string]string{"content":string(content)},"finish_reason":"stop"}}})
+	}));defer server.Close()
+	model,err:=NewHTTPModel(server.URL+"/v1","test","");if err!=nil{t.Fatal(err)}
+	s,err:=Open(filepath.Join(t.TempDir(),"run.json"),"test",model);if err!=nil{t.Fatal(err)};defer s.Close()
+	done:=make(chan error,1)
+	go func(){_,err:=s.Step(context.Background(),0);done<-err}()
+	select{case <-seen:case <-time.After(5*time.Second):close(release);t.Fatal("model never reached Horikita")}
+	p:=s.Progress()
+	if !p.Active||p.Actor!="horikita"||p.Completed!=2||s.Snapshot().State.Round!=0{t.Error("incorrect live progress")}
+	close(release)
+	if err:=<-done;err!=nil{t.Fatal(err)}
+	if calls.Load()!=7||s.Snapshot().State.Round!=1{t.Fatal("retry repeated completed agents or failed to commit")}
+}
+
+func TestCanceledRoundRetainsOnlyValidatedChoices(t *testing.T){
+	var calls atomic.Int32
+	started:=make(chan struct{})
+	m:=modelFunc(func(ctx context.Context,c Context)(Decision,error){
+		n:=calls.Add(1)
+		if n==2{close(started);<-ctx.Done();return Decision{},ctx.Err()}
+		return wait(),nil
+	})
+	s,err:=Open(filepath.Join(t.TempDir(),"run.json"),"test",m);if err!=nil{t.Fatal(err)};defer s.Close()
+	done:=make(chan error,1)
+	go func(){_,err:=s.Step(context.Background(),0);done<-err}()
+	select{case <-started:case <-time.After(5*time.Second):t.Fatal("model never started second actor")}
+	if !s.Cancel(1){t.Error("cancel rejected")}
+	if err:=<-done;err==nil{t.Fatal("canceled step committed")}
+	if s.Snapshot().State.Round!=0||s.Progress().Completed!=1{t.Fatal("partial state or lost valid decision")}
+	if _,err:=s.Step(context.Background(),0);err!=nil{t.Fatal(err)}
+	if calls.Load()!=7||s.Snapshot().State.Round!=1{t.Fatal("failed to resume cached decisions")}
+}
+
+func TestLocalSchemaLimitsIdentifiersToCurrentContext(t *testing.T){
+	j:=Journal{Version:Version,Model:"test"}
+	j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	s,err:=initial(j);if err!=nil{t.Fatal(err)}
+	m:=s.Minds["horikita"];m.Location="library";s.Minds["horikita"]=m
+	view:=actorContext(j,s,"horikita")
+	raw,err:=localDecisionSchema(view);if err!=nil{t.Fatal(err)}
+	var schema map[string]any
+	if err:=json.Unmarshal(raw,&schema);err!=nil{t.Fatal(err)}
+	props:=schema["properties"].(map[string]any)
+	targets:=props["target"].(map[string]any)["enum"].([]any)
+	for _,v:=range targets {if v=="ryuen"||v=="library"{t.Fatal("schema permitted inaccessible target")}}
+	for _,v:=range props["action"].(map[string]any)["enum"].([]any){if v=="talk"{t.Fatal("schema permitted conversation without recipient")}}
 }

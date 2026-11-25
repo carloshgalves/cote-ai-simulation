@@ -46,11 +46,11 @@ func closeConversation(s *State,id string){
   s.Minds[peer]=p
  }
 }
-func availableForContact(m Mind)bool{return m.Activity==nil||m.Activity.Kind=="wait"||m.Activity.Kind=="observe"||m.Activity.Kind=="conversation_hold"}
+func availableForContact(m Mind)bool{return m.Activity==nil||m.Activity.Kind=="wait"||m.Activity.Kind=="observe"||m.Activity.Kind=="conversation_hold"||(m.Tier!=""&&m.Activity.Kind=="task"&&m.Activity.Target=="work:")}
 func walkMinutes(from,to string)int64{
 	if strings.HasPrefix(from,"dormitory-")||strings.HasPrefix(to,"dormitory-"){return 12}
 	if has([]string{"shop","mall","seafront","park","gym","cafeteria"},from)||has([]string{"shop","mall","seafront","park","gym","cafeteria"},to){return 8}
-	isClass:=func(s string)bool{return s=="class-b"||s=="class-c"||s=="class-d"}
+	isClass:=func(s string)bool{return s=="class-a"||s=="class-b"||s=="class-c"||s=="class-d"}
 	if from==to{return 0}
 	if isClass(from)&&isClass(to){return 2}
 	if from=="hall"&&isClass(to)||to=="hall"&&isClass(from){return 2}
@@ -71,7 +71,11 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	for i,x:=range choices{
 		if x.Actor!=order[i]{return State{},errors.New("invalid eligible actor order")}
 		if x.Failure!=""{return State{},errors.New("falha técnica não constitui decisão; repita o ciclo")}
-		if err:=validateDecision(actorContext(j,s,x.Actor),x.Decision);err!=nil{return State{},fmt.Errorf("%s: %w",x.Actor,err)}
+		if j.Version>=PopulationVersion{
+   local:=!needsModel(s,x.Actor)
+   if local&&!equalDecision(x.Decision,routineDecision(j,s,x.Actor))||!local&&x.Decision.Source==routineSource{return State{},errors.New("invalid decision provenance")}
+  }
+  if err:=validateDecision(actorContext(j,s,x.Actor),x.Decision);err!=nil{return State{},fmt.Errorf("%s: %w",x.Actor,err)}
 	}
 	out:=clone(s);out.Round++
 	// All cognition uses the frozen pre-cycle context. Resolve competing
@@ -79,7 +83,11 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	byID:=map[string]Decision{}
 	for _,x:=range choices{
 		byID[x.Actor]=x.Decision
-		m:=applyCognition(j,&out,x.Actor,out.Minds[x.Actor],x.Decision)
+		m:=out.Minds[x.Actor]
+  if j.Version<PopulationVersion||x.Decision.Source!=routineSource{
+   if j.Version>=PopulationVersion&&m.Tier==LightTier&&lightInitiativeDue(s,x.Actor){m.LastLightInitiativeDay=s.Minute/1440+1}
+   m=applyCognition(j,&out,x.Actor,m,x.Decision)
+  }else{m.LastAction=x.Decision.Action}
 		m.WakeReason="";out.Minds[x.Actor]=m
 	}
 	if j.Version>=ConversationVersion{
@@ -95,7 +103,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		m.Activity=&Activity{Kind:"move",Target:d.Target,Until:s.Minute+walkMinutes(m.Location,d.Target)}
 		out.Minds[x.Actor]=m
 		appendEvent(&out,Event{Kind:"departure",Actor:x.Actor,Target:d.Target,Text:"Partiu de "+m.Location+" para "+d.Target,Audience:[]string{x.Actor}})
-		for _,id:=range ids(j.Profiles){if id!=x.Actor&&s.Minds[id].Location==m.Location&&(s.Minds[id].Activity==nil||s.Minds[id].Activity.Kind!="move"){appendEvent(&out,Event{Kind:"observation",Actor:x.Actor,Text:"Saiu de "+m.Location,Audience:[]string{id}});wakeWaiting(&out,id,"Um colega saiu do ambiente")}}
+		for _,id:=range ids(j.Profiles){if id!=x.Actor&&s.Minds[id].Location==m.Location&&(s.Minds[id].Activity==nil||s.Minds[id].Activity.Kind!="move"){appendEvent(&out,Event{Kind:"observation",Actor:x.Actor,Text:"Saiu de "+m.Location,Audience:[]string{id}});wakeOnMovement(j,&out,id,x.Actor,"Um colega saiu do ambiente")}}
 	}}
 	// Rotate priority to avoid systematic alphabetical advantage.
 	for i:=0;i<len(order);i++{
@@ -137,7 +145,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	// Departures were published at the current instant. A newly selected
 	// wait also reacts to those events, rather than sleeping through them.
 	for _,e:=range out.Events[len(s.Events):]{
-		if e.Kind=="observation"&&e.Text!=""{for _,id:=range e.Audience{wakeWaiting(&out,id,"Um colega saiu do ambiente")}}
+		if e.Kind=="observation"&&e.Text!=""{for _,id:=range e.Audience{wakeOnMovement(j,&out,id,e.Actor,"Um colega saiu do ambiente")}}
 		if j.Version>=WorldVersion&&e.Kind=="meeting"{for _,id:=range e.Audience{if id!=e.Actor{wakeWaiting(&out,id,"Atualização de compromisso")}}}
 	}
 	// An immediate stimulus can make another decision due at the same
@@ -163,13 +171,14 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	for _,id:=range arrivals{
 		m:=out.Minds[id]
 		appendEvent(&out,Event{Kind:"arrival",Actor:id,Target:m.Location,Text:"Chegou a "+m.Location,Audience:[]string{id}})
-		for _,other:=range ids(j.Profiles){if other==id{continue};p:=out.Minds[other];if p.Location==m.Location&&(p.Activity==nil||p.Activity.Kind!="move"){appendEvent(&out,Event{Kind:"observation",Actor:id,Text:"Chegou a "+m.Location,Audience:[]string{other}});wakeWaiting(&out,other,"Um colega chegou ao ambiente")}}
+		for _,other:=range ids(j.Profiles){if other==id{continue};p:=out.Minds[other];if p.Location==m.Location&&(p.Activity==nil||p.Activity.Kind!="move"){appendEvent(&out,Event{Kind:"observation",Actor:id,Text:"Chegou a "+m.Location,Audience:[]string{other}});wakeOnMovement(j,&out,other,id,"Um colega chegou ao ambiente")}}
 	}
 	for _,id:=range ids(j.Profiles){
 		m:=out.Minds[id];a:=m.Activity
 		if a==nil||a.Until>minute{continue}
 		switch a.Kind{
 		case "talk":appendEvent(&out,Event{Kind:"claim",Actor:id,Target:a.Target,Text:a.Text,Audience:[]string{id,a.Target}});m.WakeReason="Conversa concluída"
+   if j.Version>=PopulationVersion{out.Minds[id]=m;engage(j,&out,id,a.Target);m=out.Minds[id]}
 			if j.Version>=ConversationVersion&&m.Conversation!=nil{
 				m.Conversation.Turn=a.Target;m.Conversation.Turns++
 				if j.Version>=WorldVersion{
@@ -195,7 +204,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		}
 		m.Activity=nil;out.Minds[id]=m
 	}
-	if j.Version>=WorldVersion{advanceWorld(j,&out);return out,nil}
+	if j.Version>=WorldVersion{advanceWorld(j,&out);if j.Version>=PopulationVersion{updatePopulation(j,&out)};return out,nil}
 	for _,e:=range schoolAgenda{if e.Minute==minute{
 		appendEvent(&out,Event{Kind:"announcement",Actor:"school",Text:e.Text,Audience:ids(j.Profiles)})
 		for _,id:=range ids(j.Profiles){wakeWaiting(&out,id,"Novo anúncio escolar")}

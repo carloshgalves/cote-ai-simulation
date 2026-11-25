@@ -19,6 +19,7 @@ const Version = 2
 const ScheduledVersion = 3
 const ConversationVersion = 4
 const WorldVersion = 5
+const PopulationVersion = 6
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -105,6 +106,10 @@ type Mind struct {
 	Wallet int64 `json:"wallet,omitempty"`
 	Inventory map[string]int `json:"inventory,omitempty"`
 	Discoveries []Discovery `json:"discoveries,omitempty"`
+ Tier string `json:"tier,omitempty"`
+ Engagements int `json:"engagements,omitempty"`
+ LastEngagement int64 `json:"last_engagement,omitempty"`
+ LastLightInitiativeDay int64 `json:"last_light_initiative_day,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -122,6 +127,7 @@ type Journal struct {
 	Model string `json:"model"`
 	Rounds []Round `json:"rounds"`
  WorldSeed string `json:"world_seed,omitempty"`
+ Population map[string]PopulationMember `json:"population,omitempty"`
 }
 type State struct {
 	Round int `json:"round"`
@@ -129,6 +135,7 @@ type State struct {
 	Minds map[string]Mind `json:"minds"`
 	Events []Event `json:"events"`
 	World *SchoolWorld `json:"world,omitempty"`
+ Cohorts []Cohort `json:"cohorts,omitempty"`
 }
 type Context struct {
 	Round int `json:"round"`
@@ -156,6 +163,8 @@ type Context struct {
 	Version int `json:"version"`
 	School *SchoolView `json:"school,omitempty"`
  Discoveries []Discovery `json:"discoveries,omitempty"`
+ Population map[string]PublicMember `json:"population,omitempty"`
+ NearbyCohorts []Cohort `json:"nearby_cohorts,omitempty"`
 }
 type Model interface {
 	Decide(context.Context, Context) (Decision,error)
@@ -193,11 +202,14 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion) || !validText(j.Model,200) || validateProfiles(j.Profiles)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
 	if j.Version>=WorldVersion&&len(j.WorldSeed)!=64{return State{},errors.New("invalid world seed")}
  s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
 	for _, p:=range j.Profiles { s.Minds[p.ID]=Mind{Location:"hall",Goals:clone(p.Goals),Beliefs:[]Belief{},Relations:map[string]int{}};if j.Version>=ScheduledVersion{m:=s.Minds[p.ID];m.WakeReason="Início do período livre";s.Minds[p.ID]=m} }
-	appendEvent(&s,Event{Kind:"announcement",Actor:"school",Text:"Primeiro dia. A escola abriu o hall, as salas, a biblioteca e o pátio. Os estudantes têm um período livre para conhecer o ambiente e os colegas. A lista de nomes e classes dos seis participantes está disponível a todos. As regras detalhadas serão anunciadas depois.",Audience:ids(j.Profiles)})
+ if j.Version>=PopulationVersion{
+ initializePopulation(j,&s)
+ appendEvent(&s,Event{Kind:"announcement",Actor:"school",Text:"Primeiro dia. Estudantes, professores e funcionários têm rotinas próprias. Cadastro de nomes e funções disponível.",Audience:ids(j.Profiles)})
+ }else{	appendEvent(&s,Event{Kind:"announcement",Actor:"school",Text:"Primeiro dia. A escola abriu o hall, as salas, a biblioteca e o pátio. Os estudantes têm um período livre para conhecer o ambiente e os colegas. A lista de nomes e classes dos seis participantes está disponível a todos. As regras detalhadas serão anunciadas depois.",Audience:ids(j.Profiles)})}
 	if j.Version>=WorldVersion{initializeWorld(j,&s)}
 	return s,nil
 }
@@ -233,7 +245,8 @@ func actorContext(j Journal,s State,id string) Context {
 	if j.Version>=Version {c.CanObserve=observationChanged(s,id,roster(s,id))}
 	if j.Version>=ScheduledVersion{c.WakeReason=m.WakeReason;c.Activity=clone(m.Activity);if j.Version>=ConversationVersion{c.Conversation=clone(m.Conversation)}}
 	if j.Version>=WorldVersion{c.School=schoolView(j,s,id);c.Locations=worldLocations(id);c.Discoveries=clone(m.Discoveries)}
-	// Recent lived memories plus older evidence currently referenced by cognition.
+	if j.Version>=PopulationVersion{projectPopulation(j,s,id,&c)}
+ // Recent lived memories plus older evidence currently referenced by cognition.
 	// Do not retrieve any event outside the actor's audience.
 	all:=visible(s,id)
 	keep:=map[string]bool{}

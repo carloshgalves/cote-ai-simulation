@@ -48,7 +48,7 @@ func advanceBodies(j Journal,s *State,previous int64){
   m.Body.Energy=clampMeter(old.Energy-e*dt)
   m.Body.Hydration=clampMeter(old.Hydration-h*dt)
   m.Body.Fatigue=clampMeter(old.Fatigue+f*dt)
-  alert:=isStudent(j,id)&&(old.Energy>=250&&m.Body.Energy<250||old.Hydration>=250&&m.Body.Hydration<250||old.Fatigue<=850&&m.Body.Fatigue>850)
+  alert:=(isStudent(j,id)||j.Version>=StaffCareVersion)&&(old.Energy>=250&&m.Body.Energy<250||old.Hydration>=250&&m.Body.Hydration<250||old.Fatigue<=850&&m.Body.Fatigue>850)
   s.Minds[id]=m
   if alert{appendEvent(s,Event{Kind:"body_alert",Actor:id,Text:"Percebe necessidade de alimentação, hidratação ou repouso.",Audience:[]string{id}});if j.Version<SelectiveVersion{stimulate(s,id,"Necessidade corporal relevante")}}
  }

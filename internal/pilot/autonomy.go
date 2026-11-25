@@ -89,6 +89,7 @@ func autonomousRoutine(j Journal,s State,id string) Decision {
   if minutes<1{minutes=1};if minutes>60{minutes=60}
   d.WaitMinutes=int(minutes);return d
  }
+ if j.Version>=StaffCareVersion&&a.Role!="student"{return staffCareDecision(j,s,id)}
  if m.NextDeliberation>s.Minute{return waitFor(m.NextDeliberation-s.Minute)}
  if at:=nextCommitmentDeparture(j,s,id);at>s.Minute&&at-s.Minute<60{d.WaitMinutes=int(at-s.Minute)}
  v:=Context{Location:m.Location,Locations:worldLocations(id),School:schoolView(j,s,id)}

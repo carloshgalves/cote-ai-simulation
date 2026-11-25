@@ -11,6 +11,7 @@ func decisionNeedsModel(j Journal, s State, id string) bool {
  if m.Activity != nil || (m.Tier != FullTier && m.Tier != LightTier) {
   return false
  }
+ if j.Version>=StaffCareVersion&&!isStudent(j,id)&&staffUrgentCare(j,s,id)&&m.Conversation==nil{return false}
  if m.PendingStimulus != "" || (m.Conversation != nil && m.Conversation.Turn == id) {
   return true
  }

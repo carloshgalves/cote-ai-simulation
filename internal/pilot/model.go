@@ -25,6 +25,7 @@ const SelectiveVersion = 8
 const AutonomyVersion = 9
 const StaffCareVersion = 10
 const ContactVersion = 11
+const MotivationVersion = 12
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -125,6 +126,7 @@ type Mind struct {
  PendingStimulus string `json:"pending_stimulus,omitempty"`
  NextDeliberation int64 `json:"next_deliberation,omitempty"`
  LastRoutinePurchaseDay int64 `json:"last_routine_purchase_day,omitempty"`
+ LastOpportunityMinute int64 `json:"last_opportunity_minute,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -183,6 +185,7 @@ type Context struct {
  NearbyCohorts []Cohort `json:"nearby_cohorts,omitempty"`
  Identity *CharacterIdentity `json:"identity,omitempty"`
  Recognized []string `json:"recognized,omitempty"`
+ Opportunity *PersonalOpportunity `json:"opportunity,omitempty"`
  Body *PilotBody `json:"body,omitempty"`
  Social map[string]SocialBond `json:"social,omitempty"`
  Plans map[string]PlanChange `json:"plans,omitempty"`
@@ -223,7 +226,7 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
 	if j.Version>=WorldVersion&&len(j.WorldSeed)!=64{return State{},errors.New("invalid world seed")}
  if j.Version>=CognitionVersion{if err:=validateIdentities(j);err!=nil{return State{},err}}
  s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
@@ -271,6 +274,7 @@ func actorContext(j Journal,s State,id string) Context {
 	if j.Version>=WorldVersion{c.School=schoolView(j,s,id);c.Locations=worldLocations(id);c.Discoveries=clone(m.Discoveries)}
 	if j.Version>=PopulationVersion{projectPopulation(j,s,id,&c)}
  if j.Version>=CognitionVersion{projectIdentity(j,s,id,&c)}
+ if j.Version>=MotivationVersion{c.Opportunity=personalOpportunity(j,s,id)}
  // Recent lived memories plus older evidence currently referenced by cognition.
 	// Do not retrieve any event outside the actor's audience.
 	all:=visible(s,id)

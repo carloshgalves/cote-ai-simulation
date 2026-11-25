@@ -27,7 +27,7 @@ func decisionNeedsModel(j Journal, s State, id string) bool {
  }
  // A bounded endogenous opportunity preserves initiative in ordinary days.
  // It is not a mandatory decision every time a routine task ends.
- return isStudent(j, id) && lightInitiativeDue(s, id)
+ return initiativeDue(j,s,id)
 }
 
 // An admission-time recognition is an actor's own biographical fact plus

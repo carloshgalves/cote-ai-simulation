@@ -108,6 +108,7 @@ func needsModel(s State,id string)bool{
 }
 func equalDecision(a,b Decision)bool{return reflect.DeepEqual(a,b)}
 func routineDecision(j Journal,s State,id string)Decision{
+ if j.Version>=AutonomyVersion{return autonomousRoutine(j,s,id)}
  a,m:=j.Population[id],s.Minds[id]
  d:=Decision{Action:"wait",WaitMinutes:60,Source:routineSource}
  // A public schedule boundary may shorten a previously chosen deliberate

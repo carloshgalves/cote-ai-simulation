@@ -79,6 +79,8 @@ func OpenPopulation(path,name string,model Model)(*Session,error){return openVer
 func OpenCognition(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CognitionVersion)}
 // OpenSelective creates v8 saves; existing journals retain their original policies.
 func OpenSelective(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SelectiveVersion)}
+// OpenAutonomy creates v9 journals; earlier journals are replayed unchanged.
+func OpenAutonomy(path,name string,model Model)(*Session,error){return openVersion(path,name,model,AutonomyVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}

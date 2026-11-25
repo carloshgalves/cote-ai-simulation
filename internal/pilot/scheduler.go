@@ -85,7 +85,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		byID[x.Actor]=x.Decision
 		m:=out.Minds[x.Actor]
   if j.Version<PopulationVersion||x.Decision.Source!=routineSource{
-   if j.Version>=PopulationVersion&&(m.Tier==LightTier||j.Version>=SelectiveVersion&&m.Tier==FullTier)&&lightInitiativeDue(s,x.Actor){m.LastLightInitiativeDay=s.Minute/1440+1}
+   if j.Version>=PopulationVersion&&(m.Tier==LightTier||j.Version>=SelectiveVersion&&m.Tier==FullTier)&&initiativeAccountingDue(j,s,x.Actor){m.LastLightInitiativeDay=s.Minute/1440+1}
    if j.Version>=SelectiveVersion{
     m.NextDeliberation=0
     switch x.Decision.Action{
@@ -96,7 +96,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
    }
    m=applyCognition(j,&out,x.Actor,m,x.Decision)
    if j.Version>=CognitionVersion{m.PendingStimulus="";m.AwaitEvent=x.Decision.Action=="wait"&&x.Decision.WaitMinutes==0}
-  }else{m.LastAction=x.Decision.Action}
+  }else{m.LastAction=x.Decision.Action;if j.Version>=AutonomyVersion&&(x.Decision.Action=="buy"||x.Decision.Action=="recreation"){m.LastRoutinePurchaseDay=s.Minute/1440+1}}
 		m.WakeReason="";out.Minds[x.Actor]=m
 	}
 	if j.Version>=ConversationVersion{
@@ -170,6 +170,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	advanced,err:=clock.ApplyAdvance(cs,plan);if err!=nil{return State{},err}
 	out.Minute=int64(advanced.Instant)
  if j.Version>=CognitionVersion{advanceBodies(j,&out,s.Minute)}
+ if j.Version>=AutonomyVersion{completeSharedLeisure(j,&out)}
 	// Complete arrivals first, then publish messages and observations.
 	arrivals:=[]string{}
 	for _,id:=range ids(j.Profiles){

@@ -22,6 +22,7 @@ const WorldVersion = 5
 const PopulationVersion = 6
 const CognitionVersion = 7
 const SelectiveVersion = 8
+const AutonomyVersion = 9
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -121,6 +122,7 @@ type Mind struct {
  AwaitEvent bool `json:"await_event,omitempty"`
  PendingStimulus string `json:"pending_stimulus,omitempty"`
  NextDeliberation int64 `json:"next_deliberation,omitempty"`
+ LastRoutinePurchaseDay int64 `json:"last_routine_purchase_day,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -219,7 +221,7 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
 	if j.Version>=WorldVersion&&len(j.WorldSeed)!=64{return State{},errors.New("invalid world seed")}
  if j.Version>=CognitionVersion{if err:=validateIdentities(j);err!=nil{return State{},err}}
  s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}

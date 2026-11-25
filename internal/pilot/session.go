@@ -90,6 +90,7 @@ func OpenPhysical(path,name string,model Model)(*Session,error){return openVersi
 func OpenCompactContext(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CompactContextVersion)}
 func OpenCalibrated(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CalibratedVersion)}
 func OpenCrossover(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CrossoverVersion)}
+func OpenCalendar(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CalendarVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}

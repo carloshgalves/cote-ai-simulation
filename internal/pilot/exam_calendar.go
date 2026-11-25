@@ -12,6 +12,9 @@ type ExamSlot struct {
  Day int64 `json:"day"`
  Start int64 `json:"start"`
  Group []string `json:"group"`
+ Title string `json:"title,omitempty"`
+ Source string `json:"source,omitempty"`
+ Years []int `json:"years,omitempty"`
 }
 type ExamResult struct {
  ID string `json:"id"`
@@ -27,6 +30,7 @@ type ExamResult struct {
 // disclose the school's class-point mechanics. Participants rotate across
 // all first-year individualized students rather than only the six core.
 func generateExamCalendar(j Journal)[]ExamSlot{
+ if j.Version>=PortfolioVersion{return generatePortfolioCalendar(j)}
  students:=[]string{}
  for _,id:=range ids(j.Profiles){if isStudent(j,id)&&j.Population[id].Year==1{students=append(students,id)}}
  key:=func(id string)string{return fmt.Sprintf("%x",sha256.Sum256([]byte(j.WorldSeed+"/exam-calendar/"+id)))}
@@ -67,11 +71,11 @@ func advanceGeneratedExam(j Journal,s *State,announce func(string))bool{
    group:=clone(slot.Group);vip:=""
    if slot.Kind=="vip"{h:=sha256.Sum256([]byte(j.WorldSeed+"/"+slot.ID+"/vip"));vip=group[int(h[0])%len(group)]}
    s.World.Exam=&VIPExam{ID:slot.ID,Kind:slot.Kind,PublishedAt:slot.Start+360,Phase:"early",Group:group,VIP:vip,Submitted:map[string]bool{},Ballots:map[string]string{}}
-   label:="Exame de minoria";if slot.Kind=="vip"{label="Zodiac/VIP adaptado"}
+   label:="Exame de minoria";if slot.Kind=="vip"{label="Zodiac/VIP adaptado"};if slot.Title!=""{label=slot.Title}
    announce("Início de "+label+" ("+slot.ID+"). Participantes designados; consulte regras privadas. Resultado às 16:00.")
    for _,id:=range group{
     activateInvite(s,id)
-    if slot.Kind=="vip"{appendEvent(s,Event{Kind:"exam",Actor:"school",Text:fmt.Sprintf("Sua função VIP: %t",id==vip),Audience:[]string{id}})}else{appendEvent(s,Event{Kind:"exam",Actor:"school",Text:"Você participa do exame de minoria. Voto individual privado.",Audience:[]string{id}})}
+    if slot.Kind=="vip"{appendEvent(s,Event{Kind:"exam",Actor:"school",Text:fmt.Sprintf("Sua função VIP: %t",id==vip),Audience:[]string{id}})}else{message:="Você participa do exame de minoria. Voto individual privado.";if j.Version>=PortfolioVersion&&slot.Kind!="minority"{message="Você foi designado para "+label+". Consulte suas regras e ações privadas."};appendEvent(s,Event{Kind:"exam",Actor:"school",Text:message,Audience:[]string{id}})}
     stimulate(s,id,"Início do exame "+slot.ID)
    }
    return true
@@ -81,7 +85,7 @@ func advanceGeneratedExam(j Journal,s *State,announce func(string))bool{
    if e:=s.World.Exam;e!=nil&&e.ID==slot.ID&&e.Outcome==0{e.Phase="final";stimulateExam(s,"Última janela do exame "+slot.ID)}
    announce("Janela final: "+slot.ID);return true
   case slot.Start+300:
-   if e:=s.World.Exam;e!=nil&&e.ID==slot.ID&&e.Outcome==0{if slot.Kind=="minority"{settleMinority(s)}else{settleExam(j,s,2,"")}}
+   if e:=s.World.Exam;e!=nil&&e.ID==slot.ID&&e.Outcome==0{if slot.Kind=="minority"{settleMinority(s)}else if slot.Kind=="vip"{settleExam(j,s,2,"")}else if j.Version>=PortfolioVersion{settlePortfolioExam(j,s)}}
    announce("Submissões encerradas: "+slot.ID);return true
   case slot.Start+360:
    e:=s.World.Exam;if e!=nil&&e.ID==slot.ID{

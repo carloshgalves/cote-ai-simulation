@@ -164,6 +164,9 @@ func schoolView(j Journal,s State,id string)*SchoolView{
  if e:=s.World.Exam;e!=nil&&(j.Version<PopulationVersion||has(e.Group,id)){
   outcome:=0;publishAt:=examBase(j.Version)+960;if j.Version>=CalendarVersion{publishAt=e.PublishedAt};if s.Minute>=publishAt{outcome=e.Outcome}
   v.Exam=&ExamView{e.Phase,clone(e.Group),e.VIP==id,e.Submitted[id],outcome}
+  if j.Version>=PortfolioVersion&&e.Kind!="minority"&&e.Kind!="vip"{
+   rules,options:=portfolioOffers(j,s,id,e);v.Rules=append(v.Rules,rules...);for _,o:=range options{add("vote",o)};return v
+  }
   if j.Version>=CalendarVersion&&e.Kind=="minority"{
    v.Rules=append(v.Rules,"Exame de minoria: escolha A ou B uma única vez. Os votos são privados. Se ambas as opções tiverem votos e as quantidades forem diferentes, cada membro da minoria recebe 25.000 PP; empate, unanimidade ou abstenção não rendem prêmio. Não há alteração de CP. Votos e contagens não são revelados antes do encerramento.")
    if (e.Phase=="early"||e.Phase=="final")&&!e.Submitted[id]&&e.Outcome==0{add("vote","a");add("vote","b")}
@@ -246,7 +249,7 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
   }
   m.Activity=&Activity{Kind:kind,Target:d.Action+":"+d.Target,Until:s.Minute+duration};s.Minds[id]=m
  }
- if j.Version>=CalendarVersion&&s.World.Exam!=nil&&s.World.Exam.Kind=="minority"{recordGeneratedVotes(s,choices)}else{settleGuesses(j,before,s,choices)}
+ if j.Version>=PortfolioVersion&&s.World.Exam!=nil&&s.World.Exam.Kind!="vip"&&s.World.Exam.Kind!="minority"{recordPortfolioVotes(j,before,s,choices)}else if j.Version>=CalendarVersion&&s.World.Exam!=nil&&s.World.Exam.Kind=="minority"{recordGeneratedVotes(s,choices)}else{settleGuesses(j,before,s,choices)}
 }
 func completeTask(j Journal,s *State,id string,m *Mind,a *Activity){
  m.WakeReason="Atividade concluída"

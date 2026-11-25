@@ -9,9 +9,9 @@ import (
  "unicode"
 )
 
-const WorldEnd int64 = 3*1440+480 // three full days from the initial 08:00
+const WorldEnd int64 = 32*1440+480 // covers first monthly payout; bounded pilot
 func endMinute(version int)int64{if version>=WorldVersion{return WorldEnd};return EndMinute}
-func roundLimit(version int)int{if version>=WorldVersion{return 1200};return MaxRounds}
+func roundLimit(version int)int{if version>=WorldVersion{return 4000};return MaxRounds}
 
 type Discovery struct{
  Text string `json:"text"`
@@ -37,6 +37,8 @@ type Meeting struct{
  Location string `json:"location"`
  At int64 `json:"at"`
  Status string `json:"status"`
+ HostAttended bool `json:"host_attended,omitempty"`
+ GuestAttended bool `json:"guest_attended,omitempty"`
 }
 type VIPExam struct{
  Phase string `json:"phase"`
@@ -65,6 +67,8 @@ type SchoolView struct{
  Rules []string `json:"rules"`
  Options []offeredAction `json:"options"`
  Catalog map[string]int64 `json:"catalog,omitempty"`
+ Period string `json:"period"`
+ NextAnnouncement int64 `json:"next_announcement"`
  Exam *ExamView `json:"exam,omitempty"`
 }
 func worldLocations(id string)[]string{return append(clone(locations),"shop","cafeteria","dormitory")}
@@ -88,17 +92,21 @@ func pay(s *State,from,to string,amount int64,category,cause string)bool{
  return true
 }
 var shopPrices=map[string]int64{"notebook":300,"pen":100,"snack":200,"water":100}
-func isWorldAction(a string)bool{return has([]string{"buy","transfer","study","eat","rest","invite","accept","decline","attend","guess"},a)}
+func isWorldAction(a string)bool{return has([]string{"buy","transfer","study","lesson","eat","rest","invite","accept","decline","attend","guess"},a)}
 func schoolView(j Journal,s State,id string)*SchoolView{
  m:=s.Minds[id]
  v:=&SchoolView{Wallet:m.Wallet,Inventory:clone(m.Inventory),Meetings:[]Meeting{},Rules:[]string{"PP próprios persistem; o motor é autoridade sobre transações. Não há despesa obrigatória.","Regras completas da escola ainda não foram divulgadas."},Options:[]offeredAction{}}
  add:=func(a,target string){k:=a;if target!=""{k+=":"+target};v.Options=append(v.Options,offeredAction{k,a,target})}
- if s.Minute>=540{v.Rules[1]="Transferências voluntárias são permitidas; preço explícito, sem saldo negativo. Subsistência gratuita disponível. A fórmula mensal de pontos ainda não foi revelada."}
+ v.Period=periodAt(s.Minute);v.NextAnnouncement=nextDue(j,s)
+ if s.Minute>=540{v.Rules[1]="Transferências voluntárias de 1.000 PP são permitidas; sem saldo negativo. Subsistência gratuita disponível. A fórmula mensal de pontos ainda não foi revelada."}
+ if s.Minute>=30*1440+480{v.Rules[1]="Renda mensal = CP atuais da classe × 100; saldo anterior permanece. Transferências voluntárias de 1.000 PP permitidas."}
+ v.Rules=append(v.Rules,"Convites são para daqui a 30 minutos, no local atual. O destinatário deve aceitar e os dois devem comparecer. Estudar ocupa 25 minutos, refeição 20, descanso 60.")
  if m.Location=="shop"{
   v.Catalog=clone(shopPrices)
   for _,item:=range []string{"notebook","pen","snack","water"}{if m.Wallet>=shopPrices[item]{add("buy",item)}}
  }
  if m.Location=="library"||strings.HasPrefix(m.Location,"class-"){add("study","")}
+ if m.Location=="class-"+strings.ToLower(classOf(j,id))&&(v.Period=="aulas da manhã"||v.Period=="aulas da tarde"){add("lesson","")}
  if m.Location=="cafeteria"{add("eat","free");if m.Wallet>=500{add("eat","paid")}}
  if m.Location=="dormitory"{add("rest","")}
  for _,other:=range ids(j.Profiles){
@@ -114,10 +122,11 @@ func schoolView(j Journal,s State,id string)*SchoolView{
   if mt.Host!=id&&mt.Guest!=id{continue}
   v.Meetings=append(v.Meetings,mt)
   if mt.Status=="pending"&&mt.Guest==id&&s.Minute<mt.At{add("accept",mt.ID);add("decline",mt.ID)}
-  if mt.Status=="accepted"&&s.Minute>=mt.At&&s.Minute<mt.At+15&&m.Location==mt.Location{add("attend",mt.ID)}
+  if mt.Status=="accepted"&&s.Minute>=mt.At&&s.Minute+5<=mt.At+15&&m.Location==mt.Location&&((mt.Host==id&&!mt.HostAttended)||(mt.Guest==id&&!mt.GuestAttended)){add("attend",mt.ID)}
  }
  if e:=s.World.Exam;e!=nil{
-  v.Exam=&ExamView{e.Phase,clone(e.Group),e.VIP==id,e.Submitted[id],e.Outcome}
+  outcome:=0;if s.Minute>=1440+960{outcome=e.Outcome}
+  v.Exam=&ExamView{e.Phase,clone(e.Group),e.VIP==id,e.Submitted[id],outcome}
   v.Rules=append(v.Rules,"Zodiac/VIP adaptado: um VIP secreto no grupo; uma submissão por não VIP. Fase antecipada: acerto recompensa 500.000 PP ao autor e transfere 50 CP da classe VIP à dele; erro recompensa VIP e inverte CP. Janela final: acerto 1.000.000 PP ao VIP e 500.000 aos demais; erro ou omissão 500.000 ao VIP. Submissão da classe do VIP não produz resultado. O resultado não revela identidades.")
   if (e.Phase=="early"||e.Phase=="final")&&!e.Submitted[id]&&e.VIP!=id&&e.Outcome==0{for _,other:=range e.Group{if other!=id{add("guess",other)}}}
  }
@@ -132,7 +141,7 @@ func nextDue(j Journal,s State)int64{
  if j.Version<WorldVersion{return nextWorld(s)}
  next:=WorldEnd
  // Fixed authored schedule, disclosure at time of event only.
- for day:=int64(0);day<4;day++{for _,at:=range []int64{480,540,720,780,900,1080,1320,1440}{n:=day*1440+at;if n>s.Minute&&n<next{next=n}}}
+ for day:=int64(0);day<=32;day++{for _,at:=range []int64{480,540,720,780,900,1080,1320,1440}{n:=day*1440+at;if n>s.Minute&&n<next{next=n}}}
  for _,n:=range []int64{1440+600,1440+840,1440+870,1440+900,1440+960}{if n>s.Minute&&n<next{next=n}}
  for _,mt:=range s.World.Meetings{if mt.Status=="pending"||mt.Status=="accepted"{for _,n:=range []int64{mt.At,mt.At+15}{if n>s.Minute&&n<next{next=n}}}}
  return next
@@ -152,6 +161,7 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
    }
   case "transfer":pay(s,id,d.Target,1000,"transfer","Transferência voluntária");m=s.Minds[id]
   case "study":duration=25;kind="task"
+  case "lesson":duration=50;kind="task"
   case "eat":duration=20;kind="task";if d.Target=="paid"{pay(s,id,"school",500,"ordinary","Refeição paga");m=s.Minds[id]}
   case "rest":duration=60;kind="task"
   case "invite":
@@ -161,7 +171,7 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
    wakeWaiting(s,d.Target,"Recebeu convite")
   case "accept","decline","attend":
    for i,mt:=range s.World.Meetings{if mt.ID==d.Target{
-    switch d.Action{case "accept":mt.Status="accepted";case "decline":mt.Status="declined";case "attend":duration=10;kind="task"}
+    switch d.Action{case "accept":mt.Status="accepted";case "decline":mt.Status="declined";case "attend":duration=5;kind="task"}
     s.World.Meetings[i]=mt
     appendEvent(s,Event{Kind:"meeting",Actor:id,Target:d.Target,Text:"Compromisso "+mt.ID+": "+d.Action,Audience:[]string{mt.Host,mt.Guest}})
    }}
@@ -174,6 +184,12 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
 func completeTask(j Journal,s *State,id string,m *Mind,a *Activity){
  m.WakeReason="Atividade concluída"
  appendEvent(s,Event{Kind:"task",Actor:id,Text:"Concluiu "+a.Target,Audience:[]string{id}})
+ if strings.HasPrefix(a.Target,"attend:"){
+  for i,mt:=range s.World.Meetings{if mt.ID==strings.TrimPrefix(a.Target,"attend:")&&mt.Status=="accepted"&&s.Minute<=mt.At+15&&m.Location==mt.Location{
+   if mt.Host==id{mt.HostAttended=true}else if mt.Guest==id{mt.GuestAttended=true}
+   s.World.Meetings[i]=mt
+  }}
+ }
 }
 func classOf(j Journal,id string)string{for _,p:=range j.Profiles{if p.ID==id{return p.Class}};return ""}
 func settleGuesses(j Journal,before State,s *State,choices []Chosen){
@@ -224,7 +240,7 @@ func advanceWorld(j Journal,s *State){
   }
   if now==mt.At+15&&mt.Status=="accepted"{
    a,b:=s.Minds[mt.Host],s.Minds[mt.Guest]
-   if a.Location==mt.Location&&b.Location==mt.Location&&(a.Activity==nil||a.Activity.Kind!="move")&&(b.Activity==nil||b.Activity.Kind!="move"){mt.Status="met"}else{mt.Status="missed"}
+   if mt.HostAttended&&mt.GuestAttended&&a.Location==mt.Location&&b.Location==mt.Location&&(a.Activity==nil||a.Activity.Kind!="move")&&(b.Activity==nil||b.Activity.Kind!="move"){mt.Status="met"}else{mt.Status="missed"}
    appendEvent(s,Event{Kind:"meeting",Actor:"school",Target:mt.ID,Text:"Compromisso "+mt.ID+": "+mt.Status,Audience:[]string{mt.Host,mt.Guest}})
   }
   s.World.Meetings[i]=mt
@@ -234,7 +250,7 @@ func advanceWorld(j Journal,s *State){
  case 1440+600:
   group:=ids(j.Profiles)
   // Assignment is deterministic for replay, not exposed in actor context.
-  h:=sha256.Sum256([]byte(Digest(Journal{Version:j.Version,Profiles:j.Profiles,Model:j.Model})))
+  h:=sha256.Sum256([]byte(j.WorldSeed+"/vip"))
   vip:=group[int(h[0])%len(group)]
   s.World.Exam=&VIPExam{Phase:"early",Group:group,VIP:vip,Submitted:map[string]bool{}}
   announce("Início do Zodiac/VIP adaptado: grupo único. Janela antecipada até 14:30; janela final 14:30–15:00; publicação às 16:00. Consulte as regras privadas.")
@@ -245,7 +261,11 @@ func advanceWorld(j Journal,s *State){
  case 1440+960:if e:=s.World.Exam;e!=nil{announce(fmt.Sprintf("Resultado do grupo Zodiac/VIP: Outcome %d. CP: A=%d B=%d C=%d D=%d.",e.Outcome,s.World.ClassPoints["A"],s.World.ClassPoints["B"],s.World.ClassPoints["C"],s.World.ClassPoints["D"]))}
  default:
   switch now%1440{
-  case 480:announce("Novo dia escolar. Confira seus compromissos e recursos.")
+  case 480:
+   if now==30*1440+480{
+    for _,id:=range ids(j.Profiles){income:=s.World.ClassPoints[classOf(j,id)]*100;if income>0{pay(s,"school",id,income,"monthly","Renda mensal")}}
+    announce("A escola revela a fórmula: cada aluno recebe mensalmente CP atuais da classe × 100. O saldo anterior permanece.")
+   }else{announce("Novo dia escolar. Confira seus compromissos e recursos.")}
   case 540:announce("Orientação e aulas da manhã; as transferências voluntárias de PP e compras são permitidas.")
   case 720:announce("Intervalo de almoço. Refeição essencial gratuita disponível no refeitório.")
   case 780:announce("Período de estudos da tarde.")
@@ -262,4 +282,9 @@ func dialogueStale(events []Event,id,peer,text string,old int)int{
   if union>0&&common*100>=70*union{return old+1};if seen==3{break}
  }
  return 0
+}
+
+func periodAt(minute int64)string{
+ t:=minute%1440
+ switch{case t<480||t>=1320:return "repouso";case t<540:return "período livre";case t<720:return "aulas da manhã";case t<780:return "almoço";case t<900:return "aulas da tarde";case t<1080:return "atividades livres";default:return "jantar e repouso"}
 }

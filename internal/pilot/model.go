@@ -121,6 +121,7 @@ type Journal struct {
 	Profiles []Profile `json:"profiles"`
 	Model string `json:"model"`
 	Rounds []Round `json:"rounds"`
+ WorldSeed string `json:"world_seed,omitempty"`
 }
 type State struct {
 	Round int `json:"round"`
@@ -192,7 +193,8 @@ func validateProfiles(p []Profile) error {
 }
 func initial(j Journal) (State,error) {
 	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion) || !validText(j.Model,200) || validateProfiles(j.Profiles)!=nil {return State{},errors.New("unsupported journal")}
-	s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
+	if j.Version>=WorldVersion&&len(j.WorldSeed)!=64{return State{},errors.New("invalid world seed")}
+ s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
 	for _, p:=range j.Profiles { s.Minds[p.ID]=Mind{Location:"hall",Goals:clone(p.Goals),Beliefs:[]Belief{},Relations:map[string]int{}};if j.Version>=ScheduledVersion{m:=s.Minds[p.ID];m.WakeReason="Início do período livre";s.Minds[p.ID]=m} }
 	appendEvent(&s,Event{Kind:"announcement",Actor:"school",Text:"Primeiro dia. A escola abriu o hall, as salas, a biblioteca e o pátio. Os estudantes têm um período livre para conhecer o ambiente e os colegas. A lista de nomes e classes dos seis participantes está disponível a todos. As regras detalhadas serão anunciadas depois.",Audience:ids(j.Profiles)})
 	if j.Version>=WorldVersion{initializeWorld(j,&s)}
@@ -465,7 +467,7 @@ func applyCognition(j Journal,out *State,actor string,m Mind,d Decision)Mind {
 		if d.Goal!=nil {appendEvent(out,Event{Kind:"goal",Actor:actor,Text:d.Goal.Replace+" → "+d.Goal.With,Audience:[]string{actor},Evidence:d.Goal.Evidence})}
 		if d.Plan!=nil {
 			m.Plan=clone(d.Plan)
-			if j.Version==LegacyVersion||oldMind.Plan==nil||strings.Join(oldMind.Plan.Steps,"\x00")!=strings.Join(d.Plan.Steps,"\x00")||oldMind.Plan.Evidence!=d.Plan.Evidence{appendEvent(out,Event{Kind:"plan",Actor:actor,Text:strings.Join(d.Plan.Steps," → "),Audience:[]string{actor},Evidence:d.Plan.Evidence})}
+			if j.Version==LegacyVersion||oldMind.Plan==nil||strings.Join(oldMind.Plan.Steps,"\x00")!=strings.Join(d.Plan.Steps,"\x00")||oldMind.Plan.Evidence!=d.Plan.Evidence||(j.Version>=WorldVersion&&oldMind.Plan.ProgressNote!=d.Plan.ProgressNote){appendEvent(out,Event{Kind:"plan",Actor:actor,Text:strings.Join(d.Plan.Steps," → "),Audience:[]string{actor},Evidence:d.Plan.Evidence})}
 		}
 		for _, b:=range d.Beliefs {
 			same:=false;for _, old:=range oldMind.Beliefs{if old==b{same=true;break}}

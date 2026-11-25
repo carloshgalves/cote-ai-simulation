@@ -134,8 +134,8 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	// Departures were published at the current instant. A newly selected
 	// wait also reacts to those events, rather than sleeping through them.
 	for _,e:=range out.Events[len(s.Events):]{
-		if e.Kind!="observation"||e.Text==""{continue}
-		for _,id:=range e.Audience{wakeWaiting(&out,id,"Um colega saiu do ambiente")}
+		if e.Kind=="observation"&&e.Text!=""{for _,id:=range e.Audience{wakeWaiting(&out,id,"Um colega saiu do ambiente")}}
+		if j.Version>=WorldVersion&&e.Kind=="meeting"{for _,id:=range e.Audience{if id!=e.Actor{wakeWaiting(&out,id,"Atualização de compromisso")}}}
 	}
 	// An immediate stimulus can make another decision due at the same
 	// simulated minute. Publish this cycle before advancing any clock.

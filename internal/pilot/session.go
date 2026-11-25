@@ -2,6 +2,7 @@ package pilot
 
 import (
 	"context"
+ "crypto/sha256"
 	_ "embed"
 	"encoding/json"
 	"errors"
@@ -87,6 +88,7 @@ func openVersion(path,name string,model Model,version int) (*Session,error) {
 	case errors.Is(err,os.ErrNotExist):
 		profiles,err:=decodeStrict[[]Profile](defaultProfiles);if err!=nil{return nil,err}
 		j=Journal{Version:version,Profiles:profiles,Model:name,Rounds:[]Round{}}
+		if version>=WorldVersion{seed,err:=randomSecret();if err!=nil{return nil,err};sum:=sha256.Sum256([]byte(seed));j.WorldSeed=fmt.Sprintf("%x",sum)}
 		if _,err:=Replay(j);err!=nil{return nil,err}
 		if err:=createJournal(path,j);err!=nil{return nil,err}
 	case err!=nil:

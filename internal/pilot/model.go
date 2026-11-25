@@ -18,6 +18,7 @@ import (
 const Version = 2
 const ScheduledVersion = 3
 const ConversationVersion = 4
+const WorldVersion = 5
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -76,6 +77,8 @@ type Decision struct {
 	Note string `json:"note,omitempty"`
 	Source string `json:"source,omitempty"`
 	WaitMinutes int `json:"wait_minutes,omitempty"`
+	Discovery *Discovery `json:"discovery,omitempty"`
+
 }
 type Event struct {
 	ID string `json:"id"`
@@ -99,6 +102,9 @@ type Mind struct {
 	Activity *Activity `json:"activity,omitempty"`
 	WakeReason string `json:"wake_reason,omitempty"`
 	Conversation *Conversation `json:"conversation,omitempty"`
+	Wallet int64 `json:"wallet,omitempty"`
+	Inventory map[string]int `json:"inventory,omitempty"`
+	Discoveries []Discovery `json:"discoveries,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -121,6 +127,7 @@ type State struct {
 	Minute int64 `json:"minute"`
 	Minds map[string]Mind `json:"minds"`
 	Events []Event `json:"events"`
+	World *SchoolWorld `json:"world,omitempty"`
 }
 type Context struct {
 	Round int `json:"round"`
@@ -146,6 +153,7 @@ type Context struct {
 	Conversation *Conversation `json:"conversation,omitempty"`
 	Contactable []string `json:"contactable,omitempty"`
 	Version int `json:"version"`
+	School *SchoolView `json:"school,omitempty"`
 }
 type Model interface {
 	Decide(context.Context, Context) (Decision,error)
@@ -183,10 +191,11 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion) || !validText(j.Model,200) || validateProfiles(j.Profiles)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion) || !validText(j.Model,200) || validateProfiles(j.Profiles)!=nil {return State{},errors.New("unsupported journal")}
 	s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
 	for _, p:=range j.Profiles { s.Minds[p.ID]=Mind{Location:"hall",Goals:clone(p.Goals),Beliefs:[]Belief{},Relations:map[string]int{}};if j.Version>=ScheduledVersion{m:=s.Minds[p.ID];m.WakeReason="Início do período livre";s.Minds[p.ID]=m} }
 	appendEvent(&s,Event{Kind:"announcement",Actor:"school",Text:"Primeiro dia. A escola abriu o hall, as salas, a biblioteca e o pátio. Os estudantes têm um período livre para conhecer o ambiente e os colegas. A lista de nomes e classes dos seis participantes está disponível a todos. As regras detalhadas serão anunciadas depois.",Audience:ids(j.Profiles)})
+	if j.Version>=WorldVersion{initializeWorld(j,&s)}
 	return s,nil
 }
 func ids(p []Profile) []string {
@@ -220,6 +229,7 @@ func actorContext(j Journal,s State,id string) Context {
 	}
 	if j.Version>=Version {c.CanObserve=observationChanged(s,id,roster(s,id))}
 	if j.Version>=ScheduledVersion{c.WakeReason=m.WakeReason;c.Activity=clone(m.Activity);if j.Version>=ConversationVersion{c.Conversation=clone(m.Conversation)}}
+	if j.Version>=WorldVersion{c.School=schoolView(j,s,id);c.Locations=worldLocations(id)}
 	// Recent lived memories plus older evidence currently referenced by cognition.
 	// Do not retrieve any event outside the actor's audience.
 	all:=visible(s,id)
@@ -241,8 +251,9 @@ func actorContext(j Journal,s State,id string) Context {
 		}
 	}
 	recent:=[]Event{}
+	if j.Version>=WorldVersion{for _,d:=range m.Discoveries{keep[d.Evidence]=true}}
 	for _, e:=range all {
-		if j.Version==LegacyVersion||e.Kind=="announcement"||e.Kind=="claim"||e.Kind=="move"||e.Kind=="departure"||e.Kind=="arrival"||e.Kind=="obstacle"||e.Kind=="observation"||keep[e.ID]{recent=append(recent,e)}
+		if (j.Version>=WorldVersion&&has([]string{"resource","exam","meeting","task","conversation_end"},e.Kind))||j.Version==LegacyVersion||e.Kind=="announcement"||e.Kind=="claim"||e.Kind=="move"||e.Kind=="departure"||e.Kind=="arrival"||e.Kind=="obstacle"||e.Kind=="observation"||keep[e.ID]{recent=append(recent,e)}
 	}
 	for i,e:=range recent {if i>=len(recent)-20 || keep[e.ID] || e.Kind=="announcement" {c.Memory=append(c.Memory,clone(e))}}
 	return c
@@ -253,11 +264,13 @@ func evidence(c Context,id string) (Event,bool) {
 }
 func validateDecision(c Context,d Decision) error {
 	if (d.Source!=""&&!validText(d.Source,300)) || (d.Note!=""&&!validText(d.Note,500)) || (d.Reason!=""&&!validText(d.Reason,300)) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
-	if len(d.Ignored)>7 {return errors.New("invalid ignored field count")}
-	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","campo extra"},key){return errors.New("invalid ignored field")}}
+	if len(d.Ignored)>8 {return errors.New("invalid ignored field count")}
+	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","discovery","campo extra"},key){return errors.New("invalid ignored field")}}
 	if d.WaitMinutes!=0&&(c.Version<ScheduledVersion||d.Action!="wait"||d.WaitMinutes<1||d.WaitMinutes>60){return errors.New("invalid wait duration")}
-	if d.Action!="wait" && d.Action!="observe" && d.Action!="move" && d.Action!="talk" {return errors.New("unsupported action")}
-	if d.Action=="talk" {
+	worldAction:=c.Version>=WorldVersion&&isWorldAction(d.Action)
+	if d.Action!="wait" && d.Action!="observe" && d.Action!="move" && d.Action!="talk"&&!worldAction {return errors.New("unsupported action")}
+	if worldAction {if err:=validateWorldAction(c,d);err!=nil{return err}
+	} else if d.Action=="talk" {
 		found:=false;for _, p:=range c.Present {if p.ID==d.Target {found=true}}
 		if c.Version>=ConversationVersion&&!has(c.Contactable,d.Target){found=false}
 		if !found || !validText(d.Text,800) {return errors.New("message requires a present recipient and text")}
@@ -277,6 +290,9 @@ func validateDecision(c Context,d Decision) error {
 			if !validText(b.Grounding,240)||len(strings.Fields(b.Grounding))<2||!strings.Contains(e.Text,b.Grounding){return errors.New("hipótese requer trecho literal da evidência")}
 			if e.Kind=="claim"&&b.Confidence>70{return errors.New("alegação não confirmada não sustenta confiança acima de 70")}
 		}
+	}
+	if d.Discovery!=nil{
+		if c.Version<WorldVersion||!validDiscovery(c,*d.Discovery){return errors.New("descoberta requer acontecimento e trecho literal")}
 	}
 	if d.Goal!=nil {
 		g:=d.Goal
@@ -353,7 +369,7 @@ func nextMinute(s State) (int64,error) {
 }
 func apply(j Journal,s State,r Round) (State,error) {
 	if j.Version>=ScheduledVersion {
-		if r.Number!=s.Round+1||r.Number>MaxRounds{return State{},errors.New("invalid scheduled cycle")}
+		if r.Number!=s.Round+1||r.Number>roundLimit(j.Version){return State{},errors.New("invalid scheduled cycle")}
 		next,err:=scheduledAdvance(j,s,r.Choices);if err!=nil{return State{},err}
 		if next.Minute!=r.Minute{return State{},errors.New("invalid scheduled time")}
 		return next,nil
@@ -414,7 +430,7 @@ func apply(j Journal,s State,r Round) (State,error) {
 }
 func Replay(j Journal) (State,error) {
 	s,err:=initial(j);if err!=nil{return State{},err}
-	if len(j.Rounds)>MaxRounds{return State{},errors.New("round limit exceeded")}
+	if len(j.Rounds)>roundLimit(j.Version){return State{},errors.New("round limit exceeded")}
 	for _, r:=range j.Rounds {s,err=apply(j,s,r);if err!=nil{return State{},err}}
 	return s,nil
 }
@@ -425,6 +441,10 @@ func Digest(j Journal) string {
 func applyCognition(j Journal,out *State,actor string,m Mind,d Decision)Mind {
 		if len(d.Ignored)>0{appendEvent(out,Event{Kind:"ignored_cognition",Actor:actor,Text:strings.Join(d.Ignored,", "),Audience:[]string{}})}
 		oldMind:=clone(m)
+		if j.Version>=WorldVersion&&d.Discovery!=nil{
+			found:=false;for _,old:=range m.Discoveries{if old.Evidence==d.Discovery.Evidence&&old.Text==d.Discovery.Text{found=true}}
+			if !found{m.Discoveries=append(m.Discoveries,*d.Discovery);if len(m.Discoveries)>24{m.Discoveries=m.Discoveries[len(m.Discoveries)-24:]};appendEvent(out,Event{Kind:"discovery",Actor:actor,Text:d.Discovery.Text,Evidence:d.Discovery.Evidence,Audience:[]string{actor}})}
+		}
 		for _, b:=range d.Beliefs {
 			found:=false;for i, old:=range m.Beliefs {if old.Text==b.Text {m.Beliefs[i]=b;found=true}}
 			if !found {m.Beliefs=append(m.Beliefs,b)}

@@ -64,6 +64,7 @@ func offeredActions(view Context) []offeredAction {
 		if location!=view.Location {out=append(out,offeredAction{"move:"+location,"move",location})}
 	}
 	for _, person:=range view.Present {if view.Version<ConversationVersion||has(view.Contactable,person.ID){out=append(out,offeredAction{"talk:"+person.ID,"talk",person.ID})}}
+	if view.School!=nil{out=append(out,view.School.Options...)}
 	return out
 }
 type localChoice struct {
@@ -97,6 +98,7 @@ func localDecisionSchema(view Context) (json.RawMessage,error) {
 		pp:=props["plan"].(map[string]any)["anyOf"].([]any)[1].(map[string]any)["properties"].(map[string]any)
 		pp["progress_note"]=map[string]string{"type":"string"}
 	}
+	if view.Version>=WorldVersion{props["discovery"]=optionalObject([]string{"text","evidence","grounding"},map[string]any{"text":map[string]string{"type":"string"},"evidence":map[string]string{"type":"string"},"grounding":map[string]string{"type":"string"}})}
 	if view.Version>=ScheduledVersion{props["wait_minutes"]=map[string]any{"type":"integer","minimum":1,"maximum":60}}
 	raw,err:=json.Marshal(map[string]any{"type":"object","properties":props,"required":[]string{"choice"},"additionalProperties":false})
 	return json.RawMessage(raw),err
@@ -127,11 +129,12 @@ func decodeLocalChoice(view Context,raw []byte)(Decision,error) {
 	if view.Version>=ScheduledVersion&&d.Action=="wait"{var n int;if json.Unmarshal(fields["wait_minutes"],&n)==nil&&n>=1&&n<=60{d.WaitMinutes=n}}
 	if d.Action=="talk"&&invalidPeerAddress(d.Text,d.Target){return Decision{},responseError{"destinatário é colega do primeiro ano, não senpai; reformule a fala"}}
 	if err:=validateDecision(view,d);err!=nil{return Decision{},responseError{err.Error()}}
-	for _, key:=range []string{"beliefs","goal","relation","plan"} {
+	for _, key:=range []string{"beliefs","goal","relation","plan","discovery"} {
 		raw,ok:=fields[key];if !ok{continue}
 		candidate:=clone(d)
 		var err error
 		switch key{
+		case "discovery":candidate.Discovery,err=decodeStrict[*Discovery](raw)
 		case "beliefs":candidate.Beliefs,err=decodeStrict[[]Belief](raw)
 		case "goal":candidate.Goal,err=decodeStrict[*GoalChange](raw)
 		case "relation":candidate.Relation,err=decodeStrict[*RelationChange](raw)
@@ -141,7 +144,7 @@ func decodeLocalChoice(view Context,raw []byte)(Decision,error) {
 	}
 	// Do not interpret extra fields as actions or world facts.
 	for key:=range fields {
-		if !has([]string{"choice","text","reason","beliefs","goal","relation","plan","wait_minutes"},key){d.Ignored=append(d.Ignored,"campo extra");break}
+		if !has([]string{"choice","text","reason","beliefs","goal","relation","plan","wait_minutes","discovery"},key){d.Ignored=append(d.Ignored,"campo extra");break}
 	}
 	sort.Strings(d.Ignored)
 	return d,nil
@@ -179,6 +182,7 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	prompt+=" Escreva reason, text e toda cognição em português brasileiro. Não presuma materiais, reuniões, cargos ou presença de pessoas que o contexto não estabelece."
 	if view.Version>=ScheduledVersion{prompt+=" wake_reason indica por que você voltou a decidir. Se escolher wait, pode indicar wait_minutes (1 a 60) para reavaliar; sem esse campo, aguarda até um estímulo ou o próximo anúncio. Conversas e deslocamentos levam tempo e só ocorrem após validação pelo motor. Uma intenção não executa uma tarefa automaticamente. Não repita um plano que depende de alguém ausente."}
 	if view.Version>=ConversationVersion{prompt+=" present indica presença física; contactable indica disponibilidade. Se conversation estiver ativa, responda ao interlocutor para continuar ou escolha outra ação para encerrá-la. Para crenças, grounding deve copiar trecho literal do evento e subject deve indicar ID do colega quando a hipótese é sobre alguém. Anúncio geral não prova características individuais. Confiança sobre alegações até 70. Preserve o plano vigente; proponha plan apenas para criar, avançar ou revisar passos, com progress_note explicando a mudança. Nunca declare que um passo foi executado sem acontecimento que o sustente."}
+	if view.Version>=WorldVersion{prompt+=" O campo school contém seu saldo, objetos, compromissos, regras conhecidas, tarefas e opções executáveis. Escolha uma delas quando contribuir para seu objetivo. Não invente pagamento, reunião, objeto ou resultado. discovery registra uma descoberta útil com text, evidence e grounding literal. Examine a última experiência: se houve uma descoberta, hipótese nova ou compromisso, preencha discovery, beliefs ou plan; se nada mudou, omita. Não deixe uma intenção estratégica apenas na fala. Conversas longas ou repetitivas são encerradas pelo motor; procure resultados concretos."}
 	choices:=[]string{}
 	for _, option:=range offeredActions(view){choices=append(choices,option.ID)}
 	prompt+=" IDs autorizados, copie exatamente um: "+strings.Join(choices," | ")+"."

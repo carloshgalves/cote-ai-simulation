@@ -37,6 +37,22 @@
       "context_evidence_refs": [
         "tg.ev.banri-niwa.identity"
       ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [
+        "tg.case.banri-niwa.correct-overconfidence"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.banri-niwa.correct-overconfidence"
+      ]
+    },
+    "reasoning": {
+      "behavioral_case_refs": [
+        "tg.case.banri-niwa.correct-overconfidence"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.banri-niwa.correct-overconfidence"
+      ]
     }
   },
   "source_documents": [

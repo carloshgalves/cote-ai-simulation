@@ -31,11 +31,13 @@
     "strategy": {
       "behavioral_case_refs": [
         "tg.case.kei-shinomiya.detect-side-change",
-        "tg.case.kei-shinomiya.exploit-opponent-observation"
+        "tg.case.kei-shinomiya.exploit-opponent-observation",
+        "tg.case.kei-shinomiya.underestimate-team-values"
       ],
       "context_evidence_refs": [
         "tg.ev.kei-shinomiya.detect-side-change",
-        "tg.ev.kei-shinomiya.exploit-opponent-observation"
+        "tg.ev.kei-shinomiya.exploit-opponent-observation",
+        "tg.ev.kei-shinomiya.underestimate-team-values"
       ],
       "description": "Can revise alliances after observing competence",
       "description_status": "PROVISIONAL_PROFILE_INFERENCE"
@@ -75,8 +77,12 @@
       "description_status": "PROVISIONAL_PROFILE_INFERENCE"
     },
     "limitations": {
-      "behavioral_case_refs": [],
-      "context_evidence_refs": [],
+      "behavioral_case_refs": [
+        "tg.case.kei-shinomiya.underestimate-team-values"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kei-shinomiya.underestimate-team-values"
+      ],
       "description": "Limited information and dependence on teammates",
       "description_status": "PROVISIONAL_PROFILE_INFERENCE"
     },

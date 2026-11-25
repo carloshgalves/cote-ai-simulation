@@ -2322,6 +2322,576 @@
       "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "verified": false
+    },
+    {
+      "id": "tg.ev.hayato-nomura.identity",
+      "domain": "identity",
+      "summary": "Friendship Janken participant, childhood acquaintance of Kenji",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Friendship_Janken",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.hayato-nomura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.humi-uzaki.identity",
+      "domain": "identity",
+      "summary": "Friendship Janken participant",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Friendship_Janken",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.humi-uzaki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.kaede-chigusa.identity",
+      "domain": "identity",
+      "summary": "Former classmate and Friendship Janken participant",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Kaede_Chigusa",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.kaede-chigusa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.kaito-sakashita.identity",
+      "domain": "identity",
+      "summary": "Former classmate and Friendship Janken participant",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Kaito_Sakashita",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.kaito-sakashita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.saika-kamishiro.identity",
+      "domain": "identity",
+      "summary": "Cult leader and All Bet team leader",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Saika_Kamishiro",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.saika-kamishiro"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.fujii.identity",
+      "domain": "identity",
+      "summary": "All Bet member of Kaidou team",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/All_Bet",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.fujii"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.imamura.identity",
+      "domain": "identity",
+      "summary": "All Bet member of Kaidou team; spelling varies",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Tomodachi_Game",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.imamura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.tsuchiya.identity",
+      "domain": "identity",
+      "summary": "All Bet member of Kaidou team",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/All_Bet",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.tsuchiya"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.mr-hiratsuka.identity",
+      "domain": "identity",
+      "summary": "All Bet participant, Kamishiro team",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Tomodachi_Game",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.mr-hiratsuka"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.mrs-hiratsuka.identity",
+      "domain": "identity",
+      "summary": "All Bet participant, Kamishiro team",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Tomodachi_Game",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.mrs-hiratsuka"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.natori.identity",
+      "domain": "identity",
+      "summary": "All Bet participant, Mishima team",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/All_Bet",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.natori"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.mitsu-amari.identity",
+      "domain": "identity",
+      "summary": "Friend Murder Game participant",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Tomodachi_Game",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.mitsu-amari"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.takeshi-nanri.identity",
+      "domain": "identity",
+      "summary": "Observer of adult games",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Takeshi_Nanri",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.takeshi-nanri"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.yuka-katagiri.identity",
+      "domain": "identity",
+      "summary": "Yuuichi's adoptive mother, historical context",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Yuuichi_Katagiri",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.yuka-katagiri"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.mitsuru-hanamiya.identity",
+      "domain": "identity",
+      "summary": "Classmate, trusted student leader",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Mitsuru_Hanamiya",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.mitsuru-hanamiya"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.ryousuke-ikechi.identity",
+      "domain": "identity",
+      "summary": "Former friend of Makoto, witness at trial",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Ryousuke_Ikechi",
+        "locator": "profile/roster",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PROFILE_CONTEXT",
+      "mention_actor_ids": [
+        "actor.ryousuke-ikechi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "identity"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.juuzou-kadokura.prioritize-team-over-victory",
+      "domain": "leadership",
+      "summary": "Chooses surrender to protect a teammate and retain the group's trust. Team loses the immediate game but preserves an important relationship.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Episode_11",
+        "locator": "HIDE_SEEK",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "HIDE_SEEK",
+      "mention_actor_ids": [
+        "actor.juuzou-kadokura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "ethics",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.banri-niwa.correct-overconfidence",
+      "domain": "leadership",
+      "summary": "Challenges Kei's assessment and points out the unmodeled social consequence. Reframes defeat as a planning failure, not simply weak allies.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Episode_11",
+        "locator": "HIDE_SEEK",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "HIDE_SEEK",
+      "mention_actor_ids": [
+        "actor.banri-niwa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "leadership",
+        "reasoning"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.kei-shinomiya.underestimate-team-values",
+      "domain": "strategy",
+      "summary": "After the leader concedes, initially attributes the defeat to teammates. An unmodeled social objective breaks the plan.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Episode_11",
+        "locator": "HIDE_SEEK",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "HIDE_SEEK",
+      "mention_actor_ids": [
+        "actor.kei-shinomiya"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "limitations"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.hyakutarou-onigawara.assist-vulnerable-person",
+      "domain": "social",
+      "summary": "Assists Maria and becomes socially invested in her welfare. Changes relationship dynamics and exposure to the other team's strategy.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Episode_10",
+        "locator": "HIDE_SEEK",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "HIDE_SEEK",
+      "mention_actor_ids": [
+        "actor.hyakutarou-onigawara"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "ethics"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.kenji-yamashita.misjudge-friends",
+      "domain": "strategy",
+      "summary": "Attempts to gain an advantage but the other four choose a different hand. Ends the round with increased personal debt.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Friendship_Janken",
+        "locator": "JANKEN",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "JANKEN",
+      "mention_actor_ids": [
+        "actor.kenji-yamashita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "limitations",
+        "trust"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.kenji-yamashita.choose-trust-after-loss",
+      "domain": "risk_management",
+      "summary": "Chooses the proposed cooperative action despite suspicion. Suffers another adverse outcome.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Friendship_Janken",
+        "locator": "JANKEN",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "JANKEN",
+      "mention_actor_ids": [
+        "actor.kenji-yamashita"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "trust"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.hayato-nomura.propose-coordinated-hand",
+      "domain": "strategy",
+      "summary": "Suggests a coordinated second-round hand but the group selects a different one. A coordinated decision changes debt allocation.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Friendship_Janken",
+        "locator": "JANKEN",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "JANKEN",
+      "mention_actor_ids": [
+        "actor.hayato-nomura"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "communication"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.takeshi-nanri.observe-adult-games",
+      "domain": "institution",
+      "summary": "Performs observation duties. Role gives bounded access to game events.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Takeshi_Nanri",
+        "locator": "ALL_BET",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "ALL_BET",
+      "mention_actor_ids": [
+        "actor.takeshi-nanri"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "institution",
+        "observation"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
     }
   ]
 }

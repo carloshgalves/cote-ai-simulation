@@ -2,7 +2,7 @@
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.hyakutarou-onigawara",
   "display_name": "Hyakutarou Onigawara",
-  "modeling_tier": "MINIMAL_ENTITY",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "tg.secondary.2026-11-25"
   ],
@@ -20,6 +20,22 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "tg.ev.hyakutarou-onigawara.identity"
+      ]
+    },
+    "social": {
+      "behavioral_case_refs": [
+        "tg.case.hyakutarou-onigawara.assist-vulnerable-person"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.hyakutarou-onigawara.assist-vulnerable-person"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [
+        "tg.case.hyakutarou-onigawara.assist-vulnerable-person"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.hyakutarou-onigawara.assist-vulnerable-person"
       ]
     }
   },

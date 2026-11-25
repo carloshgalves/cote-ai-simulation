@@ -2,7 +2,7 @@
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.kenji-yamashita",
   "display_name": "Kenji Yamashita",
-  "modeling_tier": "MINIMAL_ENTITY",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "tg.secondary.2026-11-25"
   ],
@@ -20,6 +20,40 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "tg.ev.kenji-yamashita.identity"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [
+        "tg.case.kenji-yamashita.misjudge-friends"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kenji-yamashita.misjudge-friends"
+      ]
+    },
+    "limitations": {
+      "behavioral_case_refs": [
+        "tg.case.kenji-yamashita.misjudge-friends"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kenji-yamashita.misjudge-friends"
+      ]
+    },
+    "trust": {
+      "behavioral_case_refs": [
+        "tg.case.kenji-yamashita.misjudge-friends",
+        "tg.case.kenji-yamashita.choose-trust-after-loss"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kenji-yamashita.misjudge-friends",
+        "tg.ev.kenji-yamashita.choose-trust-after-loss"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "tg.case.kenji-yamashita.choose-trust-after-loss"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kenji-yamashita.choose-trust-after-loss"
       ]
     }
   },

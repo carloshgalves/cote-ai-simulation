@@ -1314,6 +1314,126 @@
         "legal action",
         "no deterministic winner"
       ]
+    },
+    {
+      "id": "tg.eval.juuzou-kadokura.prioritize-team-over-victory",
+      "actor_id": "actor.juuzou-kadokura",
+      "kind": "COUNTERFACTUAL",
+      "basis_case": "tg.case.juuzou-kadokura.prioritize-team-over-victory",
+      "scenario": "A captain can concede a contest to prevent a teammate's serious loss.",
+      "positive": "Balances group welfare and legitimacy against victory.",
+      "anti": "Does not prove he would surrender under every threat.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "goal tradeoff",
+        "failure permitted"
+      ]
+    },
+    {
+      "id": "tg.eval.banri-niwa.correct-overconfidence",
+      "actor_id": "actor.banri-niwa",
+      "kind": "COUNTERFACTUAL",
+      "basis_case": "tg.case.banri-niwa.correct-overconfidence",
+      "scenario": "A talented strategist blames a teammate after a socially costly failure.",
+      "positive": "Identifies missing stakeholder constraints instead of accepting blame shifting.",
+      "anti": "No assumption of knowing all private motives.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "goal tradeoff",
+        "failure permitted"
+      ]
+    },
+    {
+      "id": "tg.eval.kei-shinomiya.underestimate-team-values",
+      "actor_id": "actor.kei-shinomiya",
+      "kind": "COUNTERFACTUAL",
+      "basis_case": "tg.case.kei-shinomiya.underestimate-team-values",
+      "scenario": "A leader abandons a seemingly optimal strategy to protect a colleague.",
+      "positive": "May initially contest the choice but must update model of stakeholder values.",
+      "anti": "Do not infer flawless forecasting.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "goal tradeoff",
+        "failure permitted"
+      ]
+    },
+    {
+      "id": "tg.eval.hyakutarou-onigawara.assist-vulnerable-person",
+      "actor_id": "actor.hyakutarou-onigawara",
+      "kind": "COUNTERFACTUAL",
+      "basis_case": "tg.case.hyakutarou-onigawara.assist-vulnerable-person",
+      "scenario": "A competitor unexpectedly needs help during a contest.",
+      "positive": "May prioritize helping while balancing existing team obligations.",
+      "anti": "Appearance of vulnerability may be misleading.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "goal tradeoff",
+        "failure permitted"
+      ]
+    },
+    {
+      "id": "tg.eval.kenji-yamashita.misjudge-friends",
+      "actor_id": "actor.kenji-yamashita",
+      "kind": "COUNTERFACTUAL",
+      "basis_case": "tg.case.kenji-yamashita.misjudge-friends",
+      "scenario": "A five-player simultaneous game offers a reward for unilateral defection.",
+      "positive": "May be tempted by immediate advantage but must account for reciprocal defection.",
+      "anti": "Cannot assume collusion without evidence; own opportunism is relevant.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "goal tradeoff",
+        "failure permitted"
+      ]
+    },
+    {
+      "id": "tg.eval.kenji-yamashita.choose-trust-after-loss",
+      "actor_id": "actor.kenji-yamashita",
+      "kind": "COUNTERFACTUAL",
+      "basis_case": "tg.case.kenji-yamashita.choose-trust-after-loss",
+      "scenario": "A prior opponent offers a compensating but unverifiable agreement.",
+      "positive": "Weighs relationship trust against downside exposure.",
+      "anti": "Do not assume friends always betray in a new run.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "goal tradeoff",
+        "failure permitted"
+      ]
+    },
+    {
+      "id": "tg.eval.hayato-nomura.propose-coordinated-hand",
+      "actor_id": "actor.hayato-nomura",
+      "kind": "COUNTERFACTUAL",
+      "basis_case": "tg.case.hayato-nomura.propose-coordinated-hand",
+      "scenario": "A group proposes a visible agreement with private simultaneous choices.",
+      "positive": "May coordinate with peers or defect if incentives favor it.",
+      "anti": "No certainty of individual control of all four players.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "goal tradeoff",
+        "failure permitted"
+      ]
+    },
+    {
+      "id": "tg.eval.takeshi-nanri.observe-adult-games",
+      "actor_id": "actor.takeshi-nanri",
+      "kind": "COUNTERFACTUAL",
+      "basis_case": "tg.case.takeshi-nanri.observe-adult-games",
+      "scenario": "A trusted host assigns an observer to a single contest.",
+      "positive": "Keeps observations and rule authority scoped.",
+      "anti": "No power to arbitrarily settle a wager.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "goal tradeoff",
+        "failure permitted"
+      ]
     }
   ]
 }

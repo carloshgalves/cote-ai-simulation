@@ -26,16 +26,34 @@
     },
     "risk_management": {
       "behavioral_case_refs": [
-        "tg.case.juuzou-kadokura.accept-hider-role"
+        "tg.case.juuzou-kadokura.accept-hider-role",
+        "tg.case.juuzou-kadokura.prioritize-team-over-victory"
       ],
       "context_evidence_refs": [
-        "tg.ev.juuzou-kadokura.accept-hider-role"
+        "tg.ev.juuzou-kadokura.accept-hider-role",
+        "tg.ev.juuzou-kadokura.prioritize-team-over-victory"
       ]
     },
     "identity": {
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "tg.ev.juuzou-kadokura.identity"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [
+        "tg.case.juuzou-kadokura.prioritize-team-over-victory"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.juuzou-kadokura.prioritize-team-over-victory"
+      ]
+    },
+    "ethics": {
+      "behavioral_case_refs": [
+        "tg.case.juuzou-kadokura.prioritize-team-over-victory"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.juuzou-kadokura.prioritize-team-over-victory"
       ]
     }
   },

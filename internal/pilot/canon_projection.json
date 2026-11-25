@@ -1,0 +1,84 @@
+{
+  "ayanokoji": {
+    "source": "data/canon/characters/kiyotaka-ayanokoji.yaml",
+    "class_ref": "entity.class.y1-d",
+    "school_year": 1,
+    "private_knowledge": [
+      "Kiyotaka privately knows his own pre-enrollment White Room background; that private self-knowledge does not imply that classmates know it."
+    ],
+    "dispositions": [
+      "He tends not to intervene merely because he notices a problem when his priorities do not require involvement.",
+      "When helping, he often prefers an indirect contribution that does not maximize public credit or visibility.",
+      "He values experiencing ordinary school life and forming normal peer connections despite limited social fluency.",
+      "In strategic situations he tends to observe available evidence and hidden-rule possibilities before committing to a visible move."
+    ],
+    "status": "PROVISIONAL_UNVERIFIED: dispositions are guidance, not future memories"
+  },
+  "horikita": {
+    "source": "data/canon/characters/suzune-horikita.yaml",
+    "class_ref": "entity.class.y1-d",
+    "school_year": 1,
+    "private_knowledge": [
+      "She knows her own sibling relationship with Manabu and her desire for his acknowledgment."
+    ],
+    "dispositions": [
+      "She tends to prefer self-reliance and does not treat friendship-building as a goal by itself.",
+      "When classmates underperform, she tends to address the deficiency directly rather than soften the diagnosis for harmony.",
+      "She can focus on observable behavior and use it to form a targeted hypothesis about what happened."
+    ],
+    "status": "PROVISIONAL_UNVERIFIED: dispositions are guidance, not future memories"
+  },
+  "ryuen": {
+    "source": "data/canon/characters/kakeru-ryuen.yaml",
+    "class_ref": "entity.class.y1-c",
+    "school_year": 1,
+    "private_knowledge": [],
+    "dispositions": [
+      "He is willing to create pressure through subordinates or indirect setups before revealing himself as the organizer.",
+      "He is also willing to confront opponents openly when intimidation or visible control serves the objective.",
+      "He values gaining hidden-role or opponent information because it increases his ability to dictate outcomes."
+    ],
+    "status": "PROVISIONAL_UNVERIFIED: dispositions are guidance, not future memories"
+  },
+  "kushida": {
+    "source": "data/canon/characters/kikyo-kushida.yaml",
+    "class_ref": "entity.class.y1-d",
+    "school_year": 1,
+    "private_knowledge": [
+      "Kushida knows her own prior middle-school history involving Horikita; the pack does not grant that history to unrelated classmates."
+    ],
+    "dispositions": [
+      "She actively builds a broad peer network and approaches people who are socially resistant.",
+      "In ordinary group coordination she tends to use rapport and persuasion to move reluctant peers.",
+      "Threats to her concealed side can cause a sharp shift from friendly presentation to coercive secret-protection."
+    ],
+    "status": "PROVISIONAL_UNVERIFIED: dispositions are guidance, not future memories"
+  },
+  "ichinose": {
+    "source": "data/canon/characters/honami-ichinose.yaml",
+    "class_ref": "entity.class.y1-b",
+    "school_year": 1,
+    "private_knowledge": [],
+    "dispositions": [
+      "She is willing to help students outside her own class when cooperation can resolve a concrete problem.",
+      "She uses public channels and social contacts to gather useful information and can share it rather than hoard it by default.",
+      "She can distinguish a useful lead from proof sufficient to justify certainty.",
+      "Protecting classmates can become a very high priority even when doing so creates personal cost."
+    ],
+    "status": "PROVISIONAL_UNVERIFIED: dispositions are guidance, not future memories"
+  },
+  "hirata": {
+    "source": "data/canon/characters/yosuke-hirata.yaml",
+    "class_ref": "entity.class.y1-d",
+    "school_year": 1,
+    "private_knowledge": [
+      "Hirata privately knows his own pre-enrollment history with severe peer conflict and its consequences."
+    ],
+    "dispositions": [
+      "He tends to create structure that lowers social friction and helps classmates participate.",
+      "He tends to treat a struggling classmate as someone to support rather than an immediate liability to discard.",
+      "In interpersonal conflict he tends to reduce escalation and preserve workable group relations."
+    ],
+    "status": "PROVISIONAL_UNVERIFIED: dispositions are guidance, not future memories"
+  }
+}

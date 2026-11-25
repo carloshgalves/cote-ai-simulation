@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"syscall"
@@ -25,7 +26,9 @@ import (
 var page []byte
 
 func main() {
-	provider:=flag.String("provider","ollama","ollama, groq or custom")
+	provider:=flag.String("provider","ollama","ollama, groq, custom or ui")
+	configDir,configErr:=os.UserConfigDir();if configErr!=nil{log.Fatal(configErr)}
+	routesPath:=flag.String("routes",filepath.Join(configDir,"cote-ai-simulation","routes.json"),"private optional model configuration")
 	modelName:=flag.String("model",os.Getenv("COTE_MODEL"),"LLM model ID")
 	endpoint:=flag.String("endpoint","http://127.0.0.1:11434/v1","OpenAI-compatible base URL")
 	save:=flag.String("save","cote-local.json","local simulation journal")
@@ -42,14 +45,20 @@ func main() {
 		*endpoint="https://api.groq.com/openai/v1"
 		if *modelName==""{*modelName="qwen/qwen3.8-27b"}
 		if v:=os.Getenv("GROQ_API_KEY");v!=""{key=v}
-		if key==""{log.Fatal("configure GROQ_API_KEY")}
+		if key==""{*modelName=""}
 	case "custom":
 		if v:=os.Getenv("COTE_LLM_URL");v!=""{*endpoint=v}
+	case "ui":
+		*modelName=""
 	default:log.Fatal("unknown provider")
 	}
 	if *steps<0||*steps>pilot.MaxRounds||*port<1||*port>65535 {log.Fatal("invalid rounds or port")}
-	model,err:=pilot.NewHTTPModel(*endpoint,*modelName,key);if err!=nil{log.Fatal(err)}
-	session,err:=pilot.Open(*save,*modelName,model);if err!=nil{log.Fatal(err)}
+	router,err:=pilot.LoadRouter(*routesPath);if err!=nil{log.Fatal(err)}
+	if len(router.Routes())==0&&*modelName!="" {
+		kind:=*provider;if kind=="custom"{kind="openai-compatible"}
+		if _,err:=router.Add(pilot.RouteInput{Provider:kind,Endpoint:*endpoint,Model:*modelName,Key:key,Format:"auto"});err!=nil{log.Fatal(err)}
+	}
+	session,err:=pilot.Open(*save,"router",router);if err!=nil{log.Fatal(err)}
 	defer session.Close()
 	ctx,cancel:=signal.NotifyContext(context.Background(),os.Interrupt,syscall.SIGTERM);defer cancel()
 	if *steps>0 {
@@ -69,6 +78,22 @@ func main() {
 	fail:=func(w http.ResponseWriter,status int,err error){reply(w,status,map[string]string{"error":err.Error()})}
 	mux.HandleFunc("GET /{$}",func(w http.ResponseWriter,r *http.Request){
 		w.Header().Set("Content-Type","text/html; charset=utf-8");_,_=w.Write(page)
+	})
+	mux.HandleFunc("GET /api/routes",func(w http.ResponseWriter,r *http.Request){reply(w,200,router.Routes())})
+	mux.HandleFunc("POST /api/routes",func(w http.ResponseWriter,r *http.Request){
+		if r.Header.Get("Origin")!="http://"+addr||!strings.HasPrefix(r.Header.Get("Content-Type"),"application/json"){fail(w,403,errors.New("local browser request required"));return}
+		var input struct{Action string `json:"action"`; ID string `json:"id"`; Route pilot.RouteInput `json:"route"`}
+		d:=json.NewDecoder(http.MaxBytesReader(w,r.Body,16384));d.DisallowUnknownFields()
+		if err:=d.Decode(&input);err!=nil{fail(w,400,errors.New("invalid route request"));return}
+		if err:=d.Decode(new(any));err!=io.EOF{fail(w,400,errors.New("trailing route data"));return}
+		var err error
+		switch input.Action{
+		case "add":_,err=router.Add(input.Route)
+		case "remove","up","down","toggle":err=router.Change(input.ID,input.Action)
+		case "save":err=router.Save(*routesPath)
+		default:err=errors.New("unknown route action")
+		}
+		if err!=nil{fail(w,400,err);return};reply(w,200,router.Routes())
 	})
 	mux.HandleFunc("GET /api/state",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Snapshot())})
 	mux.HandleFunc("GET /api/progress",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Progress())})

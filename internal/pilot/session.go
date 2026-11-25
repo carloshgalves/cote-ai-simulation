@@ -65,6 +65,7 @@ type Snapshot struct {
 	Limit int `json:"limit"`
 	Done bool `json:"done"`
 	Version int `json:"version"`
+	LastChoices []Chosen `json:"last_choices"`
 }
 
 func Open(path,name string,model Model) (*Session,error) {
@@ -93,7 +94,7 @@ func Open(path,name string,model Model) (*Session,error) {
 		raw,err:=io.ReadAll(io.LimitReader(f,32<<20+1));closeErr:=f.Close()
 		if err!=nil||closeErr!=nil||len(raw)>32<<20{return nil,errors.New("cannot read save")}
 		j,err=decodeStrict[Journal](raw);if err!=nil{return nil,errors.New("invalid save JSON")}
-		if j.Model!=name{return nil,errors.New("save uses a different model; select its original model or a new save")}
+		if _,routed:=model.(*Router);j.Model!=name&&!routed{return nil,errors.New("save uses a different model; select its original model or a new save")}
 	}
 	s,err:=Replay(j);if err!=nil{return nil,err}
 	opened=true
@@ -133,7 +134,9 @@ func replaceJournal(path string,j Journal) error {
 func (s *Session) snapshot() Snapshot {
 	people:=[]Person{}
 	for _, p:=range s.journal.Profiles {people=append(people,Person{p.ID,p.Name,p.Class})}
-	return Snapshot{State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:MaxRounds,Done:s.state.Round>=MaxRounds||(s.journal.Version==Version&&s.state.Minute>=EndMinute),Version:s.journal.Version}
+	last:=[]Chosen{}
+	if n:=len(s.journal.Rounds);n>0{last=clone(s.journal.Rounds[n-1].Choices)}
+	return Snapshot{LastChoices:last,State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:MaxRounds,Done:s.state.Round>=MaxRounds||(s.journal.Version==Version&&s.state.Minute>=EndMinute),Version:s.journal.Version}
 }
 func (s *Session) Snapshot() Snapshot {
 	s.mu.Lock();defer s.mu.Unlock();return s.snapshot()

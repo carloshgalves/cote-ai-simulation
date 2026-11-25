@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"strconv"
 	"sort"
 	"time"
 )
@@ -22,6 +23,8 @@ type HTTPModel struct {
 	Name string
 	Key string
 	Client *http.Client
+	Format string
+	Protocol string
 }
 
 func NewHTTPModel(endpoint,name,key string) (*HTTPModel,error) {
@@ -106,6 +109,7 @@ func decodeLocalChoice(view Context,raw []byte)(Decision,error) {
 		if view.Version==Version&&validText(c.Text,500){d.Note=c.Text}else{d.Ignored=append(d.Ignored,"text")}
 	}
 	d.Beliefs=[]Belief{}
+	if d.Action=="talk"&&invalidPeerAddress(d.Text,d.Target){return Decision{},responseError{"destinatário é colega do primeiro ano, não senpai; reformule a fala"}}
 	if err:=validateDecision(view,d);err!=nil{return Decision{},responseError{err.Error()}}
 	for _, key:=range []string{"beliefs","goal","relation","plan"} {
 		raw,ok:=fields[key];if !ok{continue}
@@ -139,10 +143,22 @@ func (m *HTTPModel) Repair(ctx context.Context,view Context,problem string)(Deci
 	return m.decide(ctx,view,problem)
 }
 
+type providerError struct {
+	Status int
+	RetryAt time.Time
+	Message string
+}
+func (e providerError) Error() string {return e.Message}
+func retryAt(header string,now time.Time) time.Time {
+	if n,err:=strconv.Atoi(header);err==nil&&n>=0&&n<=31536000{return now.Add(time.Duration(n)*time.Second)}
+	if t,err:=http.ParseTime(header);err==nil&&t.After(now){return t}
+	return now.Add(time.Minute)
+}
 func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (Decision,error) {
 	var zero Decision
 	raw,err:=json.Marshal(struct{Context;Options []offeredAction `json:"options"`}{view,offeredActions(view)});if err!=nil{return zero,err}
 	prompt:="Interprete somente self em Classroom of the Elite. Use personalidade, objetivos atuais, plano, fatos vividos e hipóteses. Não use acontecimentos futuros nem segredos alheios. Escolha um ID de options que ajude um objetivo ou responda a uma novidade; não repita observação sem informação nova. Esperar é legítimo se não houver motivo para agir. Explique em reason, em primeira pessoa e uma ou duas frases, a intenção ficcional específica do personagem: o que deseja obter, testar, evitar ou descobrir. Não narre fatos novos nem raciocínio detalhado. Se talk, text é a fala real dirigida ao destinatário; para outras ações deixe text vazio. Responda JSON com choice, reason, text. Não copie exemplos nem invente IDs."
+	prompt+=" Todos os seis alunos deste cenário são do primeiro ano, colegas da mesma série; a classe não indica senioridade. Não chame o destinatário de senpai, sempai, veterano ou superior por ser de outra turma. Use nome, sobrenome, -san ou -kun conforme a personalidade. Não introduza relações de autoridade não estabelecidas."
 	if problem=="" {
 		prompt+=" Opcionalmente adicione beliefs [{text,evidence,confidence (0-100)}], goal {replace,with,evidence}, plan {steps,evidence} ou relation {person,delta (-1 ou 1),evidence}. Evidência deve ser ID da própria memória; omita campos sem fundamento. Uma fala recebida é alegação, não fato."
 	} else {prompt+=" A resposta anterior foi rejeitada: "+problem+". Retorne apenas choice, reason e text se conversar."}
@@ -151,7 +167,7 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	local:=u!=nil && has([]string{"127.0.0.1","localhost","::1"},u.Hostname())
 	maxTokens:=700
 	if problem!=""{maxTokens=300}
-	if local {
+	if m.Format=="schema"||(m.Format==""&&local) {
 		schema,err:=localDecisionSchema(view);if err!=nil{return zero,err}
 		var simplified map[string]any
 		if err:=json.Unmarshal(schema,&simplified);err!=nil{return zero,err}
@@ -161,39 +177,69 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 		schema,err=json.Marshal(simplified);if err!=nil{return zero,err}
 		format=map[string]any{"type":"json_schema","json_schema":map[string]any{"name":"decision","strict":true,"schema":schema}}
 	}
+	if m.Format=="plain"{format=nil}
 	payload:=struct{
 		Model string `json:"model"`
 		Messages []map[string]string `json:"messages"`
 		Temperature float64 `json:"temperature"`
-		ResponseFormat map[string]any `json:"response_format"`
+		ResponseFormat map[string]any `json:"response_format,omitempty"`
 		MaxTokens int `json:"max_tokens"`
 		ReasoningEffort string `json:"reasoning_effort,omitempty"`
 	}{m.Name,[]map[string]string{{"role":"system","content":prompt},{"role":"user","content":string(raw)}},0.65,format,maxTokens,""}
 	// Groq Qwen's instruct mode keeps the short structured output budget
 	// for the fictional decision rather than hidden reasoning tokens.
 	if u!=nil&&u.Hostname()=="api.groq.com"&&m.Name=="qwen/qwen3.8-27b"{payload.ReasoningEffort="none"}
-	body,err:=json.Marshal(payload);if err!=nil{return zero,err}
+	var body []byte
+	if m.Protocol=="anthropic" {
+		body,err=json.Marshal(map[string]any{"model":m.Name,"system":prompt,"messages":[]map[string]string{{"role":"user","content":string(raw)}},"max_tokens":maxTokens,"temperature":0.65})
+	} else {body,err=json.Marshal(payload)}
+	if err!=nil{return zero,err}
 	req,err:=http.NewRequestWithContext(ctx,http.MethodPost,m.Endpoint,bytes.NewReader(body));if err!=nil{return zero,errors.New("invalid model request")}
 	req.Header.Set("Content-Type","application/json")
-	if m.Key!="" {req.Header.Set("Authorization","Bearer "+m.Key)}
+	if m.Protocol=="anthropic"{req.Header.Set("x-api-key",m.Key);req.Header.Set("anthropic-version","2023-06-01")}else if m.Key!="" {req.Header.Set("Authorization","Bearer "+m.Key)}
 	res,err:=m.Client.Do(req)
 	if err!=nil{return zero,errors.New("modelo indisponível ou timeout")}
 	defer res.Body.Close()
 	if res.StatusCode==400 {
 		var problem struct{Error struct{Code string `json:"code"`} `json:"error"`}
 		if json.NewDecoder(io.LimitReader(res.Body,64<<10)).Decode(&problem)==nil&&problem.Error.Code=="json_validate_failed"{return zero,responseError{"provedor não conseguiu gerar JSON válido"}}
-		return zero,errors.New("provedor rejeitou a configuração da consulta (HTTP 400)")
+		return zero,providerError{Status:400,Message:"provedor rejeitou a configuração da consulta (HTTP 400)"}
 	}
-	if res.StatusCode==429{return zero,errors.New("limite de requisições do provedor (HTTP 429); pause e tente novamente após a liberação da cota")}
-	if res.StatusCode==401||res.StatusCode==403{return zero,errors.New("chave de API ausente, inválida ou sem permissão")}
-	if res.StatusCode!=http.StatusOK{return zero,fmt.Errorf("provedor LLM retornou HTTP %d",res.StatusCode)}
+	if res.StatusCode==429{return zero,providerError{Status:429,RetryAt:retryAt(res.Header.Get("Retry-After"),time.Now()),Message:"limite de requisições do provedor (HTTP 429)"}}
+	if res.StatusCode==401||res.StatusCode==403{return zero,providerError{Status:res.StatusCode,Message:"chave de API ausente, inválida ou sem permissão"}}
+	if res.StatusCode!=http.StatusOK{return zero,providerError{Status:res.StatusCode,Message:fmt.Sprintf("provedor LLM retornou HTTP %d",res.StatusCode)}}
 	data,err:=io.ReadAll(io.LimitReader(res.Body,2<<20+1))
 	if err!=nil||len(data)>2<<20{return zero,errors.New("invalid model response size")}
+	if m.Protocol=="anthropic" {
+		var response struct{Content []struct{Type,Text string};StopReason string `json:"stop_reason"`}
+		if json.Unmarshal(data,&response)!=nil||response.StopReason!="end_turn"{return zero,responseError{"resposta Anthropic incompleta"}}
+		var content strings.Builder
+		for _,part:=range response.Content{if part.Type=="text"{content.WriteString(part.Text)}}
+		return decodeLocalChoice(view,unwrapJSON(content.String()))
+	}
 	var envelope struct{Choices []struct{
 		Message struct{Content string `json:"content"`} `json:"message"`
 		FinishReason string `json:"finish_reason"`
 	} `json:"choices"`}
 	if err:=json.Unmarshal(data,&envelope);err!=nil||len(envelope.Choices)!=1||
 		!has([]string{"stop",""},envelope.Choices[0].FinishReason){return zero,responseError{"modelo não produziu uma resposta completa"}}
-	return decodeLocalChoice(view,[]byte(envelope.Choices[0].Message.Content))
+	return decodeLocalChoice(view,unwrapJSON(envelope.Choices[0].Message.Content))
+}
+
+func unwrapJSON(s string) []byte {
+	s=strings.TrimSpace(s)
+	if strings.HasPrefix(s,"```json")&&strings.HasSuffix(s,"```"){s=strings.TrimSpace(strings.TrimSuffix(strings.TrimPrefix(s,"```json"),"```"))}else if strings.HasPrefix(s,"```")&&strings.HasSuffix(s,"```"){s=strings.TrimSpace(strings.TrimSuffix(strings.TrimPrefix(s,"```"),"```"))}
+	return []byte(s)
+}
+func invalidPeerAddress(text,target string) bool {
+	s:=strings.ToLower(text)
+	// Public IDs double as surnames, with common Japanese name variants.
+	aliases:=[]string{target}
+	switch target{case "hirata":aliases=append(aliases,"yōsuke","yosuke");case "kushida":aliases=append(aliases,"kikyō","kikyo");case "horikita":aliases=append(aliases,"suzune");case "ayanokoji":aliases=append(aliases,"ayanokōji","kiyotaka");case "ryuen":aliases=append(aliases,"ryūen","kakeru");case "ichinose":aliases=append(aliases,"honami")}
+	for _,suffix:=range []string{"-senpai"," senpai","-sempai"," sempai"}{
+		for _,alias:=range aliases{if strings.Contains(s,alias+suffix){return true}}
+	}
+	s=strings.TrimLeft(strings.TrimSpace(s),"“\"'‘")
+	for _,prefix:=range []string{"senpai,","senpai!","senpai?","sempai,","sempai!","sempai?"}{if strings.HasPrefix(s,prefix){return true}}
+	return false
 }

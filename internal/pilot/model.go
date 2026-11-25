@@ -69,6 +69,7 @@ type Decision struct {
 	Plan *PlanChange `json:"plan"`
 	Ignored []string `json:"ignored,omitempty"`
 	Note string `json:"note,omitempty"`
+	Source string `json:"source,omitempty"`
 }
 type Event struct {
 	ID string `json:"id"`
@@ -119,6 +120,9 @@ type Context struct {
 	Location string `json:"location"`
 	People []Person `json:"people"`
 	Present []Presence `json:"present"`
+	SchoolYear int `json:"school_year"`
+	PeerRelationship string `json:"peer_relationship"`
+	OwnCanon CanonProjection `json:"own_canon"`
 	Locations []string `json:"locations"`
 	Goals []string `json:"goals"`
 	Beliefs []Belief `json:"beliefs"`
@@ -188,7 +192,7 @@ func visible(s State,id string) []Event {
 }
 func actorContext(j Journal,s State,id string) Context {
 	m:=s.Minds[id]
-	c:=Context{Version:j.Version,CanObserve:true,Thought:m.Thought,LastAction:m.LastAction,Round:s.Round+1,Minute:s.Minute,Location:m.Location,Locations:clone(locations),Goals:clone(m.Goals),Beliefs:clone(m.Beliefs),Relations:clone(m.Relations),Plan:clone(m.Plan),Memory:[]Event{},People:[]Person{},Present:[]Presence{}}
+	c:=Context{OwnCanon:canonFor(id),SchoolYear:1,PeerRelationship:"Todos os participantes são alunos do primeiro ano; nenhuma senioridade decorre da classe.",Version:j.Version,CanObserve:true,Thought:m.Thought,LastAction:m.LastAction,Round:s.Round+1,Minute:s.Minute,Location:m.Location,Locations:clone(locations),Goals:clone(m.Goals),Beliefs:clone(m.Beliefs),Relations:clone(m.Relations),Plan:clone(m.Plan),Memory:[]Event{},People:[]Person{},Present:[]Presence{}}
 	for _, p:=range j.Profiles {
 		if p.ID==id {c.Self=clone(p);continue}
 		person:=Person{p.ID,p.Name,p.Class}
@@ -228,7 +232,7 @@ func evidence(c Context,id string) (Event,bool) {
 	return Event{},false
 }
 func validateDecision(c Context,d Decision) error {
-	if (d.Note!=""&&!validText(d.Note,500)) || (d.Reason!=""&&!validText(d.Reason,300)) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
+	if (d.Source!=""&&!validText(d.Source,300)) || (d.Note!=""&&!validText(d.Note,500)) || (d.Reason!=""&&!validText(d.Reason,300)) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
 	if len(d.Ignored)>7 {return errors.New("invalid ignored field count")}
 	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","campo extra"},key){return errors.New("invalid ignored field")}}
 	if d.Action!="wait" && d.Action!="observe" && d.Action!="move" && d.Action!="talk" {return errors.New("unsupported action")}

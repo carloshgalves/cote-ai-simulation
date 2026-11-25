@@ -1,0 +1,7 @@
+# Tomodachi Game external-world corpus V0
+
+Operator-admitted secondary sources, not direct manga verification. Fan wiki, chapter summaries and community arc index are admissible as descriptive candidates; no scans or copied prose. Distinguish reported facts from behavioral inference. Small numeric differences can be normalized with provenance; rules affecting incentives or terminal outcomes require explicit model choices. No fan speculation becomes world truth merely through repetition.
+
+This namespace is isolated from COTE canonical loaders. Character, institution and exam records are corpus seeds, not native validated consolidated V2 records or executable ExamSpecs. No runtime registration, canon winner or post-divergence memory import. Individual actor knowledge requires acquisition. Unknown physical capacity uses the engine population prior, not invented scores. Roster stubs need substantive enrichment; character profiles need atomic evidence, behavioral cases and positive/contrast evals. Exam records need full rules and deterministic resolvers before execution. Source pages were available through indexed search excerpts; direct Fandom access was blocked. Chapter boundaries are approximate community indexing, not game transitions.
+
+Validation: remote read-back JSON parsing, unique identifiers per file, nonempty source references and no runtime-ready records. No native schema validation, CI or independent review was performed.

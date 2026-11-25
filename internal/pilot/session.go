@@ -69,7 +69,7 @@ type Snapshot struct {
 }
 
 func Open(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,Version)}
-// OpenScheduled creates v3 saves; existing saves retain their original semantics.
+// OpenScheduled creates v4 saves; existing saves retain their original semantics.
 func OpenScheduled(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,ConversationVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}

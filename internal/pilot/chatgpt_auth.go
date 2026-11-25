@@ -150,7 +150,7 @@ func(a *ChatGPTAccount) Token(ctx context.Context)(string,error){
  if r.Expiry.After(time.Now().Add(time.Minute)){return r.Tokens.Access,nil}
  t,err:=a.exchange(ctx,url.Values{"grant_type":{"refresh_token"},"client_id":{r.Client},"refresh_token":{r.Tokens.Refresh},"resource":{chatResource}});if err!=nil{return "",err}
  if t.Scope==""{t.Scope=r.Tokens.Scope}
- if !has(strings.Fields(t.Scope),"chatgpt.tokens.use.direct"){return "",errors.New("permissão de uso do plano revogada")}
+ if !has(strings.Fields(t.Scope),"chatgpt.tokens.use.direct")||!has(strings.Fields(t.Scope),"resource.invoke"){return "",errors.New("permissão de uso do plano revogada")}
  t.ID=r.Tokens.ID // retain the previously validated identity hint
  r.Tokens=t;r.Expiry=time.Now().Add(time.Duration(t.Expires)*time.Second)
  if err=a.save(r);err!=nil{return "",err}

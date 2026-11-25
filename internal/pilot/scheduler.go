@@ -173,7 +173,8 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		case "observe":text:=roster(out,id);if observationChanged(out,id,text){appendEvent(&out,Event{Kind:"observation",Actor:id,Text:text,Audience:[]string{id}})};m.WakeReason="Observação concluída"
 		case "wait":m.WakeReason="Prazo de reavaliação atingido";if minute==nextWorld(s){m.WakeReason="Novo anúncio escolar"}
 		case "retry":m.WakeReason="Interlocutor indisponível"
-		case "conversation_hold":m.Conversation=nil;m.WakeReason="Conversa expirou"
+		case "conversation_hold":
+			closeConversation(&out,id);m=out.Minds[id];m.WakeReason="Conversa expirou"
 		}
 		m.Activity=nil;out.Minds[id]=m
 	}

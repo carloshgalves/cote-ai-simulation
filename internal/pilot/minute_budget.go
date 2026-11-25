@@ -10,7 +10,7 @@ type minuteBudget struct{
  maxInput int64
  known bool
 }
-func(r *Router) admit(rt *route,v Context,now time.Time)time.Time{
+func(r *Router) admit(rt *route,v Context,now time.Time,repair,expanded bool)time.Time{
  b:=r.budgets[rt.quotaScope]
  if !b.known||!b.reset.After(now){return time.Time{}}
  // Estimate conservatively, using measured input when available. This is
@@ -18,7 +18,7 @@ func(r *Router) admit(rt *route,v Context,now time.Time)time.Time{
  raw,_:=json.Marshal(v)
  estimate:=int64(len(raw)/3+500)
  if b.maxInput>estimate{estimate=b.maxInput}
- estimate+=int64(generationBudget(rt.model.Name,false,false))
+ estimate+=int64(generationBudget(rt.model.Name,repair,expanded))
  if b.remaining<estimate{return b.reset}
  b.remaining-=estimate;r.budgets[rt.quotaScope]=b
  return time.Time{}

@@ -38,6 +38,7 @@ func readChatStream(view Context,body io.Reader,t *CallTelemetry)(Decision,error
    if t!=nil{t.Usage=readUsage(event.Response)}
    return decodeLocalChoice(view,unwrapJSON(text.String()))
   case "response.failed","error":
+   if t!=nil{t.Usage=readUsage(event.Response)}
    var failure struct{Error struct{Code string}}
    _=json.Unmarshal(event.Response,&failure);code:=failure.Error.Code;if code==""{code=event.Code}
    if code=="subscription_sharing_usage_limit_exceeded"||code=="subscription_sharing_usage_unavailable"{return Decision{},providerError{Status:429,RetryAt:time.Now().Add(5*time.Minute),Message:"limite ou permissão de uso do plano ChatGPT indisponível; confira Configurações → Uso"}}

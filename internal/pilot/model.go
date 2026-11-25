@@ -268,9 +268,13 @@ func validateDecision(c Context,d Decision) error {
 		e,ok:=evidence(c,b.Evidence)
 		if !ok||!validText(b.Text,300)||b.Confidence<0||b.Confidence>100 {return errors.New("belief requires accessible evidence")}
 		if c.Version>=ConversationVersion {
+			if b.Subject!=""{
+				found:=false;for _,p:=range c.People{if p.ID==b.Subject{found=true}}
+				if !found{return errors.New("colega da hipótese desconhecido")}
+			}
 			if e.Kind=="announcement"&&b.Subject!=""{return errors.New("anúncio geral não fundamenta hipótese sobre colega")}
 			if b.Subject!=""&&(e.Actor!=b.Subject&&e.Target!=b.Subject){return errors.New("evidência não envolve o colega indicado")}
-			if !validText(b.Grounding,240)||!strings.Contains(e.Text,b.Grounding){return errors.New("hipótese requer trecho literal da evidência")}
+			if !validText(b.Grounding,240)||len(strings.Fields(b.Grounding))<2||!strings.Contains(e.Text,b.Grounding){return errors.New("hipótese requer trecho literal da evidência")}
 			if e.Kind=="claim"&&b.Confidence>70{return errors.New("alegação não confirmada não sustenta confiança acima de 70")}
 		}
 	}

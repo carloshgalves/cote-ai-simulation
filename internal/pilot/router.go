@@ -237,7 +237,7 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 	call:=func(repair string)(Decision,error){
 		start:=time.Now()
 		r.mu.Lock()
-		if until:=r.admit(rt,view,start);until.After(start){
+		if until:=r.admit(rt,view,start,repair!="",m.largeOutput);until.After(start){
 			rt.view.Prevented++
 			r.mu.Unlock()
 			return Decision{},providerError{Status:429,RetryAt:until,Message:"limite preventivo de tokens por minuto; aguardando renovação"}

@@ -119,15 +119,16 @@ func writeChoice(b *strings.Builder,c Chosen){
 	if d.Reason!=""{fmt.Fprintf(b,"  - Intenção: %s\n",d.Reason)}
 	if d.Note!=""{fmt.Fprintf(b,"  - Nota privada: %s\n",d.Note)}
 	if d.Text!=""{fmt.Fprintf(b,"  - Fala: %s\n",d.Text)}
-	for _,belief:=range d.Beliefs{fmt.Fprintf(b,"  - Hipótese: %s (%d%%; %s)\n",belief.Text,belief.Confidence,belief.Evidence)}
+	for _,belief:=range d.Beliefs{fmt.Fprintf(b,"  - Hipótese: %s (%d%%; %s)\n",belief.Text,belief.Confidence,belief.Evidence);if belief.Grounding!=""{fmt.Fprintf(b,"    - Fundamentação (%s): %s\n",belief.Subject,belief.Grounding)}}
 	if d.Goal!=nil{fmt.Fprintf(b,"  - Meta: %s → %s (%s)\n",d.Goal.Replace,d.Goal.With,d.Goal.Evidence)}
-	if d.Plan!=nil{fmt.Fprintf(b,"  - Plano: %s (%s)\n",strings.Join(d.Plan.Steps," → "),d.Plan.Evidence)}
+	if d.Plan!=nil{fmt.Fprintf(b,"  - Plano: %s (%s)\n",strings.Join(d.Plan.Steps," → "),d.Plan.Evidence);if d.Plan.ProgressNote!=""{fmt.Fprintf(b,"    - Revisão: %s\n",d.Plan.ProgressNote)}}
 	if d.Relation!=nil{fmt.Fprintf(b,"  - Relação: %s %+d (%s)\n",d.Relation.Person,d.Relation.Delta,d.Relation.Evidence)}
 	if len(d.Ignored)>0{fmt.Fprintf(b,"  - Descartes: %s\n",strings.Join(d.Ignored,", "))}
 }
 func writeEvent(b *strings.Builder,e Event){fmt.Fprintf(b,"- %s | %s | %s | %s → %s | %s",reportTime(e.Minute),e.ID,e.Kind,e.Actor,e.Target,e.Text);if e.Evidence!=""{fmt.Fprintf(b," | evidência: %s",e.Evidence)};fmt.Fprintln(b)}
 func writeMind(b *strings.Builder,m Mind){
 	fmt.Fprintf(b,"- Local: %s\n- Objetivos: %s\n- Intenção: %s\n",m.Location,strings.Join(m.Goals,"; "),m.Thought)
+	if m.Conversation!=nil{fmt.Fprintf(b,"- Conversa com %s; vez de %s; %d falas concluídas\n",m.Conversation.Peer,m.Conversation.Turn,m.Conversation.Turns)}
 	if m.Activity!=nil{fmt.Fprintf(b,"- Atividade: %s; término/reavaliação: %s\n",m.Activity.Kind,reportTime(m.Activity.Until))}
 	if m.WakeReason!=""{fmt.Fprintf(b,"- Motivo de ativação: %s\n",m.WakeReason)}
 	if m.Plan!=nil{fmt.Fprintf(b,"- Plano: %s (%s)\n",strings.Join(m.Plan.Steps," → "),m.Plan.Evidence)}

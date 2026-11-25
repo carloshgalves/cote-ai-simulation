@@ -95,8 +95,11 @@ def _claim_divergence_reason(claim, divergence, order):
     return None
 
 
-def gate_reason(record, request, order):
+def gate_reason(record, request, order, *, continuity=DEFAULT_CONTINUITY, world=None):
     trace = []
+    # World selection is trusted caller configuration, not agent input.
+    if world != record.get("external_world"):
+        return "FILTERED_OUT", ["world=deny"]
     purpose = request.get("query", {}).get("purpose")
     expected_role = PURPOSE_ROLE.get(purpose)
     if expected_role is None:
@@ -108,7 +111,7 @@ def gate_reason(record, request, order):
     if _record_missing(record):
         return "MISSING_GATE_METADATA", trace + ["metadata=deny"]
 
-    if DEFAULT_CONTINUITY not in record["continuity"]:
+    if continuity not in record["continuity"]:
         return "FILTERED_OUT", trace + ["continuity=deny"]
 
     story = order.get(_anchor(record["effective_time"]))
@@ -124,7 +127,7 @@ def gate_reason(record, request, order):
     claims_by_id = {claim["claim_id"]: claim for claim in record.get("resolved_claims", [])}
     if record["retrieval_role"] == "KNOWLEDGE_EVIDENCE":
         if any(
-            DEFAULT_CONTINUITY not in claims_by_id[claim_id].get("continuity", [])
+            continuity not in claims_by_id[claim_id].get("continuity", [])
             for claim_id in sorted(authorizing_ids)
         ):
             return "FILTERED_OUT", trace + ["continuity=deny"]

@@ -152,7 +152,7 @@ func routineDecision(j Journal,s State,id string)Decision{
 }
 func wakeOnMovement(j Journal,s *State,id,actor,reason string){
  if j.Version>=CognitionVersion{
-  if strings.Contains(reason,"chegou")&&recognizes(j,id,actor)&&s.Minds[id].Social[actor].Interactions==0{stimulate(s,id,"Presença de pessoa conhecida antes da matrícula");return}
+  if strings.Contains(reason,"chegou")&&recognizes(j,id,actor)&&s.Minds[id].Social[actor].Interactions==0&&(j.Version<CalibratedVersion||s.Minds[id].LastDeliberationMinute==0||s.Minute-s.Minds[id].LastDeliberationMinute>=180){stimulate(s,id,"Presença de pessoa conhecida antes da matrícula");return}
   if j.Version>=SelectiveVersion||s.Minds[id].AwaitEvent{return}
  }
  if j.Version>=PopulationVersion&&(s.Minds[actor].Tier!=FullTier||s.Minds[id].Tier!=FullTier){return}

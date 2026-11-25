@@ -30,6 +30,7 @@ const ObservationVersion = 13
 const VeteranVersion = 14
 const PhysicalVersion = 15
 const CompactContextVersion = 16
+const CalibratedVersion = 17
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -131,6 +132,9 @@ type Mind struct {
  NextDeliberation int64 `json:"next_deliberation,omitempty"`
  LastRoutinePurchaseDay int64 `json:"last_routine_purchase_day,omitempty"`
  LastOpportunityMinute int64 `json:"last_opportunity_minute,omitempty"`
+ LastDeliberationMinute int64 `json:"last_deliberation_minute,omitempty"`
+ OpportunityDay int64 `json:"opportunity_day,omitempty"`
+ OpportunityCount int `json:"opportunity_count,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -231,7 +235,7 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion&&j.Version!=ObservationVersion&&j.Version!=VeteranVersion&&j.Version!=PhysicalVersion&&j.Version!=CompactContextVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion&&j.Version!=ObservationVersion&&j.Version!=VeteranVersion&&j.Version!=PhysicalVersion&&j.Version!=CompactContextVersion&&j.Version!=CalibratedVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
 	if j.Version>=WorldVersion&&len(j.WorldSeed)!=64{return State{},errors.New("invalid world seed")}
  if j.Version>=CognitionVersion{if err:=validateIdentities(j);err!=nil{return State{},err}}
  s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}

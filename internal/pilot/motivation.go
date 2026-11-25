@@ -13,13 +13,16 @@ func personalOpportunity(j Journal,s State,id string)*PersonalOpportunity{
  m:=s.Minds[id]
  if m.Body!=nil&&(m.Body.Energy<350||m.Body.Hydration<350||m.Body.Fatigue>850){return nil}
  if m.LastOpportunityMinute>0&&s.Minute-m.LastOpportunityMinute<120{return nil}
+ if j.Version>=CalibratedVersion&&m.OpportunityDay==s.Minute/1440+1&&m.OpportunityCount>=dailyOpportunityBudget(m){return nil}
  period:=periodAt(s.Minute)
  if period!="período livre"&&period!="atividades livres"{return nil}
  if m.Conversation!=nil{return nil}
  for _,goal:=range m.Goals{
   g:=strings.ToLower(goal)
   if strings.Contains(g,"vida escolar comum")||strings.Contains(g,"relaç")||strings.Contains(g,"coleg")||strings.Contains(g,"influência")||strings.Contains(g,"confiança")||strings.Contains(g,"vantagen"){
-   for _,peer:=range ids(j.Profiles){
+   peers:=ids(j.Profiles)
+   if j.Version>=CalibratedVersion{peers=rotatedOpportunityPeers(j,s,id,peers)}
+   for _,peer:=range peers{
     if peer==id||!isStudent(j,peer){continue}
     p:=s.Minds[peer]
     if p.Location!=m.Location||!canContact(m,peer,p,id){continue}

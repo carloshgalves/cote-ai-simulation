@@ -12,6 +12,7 @@ func decisionNeedsModel(j Journal, s State, id string) bool {
   return false
  }
  if j.Version>=StaffCareVersion&&!isStudent(j,id)&&staffUrgentCare(j,s,id)&&m.Conversation==nil{return false}
+ if j.Version>=CalibratedVersion{return calibratedNeedsModel(j,s,id)}
  if m.PendingStimulus != "" || (m.Conversation != nil && m.Conversation.Turn == id) {
   return true
  }

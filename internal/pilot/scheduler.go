@@ -86,12 +86,12 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		m:=out.Minds[x.Actor]
   if j.Version<PopulationVersion||x.Decision.Source!=routineSource{
    if j.Version>=PopulationVersion&&(m.Tier==LightTier||j.Version>=SelectiveVersion&&m.Tier==FullTier)&&initiativeAccountingDue(j,s,x.Actor){m.LastLightInitiativeDay=s.Minute/1440+1}
-   if j.Version>=MotivationVersion&&personalOpportunity(j,s,x.Actor)!=nil{m.LastOpportunityMinute=s.Minute}
+   if j.Version>=CalibratedVersion{m.LastDeliberationMinute=s.Minute;if personalOpportunity(j,s,x.Actor)!=nil&&!essentialCognition(j,s,x.Actor){day:=s.Minute/1440+1;if m.OpportunityDay!=day{m.OpportunityDay=day;m.OpportunityCount=0};m.OpportunityCount++;m.LastOpportunityMinute=s.Minute}}else if j.Version>=MotivationVersion&&personalOpportunity(j,s,x.Actor)!=nil{m.LastOpportunityMinute=s.Minute}
    if j.Version>=SelectiveVersion{
     m.NextDeliberation=0
     switch x.Decision.Action{
     case "wait":if x.Decision.WaitMinutes>0{m.NextDeliberation=s.Minute+int64(x.Decision.WaitMinutes)}
-    case "move":m.NextDeliberation=s.Minute+walkMinutes(m.Location,x.Decision.Target)
+    case "move":if j.Version<CalibratedVersion||x.Decision.Plan!=nil||m.Plan!=nil{m.NextDeliberation=s.Minute+walkMinutes(m.Location,x.Decision.Target)}
     case "observe":m.NextDeliberation=s.Minute+1
     }
    }
@@ -132,7 +132,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
    if j.Version>=ContactVersion&&target.Activity!=nil&&target.Activity.Kind=="contact_hold"&&target.Activity.Target==id{target.Activity=nil;out.Minds[d.Target]=target}
 			if target.Location!=m.Location||!availableForContact(target)||(j.Version>=ConversationVersion&&!canContact(m,d.Target,target,id)){
 				m.Activity=&Activity{Kind:"retry",Until:s.Minute+1}
-    if j.Version>=ContactVersion{m.PendingStimulus="Abordagem não concluída; avalie outra ocasião ou interlocutor."}
+    if j.Version>=ContactVersion&&j.Version<CalibratedVersion{m.PendingStimulus="Abordagem não concluída; avalie outra ocasião ou interlocutor."}
 				appendEvent(&out,Event{Kind:"obstacle",Actor:id,Target:d.Target,Text:"Interlocutor indisponível; reavalie a abordagem.",Audience:[]string{id}})
 				break
 			}

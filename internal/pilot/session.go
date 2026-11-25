@@ -82,6 +82,7 @@ func OpenSelective(path,name string,model Model)(*Session,error){return openVers
 // OpenAutonomy creates v9 journals; earlier journals are replayed unchanged.
 func OpenAutonomy(path,name string,model Model)(*Session,error){return openVersion(path,name,model,AutonomyVersion)}
 func OpenStaffCare(path,name string,model Model)(*Session,error){return openVersion(path,name,model,StaffCareVersion)}
+func OpenContact(path,name string,model Model)(*Session,error){return openVersion(path,name,model,ContactVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}

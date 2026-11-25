@@ -18,12 +18,33 @@ type Activity struct {
 }
 func eligibleActors(j Journal,s State)[]string{
 	order:=ids(j.Profiles)
-	if j.Version!=ScheduledVersion{return order}
+	if j.Version<ScheduledVersion{return order}
 	out:=[]string{}
 	for _,id:=range order{if s.Minds[id].Activity==nil{out=append(out,id)}}
 	return out
 }
-func availableForContact(m Mind)bool{return m.Activity==nil||m.Activity.Kind=="wait"||m.Activity.Kind=="observe"}
+type Conversation struct{
+ Peer string `json:"peer"`
+ Turn string `json:"turn"`
+ Started int64 `json:"started"`
+ Turns int `json:"turns"`
+}
+func canContact(m Mind,peer string,other Mind,self string)bool{
+ if !availableForContact(other){return false}
+ if m.Conversation!=nil&&(m.Conversation.Peer!=peer||m.Conversation.Turn!=self){return false}
+ if other.Conversation!=nil&&(other.Conversation.Peer!=self||other.Conversation.Turn!=self){return false}
+ return true
+}
+func closeConversation(s *State,id string){
+ m:=s.Minds[id];if m.Conversation==nil{return}
+ peer:=m.Conversation.Peer;m.Conversation=nil;s.Minds[id]=m
+ p:=s.Minds[peer];if p.Conversation!=nil&&p.Conversation.Peer==id{
+  p.Conversation=nil
+  if p.Activity!=nil&&p.Activity.Kind=="conversation_hold"{p.Activity=nil;p.WakeReason="Interlocutor encerrou a conversa"}
+  s.Minds[peer]=p
+ }
+}
+func availableForContact(m Mind)bool{return m.Activity==nil||m.Activity.Kind=="wait"||m.Activity.Kind=="observe"||m.Activity.Kind=="conversation_hold"}
 func walkMinutes(from,to string)int64{
 	isClass:=func(s string)bool{return s=="class-b"||s=="class-c"||s=="class-d"}
 	if from==to{return 0}
@@ -57,6 +78,12 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		m:=applyCognition(j,&out,x.Actor,out.Minds[x.Actor],x.Decision)
 		m.WakeReason="";out.Minds[x.Actor]=m
 	}
+	if j.Version>=ConversationVersion{
+		for _,x:=range choices{
+			m:=out.Minds[x.Actor]
+			if m.Conversation!=nil&&(x.Decision.Action!="talk"||x.Decision.Target!=m.Conversation.Peer){closeConversation(&out,x.Actor)}
+		}
+	}
 	// A movement removes its actor from the contactable scene immediately.
 	for _,x:=range choices{if x.Decision.Action=="move"{
 		m:=out.Minds[x.Actor];d:=x.Decision
@@ -76,12 +103,18 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		switch d.Action{
 		case "talk":
 			target:=out.Minds[d.Target]
-			if target.Location!=m.Location||!availableForContact(target){
+			if target.Location!=m.Location||!availableForContact(target)||(j.Version>=ConversationVersion&&!canContact(m,d.Target,target,id)){
 				m.Activity=&Activity{Kind:"retry",Until:s.Minute+1}
 				appendEvent(&out,Event{Kind:"obstacle",Actor:id,Target:d.Target,Text:"Interlocutor indisponível; reavalie a abordagem.",Audience:[]string{id}})
 				break
 			}
 			until:=s.Minute+talkMinutes(d.Text)
+			if j.Version>=ConversationVersion{
+				started,turns:=s.Minute,0
+				if m.Conversation!=nil{started=m.Conversation.Started;turns=m.Conversation.Turns}
+				m.Conversation=&Conversation{Peer:d.Target,Turn:id,Started:started,Turns:turns}
+				target.Conversation=&Conversation{Peer:id,Turn:id,Started:started,Turns:turns}
+			}
 			m.Activity=&Activity{Kind:"talk",Target:d.Target,Text:d.Text,Until:until}
 			target.Activity=&Activity{Kind:"listen",Target:id,Until:until};target.WakeReason=""
 			out.Minds[d.Target]=target
@@ -130,10 +163,17 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		if a==nil||a.Until>minute{continue}
 		switch a.Kind{
 		case "talk":appendEvent(&out,Event{Kind:"claim",Actor:id,Target:a.Target,Text:a.Text,Audience:[]string{id,a.Target}});m.WakeReason="Conversa concluída"
+			if j.Version>=ConversationVersion&&m.Conversation!=nil{
+				m.Conversation.Turn=a.Target;m.Conversation.Turns++
+				peer:=out.Minds[a.Target];if peer.Conversation!=nil{peer.Conversation.Turn=a.Target;peer.Conversation.Turns=m.Conversation.Turns;out.Minds[a.Target]=peer}
+				m.Activity=&Activity{Kind:"conversation_hold",Target:a.Target,Until:nextWorld(out)}
+				m.WakeReason="";out.Minds[id]=m;continue
+			}
 		case "listen":m.WakeReason="Recebeu uma fala"
 		case "observe":text:=roster(out,id);if observationChanged(out,id,text){appendEvent(&out,Event{Kind:"observation",Actor:id,Text:text,Audience:[]string{id}})};m.WakeReason="Observação concluída"
 		case "wait":m.WakeReason="Prazo de reavaliação atingido";if minute==nextWorld(s){m.WakeReason="Novo anúncio escolar"}
 		case "retry":m.WakeReason="Interlocutor indisponível"
+		case "conversation_hold":m.Conversation=nil;m.WakeReason="Conversa expirou"
 		}
 		m.Activity=nil;out.Minds[id]=m
 	}

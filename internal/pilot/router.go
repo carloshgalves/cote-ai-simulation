@@ -41,6 +41,7 @@ type RouteView struct {
 	PromptTokens int64 `json:"prompt_tokens"`
 	CompletionTokens int64 `json:"completion_tokens"`
 	UsageReports int `json:"usage_reports"`
+	Prevented int `json:"prevented_requests"`
 }
 type route struct {
 	view RouteView
@@ -58,8 +59,9 @@ type Router struct {
 	telemetry []CallTelemetry
 	telemetryDropped int
 	chat *ChatGPTAccount
+	budgets map[string]minuteBudget
 }
-func NewRouter()*Router{return &Router{cooldowns:map[string]cooldown{}}}
+func NewRouter()*Router{return &Router{cooldowns:map[string]cooldown{},budgets:map[string]minuteBudget{}}}
 var providerEndpoints=map[string]string{
 	"ollama":"http://127.0.0.1:11434/v1",
 	"groq":"https://api.groq.com/openai/v1",
@@ -234,6 +236,13 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 	r.mu.Unlock()
 	call:=func(repair string)(Decision,error){
 		start:=time.Now()
+		r.mu.Lock()
+		if until:=r.admit(rt,view,start);until.After(start){
+			rt.view.Prevented++
+			r.mu.Unlock()
+			return Decision{},providerError{Status:429,RetryAt:until,Message:"limite preventivo de tokens por minuto; aguardando renovação"}
+		}
+		r.mu.Unlock()
 		t:=CallTelemetry{StartedAt:start,Actor:view.Self.ID,Cycle:view.Round,Provider:rt.view.Provider,Model:rt.view.Model,RouteID:rt.view.ID,Repair:repair!="",Format:m.Format}
 		m.telemetry=&t
 		r.mu.Lock();rt.view.Attempts++;r.mu.Unlock()
@@ -245,6 +254,7 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 		rt.view.LastLatencyMS=t.LatencyMS
 		if err!=nil{rt.view.LastError=err.Error();t.Error=err.Error()}
 		if t.Quota.Observed {rt.view.Quota=t.Quota}
+		r.observeBudget(rt,t)
 		if t.Usage!=nil{rt.view.PromptTokens+=t.Usage.Input;rt.view.CompletionTokens+=t.Usage.Output;rt.view.UsageReports++}
 		// The provider's own explicit exhaustion signal is authoritative;
 		// do not guess at remaining quota from local call counts.
@@ -272,6 +282,7 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 	var malformed responseError
 	r.mu.Lock();blocked=!r.blocked(rt,time.Now()).until.IsZero();r.mu.Unlock()
 	if ctx.Err()==nil&&!blocked&&errors.As(err,&malformed){
+		if strings.Contains(malformed.Error(),"truncada"){m.largeOutput=true}
 		d,err=call(malformed.Error())
 	}
 	r.mu.Lock()

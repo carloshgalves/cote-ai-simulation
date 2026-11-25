@@ -17,6 +17,7 @@ import (
 
 const Version = 2
 const ScheduledVersion = 3
+const ConversationVersion = 4
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -44,6 +45,8 @@ type Belief struct {
 	Text string `json:"text"`
 	Evidence string `json:"evidence"`
 	Confidence int `json:"confidence"`
+	Subject string `json:"subject,omitempty"`
+	Grounding string `json:"grounding,omitempty"`
 }
 type GoalChange struct {
 	Replace string `json:"replace"`
@@ -58,6 +61,7 @@ type RelationChange struct {
 type PlanChange struct {
 	Steps []string `json:"steps"`
 	Evidence string `json:"evidence"`
+	ProgressNote string `json:"progress_note,omitempty"`
 }
 type Decision struct {
 	Action string `json:"action"`
@@ -94,6 +98,7 @@ type Mind struct {
 	LastAction string `json:"last_action,omitempty"`
 	Activity *Activity `json:"activity,omitempty"`
 	WakeReason string `json:"wake_reason,omitempty"`
+	Conversation *Conversation `json:"conversation,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -138,6 +143,8 @@ type Context struct {
 	CanObserve bool `json:"can_observe"`
 	WakeReason string `json:"wake_reason,omitempty"`
 	Activity *Activity `json:"activity,omitempty"`
+	Conversation *Conversation `json:"conversation,omitempty"`
+	Contactable []string `json:"contactable,omitempty"`
 	Version int `json:"version"`
 }
 type Model interface {
@@ -176,9 +183,9 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion) || !validText(j.Model,200) || validateProfiles(j.Profiles)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion) || !validText(j.Model,200) || validateProfiles(j.Profiles)!=nil {return State{},errors.New("unsupported journal")}
 	s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
-	for _, p:=range j.Profiles { s.Minds[p.ID]=Mind{Location:"hall",Goals:clone(p.Goals),Beliefs:[]Belief{},Relations:map[string]int{}};if j.Version==ScheduledVersion{m:=s.Minds[p.ID];m.WakeReason="Início do período livre";s.Minds[p.ID]=m} }
+	for _, p:=range j.Profiles { s.Minds[p.ID]=Mind{Location:"hall",Goals:clone(p.Goals),Beliefs:[]Belief{},Relations:map[string]int{}};if j.Version>=ScheduledVersion{m:=s.Minds[p.ID];m.WakeReason="Início do período livre";s.Minds[p.ID]=m} }
 	appendEvent(&s,Event{Kind:"announcement",Actor:"school",Text:"Primeiro dia. A escola abriu o hall, as salas, a biblioteca e o pátio. Os estudantes têm um período livre para conhecer o ambiente e os colegas. A lista de nomes e classes dos seis participantes está disponível a todos. As regras detalhadas serão anunciadas depois.",Audience:ids(j.Profiles)})
 	return s,nil
 }
@@ -203,10 +210,16 @@ func actorContext(j Journal,s State,id string) Context {
 		if p.ID==id {c.Self=clone(p);continue}
 		person:=Person{p.ID,p.Name,p.Class}
 		c.People=append(c.People,person)
-		if s.Minds[p.ID].Location==m.Location&&(j.Version!=ScheduledVersion||availableForContact(s.Minds[p.ID])) {c.Present=append(c.Present,Presence{person,m.Location})}
+		if s.Minds[p.ID].Location==m.Location{
+			other:=s.Minds[p.ID]
+			if j.Version>=ConversationVersion {
+				if other.Activity==nil||other.Activity.Kind!="move"{c.Present=append(c.Present,Presence{person,m.Location})}
+				if canContact(m,p.ID,other,id){c.Contactable=append(c.Contactable,p.ID)}
+			}else if j.Version!=ScheduledVersion||availableForContact(other){c.Present=append(c.Present,Presence{person,m.Location})}
+		}
 	}
 	if j.Version>=Version {c.CanObserve=observationChanged(s,id,roster(s,id))}
-	if j.Version==ScheduledVersion{c.WakeReason=m.WakeReason;c.Activity=clone(m.Activity)}
+	if j.Version>=ScheduledVersion{c.WakeReason=m.WakeReason;c.Activity=clone(m.Activity);if j.Version>=ConversationVersion{c.Conversation=clone(m.Conversation)}}
 	// Recent lived memories plus older evidence currently referenced by cognition.
 	// Do not retrieve any event outside the actor's audience.
 	all:=visible(s,id)
@@ -242,16 +255,24 @@ func validateDecision(c Context,d Decision) error {
 	if (d.Source!=""&&!validText(d.Source,300)) || (d.Note!=""&&!validText(d.Note,500)) || (d.Reason!=""&&!validText(d.Reason,300)) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
 	if len(d.Ignored)>7 {return errors.New("invalid ignored field count")}
 	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","campo extra"},key){return errors.New("invalid ignored field")}}
-	if d.WaitMinutes!=0&&(c.Version!=ScheduledVersion||d.Action!="wait"||d.WaitMinutes<1||d.WaitMinutes>60){return errors.New("invalid wait duration")}
+	if d.WaitMinutes!=0&&(c.Version<ScheduledVersion||d.Action!="wait"||d.WaitMinutes<1||d.WaitMinutes>60){return errors.New("invalid wait duration")}
 	if d.Action!="wait" && d.Action!="observe" && d.Action!="move" && d.Action!="talk" {return errors.New("unsupported action")}
 	if d.Action=="talk" {
 		found:=false;for _, p:=range c.Present {if p.ID==d.Target {found=true}}
+		if c.Version>=ConversationVersion&&!has(c.Contactable,d.Target){found=false}
 		if !found || !validText(d.Text,800) {return errors.New("message requires a present recipient and text")}
 	} else if d.Action=="move" {
 		if !has(c.Locations,d.Target)||d.Target==c.Location||d.Text!="" {return errors.New("invalid movement")}
 	} else if d.Target!="" || d.Text!="" {return errors.New("wait/observe cannot assert world events")}
 	for _, b:=range d.Beliefs {
-		if _,ok:=evidence(c,b.Evidence);!ok||!validText(b.Text,300)||b.Confidence<0||b.Confidence>100 {return errors.New("belief requires accessible evidence")}
+		e,ok:=evidence(c,b.Evidence)
+		if !ok||!validText(b.Text,300)||b.Confidence<0||b.Confidence>100 {return errors.New("belief requires accessible evidence")}
+		if c.Version>=ConversationVersion {
+			if e.Kind=="announcement"&&b.Subject!=""{return errors.New("anúncio geral não fundamenta hipótese sobre colega")}
+			if b.Subject!=""&&(e.Actor!=b.Subject&&e.Target!=b.Subject){return errors.New("evidência não envolve o colega indicado")}
+			if !validText(b.Grounding,240)||!strings.Contains(e.Text,b.Grounding){return errors.New("hipótese requer trecho literal da evidência")}
+			if e.Kind=="claim"&&b.Confidence>70{return errors.New("alegação não confirmada não sustenta confiança acima de 70")}
+		}
 	}
 	if d.Goal!=nil {
 		g:=d.Goal
@@ -259,6 +280,7 @@ func validateDecision(c Context,d Decision) error {
 	}
 	if d.Plan!=nil {
 		if _,ok:=evidence(c,d.Plan.Evidence);!ok||len(d.Plan.Steps)>5{return errors.New("plan requires accessible evidence")}
+		if c.Version>=ConversationVersion&&c.Plan!=nil&&strings.Join(c.Plan.Steps,"\x00")!=strings.Join(d.Plan.Steps,"\x00")&&!validText(d.Plan.ProgressNote,240){return errors.New("explique a mudança ou conclusão do plano")}
 		for _, step:=range d.Plan.Steps {if !validText(step,180){return errors.New("invalid plan step")}}
 	}
 	if d.Relation!=nil {
@@ -295,7 +317,7 @@ func nextWorld(s State) int64 {
 	return EndMinute
 }
 func nextEventMinute(j Journal,s State,choices []Chosen)(int64,error){
-	if j.Version==ScheduledVersion {next,err:=scheduledAdvance(j,s,choices);return next.Minute,err}
+	if j.Version>=ScheduledVersion {next,err:=scheduledAdvance(j,s,choices);return next.Minute,err}
 	if j.Version==LegacyVersion{return nextMinute(s)}
 	if s.Minute>=EndMinute{return 0,errors.New("manhã concluída")}
 	target:=nextWorld(s)
@@ -326,7 +348,7 @@ func nextMinute(s State) (int64,error) {
 	return int64(next.Instant),err
 }
 func apply(j Journal,s State,r Round) (State,error) {
-	if j.Version==ScheduledVersion {
+	if j.Version>=ScheduledVersion {
 		if r.Number!=s.Round+1||r.Number>MaxRounds{return State{},errors.New("invalid scheduled cycle")}
 		next,err:=scheduledAdvance(j,s,r.Choices);if err!=nil{return State{},err}
 		if next.Minute!=r.Minute{return State{},errors.New("invalid scheduled time")}

@@ -74,3 +74,49 @@ func TestCanonProjectionPrivateAndPeerHonorific(t *testing.T){
 	if _,err:=decodeLocalChoice(v,[]byte(`{"choice":"talk:hirata","text":"Hirata-kun, você conhece algum senpai?"}`));err!=nil{t.Fatal("legitimate mention rejected",err)}
 	if !reflect.DeepEqual(canonFor("ryuen").PrivateKnowledge,[]string{})&&len(canonFor("ryuen").PrivateKnowledge)!=0{t.Fatal("future knowledge leaked")}
 }
+
+func TestRouterCompatibleFormatDowngradeAndCache(t *testing.T){
+	r:=NewRouter();calls:=0
+	addTestRoute(t,r,"gemini","test-flash","test-key",func(req *http.Request)(*http.Response,error){
+		calls++
+		var body map[string]any
+		if err:=json.NewDecoder(req.Body).Decode(&body);err!=nil{t.Fatal(err)}
+		if calls==1{
+			if body["response_format"]==nil{t.Fatal("expected first JSON request")}
+			return response(400,`{"error":{"message":"response_format is not supported"}}`,nil),nil
+		}
+		if body["response_format"]!=nil{t.Fatal("downgrade not cached")}
+		return response(200,validChoiceResponse,nil),nil
+	})
+	for i:=0;i<2;i++{
+		d,err:=r.Decide(context.Background(),kushidaView(t))
+		if err!=nil||d.Source!="gemini / test-flash"{t.Fatalf("failed format adaptation: %+v %v",d,err)}
+	}
+	v:=r.Routes()[0]
+	if calls!=3||v.Attempts!=3||v.Accepted!=2||v.EffectiveFormat!="plain"||v.LastError!=""{t.Fatalf("wrong metrics: %+v",v)}
+}
+func TestRouterProbeUsesSyntheticContextAndDoesNotFailOver(t *testing.T){
+	r:=NewRouter();calls:=0;fallback:=0
+	a:=addTestRoute(t,r,"groq","test","secret",func(req *http.Request)(*http.Response,error){
+		calls++
+		var body struct{Messages []map[string]string}
+		if err:=json.NewDecoder(req.Body).Decode(&body);err!=nil{t.Fatal(err)}
+		if len(body.Messages)!=2||!strings.Contains(body.Messages[1]["content"],"Aluno de teste")||strings.Contains(body.Messages[1]["content"],"Kushida"){t.Fatal("probe leaked actor context")}
+		return response(200,`{"choices":[{"message":{"content":"{\"choice\":\" MOVE : LIBRARY \",\"reason\":\"Conhecer a biblioteca.\"}"},"finish_reason":"stop"}]}`,nil),nil
+	})
+	addTestRoute(t,r,"gemini","backup","backup",func(req *http.Request)(*http.Response,error){fallback++;return nil,errors.New("not expected")})
+	v,err:=r.Test(context.Background(),a.ID)
+	if err!=nil||v.Status!="disponível"||v.Accepted!=1||calls!=1||fallback!=0{t.Fatalf("probe failed: %+v %v",v,err)}
+}
+func TestRouterDoesNotDowngradeUnrelated400(t *testing.T){
+	r:=NewRouter();calls:=0
+	addTestRoute(t,r,"gemini","bad","secret",func(req *http.Request)(*http.Response,error){calls++;return response(400,`{"error":{"message":"model not supported; secret"}}`,nil),nil})
+	_,err:=r.Decide(context.Background(),kushidaView(t))
+	v:=r.Routes()[0]
+	if err==nil||calls!=1||v.Accepted!=0||!strings.Contains(v.LastError,"incompatível")||strings.Contains(v.LastError,"secret"){t.Fatalf("bad error handling: %+v %v",v,err)}
+}
+func TestNormalizedChoiceDoesNotInventAction(t *testing.T){
+	d,err:=decodeLocalChoice(kushidaView(t),[]byte(`{"choice":" TALK : HIRATA ","text":"Bom dia."}`))
+	if err!=nil||d.Target!="hirata"{t.Fatal("superficial formatting rejected",err)}
+	if _,err:=decodeLocalChoice(kushidaView(t),[]byte(`{"choice":"talk:unknown","text":"Bom dia."}`));err==nil{t.Fatal("invented target accepted")}
+}

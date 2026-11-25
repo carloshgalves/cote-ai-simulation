@@ -32,6 +32,11 @@ type RouteView struct {
 	Enabled bool `json:"enabled"`
 	Status string `json:"status"`
 	RetryAt time.Time `json:"retry_at"`
+	Attempts int `json:"attempts"`
+	Accepted int `json:"accepted"`
+	LastError string `json:"last_error,omitempty"`
+	LastLatencyMS int64 `json:"last_latency_ms,omitempty"`
+	EffectiveFormat string `json:"effective_format,omitempty"`
 }
 type route struct {
 	view RouteView
@@ -42,6 +47,7 @@ type route struct {
 type cooldown struct {until time.Time; message string}
 type Router struct {
 	mu sync.Mutex
+	callMu sync.Mutex
 	next int
 	routes []*route
 	cooldowns map[string]cooldown
@@ -75,6 +81,10 @@ func normalizeRoute(in RouteInput,requireModel bool)(RouteInput,*HTTPModel,error
 	name:=in.Model;if !requireModel{name="catalog"}
 	m,err:=NewHTTPModel(in.Endpoint,name,in.Key);if err!=nil{return in,nil,err}
 	if in.Format!="auto"{m.Format=in.Format}
+	if in.Provider!="ollama" {
+		// Remote routes should not monopolize a cycle for four minutes.
+		m.Client.Timeout=45*time.Second
+	}
 	if in.Provider=="anthropic"{m.Protocol="anthropic";m.Endpoint=strings.TrimRight(in.Endpoint,"/")+"/messages"}
 	u,_:=url.Parse(m.Endpoint)
 	if u.Scheme=="http"&&in.Key!=""{return in,nil,errors.New("chave de API requer HTTPS")}
@@ -128,6 +138,7 @@ func (r *Router) Change(id,action string)error{
 func (r *Router) Decide(ctx context.Context,view Context)(Decision,error){return r.decide(ctx,view,"")}
 func (r *Router) Repair(ctx context.Context,view Context,problem string)(Decision,error){return r.decide(ctx,view,problem)}
 func (r *Router) decide(ctx context.Context,view Context,problem string)(Decision,error){
+	r.callMu.Lock();defer r.callMu.Unlock()
 	r.mu.Lock();routes:=append([]*route{},r.routes...);r.mu.Unlock()
 	for _,rt:=range routes{
 		if err:=ctx.Err();err!=nil{return Decision{},err}
@@ -137,13 +148,7 @@ func (r *Router) decide(ctx context.Context,view Context,problem string)(Decisio
 		if available{rt.view.Status="consultando"}
 		r.mu.Unlock()
 		if !available{continue}
-		d,err:=rt.model.decide(ctx,view,problem)
-		if err==nil{if validation:=validateDecision(view,d);validation!=nil{err=responseError{validation.Error()}}}
-		var malformed responseError
-		if ctx.Err()==nil&&errors.As(err,&malformed){
-			d,err=rt.model.Repair(ctx,view,malformed.Error())
-			if err==nil{if validation:=validateDecision(view,d);validation!=nil{err=responseError{validation.Error()}}}
-		}
+		d,err:=r.callRoute(ctx,rt,view,problem)
 		if ctx.Err()!=nil{
 			r.mu.Lock();rt.view.Status="cancelado";r.mu.Unlock()
 			return Decision{},ctx.Err()
@@ -171,7 +176,7 @@ func (r *Router) decide(ctx context.Context,view Context,problem string)(Decisio
 		r.cooldowns[scope]=cooldown{until,err.Error()}
 		r.mu.Unlock()
 	}
-	return Decision{},errors.New("nenhuma rota disponível; verifique Modelos e APIs, aguarde a cota ou adicione outra rota. Decisões anteriores preservadas.")
+	return Decision{},errors.New("nenhuma rota conseguiu gerar uma decisão válida; consulte o diagnóstico de cada modelo em Modelos e APIs. Decisões anteriores preservadas.")
 }
 
 type storedRoute struct {
@@ -205,4 +210,71 @@ func LoadRouter(path string)(*Router,error){
 		if !item.Enabled{if err:=r.Change(v.ID,"toggle");err!=nil{return nil,err}}
 	}
 	return r,nil
+}
+
+func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem string)(Decision,error){
+	// Work on a copy of the client configuration; the saved format is not
+	// changed by negotiation. Only the effective format is cached in memory.
+	r.mu.Lock()
+	m:=*rt.model
+	if rt.view.EffectiveFormat!=""&&rt.view.EffectiveFormat!="auto"{m.Format=rt.view.EffectiveFormat}
+	r.mu.Unlock()
+	call:=func(repair string)(Decision,error){
+		start:=time.Now()
+		r.mu.Lock();rt.view.Attempts++;r.mu.Unlock()
+		d,err:=m.decide(ctx,view,repair)
+		if err==nil{if validation:=validateDecision(view,d);validation!=nil{err=responseError{validation.Error()}}}
+		r.mu.Lock()
+		rt.view.LastLatencyMS=time.Since(start).Milliseconds()
+		if err!=nil{rt.view.LastError=err.Error()}
+		r.mu.Unlock()
+		return d,err
+	}
+	d,err:=call(problem)
+	var pe providerError
+	if ctx.Err()==nil&&rt.view.Format=="auto"&&m.Format!="plain"&&errors.As(err,&pe)&&pe.FormatRejected{
+		// One compatibility downgrade, not a retry storm on quota/auth errors.
+		m.Format="plain"
+		d,err=call(problem)
+	}
+	var malformed responseError
+	if ctx.Err()==nil&&errors.As(err,&malformed){
+		d,err=call(malformed.Error())
+	}
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	if err==nil&&ctx.Err()==nil{
+		rt.view.Accepted++
+		rt.view.LastError=""
+		rt.view.EffectiveFormat=m.Format
+		if rt.view.EffectiveFormat==""{rt.view.EffectiveFormat="auto"}
+	}
+	return d,err
+}
+
+// Test a single configured route using a tiny synthetic context. This invokes
+// generation (and may consume quota), but never reads or changes the journal.
+func (r *Router) Test(ctx context.Context,id string)(RouteView,error){
+	if !r.callMu.TryLock(){return RouteView{},errors.New("há uma consulta em andamento; pause a simulação antes de testar")}
+	defer r.callMu.Unlock()
+	r.mu.Lock()
+	var rt *route
+	for _,candidate:=range r.routes{if candidate.view.ID==id{rt=candidate;break}}
+	if rt==nil{r.mu.Unlock();return RouteView{},errors.New("rota não encontrada")}
+	if c:=r.blocked(rt,time.Now());c.until.After(time.Now()){r.mu.Unlock();return RouteView{},errors.New("rota em cooldown: "+c.message)}
+	rt.view.Status="consultando"
+	r.mu.Unlock()
+	peer:=Person{ID:"peer",Name:"Colega fictício",Class:"D"}
+	view:=Context{Version:Version,CanObserve:true,Self:Profile{ID:"probe",Name:"Aluno de teste",Class:"D",Traits:[]string{"Reservado"},Goals:[]string{"Aguardar orientação"}},Goals:[]string{"Aguardar orientação"},Location:"hall",Locations:[]string{"hall","library"},People:[]Person{peer},Present:[]Presence{{Person:peer,Location:"hall"}},SchoolYear:1,PeerRelationship:"Teste sintético com um colega fictício da mesma série."}
+	_,err:=r.callRoute(ctx,rt,view,"")
+	r.mu.Lock();defer r.mu.Unlock()
+	if err!=nil{
+		rt.view.Status=err.Error()
+		var pe providerError
+		if errors.As(err,&pe){
+			if pe.Status==429{r.cooldowns["quota:"+rt.quotaScope]=cooldown{pe.RetryAt,err.Error()}}
+			if pe.Status==401||pe.Status==403{r.cooldowns["auth:"+rt.authScope]=cooldown{time.Now().Add(10*time.Minute),err.Error()}}
+		}
+	}else{rt.view.Status="disponível"}
+	return rt.view,nil
 }

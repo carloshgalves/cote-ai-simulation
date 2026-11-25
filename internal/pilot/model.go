@@ -16,6 +16,7 @@ import (
 )
 
 const Version = 2
+const ScheduledVersion = 3
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -70,6 +71,7 @@ type Decision struct {
 	Ignored []string `json:"ignored,omitempty"`
 	Note string `json:"note,omitempty"`
 	Source string `json:"source,omitempty"`
+	WaitMinutes int `json:"wait_minutes,omitempty"`
 }
 type Event struct {
 	ID string `json:"id"`
@@ -90,6 +92,8 @@ type Mind struct {
 	Plan *PlanChange `json:"plan"`
 	Thought string `json:"thought,omitempty"`
 	LastAction string `json:"last_action,omitempty"`
+	Activity *Activity `json:"activity,omitempty"`
+	WakeReason string `json:"wake_reason,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -132,6 +136,8 @@ type Context struct {
 	Thought string `json:"thought,omitempty"`
 	LastAction string `json:"last_action,omitempty"`
 	CanObserve bool `json:"can_observe"`
+	WakeReason string `json:"wake_reason,omitempty"`
+	Activity *Activity `json:"activity,omitempty"`
 	Version int `json:"version"`
 }
 type Model interface {
@@ -170,9 +176,9 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion) || !validText(j.Model,200) || validateProfiles(j.Profiles)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion) || !validText(j.Model,200) || validateProfiles(j.Profiles)!=nil {return State{},errors.New("unsupported journal")}
 	s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
-	for _, p:=range j.Profiles { s.Minds[p.ID]=Mind{Location:"hall",Goals:clone(p.Goals),Beliefs:[]Belief{},Relations:map[string]int{}} }
+	for _, p:=range j.Profiles { s.Minds[p.ID]=Mind{Location:"hall",Goals:clone(p.Goals),Beliefs:[]Belief{},Relations:map[string]int{}};if j.Version==ScheduledVersion{m:=s.Minds[p.ID];m.WakeReason="Início do período livre";s.Minds[p.ID]=m} }
 	appendEvent(&s,Event{Kind:"announcement",Actor:"school",Text:"Primeiro dia. A escola abriu o hall, as salas, a biblioteca e o pátio. Os estudantes têm um período livre para conhecer o ambiente e os colegas. A lista de nomes e classes dos seis participantes está disponível a todos. As regras detalhadas serão anunciadas depois.",Audience:ids(j.Profiles)})
 	return s,nil
 }
@@ -197,9 +203,10 @@ func actorContext(j Journal,s State,id string) Context {
 		if p.ID==id {c.Self=clone(p);continue}
 		person:=Person{p.ID,p.Name,p.Class}
 		c.People=append(c.People,person)
-		if s.Minds[p.ID].Location==m.Location {c.Present=append(c.Present,Presence{person,m.Location})}
+		if s.Minds[p.ID].Location==m.Location&&(j.Version!=ScheduledVersion||availableForContact(s.Minds[p.ID])) {c.Present=append(c.Present,Presence{person,m.Location})}
 	}
-	if j.Version==Version {c.CanObserve=observationChanged(s,id,roster(s,id))}
+	if j.Version>=Version {c.CanObserve=observationChanged(s,id,roster(s,id))}
+	if j.Version==ScheduledVersion{c.WakeReason=m.WakeReason;c.Activity=clone(m.Activity)}
 	// Recent lived memories plus older evidence currently referenced by cognition.
 	// Do not retrieve any event outside the actor's audience.
 	all:=visible(s,id)
@@ -235,6 +242,7 @@ func validateDecision(c Context,d Decision) error {
 	if (d.Source!=""&&!validText(d.Source,300)) || (d.Note!=""&&!validText(d.Note,500)) || (d.Reason!=""&&!validText(d.Reason,300)) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
 	if len(d.Ignored)>7 {return errors.New("invalid ignored field count")}
 	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","campo extra"},key){return errors.New("invalid ignored field")}}
+	if d.WaitMinutes!=0&&(c.Version!=ScheduledVersion||d.Action!="wait"||d.WaitMinutes<1||d.WaitMinutes>60){return errors.New("invalid wait duration")}
 	if d.Action!="wait" && d.Action!="observe" && d.Action!="move" && d.Action!="talk" {return errors.New("unsupported action")}
 	if d.Action=="talk" {
 		found:=false;for _, p:=range c.Present {if p.ID==d.Target {found=true}}
@@ -271,7 +279,7 @@ var schoolAgenda = []struct{ Minute int64; Text string }{
 func roster(s State,id string) string {
 	m:=s.Minds[id]
 	names:=[]string{}
-	for other, mind:=range s.Minds {if other!=id&&mind.Location==m.Location{names=append(names,other)}}
+	for other, mind:=range s.Minds {if other!=id&&mind.Location==m.Location&&(mind.Activity==nil||mind.Activity.Kind!="move"){names=append(names,other)}}
 	sort.Strings(names)
 	return "Presentes em "+m.Location+": "+strings.Join(names,", ")
 }
@@ -287,6 +295,7 @@ func nextWorld(s State) int64 {
 	return EndMinute
 }
 func nextEventMinute(j Journal,s State,choices []Chosen)(int64,error){
+	if j.Version==ScheduledVersion {next,err:=scheduledAdvance(j,s,choices);return next.Minute,err}
 	if j.Version==LegacyVersion{return nextMinute(s)}
 	if s.Minute>=EndMinute{return 0,errors.New("manhã concluída")}
 	target:=nextWorld(s)
@@ -317,6 +326,12 @@ func nextMinute(s State) (int64,error) {
 	return int64(next.Instant),err
 }
 func apply(j Journal,s State,r Round) (State,error) {
+	if j.Version==ScheduledVersion {
+		if r.Number!=s.Round+1||r.Number>MaxRounds{return State{},errors.New("invalid scheduled cycle")}
+		next,err:=scheduledAdvance(j,s,r.Choices);if err!=nil{return State{},err}
+		if next.Minute!=r.Minute{return State{},errors.New("invalid scheduled time")}
+		return next,nil
+	}
 	minute,err:=nextEventMinute(j,s,r.Choices)
 	if err!=nil||r.Number!=s.Round+1||r.Minute!=minute||r.Number>MaxRounds {return State{},errors.New("invalid round coordinate")}
 	order:=ids(j.Profiles)
@@ -341,35 +356,7 @@ func apply(j Journal,s State,r Round) (State,error) {
 			appendEvent(&out,Event{Kind:"model_failure",Actor:x.Actor,Text:x.Failure,Audience:[]string{}})
 			continue
 		}
-		if len(d.Ignored)>0{appendEvent(&out,Event{Kind:"ignored_cognition",Actor:x.Actor,Text:strings.Join(d.Ignored,", "),Audience:[]string{}})}
-		oldMind:=clone(m)
-		for _, b:=range d.Beliefs {
-			found:=false;for i, old:=range m.Beliefs {if old.Text==b.Text {m.Beliefs[i]=b;found=true}}
-			if !found {m.Beliefs=append(m.Beliefs,b)}
-		}
-		if len(m.Beliefs)>12 {m.Beliefs=m.Beliefs[len(m.Beliefs)-12:]}
-		if d.Goal!=nil {for i,g:=range m.Goals {if g==d.Goal.Replace {m.Goals[i]=d.Goal.With}}}
-		if d.Relation!=nil {
-			v:=m.Relations[d.Relation.Person]+d.Relation.Delta
-			if v>5 {v=5};if v< -5 {v= -5};m.Relations[d.Relation.Person]=v
-		}
-		if j.Version==Version {
-			thought:=d.Reason
-			if d.Note!="" {if thought!=""{thought+=" · "};thought+=d.Note}
-			if thought!=""&&thought!=m.Thought{appendEvent(&out,Event{Kind:"intention",Actor:x.Actor,Text:thought,Audience:[]string{x.Actor}})}
-			m.Thought=thought;m.LastAction=d.Action
-			if d.Target!=""{m.LastAction+=":"+d.Target}
-		} else if d.Reason!=""{appendEvent(&out,Event{Kind:"intention",Actor:x.Actor,Text:d.Reason,Audience:[]string{x.Actor}})}
-		if d.Goal!=nil {appendEvent(&out,Event{Kind:"goal",Actor:x.Actor,Text:d.Goal.Replace+" → "+d.Goal.With,Audience:[]string{x.Actor},Evidence:d.Goal.Evidence})}
-		if d.Plan!=nil {
-			m.Plan=clone(d.Plan)
-			if j.Version==LegacyVersion||oldMind.Plan==nil||strings.Join(oldMind.Plan.Steps,"\x00")!=strings.Join(d.Plan.Steps,"\x00")||oldMind.Plan.Evidence!=d.Plan.Evidence{appendEvent(&out,Event{Kind:"plan",Actor:x.Actor,Text:strings.Join(d.Plan.Steps," → "),Audience:[]string{x.Actor},Evidence:d.Plan.Evidence})}
-		}
-		for _, b:=range d.Beliefs {
-			same:=false;for _, old:=range oldMind.Beliefs{if old==b{same=true;break}}
-			if j.Version==LegacyVersion||!same{appendEvent(&out,Event{Kind:"belief",Actor:x.Actor,Text:b.Text,Audience:[]string{x.Actor},Evidence:b.Evidence})}
-		}
-		if d.Relation!=nil&&(j.Version==LegacyVersion||oldMind.Relations[d.Relation.Person]!=m.Relations[d.Relation.Person]) {appendEvent(&out,Event{Kind:"relation",Actor:x.Actor,Target:d.Relation.Person,Text:fmt.Sprintf("Relação: %+d",d.Relation.Delta),Audience:[]string{x.Actor},Evidence:d.Relation.Evidence})}
+		m=applyCognition(j,&out,x.Actor,m,d)
 		switch d.Action {
 		case "talk":
 			appendEvent(&out,Event{Kind:"claim",Actor:x.Actor,Target:d.Target,Text:d.Text,Audience:[]string{x.Actor,d.Target}})
@@ -407,4 +394,37 @@ func Replay(j Journal) (State,error) {
 }
 func Digest(j Journal) string {
 	raw,_:=json.Marshal(j);sum:=sha256.Sum256(raw);return hex.EncodeToString(sum[:])
+}
+
+func applyCognition(j Journal,out *State,actor string,m Mind,d Decision)Mind {
+		if len(d.Ignored)>0{appendEvent(out,Event{Kind:"ignored_cognition",Actor:actor,Text:strings.Join(d.Ignored,", "),Audience:[]string{}})}
+		oldMind:=clone(m)
+		for _, b:=range d.Beliefs {
+			found:=false;for i, old:=range m.Beliefs {if old.Text==b.Text {m.Beliefs[i]=b;found=true}}
+			if !found {m.Beliefs=append(m.Beliefs,b)}
+		}
+		if len(m.Beliefs)>12 {m.Beliefs=m.Beliefs[len(m.Beliefs)-12:]}
+		if d.Goal!=nil {for i,g:=range m.Goals {if g==d.Goal.Replace {m.Goals[i]=d.Goal.With}}}
+		if d.Relation!=nil {
+			v:=m.Relations[d.Relation.Person]+d.Relation.Delta
+			if v>5 {v=5};if v< -5 {v= -5};m.Relations[d.Relation.Person]=v
+		}
+		if j.Version>=Version {
+			thought:=d.Reason
+			if d.Note!="" {if thought!=""{thought+=" · "};thought+=d.Note}
+			if thought!=""&&thought!=m.Thought{appendEvent(out,Event{Kind:"intention",Actor:actor,Text:thought,Audience:[]string{actor}})}
+			m.Thought=thought;m.LastAction=d.Action
+			if d.Target!=""{m.LastAction+=":"+d.Target}
+		} else if d.Reason!=""{appendEvent(out,Event{Kind:"intention",Actor:actor,Text:d.Reason,Audience:[]string{actor}})}
+		if d.Goal!=nil {appendEvent(out,Event{Kind:"goal",Actor:actor,Text:d.Goal.Replace+" → "+d.Goal.With,Audience:[]string{actor},Evidence:d.Goal.Evidence})}
+		if d.Plan!=nil {
+			m.Plan=clone(d.Plan)
+			if j.Version==LegacyVersion||oldMind.Plan==nil||strings.Join(oldMind.Plan.Steps,"\x00")!=strings.Join(d.Plan.Steps,"\x00")||oldMind.Plan.Evidence!=d.Plan.Evidence{appendEvent(out,Event{Kind:"plan",Actor:actor,Text:strings.Join(d.Plan.Steps," → "),Audience:[]string{actor},Evidence:d.Plan.Evidence})}
+		}
+		for _, b:=range d.Beliefs {
+			same:=false;for _, old:=range oldMind.Beliefs{if old==b{same=true;break}}
+			if j.Version==LegacyVersion||!same{appendEvent(out,Event{Kind:"belief",Actor:actor,Text:b.Text,Audience:[]string{actor},Evidence:b.Evidence})}
+		}
+		if d.Relation!=nil&&(j.Version==LegacyVersion||oldMind.Relations[d.Relation.Person]!=m.Relations[d.Relation.Person]) {appendEvent(out,Event{Kind:"relation",Actor:actor,Target:d.Relation.Person,Text:fmt.Sprintf("Relação: %+d",d.Relation.Delta),Audience:[]string{actor},Evidence:d.Relation.Evidence})}
+	return m
 }

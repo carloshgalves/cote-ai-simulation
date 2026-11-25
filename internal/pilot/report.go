@@ -11,6 +11,7 @@ import (
 
 type ActorCycle struct {
 	Cycle int `json:"cycle"`
+	Consulted bool `json:"consulted"`
 	StartMinute int64 `json:"start_minute"`
 	EndMinute int64 `json:"end_minute"`
 	Before Mind `json:"before"`
@@ -52,15 +53,18 @@ func buildReport(o OperatorReport)([]byte,error){
 	for _,profile:=range j.Profiles{actors[profile.ID]=&ActorReport{Profile:profile,Cycles:[]ActorCycle{}}}
 	for _,round:=range j.Rounds{
 		next,err:=apply(j,s,round);if err!=nil{return nil,err}
-		for _,choice:=range round.Choices{
-			id:=choice.Actor
+		choices:=map[string]Chosen{}
+		for _,c:=range round.Choices{choices[c.Actor]=c}
+		for _,id:=range ids(j.Profiles){
+			choice,consulted:=choices[id]
+			if !consulted{choice=Chosen{Actor:id}}
 			events:=[]Event{}
 			for _,e:=range next.Events[len(s.Events):]{if has(e.Audience,id){events=append(events,e)}}
 			// Failure markers are operator diagnostics, not character knowledge.
 			c:=clone(choice)
 			c.Decision.Source="";c.Decision.Ignored=nil
 			if c.Failure!=""{c=Chosen{Actor:id}}
-			actors[id].Cycles=append(actors[id].Cycles,ActorCycle{Cycle:round.Number,StartMinute:s.Minute,EndMinute:next.Minute,Before:clone(s.Minds[id]),Choice:c,Events:events,After:clone(next.Minds[id]),AvailableContext:actorContext(j,s,id)})
+			actors[id].Cycles=append(actors[id].Cycles,ActorCycle{Cycle:round.Number,Consulted:consulted,StartMinute:s.Minute,EndMinute:next.Minute,Before:clone(s.Minds[id]),Choice:c,Events:events,After:clone(next.Minds[id]),AvailableContext:actorContext(j,s,id)})
 		}
 		s=next
 	}
@@ -96,7 +100,7 @@ func buildReport(o OperatorReport)([]byte,error){
 		for _,c:=range a.Cycles{
 			fmt.Fprintf(&b,"\n## Ciclo %d — %s a %s\n\n",c.Cycle,reportTime(c.StartMinute),reportTime(c.EndMinute))
 			fmt.Fprintln(&b,"### Antes da decisão");writeMind(&b,c.Before)
-			fmt.Fprintln(&b,"\n### Decisão própria");writeChoice(&b,c.Choice)
+			fmt.Fprintln(&b,"\n### Decisão própria");if c.Consulted{writeChoice(&b,c.Choice)}else{fmt.Fprintln(&b,"- Sem nova consulta ao modelo; atividade anterior mantida.")}
 			fmt.Fprintln(&b,"\n### Acontecimentos percebidos");for _,e:=range c.Events{writeEvent(&b,e)}
 			fmt.Fprintln(&b,"\n### Depois da decisão");writeMind(&b,c.After)
 		}
@@ -124,6 +128,8 @@ func writeChoice(b *strings.Builder,c Chosen){
 func writeEvent(b *strings.Builder,e Event){fmt.Fprintf(b,"- %s | %s | %s | %s → %s | %s",reportTime(e.Minute),e.ID,e.Kind,e.Actor,e.Target,e.Text);if e.Evidence!=""{fmt.Fprintf(b," | evidência: %s",e.Evidence)};fmt.Fprintln(b)}
 func writeMind(b *strings.Builder,m Mind){
 	fmt.Fprintf(b,"- Local: %s\n- Objetivos: %s\n- Intenção: %s\n",m.Location,strings.Join(m.Goals,"; "),m.Thought)
+	if m.Activity!=nil{fmt.Fprintf(b,"- Atividade: %s; término/reavaliação: %s\n",m.Activity.Kind,reportTime(m.Activity.Until))}
+	if m.WakeReason!=""{fmt.Fprintf(b,"- Motivo de ativação: %s\n",m.WakeReason)}
 	if m.Plan!=nil{fmt.Fprintf(b,"- Plano: %s (%s)\n",strings.Join(m.Plan.Steps," → "),m.Plan.Evidence)}
 	for _,v:=range m.Beliefs{fmt.Fprintf(b,"- Hipótese: %s (%d%%; %s)\n",v.Text,v.Confidence,v.Evidence)}
 	raw,_:=json.Marshal(m.Relations);fmt.Fprintf(b,"- Relações: %s\n",raw)

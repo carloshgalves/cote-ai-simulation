@@ -91,7 +91,7 @@ func projectPopulation(j Journal,s State,id string,c *Context){
  }else{
   filtered:=[]string{};for _,loc:=range c.Locations{if loc!="staffroom"{filtered=append(filtered,loc)}};c.Locations=filtered
  }
- for _,co:=range s.Cohorts{if co.Location==c.Location{c.NearbyCohorts=append(c.NearbyCohorts,co)}}
+ for _,co:=range s.Cohorts{if co.Location==c.Location{co.Tier="";c.NearbyCohorts=append(c.NearbyCohorts,co)}}
 }
 func sameYearPeer(c Context,target string)bool{
  if c.Version<PopulationVersion{return true}
@@ -100,13 +100,17 @@ func sameYearPeer(c Context,target string)bool{
 func needsModel(s State,id string)bool{
  m:=s.Minds[id]
  if m.Tier==FullTier{return true}
- return m.Tier==LightTier&&(m.Conversation!=nil&&m.Conversation.Turn==id||m.WakeReason=="Recebeu convite"||m.WakeReason=="Atualização de compromisso"||m.WakeReason=="Compromisso agendado")
+ if m.Tier!=LightTier{return false}
+ if m.Conversation!=nil&&m.Conversation.Turn==id{return true}
+ if s.World!=nil{for _,mt:=range s.World.Meetings{if mt.Guest==id&&mt.Status=="pending"&&s.Minute<mt.At{return true}}}
+ return m.WakeReason=="Recebeu convite"||m.WakeReason=="Atualização de compromisso"||m.WakeReason=="Compromisso agendado"
 }
 func equalDecision(a,b Decision)bool{return reflect.DeepEqual(a,b)}
 func routineDecision(j Journal,s State,id string)Decision{
  a,m:=j.Population[id],s.Minds[id]
- d:=Decision{Action:"wait",WaitMinutes:60,Reason:"Manter a rotina institucional",Source:routineSource}
- v:=actorContext(j,s,id)
+ d:=Decision{Action:"wait",WaitMinutes:60,Source:routineSource}
+ v:=Context{Location:m.Location,Locations:worldLocations(id),School:schoolView(j,s,id)}
+ projectPopulation(j,s,id,&v)
  choose:=func(action,target string)Decision{d.Action=action;d.Target=target;d.WaitMinutes=0;return d}
  if v.School!=nil{for _,o:=range v.School.Options{if o.Action=="attend"{return choose(o.Action,o.Target)}}}
  period:=periodAt(s.Minute)

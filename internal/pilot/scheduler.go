@@ -46,7 +46,7 @@ func closeConversation(s *State,id string){
   s.Minds[peer]=p
  }
 }
-func availableForContact(m Mind)bool{return m.Activity==nil||m.Activity.Kind=="wait"||m.Activity.Kind=="observe"||m.Activity.Kind=="conversation_hold"}
+func availableForContact(m Mind)bool{return m.Activity==nil||m.Activity.Kind=="wait"||m.Activity.Kind=="observe"||m.Activity.Kind=="conversation_hold"||(m.Tier!=""&&m.Activity.Kind=="task"&&m.Activity.Target=="work:")}
 func walkMinutes(from,to string)int64{
 	if strings.HasPrefix(from,"dormitory-")||strings.HasPrefix(to,"dormitory-"){return 12}
 	if has([]string{"shop","mall","seafront","park","gym","cafeteria"},from)||has([]string{"shop","mall","seafront","park","gym","cafeteria"},to){return 8}
@@ -71,7 +71,10 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	for i,x:=range choices{
 		if x.Actor!=order[i]{return State{},errors.New("invalid eligible actor order")}
 		if x.Failure!=""{return State{},errors.New("falha técnica não constitui decisão; repita o ciclo")}
-		if j.Version>=PopulationVersion&&!needsModel(s,x.Actor)&&!equalDecision(x.Decision,routineDecision(j,s,x.Actor)){return State{},errors.New("invalid deterministic routine")}
+		if j.Version>=PopulationVersion{
+   local:=!needsModel(s,x.Actor)
+   if local&&!equalDecision(x.Decision,routineDecision(j,s,x.Actor))||!local&&x.Decision.Source==routineSource{return State{},errors.New("invalid decision provenance")}
+  }
   if err:=validateDecision(actorContext(j,s,x.Actor),x.Decision);err!=nil{return State{},fmt.Errorf("%s: %w",x.Actor,err)}
 	}
 	out:=clone(s);out.Round++
@@ -80,7 +83,8 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	byID:=map[string]Decision{}
 	for _,x:=range choices{
 		byID[x.Actor]=x.Decision
-		m:=applyCognition(j,&out,x.Actor,out.Minds[x.Actor],x.Decision)
+		m:=out.Minds[x.Actor]
+  if j.Version<PopulationVersion||x.Decision.Source!=routineSource{m=applyCognition(j,&out,x.Actor,m,x.Decision)}else{m.LastAction=x.Decision.Action}
 		m.WakeReason="";out.Minds[x.Actor]=m
 	}
 	if j.Version>=ConversationVersion{

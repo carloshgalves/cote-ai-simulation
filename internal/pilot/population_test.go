@@ -49,3 +49,15 @@ func TestPopulationExamExcludesStaffAndNonparticipants(t *testing.T){
  j:=populationJournal(t);s,_:=initial(j);s.Minute=1440+600;advanceWorld(j,&s)
  if len(s.World.Exam.Group)!=6||actorContext(j,s,"kei-karuizawa").School.Exam!=nil||actorContext(j,s,"sae-chiyabashira").School.Exam!=nil{t.Fatal("exam membership leaked")}
 }
+
+func TestPopulationRoutinePreservesMindAndStaffContact(t *testing.T){
+ j:=populationJournal(t);s,_:=initial(j)
+ id:="sae-chiyabashira";m:=s.Minds[id];m.Activity=&Activity{Kind:"task",Target:"work:",Until:600};s.Minds[id]=m
+ h:=s.Minds["horikita"];h.Location=m.Location;s.Minds["horikita"]=h
+ if !has(actorContext(j,s,"horikita").Contactable,id){t.Fatal("staff cannot be contacted during service")}
+ id="kanji-ike";m=s.Minds[id];m.Thought="Memória anterior";s.Minds[id]=m
+ choices:=[]Chosen{}
+ for _,actor:=range eligibleActors(j,s){d:=wait();if !needsModel(s,actor){d=routineDecision(j,s,actor)};choices=append(choices,Chosen{Actor:actor,Decision:d})}
+ next,err:=scheduledAdvance(j,s,choices);if err!=nil{t.Fatal(err)}
+ if next.Minds[id].Thought!="Memória anterior"{t.Fatal("routine overwrote private cognition")}
+}

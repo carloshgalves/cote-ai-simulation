@@ -197,7 +197,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 			}
 			if ctx.Err()!=nil{return Snapshot{},ctx.Err()}
 			retryable:=false
-			if err==nil {err=validateDecision(view,d);retryable=err!=nil} else {
+			if err==nil {err=validateDecision(view,d);if journal.Version>=PopulationVersion&&d.Source==routineSource{err=errors.New("model cannot impersonate deterministic routine")};retryable=err!=nil} else {
 				var malformed responseError
 				retryable=errors.As(err,&malformed)
 			}

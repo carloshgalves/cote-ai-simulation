@@ -59,7 +59,7 @@ function renderChoices(){
 function renderProgress(){if(!snapshot)return;renderChoices();const p=progress;
  const active=p?.active,pending=p?.round>snapshot.state.round,done=p?.completed||0;
  $("progressbar").style.width=(pending&&p.total?100*done/p.total:0)+"%";
- $("progress").textContent=active?done+"/"+p.total+" · "+(p.phase==="saving"?"Salvando":p.phase==="canceling"?"Cancelando":name(p.actor)+" · tentativa "+p.attempt+" · "+Math.max(0,Math.floor((Date.now()-Date.parse(p.actor_started_at))/1000))+" s")+(p.last_error?" · "+p.last_error:""):pending&&done?"Resultados provisórios: "+done+"/"+p.total:"";
+ $("progress").textContent=active?done+"/"+p.total+" · "+(p.phase==="saving"?"Salvando":p.phase==="canceling"?"Cancelando":name(p.actor)+(p.attempt===0?" · rotina local":" · tentativa "+p.attempt)+" · "+Math.max(0,Math.floor((Date.now()-Date.parse(p.actor_started_at))/1000))+" s")+(p.last_error?" · "+p.last_error:""):pending&&done?"Resultados provisórios: "+done+"/"+p.total:"";
  for(const label of $("people").querySelectorAll("[data-progress]")){const x=pending&&p?.choices?.find(x=>x.actor===label.dataset.progress);label.textContent=x?(x.failure?"Falha técnica":x.decision?.source==="motor/rotina"?"Rotina local":"Decisão pronta"):active&&p.actor===label.dataset.progress?"Consultando modelo…":snapshot.state.minds[label.dataset.progress].activity?("Em atividade até "+time(snapshot.state.minds[label.dataset.progress].activity.until)):snapshot.state.minds[label.dataset.progress].wake_reason?"Pronto para decidir":"";label.className=x?(x.failure?"error":"good"):"muted"}
  controls()
 }
@@ -103,7 +103,7 @@ setInterval(poll,1000);
 async function step(){if(busy||!snapshot)return false;busy=true;controls();status("Consultando personagens…");try{snapshot=await post("/api/step",{round:snapshot.state.round});render();status(snapshot.done?"Limite do piloto atingido.":"Ciclo salvo.");return true}catch(e){running=false;try{snapshot=await api("/api/state");render()}catch{}status(e.message,e.message!=="context canceled");return false}finally{busy=false;await poll();controls()}}
 $("run").onclick=async()=>{if(running||busy)return;running=true;controls();while(running&&!snapshot.done){if(!await step())break}running=false;controls()};
 $("report").onclick=()=>{window.location.href="/api/report"};$("step").onclick=()=>step();$("pause").onclick=()=>{running=false;controls();status("Pausa solicitada.")};$("cancel").onclick=async()=>{running=false;try{await post("/api/cancel",{round:progress.round});status("Cancelamento solicitado.")}catch(e){status(e.message,true)}await poll()};
-$("who").onchange=e=>{selected=e.target.value;render()};$("tier-filter").onchange=render;$("role-filter").onchange=render;$("technical").onchange=render;
+$("who").onchange=e=>{selected=e.target.value;render()};$("tier-filter").onchange=render;$("role-filter").onchange=()=>{$("tier-filter").value="";render()};$("technical").onchange=render;
 for(const [id,preset] of Object.entries(presets)){const o=node("option",preset[0]);o.value=id;$("provider").append(o)}
 let chatConnected=false;
 async function refreshChat(){try{const c=await api("/api/chatgpt");chatConnected=c.connected;$("chat-status").textContent=c.connected?"Conectado · "+c.email+" · uso do plano autorizado. Sujeito aos limites da assinatura.":c.message||"Conta não conectada";$("chat-logout").disabled=!c.connected;modelControls()}catch(e){$("chat-status").textContent=e.message}}

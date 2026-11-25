@@ -82,10 +82,12 @@ const configs={
   },
   "friendship-janken": {
     "source": "Friendship_Janken",
+    "players": 5,
+    "initialDebt": 1000000,
     "rounds": 3,
     "prize": 2000000,
     "model": [
-      "two-player three-card variant; draw defined by aggregate score; extra rule reconstruction, not full manga reproduction"
+      "five-player three-card game; winners transfer up to 500000 yen debt each; split between losers; aggregate equal net wins treated as draw; early failure when debt concentrates on one player"
     ]
   },
   "fake-game": {
@@ -106,7 +108,7 @@ function amount(x){assert(Number.isSafeInteger(x)&&x>=0,"invalid money/quantity"
 
 function create(game,players,setup={}){
  assert(Object.hasOwn(configs,game),"unknown game");const c=configs[game];assert(Array.isArray(players)&&players.length>=2&&new Set(players).size===players.length&&players.every(p=>typeof p==="string"&&/^[a-zA-Z0-9_.-]+$/.test(p)&&!Object.hasOwn(Object.prototype,p)&&p!=="prototype"),"bad roster");
- if(c.players)assert(players.length===c.players,"wrong roster size");if(["fake-game","friendship-janken"].includes(game))assert(players.length===2,"two players required");
+ if(c.players)assert(players.length===c.players,"wrong roster size");if(game==="fake-game")assert(players.length===2,"two players required");
  const s={game,round:0,terminal:false,winners:[],players:[...players],active:[...players],debt:{},cash:{},publicLog:[],private:{},config:clone(c),data:{}};
  for(const p of players){s.debt[p]=amount(setup.debt?.[p]??c.initialDebt??0);s.cash[p]=amount(setup.cash?.[p]??0);s.private[p]={};}
  if(game==="backbiting-sugoroku"){s.data.pos=Object.fromEntries(players.map(p=>[p,0]));s.data.gameDebt=Object.fromEntries(players.map(p=>[p,0]));s.data.tiles=clone(setup.tiles??{});for(const v of Object.values(s.data.tiles))assert(Number.isSafeInteger(v),"bad board tile")}
@@ -189,12 +191,15 @@ function step(before,actions={},host={}){
  const eliminated=new Set();for(const id of a){const x=act(id);if(x.report!==undefined){const t=x.report.target;assert(a.includes(t)&&t!==id&&typeof x.report.password==="string","bad report");eliminated.add(x.report.password===s.private[t].password?t:id)}}for(const id of a){if(eliminated.has(id)){remove(id);d.excluded.push(id);log("excluded",{actor:id})}}
  for(const e of host.completedTasks??[]){assert(s.active.includes(e.actor)&&typeof e.task==="string","invalid task");(d.completed[e.actor]??=[]).push(e.task)}
  if(s.round>=c.days||s.active.length<=1){const active=s.active;const count=Object.fromEntries(active.map(id=>[id,0]));for(const id of active){const t=act(id).vote;if(t!==undefined){assert(active.includes(t)&&t!==id,"invalid election vote");count[t]++}}if(active.length){const max=Math.max(...Object.values(count)),w=active.filter(id=>count[id]===max);for(const id of active)s.debt[id]=0;split(c.prize,w,credit);finish(w)}else finish([])}break;}
- case "friendship-janken":
+ case "friendship-janken":{
+ requireAll();const hands=Object.fromEntries(a.map(id=>[id,act(id).hand]));for(const id of a){assert(d.hands[id].includes(hands[id]),"invalid or reused card");d.hands[id]=d.hands[id].filter(k=>k!==hands[id])}
+ const distinct=[...new Set(Object.values(hands))];
+ if(distinct.length===2){const winning=rps(distinct[0],distinct[1])>0?distinct[0]:distinct[1],w=a.filter(id=>hands[id]===winning),l=a.filter(id=>hands[id]!==winning);for(const id of w){const n=Math.min(500000,s.debt[id]);debt(id,-n);split(n,l,debt);d.points[id]++}for(const id of l)d.points[id]--;}
+ log("janken_reveal",{hands});const debtors=a.filter(id=>s.debt[id]>0);
+ if(debtors.length===1){debt(debtors[0],s.debt[debtors[0]]);finish([])}
+ else if(s.round>=c.rounds){if(new Set(Object.values(d.points)).size===1){split(c.prize,p,(id,n)=>{s.debt[id]=Math.max(0,s.debt[id]-n)});finish(p)}else{for(const id of a)debt(id,s.debt[id]);finish([])}}break;}
  case "fake-game":{
- requireAll();const [x,y]=a,hx=act(x).hand,hy=act(y).hand,v=rps(hx,hy);
- if(s.game==="fake-game"){finish(v===0?[]:v>0?[x]:[y]);break}
- for(const [id,h] of [[x,hx],[y,hy]]){assert(d.hands[id].includes(h),"card already used");d.hands[id]=d.hands[id].filter(k=>k!==h)}if(v!==0)d.points[v>0?x:y]++;
- if(s.round>=c.rounds){if(d.points[x]===d.points[y]){split(c.prize,p,credit);finish(p)}else finish([d.points[x]>d.points[y]?x:y])}break;}
+ requireAll();const [x,y]=a,v=rps(act(x).hand,act(y).hand);finish(v===0?[]:v>0?[x]:[y]);break;}
  default:throw new Error("unknown game");
  }
  for(const id of p){amount(s.debt[id]);amount(s.cash[id])}return s
@@ -211,7 +216,7 @@ function smoke(){
  s=create("all-bet",["a","b"],{cash:{a:3000000,b:3000000}});const b={id:"w",a:"a",b:"b",stake:1000000,kind:"rps"},contract=JSON.stringify(["w","a","b",1000000,"rps"]);const acts={a:{contract,hand:"rock"},b:{contract,hand:"scissors"}};t=step(s,acts,{settlements:[b]});eq(t.cash,{a:4000000,b:2000000});reject(()=>step(t,acts,{settlements:[b]}));reject(()=>step(s,{a:acts.a},{settlements:[b]}));
  s=create("friend-murder",["a","b"],{cash:{a:1000000,b:1000000}});t=step(s,{a:{buy:{yellow:1},defend:"yellow"}},{defenses:[{actor:"a",kind:"yellow"}],captured:["b"]});eq(t.cash,{a:0,b:0});eq(t.data.forfeiture,["b"]);reject(()=>step(s,{a:{buy:{red:1}}}));
  s=create("friendless",["a","b","c"],{passwords:{a:"X",b:"Y",c:"Z"}});eq(view(s,"a").private,{password:"X"});assert(!JSON.stringify(view(s,"a")).includes('"Y"'),"secret leak");n++;t=step(s,{a:{report:{target:"b",password:"Y"}}});eq(t.active,["a","c"]);eq(step(s,{a:{report:{target:"b",password:"wrong"}}}).active,["b","c"]);reject(()=>step(s,{a:{report:{target:"a",password:"X"}}}));
- s=create("friendship-janken",["a","b"]);for(const h of ["rock","paper","scissors"])s=step(s,{a:{hand:h},b:{hand:h}});eq(s.winners,["a","b"]);eq(s.cash.a,1000000);
+ s=create("friendship-janken",P);for(const h of ["rock","paper","scissors"])s=step(s,ballots(P,{hand:h}));eq(s.winners,P);eq(s.debt.a,600000);s=create("friendship-janken",P);s=step(s,{...ballots(P,{hand:"paper"}),a:{hand:"rock"}});eq(s.debt.a,3000000);s=step(s,{...ballots(P,{hand:"scissors"}),a:{hand:"paper"}});eq(s.terminal,true);eq(s.debt.a,10000000);
  s=create("fake-game",["a","b"]);eq(step(s,{a:{hand:"paper"},b:{hand:"rock"}}).winners,["a"]);
  return n
 }

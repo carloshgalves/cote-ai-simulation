@@ -18,7 +18,7 @@ concurrency:
 jobs:
   pilot:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v6
         with:
@@ -35,3 +35,7 @@ jobs:
         env:
           COTE_AUTONOMY_EVAL: "1"
         run: go test -v -count=1 -timeout=8m ./internal/pilot -run '^TestAutonomyLongitudinalEvaluation$'
+      - name: Fixed-seed cost and quality comparison
+        env:
+          COTE_COST_BENCHMARK: "1"
+        run: go test -v -count=1 -timeout=12m ./internal/pilot -run '^TestPilotCostQualityBenchmark$'

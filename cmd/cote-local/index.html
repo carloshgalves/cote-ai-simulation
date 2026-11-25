@@ -21,7 +21,7 @@
 #view-timeline .scroll{max-height:none}
 button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media(max-width:800px){.app-layout{grid-template-columns:minmax(0,1fr)}.sidebar{border-right:0;border-bottom:1px solid var(--line);padding:8px}.sidebar nav{position:static;display:flex;flex-wrap:wrap}.sidebar button{width:auto}.sidebar .nav-heading{display:none}}
-.character-modal{width:min(1000px,calc(100vw - 28px))}.character-layout{display:grid;grid-template-columns:minmax(160px,230px) minmax(0,1fr)}.character-portrait{padding:20px;display:flex;flex-direction:column;gap:10px;background:#141a23}.character-portrait svg,.portrait-placeholder{width:100%;border-radius:12px;aspect-ratio:9/11}.portrait-placeholder{display:grid;place-items:center;background:#26303b;color:var(--muted);font-size:46px}.character-modal .panel{border:0;border-radius:0}.character-modal .scroll{min-height:320px;max-height:60vh}@media(max-width:600px){.character-layout{grid-template-columns:1fr}.character-portrait{flex-direction:row;align-items:center;flex-wrap:wrap}.character-portrait svg,.portrait-placeholder{width:72px}.character-modal .scroll{min-height:180px}}</style></head>
+.character-modal{width:min(1000px,calc(100vw - 28px))}.character-layout{display:grid;grid-template-columns:minmax(160px,230px) minmax(0,1fr)}.character-portrait{padding:20px;display:flex;flex-direction:column;gap:10px;background:#141a23}.character-portrait svg,.portrait-placeholder{width:100%;border-radius:12px;aspect-ratio:9/11}.portrait-placeholder{display:grid;place-items:center;background:#26303b;color:var(--muted);font-size:46px}.character-modal .panel{border:0;border-radius:0}.character-modal .scroll{min-height:320px;max-height:60vh}@media(max-width:600px){.character-layout{grid-template-columns:1fr}.character-portrait{flex-direction:row;align-items:center;flex-wrap:wrap}.character-portrait svg,.portrait-placeholder{width:72px}.character-modal .scroll{min-height:180px}}.dashboard-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}.dash-metric{padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:11px;display:flex;flex-direction:column;gap:4px}.dash-metric strong{font-size:23px;letter-spacing:-.03em}.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px;align-items:start}.dashboard-grid .panel:last-child{grid-column:1/-1}#timeline-summary{color:var(--muted);border-bottom:1px solid var(--line)}@media(max-width:800px){.dashboard-grid{grid-template-columns:1fr}}</style></head>
 <body>
 <header class="top"><div class="shell"><div class="brand"><button class="quiet" id="nav-toggle" aria-label="Alternar navegação" aria-controls="sidebar" aria-expanded="true">☰</button><span class="brand-mark">C</span><div><div class="eyebrow">Classroom of the Elite</div><h1>Observatório de simulação</h1></div></div><div class="controls"><button id="settings">⚙ Modelos e APIs</button><button id="report">Exportar relatório</button><button class="primary" id="run">▶ Executar</button><button id="pause" disabled>Pausar</button><button id="step">Próximo ciclo</button><button id="advance">Até novo evento</button><button class="quiet" id="cancel" disabled>Cancelar ciclo</button></div></div></header>
 <div class="app-layout" id="app-layout"><aside class="sidebar" id="sidebar"><nav aria-label="Observatório">
@@ -29,11 +29,11 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 <span class="nav-heading">Universo</span><button data-view="characters">Personagens</button>
 <span class="nav-heading">Sistema</span><button data-view="diagnostics">Diagnósticos</button>
 </nav></aside><main class="shell">
-<div class="hero"><div><div class="eyebrow">Primeiro dia · período livre</div><div class="clock" id="clock">08:00</div><div class="muted" id="round"></div></div><div class="statusbox"><div id="status" role="status">Carregando…</div><div id="progress" class="muted" aria-live="polite"></div><div class="bar"><div id="progressbar" style="width:0%"></div></div><small id="route-status"></small></div></div>
+<div class="hero"><div><div class="eyebrow" id="world-period">Tempo simulado</div><div class="clock" id="clock">08:00</div><div class="muted" id="round"></div></div><div class="statusbox"><div id="status" role="status">Carregando…</div><div id="progress" class="muted" aria-live="polite"></div><div class="bar"><div id="progressbar" style="width:0%"></div></div><small id="route-status"></small></div></div>
 <section class="view" id="view-characters" hidden><div class="view-title"><h2>Personagens</h2><p>Catálogo de indivíduos do cenário.</p></div><div class="panel-body" id="population-panel" hidden><h2>População</h2><p class="muted" id="population-summary"></p><div class="form-actions"><label>Resolução <select id="tier-filter"><option value="">Todos os indivíduos</option><option value="FULL">FULL</option><option value="LIGHTWEIGHT">LIGHTWEIGHT</option><option value="LATENT">LATENT</option></select></label><label>Função <select id="role-filter"><option value="">Todas</option><option value="student">Estudantes</option><option value="teacher">Professores</option><option value="staff">Funcionários</option></select></label></div><p id="cohorts" class="muted"></p><label class="muted">Buscar personagem <input id="actor-search" type="search" placeholder="Nome ou função"></label></div><div class="roster" id="people"></div></section>
-<section class="view" id="view-overview"><div class="view-title"><h2>Visão geral</h2><p>Estado confirmado da simulação.</p></div><div id="overview-host" class="panel panel-body"><p>Selecione um módulo na navegação. O relógio e o estado de execução permanecem visíveis.</p></div></section>
+<section class="view" id="view-overview"><div class="view-title"><h2>Visão geral</h2><p>Estado confirmado da simulação.</p></div><div id="overview-host"></div></section>
 <section class="view" id="view-timeline" hidden><div class="view-title"><h2>Linha do tempo</h2><p>Acontecimentos e perspectivas.</p></div>
-<section class="panel"><div class="panel-head"><div><div class="eyebrow">Mundo e interações</div><h2>Linha do tempo</h2></div><label><span class="muted">Perspectiva </span><select id="who"><option value="">Todos (operador)</option></select></label><label><select id="event-filter"><option value="story">Narrativa</option><option value="all">Todos os acontecimentos</option><option value="private">Cognição privada</option><option value="institution">Instituição e recursos</option></select></label><label><input type="checkbox" id="technical"> Diagnósticos</label></div><div class="panel-body scroll" id="timeline"></div></section>
+<section class="panel"><div class="panel-head"><div><div class="eyebrow">Mundo e interações</div><h2>Linha do tempo</h2></div><label><span class="muted">Perspectiva </span><select id="who"><option value="">Todos (operador)</option></select></label><label><select id="event-filter"><option value="story">Narrativa</option><option value="all">Todos os acontecimentos</option><option value="private">Cognição privada</option><option value="institution">Instituição e recursos</option></select></label><label><input type="checkbox" id="technical"> Diagnósticos</label><label>Dia <select id="event-day"><option value="">Todos</option></select></label></div><div class="panel-body" id="timeline-summary"></div><div class="panel-body scroll" id="timeline"></div><div class="panel-head"><button id="timeline-newer">Mais recentes</button><span class="muted" id="timeline-range"></span><button id="timeline-older">Mais antigos</button></div></section>
 </section><dialog class="modal character-modal" id="character-dialog" aria-labelledby="mind-name"><div class="character-layout"><aside class="character-portrait" id="portrait"></aside><section class="panel" id="character-detail"><div class="panel-head"><h2 id="mind-name">Ficha individual</h2><button id="close-character" aria-label="Fechar ficha">Fechar</button></div><div class="tabs" id="mind-tabs" hidden><button data-tab="overview" aria-pressed="true">Resumo</button><button data-tab="identity">Identidade</button><button data-tab="memory">Cognição</button><button data-tab="body">Corpo</button><button data-tab="social">Social</button><button data-tab="strategy">Estratégia</button></div><div class="panel-body scroll" id="mind"></div></section></div></dialog>
 <section class="view" id="view-diagnostics" hidden><div class="view-title"><h2>Diagnósticos</h2><p>Decisões e propostas do motor.</p></div><section class="panel"><details class="compact-details" open><summary>Decisões do motor · <span id="decision-title">recentes</span></summary><div class="panel-body"><small id="decision-subtitle"></small></div><div class="panel-body scroll" id="pending-choices"></div></details></section></section>
 <footer id="model"></footer>
@@ -90,8 +90,44 @@ function renderProgress(){if(!snapshot)return;renderChoices();const p=progress;
  for(const label of $("people").querySelectorAll("[data-progress]")){const x=pending&&p?.choices?.find(x=>x.actor===label.dataset.progress);label.textContent=x?(x.failure?"Falha técnica":x.decision?.source==="motor/rotina"?"Rotina local":"Decisão pronta"):active&&p.actor===label.dataset.progress?"Consultando modelo…":snapshot.state.minds[label.dataset.progress].activity?("Em atividade até "+time(snapshot.state.minds[label.dataset.progress].activity.until)):snapshot.state.minds[label.dataset.progress].wake_reason?"Pronto para decidir":"";label.className=x?(x.failure?"error":"good"):"muted"}
  controls()
 }
+let timelinePage=0;
+const fmtNum=n=>Number(n).toLocaleString("pt-BR");
+function metric(label,value,detail=""){const b=node("div",undefined,"dash-metric");b.append(node("small",label),node("strong",String(value)));if(detail)b.append(node("small",detail));return b}
+function panel(title){const b=node("section",undefined,"panel panel-body");b.append(node("h2",title));return b}
+function renderDashboard(s){
+ const host=$("overview-host"),grid=node("div",undefined,"dashboard-metrics"),pop=Object.values(snapshot.population||{}),cohort=(s.cohorts||[]).reduce((n,c)=>n+c.count,0),minds=Object.values(s.minds),choices=snapshot.last_choices||[];
+ grid.append(metric("Indivíduos",fmtNum(snapshot.people.length),cohort?fmtNum(cohort)+" estudantes em coortes":""),metric("Ciclo confirmado",s.round,snapshot.done?"Simulação concluída":"Dia "+(Math.floor(s.minute/1440)+1)),metric("Atividades em curso",minds.filter(m=>m.activity).length),metric("Próxima decisão",snapshot.done?"Concluída":snapshot.needs_inference?"Deliberação":"Rotina / evento","Estado do motor"));
+ const split=node("div",undefined,"dashboard-grid"),recent=panel("Acontecimentos recentes"),activity=panel("Atividade do mundo");
+ const significant=s.events.filter(e=>["announcement","revelation","claim","exam","meeting","social","conversation_end"].includes(e.kind)).slice(-7).reverse();
+ for(const e of significant){const b=node("article",undefined,"event");b.append(node("div","D"+(Math.floor(e.minute/1440)+1)+" · "+time(e.minute)+" · "+(kind[e.kind]||e.kind),"meta"),node("p",e.text));recent.append(b)}
+ if(!significant.length)recent.append(node("p","Nenhum acontecimento registrado.","muted"));
+ const go=node("button","Abrir linha do tempo");go.onclick=()=>navigate("timeline");recent.append(go);
+ list(activity,"Último ciclo confirmado",[choices.filter(x=>x.decision.source==="motor/rotina").length+" decisões de rotina",choices.filter(x=>x.decision.source!=="motor/rotina").length+" decisões deliberativas / legadas"]);
+ list(activity,"Resolução",["FULL","LIGHTWEIGHT","LATENT"].map(t=>t+": "+pop.filter(p=>p.tier===t).length));
+ list(activity,"Compromissos ativos",(s.world?.meetings||[]).filter(x=>["pending","accepted"].includes(x.status)).slice(-6).map(x=>name(x.host)+" / "+name(x.guest)+" · "+x.status));
+ const operator=panel("Instituição · visão do operador");
+ if(s.world)list(operator,"Pontos de classe",Object.entries(s.world.class_points||{}).map(([k,v])=>"Classe "+k+" · "+fmtNum(v)+" CP"));else operator.append(node("p","Dados institucionais indisponíveis neste save.","muted"));
+ split.append(recent,activity,operator);host.replaceChildren(grid,split);
+}
+function renderTimeline(events,visibleEvents){
+ const days=[...new Set(visibleEvents.map(e=>Math.floor(e.minute/1440)+1))].sort((a,b)=>b-a),sel=$("event-day"),prior=sel.value;
+ sel.replaceChildren(new Option("Todos",""),...days.map(d=>new Option("Dia "+d,String(d))));sel.value=days.includes(Number(prior))?prior:"";
+ const scoped=sel.value?events.filter(e=>Math.floor(e.minute/1440)+1===Number(sel.value)):events;
+ const dayScoped=sel.value?visibleEvents.filter(e=>Math.floor(e.minute/1440)+1===Number(sel.value)):visibleEvents;
+ const routine=dayScoped.filter(e=>["task","arrival","departure","move","wait","activity"].includes(e.kind)).length;
+ $("timeline-summary").textContent=fmtNum(scoped.length)+" acontecimentos neste filtro · "+fmtNum(routine)+" registros de rotina no período. Perspectiva: "+(selected?name(selected):"operador")+".";
+ const pageSize=60;timelinePage=Math.min(timelinePage,Math.max(0,Math.ceil(scoped.length/pageSize)-1));const end=scoped.length-timelinePage*pageSize,start=Math.max(0,end-pageSize);
+ const host=$("timeline");host.replaceChildren();let day=-1;
+ for(const e of scoped.slice(start,end).reverse()){const d=Math.floor(e.minute/1440)+1;if(d!==day){day=d;host.append(node("h3","Dia "+day))}const b=node("article",undefined,"event "+e.kind);b.append(node("div",time(e.minute)+" · "+(kind[e.kind]||e.kind)+" · "+name(e.actor)+(e.kind==="claim"?" → "+name(e.target):""),"meta"),node("p",e.text));host.append(b)}
+ if(!scoped.length)host.append(node("p","Nenhum acontecimento corresponde aos filtros.","muted"));
+ $("timeline-range").textContent=scoped.length?fmtNum(start+1)+"–"+fmtNum(end)+" / "+fmtNum(scoped.length):"0 registros";
+ $("timeline-newer").disabled=timelinePage===0;$("timeline-older").disabled=start===0;
+}
+$("timeline-newer").onclick=()=>{timelinePage=Math.max(0,timelinePage-1);render()};$("timeline-older").onclick=()=>{timelinePage++;render()};
+$("event-day").onchange=()=>{timelinePage=0;render()};
 function render(){
  if(!snapshot)return;const s=snapshot.state;
+ $("world-period").textContent=snapshot.done?"Simulação concluída":"Tempo lógico · observatório";
  $("clock").textContent="Dia "+(Math.floor(s.minute/1440)+1)+" · "+time(s.minute);$("round").textContent="Ciclo "+s.round+(snapshot.version>=3?" · cognição por estímulos":snapshot.version===1?" · relógio legado":" · coorte legada (novo save para v3)");
  $("model").textContent="Registro "+snapshot.digest.slice(0,12)+" · As falas são alegações. Propostas não alteram o mundo até o ciclo ser publicado.";
  $("people").replaceChildren();
@@ -102,7 +138,7 @@ function render(){
  const institutional=["announcement","revelation","exam","resource","meeting","body_alert"];
  const filter=$("event-filter").value;
  const events=visibleEvents.filter(e=>($("technical").checked&&["model_failure","ignored_cognition"].includes(e.kind))||(!["model_failure","ignored_cognition"].includes(e.kind)&&(filter==="all"||filter==="private"&&privateKinds.includes(e.kind)||filter==="institution"&&institutional.includes(e.kind)||filter==="story"&&(["claim","revelation","exam","meeting","social","conversation_end","body_alert"].includes(e.kind)||e.kind==="announcement"&&(e.round===0||e.text.includes("Zodiac/VIP")||e.text.includes("classificação"))))));
- $("timeline").replaceChildren();for(const e of events.slice(-80).reverse()){const b=node("article",undefined,"event "+e.kind);b.append(node("div",(snapshot.version>=5?"D"+(Math.floor(e.minute/1440)+1)+" ":"")+time(e.minute)+" · "+(kind[e.kind]||e.kind)+" · "+name(e.actor)+(e.kind==="claim"?" → "+name(e.target):""),"meta"),node("p",e.text));$("timeline").append(b)}
+ if(currentView==="overview")renderDashboard(s);if(currentView==="timeline")renderTimeline(events,visibleEvents);
 
  const timelineSelection=selected;selected=inspected;const detailEvents=s.events.filter(e=>e.audience.includes(selected));
  $("mind").replaceChildren();$("mind-name").textContent=selected?name(selected):"Ficha individual";
@@ -184,10 +220,10 @@ $("advance").onclick=async()=>{
  catch(e){status(e.message,true);try{snapshot=await api("/api/state");render()}catch{}}
  finally{busy=false;controls();await poll()}
 };
-$("event-filter").onchange=render;$("actor-search").oninput=render;
+$("event-filter").onchange=()=>{timelinePage=0;render()};$("actor-search").oninput=render;
 $("mind-tabs").onclick=e=>{const key=e.target.dataset.tab;if(key){detailTab=key;render()}};
 $("report").onclick=()=>{window.location.href="/api/report"};$("step").onclick=()=>step();$("pause").onclick=()=>{running=false;controls();status("Pausa solicitada.")};$("cancel").onclick=async()=>{running=false;try{await post("/api/cancel",{round:progress.round});status("Cancelamento solicitado.")}catch(e){status(e.message,true)}await poll()};
-$("who").onchange=e=>{selected=e.target.value;render()};$("tier-filter").onchange=render;$("role-filter").onchange=()=>{$("tier-filter").value="";render()};$("technical").onchange=render;
+$("who").onchange=e=>{selected=e.target.value;timelinePage=0;render()};$("tier-filter").onchange=render;$("role-filter").onchange=()=>{$("tier-filter").value="";render()};$("technical").onchange=()=>{timelinePage=0;render()};
 for(const [id,preset] of Object.entries(presets)){const o=node("option",preset[0]);o.value=id;$("provider").append(o)}
 let chatConnected=false;
 async function refreshChat(){try{const c=await api("/api/chatgpt");chatConnected=c.connected;$("chat-status").textContent=c.connected?"Conectado · "+c.email+" · uso do plano autorizado. Sujeito aos limites da assinatura.":c.message||"Conta não conectada";$("chat-logout").disabled=!c.connected;modelControls()}catch(e){$("chat-status").textContent=e.message}}

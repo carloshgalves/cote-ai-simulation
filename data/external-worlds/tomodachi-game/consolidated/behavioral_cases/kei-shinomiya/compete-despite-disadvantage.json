@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.kei-shinomiya.compete-despite-disadvantage",
+  "actor_id": "actor.kei-shinomiya",
+  "primary_actor_id": "actor.kei-shinomiya",
+  "title": "compete despite disadvantage",
+  "context": "A rival offers a physical contest while Kei is recovering.",
+  "observed_actions": "Accepts a contest and ultimately wins, but cannot continue indefinitely.",
+  "observed_result": "Demonstrates resolve at substantial physical cost.",
+  "epistemic_limits": "Do not infer invulnerability or a numeric combat ceiling.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Kei_Shinomiya",
+    "locator": "ALL_BET",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "risk_management",
+    "motivation"
+  ],
+  "information_available": "A rival offers a physical contest while Kei is recovering.",
+  "counterfactual_test": "A competitive opponent can win a contest but risks losing eligibility for future rounds. Weighs rivalry against the long-term ability to participate. Reject: Treats injury as irrelevant.",
+  "topics": [
+    "risk_management",
+    "motivation"
+  ],
+  "evidence_refs": [
+    "tg.ev.kei-shinomiya.compete-despite-disadvantage"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A competitive opponent can win a contest but risks losing eligibility for future rounds.",
+    "expected_tendency": "Weighs rivalry against the long-term ability to participate.",
+    "anti_case": "Treats injury as irrelevant.",
+    "canon_outcome_as_instruction": false
+  }
+}

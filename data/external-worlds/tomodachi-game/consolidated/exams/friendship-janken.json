@@ -1,0 +1,25 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.tg.friendship-janken",
+  "name": "friendship-janken",
+  "authority": "SECONDARY_REFERENCE_WITH_SEPARATE_EXECUTABLE_MODEL",
+  "source_coverage": [
+    "https://tomodachi-game.fandom.com/wiki/Friendship_Janken"
+  ],
+  "runtime_model": "data/external-worlds/tomodachi-game/runtime/resolver.mjs",
+  "parameters": {
+    "source": "Friendship_Janken",
+    "players": 5,
+    "initialDebt": 1000000,
+    "rounds": 3,
+    "prize": 2000000,
+    "model": [
+      "five-player three-card game; winners transfer up to 500000 yen debt each; split between losers; aggregate equal net wins treated as draw; early failure when debt concentrates on one player"
+    ]
+  },
+  "not_canon": [
+    "five-player three-card game; winners transfer up to 500000 yen debt each; split between losers; aggregate equal net wins treated as draw; early failure when debt concentrates on one player"
+  ],
+  "execution_scope": "STANDALONE_REFERENCE_ONLY",
+  "native_csf_registered": false
+}

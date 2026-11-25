@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.maria-mizuse.apparent-betrayal",
+  "actor_id": "actor.maria-mizuse",
+  "primary_actor_id": "actor.maria-mizuse",
+  "title": "apparent betrayal",
+  "context": "HIDE_SEEK; secondary-source account",
+  "observed_actions": "Changes apparent allegiance during the contest as part of a concealed arrangement.",
+  "observed_result": "Influences opponent beliefs about team composition.",
+  "epistemic_limits": "Authority and private arrangements are role-specific.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_11",
+    "locator": "HIDE_SEEK",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "deception",
+    "cooperation"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Authority and private arrangements are role-specific. Allow failure.",
+  "topics": [
+    "deception",
+    "cooperation"
+  ],
+  "evidence_refs": [
+    "tg.ev.maria-mizuse.apparent-betrayal"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

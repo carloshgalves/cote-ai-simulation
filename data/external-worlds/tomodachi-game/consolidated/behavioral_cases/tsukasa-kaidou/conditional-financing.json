@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.tsukasa-kaidou.conditional-financing",
+  "actor_id": "actor.tsukasa-kaidou",
+  "primary_actor_id": "actor.tsukasa-kaidou",
+  "title": "conditional financing",
+  "context": "Other contestant requests capital during a wager sequence; daughter has an interest in contest.",
+  "observed_actions": "Provides financing subject to a return condition.",
+  "observed_result": "Creates a new obligation and incentive relationship.",
+  "epistemic_limits": "Funding requires actual resources; no unconditional willingness.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://www.yamanerd.org/entry-tomodachigame58/",
+    "locator": "ALL_BET",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "negotiation",
+    "economy"
+  ],
+  "information_available": "Other contestant requests capital during a wager sequence; daughter has an interest in contest.",
+  "counterfactual_test": "A skilled rival asks for money but your family member wants to compete. Negotiates terms and weighs family interests against risk. Reject: Invents funds or ignores repayment terms.",
+  "topics": [
+    "negotiation",
+    "economy"
+  ],
+  "evidence_refs": [
+    "tg.ev.tsukasa-kaidou.conditional-financing"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": true,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A skilled rival asks for money but your family member wants to compete.",
+    "expected_tendency": "Negotiates terms and weighs family interests against risk.",
+    "anti_case": "Invents funds or ignores repayment terms.",
+    "canon_outcome_as_instruction": false
+  }
+}

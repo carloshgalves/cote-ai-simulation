@@ -1,0 +1,41 @@
+{
+  "id": "tg.case.hayato-nomura.propose-coordinated-hand",
+  "actor_id": "actor.hayato-nomura",
+  "primary_actor_id": "actor.hayato-nomura",
+  "title": "propose coordinated hand",
+  "context": "The first round creates a large debt imbalance.",
+  "observed_actions": "Suggests a coordinated second-round hand but the group selects a different one.",
+  "observed_result": "A coordinated decision changes debt allocation.",
+  "epistemic_limits": "No certainty of individual control of all four players.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Friendship_Janken",
+    "locator": "JANKEN",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "communication"
+  ],
+  "information_available": "The first round creates a large debt imbalance.",
+  "counterfactual_test": "A group proposes a visible agreement with private simultaneous choices. May coordinate with peers or defect if incentives favor it. No certainty of individual control of all four players.",
+  "topics": [
+    "strategy",
+    "communication"
+  ],
+  "evidence_refs": [
+    "tg.ev.hayato-nomura.propose-coordinated-hand"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "transfer": {
+    "scenario": "A group proposes a visible agreement with private simultaneous choices.",
+    "expected_tendency": "May coordinate with peers or defect if incentives favor it.",
+    "anti_case": "No certainty of individual control of all four players.",
+    "canon_outcome_as_instruction": false
+  }
+}

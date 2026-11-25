@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.masakazu-shibe.false-attribution",
+  "actor_id": "actor.masakazu-shibe",
+  "primary_actor_id": "actor.masakazu-shibe",
+  "title": "false attribution",
+  "context": "FRIENDLESS; secondary-source account",
+  "observed_actions": "Feigns death and subsequently attributes organizational leadership to Tenji's father.",
+  "observed_result": "Misleads investigators about institutional identity.",
+  "epistemic_limits": "Statement is not proof of its content; private truth must be acquired.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Masakazu_Shibe",
+    "locator": "FRIENDLESS",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "deception",
+    "institution"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Statement is not proof of its content; private truth must be acquired. Allow failure.",
+  "topics": [
+    "deception",
+    "institution"
+  ],
+  "evidence_refs": [
+    "tg.ev.masakazu-shibe.false-attribution"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

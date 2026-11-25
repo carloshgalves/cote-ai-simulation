@@ -1,0 +1,38 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.natori",
+  "display_name": "Natori",
+  "modeling_tier": "MINIMAL_ENTITY",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "All Bet participant, Mishima team",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.natori.identity"
+      ]
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/All_Bet"
+  ],
+  "historical_context_only": false,
+  "uncertainties": [
+    "Limited secondary evidence"
+  ],
+  "generation_policy": "One pack per actor",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only",
+    "contextual_facts": "require acquisition"
+  }
+}

@@ -105,12 +105,12 @@ def _validate_time_order(order):
     return normalized
 
 
-def retrieve(records, request, order, manifest_digest, seed_time=None):
+def retrieve(records, request, order, manifest_digest, seed_time=None, *, continuity="ln", world=None):
     top_k = _validate_request(request, seed_time)
     normalized_order = _validate_time_order(order)
     eligible, excluded = [], []
     for record in records:
-        reason, trace = gate_reason(record, request, normalized_order)
+        reason, trace = gate_reason(record, request, normalized_order, continuity=continuity, world=world)
         if reason is not None:
             excluded.append(
                 {"evidence_id": record.get("evidence_id"), "reason": reason, "gate_trace": trace}

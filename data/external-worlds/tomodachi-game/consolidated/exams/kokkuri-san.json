@@ -1,0 +1,25 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.tg.kokkuri-san",
+  "name": "kokkuri-san",
+  "authority": "SECONDARY_REFERENCE_WITH_SEPARATE_EXECUTABLE_MODEL",
+  "source_coverage": [
+    "https://tomodachi-game.fandom.com/wiki/%22Kokkuri-San%22_Game"
+  ],
+  "runtime_model": "data/external-worlds/tomodachi-game/runtime/resolver.mjs",
+  "parameters": {
+    "source": "%22Kokkuri-San%22_Game",
+    "players": 5,
+    "rounds": 5,
+    "prize": 2000000,
+    "initialDebt": 4000000,
+    "model": [
+      "questioner order configured by roster; integer rounding down on half-debt; prize applied to debt; failed-game tie shares liability; final subjective question uses configured answer"
+    ]
+  },
+  "not_canon": [
+    "questioner order configured by roster; integer rounding down on half-debt; prize applied to debt; failed-game tie shares liability; final subjective question uses configured answer"
+  ],
+  "execution_scope": "STANDALONE_REFERENCE_ONLY",
+  "native_csf_registered": false
+}

@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.shiho-sawaragi.challenge-reputational-judgment",
+  "actor_id": "actor.shiho-sawaragi",
+  "primary_actor_id": "actor.shiho-sawaragi",
+  "title": "challenge reputational judgment",
+  "context": "Embarrassing accusation threatens friendship and reputation.",
+  "observed_actions": "Questions whether Shibe would still befriend her if the reported history were true.",
+  "observed_result": "Tests whether acceptance is conditional on surface attributes.",
+  "epistemic_limits": "No claim that the accusation is necessarily true.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Chapter_5",
+    "locator": "SUGOROKU",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "ethics",
+    "emotion"
+  ],
+  "information_available": "Embarrassing accusation threatens friendship and reputation.",
+  "counterfactual_test": "A public claim stigmatizes an ally; classmates react negatively. Asks whether the claim is relevant to trust and seeks fair treatment. Reject: Treats audience popularity as conclusive moral evidence.",
+  "topics": [
+    "ethics",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "tg.ev.shiho-sawaragi.challenge-reputational-judgment"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A public claim stigmatizes an ally; classmates react negatively.",
+    "expected_tendency": "Asks whether the claim is relevant to trust and seeks fair treatment.",
+    "anti_case": "Treats audience popularity as conclusive moral evidence.",
+    "canon_outcome_as_instruction": false
+  }
+}

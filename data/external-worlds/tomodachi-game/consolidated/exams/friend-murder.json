@@ -1,0 +1,24 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.tg.friend-murder",
+  "name": "friend-murder",
+  "authority": "SECONDARY_REFERENCE_WITH_SEPARATE_EXECUTABLE_MODEL",
+  "source_coverage": [
+    "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game"
+  ],
+  "runtime_model": "data/external-worlds/tomodachi-game/runtime/resolver.mjs",
+  "parameters": {
+    "source": "Friend_Murder_Game",
+    "days": 10,
+    "yellowPrice": 1000000,
+    "redPrice": 100000000,
+    "model": [
+      "duration configurable; abstract non-graphic pursuit tokens; capture/defense resolved by trusted environment, not player declarations; loss confiscates current assets and flags future forfeiture"
+    ]
+  },
+  "not_canon": [
+    "duration configurable; abstract non-graphic pursuit tokens; capture/defense resolved by trusted environment, not player declarations; loss confiscates current assets and flags future forfeiture"
+  ],
+  "execution_scope": "STANDALONE_REFERENCE_ONLY",
+  "native_csf_registered": false
+}

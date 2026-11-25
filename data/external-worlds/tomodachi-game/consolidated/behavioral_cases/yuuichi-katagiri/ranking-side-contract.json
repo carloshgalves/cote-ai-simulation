@@ -1,0 +1,48 @@
+{
+  "id": "tg.case.yuuichi-katagiri.ranking-side-contract",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "ranking side contract",
+  "context": "Four teams gamble; another wager concerns their final relative standings.",
+  "observed_actions": "Uses a separate contract whose payoff depends on collective rankings.",
+  "observed_result": "Can gain overall advantage despite a direct loss.",
+  "epistemic_limits": "Exact probabilities depend on opponents' choices; fan analyses dispute whether earlier error was intentional.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://intelscaling.com/items/all-bets-miscalculation-v2/",
+    "locator": "ALL_BET",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "negotiation",
+    "economy"
+  ],
+  "information_available": "Four teams gamble; another wager concerns their final relative standings.",
+  "counterfactual_test": "A tournament has several independently scored contests and optional side agreements. Analyzes payoff coupling and adverse outcomes before commitment. Reject: Assumes opponents choose the expected ranks or assumes impossible contract enforcement.",
+  "topics": [
+    "strategy",
+    "negotiation",
+    "economy"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.ranking-side-contract"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": true,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A tournament has several independently scored contests and optional side agreements.",
+    "expected_tendency": "Analyzes payoff coupling and adverse outcomes before commitment.",
+    "anti_case": "Assumes opponents choose the expected ranks or assumes impossible contract enforcement.",
+    "canon_outcome_as_instruction": false
+  }
+}

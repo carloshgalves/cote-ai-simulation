@@ -1,0 +1,150 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.tenji-mikasa",
+  "display_name": "Tenji Mikasa",
+  "modeling_tier": "FULL_CANDIDATE",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "Academic excellence; prior game experience and suspicion surrounding father's death",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "social": {
+      "behavioral_case_refs": [
+        "tg.case.tenji-mikasa.mediator"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tenji-mikasa.mediator"
+      ]
+    },
+    "communication": {
+      "behavioral_case_refs": [
+        "tg.case.tenji-mikasa.mediator",
+        "tg.case.tenji-mikasa.disclose-prior-game"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tenji-mikasa.mediator",
+        "tg.ev.tenji-mikasa.disclose-prior-game"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [
+        "tg.case.tenji-mikasa.secret-investigation"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tenji-mikasa.secret-investigation"
+      ],
+      "description": "Initially isolates Shiho and conceals motives; later cooperates with Yuuichi",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "motivation": {
+      "behavioral_case_refs": [
+        "tg.case.tenji-mikasa.secret-investigation",
+        "tg.case.tenji-mikasa.join-next-round-voluntarily"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tenji-mikasa.secret-investigation",
+        "tg.ev.tenji-mikasa.join-next-round-voluntarily"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [
+        "tg.case.tenji-mikasa.secret-investigation"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tenji-mikasa.secret-investigation"
+      ]
+    },
+    "trust": {
+      "behavioral_case_refs": [
+        "tg.case.tenji-mikasa.disclose-prior-game",
+        "tg.case.tenji-mikasa.join-next-round-voluntarily"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tenji-mikasa.disclose-prior-game",
+        "tg.ev.tenji-mikasa.join-next-round-voluntarily"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "tg.case.tenji-mikasa.endure-uncertainty",
+        "tg.case.tenji-mikasa.join-next-round-voluntarily"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tenji-mikasa.endure-uncertainty",
+        "tg.ev.tenji-mikasa.join-next-round-voluntarily"
+      ]
+    },
+    "emotion": {
+      "behavioral_case_refs": [
+        "tg.case.tenji-mikasa.endure-uncertainty"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tenji-mikasa.endure-uncertainty"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.tenji-mikasa.identity"
+      ]
+    },
+    "cognition": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Analytical observation, long-horizon investigation",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "limitations": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "Fixation and mistaken attribution",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "body": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [],
+      "description": "No calibrated physical measurements; use population prior.",
+      "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "epistemics": {
+      "behavioral_case_refs": [
+        "tg.case.tenji-mikasa.resist-first-bluff"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tenji-mikasa.resist-first-bluff"
+      ]
+    },
+    "self_control": {
+      "behavioral_case_refs": [
+        "tg.case.tenji-mikasa.resist-first-bluff"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tenji-mikasa.resist-first-bluff"
+      ]
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Tenji_Mikasa"
+  ],
+  "historical_context_only": false,
+  "uncertainties": [
+    "No direct manga audit; behavioral transfer is probabilistic"
+  ],
+  "generation_policy": "One pack per actor; append sourced cases",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only; strip narrative details before agent context",
+    "contextual_facts": "require acquisition",
+    "post_divergence_memory": "simulation events only"
+  },
+  "fidelity_eval": {
+    "anti_case": "Do not initialize later trust in Yuuichi"
+  }
+}

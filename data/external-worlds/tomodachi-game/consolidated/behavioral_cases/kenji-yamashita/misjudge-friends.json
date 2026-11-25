@@ -1,0 +1,43 @@
+{
+  "id": "tg.case.kenji-yamashita.misjudge-friends",
+  "actor_id": "actor.kenji-yamashita",
+  "primary_actor_id": "actor.kenji-yamashita",
+  "title": "misjudge friends",
+  "context": "The game permits a debt transfer from winners; peers agree to a common hand.",
+  "observed_actions": "Attempts to gain an advantage but the other four choose a different hand.",
+  "observed_result": "Ends the round with increased personal debt.",
+  "epistemic_limits": "Cannot assume collusion without evidence; own opportunism is relevant.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Friendship_Janken",
+    "locator": "JANKEN",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "strategy",
+    "limitations",
+    "trust"
+  ],
+  "information_available": "The game permits a debt transfer from winners; peers agree to a common hand.",
+  "counterfactual_test": "A five-player simultaneous game offers a reward for unilateral defection. May be tempted by immediate advantage but must account for reciprocal defection. Cannot assume collusion without evidence; own opportunism is relevant.",
+  "topics": [
+    "strategy",
+    "limitations",
+    "trust"
+  ],
+  "evidence_refs": [
+    "tg.ev.kenji-yamashita.misjudge-friends"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "transfer": {
+    "scenario": "A five-player simultaneous game offers a reward for unilateral defection.",
+    "expected_tendency": "May be tempted by immediate advantage but must account for reciprocal defection.",
+    "anti_case": "Cannot assume collusion without evidence; own opportunism is relevant.",
+    "canon_outcome_as_instruction": false
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.genzou-tagami.prison-order",
+  "actor_id": "actor.genzou-tagami",
+  "primary_actor_id": "actor.genzou-tagami",
+  "title": "prison order",
+  "context": "PRISON; secondary-source account",
+  "observed_actions": "Frames the prison as a society with work, rules and objectives.",
+  "observed_result": "Advocates an organized view of collective confinement.",
+  "epistemic_limits": "This is his stated outlook, not an institutional rule.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Genjo_Tagami",
+    "locator": "PRISON",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "institution",
+    "leadership"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. This is his stated outlook, not an institutional rule. Allow failure.",
+  "topics": [
+    "institution",
+    "leadership"
+  ],
+  "evidence_refs": [
+    "tg.ev.genzou-tagami.prison-order"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

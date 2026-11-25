@@ -92,7 +92,7 @@ func TestV7AdvanceNeverInvokesModelAndReplay(t *testing.T){
  n:=calls
  next,err:=s.AdvanceUntilEvent(context.Background(),first.State.Round);if err!=nil{t.Fatal(err)}
  if calls!=n{t.Fatal("advance invoked model")}
- if next.Snapshot.State.Round<first.State.Round{t.Fatal("advance regressed clock")}
+ if next.Cycles<1||next.Snapshot.State.Round<=first.State.Round{t.Fatal("no deterministic cycle advanced")}
  digest:=next.Snapshot.Digest;s.Close()
  s,err=OpenCognition(path,"test",model);if err!=nil{t.Fatal(err)};defer s.Close()
  if s.Snapshot().Digest!=digest||calls!=n{t.Fatal("replay changed state or invoked model")}

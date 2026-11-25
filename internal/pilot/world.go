@@ -113,7 +113,10 @@ func schoolView(j Journal,s State,id string)*SchoolView{
   v.Rules=[]string{"O cartão permite usar PP no campus. A escola anunciou boas perspectivas de emprego e universidade.","Compras e transferências dependem de saldo; existem refeições gratuitas."}
  }
  if s.Minute>=30*1440+480{v.Rules[1]="Renda mensal = CP atuais da classe × 100; saldo anterior permanece. Transferências voluntárias de 1.000 PP permitidas."}
- if j.Version>=CognitionVersion&&(j.Population[id].Year>1||s.Minute>=schoolDisclosure){v.Rules=append(v.Rules,classGuarantee)}
+ if j.Version>=CognitionVersion&&(j.Population[id].Year>1||s.Minute>=schoolDisclosure){
+  v.Rules=append(v.Rules,classGuarantee)
+  if j.Population[id].Year>1&&s.Minute<schoolDisclosure{v.Rules[1]="Renda mensal = CP atuais da classe × 100; o saldo anterior permanece. Você conhece a regra por experiência institucional anterior."}
+ }
  v.Rules=append(v.Rules,"Convites são para daqui a 30 minutos, no local atual. O destinatário deve aceitar e os dois devem comparecer. Estudar ocupa 25 minutos, refeição 20, descanso 60.")
  if m.Location=="shop"{
   v.Catalog=clone(shopPrices)

@@ -146,7 +146,7 @@ func retrieveMemory(j Journal,s State,id string,events []Event,keep map[string]b
   if age>p.RetentionDays*1440{continue}
   score:=-age*int64(101-p.Accessibility)/60
   if has([]string{"claim","meeting","exam","resource","social"},e.Kind){score+=int64(p.Encoding)*2}
-  if e.Actor!=id&&e.Actor!=""&&s.Minds[e.Actor].Location==s.Minds[id].Location{score+=int64(p.Retrieval)}
+  if other,ok:=s.Minds[e.Actor];ok&&e.Actor!=id&&other.Location==s.Minds[id].Location{score+=int64(p.Retrieval)}
   if age<120{score+=int64(p.Accessibility)}
   pool=append(pool,candidate{e,score})
  }

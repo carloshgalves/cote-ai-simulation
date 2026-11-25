@@ -68,7 +68,14 @@ func buildReport(o OperatorReport)([]byte,error){
 			c:=clone(choice)
 			c.Decision.Source="";c.Decision.Ignored=nil
 			if c.Failure!=""{c=Chosen{Actor:id}}
-			if j.Version>=PopulationVersion&&!chosen&&len(events)==0&&equalMind(s.Minds[id],next.Minds[id]){continue}
+			if j.Version>=PopulationVersion&&!chosen&&len(events)==0{
+    before,after:=s.Minds[id],next.Minds[id]
+    // Continuous body accounting changes most minds on each clock tick.
+    // Do not duplicate body-only snapshots for every inactive actor; the
+    // full journal reconstructs those states and final body is exported.
+    if j.Version>=CognitionVersion{before.Body=nil;after.Body=nil}
+    if equalMind(before,after){continue}
+   }
    contextView:=Context{}
    if j.Version<PopulationVersion||consulted{contextView=actorContext(j,s,id)}
    actors[id].Cycles=append(actors[id].Cycles,ActorCycle{Cycle:round.Number,Consulted:consulted,Routine:routine,StartMinute:s.Minute,EndMinute:next.Minute,Before:clone(s.Minds[id]),Choice:c,Events:events,After:clone(next.Minds[id]),AvailableContext:contextView})

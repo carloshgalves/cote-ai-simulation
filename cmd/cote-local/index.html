@@ -77,7 +77,7 @@ function render(){
  const privateKinds=["intention","belief","plan","goal","discovery","relation","social","plan_end"];
  const institutional=["announcement","revelation","exam","resource","meeting","body_alert"];
  const filter=$("event-filter").value;
- const events=visibleEvents.filter(e=>($("technical").checked&&["model_failure","ignored_cognition"].includes(e.kind))||(!["model_failure","ignored_cognition"].includes(e.kind)&&(filter==="all"||filter==="private"&&privateKinds.includes(e.kind)||filter==="institution"&&institutional.includes(e.kind)||filter==="story"&&["claim","revelation","exam","meeting","social","conversation_end","body_alert"].includes(e.kind))));
+ const events=visibleEvents.filter(e=>($("technical").checked&&["model_failure","ignored_cognition"].includes(e.kind))||(!["model_failure","ignored_cognition"].includes(e.kind)&&(filter==="all"||filter==="private"&&privateKinds.includes(e.kind)||filter==="institution"&&institutional.includes(e.kind)||filter==="story"&&(["claim","revelation","exam","meeting","social","conversation_end","body_alert"].includes(e.kind)||e.kind==="announcement"&&(e.round===0||e.text.includes("Zodiac/VIP")||e.text.includes("classificação"))))));
  $("timeline").replaceChildren();for(const e of events.slice(-80).reverse()){const b=node("article",undefined,"event "+e.kind);b.append(node("div",(snapshot.version>=5?"D"+(Math.floor(e.minute/1440)+1)+" ":"")+time(e.minute)+" · "+(kind[e.kind]||e.kind)+" · "+name(e.actor)+(e.kind==="claim"?" → "+name(e.target):""),"meta"),node("p",e.text));$("timeline").append(b)}
 
  $("mind").replaceChildren();$("mind-name").textContent=selected?name(selected):"Perspectiva do operador";

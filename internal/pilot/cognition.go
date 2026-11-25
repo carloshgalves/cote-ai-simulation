@@ -106,6 +106,7 @@ func initializeIdentities(j *Journal){
   }
   if j.Version>=VeteranVersion{seedVeteranIdentity(*j,p.ID,&ident)}
   if j.Version>=PhysicalVersion{ident.Physical=physicalPolicyFor(p.ID)}
+  if j.Version>=CrossoverVersion{applyExternalIdentity(*j,p.ID,&ident)}
   j.Identities[p.ID]=ident
  }
 }

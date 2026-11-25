@@ -89,6 +89,7 @@ func OpenVeteran(path,name string,model Model)(*Session,error){return openVersio
 func OpenPhysical(path,name string,model Model)(*Session,error){return openVersion(path,name,model,PhysicalVersion)}
 func OpenCompactContext(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CompactContextVersion)}
 func OpenCalibrated(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CalibratedVersion)}
+func OpenCrossover(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CrossoverVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
@@ -106,6 +107,7 @@ func openVersion(path,name string,model Model,version int) (*Session,error) {
 		profiles,err:=decodeStrict[[]Profile](defaultProfiles);if err!=nil{return nil,err}
 		j=Journal{Version:version,Profiles:profiles,Model:name,Rounds:[]Round{}}
   if version>=PopulationVersion{if err:=expandPopulation(&j);err!=nil{return nil,err}}
+  if version>=CrossoverVersion{if err:=admitExternalStudents(&j);err!=nil{return nil,err}}
   if version>=CognitionVersion{initializeIdentities(&j)}
 		if version>=WorldVersion{seed,err:=randomSecret();if err!=nil{return nil,err};sum:=sha256.Sum256([]byte(seed));j.WorldSeed=fmt.Sprintf("%x",sum)}
 		if _,err:=Replay(j);err!=nil{return nil,err}

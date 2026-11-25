@@ -110,6 +110,13 @@ func equalDecision(a,b Decision)bool{return reflect.DeepEqual(a,b)}
 func routineDecision(j Journal,s State,id string)Decision{
  a,m:=j.Population[id],s.Minds[id]
  d:=Decision{Action:"wait",WaitMinutes:60,Source:routineSource}
+ // A public schedule boundary may shorten a previously chosen deliberate
+ // wait. Do not replace its remaining interval with an unrelated task.
+ if j.Version>=SelectiveVersion&&m.NextDeliberation>s.Minute{
+  remaining:=m.NextDeliberation-s.Minute
+  if remaining<60{d.WaitMinutes=int(remaining)}
+  return d
+ }
  v:=Context{Location:m.Location,Locations:worldLocations(id),School:schoolView(j,s,id)}
  projectPopulation(j,s,id,&v)
  choose:=func(action,target string)Decision{d.Action=action;d.Target=target;d.WaitMinutes=0;return d}
@@ -145,7 +152,7 @@ func routineDecision(j Journal,s State,id string)Decision{
 func wakeOnMovement(j Journal,s *State,id,actor,reason string){
  if j.Version>=CognitionVersion{
   if strings.Contains(reason,"chegou")&&recognizes(j,id,actor)&&s.Minds[id].Social[actor].Interactions==0{stimulate(s,id,"Presença de pessoa conhecida antes da matrícula");return}
-  if s.Minds[id].AwaitEvent{return}
+  if j.Version>=SelectiveVersion||s.Minds[id].AwaitEvent{return}
  }
  if j.Version>=PopulationVersion&&(s.Minds[actor].Tier!=FullTier||s.Minds[id].Tier!=FullTier){return}
  wakeWaiting(s,id,reason)

@@ -77,6 +77,8 @@ func Open(path,name string,model Model) (*Session,error) {return openVersion(pat
 func OpenScheduled(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,WorldVersion)}
 func OpenPopulation(path,name string,model Model)(*Session,error){return openVersion(path,name,model,PopulationVersion)}
 func OpenCognition(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CognitionVersion)}
+// OpenSelective creates v8 saves; existing journals retain their original policies.
+func OpenSelective(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SelectiveVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
@@ -159,7 +161,7 @@ func (s *Session) POV(id string) (Context,error) {
 	return actorContext(s.journal,s.state,id),nil
 }
 func(s *Session) needsInferenceLocked()bool{
- for _,id:=range eligibleActors(s.journal,s.state){if s.journal.Version<PopulationVersion||needsModel(s.state,id){return true}}
+ for _,id:=range eligibleActors(s.journal,s.state){if s.journal.Version<PopulationVersion||decisionNeedsModel(s.journal,s.state,id){return true}}
  return false
 }
 func (s *Session) Step(ctx context.Context,expected int)(Snapshot,error){return s.step(ctx,expected,true)}
@@ -191,7 +193,7 @@ func (s *Session) step(ctx context.Context,expected int,allowModel bool) (result
 		var problem string
 		var d Decision
 		failure:=""
-  if journal.Version>=PopulationVersion&&!needsModel(state,id){
+  if journal.Version>=PopulationVersion&&!decisionNeedsModel(journal,state,id){
    s.mu.Lock();s.progress.Actor=id;s.progress.Attempt=0;s.progress.ActorStartedAt=time.Now();s.progress.LastError="";s.mu.Unlock()
    d=routineDecision(journal,state,id)
    if err:=validateDecision(view,d);err!=nil{return Snapshot{},fmt.Errorf("rotina %s: %w",id,err)}

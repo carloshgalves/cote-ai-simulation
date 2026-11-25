@@ -72,7 +72,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		if x.Actor!=order[i]{return State{},errors.New("invalid eligible actor order")}
 		if x.Failure!=""{return State{},errors.New("falha técnica não constitui decisão; repita o ciclo")}
 		if j.Version>=PopulationVersion{
-   local:=!needsModel(s,x.Actor)
+   local:=!decisionNeedsModel(j,s,x.Actor)
    if local&&!equalDecision(x.Decision,routineDecision(j,s,x.Actor))||!local&&x.Decision.Source==routineSource{return State{},errors.New("invalid decision provenance")}
   }
   if err:=validateDecision(actorContext(j,s,x.Actor),x.Decision);err!=nil{return State{},fmt.Errorf("%s: %w",x.Actor,err)}
@@ -85,7 +85,15 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		byID[x.Actor]=x.Decision
 		m:=out.Minds[x.Actor]
   if j.Version<PopulationVersion||x.Decision.Source!=routineSource{
-   if j.Version>=PopulationVersion&&m.Tier==LightTier&&lightInitiativeDue(s,x.Actor){m.LastLightInitiativeDay=s.Minute/1440+1}
+   if j.Version>=PopulationVersion&&(m.Tier==LightTier||j.Version>=SelectiveVersion&&m.Tier==FullTier)&&lightInitiativeDue(s,x.Actor){m.LastLightInitiativeDay=s.Minute/1440+1}
+   if j.Version>=SelectiveVersion{
+    m.NextDeliberation=0
+    switch x.Decision.Action{
+    case "wait":if x.Decision.WaitMinutes>0{m.NextDeliberation=s.Minute+int64(x.Decision.WaitMinutes)}
+    case "move":m.NextDeliberation=s.Minute+walkMinutes(m.Location,x.Decision.Target)
+    case "observe":m.NextDeliberation=s.Minute+1
+    }
+   }
    m=applyCognition(j,&out,x.Actor,m,x.Decision)
    if j.Version>=CognitionVersion{m.PendingStimulus="";m.AwaitEvent=x.Decision.Action=="wait"&&x.Decision.WaitMinutes==0}
   }else{m.LastAction=x.Decision.Action}

@@ -105,9 +105,11 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 			if m.Conversation!=nil&&(x.Decision.Action!="talk"||x.Decision.Target!=m.Conversation.Peer){closeConversation(&out,x.Actor)}
 		}
 	}
-	if j.Version>=WorldVersion{applyImmediateWorld(j,s,&out,choices)}
+	executed:=choices
+ if j.Version>=ContactVersion{executed=reserveRoutineContacts(j,s,&out,choices)}
+ if j.Version>=WorldVersion{applyImmediateWorld(j,s,&out,executed)}
 	// A movement removes its actor from the contactable scene immediately.
-	for _,x:=range choices{if x.Decision.Action=="move"{
+	for _,x:=range executed{if x.Decision.Action=="move"{
 		m:=out.Minds[x.Actor];d:=x.Decision
 		m.Activity=&Activity{Kind:"move",Target:d.Target,Until:s.Minute+walkMinutes(m.Location,d.Target)}
 		out.Minds[x.Actor]=m
@@ -117,6 +119,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	// Rotate priority to avoid systematic alphabetical advantage.
 	for i:=0;i<len(order);i++{
 		id:=order[(i+s.Round)%len(order)];d:=byID[id];m:=out.Minds[id]
+  if j.Version>=ContactVersion&&m.Activity!=nil&&m.Activity.Kind=="contact_hold"{continue}
 		if d.Action=="move"||(j.Version>=WorldVersion&&isWorldAction(d.Action)){continue}
 		if m.Activity!=nil&&m.Activity.Kind=="listen"{
 			if d.Action=="talk"&&d.Target!=m.Activity.Target{appendEvent(&out,Event{Kind:"obstacle",Actor:id,Text:"A conversa pretendida foi adiada por outra interação.",Audience:[]string{id}})}
@@ -125,8 +128,10 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		switch d.Action{
 		case "talk":
 			target:=out.Minds[d.Target]
+   if j.Version>=ContactVersion&&target.Activity!=nil&&target.Activity.Kind=="contact_hold"&&target.Activity.Target==id{target.Activity=nil;out.Minds[d.Target]=target}
 			if target.Location!=m.Location||!availableForContact(target)||(j.Version>=ConversationVersion&&!canContact(m,d.Target,target,id)){
 				m.Activity=&Activity{Kind:"retry",Until:s.Minute+1}
+    if j.Version>=ContactVersion{m.PendingStimulus="Abordagem não concluída; avalie outra ocasião ou interlocutor."}
 				appendEvent(&out,Event{Kind:"obstacle",Actor:id,Target:d.Target,Text:"Interlocutor indisponível; reavalie a abordagem.",Audience:[]string{id}})
 				break
 			}

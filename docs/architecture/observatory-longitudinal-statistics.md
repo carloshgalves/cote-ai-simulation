@@ -1,0 +1,3 @@
+# Longitudinal statistics
+
+Delivery 8/9. Actor and class panels derive daily counts from committed events and wallet ledger only. Task events include completed tasks and consumption records; academic count uses completed study/lesson events. Dialogue is emitted claims, not social trust. Group ledger excludes transfers internal to the group. Actor exam status is available only for the current modeled exam; numeric group outcome is not an individual grade. Missing academic grades, OAA, historical CP snapshots and full exam histories are explicitly unavailable. No fabricated metrics. History view is operator-only with actor audience filtering and pagination.

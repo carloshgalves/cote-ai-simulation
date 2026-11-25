@@ -21,7 +21,7 @@
 #view-timeline .scroll{max-height:none}
 button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media(max-width:800px){.app-layout{grid-template-columns:minmax(0,1fr)}.sidebar{border-right:0;border-bottom:1px solid var(--line);padding:8px}.sidebar nav{position:static;display:flex;flex-wrap:wrap}.sidebar button{width:auto}.sidebar .nav-heading{display:none}}
-.character-modal{width:min(1000px,calc(100vw - 28px))}.character-layout{display:grid;grid-template-columns:minmax(160px,230px) minmax(0,1fr)}.character-portrait{padding:20px;display:flex;flex-direction:column;gap:10px;background:#141a23}.character-portrait svg,.portrait-placeholder{width:100%;border-radius:12px;aspect-ratio:9/11}.portrait-placeholder{display:grid;place-items:center;background:#26303b;color:var(--muted);font-size:46px}.character-modal .panel{border:0;border-radius:0}.character-modal .scroll{min-height:320px;max-height:60vh}@media(max-width:600px){.character-layout{grid-template-columns:1fr}.character-portrait{flex-direction:row;align-items:center;flex-wrap:wrap}.character-portrait svg,.portrait-placeholder{width:72px}.character-modal .scroll{min-height:180px}}.dashboard-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}.dash-metric{padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:11px;display:flex;flex-direction:column;gap:4px}.dash-metric strong{font-size:23px;letter-spacing:-.03em}.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px;align-items:start}.dashboard-grid .panel:last-child{grid-column:1/-1}#timeline-summary{color:var(--muted);border-bottom:1px solid var(--line)}@media(max-width:800px){.dashboard-grid{grid-template-columns:1fr}}.universe-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin-top:14px}.universe-grid .dash-metric{margin:12px 0}.member-list{display:grid;gap:6px;margin-top:12px;max-height:300px;overflow:auto}.member-list button{text-align:left}</style></head>
+.character-modal{width:min(1000px,calc(100vw - 28px))}.character-layout{display:grid;grid-template-columns:minmax(160px,230px) minmax(0,1fr)}.character-portrait{padding:20px;display:flex;flex-direction:column;gap:10px;background:#141a23}.character-portrait svg,.portrait-placeholder{width:100%;border-radius:12px;aspect-ratio:9/11}.portrait-placeholder{display:grid;place-items:center;background:#26303b;color:var(--muted);font-size:46px}.character-modal .panel{border:0;border-radius:0}.character-modal .scroll{min-height:320px;max-height:60vh}@media(max-width:600px){.character-layout{grid-template-columns:1fr}.character-portrait{flex-direction:row;align-items:center;flex-wrap:wrap}.character-portrait svg,.portrait-placeholder{width:72px}.character-modal .scroll{min-height:180px}}.dashboard-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}.dash-metric{padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:11px;display:flex;flex-direction:column;gap:4px}.dash-metric strong{font-size:23px;letter-spacing:-.03em}.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px;align-items:start}.dashboard-grid .panel:last-child{grid-column:1/-1}#timeline-summary{color:var(--muted);border-bottom:1px solid var(--line)}@media(max-width:800px){.dashboard-grid{grid-template-columns:1fr}}.universe-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin-top:14px}.universe-grid .dash-metric{margin:12px 0}.member-list{display:grid;gap:6px;margin-top:12px;max-height:300px;overflow:auto}.member-list button{text-align:left}.history-scroll{max-width:100%;overflow:auto}.history-table{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums;margin-top:8px}.history-table td,.history-table th{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}.history-table th{color:var(--muted)}.history-table td:first-child,.history-table th:first-child{text-align:left}</style></head>
 <body>
 <header class="top"><div class="shell"><div class="brand"><button class="quiet" id="nav-toggle" aria-label="Alternar navegação" aria-controls="sidebar" aria-expanded="true">☰</button><span class="brand-mark">C</span><div><div class="eyebrow">Classroom of the Elite</div><h1>Observatório de simulação</h1></div></div><div class="controls"><button id="settings">⚙ Modelos e APIs</button><button id="report">Exportar relatório</button><button class="primary" id="run">▶ Executar</button><button id="pause" disabled>Pausar</button><button id="step">Próximo ciclo</button><button id="advance">Até novo evento</button><button class="quiet" id="cancel" disabled>Cancelar ciclo</button></div></div></header>
 <div class="app-layout" id="app-layout"><aside class="sidebar" id="sidebar"><nav aria-label="Observatório">
@@ -34,7 +34,7 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 <section class="view" id="view-overview"><div class="view-title"><h2>Visão geral</h2><p>Estado confirmado da simulação.</p></div><div id="overview-host"></div></section>
 <section class="view" id="view-timeline" hidden><div class="view-title"><h2>Linha do tempo</h2><p>Acontecimentos e perspectivas.</p></div>
 <section class="panel"><div class="panel-head"><div><div class="eyebrow">Mundo e interações</div><h2>Linha do tempo</h2></div><label><span class="muted">Perspectiva </span><select id="who"><option value="">Todos (operador)</option></select></label><label><select id="event-filter"><option value="story">Narrativa</option><option value="all">Todos os acontecimentos</option><option value="private">Cognição privada</option><option value="institution">Instituição e recursos</option></select></label><label><input type="checkbox" id="technical"> Diagnósticos</label><label>Dia <select id="event-day"><option value="">Todos</option></select></label></div><div class="panel-body" id="timeline-summary"></div><div class="panel-body scroll" id="timeline"></div><div class="panel-head"><button id="timeline-newer">Mais recentes</button><span class="muted" id="timeline-range"></span><button id="timeline-older">Mais antigos</button></div></section>
-</section><dialog class="modal character-modal" id="character-dialog" aria-labelledby="mind-name"><div class="character-layout"><aside class="character-portrait" id="portrait"></aside><section class="panel" id="character-detail"><div class="panel-head"><h2 id="mind-name">Ficha individual</h2><button id="close-character" aria-label="Fechar ficha">Fechar</button></div><div class="tabs" id="mind-tabs" hidden><button data-tab="overview" aria-pressed="true">Resumo</button><button data-tab="identity">Identidade</button><button data-tab="memory">Cognição</button><button data-tab="body">Corpo</button><button data-tab="social">Social</button><button data-tab="strategy">Estratégia</button></div><div class="panel-body scroll" id="mind"></div></section></div></dialog>
+</section><dialog class="modal character-modal" id="character-dialog" aria-labelledby="mind-name"><div class="character-layout"><aside class="character-portrait" id="portrait"></aside><section class="panel" id="character-detail"><div class="panel-head"><h2 id="mind-name">Ficha individual</h2><button id="close-character" aria-label="Fechar ficha">Fechar</button></div><div class="tabs" id="mind-tabs" hidden><button data-tab="overview" aria-pressed="true">Resumo</button><button data-tab="identity">Identidade</button><button data-tab="memory">Cognição</button><button data-tab="body">Corpo</button><button data-tab="social">Social</button><button data-tab="strategy">Estratégia</button><button data-tab="stats">Estatísticas</button><button data-tab="history">Histórico</button></div><div class="panel-body scroll" id="mind"></div></section></div></dialog>
 <section class="view" id="view-classes" hidden><div class="view-title"><h2>Turmas</h2><p>Composição e estado institucional confirmado.</p></div><label>Ano escolar <select id="class-year"><option value="1">1º ano</option><option value="2">2º ano</option><option value="3">3º ano</option></select></label><div id="class-grid" class="universe-grid"></div></section>
 <section class="view" id="view-factions" hidden><div class="view-title"><h2>Facções</h2><p>Catálogo de organizações · visão do operador.</p></div><div id="faction-grid" class="universe-grid"></div></section>
 <section class="view" id="view-institutions" hidden><div class="view-title"><h2>Instituições</h2><p>Estruturas e regras de cada cenário.</p></div><div id="institution-grid" class="universe-grid"></div></section>
@@ -136,7 +136,42 @@ const organizationCatalog=[
  {id:"kijima",name:"Facção de Kijima",type:"Organização política",active:false},
  {id:"tomodachi-game",name:"Tomodachi Game",type:"Organização / jogos",active:false}
 ];
-function openCharacter(id){inspected=id;detailTab="overview";render();if(!$("character-dialog").open)$("character-dialog").showModal()}
+function openCharacter(id){inspected=id;detailTab="overview";historyPage=0;render();if(!$("character-dialog").open)$("character-dialog").showModal()}
+function longitudinal(s,actorIDs){
+ const actorSet=new Set(actorIDs),days=new Map(),totals={tasks:0,academic:0,dialogue:0,received:0,spent:0};
+ const bucket=minute=>{const day=Math.floor(minute/1440)+1;if(!days.has(day))days.set(day,{day,tasks:0,academic:0,dialogue:0,received:0,spent:0});return days.get(day)};
+ for(const e of s.events||[]){
+  if(!actorSet.has(e.actor))continue;
+  if(e.kind==="task"){const b=bucket(e.minute);b.tasks++;totals.tasks++;if(/^Concluiu (study|lesson):/.test(e.text)){b.academic++;totals.academic++}}
+  if(e.kind==="claim"){const b=bucket(e.minute);b.dialogue++;totals.dialogue++}
+ }
+ for(const e of s.world?.ledger||[]){
+  const from=actorSet.has(e.from),to=actorSet.has(e.to);if(from===to)continue;
+  const b=bucket(e.minute);if(from){b.spent+=e.amount;totals.spent+=e.amount}else{b.received+=e.amount;totals.received+=e.amount}
+ }
+ return {totals,days:[...days.values()].sort((a,b)=>a.day-b.day)};
+}
+function historyTable(host,rows){
+ const wrap=node("div",undefined,"history-scroll"),table=node("table",undefined,"history-table"),head=node("thead"),tr=node("tr");
+ for(const label of ["Dia","Tarefas","Estudo/aulas","Falas emitidas","Entradas PP","Saídas PP"]){const th=node("th",label);th.scope="col";tr.append(th)}head.append(tr);table.append(head);const body=node("tbody");
+ for(const r of rows){const row=node("tr");for(const value of [r.day,r.tasks,r.academic,r.dialogue,r.received,r.spent])row.append(node("td",fmtNum(value)));body.append(row)}table.append(body);wrap.append(table);host.append(wrap);
+ if(!rows.length)host.append(node("p","Nenhuma atividade ou transação registrada.","muted"))
+}
+function renderActorStats(host,s,id){
+ const m=s.minds[id],data=longitudinal(s,[id]),metrics=node("div",undefined,"dashboard-metrics");
+ metrics.append(metric("Tarefas registradas",data.totals.tasks),metric("Estudo/aulas concluídos",data.totals.academic),metric("Falas emitidas",data.totals.dialogue),metric("Saldo atual",s.world?fmtNum(m.wallet||0)+" PP":"—"));host.append(metrics);
+ const exam=s.world?.exam;host.append(node("h3","Exames"));
+ if(exam?.group?.includes(id)){host.append(node("p","Zodiac/VIP · "+exam.phase+" · "+(exam.submitted?.[id]?"Submissão registrada":"Sem submissão registrada")));if(exam.outcome)host.append(node("p","Resultado coletivo do grupo: "+exam.outcome+" (código do motor)."))}else host.append(node("p","Nenhuma participação registrada neste save.","muted"));
+ host.append(node("p","Notas, OAA e rankings acadêmicos: indisponíveis; o piloto não produz essas medidas.","muted"),node("h3","Evolução por dia"));
+ historyTable(host,data.days);
+}
+let historyPage=0;
+function renderActorHistory(host,s,id){
+ const events=s.events.filter(e=>e.audience.includes(id)&&["claim","task","resource","meeting","exam","social","revelation","goal","plan_end"].includes(e.kind)),size=35;
+ historyPage=Math.min(historyPage,Math.max(0,Math.ceil(events.length/size)-1));const end=events.length-historyPage*size,start=Math.max(0,end-size);
+ for(const e of events.slice(start,end).reverse()){const b=node("article",undefined,"event");b.append(node("div","Dia "+(Math.floor(e.minute/1440)+1)+" · "+time(e.minute)+" · "+(kind[e.kind]||e.kind),"meta"),node("p",e.text));host.append(b)}
+ const buttons=node("div",undefined,"form-actions"),newer=node("button","Mais recentes"),older=node("button","Mais antigos");newer.disabled=historyPage===0;older.disabled=start===0;newer.onclick=()=>{historyPage--;render()};older.onclick=()=>{historyPage++;render()};buttons.append(newer,node("small",events.length?(start+1)+"–"+end+" / "+events.length:"0 registros"),older);host.append(buttons)
+}
 function renderUniverse(s){
  const pop=snapshot.population||{},year=Number($("class-year").value),classes=$("class-grid");
  if(currentView==="classes"){
@@ -150,7 +185,7 @@ function renderUniverse(s){
    else b.append(node("p","Pontos de classe indisponíveis para este ano.","muted"));
    const roster=node("div",undefined,"member-list");
    for(const p of members){const button=node("button",p.name);button.onclick=()=>openCharacter(p.id);roster.append(button)}
-   if(!members.length)roster.append(node("p","Nenhum indivíduo registrado.","muted"));b.append(roster);classes.append(b)
+   if(!members.length)roster.append(node("p","Nenhum indivíduo registrado.","muted"));b.append(roster);const data=longitudinal(s,members.map(p=>p.id));const d=node("details");d.append(node("summary","Histórico agregado dos indivíduos registrados"));historyTable(d,data.days);d.append(node("p","Não inclui estudantes em coortes nem notas inexistentes. Transferências internas não entram nos fluxos agregados.","muted"));b.append(d);classes.append(b)
   }
  }
  if(currentView==="factions"||currentView==="institutions"){
@@ -211,8 +246,8 @@ function render(){
   }else if(detailTab==="body"){
    if(!m.body)mind.append(node("p","Estado corporal disponível em v7.","muted"));
    else{const metrics=node("div",undefined,"metric-row");for(const [label,key] of [["Energia","energy"],["Hidratação","hydration"],["Fadiga","fatigue"]]){const x=node("div");x.append(node("span",label,"muted"),node("strong",Math.round(m.body[key]/10)+"%"));metrics.append(x)}mind.append(metrics,node("p","Indicadores experimentais do piloto; não são medidas clínicas ou capacidades físicas verificadas.","muted"))}
-  }else if(detailTab==="social"){
-   list(mind,"Vínculos",Object.entries(m.social||{}).map(([id,v])=>name(id)+" · confiança "+v.trust+" · "+v.interactions+" falas · "+v.fulfilled+" compromissos cumpridos · "+v.missed+" não cumpridos"));
+  }else if(detailTab==="stats"){renderActorStats(mind,s,selected)}else if(detailTab==="history"){renderActorHistory(mind,s,selected)}else if(detailTab==="social"){
+   list(mind,"Vínculos",Object.entries(m.social||{}).map(([id,v])=>name(id)+" · confiança "+v.trust+" · "+v.interactions+" interações de diálogo · "+(v.shared_leisure_days||0)+" dias de convivência · "+v.fulfilled+" compromissos cumpridos · "+v.missed+" não cumpridos"));
    list(mind,"Avaliações próprias",Object.entries(m.relations||{}).map(([id,v])=>name(id)+": "+v));
   }else{
    list(mind,"Objetivos",m.goals||[]);

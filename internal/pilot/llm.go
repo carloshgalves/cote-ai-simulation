@@ -52,7 +52,8 @@ type offeredAction struct {
 	Target string `json:"target,omitempty"`
 }
 func offeredActions(view Context) []offeredAction {
-	out:=[]offeredAction{{ID:"wait",Action:"wait"},{ID:"observe",Action:"observe"}}
+	out:=[]offeredAction{{ID:"wait",Action:"wait"}}
+	if view.Version!=Version||view.CanObserve{out=append(out,offeredAction{ID:"observe",Action:"observe"})}
 	for _, location:=range view.Locations {
 		if location!=view.Location {out=append(out,offeredAction{"move:"+location,"move",location})}
 	}
@@ -101,7 +102,9 @@ func decodeLocalChoice(view Context,raw []byte)(Decision,error) {
 	for _, o:=range offeredActions(view){if o.ID==c.Choice{d.Action=o.Action;d.Target=o.Target;found=true;break}}
 	if !found{return Decision{},responseError{"ação não consta nas opções disponíveis"}}
 	if validText(c.Reason,300){d.Reason=c.Reason}else if c.Reason!=""{d.Ignored=append(d.Ignored,"reason")}
-	if d.Action=="talk"{d.Text=c.Text}else if c.Text!=""{d.Ignored=append(d.Ignored,"text")}
+	if d.Action=="talk"{d.Text=c.Text}else if c.Text!=""{
+		if view.Version==Version&&validText(c.Text,500){d.Note=c.Text}else{d.Ignored=append(d.Ignored,"text")}
+	}
 	d.Beliefs=[]Belief{}
 	if err:=validateDecision(view,d);err!=nil{return Decision{},responseError{err.Error()}}
 	for _, key:=range []string{"beliefs","goal","relation","plan"} {
@@ -138,36 +141,33 @@ func (m *HTTPModel) Repair(ctx context.Context,view Context,problem string)(Deci
 
 func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (Decision,error) {
 	var zero Decision
-	raw,err:=json.Marshal(view);if err!=nil{return zero,err}
-	prompt:=systemPrompt+"\nSeja breve: reason em uma frase, text até duas frases; alterações cognitivas são opcionais. Use [] e null quando não houver evidência suficiente. Não invente ações ou campos."
+	raw,err:=json.Marshal(struct{Context;Options []offeredAction `json:"options"`}{view,offeredActions(view)});if err!=nil{return zero,err}
+	prompt:="Interprete somente self em Classroom of the Elite. Use personalidade, objetivos atuais, plano, fatos vividos e hipóteses. Não use acontecimentos futuros nem segredos alheios. Escolha um ID de options que ajude um objetivo ou responda a uma novidade; não repita observação sem informação nova. Esperar é legítimo se não houver motivo para agir. Explique em reason, em primeira pessoa e uma ou duas frases, a intenção ficcional específica do personagem: o que deseja obter, testar, evitar ou descobrir. Não narre fatos novos nem raciocínio detalhado. Se talk, text é a fala real dirigida ao destinatário; para outras ações deixe text vazio. Responda JSON com choice, reason, text. Não copie exemplos nem invente IDs."
+	if problem=="" {
+		prompt+=" Opcionalmente adicione beliefs [{text,evidence,confidence (0-100)}], goal {replace,with,evidence}, plan {steps,evidence} ou relation {person,delta (-1 ou 1),evidence}. Evidência deve ser ID da própria memória; omita campos sem fundamento. Uma fala recebida é alegação, não fato."
+	} else {prompt+=" A resposta anterior foi rejeitada: "+problem+". Retorne apenas choice, reason e text se conversar."}
 	format:=map[string]any{"type":"json_object"}
 	u,_:=url.Parse(m.Endpoint)
 	local:=u!=nil && has([]string{"127.0.0.1","localhost","::1"},u.Hostname())
-	maxTokens:=512
+	maxTokens:=700
+	if problem!=""{maxTokens=300}
 	if local {
-		prompt="Interprete somente self no primeiro dia de Classroom of the Elite. Use personalidade, metas, plano e memória; não use fatos futuros nem segredos alheios. Falas são alegações, não fatos. Escolha exatamente um ID de options. Responda em português com JSON: {\"choice\":\"observe\",\"text\":\"\",\"reason\":\"intenção breve\"}. Somente choice é obrigatório; se escolher talk, text é obrigatório e contém a fala real em até duas frases. Para outras ações text pode ser omitido. reason é uma intenção curta opcional. Não invente IDs. Não escreva raciocínio longo."
-		if problem=="" {
-			prompt+=" Opcionalmente adicione beliefs [{text,evidence,confidence (0-100)}], goal {replace,with,evidence}, plan {steps,evidence} ou relation {person,delta (-1 ou 1),evidence}. Cite IDs reais da memória; omita campos sem evidência."
-		} else {prompt+=" A resposta anterior foi rejeitada: "+problem+". Nesta tentativa use somente choice e, para talk, text. reason é opcional."}
-		raw,err=json.Marshal(struct{Context;Options []offeredAction `json:"options"`}{view,offeredActions(view)});if err!=nil{return zero,err}
 		schema,err:=localDecisionSchema(view);if err!=nil{return zero,err}
-		if problem!="" {
-			var simplified map[string]any
-			if err:=json.Unmarshal(schema,&simplified);err!=nil{return zero,err}
-			props:=simplified["properties"].(map[string]any)
-			for _, key:=range []string{"beliefs","goal","relation","plan"}{delete(props,key)}
-			schema,err=json.Marshal(simplified);if err!=nil{return zero,err}
-			maxTokens=256
-		}
+		var simplified map[string]any
+		if err:=json.Unmarshal(schema,&simplified);err!=nil{return zero,err}
+		props:=simplified["properties"].(map[string]any)
+		if problem!=""{for _,key:=range []string{"beliefs","goal","relation","plan"}{delete(props,key)}}
+		simplified["required"]=[]string{"choice","reason"}
+		schema,err=json.Marshal(simplified);if err!=nil{return zero,err}
 		format=map[string]any{"type":"json_schema","json_schema":map[string]any{"name":"decision","strict":true,"schema":schema}}
-	} else if problem!="" {prompt+="\nA tentativa anterior foi rejeitada pelo motor: "+problem+". Gere uma nova decisão válida, simples, sem mudanças cognitivas desnecessárias."}
+	}
 	payload:=struct{
 		Model string `json:"model"`
 		Messages []map[string]string `json:"messages"`
 		Temperature float64 `json:"temperature"`
 		ResponseFormat map[string]any `json:"response_format"`
 		MaxTokens int `json:"max_tokens"`
-	}{m.Name,[]map[string]string{{"role":"system","content":prompt},{"role":"user","content":string(raw)}},0.35,format,maxTokens}
+	}{m.Name,[]map[string]string{{"role":"system","content":prompt},{"role":"user","content":string(raw)}},0.65,format,maxTokens}
 	body,err:=json.Marshal(payload);if err!=nil{return zero,err}
 	req,err:=http.NewRequestWithContext(ctx,http.MethodPost,m.Endpoint,bytes.NewReader(body));if err!=nil{return zero,errors.New("invalid model request")}
 	req.Header.Set("Content-Type","application/json")
@@ -175,6 +175,8 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	res,err:=m.Client.Do(req)
 	if err!=nil{return zero,errors.New("modelo indisponível ou timeout")}
 	defer res.Body.Close()
+	if res.StatusCode==429{return zero,errors.New("limite de requisições do provedor (HTTP 429); pause e tente novamente após a liberação da cota")}
+	if res.StatusCode==401||res.StatusCode==403{return zero,errors.New("chave de API ausente, inválida ou sem permissão")}
 	if res.StatusCode!=http.StatusOK{return zero,fmt.Errorf("provedor LLM retornou HTTP %d",res.StatusCode)}
 	data,err:=io.ReadAll(io.LimitReader(res.Body,2<<20+1))
 	if err!=nil||len(data)>2<<20{return zero,errors.New("invalid model response size")}
@@ -184,8 +186,5 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	} `json:"choices"`}
 	if err:=json.Unmarshal(data,&envelope);err!=nil||len(envelope.Choices)!=1||
 		!has([]string{"stop",""},envelope.Choices[0].FinishReason){return zero,responseError{"modelo não produziu uma resposta completa"}}
-	if local{return decodeLocalChoice(view,[]byte(envelope.Choices[0].Message.Content))}
-	d,err:=decodeStrict[Decision]([]byte(envelope.Choices[0].Message.Content))
-	if err!=nil{return zero,responseError{"modelo retornou JSON fora do contrato"}}
-	return d,nil
+	return decodeLocalChoice(view,[]byte(envelope.Choices[0].Message.Content))
 }

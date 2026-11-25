@@ -63,6 +63,8 @@ type Snapshot struct {
 	Model string `json:"model"`
 	Digest string `json:"digest"`
 	Limit int `json:"limit"`
+	Done bool `json:"done"`
+	Version int `json:"version"`
 }
 
 func Open(path,name string,model Model) (*Session,error) {
@@ -131,7 +133,7 @@ func replaceJournal(path string,j Journal) error {
 func (s *Session) snapshot() Snapshot {
 	people:=[]Person{}
 	for _, p:=range s.journal.Profiles {people=append(people,Person{p.ID,p.Name,p.Class})}
-	return Snapshot{State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:MaxRounds}
+	return Snapshot{State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:MaxRounds,Done:s.state.Round>=MaxRounds||(s.journal.Version==Version&&s.state.Minute>=EndMinute),Version:s.journal.Version}
 }
 func (s *Session) Snapshot() Snapshot {
 	s.mu.Lock();defer s.mu.Unlock();return s.snapshot()
@@ -147,7 +149,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 	s.mu.Lock()
 	if s.lock==nil{s.mu.Unlock();return Snapshot{},errors.New("sessão encerrada")}
 	if s.state.Round!=expected{s.mu.Unlock();return Snapshot{},errors.New("rodada já alterada; atualize o estado")}
-	if expected>=MaxRounds{s.mu.Unlock();return Snapshot{},errors.New("limite do piloto atingido")}
+	if expected>=MaxRounds||(s.journal.Version==Version&&s.state.Minute>=EndMinute){s.mu.Unlock();return Snapshot{},errors.New("manhã do piloto concluída")}
 	ctx,cancel:=context.WithCancel(ctx)
 	s.cancel=cancel
 	s.progress=Progress{Active:true,Round:expected+1,Total:len(s.journal.Profiles),Completed:len(s.pending),StartedAt:time.Now(),Phase:"thinking",Choices:clone(s.pending)}
@@ -159,8 +161,8 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 		s.cancel=nil;s.progress.Active=false;s.progress.Actor="";s.progress.Phase="idle"
 		if retErr!=nil{s.progress.LastError=retErr.Error()}
 	}()
-	minute,err:=nextMinute(state);if err!=nil{return Snapshot{},err}
-	r:=Round{Number:expected+1,Minute:minute,Choices:append([]Chosen{},s.pending...)}
+	var err error
+	r:=Round{Number:expected+1,Choices:append([]Chosen{},s.pending...)}
 	order:=ids(journal.Profiles)
 	for _, id:=range order[len(r.Choices):] {
 		if err:=ctx.Err();err!=nil{return Snapshot{},err}
@@ -203,6 +205,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 		s.mu.Lock();s.pending=nil;s.mu.Unlock()
 		return Snapshot{},errors.New("nenhum agente produziu decisão válida; rodada não avançou")
 	}
+	r.Minute,err=nextEventMinute(journal,state,r.Choices);if err!=nil{return Snapshot{},err}
 	next,err:=apply(journal,state,r);if err!=nil{return Snapshot{},err}
 	j:=journal
 	j.Rounds=append(append([]Round(nil),j.Rounds...),r)

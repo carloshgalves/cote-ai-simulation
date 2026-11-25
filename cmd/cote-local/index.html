@@ -20,7 +20,7 @@ function name(id){return snapshot?.people.find(p=>p.id===id)?.name||id}
 function time(m){return String(Math.floor(m/60)%24).padStart(2,"0")+":"+String(m%60).padStart(2,"0")}
 function status(text,error=false){$("status").textContent=text;$("status").className=error?"error":"muted"}
 async function api(url,options){const r=await fetch(url,options);const result=await r.json();if(!r.ok)throw Error(result.error||"Falha de comunicação");return result}
-function controls(){const done=snapshot&&snapshot.state.round>=snapshot.limit;$("run").disabled=running||busy||done||!snapshot;$("pause").disabled=!running;$("step").disabled=running||busy||done||!snapshot;$("cancel").disabled=!busy||!progress?.active||progress.phase==="canceling"||progress.phase==="saving"}
+function controls(){const done=snapshot&&(snapshot.done||snapshot.state.round>=snapshot.limit);$("run").disabled=running||busy||done||!snapshot;$("pause").disabled=!running;$("step").disabled=running||busy||done||!snapshot;$("cancel").disabled=!busy||!progress?.active||progress.phase==="canceling"||progress.phase==="saving"}
 function renderChoices(){
  const p=progress,choices=p?.round>snapshot?.state.round?p.choices||[]:[];
  const show=choices.filter(x=>!selected||x.actor===selected);
@@ -32,13 +32,13 @@ function renderChoices(){
   if(x.failure){box.append(node("div",x.failure,"error"))}
   else{
    const action={wait:"Aguardar",observe:"Observar",move:"Ir para "+(place[d.target]||d.target),talk:"Conversar com "+name(d.target)}[d.action]||d.action;
-   box.append(node("strong",action));if(d.reason)box.append(node("p",d.reason));
+   box.append(node("strong",action));if(d.reason)box.append(node("p","Intenção: "+d.reason));if(d.note)box.append(node("p","Nota privada do personagem (não verificada): "+d.note));if(!d.reason&&!d.note)box.append(node("small","O modelo não explicitou a intenção."));
    if(d.text)box.append(node("p","“"+d.text+"”"));
    for(const b of d.beliefs||[])box.append(node("div","Hipótese: "+b.text+" ("+b.confidence+"%)"));
    if(d.goal)box.append(node("div","Meta proposta: "+d.goal.with));
    if(d.plan)box.append(node("div","Plano proposto: "+d.plan.steps.join(" → ")));
    if(d.relation)box.append(node("div","Relação proposta: "+name(d.relation.person)+" "+d.relation.delta));
-   if(d.ignored?.length)box.append(node("div","Campos descartados: "+d.ignored.join(", "),"muted"));
+   if(d.ignored?.length){const details=node("details");details.append(node("summary","Diagnóstico do modelo"),node("div","Campos descartados: "+d.ignored.join(", "),"muted"));box.append(details)}
   }
   $("pending-choices").append(box);
  }
@@ -65,25 +65,25 @@ setInterval(poll,1000);
 function list(parent,label,items){parent.append(node("h3",label));const ul=node("ul");if(!items.length)ul.append(node("li","Nenhum registro","muted"));for(const item of items)ul.append(node("li",item));parent.append(ul)}
 function render(){
  if(!snapshot)return;const s=snapshot.state;
- $("clock").textContent="Dia "+(Math.floor(s.minute/1440)+1)+" · "+time(s.minute);$("round").textContent="Rodada "+s.round+" / "+snapshot.limit;
+ $("clock").textContent="Dia "+(Math.floor(s.minute/1440)+1)+" · "+time(s.minute);$("round").textContent="Ciclo "+s.round+(snapshot.version===1?" · relógio legado":" · por acontecimentos");
  $("model").textContent="Modelo: "+snapshot.model+" · registro "+snapshot.digest.slice(0,12);
  $("people").replaceChildren();
  for(const p of snapshot.people){const m=s.minds[p.id],card=node("div",undefined,"person");card.append(node("strong",p.name),node("small","Classe "+p.class+" · "+(place[m.location]||m.location)));const activity=node("p","","muted");activity.dataset.progress=p.id;card.append(activity);const b=node("button","Inspecionar");b.onclick=()=>{$("who").value=p.id;selected=p.id;render()};card.append(b);$("people").append(card)}
- const events=s.events.filter(e=>!selected||e.audience.includes(selected));$("timeline").replaceChildren();
+ const events=s.events.filter(e=>(!selected||e.audience.includes(selected))&&!["ignored_cognition"].includes(e.kind));$("timeline").replaceChildren();
  for(const e of events.slice(-150).reverse()){const box=node("div",undefined,"event "+e.kind);box.append(node("div",time(e.minute)+" · "+(kind[e.kind]||e.kind)+" · "+name(e.actor)+(e.kind==="claim"?" → "+name(e.target):""),"meta"),node("div",e.text));$("timeline").append(box)}
  $("mind").replaceChildren();
- if(selected){const m=s.minds[selected];$("mind").append(node("strong",name(selected)),node("p","Local: "+(place[m.location]||m.location)));list($("mind"),"Objetivos",m.goals);list($("mind"),"Plano atual",m.plan?.steps||[]);list($("mind"),"Crenças (hipóteses)",m.beliefs.map(b=>b.text+" · confiança "+b.confidence+"% · "+b.evidence));list($("mind"),"Relações",Object.entries(m.relations).map(([id,v])=>name(id)+": "+v));list($("mind"),"Memórias recentes",events.slice(-12).reverse().map(e=>time(e.minute)+" · "+e.id+" · "+e.text))}
+ if(selected){const m=s.minds[selected];$("mind").append(node("strong",name(selected)),node("p","Local: "+(place[m.location]||m.location)));$("mind").append(node("h3","Última intenção"),node("p",m.thought||"O personagem ainda não explicitou uma intenção.","muted"));list($("mind"),"Objetivos",m.goals);list($("mind"),"Plano atual",m.plan?.steps||[]);list($("mind"),"Crenças (hipóteses)",m.beliefs.map(b=>b.text+" · confiança "+b.confidence+"% · "+b.evidence));list($("mind"),"Relações",Object.entries(m.relations).map(([id,v])=>name(id)+": "+v));list($("mind"),"Memórias de acontecimentos",events.filter(e=>["announcement","claim","move","observation"].includes(e.kind)).slice(-12).reverse().map(e=>time(e.minute)+" · "+e.id+" · "+e.text))}
  else{$("mind").append(node("p","Selecione um personagem para inspecionar sua cognição.","muted"))}
  renderProgress();controls()
 }
 async function step(){
  if(busy||!snapshot)return false;busy=true;controls();status("Consultando os agentes. As decisões aparecem assim que validadas; os efeitos são publicados juntos.");
- try{snapshot=await api("/api/step",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({round:snapshot.state.round})});render();status("Rodada "+snapshot.state.round+" salva.");return true}
+ try{snapshot=await api("/api/step",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({round:snapshot.state.round})});render();status(snapshot.done?"Manhã concluída. Registro salvo.":"Acontecimentos da rodada "+snapshot.state.round+" salvos.");return true}
  catch(e){running=false;try{snapshot=await api("/api/state");render()}catch{}status(e.message==="context canceled"?"Rodada cancelada. Decisões já validadas permanecem nesta sessão.":e.message+" · confira o estado salvo. Decisões já validadas podem ser reaproveitadas na próxima tentativa.",e.message!=="context canceled");return false}
  finally{busy=false;await poll();controls()}
 }
 $("step").onclick=()=>step();$("pause").onclick=()=>{running=false;controls();status(busy?"Pausa solicitada; finalizando a rodada atual.":"Pausado.")};
-$("run").onclick=async()=>{if(running||busy)return;running=true;controls();while(running&&snapshot.state.round<snapshot.limit){if(!await step())break}running=false;controls()};
+$("run").onclick=async()=>{if(running||busy)return;running=true;controls();while(running&&!snapshot.done&&snapshot.state.round<snapshot.limit){if(!await step())break}running=false;controls()};
 $("cancel").onclick=async()=>{running=false;try{const r=await api("/api/cancel",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({round:progress.round})});status(r.canceled?"Cancelamento solicitado.":"Rodada já finalizando.");await poll()}catch(e){status(e.message,true)}};
 $("who").onchange=e=>{selected=e.target.value;render()};
 (async()=>{try{snapshot=await api("/api/state");for(const p of snapshot.people){const o=node("option",p.name);o.value=p.id;$("who").append(o)}render();status("Pronto. Execute ou avance uma rodada.")}catch(e){status(e.message,true)}})();

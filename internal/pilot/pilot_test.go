@@ -224,3 +224,33 @@ func TestAllInvalidAgentsDoNotAdvanceAndRetryFresh(t *testing.T){
 	if _,err:=s.Step(context.Background(),0);err!=nil{t.Fatal(err)}
 	if calls.Load()!=24||s.Snapshot().State.Round!=1{t.Fatal("all-failed retry did not start fresh")}
 }
+
+func TestEventClockIdleJumpAndNoRepeatedObservation(t *testing.T) {
+	j:=Journal{Version:Version,Model:"test"};j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	s,err:=initial(j);if err!=nil{t.Fatal(err)}
+	choices:=[]Chosen{}
+	for _,id:=range ids(j.Profiles){choices=append(choices,Chosen{Actor:id,Decision:Decision{Action:"observe",Reason:"Conhecer o ambiente"}})}
+	minute,err:=nextEventMinute(j,s,choices);if err!=nil||minute!=481{t.Fatal("observation duration",minute,err)}
+	r:=Round{Number:1,Minute:minute,Choices:choices}
+	s,err=apply(j,s,r);if err!=nil{t.Fatal(err)}
+	view:=actorContext(j,s,"ayanokoji")
+	for _,o:=range offeredActions(view){if o.ID=="observe"{t.Fatal("repetitive observation offered")}}
+	count:=len(s.Events)
+	minute,err=nextEventMinute(j,s,choices);if err!=nil||minute!=490{t.Fatal("idle must jump to next school event",minute,err)}
+	// An old or injected observer can still replay without adding repeated memories.
+	s,err=apply(j,s,Round{Number:2,Minute:minute,Choices:choices});if err!=nil{t.Fatal(err)}
+	if len(s.Events)!=count+1||s.Events[len(s.Events)-1].Kind!="announcement"{t.Fatal("repeated memories or missing school event")}
+	if s.Minds["ayanokoji"].Thought!="Conhecer o ambiente"{t.Fatal("missing intention")}
+}
+func TestLegacyClockStillReplays(t *testing.T) {
+	j:=Journal{Version:LegacyVersion,Model:"test"};j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	choices:=[]Chosen{};for _,id:=range ids(j.Profiles){choices=append(choices,Chosen{Actor:id,Decision:wait()})}
+	j.Rounds=[]Round{{Number:1,Minute:485,Choices:choices}}
+	s,err:=Replay(j);if err!=nil||s.Minute!=485||len(s.Events)!=13{t.Fatal("legacy replay changed",err)}
+}
+func TestNonSpeechTextPreservedAsUnverifiedPrivateNote(t *testing.T){
+	j:=Journal{Version:Version,Model:"test"};j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	s,_:=initial(j);view:=actorContext(j,s,"ayanokoji")
+	d,err:=decodeLocalChoice(view,[]byte(`{"choice":"observe","text":"Quero identificar os líderes."}`))
+	if err!=nil||d.Note==""||d.Text!=""||len(d.Ignored)!=0{t.Fatal("private note discarded",d,err)}
+}

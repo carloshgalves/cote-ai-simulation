@@ -16,6 +16,7 @@ type Activity struct {
 	Target string `json:"target,omitempty"`
 	Text string `json:"text,omitempty"`
 	Until int64 `json:"until"`
+ SpanMinutes int64 `json:"span_minutes,omitempty"`
 }
 func eligibleActors(j Journal,s State)[]string{
 	order:=ids(j.Profiles)

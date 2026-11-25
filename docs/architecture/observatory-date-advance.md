@@ -1,0 +1,3 @@
+# Date-target fast forward
+
+The observatory has 1/3/7 day targets at 08:00. Faithful mode repeatedly executes the existing Step endpoint (including model calls when due), preserves committed journals, permits pause/cancel, and does not invent elapsed experiences. Routine mode calls a bounded server-side batch of normal cycles, stops before inference, and returns the actual committed snapshot and reason. No skipping unknown cognitive decisions or hidden state mutation. Future history can be viewed by day in existing timeline. The UI target is a request, not a guarantee of speed, cost or available disk. Full-year JSON journal limitations remain. Static JS checked; actual browser and Go validation pending.

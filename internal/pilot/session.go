@@ -285,3 +285,22 @@ func(s *Session) AdvanceUntilEvent(ctx context.Context,expected int)(AdvanceResu
  result.Reason="Rotinas avançadas; nenhum acontecimento novo neste lote"
  return result,nil
 }
+
+ // AdvanceRoutineTo advances only the normal, committed scheduler cycles.
+ // It stops before an inference request and never creates substitute dialogue.
+ func(s *Session) AdvanceRoutineTo(ctx context.Context,expected int,target int64)(AdvanceResult,error){
+  result:=AdvanceResult{Snapshot:s.Snapshot()}
+  if result.Snapshot.Version<CognitionVersion{return result,errors.New("avanço por data requer v7")}
+  if result.Snapshot.State.Round!=expected{return result,errors.New("rodada já alterada")}
+  if target<=result.Snapshot.State.Minute||target>result.Snapshot.State.Minute+7*1440+480||target>endMinute(result.Snapshot.Version)||target%1440!=480{return result,errors.New("data de destino inválida")}
+  for i:=0;i<64;i++{
+   if err:=ctx.Err();err!=nil{return result,err}
+   if result.Snapshot.State.Minute>=target{result.Reason="Data de destino atingida";return result,nil}
+   if result.Snapshot.Done{result.Reason="Limite do piloto atingido";return result,nil}
+   if result.Snapshot.NeedsInference{result.Reason="Decisão cognitiva necessária; nenhuma decisão substituída";return result,nil}
+   next,err:=s.step(ctx,result.Snapshot.State.Round,false);if err!=nil{return result,err}
+   result.Snapshot=next;result.Cycles++
+  }
+  if result.Snapshot.State.Minute>=target{result.Reason="Data de destino atingida"}else{result.Reason="Lote de rotinas concluído"}
+  return result,nil
+ }

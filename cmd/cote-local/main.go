@@ -161,6 +161,14 @@ func main() {
   if err:=d.Decode(new(any));err!=io.EOF{fail(w,400,errors.New("trailing request data"));return}
   result,err:=session.AdvanceUntilEvent(r.Context(),*input.Round);if err!=nil{fail(w,409,err);return};reply(w,200,result)
  })
+ mux.HandleFunc("POST /api/advance-date",func(w http.ResponseWriter,r *http.Request){
+  if r.Header.Get("Origin")!="http://"+addr||!strings.HasPrefix(r.Header.Get("Content-Type"),"application/json"){fail(w,403,errors.New("local browser request required"));return}
+  var input struct{Round *int `json:"round"`; Target *int64 `json:"target"`}
+  d:=json.NewDecoder(http.MaxBytesReader(w,r.Body,1024));d.DisallowUnknownFields()
+  if err:=d.Decode(&input);err!=nil||input.Round==nil||input.Target==nil{fail(w,400,errors.New("expected round and target required"));return}
+  if err:=d.Decode(new(any));err!=io.EOF{fail(w,400,errors.New("trailing request data"));return}
+  result,err:=session.AdvanceRoutineTo(r.Context(),*input.Round,*input.Target);if err!=nil{fail(w,409,err);return};reply(w,200,result)
+ })
  mux.HandleFunc("POST /api/step",func(w http.ResponseWriter,r *http.Request){
 		if r.Header.Get("Origin")!="http://"+addr||!strings.HasPrefix(r.Header.Get("Content-Type"),"application/json"){fail(w,403,errors.New("local browser request required"));return}
 		var input struct{Round *int `json:"round"`}

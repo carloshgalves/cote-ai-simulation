@@ -59,24 +59,30 @@ var providerEndpoints=map[string]string{
 	"mistral":"https://api.mistral.ai/v1",
 	"deepseek":"https://api.deepseek.com/v1",
 }
-func (r *Router) Add(in RouteInput)(RouteView,error){
+func normalizeRoute(in RouteInput,requireModel bool)(RouteInput,*HTTPModel,error){
 	in.Provider=strings.ToLower(strings.TrimSpace(in.Provider))
 	in.Model=strings.TrimSpace(in.Model)
 	in.Endpoint=strings.TrimSpace(in.Endpoint)
 	in.Key=strings.TrimSpace(in.Key)
 	if in.Format==""{in.Format="auto"}
-	if !has([]string{"auto","json","schema","plain"},in.Format){return RouteView{},errors.New("formato de resposta inválido")}
+	if !has([]string{"auto","json","schema","plain"},in.Format){return in,nil,errors.New("formato de resposta inválido")}
 	if in.Provider!="openai-compatible"{
-		endpoint,ok:=providerEndpoints[in.Provider];if !ok{return RouteView{},errors.New("provedor não suportado")}
+		endpoint,ok:=providerEndpoints[in.Provider];if !ok{return in,nil,errors.New("provedor não suportado")}
 		if in.Provider!="ollama"||in.Endpoint==""{in.Endpoint=endpoint}
 	}
-	if len(in.Key)>4096||strings.ContainsAny(in.Key,"\r\n")||len(in.Endpoint)>500||!validText(in.Model,200){return RouteView{},errors.New("configuração de modelo inválida")}
-	if in.Provider!="ollama"&&in.Provider!="openai-compatible"&&in.Key==""{return RouteView{},errors.New("informe uma chave")}
-	m,err:=NewHTTPModel(in.Endpoint,in.Model,in.Key);if err!=nil{return RouteView{},err}
+	if len(in.Key)>4096||strings.ContainsAny(in.Key,"\r\n")||len(in.Endpoint)>500||(requireModel&&!validText(in.Model,200)){return in,nil,errors.New("configuração de modelo inválida")}
+	if in.Provider!="ollama"&&in.Provider!="openai-compatible"&&in.Key==""{return in,nil,errors.New("informe uma chave")}
+	name:=in.Model;if !requireModel{name="catalog"}
+	m,err:=NewHTTPModel(in.Endpoint,name,in.Key);if err!=nil{return in,nil,err}
 	if in.Format!="auto"{m.Format=in.Format}
 	if in.Provider=="anthropic"{m.Protocol="anthropic";m.Endpoint=strings.TrimRight(in.Endpoint,"/")+"/messages"}
 	u,_:=url.Parse(m.Endpoint)
-	if u.Scheme=="http"&&in.Key!=""{return RouteView{},errors.New("chave de API requer HTTPS")}
+	if u.Scheme=="http"&&in.Key!=""{return in,nil,errors.New("chave de API requer HTTPS")}
+	return in,m,nil
+}
+func (r *Router) Add(in RouteInput)(RouteView,error){
+	in,m,err:=normalizeRoute(in,true);if err!=nil{return RouteView{},err}
+	u,_:=url.Parse(m.Endpoint)
 	r.mu.Lock();defer r.mu.Unlock()
 	if len(r.routes)>=24{return RouteView{},errors.New("limite de 24 rotas")}
 	for _,old:=range r.routes{if old.model.Endpoint==m.Endpoint&&old.model.Name==m.Name&&old.model.Key==m.Key&&old.model.Format==m.Format{return RouteView{},errors.New("rota já cadastrada")}}

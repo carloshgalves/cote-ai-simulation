@@ -79,6 +79,16 @@ func main() {
 	mux.HandleFunc("GET /{$}",func(w http.ResponseWriter,r *http.Request){
 		w.Header().Set("Content-Type","text/html; charset=utf-8");_,_=w.Write(page)
 	})
+	mux.HandleFunc("POST /api/models",func(w http.ResponseWriter,r *http.Request){
+		if r.Header.Get("Origin")!="http://"+addr||!strings.HasPrefix(r.Header.Get("Content-Type"),"application/json"){fail(w,403,errors.New("local browser request required"));return}
+		var input pilot.RouteInput
+		d:=json.NewDecoder(http.MaxBytesReader(w,r.Body,16384));d.DisallowUnknownFields()
+		if err:=d.Decode(&input);err!=nil{fail(w,400,errors.New("configuração de catálogo inválida"));return}
+		if err:=d.Decode(new(any));err!=io.EOF{fail(w,400,errors.New("trailing request data"));return}
+		ctx,cancel:=context.WithTimeout(r.Context(),30*time.Second);defer cancel()
+		catalog,err:=pilot.DiscoverModels(ctx,input);if err!=nil{fail(w,400,err);return}
+		reply(w,200,catalog)
+	})
 	mux.HandleFunc("GET /api/routes",func(w http.ResponseWriter,r *http.Request){reply(w,200,router.Routes())})
 	mux.HandleFunc("POST /api/routes",func(w http.ResponseWriter,r *http.Request){
 		if r.Header.Get("Origin")!="http://"+addr||!strings.HasPrefix(r.Header.Get("Content-Type"),"application/json"){fail(w,403,errors.New("local browser request required"));return}

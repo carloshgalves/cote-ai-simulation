@@ -109,7 +109,7 @@ func buildReport(o OperatorReport)([]byte,error){
 	}
 	if err:=z.Close();err!=nil{return nil,err};return buf.Bytes(),nil
 }
-func reportTime(m int64)string{return fmt.Sprintf("%02d:%02d",m/60,m%60)}
+func reportTime(m int64)string{if m>=1440{return fmt.Sprintf("Dia %d %02d:%02d",m/1440+1,m/60%24,m%60)};return fmt.Sprintf("%02d:%02d",m/60,m%60)}
 func writeChoice(b *strings.Builder,c Chosen){
 	d:=c.Decision
 	if c.Failure!=""{fmt.Fprintf(b,"- %s — falha: %s\n",c.Actor,c.Failure);return}
@@ -121,6 +121,7 @@ func writeChoice(b *strings.Builder,c Chosen){
 	if d.Text!=""{fmt.Fprintf(b,"  - Fala: %s\n",d.Text)}
 	for _,belief:=range d.Beliefs{fmt.Fprintf(b,"  - Hipótese: %s (%d%%; %s)\n",belief.Text,belief.Confidence,belief.Evidence);if belief.Grounding!=""{fmt.Fprintf(b,"    - Fundamentação (%s): %s\n",belief.Subject,belief.Grounding)}}
 	if d.Goal!=nil{fmt.Fprintf(b,"  - Meta: %s → %s (%s)\n",d.Goal.Replace,d.Goal.With,d.Goal.Evidence)}
+	if d.Discovery!=nil{fmt.Fprintf(b,"  - Descoberta: %s (%s; %s)\n",d.Discovery.Text,d.Discovery.Evidence,d.Discovery.Grounding)}
 	if d.Plan!=nil{fmt.Fprintf(b,"  - Plano: %s (%s)\n",strings.Join(d.Plan.Steps," → "),d.Plan.Evidence);if d.Plan.ProgressNote!=""{fmt.Fprintf(b,"    - Revisão: %s\n",d.Plan.ProgressNote)}}
 	if d.Relation!=nil{fmt.Fprintf(b,"  - Relação: %s %+d (%s)\n",d.Relation.Person,d.Relation.Delta,d.Relation.Evidence)}
 	if len(d.Ignored)>0{fmt.Fprintf(b,"  - Descartes: %s\n",strings.Join(d.Ignored,", "))}
@@ -128,6 +129,8 @@ func writeChoice(b *strings.Builder,c Chosen){
 func writeEvent(b *strings.Builder,e Event){fmt.Fprintf(b,"- %s | %s | %s | %s → %s | %s",reportTime(e.Minute),e.ID,e.Kind,e.Actor,e.Target,e.Text);if e.Evidence!=""{fmt.Fprintf(b," | evidência: %s",e.Evidence)};fmt.Fprintln(b)}
 func writeMind(b *strings.Builder,m Mind){
 	fmt.Fprintf(b,"- Local: %s\n- Objetivos: %s\n- Intenção: %s\n",m.Location,strings.Join(m.Goals,"; "),m.Thought)
+	if m.Inventory!=nil{fmt.Fprintf(b,"- Saldo: %d PP\n",m.Wallet);writeJSONText(b,m.Inventory)}
+	for _,d:=range m.Discoveries{fmt.Fprintf(b,"- Descoberta: %s (%s)\n",d.Text,d.Evidence)}
 	if m.Conversation!=nil{fmt.Fprintf(b,"- Conversa com %s; vez de %s; %d falas concluídas\n",m.Conversation.Peer,m.Conversation.Turn,m.Conversation.Turns)}
 	if m.Activity!=nil{fmt.Fprintf(b,"- Atividade: %s; término/reavaliação: %s\n",m.Activity.Kind,reportTime(m.Activity.Until))}
 	if m.WakeReason!=""{fmt.Fprintf(b,"- Motivo de ativação: %s\n",m.WakeReason)}

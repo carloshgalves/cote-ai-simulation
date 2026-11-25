@@ -68,6 +68,8 @@ type Snapshot struct {
 	Version int `json:"version"`
 	LastChoices []Chosen `json:"last_choices"`
  Population map[string]PublicMember `json:"population,omitempty"`
+ Identities map[string]CharacterIdentity `json:"identities,omitempty"`
+ NeedsInference bool `json:"needs_inference"`
 }
 
 func Open(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,Version)}
@@ -146,7 +148,7 @@ func (s *Session) snapshot() Snapshot {
 	for _, p:=range s.journal.Profiles {people=append(people,Person{p.ID,p.Name,p.Class})}
 	last:=[]Chosen{}
 	if n:=len(s.journal.Rounds);n>0{last=clone(s.journal.Rounds[n-1].Choices)}
-	return Snapshot{Population:publicPopulation(s.journal,s.state),LastChoices:last,State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:roundLimit(s.journal.Version),Done:s.state.Round>=roundLimit(s.journal.Version)||(s.journal.Version>=Version&&s.state.Minute>=endMinute(s.journal.Version)),Version:s.journal.Version}
+	return Snapshot{Identities:clone(s.journal.Identities),NeedsInference:s.needsInferenceLocked(),Population:publicPopulation(s.journal,s.state),LastChoices:last,State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:roundLimit(s.journal.Version),Done:s.state.Round>=roundLimit(s.journal.Version)||(s.journal.Version>=Version&&s.state.Minute>=endMinute(s.journal.Version)),Version:s.journal.Version}
 }
 func (s *Session) Snapshot() Snapshot {
 	s.mu.Lock();defer s.mu.Unlock();return s.snapshot()
@@ -156,12 +158,18 @@ func (s *Session) POV(id string) (Context,error) {
 	if !known(s.journal.Profiles,id){return Context{},errors.New("unknown actor")}
 	return actorContext(s.journal,s.state,id),nil
 }
-func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr error) {
+func(s *Session) needsInferenceLocked()bool{
+ for _,id:=range eligibleActors(s.journal,s.state){if s.journal.Version<PopulationVersion||needsModel(s.state,id){return true}}
+ return false
+}
+func (s *Session) Step(ctx context.Context,expected int)(Snapshot,error){return s.step(ctx,expected,true)}
+func (s *Session) step(ctx context.Context,expected int,allowModel bool) (result Snapshot,retErr error) {
 	if !s.stepMu.TryLock(){return Snapshot{},errors.New("uma rodada já está em execução")}
 	defer s.stepMu.Unlock()
 	s.mu.Lock()
 	if s.lock==nil{s.mu.Unlock();return Snapshot{},errors.New("sessão encerrada")}
 	if s.state.Round!=expected{s.mu.Unlock();return Snapshot{},errors.New("rodada já alterada; atualize o estado")}
+ if !allowModel&&(s.needsInferenceLocked()||len(s.pending)>0){s.mu.Unlock();return Snapshot{},errors.New("Há decisão cognitiva pendente; use Executar ou Próximo ciclo.")}
 	if expected>=roundLimit(s.journal.Version)||(s.journal.Version>=Version&&s.state.Minute>=endMinute(s.journal.Version)){s.mu.Unlock();return Snapshot{},errors.New("período da simulação concluído")}
 	ctx,cancel:=context.WithCancel(ctx)
 	s.cancel=cancel
@@ -236,4 +244,29 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 	if err:=replaceJournal(s.path,j);err!=nil{return Snapshot{},errors.New("falha ao salvar rodada; estado não publicado")}
 	s.journal=j;s.state=next;s.pending=nil
 	return s.snapshot(),nil
+}
+
+type AdvanceResult struct{
+ Snapshot Snapshot `json:"snapshot"`
+ Reason string `json:"reason"`
+ Cycles int `json:"cycles"`
+}
+// AdvanceUntilEvent commits exactly the normal deterministic cycles and
+// stops before any inference. Chunking bounds request duration, not sim time.
+func(s *Session) AdvanceUntilEvent(ctx context.Context,expected int)(AdvanceResult,error){
+ result:=AdvanceResult{Snapshot:s.Snapshot()}
+ if result.Snapshot.Version<CognitionVersion{return result,errors.New("avanço por acontecimento requer v7")}
+ if result.Snapshot.State.Round!=expected{return result,errors.New("rodada já alterada")}
+ for i:=0;i<64;i++{
+  if result.Snapshot.Done{result.Reason="Limite do piloto atingido";return result,nil}
+  if result.Snapshot.NeedsInference{result.Reason="Decisão cognitiva necessária";return result,nil}
+  prev:=len(result.Snapshot.State.Events)
+  next,err:=s.step(ctx,result.Snapshot.State.Round,false);if err!=nil{return result,err}
+  result.Snapshot=next;result.Cycles++
+  for _,e:=range next.State.Events[prev:]{
+   if has([]string{"revelation","claim","meeting","exam","plan_end","body_alert","social"},e.Kind){result.Reason="Novo acontecimento: "+e.Kind;return result,nil}
+  }
+ }
+ result.Reason="Rotinas avançadas; nenhum acontecimento novo neste lote"
+ return result,nil
 }

@@ -23,6 +23,7 @@ type ActorCycle struct {
 }
 type ActorReport struct {
 	Profile Profile `json:"profile"`
+ Identity *CharacterIdentity `json:"identity,omitempty"`
 	Cycles []ActorCycle `json:"cycles"`
 	Events []Event `json:"events"`
 	Final Mind `json:"final"`
@@ -51,7 +52,7 @@ func buildReport(o OperatorReport)([]byte,error){
 	j:=o.Journal
 	s,err:=initial(j);if err!=nil{return nil,err}
 	actors:=map[string]*ActorReport{}
-	for _,profile:=range j.Profiles{actors[profile.ID]=&ActorReport{Profile:profile,Cycles:[]ActorCycle{}}}
+	for _,profile:=range j.Profiles{a:=&ActorReport{Profile:profile,Cycles:[]ActorCycle{}};if x,ok:=j.Identities[profile.ID];ok{a.Identity=&x};actors[profile.ID]=a}
 	for _,round:=range j.Rounds{
 		next,err:=apply(j,s,round);if err!=nil{return nil,err}
 		choices:=map[string]Chosen{}
@@ -137,6 +138,9 @@ func writeEvent(b *strings.Builder,e Event){fmt.Fprintf(b,"- %s | %s | %s | %s �
 func writeMind(b *strings.Builder,m Mind){
 	fmt.Fprintf(b,"- Local: %s\n- Objetivos: %s\n- Intenção: %s\n",m.Location,strings.Join(m.Goals,"; "),m.Thought)
 	if m.Inventory!=nil{fmt.Fprintf(b,"- Saldo: %d PP\n",m.Wallet);writeJSONText(b,m.Inventory)}
+ if m.Body!=nil{fmt.Fprintf(b,"- Estado corporal experimental: energia %d, hidratação %d, fadiga %d\n",m.Body.Energy,m.Body.Hydration,m.Body.Fatigue)}
+ if len(m.Social)>0{fmt.Fprintln(b,"- Vínculos sociais:");writeJSONText(b,m.Social)}
+ if len(m.Plans)>0{fmt.Fprintln(b,"- Planos por horizonte:");writeJSONText(b,m.Plans)}
 	for _,d:=range m.Discoveries{fmt.Fprintf(b,"- Descoberta: %s (%s)\n",d.Text,d.Evidence)}
 	if m.Conversation!=nil{fmt.Fprintf(b,"- Conversa com %s; vez de %s; %d falas concluídas\n",m.Conversation.Peer,m.Conversation.Turn,m.Conversation.Turns)}
 	if m.Activity!=nil{fmt.Fprintf(b,"- Atividade: %s; término/reavaliação: %s\n",m.Activity.Kind,reportTime(m.Activity.Until))}

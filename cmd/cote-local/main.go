@@ -148,7 +148,15 @@ func main() {
 	mux.HandleFunc("GET /api/pov",func(w http.ResponseWriter,r *http.Request){
 		c,err:=session.POV(r.URL.Query().Get("actor"));if err!=nil{fail(w,400,err);return};reply(w,200,c)
 	})
-	mux.HandleFunc("POST /api/step",func(w http.ResponseWriter,r *http.Request){
+	mux.HandleFunc("POST /api/advance",func(w http.ResponseWriter,r *http.Request){
+  if r.Header.Get("Origin")!="http://"+addr||!strings.HasPrefix(r.Header.Get("Content-Type"),"application/json"){fail(w,403,errors.New("local browser request required"));return}
+  var input struct{Round *int `json:"round"`}
+  d:=json.NewDecoder(http.MaxBytesReader(w,r.Body,1024));d.DisallowUnknownFields()
+  if err:=d.Decode(&input);err!=nil||input.Round==nil{fail(w,400,errors.New("expected round required"));return}
+  if err:=d.Decode(new(any));err!=io.EOF{fail(w,400,errors.New("trailing request data"));return}
+  result,err:=session.AdvanceUntilEvent(r.Context(),*input.Round);if err!=nil{fail(w,409,err);return};reply(w,200,result)
+ })
+ mux.HandleFunc("POST /api/step",func(w http.ResponseWriter,r *http.Request){
 		if r.Header.Get("Origin")!="http://"+addr||!strings.HasPrefix(r.Header.Get("Content-Type"),"application/json"){fail(w,403,errors.New("local browser request required"));return}
 		var input struct{Round *int `json:"round"`}
 		d:=json.NewDecoder(http.MaxBytesReader(w,r.Body,1024));d.DisallowUnknownFields()

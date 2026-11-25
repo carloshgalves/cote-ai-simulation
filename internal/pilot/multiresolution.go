@@ -44,7 +44,7 @@ func routineMacro(ctx context.Context,j Journal,s State,target int64,limit int)(
   next,err:=scheduledAdvance(j,s,choices);if err!=nil{return s,nil,"",err}
   rounds=append(rounds,Round{Number:next.Round,Minute:next.Minute,Choices:choices})
   relevant:=meaningfulBoundary(next.Events[len(s.Events):]);s=next
-  if relevant{return s,rounds,"Acontecimento relevante registrado; reavaliar resolução",nil}
+  if relevant&&(j.Version<HierarchicalVersion||requiresDetailedCycle(j,s)){return s,rounds,"Acontecimento relevante registrado; reavaliar resolução",nil}
  }
  return s,rounds,"Lote de rotinas concluído",nil
 }
@@ -58,7 +58,7 @@ func(s *Session) advanceRoutineMacro(ctx context.Context,expected int,target int
  s.progress=Progress{Active:true,Round:expected+1,StartedAt:time.Now(),Phase:"routine-batch"}
  s.mu.Unlock()
  defer func(){cancel();s.mu.Lock();defer s.mu.Unlock();s.cancel=nil;s.progress.Active=false;s.progress.Phase="idle";if retErr!=nil{s.progress.LastError=retErr.Error()}}()
- next,rounds,reason,err:=routineMacro(ctx,j,state,target,32);if err!=nil{return result,err}
+ next,rounds,reason,err:=routineMacro(ctx,j,state,target,macroCycleLimit(j.Version));if err!=nil{return result,err}
  s.mu.Lock();defer s.mu.Unlock()
  if err:=ctx.Err();err!=nil{return result,err}
  if len(rounds)>0{

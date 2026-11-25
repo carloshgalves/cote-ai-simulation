@@ -58,6 +58,7 @@ type Router struct {
 	cooldowns map[string]cooldown
 	telemetry []CallTelemetry
 	telemetryDropped int
+ simulationAttempts uint64
 	chat *ChatGPTAccount
 	budgets map[string]minuteBudget
 }
@@ -245,7 +246,7 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 		r.mu.Unlock()
 		t:=CallTelemetry{StartedAt:start,Actor:view.Self.ID,Cycle:view.Round,Provider:rt.view.Provider,Model:rt.view.Model,RouteID:rt.view.ID,Repair:repair!="",Format:m.Format}
 		m.telemetry=&t
-		r.mu.Lock();rt.view.Attempts++;r.mu.Unlock()
+		r.mu.Lock();rt.view.Attempts++;if view.Round>0{r.simulationAttempts++};r.mu.Unlock()
 		d,err:=m.decide(ctx,view,repair)
 		if err==nil{if validation:=validateDecision(view,d);validation!=nil{err=responseError{validation.Error()}}}
 		r.mu.Lock()

@@ -149,12 +149,13 @@ func autonomousRoutine(j Journal,s State,id string) Decision {
  case "jantar e repouso":
   if m.Body==nil||m.Body.Energy<550||m.Body.Hydration<550{return goOr("cafeteria","eat","free")}
   return goOr("dormitory-"+id,"rest","")
- case "atividades livres":
+ case "atividades livres","período livre":
+  if j.Version<HierarchicalVersion&&period=="período livre"{return goOr(classroom,"study","")}
   // A modest, infrequent discretionary purchase is a versioned fallback
   // prior, not a canonical spending habit. Preserve an ample balance.
   day:=s.Minute/1440+1
   h:=sha256.Sum256([]byte(fmt.Sprintf("%s/pilot-v9/leisure/%s/%d",j.WorldSeed,id,day)))
-  if m.LastRoutinePurchaseDay!=day&&m.Wallet>=10000&&h[0]%7==0&&s.Minute%1440<1020&&(meeting==nil||meeting.At-s.Minute>60){
+  if (j.Version<HierarchicalVersion||period=="atividades livres")&&m.LastRoutinePurchaseDay!=day&&m.Wallet>=10000&&h[0]%7==0&&s.Minute%1440<1020&&(meeting==nil||meeting.At-s.Minute>60){
    return goOr("mall","recreation","")
   }
   leisure:=personalPrior(j,s,id).leisure
@@ -175,6 +176,7 @@ func autonomousRoutine(j Journal,s State,id string) Decision {
 // Only simultaneous, completed and co-located leisure sessions create a
 // shared encounter. No scripted speech, inferred trust or forced friendship.
 func completeSharedLeisure(j Journal,s *State){
+ if j.Version>=HierarchicalVersion{recordOverlappingLeisure(j,s);return}
  groups:=[]string{}
  for _,id:=range ids(j.Profiles){
   m:=s.Minds[id]

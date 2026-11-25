@@ -22,6 +22,7 @@ func clampMeter(x int)int{if x<0{return 0};if x>1000{return 1000};return x}
 func recognizes(j Journal,id,other string)bool{for _,f:=range j.Identities[id].Background{if f.Person==other{return true}};return false}
 func stimulate(s *State,id,reason string){
  m,ok:=s.Minds[id];if !ok{return}
+ if m.Activity!=nil&&m.Activity.Coarse{interruptCoarse(s,id,reason);m=s.Minds[id]}
  m.PendingStimulus=reason
  if m.Activity!=nil&&m.Activity.Kind=="wait"{m.Activity=nil;m.WakeReason=reason}
  s.Minds[id]=m

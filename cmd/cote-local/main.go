@@ -54,6 +54,9 @@ func main() {
 	}
 	if *steps<0||*steps>pilot.MaxRounds||*port<1||*port>65535 {log.Fatal("invalid rounds or port")}
 	router,err:=pilot.LoadRouter(*routesPath);if err!=nil{log.Fatal(err)}
+	chat,err:=pilot.OpenChatGPT(filepath.Join(configDir,"cote-ai-simulation","chatgpt.json"));if err!=nil{log.Fatal(err)}
+	defer chat.Close()
+	router.AttachChatGPT(chat)
 	if len(router.Routes())==0&&*modelName!="" {
 		kind:=*provider;if kind=="custom"{kind="openai-compatible"}
 		if _,err:=router.Add(pilot.RouteInput{Provider:kind,Endpoint:*endpoint,Model:*modelName,Key:key,Format:"auto"});err!=nil{log.Fatal(err)}
@@ -86,8 +89,28 @@ func main() {
 		if err:=d.Decode(&input);err!=nil{fail(w,400,errors.New("configuração de catálogo inválida"));return}
 		if err:=d.Decode(new(any));err!=io.EOF{fail(w,400,errors.New("trailing request data"));return}
 		ctx,cancel:=context.WithTimeout(r.Context(),30*time.Second);defer cancel()
-		catalog,err:=pilot.DiscoverModels(ctx,input);if err!=nil{fail(w,400,err);return}
+		var catalog pilot.ModelCatalog;var err error
+		if input.Provider=="chatgpt"{catalog,err=chat.Models(ctx)}else{catalog,err=pilot.DiscoverModels(ctx,input)}
+		if err!=nil{fail(w,400,err);return}
 		reply(w,200,catalog)
+	})
+	mux.HandleFunc("GET /api/chatgpt",func(w http.ResponseWriter,r *http.Request){reply(w,200,chat.Status())})
+	mux.HandleFunc("POST /api/chatgpt/start",func(w http.ResponseWriter,r *http.Request){
+		if r.Header.Get("Origin")!="http://"+addr{fail(w,403,errors.New("local browser request required"));return}
+		u,err:=chat.Start("http://"+addr+"/auth/callback");if err!=nil{fail(w,400,err);return}
+		reply(w,200,map[string]string{"url":u})
+	})
+	mux.HandleFunc("GET /auth/callback",func(w http.ResponseWriter,r *http.Request){
+		ctx,cancel:=context.WithTimeout(r.Context(),40*time.Second);defer cancel()
+		err:=chat.Complete(ctx,r.URL.Query())
+		if err==nil{router.AttachChatGPT(chat)}
+		w.Header().Set("Content-Type","text/plain; charset=utf-8")
+		if err!=nil{w.WriteHeader(400);fmt.Fprintln(w,err.Error());return}
+		fmt.Fprintln(w,"Conta autorizada. Volte ao observatório e abra Modelos e APIs para selecionar um modelo.")
+	})
+	mux.HandleFunc("POST /api/chatgpt/logout",func(w http.ResponseWriter,r *http.Request){
+		if r.Header.Get("Origin")!="http://"+addr{fail(w,403,errors.New("local browser request required"));return}
+		if err:=chat.Logout(r.Context());err!=nil{fail(w,400,err);return};reply(w,200,chat.Status())
 	})
 	mux.HandleFunc("GET /api/routes",func(w http.ResponseWriter,r *http.Request){reply(w,200,router.Routes())})
 	mux.HandleFunc("POST /api/routes",func(w http.ResponseWriter,r *http.Request){

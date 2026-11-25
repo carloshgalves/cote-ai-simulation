@@ -26,6 +26,7 @@ type HTTPModel struct {
 	Format string
 	Protocol string
 	telemetry *CallTelemetry
+	chat *ChatGPTAccount
 }
 
 func NewHTTPModel(endpoint,name,key string) (*HTTPModel,error) {
@@ -174,6 +175,7 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	if problem=="" {
 		prompt+=" Opcionalmente adicione beliefs [{text,evidence,confidence (0-100)}], goal {replace,with,evidence}, plan {steps,evidence} ou relation {person,delta (-1 ou 1),evidence}. Evidência deve ser ID da própria memória; omita campos sem fundamento. Uma fala recebida é alegação, não fato."
 	} else {prompt+=" A resposta anterior foi rejeitada: "+problem+". Retorne um único objeto JSON com choice (um dos IDs autorizados), reason (uma frase em primeira pessoa) e text (fala se talk, caso contrário vazio). Não acrescente outros campos."}
+	if m.Protocol=="chatgpt"{return m.chatDecision(ctx,view,prompt,string(raw))}
 	format:=map[string]any{"type":"json_object"}
 	u,_:=url.Parse(m.Endpoint)
 	local:=u!=nil && has([]string{"127.0.0.1","localhost","::1"},u.Hostname())

@@ -1,0 +1,3 @@
+# Tomodachi character detail
+
+Owner-only read-only catalog detail. All 60 consolidated V2 packs are embedded from the existing corpus. A typed projection is keyed by exact character ID; no request-controlled filesystem lookup. Cards use the name in the authoritative pack. The modal shows identity, domains, case/evidence references and limitations/sources, including a spoiler and secondary-source warning. No school session, agent memory, game state or journal changes. No portraits are invented; use initials. The interface preserves source English descriptions. Regression: all catalog entries resolve, unknown/foreign/traversal IDs return 404. Browser visual verification pending.

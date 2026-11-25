@@ -138,7 +138,8 @@ func main() {
 		w.Header().Set("Content-Disposition","attachment; filename=cote-relatorio.zip")
 		_,_=w.Write(data)
 	})
-	mux.HandleFunc("GET /api/tomodachi/catalog",func(w http.ResponseWriter,r *http.Request){w.Header().Set("Content-Type","application/json; charset=utf-8");_,_=w.Write(tomodachiCatalog)})
+	catalog,packs,err:=loadTomodachiCatalog();if err!=nil{log.Fatal(err)}
+	registerTomodachiEndpoints(mux,catalog,packs)
 	mux.HandleFunc("GET /api/state",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Snapshot())})
 	mux.HandleFunc("GET /api/progress",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Progress())})
 	mux.HandleFunc("POST /api/cancel",func(w http.ResponseWriter,r *http.Request){

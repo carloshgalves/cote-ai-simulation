@@ -6,7 +6,7 @@
 </style></head>
 <body><main>
 <header><div><h1>COTE · Simulação local</h1><p class="muted">Piloto cognitivo · primeiro dia · seis personagens</p></div><div><span id="clock">08:00</span> <span id="round" class="muted"></span></div><div><button id="run">▶ Executar</button> <button id="pause" disabled>Pausar</button> <button id="step">Avançar uma rodada</button> <button id="cancel" disabled>Cancelar rodada</button></div></header>
-<div id="status" role="status">Carregando…</div><div id="progress" class="muted" aria-live="polite"></div><div id="people" class="grid"></div>
+<div id="status" role="status">Carregando…</div><div id="progress" class="muted" aria-live="polite"></div><div id="people" class="grid"></div><section class="panel" id="pending-panel" hidden><h2>Decisões desta rodada <span class="private">· propostas, ainda não executadas</span></h2><div id="pending-choices"></div></section>
 <div class="columns"><section class="panel"><h2>Linha do tempo <span class="private">· visão do operador</span></h2><label>Perspectiva <select id="who"><option value="">Todos (operador)</option></select></label><div id="timeline" class="scroll"></div></section><section class="panel"><h2>Cognição do personagem</h2><div id="mind" class="scroll"><p class="muted">Selecione um personagem para inspecionar suas metas, hipóteses, relações e memórias.</p></div></section></div>
 <p class="muted" id="model"></p><p class="muted">O motor decide os efeitos; as falas são alegações, não fatos. A pausa ocorre entre rodadas. O progresso é salvo localmente a cada rodada concluída.</p>
 </main>
@@ -14,24 +14,48 @@
 "use strict";
 const $=id=>document.getElementById(id);let snapshot=null,running=false,busy=false,selected="",progress=null;
 const place={"hall":"Hall","class-b":"Sala B","class-c":"Sala C","class-d":"Sala D","library":"Biblioteca","courtyard":"Pátio"};
-const kind={announcement:"Anúncio",intention:"Intenção privada",claim:"Conversa privada",move:"Deslocamento",observation:"Observação",wait:"Espera",goal:"Mudança de objetivo",plan:"Plano",belief:"Crença",relation:"Relação"};
+const kind={announcement:"Anúncio",intention:"Intenção privada",claim:"Conversa privada",move:"Deslocamento",observation:"Observação",wait:"Espera",goal:"Mudança de objetivo",plan:"Plano",belief:"Crença",relation:"Relação",model_failure:"Falha do modelo (sem ação)",ignored_cognition:"Proposta cognitiva descartada"};
 function node(tag,text,klass){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(klass)e.className=klass;return e}
 function name(id){return snapshot?.people.find(p=>p.id===id)?.name||id}
 function time(m){return String(Math.floor(m/60)%24).padStart(2,"0")+":"+String(m%60).padStart(2,"0")}
 function status(text,error=false){$("status").textContent=text;$("status").className=error?"error":"muted"}
 async function api(url,options){const r=await fetch(url,options);const result=await r.json();if(!r.ok)throw Error(result.error||"Falha de comunicação");return result}
 function controls(){const done=snapshot&&snapshot.state.round>=snapshot.limit;$("run").disabled=running||busy||done||!snapshot;$("pause").disabled=!running;$("step").disabled=running||busy||done||!snapshot;$("cancel").disabled=!busy||!progress?.active||progress.phase==="canceling"||progress.phase==="saving"}
+function renderChoices(){
+ const p=progress,choices=p?.round>snapshot?.state.round?p.choices||[]:[];
+ const show=choices.filter(x=>!selected||x.actor===selected);
+ $("pending-panel").hidden=show.length===0;
+ $("pending-choices").replaceChildren();
+ for(const x of show){
+  const d=x.decision,box=node("div",undefined,"event");
+  box.append(node("div",name(x.actor)+" · "+(x.failure?"Sem decisão válida":"Decisão validada, não executada"),"meta"));
+  if(x.failure){box.append(node("div",x.failure,"error"))}
+  else{
+   const action={wait:"Aguardar",observe:"Observar",move:"Ir para "+(place[d.target]||d.target),talk:"Conversar com "+name(d.target)}[d.action]||d.action;
+   box.append(node("strong",action),node("p",d.reason));
+   if(d.text)box.append(node("p","“"+d.text+"”"));
+   for(const b of d.beliefs||[])box.append(node("div","Hipótese: "+b.text+" ("+b.confidence+"%)"));
+   if(d.goal)box.append(node("div","Meta proposta: "+d.goal.with));
+   if(d.plan)box.append(node("div","Plano proposto: "+d.plan.steps.join(" → ")));
+   if(d.relation)box.append(node("div","Relação proposta: "+name(d.relation.person)+" "+d.relation.delta));
+   if(d.ignored?.length)box.append(node("div","Campos descartados: "+d.ignored.join(", "),"muted"));
+  }
+  $("pending-choices").append(box);
+ }
+}
 function renderProgress(){
+ if(!snapshot)return;
+ renderChoices();
  const p=progress;if(!p?.active){
  const pending=p?.completed>0&&p.round>snapshot?.state.round;
- $("progress").textContent=pending?("Decisões válidas guardadas nesta sessão: "+p.completed+"/"+p.total+". Próxima tentativa continua do ponto de falha."):"";
- for(const label of $("people").querySelectorAll("[data-progress]")){const i=Object.keys(snapshot.state.minds).sort().indexOf(label.dataset.progress);label.textContent=pending&&i<p.completed?"Decisão guardada":""}
+ $("progress").textContent=pending?("Resultados guardados nesta sessão: "+p.completed+"/"+p.total+". Próxima tentativa continua do ponto de falha."):"";
+ for(const label of $("people").querySelectorAll("[data-progress]")){const i=Object.keys(snapshot.state.minds).sort().indexOf(label.dataset.progress);label.textContent=pending&&i<p.completed?(p.choices?.find(x=>x.actor===label.dataset.progress)?.failure?"Falha do modelo":"Decisão guardada"):""}
  controls();return
  }
  const elapsed=Math.max(0,Math.floor((Date.now()-Date.parse(p.started_at))/1000));
  const actorElapsed=p.actor?Math.max(0,Math.floor((Date.now()-Date.parse(p.actor_started_at))/1000)):0;
- $("progress").textContent=p.completed+"/"+p.total+" concluídos · "+elapsed+" s · "+(p.phase==="canceling"?"Cancelando":p.phase==="saving"?"Salvando":name(p.actor)+" · tentativa "+p.attempt+" · "+actorElapsed+" s")+(p.last_error?" · "+p.last_error:"");
- for(const card of $("people").children){const label=card.querySelector("[data-progress]");if(label){const i=Object.keys(snapshot.state.minds).sort().indexOf(label.dataset.progress);label.textContent=i<p.completed?"Decisão validada":label.dataset.progress===p.actor?"Consultando · "+actorElapsed+" s":"Aguardando"}}
+ $("progress").textContent=p.completed+"/"+p.total+" processados · "+elapsed+" s · "+(p.phase==="canceling"?"Cancelando":p.phase==="saving"?"Salvando":name(p.actor)+" · tentativa "+p.attempt+" · "+actorElapsed+" s")+(p.last_error?" · "+p.last_error:"");
+ for(const card of $("people").children){const label=card.querySelector("[data-progress]");if(label){const i=Object.keys(snapshot.state.minds).sort().indexOf(label.dataset.progress);label.textContent=i<p.completed?(p.choices?.find(x=>x.actor===label.dataset.progress)?.failure?"Falha do modelo":"Decisão validada"):label.dataset.progress===p.actor?"Consultando · "+actorElapsed+" s":"Aguardando"}}
  controls()
 }
 let polling=false;
@@ -52,7 +76,7 @@ function render(){
  renderProgress();controls()
 }
 async function step(){
- if(busy||!snapshot)return false;busy=true;controls();status("Consultando os agentes. A rodada só é publicada quando todas as decisões forem válidas.");
+ if(busy||!snapshot)return false;busy=true;controls();status("Consultando os agentes. As decisões aparecem assim que validadas; os efeitos são publicados juntos.");
  try{snapshot=await api("/api/step",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({round:snapshot.state.round})});render();status("Rodada "+snapshot.state.round+" salva.");return true}
  catch(e){running=false;try{snapshot=await api("/api/state");render()}catch{}status(e.message==="context canceled"?"Rodada cancelada. Decisões já validadas permanecem nesta sessão.":e.message+" · confira o estado salvo. Decisões já validadas podem ser reaproveitadas na próxima tentativa.",e.message!=="context canceled");return false}
  finally{busy=false;await poll();controls()}

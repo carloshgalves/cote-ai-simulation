@@ -94,7 +94,7 @@ func TestHTTPModelSendsOnlyActorContextAndParsesRealWire(t *testing.T) {
 		var view Context
 		if err:=json.Unmarshal([]byte(req.Messages[1].Content),&view);err!=nil||view.Self.ID==""{t.Error("missing scoped context")}
 		if view.Self.ID!="ayanokoji"&&strings.Contains(req.Messages[1].Content,"treinamento isolado"){t.Error("foreign background leaked")}
-		d,_:=json.Marshal(wait())
+		d,_:=json.Marshal(localChoice{Choice:"wait",Reason:"avaliar a situação"})
 		_ = json.NewEncoder(w).Encode(map[string]any{"choices":[]any{map[string]any{"message":map[string]string{"content":string(d)},"finish_reason":"stop"}}})
 	}));defer server.Close()
 	model,err:=NewHTTPModel(server.URL+"/v1","test","");if err!=nil{t.Fatal(err)}
@@ -115,7 +115,7 @@ func TestHTTPRepairKeepsCompletedActorsAndProgress(t *testing.T) {
 		if req.ResponseFormat["type"]!="json_schema"{t.Error("local schema missing")}
 		var view Context
 		if err:=json.Unmarshal([]byte(req.Messages[1].Content),&view);err!=nil{t.Error(err);return}
-		content,_:=json.Marshal(wait())
+		content,_:=json.Marshal(localChoice{Choice:"wait",Reason:"avaliar a situação"})
 		if view.Self.ID=="horikita"&&bad.Add(1)==1{
 			close(seen);<-release
 			content=[]byte("{\"world-assets\":true}")
@@ -128,7 +128,7 @@ func TestHTTPRepairKeepsCompletedActorsAndProgress(t *testing.T) {
 	go func(){_,err:=s.Step(context.Background(),0);done<-err}()
 	select{case <-seen:case <-time.After(5*time.Second):close(release);t.Fatal("model never reached Horikita")}
 	p:=s.Progress()
-	if !p.Active||p.Actor!="horikita"||p.Completed!=2||s.Snapshot().State.Round!=0{t.Error("incorrect live progress")}
+	if !p.Active||p.Actor!="horikita"||p.Completed!=2||len(p.Choices)!=2||p.Choices[0].Decision.Reason!="avaliar a situação"||s.Snapshot().State.Round!=0{t.Error("incorrect live progress")}
 	close(release)
 	if err:=<-done;err!=nil{t.Fatal(err)}
 	if calls.Load()!=7||s.Snapshot().State.Round!=1{t.Fatal("retry repeated completed agents or failed to commit")}
@@ -163,7 +163,64 @@ func TestLocalSchemaLimitsIdentifiersToCurrentContext(t *testing.T){
 	var schema map[string]any
 	if err:=json.Unmarshal(raw,&schema);err!=nil{t.Fatal(err)}
 	props:=schema["properties"].(map[string]any)
-	targets:=props["target"].(map[string]any)["enum"].([]any)
-	for _,v:=range targets {if v=="ryuen"||v=="library"{t.Fatal("schema permitted inaccessible target")}}
-	for _,v:=range props["action"].(map[string]any)["enum"].([]any){if v=="talk"{t.Fatal("schema permitted conversation without recipient")}}
+	targets:=props["choice"].(map[string]any)["enum"].([]any)
+	for _,v:=range targets {if strings.HasPrefix(v.(string),"talk:")||v=="move:library"{t.Fatal("schema permitted inaccessible action")}}
+}
+
+func TestLocalChoiceKeepsActionDespiteInvalidOptionalCognition(t *testing.T){
+	j:=Journal{Version:Version,Model:"test"};j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	s,err:=initial(j);if err!=nil{t.Fatal(err)}
+	view:=actorContext(j,s,"ayanokoji")
+	d,err:=decodeLocalChoice(view,[]byte(`{"choice":"talk:horikita","text":"Bom dia.","reason":"Conhecer colega","beliefs":[{"text":"inventado","evidence":"e999999","confidence":100}],"goal":{"replace":"inexistente","with":"nova","evidence":"e000001"},"plan":{"steps":["Observar"],"evidence":"e000001"},"world-assets":true}`))
+	if err!=nil||d.Action!="talk"||d.Target!="horikita"||d.Text!="Bom dia."||d.Goal!=nil||len(d.Beliefs)!=0||d.Plan==nil||len(d.Ignored)!=3{t.Fatalf("unexpected decision: %+v %v",d,err)}
+	if _,err:=decodeLocalChoice(view,[]byte(`{"choice":"talk:unknown","text":"Oi","reason":"testar"}`));err==nil{t.Fatal("invented choice accepted")}
+}
+func TestInvalidAgentDoesNotBlockOtherAgents(t *testing.T){
+	server:=httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter,r *http.Request){
+		var req struct{Messages []struct{Content string}}
+		if err:=json.NewDecoder(r.Body).Decode(&req);err!=nil{t.Error(err);return}
+		var view Context
+		if err:=json.Unmarshal([]byte(req.Messages[1].Content),&view);err!=nil{t.Error(err);return}
+		content,_:=json.Marshal(localChoice{Choice:"observe",Reason:"avaliar"})
+		if view.Self.ID=="horikita"{content=[]byte(`{"choice":"invented","text":"","reason":"errado"}`)}
+		_ = json.NewEncoder(w).Encode(map[string]any{"choices":[]any{map[string]any{"message":map[string]string{"content":string(content)},"finish_reason":"stop"}}})
+	}));defer server.Close()
+	model,err:=NewHTTPModel(server.URL+"/v1","test","");if err!=nil{t.Fatal(err)}
+	path:=filepath.Join(t.TempDir(),"run.json")
+	s,err:=Open(path,"test",model);if err!=nil{t.Fatal(err)}
+	snap,err:=s.Step(context.Background(),0);if err!=nil{t.Fatal(err)}
+	if snap.State.Round!=1{t.Fatal("round failed to advance")}
+	failures:=0
+	for _,e:=range snap.State.Events{
+		if e.Actor=="horikita"{if e.Kind!="model_failure"||len(e.Audience)!=0{t.Fatal("failure misrepresented as character action")};failures++}
+	}
+	if failures!=1{t.Fatal("missing failure provenance")}
+	view,_:=s.POV("horikita");for _,e:=range view.Memory{if e.Kind=="model_failure"{t.Fatal("technical failure leaked into character memory")}}
+	s.Close()
+	reopened,err:=Open(path,"test",model);if err!=nil{t.Fatal(err)};defer reopened.Close()
+	if !reflect.DeepEqual(snap,reopened.Snapshot()){t.Fatal("failure replay diverged")}
+}
+
+func TestMinimalActionDoesNotRequireIntention(t *testing.T){
+	j:=Journal{Version:Version,Model:"test"};j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	s,err:=initial(j);if err!=nil{t.Fatal(err)}
+	view:=actorContext(j,s,"ayanokoji")
+	d,err:=decodeLocalChoice(view,[]byte(`{"choice":"move:library"}`))
+	if err!=nil||d.Action!="move"||d.Target!="library"||d.Reason!=""{t.Fatalf("minimal choice failed: %+v %v",d,err)}
+	if _,err:=decodeLocalChoice(view,[]byte(`{"choice":"talk:horikita"}`));err==nil{t.Fatal("empty speech accepted")}
+}
+func TestAllInvalidAgentsDoNotAdvanceAndRetryFresh(t *testing.T){
+	var calls atomic.Int32
+	server:=httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter,r *http.Request){
+		n:=calls.Add(1)
+		content:=`{"choice":"invented"}`
+		if n>18{content=`{"choice":"observe"}`}
+		_ = json.NewEncoder(w).Encode(map[string]any{"choices":[]any{map[string]any{"message":map[string]string{"content":content},"finish_reason":"stop"}}})
+	}));defer server.Close()
+	model,err:=NewHTTPModel(server.URL+"/v1","test","");if err!=nil{t.Fatal(err)}
+	s,err:=Open(filepath.Join(t.TempDir(),"run.json"),"test",model);if err!=nil{t.Fatal(err)};defer s.Close()
+	if _,err:=s.Step(context.Background(),0);err==nil{t.Fatal("all invalid round advanced")}
+	if s.Snapshot().State.Round!=0||calls.Load()!=18||len(s.Progress().Choices)!=6{t.Fatal("missing failures or bad round state")}
+	if _,err:=s.Step(context.Background(),0);err!=nil{t.Fatal(err)}
+	if calls.Load()!=24||s.Snapshot().State.Round!=1{t.Fatal("all-failed retry did not start fresh")}
 }

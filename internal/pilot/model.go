@@ -65,6 +65,7 @@ type Decision struct {
 	Goal *GoalChange `json:"goal"`
 	Relation *RelationChange `json:"relation"`
 	Plan *PlanChange `json:"plan"`
+	Ignored []string `json:"ignored,omitempty"`
 }
 type Event struct {
 	ID string `json:"id"`
@@ -87,6 +88,7 @@ type Mind struct {
 type Chosen struct {
 	Actor string `json:"actor"`
 	Decision Decision `json:"decision"`
+	Failure string `json:"failure,omitempty"`
 }
 type Round struct {
 	Number int `json:"number"`
@@ -212,7 +214,9 @@ func evidence(c Context,id string) (Event,bool) {
 	return Event{},false
 }
 func validateDecision(c Context,d Decision) error {
-	if !validText(d.Reason,300) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
+	if (d.Reason!=""&&!validText(d.Reason,300)) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
+	if len(d.Ignored)>7 {return errors.New("invalid ignored field count")}
+	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","campo extra"},key){return errors.New("invalid ignored field")}}
 	if d.Action!="wait" && d.Action!="observe" && d.Action!="move" && d.Action!="talk" {return errors.New("unsupported action")}
 	if d.Action=="talk" {
 		found:=false;for _, p:=range c.Present {if p.ID==d.Target {found=true}}
@@ -256,13 +260,25 @@ func apply(j Journal,s State,r Round) (State,error) {
 	if len(r.Choices)!=len(order){return State{},errors.New("incomplete round")}
 	for i, x:=range r.Choices {
 		if x.Actor!=order[i] {return State{},errors.New("noncanonical actor order")}
+		if x.Failure!="" {
+			d:=x.Decision
+			if d.Action!="wait"||d.Target!=""||d.Text!=""||d.Reason!="Sem decisão válida do modelo"||len(d.Beliefs)!=0||d.Goal!=nil||d.Plan!=nil||d.Relation!=nil||len(d.Ignored)!=0||!validText(x.Failure,500){return State{},errors.New("invalid model failure marker")}
+		}
 		if err:=validateDecision(actorContext(j,s,x.Actor),x.Decision);err!=nil {return State{},fmt.Errorf("%s: %w",x.Actor,err)}
 	}
+	valid:=0
+	for _,x:=range r.Choices{if x.Failure==""{valid++}}
+	if valid==0{return State{},errors.New("nenhum agente produziu decisão válida")}
 	// Validate the entire cohort on the immutable start-of-round snapshot.
 	// Only then apply deterministic effects; no response sees another response.
 	out:=clone(s);out.Round=r.Number;out.Minute=r.Minute
 	for _, x:=range r.Choices {
 		d:=x.Decision;m:=out.Minds[x.Actor]
+		if x.Failure!="" {
+			appendEvent(&out,Event{Kind:"model_failure",Actor:x.Actor,Text:x.Failure,Audience:[]string{}})
+			continue
+		}
+		if len(d.Ignored)>0{appendEvent(&out,Event{Kind:"ignored_cognition",Actor:x.Actor,Text:strings.Join(d.Ignored,", "),Audience:[]string{}})}
 		for _, b:=range d.Beliefs {
 			found:=false;for i, old:=range m.Beliefs {if old.Text==b.Text {m.Beliefs[i]=b;found=true}}
 			if !found {m.Beliefs=append(m.Beliefs,b)}
@@ -273,7 +289,7 @@ func apply(j Journal,s State,r Round) (State,error) {
 			v:=m.Relations[d.Relation.Person]+d.Relation.Delta
 			if v>5 {v=5};if v< -5 {v= -5};m.Relations[d.Relation.Person]=v
 		}
-		appendEvent(&out,Event{Kind:"intention",Actor:x.Actor,Text:d.Reason,Audience:[]string{x.Actor}})
+		if d.Reason!=""{appendEvent(&out,Event{Kind:"intention",Actor:x.Actor,Text:d.Reason,Audience:[]string{x.Actor}})}
 		if d.Goal!=nil {appendEvent(&out,Event{Kind:"goal",Actor:x.Actor,Text:d.Goal.Replace+" → "+d.Goal.With,Audience:[]string{x.Actor},Evidence:d.Goal.Evidence})}
 		if d.Plan!=nil {
 			m.Plan=clone(d.Plan)

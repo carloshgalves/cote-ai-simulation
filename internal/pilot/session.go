@@ -41,10 +41,13 @@ type Progress struct {
 	ActorStartedAt time.Time `json:"actor_started_at"`
 	Phase string `json:"phase"`
 	LastError string `json:"last_error,omitempty"`
+	Choices []Chosen `json:"choices"`
 }
 func (s *Session) Progress() Progress {
 	s.mu.Lock();defer s.mu.Unlock()
-	return s.progress
+	p:=s.progress
+	p.Choices=clone(p.Choices)
+	return p
 }
 func (s *Session) Cancel(round int) bool {
 	s.mu.Lock();defer s.mu.Unlock()
@@ -147,7 +150,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 	if expected>=MaxRounds{s.mu.Unlock();return Snapshot{},errors.New("limite do piloto atingido")}
 	ctx,cancel:=context.WithCancel(ctx)
 	s.cancel=cancel
-	s.progress=Progress{Active:true,Round:expected+1,Total:len(s.journal.Profiles),Completed:len(s.pending),StartedAt:time.Now(),Phase:"thinking"}
+	s.progress=Progress{Active:true,Round:expected+1,Total:len(s.journal.Profiles),Completed:len(s.pending),StartedAt:time.Now(),Phase:"thinking",Choices:clone(s.pending)}
 	journal,state:=s.journal,s.state
 	s.mu.Unlock()
 	defer func(){
@@ -164,6 +167,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 		view:=actorContext(journal,state,id)
 		var problem string
 		var d Decision
+		failure:=""
 		for attempt:=1;attempt<=3;attempt++ {
 			if err:=ctx.Err();err!=nil{return Snapshot{},err}
 			s.mu.Lock()
@@ -182,12 +186,22 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 			if err==nil {break}
 			problem=err.Error()
 			_,repairable:=s.model.(interface{Repair(context.Context,Context,string)(Decision,error)})
-			if !repairable||!retryable||attempt==3{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
+			if !repairable||!retryable{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
+			if attempt==3 {
+				failure="Modelo não produziu uma ação válida após três tentativas: "+problem
+				d=Decision{Action:"wait",Reason:"Sem decisão válida do modelo",Beliefs:[]Belief{}}
+			}
 		}
-		chosen:=Chosen{Actor:id,Decision:clone(d)}
+		chosen:=Chosen{Actor:id,Decision:clone(d),Failure:failure}
 		r.Choices=append(r.Choices,chosen)
 		s.pending=append(s.pending,chosen)
-		s.mu.Lock();s.progress.Completed=len(r.Choices);s.progress.LastError="";s.mu.Unlock()
+		s.mu.Lock();s.progress.Completed=len(r.Choices);s.progress.Choices=clone(r.Choices);s.progress.LastError="";s.mu.Unlock()
+	}
+	valid:=0
+	for _,x:=range r.Choices{if x.Failure==""{valid++}}
+	if valid==0 {
+		s.mu.Lock();s.pending=nil;s.mu.Unlock()
+		return Snapshot{},errors.New("nenhum agente produziu decisão válida; rodada não avançou")
 	}
 	next,err:=apply(journal,state,r);if err!=nil{return Snapshot{},err}
 	j:=journal

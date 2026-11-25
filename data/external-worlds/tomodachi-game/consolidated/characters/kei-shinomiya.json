@@ -2,7 +2,7 @@
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.kei-shinomiya",
   "display_name": "Kei Shinomiya",
-  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "tg.secondary.2026-11-25"
   ],
@@ -18,36 +18,48 @@
   "domains": {
     "observation": {
       "behavioral_case_refs": [
-        "tg.case.kei-shinomiya.detect-side-change"
+        "tg.case.kei-shinomiya.detect-side-change",
+        "tg.case.kei-shinomiya.exploit-opponent-observation",
+        "tg.case.kei-shinomiya.revise-after-ambush"
       ],
       "context_evidence_refs": [
-        "tg.ev.kei-shinomiya.detect-side-change"
+        "tg.ev.kei-shinomiya.detect-side-change",
+        "tg.ev.kei-shinomiya.exploit-opponent-observation",
+        "tg.ev.kei-shinomiya.revise-after-ambush"
       ]
     },
     "strategy": {
       "behavioral_case_refs": [
-        "tg.case.kei-shinomiya.detect-side-change"
+        "tg.case.kei-shinomiya.detect-side-change",
+        "tg.case.kei-shinomiya.exploit-opponent-observation"
       ],
       "context_evidence_refs": [
-        "tg.ev.kei-shinomiya.detect-side-change"
+        "tg.ev.kei-shinomiya.detect-side-change",
+        "tg.ev.kei-shinomiya.exploit-opponent-observation"
       ],
       "description": "Can revise alliances after observing competence",
       "description_status": "PROVISIONAL_PROFILE_INFERENCE"
     },
     "motivation": {
       "behavioral_case_refs": [
-        "tg.case.kei-shinomiya.enter-adult-game"
+        "tg.case.kei-shinomiya.enter-adult-game",
+        "tg.case.kei-shinomiya.compete-despite-disadvantage"
       ],
       "context_evidence_refs": [
-        "tg.ev.kei-shinomiya.enter-adult-game"
+        "tg.ev.kei-shinomiya.enter-adult-game",
+        "tg.ev.kei-shinomiya.compete-despite-disadvantage"
       ]
     },
     "risk_management": {
       "behavioral_case_refs": [
-        "tg.case.kei-shinomiya.enter-adult-game"
+        "tg.case.kei-shinomiya.enter-adult-game",
+        "tg.case.kei-shinomiya.revise-after-ambush",
+        "tg.case.kei-shinomiya.compete-despite-disadvantage"
       ],
       "context_evidence_refs": [
-        "tg.ev.kei-shinomiya.enter-adult-game"
+        "tg.ev.kei-shinomiya.enter-adult-game",
+        "tg.ev.kei-shinomiya.revise-after-ambush",
+        "tg.ev.kei-shinomiya.compete-despite-disadvantage"
       ]
     },
     "identity": {
@@ -73,6 +85,14 @@
       "context_evidence_refs": [],
       "description": "No calibrated physical measurements; use population prior.",
       "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "deception": {
+      "behavioral_case_refs": [
+        "tg.case.kei-shinomiya.exploit-opponent-observation"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kei-shinomiya.exploit-opponent-observation"
+      ]
     }
   },
   "source_documents": [

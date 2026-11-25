@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.shiho-sawaragi.refuse-initial-suspicion",
+  "actor_id": "actor.shiho-sawaragi",
+  "primary_actor_id": "actor.shiho-sawaragi",
+  "title": "refuse initial suspicion",
+  "context": "Group hears about the debt and can question friends.",
+  "observed_actions": "Advocates not demanding identification before helping.",
+  "observed_result": "Expresses trust and moral solidarity.",
+  "epistemic_limits": "Not proof of knowing the debtor; may change after evidence.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Yuuichi_Katagiri",
+    "locator": "PRE_GAME",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "ethics",
+    "trust"
+  ],
+  "information_available": "Group hears about the debt and can question friends.",
+  "counterfactual_test": "A friend requests help with an unexplained group debt. Prioritizes fairness and help while responding to genuine evidence. Reject: Automatically knows which friend caused the debt.",
+  "topics": [
+    "ethics",
+    "trust"
+  ],
+  "evidence_refs": [
+    "tg.ev.shiho-sawaragi.refuse-initial-suspicion"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A friend requests help with an unexplained group debt.",
+    "expected_tendency": "Prioritizes fairness and help while responding to genuine evidence.",
+    "anti_case": "Automatically knows which friend caused the debt.",
+    "canon_outcome_as_instruction": false
+  }
+}

@@ -2,7 +2,7 @@
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.kuroki",
   "display_name": "Kuroki",
-  "modeling_tier": "MINIMAL_ENTITY",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "tg.secondary.2026-11-25"
   ],
@@ -20,6 +20,22 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "tg.ev.kuroki.identity"
+      ]
+    },
+    "deception": {
+      "behavioral_case_refs": [
+        "tg.case.kuroki.impersonation-exposed"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kuroki.impersonation-exposed"
+      ]
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "tg.case.kuroki.impersonation-exposed"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.kuroki.impersonation-exposed"
       ]
     }
   },

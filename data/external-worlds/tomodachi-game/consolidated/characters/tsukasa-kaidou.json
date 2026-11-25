@@ -2,7 +2,7 @@
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.tsukasa-kaidou",
   "display_name": "Tsukasa Kaidou",
-  "modeling_tier": "MINIMAL_ENTITY",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "tg.secondary.2026-11-25"
   ],
@@ -20,6 +20,22 @@
       "behavioral_case_refs": [],
       "context_evidence_refs": [
         "tg.ev.tsukasa-kaidou.identity"
+      ]
+    },
+    "negotiation": {
+      "behavioral_case_refs": [
+        "tg.case.tsukasa-kaidou.conditional-financing"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tsukasa-kaidou.conditional-financing"
+      ]
+    },
+    "economy": {
+      "behavioral_case_refs": [
+        "tg.case.tsukasa-kaidou.conditional-financing"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.tsukasa-kaidou.conditional-financing"
       ]
     }
   },

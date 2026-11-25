@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.kei-shinomiya.revise-after-ambush",
+  "actor_id": "actor.kei-shinomiya",
+  "primary_actor_id": "actor.kei-shinomiya",
+  "title": "revise after ambush",
+  "context": "Unexpected attack and presence of two apparently cooperating rivals.",
+  "observed_actions": "Recognizes that the rivals may have formed a prior alliance.",
+  "observed_result": "Updates adversary model despite being physically incapacitated.",
+  "epistemic_limits": "Not proof he knew the alliance before observing it.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://renote.net/en/articles/16549",
+    "locator": "ALL_BET",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "observation",
+    "risk_management"
+  ],
+  "information_available": "Unexpected attack and presence of two apparently cooperating rivals.",
+  "counterfactual_test": "Two rivals independently claimed neutrality but are observed coordinating. Revises coalition hypothesis and accounts for injury or exhaustion. Reject: Assumes prior omniscience or ignores physical impairment.",
+  "topics": [
+    "observation",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "tg.ev.kei-shinomiya.revise-after-ambush"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": true,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "Two rivals independently claimed neutrality but are observed coordinating.",
+    "expected_tendency": "Revises coalition hypothesis and accounts for injury or exhaustion.",
+    "anti_case": "Assumes prior omniscience or ignores physical impairment.",
+    "canon_outcome_as_instruction": false
+  }
+}

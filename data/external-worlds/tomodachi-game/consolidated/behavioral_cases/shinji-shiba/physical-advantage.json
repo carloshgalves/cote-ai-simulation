@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.shinji-shiba.physical-advantage",
+  "actor_id": "actor.shinji-shiba",
+  "primary_actor_id": "actor.shinji-shiba",
+  "title": "physical advantage",
+  "context": "Confrontation against a capable opponent in island contest.",
+  "observed_actions": "Demonstrates substantial physical advantage in the account.",
+  "observed_result": "Opponent assesses him as difficult to overcome.",
+  "epistemic_limits": "No calibrated force, speed or perfect defense can be inferred.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Shinji_Shiba",
+    "locator": "FRIEND_MURDER",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "combat",
+    "strategy"
+  ],
+  "information_available": "Confrontation against a capable opponent in island contest.",
+  "counterfactual_test": "A confrontation is resolved by an independent physical model. Uses observed capability and can choose noncombat alternatives. Reject: Claims automatic victory or writes physical outcomes directly.",
+  "topics": [
+    "combat",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "tg.ev.shinji-shiba.physical-advantage"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": true,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A confrontation is resolved by an independent physical model.",
+    "expected_tendency": "Uses observed capability and can choose noncombat alternatives.",
+    "anti_case": "Claims automatic victory or writes physical outcomes directly.",
+    "canon_outcome_as_instruction": false
+  }
+}

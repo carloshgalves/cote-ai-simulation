@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.yutori-kokorogi.concealed-alignment",
+  "actor_id": "actor.yutori-kokorogi",
+  "primary_actor_id": "actor.yutori-kokorogi",
+  "title": "concealed alignment",
+  "context": "Long-standing appearance of dependence, later source account identifies concealed opposition.",
+  "observed_actions": "Maintains a public persona that differs from private allegiances.",
+  "observed_result": "Other contestants lack reliable access to her actual commitments.",
+  "epistemic_limits": "Later reveal is not public starting knowledge or proof every early emotion was fake.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://vsbattles.fandom.com/wiki/Yutori_Kokorogi",
+    "locator": "FRIEND_MURDER",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "deception",
+    "social"
+  ],
+  "information_available": "Long-standing appearance of dependence, later source account identifies concealed opposition.",
+  "counterfactual_test": "An agent's public reputation conflicts with an unobserved private objective. Preserves role distinction; changes behavior when secrecy and payoff shift. Reject: Reveals private motives to every peer or acts like a visible villain from day one.",
+  "topics": [
+    "deception",
+    "social"
+  ],
+  "evidence_refs": [
+    "tg.ev.yutori-kokorogi.concealed-alignment"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "An agent's public reputation conflicts with an unobserved private objective.",
+    "expected_tendency": "Preserves role distinction; changes behavior when secrecy and payoff shift.",
+    "anti_case": "Reveals private motives to every peer or acts like a visible villain from day one.",
+    "canon_outcome_as_instruction": false
+  }
+}

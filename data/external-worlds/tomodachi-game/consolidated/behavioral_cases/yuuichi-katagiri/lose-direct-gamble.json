@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.yuuichi-katagiri.lose-direct-gamble",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "lose direct gamble",
+  "context": "Opponent is unusually effective in a direct hidden-choice wager.",
+  "observed_actions": "Loses the direct contest while a separate wager affects overall settlement.",
+  "observed_result": "Local loss and eventual overall success coexist.",
+  "epistemic_limits": "Fan sources disagree about intentionality of early losses; do not encode perfect foresight.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://www.reddit.com/r/TomodachiGame/comments/1ubcafd/analysis_of_the_satone_coin_toss_game_and/",
+    "locator": "ALL_BET",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "risk_management",
+    "strategy"
+  ],
+  "information_available": "Opponent is unusually effective in a direct hidden-choice wager.",
+  "counterfactual_test": "Two contests settle on different outcomes; a rival is favored in one. Considers overall payoff and credible fallback paths; tolerates real local failure. Reject: Claims every loss was intended or rewrites settled result.",
+  "topics": [
+    "risk_management",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.lose-direct-gamble"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": true,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "Two contests settle on different outcomes; a rival is favored in one.",
+    "expected_tendency": "Considers overall payoff and credible fallback paths; tolerates real local failure.",
+    "anti_case": "Claims every loss was intended or rewrites settled result.",
+    "canon_outcome_as_instruction": false
+  }
+}

@@ -1741,6 +1741,587 @@
       "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "verified": false
+    },
+    {
+      "id": "tg.ev.yuuichi-katagiri.costly-rule-bluff",
+      "domain": "strategy",
+      "summary": "Challenges the assumed incentive structure publicly at his own expense, changing how peers evaluate self-interest. Group eventually clears; the bluff's efficacy depends on credibility.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Episode_2",
+        "locator": "KOKKURI",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "KOKKURI",
+      "mention_actor_ids": [
+        "actor.yuuichi-katagiri"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "risk_management",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.yuuichi-katagiri.failed-early-accusation",
+      "domain": "epistemics",
+      "summary": "Tests a suspicion with an early bluff that does not expose Tenji. Initial attempt fails; more discriminating evidence is necessary.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://mangagift.com/%E6%BC%AB%E7%94%BB%E3%80%8C%E3%83%88%E3%83%A2%E3%83%80%E3%83%81%E3%82%B2%E3%83%BC%E3%83%A0%E3%80%8D%E3%81%AE%E3%81%82%E3%82%89%E3%81%99%E3%81%98%EF%BC%88%E3%83%8D%E3%82%BF%E3%83%90%E3%83%AC%EF%BC%89/",
+        "locator": "SUGOROKU",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "SUGOROKU",
+      "mention_actor_ids": [
+        "actor.yuuichi-katagiri"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "epistemics",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.yuuichi-katagiri.sequential-trust-tests",
+      "domain": "observation",
+      "summary": "Uses sequential private checks with classmates before committing to a public accusation. Narrows suspects and gains a basis for confronting Tenji.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Episode_6",
+        "locator": "SUGOROKU",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "SUGOROKU",
+      "mention_actor_ids": [
+        "actor.yuuichi-katagiri"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy",
+        "cooperation"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.yuuichi-katagiri.accept-own-financial-loss",
+      "domain": "motivation",
+      "summary": "Admits a false statement and accepts an adverse position to let others avoid the next game. Prioritizes friends' release over immediate individual finances.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Episode_6",
+        "locator": "SUGOROKU",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "SUGOROKU",
+      "mention_actor_ids": [
+        "actor.yuuichi-katagiri"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "strategy",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.tenji-mikasa.resist-first-bluff",
+      "domain": "epistemics",
+      "summary": "Does not immediately reveal himself under an unsupported challenge. Avoids exposure during that particular attempt.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://mangagift.com/%E6%BC%AB%E7%94%BB%E3%80%8C%E3%83%88%E3%83%A2%E3%83%80%E3%83%81%E3%82%B2%E3%83%BC%E3%83%A0%E3%80%8D%E3%81%AE%E3%81%82%E3%82%89%E3%81%99%E3%81%98%EF%BC%88%E3%83%8D%E3%82%BF%E3%83%90%E3%83%AC%EF%BC%89/",
+        "locator": "SUGOROKU",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "SUGOROKU",
+      "mention_actor_ids": [
+        "actor.tenji-mikasa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "epistemics",
+        "self_control"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.tenji-mikasa.join-next-round-voluntarily",
+      "domain": "motivation",
+      "summary": "Reports his own false statement and accompanies Yuuichi. Accepts further exposure rather than ending his involvement.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Episode_6",
+        "locator": "SUGOROKU",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "SUGOROKU",
+      "mention_actor_ids": [
+        "actor.tenji-mikasa"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "trust",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.kei-shinomiya.exploit-opponent-observation",
+      "domain": "observation",
+      "summary": "Adapts play to the opponents' inferred information channel. Wins a substantial wager and restores resources.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://intelscaling.com/items/kei-vs-ayanokoji-tomodachi-game-vs-classroom-of-the-elite/",
+        "locator": "ALL_BET",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "ALL_BET",
+      "mention_actor_ids": [
+        "actor.kei-shinomiya"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "strategy",
+        "deception"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.kei-shinomiya.revise-after-ambush",
+      "domain": "observation",
+      "summary": "Recognizes that the rivals may have formed a prior alliance. Updates adversary model despite being physically incapacitated.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://renote.net/en/articles/16549",
+        "locator": "ALL_BET",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "ALL_BET",
+      "mention_actor_ids": [
+        "actor.kei-shinomiya"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.kei-shinomiya.compete-despite-disadvantage",
+      "domain": "risk_management",
+      "summary": "Accepts a contest and ultimately wins, but cannot continue indefinitely. Demonstrates resolve at substantial physical cost.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Kei_Shinomiya",
+        "locator": "ALL_BET",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "ALL_BET",
+      "mention_actor_ids": [
+        "actor.kei-shinomiya"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "motivation"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.satone-kaidou.intuition-wager",
+      "domain": "observation",
+      "summary": "Chooses a hand by intuitive judgment and wins the direct wager. Demonstrates a strong decision under uncertainty, not certain future prediction.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://renote.net/en/articles/16549",
+        "locator": "ALL_BET",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "ALL_BET",
+      "mention_actor_ids": [
+        "actor.satone-kaidou"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "observation",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.satone-kaidou.seek-risk",
+      "domain": "motivation",
+      "summary": "Consistently seeks further gambling challenges. Risk itself is a meaningful incentive.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Satone_Kaidou",
+        "locator": "ALL_BET",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "ALL_BET",
+      "mention_actor_ids": [
+        "actor.satone-kaidou"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.yuuichi-katagiri.lose-direct-gamble",
+      "domain": "risk_management",
+      "summary": "Loses the direct contest while a separate wager affects overall settlement. Local loss and eventual overall success coexist.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://www.reddit.com/r/TomodachiGame/comments/1ubcafd/analysis_of_the_satone_coin_toss_game_and/",
+        "locator": "ALL_BET",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "ALL_BET",
+      "mention_actor_ids": [
+        "actor.yuuichi-katagiri"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "risk_management",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.yuuichi-katagiri.ranking-side-contract",
+      "domain": "strategy",
+      "summary": "Uses a separate contract whose payoff depends on collective rankings. Can gain overall advantage despite a direct loss.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://intelscaling.com/items/all-bets-miscalculation-v2/",
+        "locator": "ALL_BET",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "ALL_BET",
+      "mention_actor_ids": [
+        "actor.yuuichi-katagiri"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "strategy",
+        "negotiation",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.yutori-kokorogi.concealed-alignment",
+      "domain": "deception",
+      "summary": "Maintains a public persona that differs from private allegiances. Other contestants lack reliable access to her actual commitments.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://vsbattles.fandom.com/wiki/Yutori_Kokorogi",
+        "locator": "FRIEND_MURDER",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "FRIEND_MURDER",
+      "mention_actor_ids": [
+        "actor.yutori-kokorogi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "deception",
+        "social"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.yutori-kokorogi.private-knowledge-separation",
+      "domain": "social",
+      "summary": "Participates in an exchange that appears to build trust. A narrow demonstration of cooperation changes the other actor's assessment.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Episode_6",
+        "locator": "SUGOROKU",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "SUGOROKU",
+      "mention_actor_ids": [
+        "actor.yutori-kokorogi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "cooperation"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.shiho-sawaragi.refuse-initial-suspicion",
+      "domain": "ethics",
+      "summary": "Advocates not demanding identification before helping. Expresses trust and moral solidarity.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Yuuichi_Katagiri",
+        "locator": "PRE_GAME",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PRE_GAME",
+      "mention_actor_ids": [
+        "actor.shiho-sawaragi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "ethics",
+        "trust"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.shiho-sawaragi.challenge-reputational-judgment",
+      "domain": "ethics",
+      "summary": "Questions whether Shibe would still befriend her if the reported history were true. Tests whether acceptance is conditional on surface attributes.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Chapter_5",
+        "locator": "SUGOROKU",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "SUGOROKU",
+      "mention_actor_ids": [
+        "actor.shiho-sawaragi"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "ethics",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.makoto-shibe.seek-social-approval",
+      "domain": "social",
+      "summary": "Acts without sufficiently considering boundaries or consequences. Interpersonal friction occurs.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://www.springfieldspringfield.co.uk/view_episode_scripts.php?episode=s01e01&tv-show=tomodachi-game-2022",
+        "locator": "PRE_GAME",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PRE_GAME",
+      "mention_actor_ids": [
+        "actor.makoto-shibe"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "social",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.makoto-shibe.accept-post-trial-debt",
+      "domain": "motivation",
+      "summary": "Continues into the adult games alongside Yuuichi. Tolerates continued risk rather than simply abandoning the group.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://es.wikipedia.org/wiki/Tomodachi_Game",
+        "locator": "TRIAL",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "TRIAL",
+      "mention_actor_ids": [
+        "actor.makoto-shibe"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "trust"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.shinji-shiba.physical-advantage",
+      "domain": "combat",
+      "summary": "Demonstrates substantial physical advantage in the account. Opponent assesses him as difficult to overcome.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Shinji_Shiba",
+        "locator": "FRIEND_MURDER",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "FRIEND_MURDER",
+      "mention_actor_ids": [
+        "actor.shinji-shiba"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "combat",
+        "strategy"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.tsukasa-kaidou.conditional-financing",
+      "domain": "negotiation",
+      "summary": "Provides financing subject to a return condition. Creates a new obligation and incentive relationship.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://www.yamanerd.org/entry-tomodachigame58/",
+        "locator": "ALL_BET",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "ALL_BET",
+      "mention_actor_ids": [
+        "actor.tsukasa-kaidou"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "negotiation",
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.kuroki.impersonation-exposed",
+      "domain": "deception",
+      "summary": "Poses as administrator and is later confronted by genuine staff. False authority is exposed.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Episode_12",
+        "locator": "FAKE_GAME",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "FAKE_GAME",
+      "mention_actor_ids": [
+        "actor.kuroki"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "deception",
+        "risk_management"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.yuuichi-katagiri.friendship-priority-conflict",
+      "domain": "motivation",
+      "summary": "Prioritizes friendships in ordinary life while possessing practical knowledge of transactional exploitation. His public and private motivations are more complex than a single utility.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Yuuichi_Katagiri",
+        "locator": "PRE_GAME",
+        "verification": "UNVERIFIED_SECONDARY",
+        "source_status": "OPERATOR_ADMITTED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "PRE_GAME",
+      "mention_actor_ids": [
+        "actor.yuuichi-katagiri"
+      ],
+      "mention_organization_ids": [],
+      "topics": [
+        "motivation",
+        "emotion"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
     }
   ]
 }

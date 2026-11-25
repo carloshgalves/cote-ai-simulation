@@ -11,6 +11,7 @@
         "cooperation",
         "deception",
         "economy",
+        "emotion",
         "epistemics",
         "ethics",
         "identity",
@@ -19,6 +20,7 @@
         "negotiation",
         "observation",
         "reasoning",
+        "risk_management",
         "strategy"
       ]
     },
@@ -31,10 +33,12 @@
         "communication",
         "deception",
         "emotion",
+        "epistemics",
         "identity",
         "limitations",
         "motivation",
         "risk_management",
+        "self_control",
         "social",
         "strategy",
         "trust"
@@ -42,38 +46,45 @@
     },
     "actor.shiho-sawaragi": {
       "path": "data/external-worlds/tomodachi-game/consolidated/characters/shiho-sawaragi.json",
-      "modeling_tier": "INTERMEDIATE_CANDIDATE",
+      "modeling_tier": "FULL_CANDIDATE",
       "topics": [
         "body",
         "cognition",
+        "emotion",
+        "ethics",
         "identity",
         "leadership",
         "limitations",
         "observation",
         "social",
-        "strategy"
+        "strategy",
+        "trust"
       ]
     },
     "actor.makoto-shibe": {
       "path": "data/external-worlds/tomodachi-game/consolidated/characters/makoto-shibe.json",
-      "modeling_tier": "INTERMEDIATE_CANDIDATE",
+      "modeling_tier": "FULL_CANDIDATE",
       "topics": [
         "body",
         "cognition",
         "economy",
+        "emotion",
         "identity",
         "limitations",
         "motivation",
+        "social",
         "strategy",
         "trust"
       ]
     },
     "actor.yutori-kokorogi": {
       "path": "data/external-worlds/tomodachi-game/consolidated/characters/yutori-kokorogi.json",
-      "modeling_tier": "INTERMEDIATE_CANDIDATE",
+      "modeling_tier": "FULL_CANDIDATE",
       "topics": [
         "body",
         "cognition",
+        "cooperation",
+        "deception",
         "emotion",
         "identity",
         "limitations",
@@ -83,10 +94,11 @@
     },
     "actor.kei-shinomiya": {
       "path": "data/external-worlds/tomodachi-game/consolidated/characters/kei-shinomiya.json",
-      "modeling_tier": "INTERMEDIATE_CANDIDATE",
+      "modeling_tier": "FULL_CANDIDATE",
       "topics": [
         "body",
         "cognition",
+        "deception",
         "identity",
         "limitations",
         "motivation",
@@ -97,10 +109,11 @@
     },
     "actor.shinji-shiba": {
       "path": "data/external-worlds/tomodachi-game/consolidated/characters/shinji-shiba.json",
-      "modeling_tier": "MINIMAL_ENTITY",
+      "modeling_tier": "INTERMEDIATE_CANDIDATE",
       "topics": [
         "body",
         "cognition",
+        "combat",
         "identity",
         "limitations",
         "strategy"
@@ -108,12 +121,15 @@
     },
     "actor.satone-kaidou": {
       "path": "data/external-worlds/tomodachi-game/consolidated/characters/satone-kaidou.json",
-      "modeling_tier": "MINIMAL_ENTITY",
+      "modeling_tier": "INTERMEDIATE_CANDIDATE",
       "topics": [
         "body",
         "cognition",
         "identity",
         "limitations",
+        "motivation",
+        "observation",
+        "risk_management",
         "strategy"
       ]
     },
@@ -227,9 +243,11 @@
     },
     "actor.kuroki": {
       "path": "data/external-worlds/tomodachi-game/consolidated/characters/kuroki.json",
-      "modeling_tier": "MINIMAL_ENTITY",
+      "modeling_tier": "INTERMEDIATE_CANDIDATE",
       "topics": [
-        "identity"
+        "deception",
+        "identity",
+        "risk_management"
       ]
     },
     "actor.ryusei-taneda": {
@@ -294,9 +312,11 @@
     },
     "actor.tsukasa-kaidou": {
       "path": "data/external-worlds/tomodachi-game/consolidated/characters/tsukasa-kaidou.json",
-      "modeling_tier": "MINIMAL_ENTITY",
+      "modeling_tier": "INTERMEDIATE_CANDIDATE",
       "topics": [
-        "identity"
+        "economy",
+        "identity",
+        "negotiation"
       ]
     },
     "actor.yasushi-mishima": {
@@ -419,7 +439,9 @@
       "cognition": [],
       "cooperation": [
         "tg.case.yuuichi-katagiri.support-isolated-ally",
-        "tg.ev.yuuichi-katagiri.support-isolated-ally"
+        "tg.ev.yuuichi-katagiri.support-isolated-ally",
+        "tg.case.yuuichi-katagiri.sequential-trust-tests",
+        "tg.ev.yuuichi-katagiri.sequential-trust-tests"
       ],
       "deception": [
         "tg.case.yuuichi-katagiri.concealed-cooperation",
@@ -429,11 +451,17 @@
         "tg.case.yuuichi-katagiri.verify-incentive",
         "tg.case.yuuichi-katagiri.documented-wager",
         "tg.ev.yuuichi-katagiri.verify-incentive",
-        "tg.ev.yuuichi-katagiri.documented-wager"
+        "tg.ev.yuuichi-katagiri.documented-wager",
+        "tg.case.yuuichi-katagiri.costly-rule-bluff",
+        "tg.ev.yuuichi-katagiri.costly-rule-bluff",
+        "tg.case.yuuichi-katagiri.ranking-side-contract",
+        "tg.ev.yuuichi-katagiri.ranking-side-contract"
       ],
       "epistemics": [
         "tg.case.yuuichi-katagiri.minority-inference",
-        "tg.ev.yuuichi-katagiri.minority-inference"
+        "tg.ev.yuuichi-katagiri.minority-inference",
+        "tg.case.yuuichi-katagiri.failed-early-accusation",
+        "tg.ev.yuuichi-katagiri.failed-early-accusation"
       ],
       "ethics": [
         "tg.case.yuuichi-katagiri.friendship-under-scarcity",
@@ -445,15 +473,23 @@
       "limitations": [],
       "motivation": [
         "tg.case.yuuichi-katagiri.friendship-under-scarcity",
-        "tg.ev.yuuichi-katagiri.friendship-under-scarcity"
+        "tg.ev.yuuichi-katagiri.friendship-under-scarcity",
+        "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.ev.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.case.yuuichi-katagiri.friendship-priority-conflict",
+        "tg.ev.yuuichi-katagiri.friendship-priority-conflict"
       ],
       "negotiation": [
         "tg.case.yuuichi-katagiri.documented-wager",
-        "tg.ev.yuuichi-katagiri.documented-wager"
+        "tg.ev.yuuichi-katagiri.documented-wager",
+        "tg.case.yuuichi-katagiri.ranking-side-contract",
+        "tg.ev.yuuichi-katagiri.ranking-side-contract"
       ],
       "observation": [
         "tg.case.yuuichi-katagiri.minority-inference",
-        "tg.ev.yuuichi-katagiri.minority-inference"
+        "tg.ev.yuuichi-katagiri.minority-inference",
+        "tg.case.yuuichi-katagiri.sequential-trust-tests",
+        "tg.ev.yuuichi-katagiri.sequential-trust-tests"
       ],
       "reasoning": [
         "tg.case.yuuichi-katagiri.verify-incentive",
@@ -467,7 +503,31 @@
         "tg.ev.yuuichi-katagiri.minority-inference",
         "tg.ev.yuuichi-katagiri.support-isolated-ally",
         "tg.ev.yuuichi-katagiri.concealed-cooperation",
-        "tg.ev.yuuichi-katagiri.documented-wager"
+        "tg.ev.yuuichi-katagiri.documented-wager",
+        "tg.case.yuuichi-katagiri.costly-rule-bluff",
+        "tg.ev.yuuichi-katagiri.costly-rule-bluff",
+        "tg.case.yuuichi-katagiri.failed-early-accusation",
+        "tg.ev.yuuichi-katagiri.failed-early-accusation",
+        "tg.case.yuuichi-katagiri.sequential-trust-tests",
+        "tg.ev.yuuichi-katagiri.sequential-trust-tests",
+        "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.ev.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.case.yuuichi-katagiri.lose-direct-gamble",
+        "tg.ev.yuuichi-katagiri.lose-direct-gamble",
+        "tg.case.yuuichi-katagiri.ranking-side-contract",
+        "tg.ev.yuuichi-katagiri.ranking-side-contract"
+      ],
+      "risk_management": [
+        "tg.case.yuuichi-katagiri.costly-rule-bluff",
+        "tg.ev.yuuichi-katagiri.costly-rule-bluff",
+        "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.ev.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.case.yuuichi-katagiri.lose-direct-gamble",
+        "tg.ev.yuuichi-katagiri.lose-direct-gamble"
+      ],
+      "emotion": [
+        "tg.case.yuuichi-katagiri.friendship-priority-conflict",
+        "tg.ev.yuuichi-katagiri.friendship-priority-conflict"
       ]
     },
     "actor.tenji-mikasa": {
@@ -493,11 +553,15 @@
       "limitations": [],
       "motivation": [
         "tg.case.tenji-mikasa.secret-investigation",
-        "tg.ev.tenji-mikasa.secret-investigation"
+        "tg.ev.tenji-mikasa.secret-investigation",
+        "tg.case.tenji-mikasa.join-next-round-voluntarily",
+        "tg.ev.tenji-mikasa.join-next-round-voluntarily"
       ],
       "risk_management": [
         "tg.case.tenji-mikasa.endure-uncertainty",
-        "tg.ev.tenji-mikasa.endure-uncertainty"
+        "tg.ev.tenji-mikasa.endure-uncertainty",
+        "tg.case.tenji-mikasa.join-next-round-voluntarily",
+        "tg.ev.tenji-mikasa.join-next-round-voluntarily"
       ],
       "social": [
         "tg.case.tenji-mikasa.mediator",
@@ -509,7 +573,17 @@
       ],
       "trust": [
         "tg.case.tenji-mikasa.disclose-prior-game",
-        "tg.ev.tenji-mikasa.disclose-prior-game"
+        "tg.ev.tenji-mikasa.disclose-prior-game",
+        "tg.case.tenji-mikasa.join-next-round-voluntarily",
+        "tg.ev.tenji-mikasa.join-next-round-voluntarily"
+      ],
+      "epistemics": [
+        "tg.case.tenji-mikasa.resist-first-bluff",
+        "tg.ev.tenji-mikasa.resist-first-bluff"
+      ],
+      "self_control": [
+        "tg.case.tenji-mikasa.resist-first-bluff",
+        "tg.ev.tenji-mikasa.resist-first-bluff"
       ]
     },
     "actor.shiho-sawaragi": {
@@ -533,7 +607,21 @@
         "tg.ev.shiho-sawaragi.class-organizer",
         "tg.ev.shiho-sawaragi.consider-kimiko"
       ],
-      "strategy": []
+      "strategy": [],
+      "ethics": [
+        "tg.case.shiho-sawaragi.refuse-initial-suspicion",
+        "tg.ev.shiho-sawaragi.refuse-initial-suspicion",
+        "tg.case.shiho-sawaragi.challenge-reputational-judgment",
+        "tg.ev.shiho-sawaragi.challenge-reputational-judgment"
+      ],
+      "trust": [
+        "tg.case.shiho-sawaragi.refuse-initial-suspicion",
+        "tg.ev.shiho-sawaragi.refuse-initial-suspicion"
+      ],
+      "emotion": [
+        "tg.case.shiho-sawaragi.challenge-reputational-judgment",
+        "tg.ev.shiho-sawaragi.challenge-reputational-judgment"
+      ]
     },
     "actor.makoto-shibe": {
       "body": [],
@@ -550,12 +638,24 @@
       "limitations": [],
       "motivation": [
         "tg.case.makoto-shibe.choose-father",
-        "tg.ev.makoto-shibe.choose-father"
+        "tg.ev.makoto-shibe.choose-father",
+        "tg.case.makoto-shibe.accept-post-trial-debt",
+        "tg.ev.makoto-shibe.accept-post-trial-debt"
       ],
       "strategy": [],
       "trust": [
         "tg.case.makoto-shibe.ask-father-for-help",
-        "tg.ev.makoto-shibe.ask-father-for-help"
+        "tg.ev.makoto-shibe.ask-father-for-help",
+        "tg.case.makoto-shibe.accept-post-trial-debt",
+        "tg.ev.makoto-shibe.accept-post-trial-debt"
+      ],
+      "social": [
+        "tg.case.makoto-shibe.seek-social-approval",
+        "tg.ev.makoto-shibe.seek-social-approval"
+      ],
+      "emotion": [
+        "tg.case.makoto-shibe.seek-social-approval",
+        "tg.ev.makoto-shibe.seek-social-approval"
       ]
     },
     "actor.yutori-kokorogi": {
@@ -571,9 +671,21 @@
       "limitations": [],
       "social": [
         "tg.case.yutori-kokorogi.accept-friendship",
-        "tg.ev.yutori-kokorogi.accept-friendship"
+        "tg.ev.yutori-kokorogi.accept-friendship",
+        "tg.case.yutori-kokorogi.concealed-alignment",
+        "tg.ev.yutori-kokorogi.concealed-alignment",
+        "tg.case.yutori-kokorogi.private-knowledge-separation",
+        "tg.ev.yutori-kokorogi.private-knowledge-separation"
       ],
-      "strategy": []
+      "strategy": [],
+      "deception": [
+        "tg.case.yutori-kokorogi.concealed-alignment",
+        "tg.ev.yutori-kokorogi.concealed-alignment"
+      ],
+      "cooperation": [
+        "tg.case.yutori-kokorogi.private-knowledge-separation",
+        "tg.ev.yutori-kokorogi.private-knowledge-separation"
+      ]
     },
     "actor.kei-shinomiya": {
       "body": [],
@@ -584,19 +696,35 @@
       "limitations": [],
       "motivation": [
         "tg.case.kei-shinomiya.enter-adult-game",
-        "tg.ev.kei-shinomiya.enter-adult-game"
+        "tg.ev.kei-shinomiya.enter-adult-game",
+        "tg.case.kei-shinomiya.compete-despite-disadvantage",
+        "tg.ev.kei-shinomiya.compete-despite-disadvantage"
       ],
       "observation": [
         "tg.case.kei-shinomiya.detect-side-change",
-        "tg.ev.kei-shinomiya.detect-side-change"
+        "tg.ev.kei-shinomiya.detect-side-change",
+        "tg.case.kei-shinomiya.exploit-opponent-observation",
+        "tg.ev.kei-shinomiya.exploit-opponent-observation",
+        "tg.case.kei-shinomiya.revise-after-ambush",
+        "tg.ev.kei-shinomiya.revise-after-ambush"
       ],
       "risk_management": [
         "tg.case.kei-shinomiya.enter-adult-game",
-        "tg.ev.kei-shinomiya.enter-adult-game"
+        "tg.ev.kei-shinomiya.enter-adult-game",
+        "tg.case.kei-shinomiya.revise-after-ambush",
+        "tg.ev.kei-shinomiya.revise-after-ambush",
+        "tg.case.kei-shinomiya.compete-despite-disadvantage",
+        "tg.ev.kei-shinomiya.compete-despite-disadvantage"
       ],
       "strategy": [
         "tg.case.kei-shinomiya.detect-side-change",
-        "tg.ev.kei-shinomiya.detect-side-change"
+        "tg.ev.kei-shinomiya.detect-side-change",
+        "tg.case.kei-shinomiya.exploit-opponent-observation",
+        "tg.ev.kei-shinomiya.exploit-opponent-observation"
+      ],
+      "deception": [
+        "tg.case.kei-shinomiya.exploit-opponent-observation",
+        "tg.ev.kei-shinomiya.exploit-opponent-observation"
       ]
     },
     "actor.shinji-shiba": {
@@ -606,7 +734,14 @@
         "tg.ev.shinji-shiba.identity"
       ],
       "limitations": [],
-      "strategy": []
+      "strategy": [
+        "tg.case.shinji-shiba.physical-advantage",
+        "tg.ev.shinji-shiba.physical-advantage"
+      ],
+      "combat": [
+        "tg.case.shinji-shiba.physical-advantage",
+        "tg.ev.shinji-shiba.physical-advantage"
+      ]
     },
     "actor.satone-kaidou": {
       "body": [],
@@ -615,7 +750,21 @@
         "tg.ev.satone-kaidou.identity"
       ],
       "limitations": [],
-      "strategy": []
+      "strategy": [],
+      "observation": [
+        "tg.case.satone-kaidou.intuition-wager",
+        "tg.ev.satone-kaidou.intuition-wager"
+      ],
+      "risk_management": [
+        "tg.case.satone-kaidou.intuition-wager",
+        "tg.ev.satone-kaidou.intuition-wager",
+        "tg.case.satone-kaidou.seek-risk",
+        "tg.ev.satone-kaidou.seek-risk"
+      ],
+      "motivation": [
+        "tg.case.satone-kaidou.seek-risk",
+        "tg.ev.satone-kaidou.seek-risk"
+      ]
     },
     "actor.maria-mizuse": {
       "body": [],
@@ -739,6 +888,14 @@
     "actor.kuroki": {
       "identity": [
         "tg.ev.kuroki.identity"
+      ],
+      "deception": [
+        "tg.case.kuroki.impersonation-exposed",
+        "tg.ev.kuroki.impersonation-exposed"
+      ],
+      "risk_management": [
+        "tg.case.kuroki.impersonation-exposed",
+        "tg.ev.kuroki.impersonation-exposed"
       ]
     },
     "actor.ryusei-taneda": {
@@ -800,6 +957,14 @@
     "actor.tsukasa-kaidou": {
       "identity": [
         "tg.ev.tsukasa-kaidou.identity"
+      ],
+      "negotiation": [
+        "tg.case.tsukasa-kaidou.conditional-financing",
+        "tg.ev.tsukasa-kaidou.conditional-financing"
+      ],
+      "economy": [
+        "tg.case.tsukasa-kaidou.conditional-financing",
+        "tg.ev.tsukasa-kaidou.conditional-financing"
       ]
     },
     "actor.yasushi-mishima": {
@@ -915,17 +1080,21 @@
       "body": [],
       "cognition": [],
       "cooperation": [
-        "tg.case.yuuichi-katagiri.support-isolated-ally"
+        "tg.case.yuuichi-katagiri.support-isolated-ally",
+        "tg.case.yuuichi-katagiri.sequential-trust-tests"
       ],
       "deception": [
         "tg.case.yuuichi-katagiri.concealed-cooperation"
       ],
       "economy": [
         "tg.case.yuuichi-katagiri.verify-incentive",
-        "tg.case.yuuichi-katagiri.documented-wager"
+        "tg.case.yuuichi-katagiri.documented-wager",
+        "tg.case.yuuichi-katagiri.costly-rule-bluff",
+        "tg.case.yuuichi-katagiri.ranking-side-contract"
       ],
       "epistemics": [
-        "tg.case.yuuichi-katagiri.minority-inference"
+        "tg.case.yuuichi-katagiri.minority-inference",
+        "tg.case.yuuichi-katagiri.failed-early-accusation"
       ],
       "ethics": [
         "tg.case.yuuichi-katagiri.friendship-under-scarcity"
@@ -933,13 +1102,17 @@
       "identity": [],
       "limitations": [],
       "motivation": [
-        "tg.case.yuuichi-katagiri.friendship-under-scarcity"
+        "tg.case.yuuichi-katagiri.friendship-under-scarcity",
+        "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.case.yuuichi-katagiri.friendship-priority-conflict"
       ],
       "negotiation": [
-        "tg.case.yuuichi-katagiri.documented-wager"
+        "tg.case.yuuichi-katagiri.documented-wager",
+        "tg.case.yuuichi-katagiri.ranking-side-contract"
       ],
       "observation": [
-        "tg.case.yuuichi-katagiri.minority-inference"
+        "tg.case.yuuichi-katagiri.minority-inference",
+        "tg.case.yuuichi-katagiri.sequential-trust-tests"
       ],
       "reasoning": [
         "tg.case.yuuichi-katagiri.verify-incentive"
@@ -948,7 +1121,21 @@
         "tg.case.yuuichi-katagiri.minority-inference",
         "tg.case.yuuichi-katagiri.support-isolated-ally",
         "tg.case.yuuichi-katagiri.concealed-cooperation",
-        "tg.case.yuuichi-katagiri.documented-wager"
+        "tg.case.yuuichi-katagiri.documented-wager",
+        "tg.case.yuuichi-katagiri.costly-rule-bluff",
+        "tg.case.yuuichi-katagiri.failed-early-accusation",
+        "tg.case.yuuichi-katagiri.sequential-trust-tests",
+        "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.case.yuuichi-katagiri.lose-direct-gamble",
+        "tg.case.yuuichi-katagiri.ranking-side-contract"
+      ],
+      "risk_management": [
+        "tg.case.yuuichi-katagiri.costly-rule-bluff",
+        "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.case.yuuichi-katagiri.lose-direct-gamble"
+      ],
+      "emotion": [
+        "tg.case.yuuichi-katagiri.friendship-priority-conflict"
       ]
     },
     "actor.tenji-mikasa": {
@@ -967,10 +1154,12 @@
       "identity": [],
       "limitations": [],
       "motivation": [
-        "tg.case.tenji-mikasa.secret-investigation"
+        "tg.case.tenji-mikasa.secret-investigation",
+        "tg.case.tenji-mikasa.join-next-round-voluntarily"
       ],
       "risk_management": [
-        "tg.case.tenji-mikasa.endure-uncertainty"
+        "tg.case.tenji-mikasa.endure-uncertainty",
+        "tg.case.tenji-mikasa.join-next-round-voluntarily"
       ],
       "social": [
         "tg.case.tenji-mikasa.mediator"
@@ -979,7 +1168,14 @@
         "tg.case.tenji-mikasa.secret-investigation"
       ],
       "trust": [
-        "tg.case.tenji-mikasa.disclose-prior-game"
+        "tg.case.tenji-mikasa.disclose-prior-game",
+        "tg.case.tenji-mikasa.join-next-round-voluntarily"
+      ],
+      "epistemics": [
+        "tg.case.tenji-mikasa.resist-first-bluff"
+      ],
+      "self_control": [
+        "tg.case.tenji-mikasa.resist-first-bluff"
       ]
     },
     "actor.shiho-sawaragi": {
@@ -997,7 +1193,17 @@
         "tg.case.shiho-sawaragi.class-organizer",
         "tg.case.shiho-sawaragi.consider-kimiko"
       ],
-      "strategy": []
+      "strategy": [],
+      "ethics": [
+        "tg.case.shiho-sawaragi.refuse-initial-suspicion",
+        "tg.case.shiho-sawaragi.challenge-reputational-judgment"
+      ],
+      "trust": [
+        "tg.case.shiho-sawaragi.refuse-initial-suspicion"
+      ],
+      "emotion": [
+        "tg.case.shiho-sawaragi.challenge-reputational-judgment"
+      ]
     },
     "actor.makoto-shibe": {
       "body": [],
@@ -1009,11 +1215,19 @@
       "identity": [],
       "limitations": [],
       "motivation": [
-        "tg.case.makoto-shibe.choose-father"
+        "tg.case.makoto-shibe.choose-father",
+        "tg.case.makoto-shibe.accept-post-trial-debt"
       ],
       "strategy": [],
       "trust": [
-        "tg.case.makoto-shibe.ask-father-for-help"
+        "tg.case.makoto-shibe.ask-father-for-help",
+        "tg.case.makoto-shibe.accept-post-trial-debt"
+      ],
+      "social": [
+        "tg.case.makoto-shibe.seek-social-approval"
+      ],
+      "emotion": [
+        "tg.case.makoto-shibe.seek-social-approval"
       ]
     },
     "actor.yutori-kokorogi": {
@@ -1025,9 +1239,17 @@
       "identity": [],
       "limitations": [],
       "social": [
-        "tg.case.yutori-kokorogi.accept-friendship"
+        "tg.case.yutori-kokorogi.accept-friendship",
+        "tg.case.yutori-kokorogi.concealed-alignment",
+        "tg.case.yutori-kokorogi.private-knowledge-separation"
       ],
-      "strategy": []
+      "strategy": [],
+      "deception": [
+        "tg.case.yutori-kokorogi.concealed-alignment"
+      ],
+      "cooperation": [
+        "tg.case.yutori-kokorogi.private-knowledge-separation"
+      ]
     },
     "actor.kei-shinomiya": {
       "body": [],
@@ -1035,16 +1257,25 @@
       "identity": [],
       "limitations": [],
       "motivation": [
-        "tg.case.kei-shinomiya.enter-adult-game"
+        "tg.case.kei-shinomiya.enter-adult-game",
+        "tg.case.kei-shinomiya.compete-despite-disadvantage"
       ],
       "observation": [
-        "tg.case.kei-shinomiya.detect-side-change"
+        "tg.case.kei-shinomiya.detect-side-change",
+        "tg.case.kei-shinomiya.exploit-opponent-observation",
+        "tg.case.kei-shinomiya.revise-after-ambush"
       ],
       "risk_management": [
-        "tg.case.kei-shinomiya.enter-adult-game"
+        "tg.case.kei-shinomiya.enter-adult-game",
+        "tg.case.kei-shinomiya.revise-after-ambush",
+        "tg.case.kei-shinomiya.compete-despite-disadvantage"
       ],
       "strategy": [
-        "tg.case.kei-shinomiya.detect-side-change"
+        "tg.case.kei-shinomiya.detect-side-change",
+        "tg.case.kei-shinomiya.exploit-opponent-observation"
+      ],
+      "deception": [
+        "tg.case.kei-shinomiya.exploit-opponent-observation"
       ]
     },
     "actor.shinji-shiba": {
@@ -1052,14 +1283,29 @@
       "cognition": [],
       "identity": [],
       "limitations": [],
-      "strategy": []
+      "strategy": [
+        "tg.case.shinji-shiba.physical-advantage"
+      ],
+      "combat": [
+        "tg.case.shinji-shiba.physical-advantage"
+      ]
     },
     "actor.satone-kaidou": {
       "body": [],
       "cognition": [],
       "identity": [],
       "limitations": [],
-      "strategy": []
+      "strategy": [],
+      "observation": [
+        "tg.case.satone-kaidou.intuition-wager"
+      ],
+      "risk_management": [
+        "tg.case.satone-kaidou.intuition-wager",
+        "tg.case.satone-kaidou.seek-risk"
+      ],
+      "motivation": [
+        "tg.case.satone-kaidou.seek-risk"
+      ]
     },
     "actor.maria-mizuse": {
       "body": [],
@@ -1146,7 +1392,13 @@
       "identity": []
     },
     "actor.kuroki": {
-      "identity": []
+      "identity": [],
+      "deception": [
+        "tg.case.kuroki.impersonation-exposed"
+      ],
+      "risk_management": [
+        "tg.case.kuroki.impersonation-exposed"
+      ]
     },
     "actor.ryusei-taneda": {
       "identity": []
@@ -1185,7 +1437,13 @@
       "identity": []
     },
     "actor.tsukasa-kaidou": {
-      "identity": []
+      "identity": [],
+      "negotiation": [
+        "tg.case.tsukasa-kaidou.conditional-financing"
+      ],
+      "economy": [
+        "tg.case.tsukasa-kaidou.conditional-financing"
+      ]
     },
     "actor.yasushi-mishima": {
       "identity": [],
@@ -1262,17 +1520,21 @@
       "body": [],
       "cognition": [],
       "cooperation": [
-        "tg.ev.yuuichi-katagiri.support-isolated-ally"
+        "tg.ev.yuuichi-katagiri.support-isolated-ally",
+        "tg.ev.yuuichi-katagiri.sequential-trust-tests"
       ],
       "deception": [
         "tg.ev.yuuichi-katagiri.concealed-cooperation"
       ],
       "economy": [
         "tg.ev.yuuichi-katagiri.verify-incentive",
-        "tg.ev.yuuichi-katagiri.documented-wager"
+        "tg.ev.yuuichi-katagiri.documented-wager",
+        "tg.ev.yuuichi-katagiri.costly-rule-bluff",
+        "tg.ev.yuuichi-katagiri.ranking-side-contract"
       ],
       "epistemics": [
-        "tg.ev.yuuichi-katagiri.minority-inference"
+        "tg.ev.yuuichi-katagiri.minority-inference",
+        "tg.ev.yuuichi-katagiri.failed-early-accusation"
       ],
       "ethics": [
         "tg.ev.yuuichi-katagiri.friendship-under-scarcity"
@@ -1282,13 +1544,17 @@
       ],
       "limitations": [],
       "motivation": [
-        "tg.ev.yuuichi-katagiri.friendship-under-scarcity"
+        "tg.ev.yuuichi-katagiri.friendship-under-scarcity",
+        "tg.ev.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.ev.yuuichi-katagiri.friendship-priority-conflict"
       ],
       "negotiation": [
-        "tg.ev.yuuichi-katagiri.documented-wager"
+        "tg.ev.yuuichi-katagiri.documented-wager",
+        "tg.ev.yuuichi-katagiri.ranking-side-contract"
       ],
       "observation": [
-        "tg.ev.yuuichi-katagiri.minority-inference"
+        "tg.ev.yuuichi-katagiri.minority-inference",
+        "tg.ev.yuuichi-katagiri.sequential-trust-tests"
       ],
       "reasoning": [
         "tg.ev.yuuichi-katagiri.verify-incentive"
@@ -1297,7 +1563,21 @@
         "tg.ev.yuuichi-katagiri.minority-inference",
         "tg.ev.yuuichi-katagiri.support-isolated-ally",
         "tg.ev.yuuichi-katagiri.concealed-cooperation",
-        "tg.ev.yuuichi-katagiri.documented-wager"
+        "tg.ev.yuuichi-katagiri.documented-wager",
+        "tg.ev.yuuichi-katagiri.costly-rule-bluff",
+        "tg.ev.yuuichi-katagiri.failed-early-accusation",
+        "tg.ev.yuuichi-katagiri.sequential-trust-tests",
+        "tg.ev.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.ev.yuuichi-katagiri.lose-direct-gamble",
+        "tg.ev.yuuichi-katagiri.ranking-side-contract"
+      ],
+      "risk_management": [
+        "tg.ev.yuuichi-katagiri.costly-rule-bluff",
+        "tg.ev.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.ev.yuuichi-katagiri.lose-direct-gamble"
+      ],
+      "emotion": [
+        "tg.ev.yuuichi-katagiri.friendship-priority-conflict"
       ]
     },
     "actor.tenji-mikasa": {
@@ -1318,10 +1598,12 @@
       ],
       "limitations": [],
       "motivation": [
-        "tg.ev.tenji-mikasa.secret-investigation"
+        "tg.ev.tenji-mikasa.secret-investigation",
+        "tg.ev.tenji-mikasa.join-next-round-voluntarily"
       ],
       "risk_management": [
-        "tg.ev.tenji-mikasa.endure-uncertainty"
+        "tg.ev.tenji-mikasa.endure-uncertainty",
+        "tg.ev.tenji-mikasa.join-next-round-voluntarily"
       ],
       "social": [
         "tg.ev.tenji-mikasa.mediator"
@@ -1330,7 +1612,14 @@
         "tg.ev.tenji-mikasa.secret-investigation"
       ],
       "trust": [
-        "tg.ev.tenji-mikasa.disclose-prior-game"
+        "tg.ev.tenji-mikasa.disclose-prior-game",
+        "tg.ev.tenji-mikasa.join-next-round-voluntarily"
+      ],
+      "epistemics": [
+        "tg.ev.tenji-mikasa.resist-first-bluff"
+      ],
+      "self_control": [
+        "tg.ev.tenji-mikasa.resist-first-bluff"
       ]
     },
     "actor.shiho-sawaragi": {
@@ -1350,7 +1639,17 @@
         "tg.ev.shiho-sawaragi.class-organizer",
         "tg.ev.shiho-sawaragi.consider-kimiko"
       ],
-      "strategy": []
+      "strategy": [],
+      "ethics": [
+        "tg.ev.shiho-sawaragi.refuse-initial-suspicion",
+        "tg.ev.shiho-sawaragi.challenge-reputational-judgment"
+      ],
+      "trust": [
+        "tg.ev.shiho-sawaragi.refuse-initial-suspicion"
+      ],
+      "emotion": [
+        "tg.ev.shiho-sawaragi.challenge-reputational-judgment"
+      ]
     },
     "actor.makoto-shibe": {
       "body": [],
@@ -1364,11 +1663,19 @@
       ],
       "limitations": [],
       "motivation": [
-        "tg.ev.makoto-shibe.choose-father"
+        "tg.ev.makoto-shibe.choose-father",
+        "tg.ev.makoto-shibe.accept-post-trial-debt"
       ],
       "strategy": [],
       "trust": [
-        "tg.ev.makoto-shibe.ask-father-for-help"
+        "tg.ev.makoto-shibe.ask-father-for-help",
+        "tg.ev.makoto-shibe.accept-post-trial-debt"
+      ],
+      "social": [
+        "tg.ev.makoto-shibe.seek-social-approval"
+      ],
+      "emotion": [
+        "tg.ev.makoto-shibe.seek-social-approval"
       ]
     },
     "actor.yutori-kokorogi": {
@@ -1382,9 +1689,17 @@
       ],
       "limitations": [],
       "social": [
-        "tg.ev.yutori-kokorogi.accept-friendship"
+        "tg.ev.yutori-kokorogi.accept-friendship",
+        "tg.ev.yutori-kokorogi.concealed-alignment",
+        "tg.ev.yutori-kokorogi.private-knowledge-separation"
       ],
-      "strategy": []
+      "strategy": [],
+      "deception": [
+        "tg.ev.yutori-kokorogi.concealed-alignment"
+      ],
+      "cooperation": [
+        "tg.ev.yutori-kokorogi.private-knowledge-separation"
+      ]
     },
     "actor.kei-shinomiya": {
       "body": [],
@@ -1394,16 +1709,25 @@
       ],
       "limitations": [],
       "motivation": [
-        "tg.ev.kei-shinomiya.enter-adult-game"
+        "tg.ev.kei-shinomiya.enter-adult-game",
+        "tg.ev.kei-shinomiya.compete-despite-disadvantage"
       ],
       "observation": [
-        "tg.ev.kei-shinomiya.detect-side-change"
+        "tg.ev.kei-shinomiya.detect-side-change",
+        "tg.ev.kei-shinomiya.exploit-opponent-observation",
+        "tg.ev.kei-shinomiya.revise-after-ambush"
       ],
       "risk_management": [
-        "tg.ev.kei-shinomiya.enter-adult-game"
+        "tg.ev.kei-shinomiya.enter-adult-game",
+        "tg.ev.kei-shinomiya.revise-after-ambush",
+        "tg.ev.kei-shinomiya.compete-despite-disadvantage"
       ],
       "strategy": [
-        "tg.ev.kei-shinomiya.detect-side-change"
+        "tg.ev.kei-shinomiya.detect-side-change",
+        "tg.ev.kei-shinomiya.exploit-opponent-observation"
+      ],
+      "deception": [
+        "tg.ev.kei-shinomiya.exploit-opponent-observation"
       ]
     },
     "actor.shinji-shiba": {
@@ -1413,7 +1737,12 @@
         "tg.ev.shinji-shiba.identity"
       ],
       "limitations": [],
-      "strategy": []
+      "strategy": [
+        "tg.ev.shinji-shiba.physical-advantage"
+      ],
+      "combat": [
+        "tg.ev.shinji-shiba.physical-advantage"
+      ]
     },
     "actor.satone-kaidou": {
       "body": [],
@@ -1422,7 +1751,17 @@
         "tg.ev.satone-kaidou.identity"
       ],
       "limitations": [],
-      "strategy": []
+      "strategy": [],
+      "observation": [
+        "tg.ev.satone-kaidou.intuition-wager"
+      ],
+      "risk_management": [
+        "tg.ev.satone-kaidou.intuition-wager",
+        "tg.ev.satone-kaidou.seek-risk"
+      ],
+      "motivation": [
+        "tg.ev.satone-kaidou.seek-risk"
+      ]
     },
     "actor.maria-mizuse": {
       "body": [],
@@ -1536,6 +1875,12 @@
     "actor.kuroki": {
       "identity": [
         "tg.ev.kuroki.identity"
+      ],
+      "deception": [
+        "tg.ev.kuroki.impersonation-exposed"
+      ],
+      "risk_management": [
+        "tg.ev.kuroki.impersonation-exposed"
       ]
     },
     "actor.ryusei-taneda": {
@@ -1593,6 +1938,12 @@
     "actor.tsukasa-kaidou": {
       "identity": [
         "tg.ev.tsukasa-kaidou.identity"
+      ],
+      "negotiation": [
+        "tg.ev.tsukasa-kaidou.conditional-financing"
+      ],
+      "economy": [
+        "tg.ev.tsukasa-kaidou.conditional-financing"
       ]
     },
     "actor.yasushi-mishima": {
@@ -1723,6 +2074,29 @@
     "tg.case.yasushi-mishima.trade-and-advice": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/yasushi-mishima/trade-and-advice.json",
     "tg.case.sora-namiragawa.mutual-password-trust": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/sora-namiragawa/mutual-password-trust.json",
     "tg.case.kimiko-kyouguchi.mutual-password-trust": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/kimiko-kyouguchi/mutual-password-trust.json",
-    "tg.case.akira-nishizawa.observe-contests": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/akira-nishizawa/observe-contests.json"
+    "tg.case.akira-nishizawa.observe-contests": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/akira-nishizawa/observe-contests.json",
+    "tg.case.yuuichi-katagiri.costly-rule-bluff": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/yuuichi-katagiri/costly-rule-bluff.json",
+    "tg.case.yuuichi-katagiri.failed-early-accusation": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/yuuichi-katagiri/failed-early-accusation.json",
+    "tg.case.yuuichi-katagiri.sequential-trust-tests": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/yuuichi-katagiri/sequential-trust-tests.json",
+    "tg.case.yuuichi-katagiri.accept-own-financial-loss": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/yuuichi-katagiri/accept-own-financial-loss.json",
+    "tg.case.tenji-mikasa.resist-first-bluff": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/tenji-mikasa/resist-first-bluff.json",
+    "tg.case.tenji-mikasa.join-next-round-voluntarily": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/tenji-mikasa/join-next-round-voluntarily.json",
+    "tg.case.kei-shinomiya.exploit-opponent-observation": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/kei-shinomiya/exploit-opponent-observation.json",
+    "tg.case.kei-shinomiya.revise-after-ambush": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/kei-shinomiya/revise-after-ambush.json",
+    "tg.case.kei-shinomiya.compete-despite-disadvantage": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/kei-shinomiya/compete-despite-disadvantage.json",
+    "tg.case.satone-kaidou.intuition-wager": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/satone-kaidou/intuition-wager.json",
+    "tg.case.satone-kaidou.seek-risk": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/satone-kaidou/seek-risk.json",
+    "tg.case.yuuichi-katagiri.lose-direct-gamble": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/yuuichi-katagiri/lose-direct-gamble.json",
+    "tg.case.yuuichi-katagiri.ranking-side-contract": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/yuuichi-katagiri/ranking-side-contract.json",
+    "tg.case.yutori-kokorogi.concealed-alignment": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/yutori-kokorogi/concealed-alignment.json",
+    "tg.case.yutori-kokorogi.private-knowledge-separation": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/yutori-kokorogi/private-knowledge-separation.json",
+    "tg.case.shiho-sawaragi.refuse-initial-suspicion": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/shiho-sawaragi/refuse-initial-suspicion.json",
+    "tg.case.shiho-sawaragi.challenge-reputational-judgment": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/shiho-sawaragi/challenge-reputational-judgment.json",
+    "tg.case.makoto-shibe.seek-social-approval": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/makoto-shibe/seek-social-approval.json",
+    "tg.case.makoto-shibe.accept-post-trial-debt": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/makoto-shibe/accept-post-trial-debt.json",
+    "tg.case.shinji-shiba.physical-advantage": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/shinji-shiba/physical-advantage.json",
+    "tg.case.tsukasa-kaidou.conditional-financing": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/tsukasa-kaidou/conditional-financing.json",
+    "tg.case.kuroki.impersonation-exposed": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/kuroki/impersonation-exposed.json",
+    "tg.case.yuuichi-katagiri.friendship-priority-conflict": "data/external-worlds/tomodachi-game/consolidated/behavioral_cases/yuuichi-katagiri/friendship-priority-conflict.json"
   }
 }

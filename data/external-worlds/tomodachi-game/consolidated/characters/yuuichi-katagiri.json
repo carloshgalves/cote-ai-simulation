@@ -21,31 +21,47 @@
         "tg.case.yuuichi-katagiri.minority-inference",
         "tg.case.yuuichi-katagiri.support-isolated-ally",
         "tg.case.yuuichi-katagiri.concealed-cooperation",
-        "tg.case.yuuichi-katagiri.documented-wager"
+        "tg.case.yuuichi-katagiri.documented-wager",
+        "tg.case.yuuichi-katagiri.costly-rule-bluff",
+        "tg.case.yuuichi-katagiri.failed-early-accusation",
+        "tg.case.yuuichi-katagiri.sequential-trust-tests",
+        "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.case.yuuichi-katagiri.lose-direct-gamble",
+        "tg.case.yuuichi-katagiri.ranking-side-contract"
       ],
       "context_evidence_refs": [
         "tg.ev.yuuichi-katagiri.minority-inference",
         "tg.ev.yuuichi-katagiri.support-isolated-ally",
         "tg.ev.yuuichi-katagiri.concealed-cooperation",
-        "tg.ev.yuuichi-katagiri.documented-wager"
+        "tg.ev.yuuichi-katagiri.documented-wager",
+        "tg.ev.yuuichi-katagiri.costly-rule-bluff",
+        "tg.ev.yuuichi-katagiri.failed-early-accusation",
+        "tg.ev.yuuichi-katagiri.sequential-trust-tests",
+        "tg.ev.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.ev.yuuichi-katagiri.lose-direct-gamble",
+        "tg.ev.yuuichi-katagiri.ranking-side-contract"
       ],
       "description": "Selective disclosure, strategic deception, willingness to bear costs for allies",
       "description_status": "PROVISIONAL_PROFILE_INFERENCE"
     },
     "observation": {
       "behavioral_case_refs": [
-        "tg.case.yuuichi-katagiri.minority-inference"
+        "tg.case.yuuichi-katagiri.minority-inference",
+        "tg.case.yuuichi-katagiri.sequential-trust-tests"
       ],
       "context_evidence_refs": [
-        "tg.ev.yuuichi-katagiri.minority-inference"
+        "tg.ev.yuuichi-katagiri.minority-inference",
+        "tg.ev.yuuichi-katagiri.sequential-trust-tests"
       ]
     },
     "epistemics": {
       "behavioral_case_refs": [
-        "tg.case.yuuichi-katagiri.minority-inference"
+        "tg.case.yuuichi-katagiri.minority-inference",
+        "tg.case.yuuichi-katagiri.failed-early-accusation"
       ],
       "context_evidence_refs": [
-        "tg.ev.yuuichi-katagiri.minority-inference"
+        "tg.ev.yuuichi-katagiri.minority-inference",
+        "tg.ev.yuuichi-katagiri.failed-early-accusation"
       ]
     },
     "reasoning": {
@@ -59,19 +75,25 @@
     "economy": {
       "behavioral_case_refs": [
         "tg.case.yuuichi-katagiri.verify-incentive",
-        "tg.case.yuuichi-katagiri.documented-wager"
+        "tg.case.yuuichi-katagiri.documented-wager",
+        "tg.case.yuuichi-katagiri.costly-rule-bluff",
+        "tg.case.yuuichi-katagiri.ranking-side-contract"
       ],
       "context_evidence_refs": [
         "tg.ev.yuuichi-katagiri.verify-incentive",
-        "tg.ev.yuuichi-katagiri.documented-wager"
+        "tg.ev.yuuichi-katagiri.documented-wager",
+        "tg.ev.yuuichi-katagiri.costly-rule-bluff",
+        "tg.ev.yuuichi-katagiri.ranking-side-contract"
       ]
     },
     "cooperation": {
       "behavioral_case_refs": [
-        "tg.case.yuuichi-katagiri.support-isolated-ally"
+        "tg.case.yuuichi-katagiri.support-isolated-ally",
+        "tg.case.yuuichi-katagiri.sequential-trust-tests"
       ],
       "context_evidence_refs": [
-        "tg.ev.yuuichi-katagiri.support-isolated-ally"
+        "tg.ev.yuuichi-katagiri.support-isolated-ally",
+        "tg.ev.yuuichi-katagiri.sequential-trust-tests"
       ]
     },
     "deception": {
@@ -84,18 +106,24 @@
     },
     "negotiation": {
       "behavioral_case_refs": [
-        "tg.case.yuuichi-katagiri.documented-wager"
+        "tg.case.yuuichi-katagiri.documented-wager",
+        "tg.case.yuuichi-katagiri.ranking-side-contract"
       ],
       "context_evidence_refs": [
-        "tg.ev.yuuichi-katagiri.documented-wager"
+        "tg.ev.yuuichi-katagiri.documented-wager",
+        "tg.ev.yuuichi-katagiri.ranking-side-contract"
       ]
     },
     "motivation": {
       "behavioral_case_refs": [
-        "tg.case.yuuichi-katagiri.friendship-under-scarcity"
+        "tg.case.yuuichi-katagiri.friendship-under-scarcity",
+        "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.case.yuuichi-katagiri.friendship-priority-conflict"
       ],
       "context_evidence_refs": [
-        "tg.ev.yuuichi-katagiri.friendship-under-scarcity"
+        "tg.ev.yuuichi-katagiri.friendship-under-scarcity",
+        "tg.ev.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.ev.yuuichi-katagiri.friendship-priority-conflict"
       ]
     },
     "ethics": {
@@ -129,6 +157,26 @@
       "context_evidence_refs": [],
       "description": "No calibrated physical measurements; use population prior.",
       "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "risk_management": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.costly-rule-bluff",
+        "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.case.yuuichi-katagiri.lose-direct-gamble"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.costly-rule-bluff",
+        "tg.ev.yuuichi-katagiri.accept-own-financial-loss",
+        "tg.ev.yuuichi-katagiri.lose-direct-gamble"
+      ]
+    },
+    "emotion": {
+      "behavioral_case_refs": [
+        "tg.case.yuuichi-katagiri.friendship-priority-conflict"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.yuuichi-katagiri.friendship-priority-conflict"
+      ]
     }
   },
   "source_documents": [

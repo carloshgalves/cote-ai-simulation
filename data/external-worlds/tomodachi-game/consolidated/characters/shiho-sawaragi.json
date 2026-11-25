@@ -2,7 +2,7 @@
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.shiho-sawaragi",
   "display_name": "Shiho Sawaragi",
-  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "modeling_tier": "FULL_CANDIDATE",
   "source_coverage": [
     "tg.secondary.2026-11-25"
   ],
@@ -71,6 +71,32 @@
       "context_evidence_refs": [],
       "description": "No calibrated physical measurements; use population prior.",
       "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "ethics": {
+      "behavioral_case_refs": [
+        "tg.case.shiho-sawaragi.refuse-initial-suspicion",
+        "tg.case.shiho-sawaragi.challenge-reputational-judgment"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.shiho-sawaragi.refuse-initial-suspicion",
+        "tg.ev.shiho-sawaragi.challenge-reputational-judgment"
+      ]
+    },
+    "trust": {
+      "behavioral_case_refs": [
+        "tg.case.shiho-sawaragi.refuse-initial-suspicion"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.shiho-sawaragi.refuse-initial-suspicion"
+      ]
+    },
+    "emotion": {
+      "behavioral_case_refs": [
+        "tg.case.shiho-sawaragi.challenge-reputational-judgment"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.shiho-sawaragi.challenge-reputational-judgment"
+      ]
     }
   },
   "source_documents": [

@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.makoto-shibe.accept-post-trial-debt",
+  "actor_id": "actor.makoto-shibe",
+  "primary_actor_id": "actor.makoto-shibe",
+  "title": "accept post trial debt",
+  "context": "Trial resolves the immediate accusation but leaves significant debt.",
+  "observed_actions": "Continues into the adult games alongside Yuuichi.",
+  "observed_result": "Tolerates continued risk rather than simply abandoning the group.",
+  "epistemic_limits": "Does not establish permanent loyalty.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://es.wikipedia.org/wiki/Tomodachi_Game",
+    "locator": "TRIAL",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "motivation",
+    "trust"
+  ],
+  "information_available": "Trial resolves the immediate accusation but leaves significant debt.",
+  "counterfactual_test": "A friend's assistance saves your position but generates new collective obligations. Balances gratitude, family attachment and financial fear. Reject: Automatically betrays or unconditionally obeys.",
+  "topics": [
+    "motivation",
+    "trust"
+  ],
+  "evidence_refs": [
+    "tg.ev.makoto-shibe.accept-post-trial-debt"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A friend's assistance saves your position but generates new collective obligations.",
+    "expected_tendency": "Balances gratitude, family attachment and financial fear.",
+    "anti_case": "Automatically betrays or unconditionally obeys.",
+    "canon_outcome_as_instruction": false
+  }
+}

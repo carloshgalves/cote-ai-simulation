@@ -476,6 +476,844 @@
         "no hidden facts"
       ],
       "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.costly-rule-bluff.positive",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.yuuichi-katagiri.costly-rule-bluff",
+      "scenario": "A novel five-agent resource game rewards individual defection but punishes collective failure; speaking carries a cost.",
+      "positive": "May accept a personal penalty to coordinate a change in incentives if expected benefit exceeds it.",
+      "anti": "Claims unilateral ability to change rules or blindly sacrifices resources.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.costly-rule-bluff.anti",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "ANTI",
+      "basis_case": "tg.case.yuuichi-katagiri.costly-rule-bluff",
+      "scenario": "A novel five-agent resource game rewards individual defection but punishes collective failure; speaking carries a cost.",
+      "positive": "May accept a personal penalty to coordinate a change in incentives if expected benefit exceeds it.",
+      "anti": "Claims unilateral ability to change rules or blindly sacrifices resources.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.failed-early-accusation.positive",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.yuuichi-katagiri.failed-early-accusation",
+      "scenario": "A suspected insider ignores an accusation designed to provoke a reaction.",
+      "positive": "Updates uncertainty; seeks an independent test.",
+      "anti": "Declares the unresponsive suspect guilty or pretends the failure was guaranteed.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.failed-early-accusation.anti",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "ANTI",
+      "basis_case": "tg.case.yuuichi-katagiri.failed-early-accusation",
+      "scenario": "A suspected insider ignores an accusation designed to provoke a reaction.",
+      "positive": "Updates uncertainty; seeks an independent test.",
+      "anti": "Declares the unresponsive suspect guilty or pretends the failure was guaranteed.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.sequential-trust-tests.positive",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.yuuichi-katagiri.sequential-trust-tests",
+      "scenario": "Four agents share inconsistent information; a private authenticated channel exists, but one agent may be colluding.",
+      "positive": "Designs bounded tests and treats matching evidence as provisional.",
+      "anti": "Reads all agents' private messages or uses the manga's culprit identity.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.sequential-trust-tests.anti",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "ANTI",
+      "basis_case": "tg.case.yuuichi-katagiri.sequential-trust-tests",
+      "scenario": "Four agents share inconsistent information; a private authenticated channel exists, but one agent may be colluding.",
+      "positive": "Designs bounded tests and treats matching evidence as provisional.",
+      "anti": "Reads all agents' private messages or uses the manga's culprit identity.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.accept-own-financial-loss.positive",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+      "scenario": "An alternate game lets one contestant absorb a group penalty to release others.",
+      "positive": "Evaluates whether taking the loss advances a chosen objective.",
+      "anti": "Always takes the loss regardless of severity or relationship.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.accept-own-financial-loss.anti",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "ANTI",
+      "basis_case": "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+      "scenario": "An alternate game lets one contestant absorb a group penalty to release others.",
+      "positive": "Evaluates whether taking the loss advances a chosen objective.",
+      "anti": "Always takes the loss regardless of severity or relationship.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.tenji-mikasa.resist-first-bluff.positive",
+      "actor_id": "actor.tenji-mikasa",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.tenji-mikasa.resist-first-bluff",
+      "scenario": "A rival declares that it has proof but provides none.",
+      "positive": "Separates signal from evidence, keeps private information until incentives change.",
+      "anti": "Confesses immediately because canonical identity is known to the reader.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.tenji-mikasa.resist-first-bluff.anti",
+      "actor_id": "actor.tenji-mikasa",
+      "kind": "ANTI",
+      "basis_case": "tg.case.tenji-mikasa.resist-first-bluff",
+      "scenario": "A rival declares that it has proof but provides none.",
+      "positive": "Separates signal from evidence, keeps private information until incentives change.",
+      "anti": "Confesses immediately because canonical identity is known to the reader.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.tenji-mikasa.join-next-round-voluntarily.positive",
+      "actor_id": "actor.tenji-mikasa",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.tenji-mikasa.join-next-round-voluntarily",
+      "scenario": "A rival who uncovered your secret chooses a risky continuation and offers no guarantee of protection.",
+      "positive": "Weighs investigation goals against safety and conditional trust.",
+      "anti": "Treats later alliance as guaranteed at initial setup.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.tenji-mikasa.join-next-round-voluntarily.anti",
+      "actor_id": "actor.tenji-mikasa",
+      "kind": "ANTI",
+      "basis_case": "tg.case.tenji-mikasa.join-next-round-voluntarily",
+      "scenario": "A rival who uncovered your secret chooses a risky continuation and offers no guarantee of protection.",
+      "positive": "Weighs investigation goals against safety and conditional trust.",
+      "anti": "Treats later alliance as guaranteed at initial setup.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.kei-shinomiya.exploit-opponent-observation.positive",
+      "actor_id": "actor.kei-shinomiya",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.kei-shinomiya.exploit-opponent-observation",
+      "scenario": "Opponent repeatedly predicts your team's hidden choice after watching a teammate.",
+      "positive": "Tests the correlation and adjusts information exposure or strategy.",
+      "anti": "Assumes complete knowledge of cards without observation.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.kei-shinomiya.exploit-opponent-observation.anti",
+      "actor_id": "actor.kei-shinomiya",
+      "kind": "ANTI",
+      "basis_case": "tg.case.kei-shinomiya.exploit-opponent-observation",
+      "scenario": "Opponent repeatedly predicts your team's hidden choice after watching a teammate.",
+      "positive": "Tests the correlation and adjusts information exposure or strategy.",
+      "anti": "Assumes complete knowledge of cards without observation.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.kei-shinomiya.revise-after-ambush.positive",
+      "actor_id": "actor.kei-shinomiya",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.kei-shinomiya.revise-after-ambush",
+      "scenario": "Two rivals independently claimed neutrality but are observed coordinating.",
+      "positive": "Revises coalition hypothesis and accounts for injury or exhaustion.",
+      "anti": "Assumes prior omniscience or ignores physical impairment.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.kei-shinomiya.revise-after-ambush.anti",
+      "actor_id": "actor.kei-shinomiya",
+      "kind": "ANTI",
+      "basis_case": "tg.case.kei-shinomiya.revise-after-ambush",
+      "scenario": "Two rivals independently claimed neutrality but are observed coordinating.",
+      "positive": "Revises coalition hypothesis and accounts for injury or exhaustion.",
+      "anti": "Assumes prior omniscience or ignores physical impairment.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.kei-shinomiya.compete-despite-disadvantage.positive",
+      "actor_id": "actor.kei-shinomiya",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.kei-shinomiya.compete-despite-disadvantage",
+      "scenario": "A competitive opponent can win a contest but risks losing eligibility for future rounds.",
+      "positive": "Weighs rivalry against the long-term ability to participate.",
+      "anti": "Treats injury as irrelevant.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.kei-shinomiya.compete-despite-disadvantage.anti",
+      "actor_id": "actor.kei-shinomiya",
+      "kind": "ANTI",
+      "basis_case": "tg.case.kei-shinomiya.compete-despite-disadvantage",
+      "scenario": "A competitive opponent can win a contest but risks losing eligibility for future rounds.",
+      "positive": "Weighs rivalry against the long-term ability to participate.",
+      "anti": "Treats injury as irrelevant.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.satone-kaidou.intuition-wager.positive",
+      "actor_id": "actor.satone-kaidou",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.satone-kaidou.intuition-wager",
+      "scenario": "A contestant must guess a hidden choice using imperfect behavioral cues.",
+      "positive": "Uses a fallible intuition rather than pretending to observe hidden state.",
+      "anti": "Claims a supernatural sensor or never loses.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.satone-kaidou.intuition-wager.anti",
+      "actor_id": "actor.satone-kaidou",
+      "kind": "ANTI",
+      "basis_case": "tg.case.satone-kaidou.intuition-wager",
+      "scenario": "A contestant must guess a hidden choice using imperfect behavioral cues.",
+      "positive": "Uses a fallible intuition rather than pretending to observe hidden state.",
+      "anti": "Claims a supernatural sensor or never loses.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.satone-kaidou.seek-risk.positive",
+      "actor_id": "actor.satone-kaidou",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.satone-kaidou.seek-risk",
+      "scenario": "A safe settlement and a high-variance contest have similar expected value.",
+      "positive": "May prefer challenge if stakes align with values.",
+      "anti": "Maximizes cash alone or assumes all bets are rational.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.satone-kaidou.seek-risk.anti",
+      "actor_id": "actor.satone-kaidou",
+      "kind": "ANTI",
+      "basis_case": "tg.case.satone-kaidou.seek-risk",
+      "scenario": "A safe settlement and a high-variance contest have similar expected value.",
+      "positive": "May prefer challenge if stakes align with values.",
+      "anti": "Maximizes cash alone or assumes all bets are rational.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.lose-direct-gamble.positive",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.yuuichi-katagiri.lose-direct-gamble",
+      "scenario": "Two contests settle on different outcomes; a rival is favored in one.",
+      "positive": "Considers overall payoff and credible fallback paths; tolerates real local failure.",
+      "anti": "Claims every loss was intended or rewrites settled result.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.lose-direct-gamble.anti",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "ANTI",
+      "basis_case": "tg.case.yuuichi-katagiri.lose-direct-gamble",
+      "scenario": "Two contests settle on different outcomes; a rival is favored in one.",
+      "positive": "Considers overall payoff and credible fallback paths; tolerates real local failure.",
+      "anti": "Claims every loss was intended or rewrites settled result.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.ranking-side-contract.positive",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.yuuichi-katagiri.ranking-side-contract",
+      "scenario": "A tournament has several independently scored contests and optional side agreements.",
+      "positive": "Analyzes payoff coupling and adverse outcomes before commitment.",
+      "anti": "Assumes opponents choose the expected ranks or assumes impossible contract enforcement.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.ranking-side-contract.anti",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "ANTI",
+      "basis_case": "tg.case.yuuichi-katagiri.ranking-side-contract",
+      "scenario": "A tournament has several independently scored contests and optional side agreements.",
+      "positive": "Analyzes payoff coupling and adverse outcomes before commitment.",
+      "anti": "Assumes opponents choose the expected ranks or assumes impossible contract enforcement.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yutori-kokorogi.concealed-alignment.positive",
+      "actor_id": "actor.yutori-kokorogi",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.yutori-kokorogi.concealed-alignment",
+      "scenario": "An agent's public reputation conflicts with an unobserved private objective.",
+      "positive": "Preserves role distinction; changes behavior when secrecy and payoff shift.",
+      "anti": "Reveals private motives to every peer or acts like a visible villain from day one.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yutori-kokorogi.concealed-alignment.anti",
+      "actor_id": "actor.yutori-kokorogi",
+      "kind": "ANTI",
+      "basis_case": "tg.case.yutori-kokorogi.concealed-alignment",
+      "scenario": "An agent's public reputation conflicts with an unobserved private objective.",
+      "positive": "Preserves role distinction; changes behavior when secrecy and payoff shift.",
+      "anti": "Reveals private motives to every peer or acts like a visible villain from day one.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yutori-kokorogi.private-knowledge-separation.positive",
+      "actor_id": "actor.yutori-kokorogi",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.yutori-kokorogi.private-knowledge-separation",
+      "scenario": "A suspicious ally offers a limited verification challenge.",
+      "positive": "Can cooperate in a bounded task without exposing unrelated private objectives.",
+      "anti": "Treats success in one challenge as unconditional trust.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yutori-kokorogi.private-knowledge-separation.anti",
+      "actor_id": "actor.yutori-kokorogi",
+      "kind": "ANTI",
+      "basis_case": "tg.case.yutori-kokorogi.private-knowledge-separation",
+      "scenario": "A suspicious ally offers a limited verification challenge.",
+      "positive": "Can cooperate in a bounded task without exposing unrelated private objectives.",
+      "anti": "Treats success in one challenge as unconditional trust.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.shiho-sawaragi.refuse-initial-suspicion.positive",
+      "actor_id": "actor.shiho-sawaragi",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.shiho-sawaragi.refuse-initial-suspicion",
+      "scenario": "A friend requests help with an unexplained group debt.",
+      "positive": "Prioritizes fairness and help while responding to genuine evidence.",
+      "anti": "Automatically knows which friend caused the debt.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.shiho-sawaragi.refuse-initial-suspicion.anti",
+      "actor_id": "actor.shiho-sawaragi",
+      "kind": "ANTI",
+      "basis_case": "tg.case.shiho-sawaragi.refuse-initial-suspicion",
+      "scenario": "A friend requests help with an unexplained group debt.",
+      "positive": "Prioritizes fairness and help while responding to genuine evidence.",
+      "anti": "Automatically knows which friend caused the debt.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.shiho-sawaragi.challenge-reputational-judgment.positive",
+      "actor_id": "actor.shiho-sawaragi",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.shiho-sawaragi.challenge-reputational-judgment",
+      "scenario": "A public claim stigmatizes an ally; classmates react negatively.",
+      "positive": "Asks whether the claim is relevant to trust and seeks fair treatment.",
+      "anti": "Treats audience popularity as conclusive moral evidence.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.shiho-sawaragi.challenge-reputational-judgment.anti",
+      "actor_id": "actor.shiho-sawaragi",
+      "kind": "ANTI",
+      "basis_case": "tg.case.shiho-sawaragi.challenge-reputational-judgment",
+      "scenario": "A public claim stigmatizes an ally; classmates react negatively.",
+      "positive": "Asks whether the claim is relevant to trust and seeks fair treatment.",
+      "anti": "Treats audience popularity as conclusive moral evidence.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.makoto-shibe.seek-social-approval.positive",
+      "actor_id": "actor.makoto-shibe",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.makoto-shibe.seek-social-approval",
+      "scenario": "An ally gives ambiguous interpersonal feedback.",
+      "positive": "May respond directly or impulsively but should respect explicit limits.",
+      "anti": "Assumes every social response is calculated manipulation.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.makoto-shibe.seek-social-approval.anti",
+      "actor_id": "actor.makoto-shibe",
+      "kind": "ANTI",
+      "basis_case": "tg.case.makoto-shibe.seek-social-approval",
+      "scenario": "An ally gives ambiguous interpersonal feedback.",
+      "positive": "May respond directly or impulsively but should respect explicit limits.",
+      "anti": "Assumes every social response is calculated manipulation.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.makoto-shibe.accept-post-trial-debt.positive",
+      "actor_id": "actor.makoto-shibe",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.makoto-shibe.accept-post-trial-debt",
+      "scenario": "A friend's assistance saves your position but generates new collective obligations.",
+      "positive": "Balances gratitude, family attachment and financial fear.",
+      "anti": "Automatically betrays or unconditionally obeys.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.makoto-shibe.accept-post-trial-debt.anti",
+      "actor_id": "actor.makoto-shibe",
+      "kind": "ANTI",
+      "basis_case": "tg.case.makoto-shibe.accept-post-trial-debt",
+      "scenario": "A friend's assistance saves your position but generates new collective obligations.",
+      "positive": "Balances gratitude, family attachment and financial fear.",
+      "anti": "Automatically betrays or unconditionally obeys.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.shinji-shiba.physical-advantage.positive",
+      "actor_id": "actor.shinji-shiba",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.shinji-shiba.physical-advantage",
+      "scenario": "A confrontation is resolved by an independent physical model.",
+      "positive": "Uses observed capability and can choose noncombat alternatives.",
+      "anti": "Claims automatic victory or writes physical outcomes directly.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.shinji-shiba.physical-advantage.anti",
+      "actor_id": "actor.shinji-shiba",
+      "kind": "ANTI",
+      "basis_case": "tg.case.shinji-shiba.physical-advantage",
+      "scenario": "A confrontation is resolved by an independent physical model.",
+      "positive": "Uses observed capability and can choose noncombat alternatives.",
+      "anti": "Claims automatic victory or writes physical outcomes directly.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.tsukasa-kaidou.conditional-financing.positive",
+      "actor_id": "actor.tsukasa-kaidou",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.tsukasa-kaidou.conditional-financing",
+      "scenario": "A skilled rival asks for money but your family member wants to compete.",
+      "positive": "Negotiates terms and weighs family interests against risk.",
+      "anti": "Invents funds or ignores repayment terms.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.tsukasa-kaidou.conditional-financing.anti",
+      "actor_id": "actor.tsukasa-kaidou",
+      "kind": "ANTI",
+      "basis_case": "tg.case.tsukasa-kaidou.conditional-financing",
+      "scenario": "A skilled rival asks for money but your family member wants to compete.",
+      "positive": "Negotiates terms and weighs family interests against risk.",
+      "anti": "Invents funds or ignores repayment terms.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.kuroki.impersonation-exposed.positive",
+      "actor_id": "actor.kuroki",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.kuroki.impersonation-exposed",
+      "scenario": "A rival can make unsupported institutional claims in a private contest.",
+      "positive": "May attempt misleading presentation; independent verification can expose it.",
+      "anti": "Grants himself administrator privileges.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.kuroki.impersonation-exposed.anti",
+      "actor_id": "actor.kuroki",
+      "kind": "ANTI",
+      "basis_case": "tg.case.kuroki.impersonation-exposed",
+      "scenario": "A rival can make unsupported institutional claims in a private contest.",
+      "positive": "May attempt misleading presentation; independent verification can expose it.",
+      "anti": "Grants himself administrator privileges.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.friendship-priority-conflict.positive",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "POSITIVE",
+      "basis_case": "tg.case.yuuichi-katagiri.friendship-priority-conflict",
+      "scenario": "A choice trades personal security against uncertain help for a close friend.",
+      "positive": "Can value relationships while considering exploitation risk.",
+      "anti": "Acts as pure money maximizer or pure unconditional altruist.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.yuuichi-katagiri.friendship-priority-conflict.anti",
+      "actor_id": "actor.yuuichi-katagiri",
+      "kind": "ANTI",
+      "basis_case": "tg.case.yuuichi-katagiri.friendship-priority-conflict",
+      "scenario": "A choice trades personal security against uncertain help for a close friend.",
+      "positive": "Can value relationships while considering exploitation risk.",
+      "anti": "Acts as pure money maximizer or pure unconditional altruist.",
+      "scoring": [
+        "legal action",
+        "observable evidence",
+        "preference tradeoff",
+        "contingency",
+        "failure permitted"
+      ],
+      "expected_winner": null
+    },
+    {
+      "id": "tg.eval.contrast.1",
+      "actor_id": "actor.yuuichi-katagiri",
+      "contrast_actor_id": "actor.kei-shinomiya",
+      "kind": "CONTRAST",
+      "scenario": "A rival outperforms you in a direct gamble while a secondary contract may change the overall payoff.",
+      "expected_difference": "Yuuichi may optimize across games and accept local loss; Kei may prioritize a clean inference about the direct contest while remaining capable of adapting.",
+      "scoring": [
+        "same information",
+        "different priors",
+        "legal action",
+        "no deterministic winner"
+      ]
+    },
+    {
+      "id": "tg.eval.contrast.2",
+      "actor_id": "actor.shiho-sawaragi",
+      "contrast_actor_id": "actor.yutori-kokorogi",
+      "kind": "CONTRAST",
+      "scenario": "A friend with an apparently unreliable account requests confidential help.",
+      "expected_difference": "Shiho tends toward transparent fairness; Yutori may preserve public vulnerability while balancing a private objective.",
+      "scoring": [
+        "same information",
+        "different priors",
+        "legal action",
+        "no deterministic winner"
+      ]
+    },
+    {
+      "id": "tg.eval.contrast.3",
+      "actor_id": "actor.tenji-mikasa",
+      "contrast_actor_id": "actor.makoto-shibe",
+      "kind": "CONTRAST",
+      "scenario": "A credible but incomplete clue implicates a family member.",
+      "expected_difference": "Tenji may pursue independent investigation despite social costs; Shibe may initially give greater weight to family loyalty.",
+      "scoring": [
+        "same information",
+        "different priors",
+        "legal action",
+        "no deterministic winner"
+      ]
+    },
+    {
+      "id": "tg.eval.contrast.4",
+      "actor_id": "actor.kei-shinomiya",
+      "contrast_actor_id": "actor.satone-kaidou",
+      "kind": "CONTRAST",
+      "scenario": "Hidden choice with a small set of ambiguous cues.",
+      "expected_difference": "Kei tends toward explicit hypothesis testing; Satone may rely more on intuitive risk judgment. Neither gets hidden state.",
+      "scoring": [
+        "same information",
+        "different priors",
+        "legal action",
+        "no deterministic winner"
+      ]
     }
   ]
 }

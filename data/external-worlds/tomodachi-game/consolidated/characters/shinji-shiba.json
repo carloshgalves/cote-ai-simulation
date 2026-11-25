@@ -2,7 +2,7 @@
   "schema_version": "consolidated-character-v2",
   "character_id": "actor.shinji-shiba",
   "display_name": "Shinji Shiba",
-  "modeling_tier": "MINIMAL_ENTITY",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
   "source_coverage": [
     "tg.secondary.2026-11-25"
   ],
@@ -29,8 +29,12 @@
       "description_status": "PROVISIONAL_PROFILE_INFERENCE"
     },
     "strategy": {
-      "behavioral_case_refs": [],
-      "context_evidence_refs": [],
+      "behavioral_case_refs": [
+        "tg.case.shinji-shiba.physical-advantage"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.shinji-shiba.physical-advantage"
+      ],
       "description": "Instrumental cooperation",
       "description_status": "PROVISIONAL_PROFILE_INFERENCE"
     },
@@ -45,6 +49,14 @@
       "context_evidence_refs": [],
       "description": "No calibrated physical measurements; use population prior.",
       "description_status": "PROVISIONAL_PROFILE_INFERENCE"
+    },
+    "combat": {
+      "behavioral_case_refs": [
+        "tg.case.shinji-shiba.physical-advantage"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.shinji-shiba.physical-advantage"
+      ]
     }
   },
   "source_documents": [

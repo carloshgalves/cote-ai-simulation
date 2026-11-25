@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.yutori-kokorogi.private-knowledge-separation",
+  "actor_id": "actor.yutori-kokorogi",
+  "primary_actor_id": "actor.yutori-kokorogi",
+  "title": "private knowledge separation",
+  "context": "A classmate privately proposes a limited cooperation test.",
+  "observed_actions": "Participates in an exchange that appears to build trust.",
+  "observed_result": "A narrow demonstration of cooperation changes the other actor's assessment.",
+  "epistemic_limits": "Cooperation in one test cannot establish loyalty in every subsequent game.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_6",
+    "locator": "SUGOROKU",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social",
+    "cooperation"
+  ],
+  "information_available": "A classmate privately proposes a limited cooperation test.",
+  "counterfactual_test": "A suspicious ally offers a limited verification challenge. Can cooperate in a bounded task without exposing unrelated private objectives. Reject: Treats success in one challenge as unconditional trust.",
+  "topics": [
+    "social",
+    "cooperation"
+  ],
+  "evidence_refs": [
+    "tg.ev.yutori-kokorogi.private-knowledge-separation"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A suspicious ally offers a limited verification challenge.",
+    "expected_tendency": "Can cooperate in a bounded task without exposing unrelated private objectives.",
+    "anti_case": "Treats success in one challenge as unconditional trust.",
+    "canon_outcome_as_instruction": false
+  }
+}

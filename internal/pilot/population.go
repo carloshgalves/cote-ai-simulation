@@ -87,7 +87,7 @@ func projectPopulation(j Journal,s State,id string,c *Context){
  if !a.Core{c.OwnCanon=CanonProjection{Source:a.Source,SchoolYear:a.Year,Status:"Identidade provisória; sem episódios posteriores à divergência"}}
  c.Locations=append(c.Locations,"class-a","staffroom","senior-class-a","senior-class-b","senior-class-c","senior-class-d","senior-common")
  if a.Role!="student"{
-  filtered:=[]string{};for _,loc:=range c.Locations{if !strings.HasPrefix(loc,"dormitory-"){filtered=append(filtered,loc)}};c.Locations=filtered
+  filtered:=[]string{};for _,loc:=range c.Locations{if !strings.HasPrefix(loc,"dormitory-")||j.Version>=StaffCareVersion&&loc=="dormitory-"+id{filtered=append(filtered,loc)}};c.Locations=filtered
  }else{
   filtered:=[]string{};for _,loc:=range c.Locations{if loc!="staffroom"{filtered=append(filtered,loc)}};c.Locations=filtered
  }

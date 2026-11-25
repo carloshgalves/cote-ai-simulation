@@ -105,7 +105,12 @@ func schoolView(j Journal,s State,id string)*SchoolView{
  if j.Version>=PopulationVersion&&!isStudent(j,id){
   v.Rules=[]string{"Equipe escolar. Não recebe PP de estudante, não participa do exame VIP e não pode criar sanções ou regras. A autoridade institucional permanece com o motor."}
   if j.Version>=CognitionVersion&&j.Population[id].Role=="teacher"{v.Rules=append(v.Rules,classGuarantee,"A renda mensal estudantil é CP × 100. A revelação institucional aos ingressantes está prevista para o segundo mês; cumpra a confidencialidade.")}
-  if m.Location==staffStation(j,id){add("work","")}
+  if m.Location==staffStation(j,id)&&(j.Version<StaffCareVersion||staffOnDuty(j,s,id)){add("work","")}
+  if j.Version>=StaffCareVersion{
+   if m.Location=="cafeteria"{add("eat","free")}
+   if m.Location=="dormitory-"+id{add("rest","");if v.Period=="repouso"{add("sleep","")}}
+   if m.Location=="courtyard"||m.Location=="park"{add("relax","")}
+  }
   return v
  }
  if s.Minute>=540{v.Rules[1]="Transferências voluntárias de 1.000 PP são permitidas; sem saldo negativo. Subsistência gratuita disponível. A fórmula mensal de pontos ainda não foi revelada."}

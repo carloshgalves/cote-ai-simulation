@@ -21,6 +21,8 @@ func TestHierarchicalOrdinaryVersusStrategic(t *testing.T){
  if decisionNeedsModel(j,s,id){t.Fatal("ordinary initiative polled")}
  m.Goals=[]string{"Estabelecer influência entre colegas"};s.Minds[id]=m
  if !decisionNeedsModel(j,s,id){t.Fatal("strategic initiative suppressed")}
+ m.Goals=[]string{"Enfrentar desafios de raciocínio"};s.Minds[id]=m
+ if !decisionNeedsModel(j,s,id){t.Fatal("standalone strategic goal lost")}
  m.OpportunityDay=1;m.OpportunityCount=1;s.Minds[id]=m
  if decisionNeedsModel(j,s,id){t.Fatal("discretionary budget ignored")}
  stimulate(&s,id,"Recebeu uma fala");if !decisionNeedsModel(j,s,id){t.Fatal("essential stimulus suppressed")}

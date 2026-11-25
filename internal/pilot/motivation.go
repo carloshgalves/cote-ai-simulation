@@ -34,6 +34,7 @@ func personalOpportunity(j Journal,s State,id string)*PersonalOpportunity{
    // promise of any specific peer's presence is provided.
    return &PersonalOpportunity{Goal:goal,Kind:"explore",Location:m.Location}
   }
+  if j.Version>=HierarchicalVersion&&strategicGoal(g){return &PersonalOpportunity{Goal:goal,Kind:"strategic",Location:m.Location}}
   if strings.Contains(g,"acadêm")||strings.Contains(g,"reconhecimento")||strings.Contains(g,"talento")||strings.Contains(g,"autonomia"){
    return &PersonalOpportunity{Goal:goal,Kind:"personal",Location:m.Location}
   }

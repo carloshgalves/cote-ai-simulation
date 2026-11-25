@@ -102,7 +102,7 @@ function renderChoices(){
 function renderProgress(){if(!snapshot)return;renderDateProgress();renderChoices();const p=progress;
  const active=p?.active,pending=p?.round>snapshot.state.round,done=p?.completed||0;
  $("progressbar").style.width=(pending&&p.total?100*done/p.total:0)+"%";
- $("progress").textContent=active?done+"/"+p.total+" · "+(p.phase==="saving"?"Salvando":p.phase==="canceling"?"Cancelando":name(p.actor)+(p.attempt===0?" · rotina local":" · tentativa "+p.attempt)+" · "+Math.max(0,Math.floor((Date.now()-Date.parse(p.actor_started_at))/1000))+" s")+(p.last_error?" · "+p.last_error:""):pending&&done?"Resultados provisórios: "+done+"/"+p.total:"";
+ $("progress").textContent=active?done+"/"+p.total+" · "+(p.phase==="saving"?"Salvando":p.phase==="canceling"?"Cancelando":p.phase==="routine-batch"?"Processando lote determinístico":name(p.actor)+(p.attempt===0?" · rotina local":" · tentativa "+p.attempt)+" · "+Math.max(0,Math.floor((Date.now()-Date.parse(p.actor_started_at))/1000))+" s")+(p.last_error?" · "+p.last_error:""):pending&&done?"Resultados provisórios: "+done+"/"+p.total:"";
  for(const label of $("people").querySelectorAll("[data-progress]")){const x=pending&&p?.choices?.find(x=>x.actor===label.dataset.progress);label.textContent=x?(x.failure?"Falha técnica":x.decision?.source==="motor/rotina"?"Rotina local":"Decisão pronta"):active&&p.actor===label.dataset.progress?"Consultando modelo…":snapshot.state.minds[label.dataset.progress].activity?("Em atividade até "+time(snapshot.state.minds[label.dataset.progress].activity.until)):snapshot.state.minds[label.dataset.progress].wake_reason?"Pronto para decidir":"";label.className=x?(x.failure?"error":"good"):"muted"}
  controls()
 }
@@ -333,7 +333,15 @@ $("advance").onclick=async()=>{
  finally{busy=false;controls();await poll()}
 };
 let dateOverride=null,dateRun=null;
-function renderDateProgress(){if(!dateRun||!snapshot)return;const d=dateRun,p=progress,elapsed=Math.max(0,snapshot.state.minute-d.start),span=Math.max(1,d.target-d.start),percent=Math.min(100,100*elapsed/span);$("date-progress").hidden=false;$("date-progress-target").textContent=time(d.target);$("date-progress-percent").textContent=percent.toFixed(1).replace(".",",")+"%";$("date-progress-bar").style.width=percent+"%";$("date-progress-resolution").textContent=d.finished?d.finished:p?.active&&p.phase==="routine-batch"?"Baixa · lote de rotinas":p?.active&&p.phase==="thinking"?"Detalhada · cognição":snapshot.needs_inference?"Detalhada · próxima decisão":"Baixa · período escolar";$("date-progress-calls").textContent=fmtNum(Math.max(0,(p?.model_calls||0)-d.calls));$("date-progress-detail").textContent=fmtNum(elapsed)+" / "+fmtNum(span)+" minutos simulados · "+fmtNum(snapshot.state.round-d.round)+" ciclos confirmados"+(d.finished?" · "+d.finished:"");}
+function renderDateProgress(){if(!dateRun||!snapshot)return;const d=dateRun,p=progress,elapsed=Math.max(0,(d.endMinute??snapshot.state.minute)-d.start),span=Math.max(1,d.target-d.start),percent=Math.min(100,100*elapsed/span),rounds=(d.endRound??snapshot.state.round)-d.round;
+ $("date-progress").hidden=false;
+ $("date-progress-target").textContent=time(d.target);
+ $("date-progress-percent").textContent=percent.toFixed(1).replace(".",",")+"%";
+ $("date-progress-bar").style.width=percent+"%";
+ $("date-progress-resolution").textContent=d.finished?d.finished:p?.active&&p.phase==="routine-batch"?"Baixa · lote de rotinas":p?.active&&p.phase==="thinking"&&p.attempt>0?"Detalhada · cognição":snapshot.needs_inference?"Detalhada · próxima decisão":d.mode==="faithful"?"Rotina · ciclo por ciclo":"Baixa · período escolar";
+ $("date-progress-calls").textContent=fmtNum(Math.max(0,(d.endCalls??p?.model_calls??0)-d.calls));
+ $("date-progress-detail").textContent=fmtNum(elapsed)+" / "+fmtNum(span)+" minutos simulados · "+fmtNum(rounds)+" ciclos confirmados"+(d.finished?" · "+d.finished:"");
+}
 function dateTarget(){if(dateOverride!==null)return dateOverride;if($("date-days").value==="exam"){const slot=(snapshot.state.world?.calendar||[]).find(e=>(e.day-1)*1440+480>snapshot.state.minute);return slot?(slot.day-1)*1440+480:null}return (Math.floor(snapshot.state.minute/1440)+Number($("date-days").value))*1440+480}
 function datePreview(){if(!snapshot)return;const t=dateTarget();$("date-preview").textContent=t===null?"Nenhum exame futuro com dia de início disponível.":"Destino: dia "+(Math.floor(t/1440)+1)+", 08:00.";$("date-start").disabled=t===null||t<=snapshot.state.minute}
 $("date-open").onclick=()=>{if(!snapshot||busy||running)return;dateOverride=null;datePreview();$("date-dialog").showModal()};
@@ -345,7 +353,7 @@ $("date-start").onclick=async()=>{
  if(target===null||target<=snapshot.state.minute)return;
  if(faithful&&!routes.some(r=>r.enabled)){status("Configure uma rota de modelo antes do avanço fiel.",true);return}
  $("date-dialog").close();running=true;controls();let reason="Pausa solicitada.";
- try{progress=await api("/api/progress")}catch{}dateRun={start:snapshot.state.minute,target,round:snapshot.state.round,calls:progress?.model_calls||0,finished:""};renderDateProgress();
+ try{progress=await api("/api/progress")}catch{}dateRun={start:snapshot.state.minute,target,round:snapshot.state.round,calls:progress?.model_calls||0,mode,finished:""};renderDateProgress();
  try{
   while(running&&!snapshot.done&&snapshot.state.minute<target){
    if(faithful||adaptive&&snapshot.needs_inference){if(!routes.some(r=>r.enabled)){reason="Decisão cognitiva necessária; configure um modelo para continuar.";break}if(!await step()){reason="Avanço interrompido por erro ou pausa; ciclos concluídos preservados.";break}}
@@ -360,7 +368,7 @@ $("date-start").onclick=async()=>{
   else if(snapshot.done)reason="Limite da simulação atingido.";
   status(reason);
  }catch(e){status(e.message,true);try{snapshot=await api("/api/state");render()}catch{}}
- finally{running=false;busy=false;if(dateRun)dateRun.finished=snapshot.state.minute>=target?"Destino atingido":snapshot.done?"Limite atingido":"Interrompido";controls();await poll();renderDateProgress()}
+ finally{running=false;busy=false;if(dateRun){dateRun.finished=snapshot.state.minute>=target?"Destino atingido":snapshot.done?"Limite atingido":"Interrompido";dateRun.endMinute=snapshot.state.minute;dateRun.endRound=snapshot.state.round;try{const p=await api("/api/progress");dateRun.endCalls=p.model_calls??0}catch{dateRun.endCalls=progress?.model_calls||0}}controls();await poll();renderDateProgress()}
 };
 $("event-filter").onchange=()=>{timelinePage=0;render()};$("actor-search").oninput=render;
 $("mind-tabs").onclick=e=>{const key=e.target.dataset.tab;if(key){detailTab=key;render()}};

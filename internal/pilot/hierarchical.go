@@ -14,14 +14,15 @@ func strategicOpportunity(j Journal,s State,id string)bool{
  m:=s.Minds[id]
  if m.Plan!=nil||len(m.Plans)>0||op.Kind=="plan"{return true}
  if m.OpportunityDay==s.Minute/1440+1&&m.OpportunityCount>=1{return false}
- for _,goal:=range m.Goals{
-  g:=strings.ToLower(goal)
-  for _,term:=range []string{"influência","estratég","vantagen","manipul","investig","segredo","suspeita","ameaça","rival","proteger","ocultar","reconhecimento","talento","desafios de raciocínio","cooperação"}{
-   if strings.Contains(g,term){return true}
-  }
- }
+ for _,goal:=range m.Goals{if strategicGoal(goal){return true}}
  // Unrecognized/ambiguous goals are never assigned a fabricated motive.
  // Routine interests may generate co-presence, not dialogue or trust.
+ return false
+}
+
+func strategicGoal(goal string)bool{
+ g:=strings.ToLower(goal)
+ for _,term:=range []string{"influência","estratég","vantagen","manipul","investig","segredo","suspeita","ameaça","rival","proteger","ocultar","reconhecimento","talento","desafios de raciocínio","cooperação"}{if strings.Contains(g,term){return true}}
  return false
 }
 

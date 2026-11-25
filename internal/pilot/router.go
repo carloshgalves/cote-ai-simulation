@@ -219,8 +219,8 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 	m:=*rt.model
 	if rt.view.EffectiveFormat!=""&&rt.view.EffectiveFormat!="auto"{m.Format=rt.view.EffectiveFormat}
 	r.mu.Unlock()
-	start:=time.Now()
 	call:=func(repair string)(Decision,error){
+		start:=time.Now()
 		r.mu.Lock();rt.view.Attempts++;r.mu.Unlock()
 		d,err:=m.decide(ctx,view,repair)
 		if err==nil{if validation:=validateDecision(view,d);validation!=nil{err=responseError{validation.Error()}}}
@@ -264,7 +264,8 @@ func (r *Router) Test(ctx context.Context,id string)(RouteView,error){
 	if c:=r.blocked(rt,time.Now());c.until.After(time.Now()){r.mu.Unlock();return RouteView{},errors.New("rota em cooldown: "+c.message)}
 	rt.view.Status="consultando"
 	r.mu.Unlock()
-	view:=Context{Version:Version,Self:Profile{ID:"probe",Name:"Aluno de teste",Class:"D",Traits:[]string{"Reservado"},Goals:[]string{"Aguardar orientação"}},Goals:[]string{"Aguardar orientação"},Location:"hall",Locations:[]string{"hall"},SchoolYear:1,PeerRelationship:"Teste sintético sem outros personagens."}
+	peer:=Person{ID:"peer",Name:"Colega fictício",Class:"D"}
+	view:=Context{Version:Version,CanObserve:true,Self:Profile{ID:"probe",Name:"Aluno de teste",Class:"D",Traits:[]string{"Reservado"},Goals:[]string{"Aguardar orientação"}},Goals:[]string{"Aguardar orientação"},Location:"hall",Locations:[]string{"hall","library"},People:[]Person{peer},Present:[]Presence{{Person:peer,Location:"hall"}},SchoolYear:1,PeerRelationship:"Teste sintético com um colega fictício da mesma série."}
 	_,err:=r.callRoute(ctx,rt,view,"")
 	r.mu.Lock();defer r.mu.Unlock()
 	if err!=nil{

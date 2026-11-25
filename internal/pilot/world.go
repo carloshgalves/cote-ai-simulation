@@ -39,6 +39,8 @@ type Meeting struct{
  Status string `json:"status"`
  HostAttended bool `json:"host_attended,omitempty"`
  GuestAttended bool `json:"guest_attended,omitempty"`
+ HostAttendanceStart int64 `json:"host_attendance_start,omitempty"`
+ GuestAttendanceStart int64 `json:"guest_attendance_start,omitempty"`
 }
 type VIPExam struct{
  Phase string `json:"phase"`
@@ -102,11 +104,19 @@ func schoolView(j Journal,s State,id string)*SchoolView{
  v.Period=periodAt(s.Minute);v.NextAnnouncement=nextPublicSchedule(s.Minute)
  if j.Version>=PopulationVersion&&!isStudent(j,id){
   v.Rules=[]string{"Equipe escolar. Não recebe PP de estudante, não participa do exame VIP e não pode criar sanções ou regras. A autoridade institucional permanece com o motor."}
+  if j.Version>=CognitionVersion&&j.Population[id].Role=="teacher"{v.Rules=append(v.Rules,classGuarantee,"A renda mensal estudantil é CP × 100. A revelação institucional aos ingressantes está prevista para o segundo mês; cumpra a confidencialidade.")}
   if m.Location==staffStation(j,id){add("work","")}
   return v
  }
  if s.Minute>=540{v.Rules[1]="Transferências voluntárias de 1.000 PP são permitidas; sem saldo negativo. Subsistência gratuita disponível. A fórmula mensal de pontos ainda não foi revelada."}
+ if j.Version>=CognitionVersion&&j.Population[id].Year==1&&s.Minute<schoolDisclosure{
+  v.Rules=[]string{"O cartão permite usar PP no campus. A escola anunciou boas perspectivas de emprego e universidade.","Compras e transferências dependem de saldo; existem refeições gratuitas."}
+ }
  if s.Minute>=30*1440+480{v.Rules[1]="Renda mensal = CP atuais da classe × 100; saldo anterior permanece. Transferências voluntárias de 1.000 PP permitidas."}
+ if j.Version>=CognitionVersion&&(j.Population[id].Year>1||s.Minute>=schoolDisclosure){
+  v.Rules=append(v.Rules,classGuarantee)
+  if j.Population[id].Year>1&&s.Minute<schoolDisclosure{v.Rules[1]="Renda mensal = CP atuais da classe × 100; o saldo anterior permanece. Você conhece a regra por experiência institucional anterior."}
+ }
  v.Rules=append(v.Rules,"Convites são para daqui a 30 minutos, no local atual. O destinatário deve aceitar e os dois devem comparecer. Estudar ocupa 25 minutos, refeição 20, descanso 60.")
  if m.Location=="shop"{
   v.Catalog=clone(shopPrices)
@@ -135,9 +145,10 @@ func schoolView(j Journal,s State,id string)*SchoolView{
   if mt.Status=="accepted"&&s.Minute>=mt.At&&s.Minute+5<=mt.At+15&&m.Location==mt.Location&&((mt.Host==id&&!mt.HostAttended)||(mt.Guest==id&&!mt.GuestAttended)){add("attend",mt.ID)}
  }
  if e:=s.World.Exam;e!=nil&&(j.Version<PopulationVersion||has(e.Group,id)){
-  outcome:=0;if s.Minute>=1440+960{outcome=e.Outcome}
+  outcome:=0;if s.Minute>=examBase(j.Version)+960{outcome=e.Outcome}
   v.Exam=&ExamView{e.Phase,clone(e.Group),e.VIP==id,e.Submitted[id],outcome}
   v.Rules=append(v.Rules,"Zodiac/VIP adaptado: um VIP secreto no grupo; uma submissão por não VIP. Fase antecipada: acerto recompensa 500.000 PP ao autor e transfere 50 CP da classe VIP à dele; erro recompensa VIP e inverte CP. Janela final: acerto 1.000.000 PP ao VIP e 500.000 aos demais; erro ou omissão 500.000 ao VIP. Submissão da classe do VIP não produz resultado. O resultado não revela identidades.")
+  if j.Version>=CognitionVersion&&e.Phase=="final"{v.Rules=append(v.Rules,"Na janela final não há perda nem transferência de CP por erro ou omissão. A penalidade em CP pertence exclusivamente à fase antecipada.")}
   if (e.Phase=="early"||e.Phase=="final")&&!e.Submitted[id]&&e.VIP!=id&&e.Outcome==0{for _,other:=range e.Group{if other!=id{add("guess",other)}}}
  }
  return v
@@ -152,8 +163,10 @@ func nextDue(j Journal,s State)int64{
  next:=WorldEnd
  // Fixed authored schedule, disclosure at time of event only.
  for day:=int64(0);day<=32;day++{for _,at:=range []int64{480,540,720,780,900,1080,1320,1440}{n:=day*1440+at;if n>s.Minute&&n<next{next=n}}}
- for _,n:=range []int64{1440+600,1440+840,1440+870,1440+900,1440+960}{if n>s.Minute&&n<next{next=n}}
+ base:=examBase(j.Version)
+ for _,n:=range []int64{base+600,base+840,base+870,base+900,base+960}{if n>s.Minute&&n<next{next=n}}
  for _,mt:=range s.World.Meetings{if mt.Status=="pending"||mt.Status=="accepted"{for _,n:=range []int64{mt.At,mt.At+15}{if n>s.Minute&&n<next{next=n}}}}
+ if j.Version>=CognitionVersion{for _,m:=range s.Minds{for _,p:=range m.Plans{if p.Deadline>s.Minute&&p.Deadline<next{next=p.Deadline}}}}
  return next
 }
 func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
@@ -179,7 +192,7 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
   case "exercise":duration=30;kind="task"
   case "recreation":duration=40;kind="task";pay(s,id,"school",800,"event","Atividade de lazer");m=s.Minds[id]
   case "use":
-   if m.Inventory[d.Target]>0{m.Inventory[d.Target]--;appendEvent(s,Event{Kind:"task",Actor:id,Text:"Consumiu "+d.Target,Audience:[]string{id}})}
+   if m.Inventory[d.Target]>0{m.Inventory[d.Target]--;if j.Version>=CognitionVersion&&m.Body!=nil{if d.Target=="water"{m.Body.Hydration=clampMeter(m.Body.Hydration+250)}else{m.Body.Energy=clampMeter(m.Body.Energy+200)}};appendEvent(s,Event{Kind:"task",Actor:id,Text:"Consumiu "+d.Target,Audience:[]string{id}})}
   case "invite":
    duplicate:=false
    for _,mt:=range s.World.Meetings{if (mt.Status=="pending"||mt.Status=="accepted")&&((mt.Host==id&&mt.Guest==d.Target)||(mt.Host==d.Target&&mt.Guest==id)){duplicate=true}}
@@ -188,12 +201,13 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
    s.World.Meetings=append(s.World.Meetings,mt)
    appendEvent(s,Event{Kind:"meeting",Actor:id,Target:d.Target,Text:fmt.Sprintf("Convite %s em %s às %s; aguarda aceite.",mt.ID,mt.Location,reportTime(mt.At)),Audience:[]string{id,d.Target}})
    if j.Version>=PopulationVersion{activateInvite(s,d.Target)}
-   wakeWaiting(s,d.Target,"Recebeu convite")
+   wakeWaiting(s,d.Target,"Recebeu convite");if j.Version>=CognitionVersion{stimulate(s,d.Target,"Recebeu convite")}
   case "accept","decline","attend":
    for i,mt:=range s.World.Meetings{if mt.ID==d.Target{
     switch d.Action{case "accept":mt.Status="accepted";case "decline":mt.Status="declined";case "attend":duration=5;kind="task"}
     s.World.Meetings[i]=mt
     appendEvent(s,Event{Kind:"meeting",Actor:id,Target:d.Target,Text:"Compromisso "+mt.ID+": "+d.Action,Audience:[]string{mt.Host,mt.Guest}})
+    if j.Version>=CognitionVersion&&(d.Action=="accept"||d.Action=="decline"){stimulate(s,mt.Host,"Atualização de compromisso")}
    }}
   case "guess": // resolved as one cohort below
   }
@@ -203,10 +217,14 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
 }
 func completeTask(j Journal,s *State,id string,m *Mind,a *Activity){
  m.WakeReason="Atividade concluída"
+ if j.Version>=CognitionVersion&&m.Body!=nil&&strings.HasPrefix(a.Target,"eat:"){m.Body.Energy=clampMeter(m.Body.Energy+450);m.Body.Hydration=clampMeter(m.Body.Hydration+350)}
  appendEvent(s,Event{Kind:"task",Actor:id,Text:"Concluiu "+a.Target,Audience:[]string{id}})
  if strings.HasPrefix(a.Target,"attend:"){
   for i,mt:=range s.World.Meetings{if mt.ID==strings.TrimPrefix(a.Target,"attend:")&&mt.Status=="accepted"&&s.Minute<=mt.At+15&&m.Location==mt.Location{
-   if mt.Host==id{mt.HostAttended=true}else if mt.Guest==id{mt.GuestAttended=true}
+   if mt.Host==id{mt.HostAttended=true;if j.Version>=CognitionVersion{mt.HostAttendanceStart=a.Until-5}}else if mt.Guest==id{mt.GuestAttended=true;if j.Version>=CognitionVersion{mt.GuestAttendanceStart=a.Until-5}}
+   if j.Version>=CognitionVersion&&mt.HostAttended&&mt.GuestAttended&&mt.HostAttendanceStart<mt.GuestAttendanceStart+5&&mt.GuestAttendanceStart<mt.HostAttendanceStart+5{
+    mt.Status="met";s.Minds[id]=*m;recordMeeting(s,mt);*m=s.Minds[id]
+   }
    s.World.Meetings[i]=mt
   }}
  }
@@ -256,18 +274,21 @@ func advanceWorld(j Journal,s *State){
    if mt.Status=="pending"{mt.Status="expired"}else{
     appendEvent(s,Event{Kind:"meeting",Actor:"school",Target:mt.ID,Text:"Horário do compromisso "+mt.ID+" em "+mt.Location,Audience:[]string{mt.Host,mt.Guest}})
     wakeWaiting(s,mt.Host,"Compromisso agendado");wakeWaiting(s,mt.Guest,"Compromisso agendado")
+    if j.Version>=CognitionVersion{stimulate(s,mt.Host,"Compromisso agendado");stimulate(s,mt.Guest,"Compromisso agendado")}
    }
   }
   if now==mt.At+15&&mt.Status=="accepted"{
    a,b:=s.Minds[mt.Host],s.Minds[mt.Guest]
-   if mt.HostAttended&&mt.GuestAttended&&a.Location==mt.Location&&b.Location==mt.Location&&(a.Activity==nil||a.Activity.Kind!="move")&&(b.Activity==nil||b.Activity.Kind!="move"){mt.Status="met"}else{mt.Status="missed"}
+   if j.Version<CognitionVersion&&mt.HostAttended&&mt.GuestAttended&&a.Location==mt.Location&&b.Location==mt.Location&&(a.Activity==nil||a.Activity.Kind!="move")&&(b.Activity==nil||b.Activity.Kind!="move"){mt.Status="met"}else{mt.Status="missed"}
    appendEvent(s,Event{Kind:"meeting",Actor:"school",Target:mt.ID,Text:"Compromisso "+mt.ID+": "+mt.Status,Audience:[]string{mt.Host,mt.Guest}})
+   if j.Version>=CognitionVersion{recordMeeting(s,mt)}
   }
   s.World.Meetings[i]=mt
  }
  announce:=func(t string){appendEvent(s,Event{Kind:"announcement",Actor:"school",Text:t,Audience:ids(j.Profiles)});for _,id:=range ids(j.Profiles){wakeWaiting(s,id,"Novo anúncio escolar")}}
+ base:=examBase(j.Version)
  switch now{
- case 1440+600:
+ case base+600:
   group:=ids(j.Profiles)
   if j.Version>=PopulationVersion{group=[]string{};for _,id:=range ids(j.Profiles){if j.Population[id].Core{group=append(group,id)}}}
   // Assignment is deterministic for replay, not exposed in actor context.
@@ -275,17 +296,21 @@ func advanceWorld(j Journal,s *State){
   vip:=group[int(h[0])%len(group)]
   s.World.Exam=&VIPExam{Phase:"early",Group:group,VIP:vip,Submitted:map[string]bool{}}
   if j.Version>=PopulationVersion{announce("Início do Zodiac/VIP experimental, restrito aos seis participantes designados. Publicação às 16:00.")}else{announce("Início do Zodiac/VIP adaptado: grupo único. Janela antecipada até 14:30; janela final 14:30–15:00; publicação às 16:00. Consulte as regras privadas.")}
-  for _,id:=range group{appendEvent(s,Event{Kind:"exam",Actor:"school",Text:fmt.Sprintf("Sua função VIP: %t",id==vip),Audience:[]string{id}})}
- case 1440+840:announce("Fim do período ativo do exame; submissões antecipadas continuam até 14:30.")
- case 1440+870:if e:=s.World.Exam;e!=nil&&e.Outcome==0{e.Phase="final"};announce("Janela final de submissões do exame aberta.")
- case 1440+900:if e:=s.World.Exam;e!=nil&&e.Outcome==0{settleExam(j,s,2,"")};announce("Submissões encerradas.")
- case 1440+960:if e:=s.World.Exam;e!=nil{announce(fmt.Sprintf("Resultado do grupo Zodiac/VIP: Outcome %d. Variações de CP desde o início: A=%+d B=%+d C=%+d D=%+d.",e.Outcome,s.World.ClassPoints["A"]-1000,s.World.ClassPoints["B"]-1000,s.World.ClassPoints["C"]-1000,s.World.ClassPoints["D"]-1000))}
+  for _,id:=range group{appendEvent(s,Event{Kind:"exam",Actor:"school",Text:fmt.Sprintf("Sua função VIP: %t",id==vip),Audience:[]string{id}});if j.Version>=CognitionVersion{stimulate(s,id,"Início do exame VIP")}}
+ case base+840:announce("Fim do período ativo do exame; submissões antecipadas continuam até 14:30.")
+ case base+870:if e:=s.World.Exam;e!=nil&&e.Outcome==0{e.Phase="final"};announce("Janela final de submissões do exame aberta.");if j.Version>=CognitionVersion{stimulateExam(s,"Janela final: erro ou omissão não perde CP; só a fase antecipada transfere CP.")}
+ case base+900:if e:=s.World.Exam;e!=nil&&e.Outcome==0{settleExam(j,s,2,"")};announce("Submissões encerradas.");if j.Version>=CognitionVersion{stimulateExam(s,"Exame encerrado")}
+ case base+960:if e:=s.World.Exam;e!=nil{announce(fmt.Sprintf("Resultado do grupo Zodiac/VIP: Outcome %d. Variações de CP desde o início: A=%+d B=%+d C=%+d D=%+d.",e.Outcome,s.World.ClassPoints["A"]-1000,s.World.ClassPoints["B"]-1000,s.World.ClassPoints["C"]-1000,s.World.ClassPoints["D"]-1000))}
  default:
   switch now%1440{
   case 480:
    if now==30*1440+480{
     for _,id:=range ids(j.Profiles){if j.Version>=PopulationVersion&&(!isStudent(j,id)||j.Population[id].Year!=1){continue};income:=s.World.ClassPoints[classOf(j,id)]*100;if income>0{pay(s,"school",id,income,"monthly","Renda mensal")}}
-    announce("A escola revela a fórmula: cada aluno recebe mensalmente CP atuais da classe × 100. O saldo anterior permanece.")
+    if j.Version>=CognitionVersion{
+     announce("A escola revela as regras de classificação: os CP determinam a posição das turmas e a renda mensal (CP × 100). "+classGuarantee)
+     appendEvent(s,Event{Kind:"revelation",Actor:"school",Text:classGuarantee,Audience:ids(j.Profiles)})
+     for _,id:=range ids(j.Profiles){if j.Population[id].Year==1{stimulate(s,id,"Revelação institucional: critérios de classificação e renda")}}
+    }else{announce("A escola revela a fórmula: cada aluno recebe mensalmente CP atuais da classe × 100. O saldo anterior permanece.")}
    }else{announce("Novo dia escolar. Confira seus compromissos e recursos.")}
   case 540:announce("Orientação e aulas da manhã; as transferências voluntárias de PP e compras são permitidas.")
   case 720:announce("Intervalo de almoço. Refeição essencial gratuita disponível no refeitório.")

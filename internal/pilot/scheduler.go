@@ -87,6 +87,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
   if j.Version<PopulationVersion||x.Decision.Source!=routineSource{
    if j.Version>=PopulationVersion&&m.Tier==LightTier&&lightInitiativeDue(s,x.Actor){m.LastLightInitiativeDay=s.Minute/1440+1}
    m=applyCognition(j,&out,x.Actor,m,x.Decision)
+   if j.Version>=CognitionVersion{m.PendingStimulus="";m.AwaitEvent=x.Decision.Action=="wait"&&x.Decision.WaitMinutes==0}
   }else{m.LastAction=x.Decision.Action}
 		m.WakeReason="";out.Minds[x.Actor]=m
 	}
@@ -160,6 +161,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	if err!=nil||!ok||plan.Kind!=clock.ClockAdvance{return State{},errors.New("invalid scheduled clock")}
 	advanced,err:=clock.ApplyAdvance(cs,plan);if err!=nil{return State{},err}
 	out.Minute=int64(advanced.Instant)
+ if j.Version>=CognitionVersion{advanceBodies(j,&out,s.Minute)}
 	// Complete arrivals first, then publish messages and observations.
 	arrivals:=[]string{}
 	for _,id:=range ids(j.Profiles){
@@ -178,7 +180,9 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		if a==nil||a.Until>minute{continue}
 		switch a.Kind{
 		case "talk":appendEvent(&out,Event{Kind:"claim",Actor:id,Target:a.Target,Text:a.Text,Audience:[]string{id,a.Target}});m.WakeReason="Conversa concluída"
-   if j.Version>=PopulationVersion{out.Minds[id]=m;engage(j,&out,id,a.Target);m=out.Minds[id]}
+   if j.Version>=PopulationVersion{out.Minds[id]=m;engage(j,&out,id,a.Target)
+    if j.Version>=CognitionVersion{recordExchange(&out,id,a.Target);stimulate(&out,a.Target,"Recebeu uma fala")}
+    m=out.Minds[id]}
 			if j.Version>=ConversationVersion&&m.Conversation!=nil{
 				m.Conversation.Turn=a.Target;m.Conversation.Turns++
 				if j.Version>=WorldVersion{
@@ -204,7 +208,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		}
 		m.Activity=nil;out.Minds[id]=m
 	}
-	if j.Version>=WorldVersion{advanceWorld(j,&out);if j.Version>=PopulationVersion{updatePopulation(j,&out)};return out,nil}
+	if j.Version>=WorldVersion{advanceWorld(j,&out);if j.Version>=PopulationVersion{updatePopulation(j,&out)};if j.Version>=CognitionVersion{expirePlans(j,&out)};return out,nil}
 	for _,e:=range schoolAgenda{if e.Minute==minute{
 		appendEvent(&out,Event{Kind:"announcement",Actor:"school",Text:e.Text,Audience:ids(j.Profiles)})
 		for _,id:=range ids(j.Profiles){wakeWaiting(&out,id,"Novo anúncio escolar")}

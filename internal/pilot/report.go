@@ -23,6 +23,7 @@ type ActorCycle struct {
 }
 type ActorReport struct {
 	Profile Profile `json:"profile"`
+ Identity *CharacterIdentity `json:"identity,omitempty"`
 	Cycles []ActorCycle `json:"cycles"`
 	Events []Event `json:"events"`
 	Final Mind `json:"final"`
@@ -51,7 +52,7 @@ func buildReport(o OperatorReport)([]byte,error){
 	j:=o.Journal
 	s,err:=initial(j);if err!=nil{return nil,err}
 	actors:=map[string]*ActorReport{}
-	for _,profile:=range j.Profiles{actors[profile.ID]=&ActorReport{Profile:profile,Cycles:[]ActorCycle{}}}
+	for _,profile:=range j.Profiles{a:=&ActorReport{Profile:profile,Cycles:[]ActorCycle{}};if x,ok:=j.Identities[profile.ID];ok{a.Identity=&x};actors[profile.ID]=a}
 	for _,round:=range j.Rounds{
 		next,err:=apply(j,s,round);if err!=nil{return nil,err}
 		choices:=map[string]Chosen{}
@@ -67,7 +68,14 @@ func buildReport(o OperatorReport)([]byte,error){
 			c:=clone(choice)
 			c.Decision.Source="";c.Decision.Ignored=nil
 			if c.Failure!=""{c=Chosen{Actor:id}}
-			if j.Version>=PopulationVersion&&!chosen&&len(events)==0&&equalMind(s.Minds[id],next.Minds[id]){continue}
+			if j.Version>=PopulationVersion&&!chosen&&len(events)==0{
+    before,after:=s.Minds[id],next.Minds[id]
+    // Continuous body accounting changes most minds on each clock tick.
+    // Do not duplicate body-only snapshots for every inactive actor; the
+    // full journal reconstructs those states and final body is exported.
+    if j.Version>=CognitionVersion{before.Body=nil;after.Body=nil}
+    if equalMind(before,after){continue}
+   }
    contextView:=Context{}
    if j.Version<PopulationVersion||consulted{contextView=actorContext(j,s,id)}
    actors[id].Cycles=append(actors[id].Cycles,ActorCycle{Cycle:round.Number,Consulted:consulted,Routine:routine,StartMinute:s.Minute,EndMinute:next.Minute,Before:clone(s.Minds[id]),Choice:c,Events:events,After:clone(next.Minds[id]),AvailableContext:contextView})
@@ -137,6 +145,9 @@ func writeEvent(b *strings.Builder,e Event){fmt.Fprintf(b,"- %s | %s | %s | %s �
 func writeMind(b *strings.Builder,m Mind){
 	fmt.Fprintf(b,"- Local: %s\n- Objetivos: %s\n- Intenção: %s\n",m.Location,strings.Join(m.Goals,"; "),m.Thought)
 	if m.Inventory!=nil{fmt.Fprintf(b,"- Saldo: %d PP\n",m.Wallet);writeJSONText(b,m.Inventory)}
+ if m.Body!=nil{fmt.Fprintf(b,"- Estado corporal experimental: energia %d, hidratação %d, fadiga %d\n",m.Body.Energy,m.Body.Hydration,m.Body.Fatigue)}
+ if len(m.Social)>0{fmt.Fprintln(b,"- Vínculos sociais:");writeJSONText(b,m.Social)}
+ if len(m.Plans)>0{fmt.Fprintln(b,"- Planos por horizonte:");writeJSONText(b,m.Plans)}
 	for _,d:=range m.Discoveries{fmt.Fprintf(b,"- Descoberta: %s (%s)\n",d.Text,d.Evidence)}
 	if m.Conversation!=nil{fmt.Fprintf(b,"- Conversa com %s; vez de %s; %d falas concluídas\n",m.Conversation.Peer,m.Conversation.Turn,m.Conversation.Turns)}
 	if m.Activity!=nil{fmt.Fprintf(b,"- Atividade: %s; término/reavaliação: %s\n",m.Activity.Kind,reportTime(m.Activity.Until))}

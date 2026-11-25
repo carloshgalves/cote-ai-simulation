@@ -20,5 +20,6 @@ jobs:
           node validate-corpus.mjs
           node smoke.mjs
           node adversarial.mjs
+          node full-runs.mjs
           node cli.mjs --out /tmp/tg-owner-run.json
           node cli.mjs --replay /tmp/tg-owner-run.json

@@ -1,0 +1,1035 @@
+[
+  {
+    "game": "kokkuri-san",
+    "players": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "maxRounds": 5,
+    "hostRounds": [
+      {},
+      {},
+      {},
+      {},
+      {
+        "finalAnswer": "yes"
+      }
+    ],
+    "scriptedRounds": [
+      {
+        "a": {
+          "answer": "no"
+        },
+        "b": {
+          "answer": "yes"
+        },
+        "c": {
+          "answer": "yes"
+        },
+        "d": {
+          "answer": "yes"
+        },
+        "e": {
+          "answer": "yes"
+        }
+      },
+      {
+        "a": {
+          "answer": "yes"
+        },
+        "b": {
+          "answer": "yes"
+        },
+        "c": {
+          "answer": "yes"
+        },
+        "d": {
+          "answer": "yes"
+        },
+        "e": {
+          "answer": "yes"
+        }
+      },
+      {
+        "a": {
+          "answer": "yes"
+        },
+        "b": {
+          "answer": "yes"
+        },
+        "c": {
+          "answer": "yes"
+        },
+        "d": {
+          "answer": "yes"
+        },
+        "e": {
+          "answer": "yes"
+        }
+      },
+      {
+        "a": {
+          "answer": "yes"
+        },
+        "b": {
+          "answer": "yes"
+        },
+        "c": {
+          "answer": "yes"
+        },
+        "d": {
+          "answer": "yes"
+        },
+        "e": {
+          "answer": "yes"
+        }
+      },
+      {
+        "a": {
+          "answer": "yes"
+        },
+        "b": {
+          "answer": "yes"
+        },
+        "c": {
+          "answer": "yes"
+        },
+        "d": {
+          "answer": "yes"
+        },
+        "e": {
+          "answer": "yes"
+        }
+      }
+    ]
+  },
+  {
+    "game": "backbiting-sugoroku",
+    "players": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "maxRounds": 20,
+    "scriptedRounds": [
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      },
+      {
+        "a": {
+          "cards": []
+        },
+        "b": {
+          "cards": []
+        },
+        "c": {
+          "cards": []
+        },
+        "d": {
+          "cards": []
+        },
+        "e": {
+          "cards": []
+        }
+      }
+    ]
+  },
+  {
+    "game": "hide-and-seek",
+    "players": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "setup": {
+      "teams": {
+        "a": "A",
+        "b": "A",
+        "c": "B",
+        "d": "B",
+        "e": "B"
+      },
+      "hiders": {
+        "A": "a",
+        "B": "c"
+      }
+    },
+    "maxRounds": 2,
+    "scriptedRounds": [
+      {
+        "a": {
+          "surrender": true
+        },
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {
+          "surrender": true
+        },
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      }
+    ]
+  },
+  {
+    "game": "friend-sin-trial",
+    "players": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "setup": {
+      "jurors": [
+        "j0",
+        "j1",
+        "j2",
+        "j3",
+        "j4",
+        "j5",
+        "j6",
+        "j7",
+        "j8",
+        "j9",
+        "j10",
+        "j11",
+        "j12",
+        "j13",
+        "j14",
+        "j15",
+        "j16",
+        "j17",
+        "j18",
+        "j19",
+        "j20",
+        "j21",
+        "j22",
+        "j23",
+        "j24",
+        "j25",
+        "j26",
+        "j27"
+      ]
+    },
+    "hostRounds": [
+      {
+        "jurorPayments": [
+          "j0",
+          "j1",
+          "j2",
+          "j3",
+          "j4",
+          "j5",
+          "j6",
+          "j7",
+          "j8",
+          "j9",
+          "j10",
+          "j11",
+          "j12",
+          "j13",
+          "j14",
+          "j15",
+          "j16",
+          "j17",
+          "j18",
+          "j19",
+          "j20",
+          "j21",
+          "j22",
+          "j23",
+          "j24",
+          "j25",
+          "j26",
+          "j27"
+        ]
+      }
+    ],
+    "maxRounds": 7,
+    "scriptedRounds": [
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      }
+    ]
+  },
+  {
+    "game": "friends-prison",
+    "players": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "hostRounds": [
+      {
+        "dominoesPlaced": 120000
+      }
+    ],
+    "maxRounds": 2,
+    "scriptedRounds": [
+      {
+        "a": {
+          "vote": "e"
+        },
+        "b": {
+          "vote": "e"
+        },
+        "c": {
+          "vote": "e"
+        },
+        "d": {
+          "vote": "e"
+        },
+        "e": {
+          "vote": "e"
+        }
+      },
+      {
+        "a": {
+          "vote": "e"
+        },
+        "b": {
+          "vote": "e"
+        },
+        "c": {
+          "vote": "e"
+        },
+        "d": {
+          "vote": "e"
+        },
+        "e": {
+          "vote": "e"
+        }
+      }
+    ]
+  },
+  {
+    "game": "all-bet",
+    "players": [
+      "a",
+      "b"
+    ],
+    "setup": {
+      "cash": {
+        "a": 3000000,
+        "b": 3000000
+      }
+    },
+    "hostRounds": [
+      {
+        "settlements": [
+          {
+            "id": "w",
+            "a": "a",
+            "b": "b",
+            "stake": 1000000,
+            "kind": "rps"
+          }
+        ]
+      }
+    ],
+    "maxRounds": 7,
+    "scriptedRounds": [
+      {
+        "a": {
+          "contract": "[\"w\",\"a\",\"b\",1000000,\"rps\"]",
+          "hand": "rock"
+        },
+        "b": {
+          "contract": "[\"w\",\"a\",\"b\",1000000,\"rps\"]",
+          "hand": "scissors"
+        }
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      }
+    ]
+  },
+  {
+    "game": "friend-murder",
+    "players": [
+      "a",
+      "b"
+    ],
+    "setup": {
+      "cash": {
+        "a": 1000000,
+        "b": 1000000
+      }
+    },
+    "hostRounds": [
+      {
+        "defenses": [
+          {
+            "actor": "a",
+            "kind": "yellow"
+          }
+        ],
+        "captured": [
+          "b"
+        ]
+      }
+    ],
+    "maxRounds": 10,
+    "scriptedRounds": [
+      {
+        "a": {
+          "buy": {
+            "yellow": 1
+          },
+          "defend": "yellow"
+        },
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      },
+      {
+        "a": {},
+        "b": {}
+      }
+    ]
+  },
+  {
+    "game": "friendless",
+    "players": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "setup": {
+      "passwords": {
+        "a": "X",
+        "b": "Y",
+        "c": "Z",
+        "d": "W",
+        "e": "V"
+      }
+    },
+    "maxRounds": 14,
+    "scriptedRounds": [
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {},
+        "b": {},
+        "c": {},
+        "d": {},
+        "e": {}
+      },
+      {
+        "a": {
+          "vote": "b"
+        },
+        "b": {
+          "vote": "a"
+        },
+        "c": {
+          "vote": "a"
+        },
+        "d": {
+          "vote": "a"
+        },
+        "e": {
+          "vote": "a"
+        }
+      }
+    ]
+  },
+  {
+    "game": "friendship-janken",
+    "players": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "maxRounds": 3,
+    "scriptedRounds": [
+      {
+        "a": {
+          "hand": "rock"
+        },
+        "b": {
+          "hand": "rock"
+        },
+        "c": {
+          "hand": "rock"
+        },
+        "d": {
+          "hand": "rock"
+        },
+        "e": {
+          "hand": "rock"
+        }
+      },
+      {
+        "a": {
+          "hand": "paper"
+        },
+        "b": {
+          "hand": "paper"
+        },
+        "c": {
+          "hand": "paper"
+        },
+        "d": {
+          "hand": "paper"
+        },
+        "e": {
+          "hand": "paper"
+        }
+      },
+      {
+        "a": {
+          "hand": "scissors"
+        },
+        "b": {
+          "hand": "scissors"
+        },
+        "c": {
+          "hand": "scissors"
+        },
+        "d": {
+          "hand": "scissors"
+        },
+        "e": {
+          "hand": "scissors"
+        }
+      }
+    ]
+  },
+  {
+    "game": "fake-game",
+    "players": [
+      "a",
+      "b"
+    ],
+    "maxRounds": 1,
+    "scriptedRounds": [
+      {
+        "a": {
+          "hand": "rock"
+        },
+        "b": {
+          "hand": "scissors"
+        }
+      }
+    ]
+  }
+]

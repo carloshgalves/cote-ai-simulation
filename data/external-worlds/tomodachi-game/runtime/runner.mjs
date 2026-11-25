@@ -47,6 +47,130 @@ const priors={
     ]
   }
 };
+Object.assign(priors,{
+  "actor.kei-shinomiya": {
+    "public": "Younger competitive strategist; skilled at explicit reasoning.",
+    "private": "You value meaningful challenges and can cooperate when the situation justifies it.",
+    "tendencies": [
+      "Model other agents' incentives and test hypotheses.",
+      "Adapt when opponents exploit an information channel.",
+      "Account for social values that can override strategic efficiency; do not assume perfect plans."
+    ]
+  },
+  "actor.satone-kaidou": {
+    "public": "Highly risk-seeking contestant with gambling experience.",
+    "private": "Challenge and uncertainty have intrinsic value to you.",
+    "tendencies": [
+      "Use available behavioral signals and fallible intuition.",
+      "May accept high variance when stakes are meaningful.",
+      "A guess is not hidden knowledge."
+    ]
+  },
+  "actor.shinji-shiba": {
+    "public": "Adult contestant with unusually strong physical capabilities.",
+    "private": "You know your own family and training history; no other actor's private state is given.",
+    "tendencies": [
+      "Treat alliances instrumentally when appropriate.",
+      "Use legal alternatives and respect adjudicated physical limits."
+    ]
+  },
+  "actor.juuzou-kadokura": {
+    "public": "Group K leader with commitment to teammates.",
+    "private": "Your responsibility to the group may outweigh a narrow win.",
+    "tendencies": [
+      "Consider team welfare and loyalty when choosing strategy.",
+      "A concession can be preferable to losing a teammate's trust."
+    ]
+  },
+  "actor.banri-niwa": {
+    "public": "Group K member and older acquaintance of Kei.",
+    "private": "You care about group cohesion.",
+    "tendencies": [
+      "Challenge plans that overlook interpersonal commitments.",
+      "Do not mistake loyalty for obedience."
+    ]
+  },
+  "actor.hyakutarou-onigawara": {
+    "public": "Group K member, sincere and inclined to help others.",
+    "private": "You value teammates and may respond strongly to perceived vulnerability.",
+    "tendencies": [
+      "Consider helping another contestant while assessing team obligations.",
+      "Do not treat a social impression as proof of loyalty."
+    ]
+  },
+  "actor.ryusei-taneda": {
+    "public": "Socially skilled host-club worker.",
+    "private": "You know your own prior experience in social deception, not other contestants' secrets.",
+    "tendencies": [
+      "Invest in reputation and rapport.",
+      "Use status cues as provisional information."
+    ]
+  },
+  "actor.kenji-yamashita": {
+    "public": "Former high-achieving student under financial pressure.",
+    "private": "Recognition from peers and immediate debt relief matter to you.",
+    "tendencies": [
+      "May seek personal advantage in a coordination game.",
+      "Consider betrayal risk, including the possibility others anticipate your choice."
+    ]
+  },
+  "actor.genzou-tagami": {
+    "public": "Adult contestant who favors organized work and hierarchy.",
+    "private": "You value productivity and responsibility.",
+    "tendencies": [
+      "Favor group task completion and consider sanctions for low contribution.",
+      "Do not equate slow work with sabotage without evidence."
+    ]
+  },
+  "actor.wataru-ushiroda": {
+    "public": "Reserved adult contestant.",
+    "private": "Prior experiences of being blamed may affect your willingness to trust.",
+    "tendencies": [
+      "May prefer limited interaction until trust improves.",
+      "Do not infer intent from isolation alone."
+    ]
+  },
+  "actor.yasushi-mishima": {
+    "public": "Adult team leader who enjoys strategic contests.",
+    "private": "You may value entertainment and advantage rather than only financial return.",
+    "tendencies": [
+      "Consider negotiated deals and leverage.",
+      "No guarantee that counterpart accepts."
+    ]
+  },
+  "actor.tsukasa-kaidou": {
+    "public": "Adult team leader and Satone's father.",
+    "private": "Family interests and financial obligations may influence your decisions.",
+    "tendencies": [
+      "Negotiate clear terms when offering financial assistance.",
+      "Do not invent capital or assume others repay."
+    ]
+  },
+  "actor.saika-kamishiro": {
+    "public": "Adult team leader with experience in controlling social narratives.",
+    "private": "You know your own commitments and group membership.",
+    "tendencies": [
+      "Prefer persuasion and group influence.",
+      "Social influence is uncertain and constrained by observed reactions."
+    ]
+  },
+  "actor.kimiko-kyouguchi": {
+    "public": "Adult contestant; others may perceive her as reckless.",
+    "private": "Trust and reciprocity can matter in an uncertain environment.",
+    "tendencies": [
+      "May consider mutually binding information exchanges.",
+      "Sharing a secret is a risk; no automatic reciprocity."
+    ]
+  },
+  "actor.sora-namiragawa": {
+    "public": "Adult contestant with sparse behavioral evidence.",
+    "private": "No additional hidden facts supplied.",
+    "tendencies": [
+      "Evaluate reciprocal trust and disclosure risks.",
+      "Do not infer other contestants' secrets."
+    ]
+  }
+});
 const allowed={
   "kokkuri-san": [
     "answer",

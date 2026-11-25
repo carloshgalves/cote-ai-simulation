@@ -124,7 +124,23 @@ function create(game,players,setup={}){
 
 function rps(a,b){assert(["rock","paper","scissors"].includes(a)&&["rock","paper","scissors"].includes(b),"invalid hand");return a===b?0:((a==="rock"&&b==="scissors")||(a==="scissors"&&b==="paper")||(a==="paper"&&b==="rock"))?1:-1}
 
-function view(s,actor){assert(s.players.includes(actor),"unknown viewer");const out={game:s.game,round:s.round,terminal:s.terminal,active:[...s.active],winners:[...s.winners],ownCash:s.cash[actor],ownDebt:s.debt[actor],publicLog:clone(s.publicLog),private:clone(s.private[actor]),publicRules:clone(s.config)};if(s.game==="kokkuri-san"&&!s.terminal){out.questioner=s.players[s.round];out.private.questionCard=actor===out.questioner?(s.round<4?"A yes result clears the game; a no result halves your own debt.":"Final question concerns continued friendship.") : null;}if(s.game==="backbiting-sugoroku")out.positions=clone(s.data.pos);if(s.game==="hide-and-seek")out.team=s.data.teams[actor];if(s.game==="friends-prison")out.dominoes=s.data.dominoes;if(s.game==="friendship-janken")out.cards=clone(s.data.hands[actor]);return out}
+function publicRules(game){
+ const c=configs[game];const keys={
+ "kokkuri-san":["rounds","prize"],"backbiting-sugoroku":["boardLength","prize","nonFinisherBonus","maxRounds"],"hide-and-seek":["prize","deadline","loserPenalty"],"friend-sin-trial":["days","jurors","jurorFunds","target","accusedDebt"],"friends-prison":["days","dominoes","clearPrize","exilePenalty","escapePrize","escapePenalty"],"all-bet":["days","boardingFee","feePenalty","breachPenalty"],"friend-murder":["days","yellowPrice","redPrice"],"friendless":["days","prize"],"friendship-janken":["rounds","prize"],"fake-game":["rounds"]};
+ const ruleText={
+ "kokkuri-san":"Answer yes or no simultaneously. A minority answer determines the result if votes differ. A correct answer clears the game; otherwise five questions maximum. Speaking out of turn doubles your debt. If all answers are incorrect, the largest debtor takes the group's debt.",
+ "backbiting-sugoroku":"Submit accusation cards privately or submit none. Audience ranks accusations; the most unforgivable target moves farthest. If all cards are blank, everyone moves one space. A proven liar moves ahead of the leading contestant. First finishers absorb accumulated game debt.",
+ "hide-and-seek":"Find the opposing hider before your team loses. Hiders remain at their hiding spot and can surrender; seekers may transfer teams once with consent. Prohibited conduct incurs a penalty.",
+ "friend-sin-trial":"Win support from independent jurors; players cannot fund the required jury payments directly.",
+ "friends-prison":"Complete the domino task or sentence; nightly majority vote can exile a player. Escape requires a key and an opportunity confirmed by the host. No violence.",
+ "all-bet":"Negotiate and document wagers with consent. Sold players cannot gamble until bought back. Board fee applies at the deadline.",
+ "friend-murder":"Evade abstract pursuit threats until the deadline. Purchase and consume defense tokens; capture confiscates assets.",
+ "friendless":"Live in the lodge for the stated duration. Report another contestant's password at the risk of exclusion on a wrong guess. At the final election vote for another surviving contestant. No violence.",
+ "friendship-janken":"Use each of your three cards once. Winners may shift up to 500000 yen of their debt to losers; coordinate to clear by a draw.",
+ "fake-game":"Optional symbolic two-player rock-paper-scissors encounter, not an official game."};
+ return {...Object.fromEntries(keys[game].map(k=>[k,c[k]])),summary:ruleText[game]};
+}
+function view(s,actor){assert(s.players.includes(actor),"unknown viewer");const out={game:s.game,round:s.round,terminal:s.terminal,active:[...s.active],winners:[...s.winners],ownCash:s.cash[actor],ownDebt:s.debt[actor],publicLog:clone(s.publicLog),private:clone(s.private[actor]),publicRules:publicRules(s.game)};if(s.game==="kokkuri-san"&&!s.terminal){out.questioner=s.players[s.round];out.private.questionCard=actor===out.questioner?(s.round<4?"A yes result clears the game; a no result halves your own debt.":"Final question concerns continued friendship.") : null;}if(s.game==="backbiting-sugoroku")out.positions=clone(s.data.pos);if(s.game==="hide-and-seek")out.team=s.data.teams[actor];if(s.game==="friend-murder")out.private.defenseTokens=clone(s.data.tokens[actor]);if(s.game==="all-bet")out.private.sold=Object.hasOwn(s.data.sold,actor);if(s.game==="friends-prison")out.dominoes=s.data.dominoes;if(s.game==="friendship-janken")out.cards=clone(s.data.hands[actor]);return out}
 
 function step(before,actions={},host={}){
  assert(!before.terminal,"terminal");const s=clone(before),c=s.config,d=s.data,p=s.players,a=s.active;
@@ -154,7 +170,7 @@ function step(before,actions={},host={}){
  log("movement",{positions:clone(d.pos)});
  if(a.some(id=>d.pos[id]>=c.boardLength)||s.round>=c.maxRounds){const max=Math.max(...a.map(id=>d.pos[id])),losers=a.filter(id=>d.pos[id]>=c.boardLength||(s.round>=c.maxRounds&&d.pos[id]===max)),w=a.filter(id=>!losers.includes(id));split(Object.values(d.gameDebt).reduce((n,x)=>n+x,0),losers,debt);split(c.prize,p,credit);for(const id of w)credit(id,c.nonFinisherBonus);finish(w)}break;}
  case "hide-and-seek":{
- for(const id of a){const x=act(id);if(x.betray!==undefined){const target=x.betray;assert(!Object.values(d.hiders).includes(id)&&!d.switched.includes(id)&&a.includes(target)&&d.teams[target]!==d.teams[id]&&act(target).accept===id,"invalid switch");d.teams[id]=d.teams[target];d.switched.push(id);log("team_switch",{actor:id,team:d.teams[id]})}}
+ const original=clone(d.teams),switches=[];for(const id of a){const x=act(id);if(x.betray!==undefined){const target=x.betray;assert(!Object.values(d.hiders).includes(id)&&!d.switched.includes(id)&&a.includes(target)&&original[target]!==original[id]&&act(target).accept===id,"invalid switch");switches.push([id,original[target]])}}for(const [id,team] of switches){d.teams[id]=team;d.switched.push(id);log("team_switch",{actor:id,team})}
  let losing=null;
  const violations=host.violators??[];assert(Array.isArray(violations)&&violations.every(id=>a.includes(id)),"bad violation");
  const surrender=a.filter(id=>act(id).surrender===true);assert(surrender.every(id=>Object.values(d.hiders).includes(id)),"only hider can surrender");

@@ -112,7 +112,7 @@ func schoolView(j Journal,s State,id string)*SchoolView{
   v.Catalog=clone(shopPrices)
   for _,item:=range []string{"notebook","pen","snack","water"}{if m.Wallet>=shopPrices[item]{add("buy",item)}}
  }
- if m.Location=="library"||strings.HasPrefix(m.Location,"class-")||(j.Version>=PopulationVersion&&strings.HasPrefix(m.Location,"senior-class-")){add("study","")}
+ if m.Location=="library"||strings.HasPrefix(m.Location,"class-")||(j.Version>=PopulationVersion&&(strings.HasPrefix(m.Location,"senior-class-")||m.Location=="senior-common")){add("study","")}
  if m.Location=="class-"+strings.ToLower(classOf(j,id))&&(v.Period=="aulas da manhã"||v.Period=="aulas da tarde"){add("lesson","")}
  if m.Location=="cafeteria"{add("eat","free");if m.Wallet>=500{add("eat","paid")}}
  if m.Location=="dormitory-"+id{add("rest","");if v.Period=="repouso"{add("sleep","")}}

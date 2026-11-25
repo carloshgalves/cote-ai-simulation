@@ -1329,10 +1329,10 @@
   {
     "profile": {
       "id": "unidentified-third-year-test-seller",
-      "name": "Veterano vendedor de provas (identidade não confirmada)",
+      "name": "Estudante veterano (identidade não confirmada)",
       "class": "",
       "traits": [
-        "Estudante do terceiro ano; nome e classe não estabelecidos; não presumir venda futura."
+        "Estudante do terceiro ano; nome e classe não estabelecidos."
       ],
       "background": [
         "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."

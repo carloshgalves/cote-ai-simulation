@@ -3,6 +3,7 @@ import (
  "context"
  "encoding/json"
  "path/filepath"
+ "os"
  "strings"
  "testing"
 )
@@ -94,4 +95,20 @@ func TestLightweightInitiativeIsBounded(t *testing.T){
  if needsModel(s,id){t.Fatal("repeated free-period polling")}
  s.Minute+=1440
  if !needsModel(s,id){t.Fatal("next day's initiative was lost")}
+}
+
+func TestPopulationCatalogCoversEveryConsolidatedPack(t *testing.T){
+ raw,err:=os.ReadFile("population_catalog.json");if err!=nil{t.Fatal(err)}
+ var rows []struct{Pack,Source,Actor,Tier,Admission,Reason string}
+ if err=json.Unmarshal(raw,&rows);err!=nil{t.Fatal(err)}
+ files,err:=os.ReadDir("../../data/canon/consolidated/characters");if err!=nil{t.Fatal(err)}
+ j:=populationJournal(t);seen:=map[string]bool{};active:=0
+ for _,row:=range rows{
+  if seen[row.Pack]||row.Reason==""||!has([]string{FullTier,LightTier,LatentTier},row.Tier){t.Fatal("invalid catalog entry",row.Pack)}
+  seen[row.Pack]=true
+  if row.Admission=="active"{active++;m,ok:=j.Population[row.Actor];if !ok||m.InitialTier!=row.Tier{t.Fatal("active catalog mismatch",row.Pack)}}else if row.Actor!=""{t.Fatal("reserved pack has active actor",row.Pack)}
+ }
+ n:=0
+ for _,file:=range files{if !file.IsDir()&&strings.HasSuffix(file.Name(),".json"){n++;if !seen[strings.TrimSuffix(file.Name(),".json")]{t.Fatal("uncatalogued pack",file.Name())}}}
+ if n!=len(rows)||active!=65{t.Fatalf("catalog coverage %d/%d active %d",len(rows),n,active)}
 }

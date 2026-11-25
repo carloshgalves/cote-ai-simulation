@@ -184,7 +184,7 @@ func seniorClassroom(class string)string{if class==""{return "senior-common"};re
 func lightInitiativeDue(s State,id string)bool{
  m:=s.Minds[id];return periodAt(s.Minute)=="atividades livres"&&m.LastLightInitiativeDay!=s.Minute/1440+1
 }
-func strategicPromotion(s State,id string,m Mind)bool{
+func strategicPromotion(s *State,id string,m Mind)bool{
  if m.Engagements<6||m.Plan==nil||len(m.Plan.Steps)==0{return false}
  peers:=map[string]bool{}
  for i:=len(s.Events)-1;i>=0;i--{e:=s.Events[i];if s.Minute-e.Minute>2880{break};if e.Kind!="claim"{continue};if e.Actor==id&&e.Target!=id{peers[e.Target]=true};if e.Target==id&&e.Actor!=id{peers[e.Actor]=true}}

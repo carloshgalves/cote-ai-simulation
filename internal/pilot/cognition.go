@@ -129,6 +129,7 @@ func initializeCognition(j Journal,s *State){
 func projectIdentity(j Journal,s State,id string,c *Context){
  x:=clone(j.Identities[id]);c.Identity=&x
  m:=s.Minds[id];c.Body=clone(m.Body);c.Social=clone(m.Social);c.Plans=clone(m.Plans)
+ if j.Version>=CompactContextVersion{c.Interoception=qualitativeBody(m.Body);c.Body=nil}
  if m.PendingStimulus!=""{c.WakeReason=m.PendingStimulus}
  c.OwnCanon.PrivateKnowledge=nil;c.OwnCanon.Dispositions=nil
  c.OwnCanon.Status="Perfil inicial em identity; não recuperar acontecimentos futuros."

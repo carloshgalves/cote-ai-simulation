@@ -28,7 +28,15 @@ go run ./cmd/cote-local --save "$HOME/cote-pilot.json"
 
 Abra **http://127.0.0.1:8765**. Clique em Executar, Pausar ou Avançar uma rodada. O exemplo de modelo é configurável, não é instalado automaticamente. Para um provedor remoto HTTPS, configure `COTE_LLM_URL` e `COTE_API_KEY`; o contexto privado do personagem será enviado ao provedor escolhido. O comando `--steps 1` permite executar no terminal. Use um novo arquivo de save para iniciar outro cenário.
 
-[Escopo, limitações e testes do piloto](docs/pilot-local.md).
+Novos saves usam a manhã por acontecimentos (v2). Para testar um modelo remoto no plano gratuito Groq, crie uma chave em https://console.groq.com/keys, leia-a no shell sem exibi-la e use um novo save:
+
+```sh
+read -rsp 'Groq API key: ' GROQ_API_KEY; echo
+export GROQ_API_KEY
+go run ./cmd/cote-local --provider groq --model qwen/qwen3.8-27b --save "$HOME/cote-groq-v2.json"
+```
+
+A cota depende da conta; não habilite cobrança para o experimento gratuito. O contexto é enviado ao provedor remoto. [Escopo, limitações e testes do piloto](docs/pilot-local.md).
 
 ## Estado histórico (apurado em 2026-11-12; `main@78bfd267`)
 

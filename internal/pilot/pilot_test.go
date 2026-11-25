@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -253,4 +254,37 @@ func TestNonSpeechTextPreservedAsUnverifiedPrivateNote(t *testing.T){
 	s,_:=initial(j);view:=actorContext(j,s,"ayanokoji")
 	d,err:=decodeLocalChoice(view,[]byte(`{"choice":"observe","text":"Quero identificar os líderes."}`))
 	if err!=nil||d.Note==""||d.Text!=""||len(d.Ignored)!=0{t.Fatal("private note discarded",d,err)}
+}
+
+type roundTripperFunc func(*http.Request)(*http.Response,error)
+func (f roundTripperFunc) RoundTrip(r *http.Request)(*http.Response,error){return f(r)}
+func TestGroqChoiceProtocolAndQuota(t *testing.T){
+	j:=Journal{Version:Version,Model:"test"};j.Profiles,_=decodeStrict[[]Profile](defaultProfiles)
+	s,_:=initial(j);view:=actorContext(j,s,"ayanokoji")
+	model,err:=NewHTTPModel("https://api.groq.com/openai/v1","qwen/qwen3.8-27b","test-key");if err!=nil{t.Fatal(err)}
+	status:=200
+	model.Client.Transport=roundTripperFunc(func(r *http.Request)(*http.Response,error){
+		if r.URL.Host!="api.groq.com"||r.Header.Get("Authorization")!="Bearer test-key"{t.Fatal("wrong provider configuration")}
+		var req map[string]any
+		if err:=json.NewDecoder(r.Body).Decode(&req);err!=nil{t.Fatal(err)}
+		if req["reasoning_effort"]!="none"||req["response_format"].(map[string]any)["type"]!="json_object"{t.Fatal("wrong Qwen request")}
+		body:=`{"choices":[{"message":{"content":"{\"choice\":\"talk:horikita\",\"text\":\"Bom dia.\",\"reason\":\"Quero entender suas prioridades.\"}"},"finish_reason":"stop"}]}`
+		if status==429{body="{}"}
+		return &http.Response{StatusCode:status,Body:io.NopCloser(strings.NewReader(body)),Header:make(http.Header)},nil
+	})
+	d,err:=model.Decide(context.Background(),view)
+	if err!=nil||d.Action!="talk"||d.Target!="horikita"||d.Reason==""{t.Fatalf("bad cloud decision: %+v %v",d,err)}
+	status=429
+	if _,err:=model.Decide(context.Background(),view);err==nil||!strings.Contains(err.Error(),"429"){t.Fatal("quota not explained")}
+}
+func TestWorldAgendaStopsAtEndWithoutDuplicateAnnouncements(t *testing.T){
+	model:=modelFunc(func(_ context.Context,_ Context)(Decision,error){return wait(),nil})
+	s,err:=Open(filepath.Join(t.TempDir(),"run.json"),"test",model);if err!=nil{t.Fatal(err)};defer s.Close()
+	for i,minute:=range []int64{490,505,540}{
+		snap,err:=s.Step(context.Background(),i)
+		if err!=nil||snap.State.Minute!=minute||snap.Done!=(minute==540){t.Fatalf("unexpected agenda: %+v %v",snap,err)}
+	}
+	if _,err:=s.Step(context.Background(),3);err==nil{t.Fatal("advanced past end of morning")}
+	n:=0;for _,e:=range s.Snapshot().State.Events{if e.Kind=="announcement"{n++}}
+	if n!=4{t.Fatal("world announcement missing or repeated")}
 }

@@ -167,7 +167,11 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 		Temperature float64 `json:"temperature"`
 		ResponseFormat map[string]any `json:"response_format"`
 		MaxTokens int `json:"max_tokens"`
-	}{m.Name,[]map[string]string{{"role":"system","content":prompt},{"role":"user","content":string(raw)}},0.65,format,maxTokens}
+		ReasoningEffort string `json:"reasoning_effort,omitempty"`
+	}{m.Name,[]map[string]string{{"role":"system","content":prompt},{"role":"user","content":string(raw)}},0.65,format,maxTokens,""}
+	// Groq Qwen's instruct mode keeps the short structured output budget
+	// for the fictional decision rather than hidden reasoning tokens.
+	if u!=nil&&u.Hostname()=="api.groq.com"&&m.Name=="qwen/qwen3.8-27b"{payload.ReasoningEffort="none"}
 	body,err:=json.Marshal(payload);if err!=nil{return zero,err}
 	req,err:=http.NewRequestWithContext(ctx,http.MethodPost,m.Endpoint,bytes.NewReader(body));if err!=nil{return zero,errors.New("invalid model request")}
 	req.Header.Set("Content-Type","application/json")
@@ -175,6 +179,11 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	res,err:=m.Client.Do(req)
 	if err!=nil{return zero,errors.New("modelo indisponível ou timeout")}
 	defer res.Body.Close()
+	if res.StatusCode==400 {
+		var problem struct{Error struct{Code string `json:"code"`} `json:"error"`}
+		if json.NewDecoder(io.LimitReader(res.Body,64<<10)).Decode(&problem)==nil&&problem.Error.Code=="json_validate_failed"{return zero,responseError{"provedor não conseguiu gerar JSON válido"}}
+		return zero,errors.New("provedor rejeitou a configuração da consulta (HTTP 400)")
+	}
 	if res.StatusCode==429{return zero,errors.New("limite de requisições do provedor (HTTP 429); pause e tente novamente após a liberação da cota")}
 	if res.StatusCode==401||res.StatusCode==403{return zero,errors.New("chave de API ausente, inválida ou sem permissão")}
 	if res.StatusCode!=http.StatusOK{return zero,fmt.Errorf("provedor LLM retornou HTTP %d",res.StatusCode)}

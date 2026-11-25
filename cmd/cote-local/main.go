@@ -35,6 +35,7 @@ func main() {
 	key:=os.Getenv("COTE_API_KEY")
 	switch *provider {
 	case "ollama":
+		key=""
 		if *modelName==""{*modelName="qwen2.5:3b"}
 		if v:=os.Getenv("COTE_LLM_URL");v!=""{*endpoint=v}
 	case "groq":

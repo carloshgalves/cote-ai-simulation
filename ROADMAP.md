@@ -8,7 +8,18 @@ Princípio geral:
 
 O objetivo do projeto não é reproduzir a light novel. É construir uma ANHS causalmente executável, povoada por personagens persistentes, capaz de produzir uma timeline própria a partir das mesmas pressões, regras, capacidades e conhecimentos disponíveis.
 
-## Checkpoint de implementação — 2026-11-12
+## Prioridade de produto — 2026-11-24
+
+O proprietário aprovou a transição para uma primeira simulação local utilizável. A fundação causal integrada é suficiente para iniciar cognição e interface; as 109 linhas de G, auditorias formais, atestação externa e produção distribuída deixam de ser pré-requisito do piloto. Não apagar os critérios históricos nem marcar requisitos não provados como PASS.
+
+1. Piloto cognitivo com seis personagens, LLM, memória, hipóteses, metas e planos, ações limitadas e interface local.
+2. Experimentar uma manhã escolar real e corrigir problemas observados de fidelidade, conhecimento e causalidade.
+3. Integrar as ações necessárias aos handlers CSF canônicos; ampliar calendário, economia e microexame somente conforme uso real.
+4. Evoluir para Zodiac/VIP, elenco e contexto de cânone autorizados.
+
+Sem login, multiusuário, cloud ou infra remota obrigatória. Manter #168/#169/#172/#174/#22, #93/#94/#113/#123 como dívida técnica não bloqueante do piloto; NO_GO normativo não significa que o experimento pessoal está proibido. #45/#15/#36 avançam em fatias úteis; não declarar suas especificações completas pelo piloto.
+
+## Checkpoint histórico de implementação — 2026-11-12
 
 Este roadmap descreve capacidades de produto; nenhum ✅ equivale automaticamente a homologação de runtime. Na `main@78bfd267`, **CSFRV1-1–8** estão integrados: baseline de replay/snapshot/fork da [PR #25](https://github.com/carloshgalves/cote-ai-simulation/pull/25), refactors de autoridade/partições das PRs #61–#71 e contrato/gate de owner cognitivo **S0** da [PR #72](https://github.com/carloshgalves/cote-ai-simulation/pull/72). Isso **não comprova** flush remoto, restauração de memória real ou uso obrigatório de gate em todo dispatch: [#58 P0](https://github.com/carloshgalves/cote-ai-simulation/issues/58) permanece aberta, assim como [#59 CI V2](https://github.com/carloshgalves/cote-ai-simulation/issues/59). A conformidade cruzada de 621 casos é **V1**. A [matriz pós-merge](docs/validation/csfrv1-8-baseline-2026-11-11.md) registra os limites da entrega original; o [checkpoint de 12/11](docs/validation/project-state-2026-11-12.md) registra as mudanças posteriores.
 

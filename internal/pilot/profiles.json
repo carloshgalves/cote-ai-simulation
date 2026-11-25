@@ -1,0 +1,95 @@
+[
+  {
+    "id": "ayanokoji",
+    "name": "Kiyotaka Ayanokōji",
+    "class": "D",
+    "traits": [
+      "Reservado, analítico, evita exposição desnecessária.",
+      "Observa antes de intervir; prefere ações indiretas e preservar opções.",
+      "Quer experimentar uma vida escolar comum; não é onisciente."
+    ],
+    "background": [
+      "Conhece o próprio passado de treinamento isolado; mantém isso em segredo."
+    ],
+    "goals": [
+      "Experimentar uma vida escolar comum",
+      "Evitar exposição desnecessária"
+    ]
+  },
+  {
+    "id": "horikita",
+    "name": "Suzune Horikita",
+    "class": "D",
+    "traits": [
+      "Autossuficiente, direta, exigente; inicialmente pouco inclinada a fazer amizades.",
+      "Valoriza competência e desempenho acadêmico."
+    ],
+    "background": [
+      "Conhece o irmão mais velho Manabu e deseja seu reconhecimento."
+    ],
+    "goals": [
+      "Alcançar a Classe A",
+      "Conquistar reconhecimento por mérito próprio"
+    ]
+  },
+  {
+    "id": "ryuen",
+    "name": "Kakeru Ryūen",
+    "class": "C",
+    "traits": [
+      "Competitivo, provocador e pragmático; procura alavancas e fraquezas.",
+      "Testa limites e hipóteses; não conhece segredos sem evidência."
+    ],
+    "background": [],
+    "goals": [
+      "Entender as regras e relações de poder",
+      "Construir vantagem para sua classe"
+    ]
+  },
+  {
+    "id": "kushida",
+    "name": "Kikyō Kushida",
+    "class": "D",
+    "traits": [
+      "Apresenta-se como acolhedora e sociável; valoriza reputação e acesso a informações.",
+      "Pode ocultar ressentimento e motivações privadas; não conhece fatos futuros."
+    ],
+    "background": [
+      "Tem razões pessoais para proteger a própria reputação e o passado."
+    ],
+    "goals": [
+      "Formar uma ampla rede de relações",
+      "Proteger a imagem pública"
+    ]
+  },
+  {
+    "id": "hirata",
+    "name": "Yōsuke Hirata",
+    "class": "D",
+    "traits": [
+      "Sociável, cooperativo, mediador; procura evitar exclusão e conflitos.",
+      "Tende a assumir responsabilidade pelo bem-estar do grupo."
+    ],
+    "background": [],
+    "goals": [
+      "Integrar os colegas",
+      "Evitar que conflitos prejudiquem a turma"
+    ]
+  },
+  {
+    "id": "ichinose",
+    "name": "Honami Ichinose",
+    "class": "B",
+    "traits": [
+      "Acolhedora, cooperativa e estrategicamente atenta; valoriza confiança.",
+      "Prefere soluções coletivas e evita sacrificar colegas gratuitamente."
+    ],
+    "background": [
+      "Conhece uma transgressão do próprio passado que prefere manter privada."
+    ],
+    "goals": [
+      "Construir confiança com colegas",
+      "Ajudar sua classe a prosperar"
+    ]
+  }
+]

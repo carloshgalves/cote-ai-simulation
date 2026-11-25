@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"syscall"
@@ -25,7 +26,9 @@ import (
 var page []byte
 
 func main() {
-	provider:=flag.String("provider","ollama","ollama, groq or custom")
+	provider:=flag.String("provider","ollama","ollama, groq, custom or ui")
+	configDir,configErr:=os.UserConfigDir();if configErr!=nil{log.Fatal(configErr)}
+	routesPath:=flag.String("routes",filepath.Join(configDir,"cote-ai-simulation","routes.json"),"private optional model configuration")
 	modelName:=flag.String("model",os.Getenv("COTE_MODEL"),"LLM model ID")
 	endpoint:=flag.String("endpoint","http://127.0.0.1:11434/v1","OpenAI-compatible base URL")
 	save:=flag.String("save","cote-local.json","local simulation journal")
@@ -45,11 +48,13 @@ func main() {
 		if key==""{*modelName=""}
 	case "custom":
 		if v:=os.Getenv("COTE_LLM_URL");v!=""{*endpoint=v}
+	case "ui":
+		*modelName=""
 	default:log.Fatal("unknown provider")
 	}
 	if *steps<0||*steps>pilot.MaxRounds||*port<1||*port>65535 {log.Fatal("invalid rounds or port")}
-	router:=pilot.NewRouter()
-	if *modelName!="" {
+	router,err:=pilot.LoadRouter(*routesPath);if err!=nil{log.Fatal(err)}
+	if len(router.Routes())==0&&*modelName!="" {
 		kind:=*provider;if kind=="custom"{kind="openai-compatible"}
 		if _,err:=router.Add(pilot.RouteInput{Provider:kind,Endpoint:*endpoint,Model:*modelName,Key:key,Format:"auto"});err!=nil{log.Fatal(err)}
 	}
@@ -85,6 +90,7 @@ func main() {
 		switch input.Action{
 		case "add":_,err=router.Add(input.Route)
 		case "remove","up","down","toggle":err=router.Change(input.ID,input.Action)
+		case "save":err=router.Save(*routesPath)
 		default:err=errors.New("unknown route action")
 		}
 		if err!=nil{fail(w,400,err);return};reply(w,200,router.Routes())

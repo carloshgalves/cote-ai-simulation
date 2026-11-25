@@ -3,7 +3,11 @@ package pilot
 import (
 	"context"
 	"crypto/sha256"
+	"encoding/json"
 	"errors"
+	"io"
+	"os"
+	"path/filepath"
 	"fmt"
 	"net/url"
 	"strings"
@@ -97,7 +101,7 @@ func (r *Router) Routes() []RouteView{
 	out:=[]RouteView{}
 	for _,rt:=range r.routes{
 		v:=rt.view
-		if c:=r.blocked(rt,time.Now());!c.until.IsZero(){v.RetryAt=c.until;v.Status=c.message}
+		if c:=r.blocked(rt,time.Now());!c.until.IsZero(){v.RetryAt=c.until;v.Status=c.message}else if v.Status!="disponível"&&v.Status!="consultando"&&v.Status!="não testado"{v.Status="pronto para nova tentativa"}
 		out=append(out,v)
 	}
 	return out
@@ -157,4 +161,37 @@ func (r *Router) decide(ctx context.Context,view Context,problem string)(Decisio
 		r.mu.Unlock()
 	}
 	return Decision{},errors.New("nenhuma rota disponível; verifique Modelos e APIs, aguarde a cota ou adicione outra rota. Decisões anteriores preservadas.")
+}
+
+type storedRoute struct {
+	Input RouteInput `json:"input"`
+	Enabled bool `json:"enabled"`
+}
+func (r *Router) Save(path string)error{
+	r.mu.Lock()
+	routes:=[]storedRoute{}
+	for _,rt:=range r.routes{routes=append(routes,storedRoute{RouteInput{Provider:rt.view.Provider,Endpoint:rt.view.Endpoint,Model:rt.view.Model,Key:rt.model.Key,Format:rt.view.Format},rt.view.Enabled})}
+	r.mu.Unlock()
+	if err:=os.MkdirAll(filepath.Dir(path),0700);err!=nil{return errors.New("não foi possível criar diretório local")}
+	raw,err:=json.MarshalIndent(routes,"","  ");if err!=nil{return err}
+	tmp,err:=os.CreateTemp(filepath.Dir(path),".cote-routes-");if err!=nil{return errors.New("não foi possível criar arquivo de modelos")}
+	defer os.Remove(tmp.Name())
+	_,err=tmp.Write(raw);if err==nil{err=tmp.Sync()};closeErr:=tmp.Close()
+	if err!=nil||closeErr!=nil{return errors.New("não foi possível gravar modelos")}
+	if err:=os.Rename(tmp.Name(),path);err!=nil{return errors.New("não foi possível salvar configuração")}
+	return nil
+}
+func LoadRouter(path string)(*Router,error){
+	r:=NewRouter()
+	info,err:=os.Lstat(path)
+	if errors.Is(err,os.ErrNotExist){return r,nil}
+	if err!=nil||!info.Mode().IsRegular()||info.Mode().Perm()&0077!=0||info.Size()>256<<10{return nil,errors.New("arquivo de modelos inválido ou permissões expostas")}
+	f,err:=os.Open(path);if err!=nil{return nil,err};defer f.Close()
+	raw,err:=io.ReadAll(io.LimitReader(f,256<<10+1));if err!=nil||len(raw)>256<<10{return nil,errors.New("não foi possível ler modelos")}
+	list,err:=decodeStrict[[]storedRoute](raw);if err!=nil{return nil,errors.New("configuração de modelos inválida")}
+	for _,item:=range list{
+		v,err:=r.Add(item.Input);if err!=nil{return nil,err}
+		if !item.Enabled{if err:=r.Change(v.ID,"toggle");err!=nil{return nil,err}}
+	}
+	return r,nil
 }

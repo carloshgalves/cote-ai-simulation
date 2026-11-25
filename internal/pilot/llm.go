@@ -233,8 +233,11 @@ func unwrapJSON(s string) []byte {
 }
 func invalidPeerAddress(text,target string) bool {
 	s:=strings.ToLower(text)
+	// Public IDs double as surnames, with common Japanese name variants.
+	aliases:=[]string{target}
+	switch target{case "hirata":aliases=append(aliases,"yōsuke","yosuke");case "kushida":aliases=append(aliases,"kikyō","kikyo");case "horikita":aliases=append(aliases,"suzune");case "ayanokoji":aliases=append(aliases,"ayanokōji","kiyotaka");case "ryuen":aliases=append(aliases,"ryūen","kakeru");case "ichinose":aliases=append(aliases,"honami")}
 	for _,suffix:=range []string{"-senpai"," senpai","-sempai"," sempai"}{
-		if strings.Contains(s,target+suffix){return true}
+		for _,alias:=range aliases{if strings.Contains(s,alias+suffix){return true}}
 	}
 	s=strings.TrimLeft(strings.TrimSpace(s),"“\"'‘")
 	for _,prefix:=range []string{"senpai,","senpai!","senpai?","sempai,","sempai!","sempai?"}{if strings.HasPrefix(s,prefix){return true}}

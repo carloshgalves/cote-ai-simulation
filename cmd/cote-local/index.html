@@ -1,90 +1,105 @@
 <!doctype html>
 <html lang="pt-BR">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>COTE · Simulação local</title>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>COTE · Observatório</title>
 <style>
-:root{color-scheme:dark;background:#11141b;color:#eef0f6;font:15px system-ui,sans-serif}*{box-sizing:border-box}body{margin:0}main{max-width:1280px;margin:auto;padding:28px}header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}h1{font-size:26px;margin:0}h2{font-size:17px;margin:0 0 12px}p{line-height:1.5}small,.muted{color:#a8b0c2}button,select{font:inherit;padding:10px 14px;color:inherit;border:1px solid #3e4656;border-radius:8px;background:#252b37}button{cursor:pointer}button:disabled{opacity:.45;cursor:default}#run{background:#c9da9c;color:#182118;border:0;font-weight:650}#status{min-height:24px;margin:12px 0}.error{color:#ffac9f}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:20px 0}.panel,.person{background:#1c212c;border:1px solid #313847;border-radius:12px;padding:16px}.person strong{display:block;margin-bottom:6px}.person button{margin-top:10px;width:100%;text-align:left}.columns{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}.event{border-top:1px solid #313847;padding:12px 0;overflow-wrap:anywhere}.event:first-child{border:0}.event .meta{font-size:12px;color:#aab6c8;margin-bottom:4px}.event.claim{border-left:2px solid #8ca6dc;padding-left:10px}.scroll{max-height:64vh;overflow:auto}ul{padding-left:22px}li{margin:6px 0}#who{max-width:100%}#clock{font-size:21px;font-weight:650}.private{color:#d7bd93;font-size:12px}@media(max-width:800px){.columns{grid-template-columns:1fr}main{padding:15px}.scroll{max-height:55vh}}
+:root{color-scheme:dark;--bg:#10141c;--panel:#191f2b;--line:#303a4a;--text:#edf0f6;--muted:#a5afc3;--accent:#b8dbac;--blue:#a1b9ee;--warn:#e5bd8d;--error:#f9a99f;font:14px/1.55 system-ui,sans-serif;background:var(--bg);color:var(--text)}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit;color:inherit}button,select,input{background:#242d3b;border:1px solid var(--line);border-radius:8px;padding:9px 12px;min-width:0}button{cursor:pointer;white-space:normal}button:hover:not(:disabled){border-color:var(--blue)}button:disabled{opacity:.45;cursor:default}button.primary{background:var(--accent);color:#18261a;border:0;font-weight:700}button.quiet{background:transparent}a{color:var(--blue)}h1,h2,h3,p{margin:0}h1{font-size:21px;letter-spacing:-.03em}h2{font-size:16px}h3{font-size:13px;color:var(--muted);margin:16px 0 5px;text-transform:uppercase;letter-spacing:.06em}p{overflow-wrap:anywhere}small,.muted{color:var(--muted)}.error{color:var(--error)}.good{color:var(--accent)}.pending{color:var(--warn)}.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}.shell{max-width:1500px;margin:auto;padding:22px 26px}.top{position:sticky;top:0;z-index:2;background:var(--bg);border-bottom:1px solid var(--line)}.top .shell{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding-block:14px}.brand{display:flex;gap:10px;align-items:center}.brand-mark{background:#d8e6d1;color:#18261a;width:34px;height:34px;display:grid;place-items:center;border-radius:9px;font-weight:800}.controls{display:flex;gap:7px;flex-wrap:wrap}.hero{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}.clock{font-size:32px;line-height:1.15;font-weight:650;font-variant-numeric:tabular-nums;letter-spacing:-.04em}.statusbox{min-width:0;flex:1;max-width:760px;background:var(--panel);border:1px solid var(--line);padding:12px 15px;border-radius:10px}.bar{height:5px;background:#2b3545;border-radius:9px;overflow:hidden;margin-top:8px}.bar>div{height:100%;background:var(--accent);transition:width .3s}.roster{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:10px;margin-bottom:18px}.person{display:flex;flex-direction:column;gap:5px;text-align:left;min-width:0;min-height:109px;background:var(--panel);padding:13px;border:1px solid var(--line);border-radius:11px;overflow-wrap:anywhere}.person[aria-pressed=true]{border-color:var(--accent);background:#233127}.initial{font-size:11px;color:var(--blue);font-weight:600}.person strong{font-size:14px}.workspace{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:start}.panel{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}.panel-head{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.panel-body{padding:15px 17px;min-width:0}.scroll{max-height:64vh;overflow:auto;overscroll-behavior:contain}.event{padding:13px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.event:last-child{border-bottom:0}.meta{font-size:12px;color:var(--muted);margin-bottom:4px}.event.claim{border-left:2px solid var(--blue);padding-left:11px}.event.announcement{border-left:2px solid var(--accent);padding-left:11px}.event.intention{color:#d2dbe9}.decision{background:#141a23;padding:12px;border:1px solid var(--line);border-radius:9px;margin-bottom:9px;overflow-wrap:anywhere}.decision>p{margin-top:6px}.speech{border-left:2px solid var(--blue);padding-left:10px;color:#e6edf9}.thought{background:#222c3b;border-left:2px solid var(--blue);padding:10px 12px;margin:8px 0;border-radius:0 8px 8px 0}.label{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}ul{padding-left:19px;margin:5px 0}li{margin:5px 0;overflow-wrap:anywhere}details{margin-top:8px;color:var(--muted);font-size:12px}summary{cursor:pointer}footer{padding:16px 0;color:var(--muted);font-size:12px}.modal{width:min(860px,calc(100vw - 24px));max-height:90vh;overflow:auto;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:14px;padding:0}.modal::backdrop{background:#000a}.modal .panel-body{padding:20px}.route{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:9px;padding:12px;margin:10px 0;overflow-wrap:anywhere}.route-actions{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end}.formgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:12px}.formgrid label{display:flex;flex-direction:column;gap:5px;min-width:0}.full{grid-column:1/-1}.form-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}.modal p{margin-top:6px}.hidden{display:none!important}@media(max-width:900px){.workspace{grid-template-columns:minmax(0,1fr)}.scroll{max-height:55vh}.shell{padding:16px}.top{position:static}}@media(max-width:550px){.formgrid,.route{grid-template-columns:minmax(0,1fr)}.controls{width:100%}.controls button{flex:1}.route-actions{justify-content:flex-start}.hero{display:block}.statusbox{margin-top:12px}}
 </style></head>
-<body><main>
-<header><div><h1>COTE · Simulação local</h1><p class="muted">Piloto cognitivo · primeiro dia · seis personagens</p></div><div><span id="clock">08:00</span> <span id="round" class="muted"></span></div><div><button id="run">▶ Executar</button> <button id="pause" disabled>Pausar</button> <button id="step">Avançar uma rodada</button> <button id="cancel" disabled>Cancelar rodada</button></div></header>
-<div id="status" role="status">Carregando…</div><div id="progress" class="muted" aria-live="polite"></div><div id="people" class="grid"></div><section class="panel" id="pending-panel" hidden><h2>Decisões desta rodada <span class="private">· propostas, ainda não executadas</span></h2><div id="pending-choices"></div></section>
-<div class="columns"><section class="panel"><h2>Linha do tempo <span class="private">· visão do operador</span></h2><label>Perspectiva <select id="who"><option value="">Todos (operador)</option></select></label><div id="timeline" class="scroll"></div></section><section class="panel"><h2>Cognição do personagem</h2><div id="mind" class="scroll"><p class="muted">Selecione um personagem para inspecionar suas metas, hipóteses, relações e memórias.</p></div></section></div>
-<p class="muted" id="model"></p><p class="muted">O motor decide os efeitos; as falas são alegações, não fatos. A pausa ocorre entre rodadas. O progresso é salvo localmente a cada rodada concluída.</p>
+<body>
+<header class="top"><div class="shell"><div class="brand"><span class="brand-mark">C</span><div><div class="eyebrow">Classroom of the Elite</div><h1>Observatório de simulação</h1></div></div><div class="controls"><button id="settings">⚙ Modelos e APIs</button><button class="primary" id="run">▶ Executar</button><button id="pause" disabled>Pausar</button><button id="step">Avançar</button><button class="quiet" id="cancel" disabled>Cancelar ciclo</button></div></div></header>
+<main class="shell">
+<div class="hero"><div><div class="eyebrow">Primeiro dia · período livre</div><div class="clock" id="clock">08:00</div><div class="muted" id="round"></div></div><div class="statusbox"><div id="status" role="status">Carregando…</div><div id="progress" class="muted" aria-live="polite"></div><div class="bar"><div id="progressbar" style="width:0%"></div></div><small id="route-status"></small></div></div>
+<div class="roster" id="people"></div>
+<div class="workspace">
+<section class="panel"><div class="panel-head"><div><div class="eyebrow">Mundo e interações</div><h2>Linha do tempo</h2></div><label><span class="muted">Perspectiva </span><select id="who"><option value="">Todos (operador)</option></select></label><label><input type="checkbox" id="technical"> Diagnósticos</label></div><div class="panel-body scroll" id="timeline"></div></section>
+<div style="display:grid;gap:16px;min-width:0"><section class="panel"><div class="panel-head"><div><div class="eyebrow">Decisões e cognição</div><h2 id="decision-title">Decisões recentes</h2></div><small id="decision-subtitle"></small></div><div class="panel-body scroll" id="pending-choices"></div></section>
+<section class="panel"><div class="panel-head"><h2>Perfil cognitivo</h2><small id="mind-name"></small></div><div class="panel-body scroll" id="mind"></div></section></div>
+</div>
+<footer id="model"></footer>
 </main>
+<dialog class="modal" id="settings-dialog"><div class="panel-head"><div><div class="eyebrow">Configuração local</div><h2>Modelos e APIs</h2></div><button id="close-settings">Fechar</button></div><div class="panel-body"><p>As rotas são tentadas na ordem abaixo. Falhas de cota, credencial, modelo ou resposta ativam outra rota disponível. O contexto ficcional será enviado ao provedor selecionado.</p><p class="muted">Adicionar rotas pagas pode gerar cobranças. Chaves da mesma conta podem compartilhar cotas; o roteador não promete cota independente.</p><div id="routes"></div><h3>Adicionar rota</h3><form id="route-form"><div class="formgrid"><label>Provedor<select id="provider"></select></label><label>Modelo (ID exato)<input id="route-model" required maxlength="200" placeholder="qwen/qwen3.8-27b"></label><label class="full">Endpoint base<input id="endpoint" required maxlength="500" placeholder="https://api.exemplo.com/v1"></label><label class="full">Chave API<input type="password" id="key" autocomplete="off" maxlength="4096" placeholder="Não exibida após cadastro"></label><label>Formato<select id="format"><option value="auto">Automático</option><option value="json">Objeto JSON</option><option value="schema">JSON Schema</option><option value="plain">Texto JSON sem parâmetro de formato</option></select></label></div><div class="form-actions"><button type="submit" class="primary">Adicionar rota</button><span id="settings-error" role="status"></span></div></form><h3>Persistência</h3><p class="muted">Por padrão, novas alterações ficam somente em memória. Salvar no computador grava as chaves em arquivo local privado (permissão 0600), sem criptografia. Não salve se compartilhar a conta do sistema.</p><div class="form-actions"><button id="save-routes">Salvar configuração neste computador</button><small id="save-status"></small></div></div></dialog>
 <script>
 "use strict";
-const $=id=>document.getElementById(id);let snapshot=null,running=false,busy=false,selected="",progress=null;
-const place={"hall":"Hall","class-b":"Sala B","class-c":"Sala C","class-d":"Sala D","library":"Biblioteca","courtyard":"Pátio"};
-const kind={announcement:"Anúncio",intention:"Intenção privada",claim:"Conversa privada",move:"Deslocamento",observation:"Observação",wait:"Espera",goal:"Mudança de objetivo",plan:"Plano",belief:"Crença",relation:"Relação",model_failure:"Falha do modelo (sem ação)",ignored_cognition:"Proposta cognitiva descartada"};
-function node(tag,text,klass){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(klass)e.className=klass;return e}
-function name(id){return snapshot?.people.find(p=>p.id===id)?.name||id}
-function time(m){return String(Math.floor(m/60)%24).padStart(2,"0")+":"+String(m%60).padStart(2,"0")}
-function status(text,error=false){$("status").textContent=text;$("status").className=error?"error":"muted"}
-async function api(url,options){const r=await fetch(url,options);const result=await r.json();if(!r.ok)throw Error(result.error||"Falha de comunicação");return result}
-function controls(){const done=snapshot&&(snapshot.done||snapshot.state.round>=snapshot.limit);$("run").disabled=running||busy||done||!snapshot;$("pause").disabled=!running;$("step").disabled=running||busy||done||!snapshot;$("cancel").disabled=!busy||!progress?.active||progress.phase==="canceling"||progress.phase==="saving"}
+const $=id=>document.getElementById(id);
+let snapshot=null,progress=null,routes=[],selected="",busy=false,running=false,polling=false,routeBusy=false,choiceSignature="";
+const place={hall:"Hall","class-b":"Sala B","class-c":"Sala C","class-d":"Sala D",library:"Biblioteca",courtyard:"Pátio"};
+const kind={announcement:"Anúncio escolar",intention:"Intenção privada",claim:"Conversa privada",move:"Deslocamento",observation:"Observação",wait:"Espera",goal:"Objetivo atualizado",plan:"Plano",belief:"Hipótese",relation:"Relação",model_failure:"Falha técnica",ignored_cognition:"Diagnóstico"};
+const presets={ollama:["Ollama (local)","http://127.0.0.1:11434/v1","qwen2.5:3b"],groq:["Groq","https://api.groq.com/openai/v1","qwen/qwen3.8-27b"],gemini:["Google Gemini","https://generativelanguage.googleapis.com/v1beta/openai",""],openrouter:["OpenRouter","https://openrouter.ai/api/v1",""],openai:["OpenAI","https://api.openai.com/v1",""],anthropic:["Anthropic (Messages)","https://api.anthropic.com/v1",""],cerebras:["Cerebras","https://api.cerebras.ai/v1",""],nvidia:["NVIDIA NIM","https://integrate.api.nvidia.com/v1",""],mistral:["Mistral","https://api.mistral.ai/v1",""],deepseek:["DeepSeek","https://api.deepseek.com/v1",""],"openai-compatible":["Outro · compatível OpenAI","",""]};
+const node=(tag,text,klass)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(klass)n.className=klass;return n};
+const name=id=>snapshot?.people.find(p=>p.id===id)?.name||(id==="school"?"Escola":id);
+const time=m=>String(Math.floor(m/60)%24).padStart(2,"0")+":"+String(m%60).padStart(2,"0");
+const status=(t,error=false)=>{$("status").textContent=t;$("status").className=error?"error":""};
+async function api(url,options){const r=await fetch(url,options);const body=await r.json();if(!r.ok)throw Error(body.error||"Falha de comunicação");return body}
+const post=(url,data)=>api(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+function controls(){const stop=!snapshot||snapshot.done||!routes.some(r=>r.enabled);$("run").disabled=running||busy||stop;$("step").disabled=running||busy||stop;$("pause").disabled=!running;$("cancel").disabled=!busy||!progress?.active||["saving","canceling"].includes(progress.phase)}
+function list(parent,label,items){parent.append(node("h3",label));if(!items.length){parent.append(node("p","Nenhum registro","muted"));return}const ul=node("ul");for(const text of items)ul.append(node("li",text));parent.append(ul)}
+function action(d){return {wait:"Aguardar",observe:"Observar",move:"Ir para "+(place[d.target]||d.target),talk:"Conversar com "+name(d.target)}[d.action]||d.action}
 function renderChoices(){
- const p=progress,choices=p?.round>snapshot?.state.round?p.choices||[]:[];
- const show=choices.filter(x=>!selected||x.actor===selected);
- $("pending-panel").hidden=show.length===0;
+ if(!snapshot)return;
+ const pending=progress?.round>snapshot.state.round;
+ const choices=(pending?progress.choices:snapshot.last_choices)||[];
+ const shown=choices.filter(x=>!selected||x.actor===selected);
+ const sig=JSON.stringify([pending,selected,shown]);
+ if(sig===choiceSignature)return;choiceSignature=sig;
+ $("decision-title").textContent=pending?"Decisões do ciclo atual":"Últimas decisões executadas";
+ $("decision-subtitle").textContent=pending?"Propostas ainda não executadas":"Registro confirmado";
  $("pending-choices").replaceChildren();
- for(const x of show){
-  const d=x.decision,box=node("div",undefined,"event");
-  box.append(node("div",name(x.actor)+" · "+(x.failure?"Sem decisão válida":"Decisão validada, não executada"),"meta"));
-  if(x.failure){box.append(node("div",x.failure,"error"))}
-  else{
-   const action={wait:"Aguardar",observe:"Observar",move:"Ir para "+(place[d.target]||d.target),talk:"Conversar com "+name(d.target)}[d.action]||d.action;
-   box.append(node("strong",action));if(d.reason)box.append(node("p","Intenção: "+d.reason));if(d.note)box.append(node("p","Nota privada do personagem (não verificada): "+d.note));if(!d.reason&&!d.note)box.append(node("small","O modelo não explicitou a intenção."));
-   if(d.text)box.append(node("p","“"+d.text+"”"));
-   for(const b of d.beliefs||[])box.append(node("div","Hipótese: "+b.text+" ("+b.confidence+"%)"));
-   if(d.goal)box.append(node("div","Meta proposta: "+d.goal.with));
-   if(d.plan)box.append(node("div","Plano proposto: "+d.plan.steps.join(" → ")));
-   if(d.relation)box.append(node("div","Relação proposta: "+name(d.relation.person)+" "+d.relation.delta));
-   if(d.ignored?.length){const details=node("details");details.append(node("summary","Diagnóstico do modelo"),node("div","Campos descartados: "+d.ignored.join(", "),"muted"));box.append(details)}
-  }
-  $("pending-choices").append(box);
+ if(!shown.length){$("pending-choices").append(node("p","As decisões aparecem aqui conforme cada personagem termina.","muted"));return}
+ for(const x of shown){
+  const d=x.decision,b=node("article",undefined,"decision");
+  b.append(node("div",name(x.actor)+(d.source?" · "+d.source:""),"meta"));
+  if(x.failure){b.append(node("p",x.failure,"error"))}
+  else{b.append(node("strong",action(d)));if(d.reason||d.note){const thought=node("div",undefined,"thought");thought.append(node("div","Intenção / nota privada","label"),node("p",[d.reason,d.note].filter(Boolean).join(" · ")));b.append(thought)}if(d.text)b.append(node("p","“"+d.text+"”","speech"));
+   for(const belief of d.beliefs||[])b.append(node("p","Hipótese: "+belief.text+" · "+belief.confidence+"%"));
+   if(d.goal)b.append(node("p","Meta: "+d.goal.with));if(d.plan)b.append(node("p","Plano: "+d.plan.steps.join(" → ")));if(d.relation)b.append(node("p","Relação: "+name(d.relation.person)+" "+d.relation.delta));
+   if(d.ignored?.length){const detail=node("details");detail.append(node("summary","Diagnóstico"),node("p",d.ignored.join(", ")));b.append(detail)}
+  }$("pending-choices").append(b)
  }
 }
-function renderProgress(){
- if(!snapshot)return;
- renderChoices();
- const p=progress;if(!p?.active){
- const pending=p?.completed>0&&p.round>snapshot?.state.round;
- const allFailed=pending&&p.completed===p.total&&p.choices?.every(x=>x.failure);
- $("progress").textContent=allFailed?"Todos os agentes falharam; a próxima tentativa recomeça.":pending?("Resultados guardados nesta sessão: "+p.completed+"/"+p.total+". Próxima tentativa continua do ponto de falha."):"";
- for(const label of $("people").querySelectorAll("[data-progress]")){const i=Object.keys(snapshot.state.minds).sort().indexOf(label.dataset.progress);label.textContent=pending&&i<p.completed?(p.choices?.find(x=>x.actor===label.dataset.progress)?.failure?"Falha do modelo":"Decisão guardada"):""}
- controls();return
- }
- const elapsed=Math.max(0,Math.floor((Date.now()-Date.parse(p.started_at))/1000));
- const actorElapsed=p.actor?Math.max(0,Math.floor((Date.now()-Date.parse(p.actor_started_at))/1000)):0;
- $("progress").textContent=p.completed+"/"+p.total+" processados · "+elapsed+" s · "+(p.phase==="canceling"?"Cancelando":p.phase==="saving"?"Salvando":name(p.actor)+" · tentativa "+p.attempt+" · "+actorElapsed+" s")+(p.last_error?" · "+p.last_error:"");
- for(const card of $("people").children){const label=card.querySelector("[data-progress]");if(label){const i=Object.keys(snapshot.state.minds).sort().indexOf(label.dataset.progress);label.textContent=i<p.completed?(p.choices?.find(x=>x.actor===label.dataset.progress)?.failure?"Falha do modelo":"Decisão validada"):label.dataset.progress===p.actor?"Consultando · "+actorElapsed+" s":"Aguardando"}}
+function renderProgress(){if(!snapshot)return;renderChoices();const p=progress;
+ const active=p?.active,pending=p?.round>snapshot.state.round,done=p?.completed||0;
+ $("progressbar").style.width=(pending&&p.total?100*done/p.total:0)+"%";
+ $("progress").textContent=active?done+"/"+p.total+" · "+(p.phase==="saving"?"Salvando":p.phase==="canceling"?"Cancelando":name(p.actor)+" · tentativa "+p.attempt+" · "+Math.max(0,Math.floor((Date.now()-Date.parse(p.actor_started_at))/1000))+" s")+(p.last_error?" · "+p.last_error:""):pending&&done?"Resultados provisórios: "+done+"/"+p.total:"";
+ for(const label of $("people").querySelectorAll("[data-progress]")){const x=pending&&p?.choices?.find(x=>x.actor===label.dataset.progress);label.textContent=x?(x.failure?"Falha técnica":"Decisão pronta"):active&&p.actor===label.dataset.progress?"Consultando modelo…":"";label.className=x?(x.failure?"error":"good"):"muted"}
  controls()
 }
-let polling=false;
-async function poll(){if(polling)return;polling=true;try{progress=await api("/api/progress");renderProgress()}catch{}finally{polling=false}}
-setInterval(poll,1000);
-function list(parent,label,items){parent.append(node("h3",label));const ul=node("ul");if(!items.length)ul.append(node("li","Nenhum registro","muted"));for(const item of items)ul.append(node("li",item));parent.append(ul)}
 function render(){
  if(!snapshot)return;const s=snapshot.state;
  $("clock").textContent="Dia "+(Math.floor(s.minute/1440)+1)+" · "+time(s.minute);$("round").textContent="Ciclo "+s.round+(snapshot.version===1?" · relógio legado":" · por acontecimentos");
- $("model").textContent="Modelo: "+snapshot.model+" · registro "+snapshot.digest.slice(0,12);
+ $("model").textContent="Registro "+snapshot.digest.slice(0,12)+" · As falas são alegações. Propostas não alteram o mundo até o ciclo ser publicado.";
  $("people").replaceChildren();
- for(const p of snapshot.people){const m=s.minds[p.id],card=node("div",undefined,"person");card.append(node("strong",p.name),node("small","Classe "+p.class+" · "+(place[m.location]||m.location)));const activity=node("p","","muted");activity.dataset.progress=p.id;card.append(activity);const b=node("button","Inspecionar");b.onclick=()=>{$("who").value=p.id;selected=p.id;render()};card.append(b);$("people").append(card)}
- const events=s.events.filter(e=>(!selected||e.audience.includes(selected))&&!["ignored_cognition"].includes(e.kind));$("timeline").replaceChildren();
- for(const e of events.slice(-150).reverse()){const box=node("div",undefined,"event "+e.kind);box.append(node("div",time(e.minute)+" · "+(kind[e.kind]||e.kind)+" · "+name(e.actor)+(e.kind==="claim"?" → "+name(e.target):""),"meta"),node("div",e.text));$("timeline").append(box)}
- $("mind").replaceChildren();
- if(selected){const m=s.minds[selected];$("mind").append(node("strong",name(selected)),node("p","Local: "+(place[m.location]||m.location)));$("mind").append(node("h3","Última intenção"),node("p",m.thought||"O personagem ainda não explicitou uma intenção.","muted"));list($("mind"),"Objetivos",m.goals);list($("mind"),"Plano atual",m.plan?.steps||[]);list($("mind"),"Crenças (hipóteses)",m.beliefs.map(b=>b.text+" · confiança "+b.confidence+"% · "+b.evidence));list($("mind"),"Relações",Object.entries(m.relations).map(([id,v])=>name(id)+": "+v));list($("mind"),"Memórias de acontecimentos",events.filter(e=>["announcement","claim","move","observation"].includes(e.kind)).slice(-12).reverse().map(e=>time(e.minute)+" · "+e.id+" · "+e.text))}
- else{$("mind").append(node("p","Selecione um personagem para inspecionar sua cognição.","muted"))}
- renderProgress();controls()
+ for(const p of snapshot.people){const m=s.minds[p.id],b=node("button",undefined,"person");b.setAttribute("aria-pressed",String(selected===p.id));b.append(node("span","CLASSE "+p.class+" · 1º ANO","initial"),node("strong",p.name),node("span",place[m.location]||m.location,"muted"));const a=node("small","");a.dataset.progress=p.id;b.append(a);b.onclick=()=>{selected=selected===p.id?"":p.id;$("who").value=selected;render()};$("people").append(b)}
+ const events=s.events.filter(e=>(!selected||e.audience.includes(selected))&&($("technical").checked||!["model_failure","ignored_cognition","wait"].includes(e.kind)));
+ $("timeline").replaceChildren();for(const e of events.slice(-150).reverse()){const b=node("article",undefined,"event "+e.kind);b.append(node("div",time(e.minute)+" · "+(kind[e.kind]||e.kind)+" · "+name(e.actor)+(e.kind==="claim"?" → "+name(e.target):""),"meta"),node("p",e.text));$("timeline").append(b)}
+ $("mind").replaceChildren();$("mind-name").textContent=selected?name(selected):"Selecione um personagem";
+ if(selected){const m=s.minds[selected],mind=$("mind");mind.append(node("div",m.thought||"Nenhuma intenção explícita registrada.","thought"));list(mind,"Objetivos",m.goals);list(mind,"Plano",m.plan?.steps||[]);list(mind,"Hipóteses",m.beliefs.map(b=>b.text+" · "+b.confidence+"%"));list(mind,"Relações",Object.entries(m.relations).map(([id,v])=>name(id)+": "+v));list(mind,"Memórias",events.filter(e=>["announcement","claim","move","observation"].includes(e.kind)).slice(-12).reverse().map(e=>time(e.minute)+" · "+e.text))}
+ else $("mind").append(node("p","Clique em um personagem para acompanhar suas metas, planos e memórias privadas.","muted"));
+ renderProgress()
 }
-async function step(){
- if(busy||!snapshot)return false;busy=true;controls();status("Consultando os agentes. As decisões aparecem assim que validadas; os efeitos são publicados juntos.");
- try{snapshot=await api("/api/step",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({round:snapshot.state.round})});render();status(snapshot.done?"Manhã concluída. Registro salvo.":"Acontecimentos da rodada "+snapshot.state.round+" salvos.");return true}
- catch(e){running=false;try{snapshot=await api("/api/state");render()}catch{}status(e.message==="context canceled"?"Rodada cancelada. Decisões já validadas permanecem nesta sessão.":e.message+" · confira o estado salvo. Decisões já validadas podem ser reaproveitadas na próxima tentativa.",e.message!=="context canceled");return false}
- finally{busy=false;await poll();controls()}
+function renderRoutes(){
+ $("route-status").textContent=routes.length?routes.filter(r=>r.enabled).length+" rota(s) habilitada(s) · "+(routes.find(r=>r.status==="consultando")?.model||"fallback por prioridade"):"Nenhuma rota configurada";
+ if(!$("settings-dialog").open)return;
+ $("routes").replaceChildren();
+ for(const [i,r] of routes.entries()){
+ const row=node("div",undefined,"route"),description=node("div"),actions=node("div",undefined,"route-actions");
+ const blocked=Date.parse(r.retry_at)>Date.now();
+ description.append(node("strong",(i+1)+". "+(presets[r.provider]?.[0]||r.provider)+" · "+r.model),node("p",(r.enabled?r.status:"Desativada")+(blocked?" · nova tentativa após "+new Date(r.retry_at).toLocaleTimeString():""),blocked?"pending":"muted"),node("small",(r.has_key?"Chave configurada":"Sem chave")+" · "+r.format));
+ for(const [op,label] of [["up","↑"],["down","↓"],["toggle",r.enabled?"Desativar":"Ativar"],["remove","Remover"]]){const b=node("button",label);b.disabled=routeBusy||(op==="up"&&i===0)||(op==="down"&&i===routes.length-1);b.onclick=()=>routeAction({action:op,id:r.id});actions.append(b)}
+ row.append(description,actions);$("routes").append(row)
+ }
+ if(!routes.length)$("routes").append(node("p","Adicione pelo menos um modelo para iniciar.","muted"))
 }
-$("step").onclick=()=>step();$("pause").onclick=()=>{running=false;controls();status(busy?"Pausa solicitada; finalizando a rodada atual.":"Pausado.")};
-$("run").onclick=async()=>{if(running||busy)return;running=true;controls();while(running&&!snapshot.done&&snapshot.state.round<snapshot.limit){if(!await step())break}running=false;controls()};
-$("cancel").onclick=async()=>{running=false;try{const r=await api("/api/cancel",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({round:progress.round})});status(r.canceled?"Cancelamento solicitado.":"Rodada já finalizando.");await poll()}catch(e){status(e.message,true)}};
-$("who").onchange=e=>{selected=e.target.value;render()};
-(async()=>{try{snapshot=await api("/api/state");for(const p of snapshot.people){const o=node("option",p.name);o.value=p.id;$("who").append(o)}render();status("Pronto. Execute ou avance uma rodada.")}catch(e){status(e.message,true)}})();
+async function routeAction(data){if(routeBusy)return;routeBusy=true;$("settings-error").textContent="";try{routes=await post("/api/routes",data);if(data.action==="save")$("save-status").textContent="Configuração gravada localmente.";else $("save-status").textContent="Alterações em memória.";if(data.action==="add")$("key").value=""}catch(e){$("settings-error").textContent=e.message;$("settings-error").className="error"}finally{routeBusy=false;renderRoutes();controls()}}
+async function poll(){if(polling)return;polling=true;try{const [p,r]=await Promise.all([api("/api/progress"),api("/api/routes")]);progress=p;if(!routeBusy)routes=r;renderProgress();renderRoutes()}catch{}finally{polling=false}}
+setInterval(poll,1000);
+async function step(){if(busy||!snapshot)return false;busy=true;controls();status("Consultando personagens…");try{snapshot=await post("/api/step",{round:snapshot.state.round});render();status(snapshot.done?"Manhã concluída.":"Ciclo salvo.");return true}catch(e){running=false;try{snapshot=await api("/api/state");render()}catch{}status(e.message,e.message!=="context canceled");return false}finally{busy=false;await poll();controls()}}
+$("run").onclick=async()=>{if(running||busy)return;running=true;controls();while(running&&!snapshot.done){if(!await step())break}running=false;controls()};
+$("step").onclick=()=>step();$("pause").onclick=()=>{running=false;controls();status("Pausa solicitada.")};$("cancel").onclick=async()=>{running=false;try{await post("/api/cancel",{round:progress.round});status("Cancelamento solicitado.")}catch(e){status(e.message,true)}await poll()};
+$("who").onchange=e=>{selected=e.target.value;render()};$("technical").onchange=render;
+for(const [id,preset] of Object.entries(presets)){const o=node("option",preset[0]);o.value=id;$("provider").append(o)}
+function preset(){const p=presets[$("provider").value];$("endpoint").value=p[1];$("endpoint").readOnly=!["ollama","openai-compatible"].includes($("provider").value);$("route-model").value=p[2];$("format").value="auto"}
+$("provider").onchange=preset;$("provider").value="groq";preset();
+$("settings").onclick=()=>{$("settings-dialog").showModal();renderRoutes();poll()};$("close-settings").onclick=()=>$("settings-dialog").close();
+$("route-form").onsubmit=e=>{e.preventDefault();routeAction({action:"add",route:{provider:$("provider").value,endpoint:$("endpoint").value,model:$("route-model").value,key:$("key").value,format:$("format").value}})};
+$("save-routes").onclick=()=>{if(confirm("Salvar também as chaves em arquivo local privado, sem criptografia?"))routeAction({action:"save"})};
+(async()=>{try{[snapshot,routes,progress]=await Promise.all([api("/api/state"),api("/api/routes"),api("/api/progress")]);for(const p of snapshot.people){const o=node("option",p.name);o.value=p.id;$("who").append(o)}render();renderRoutes();status(routes.some(r=>r.enabled)?"Pronto para simular.":"Configure Modelos e APIs para iniciar.")}catch(e){status(e.message,true)}})();
 </script></body></html>

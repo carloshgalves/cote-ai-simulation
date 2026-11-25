@@ -25,6 +25,7 @@ type HTTPModel struct {
 	Client *http.Client
 	Format string
 	Protocol string
+	telemetry *CallTelemetry
 }
 
 func NewHTTPModel(endpoint,name,key string) (*HTTPModel,error) {
@@ -207,6 +208,10 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	res,err:=m.Client.Do(req)
 	if err!=nil{return zero,errors.New("modelo indisponível ou timeout")}
 	defer res.Body.Close()
+	if m.telemetry!=nil {
+		m.telemetry.HTTPStatus=res.StatusCode
+		m.telemetry.Quota=readQuota(res.Header,time.Now(),u!=nil&&u.Hostname()=="api.groq.com")
+	}
 	if res.StatusCode==400 {
 		// Inspect provider error only for known categories; never echo arbitrary
 		// bodies, which can include credentials or generated character content.
@@ -223,6 +228,7 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	if res.StatusCode!=http.StatusOK{return zero,providerError{Status:res.StatusCode,Message:fmt.Sprintf("provedor LLM retornou HTTP %d",res.StatusCode)}}
 	data,err:=io.ReadAll(io.LimitReader(res.Body,2<<20+1))
 	if err!=nil||len(data)>2<<20{return zero,errors.New("invalid model response size")}
+	if m.telemetry!=nil {m.telemetry.Usage=readUsage(data)}
 	if m.Protocol=="anthropic" {
 		var response struct{Content []struct{Type,Text string};StopReason string `json:"stop_reason"`}
 		if json.Unmarshal(data,&response)!=nil||response.StopReason!="end_turn"{return zero,responseError{"resposta Anthropic incompleta"}}

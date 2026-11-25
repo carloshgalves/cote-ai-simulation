@@ -28,6 +28,7 @@ type Conversation struct{
  Turn string `json:"turn"`
  Started int64 `json:"started"`
  Turns int `json:"turns"`
+ Stale int `json:"stale,omitempty"`
 }
 func canContact(m Mind,peer string,other Mind,self string)bool{
  if !availableForContact(other){return false}
@@ -61,7 +62,7 @@ func talkMinutes(text string)int64{
 	if n>400{return 4};if n>160{return 3};return 2
 }
 func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
-	if s.Minute>=EndMinute{return State{},errors.New("manhã concluída")}
+	if s.Minute>=endMinute(j.Version){return State{},errors.New("período concluído")}
 	order:=eligibleActors(j,s)
 	if len(choices)!=len(order){return State{},errors.New("incomplete eligible cohort")}
 	for i,x:=range choices{
@@ -84,6 +85,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 			if m.Conversation!=nil&&(x.Decision.Action!="talk"||x.Decision.Target!=m.Conversation.Peer){closeConversation(&out,x.Actor)}
 		}
 	}
+	if j.Version>=WorldVersion{applyImmediateWorld(j,s,&out,choices)}
 	// A movement removes its actor from the contactable scene immediately.
 	for _,x:=range choices{if x.Decision.Action=="move"{
 		m:=out.Minds[x.Actor];d:=x.Decision
@@ -95,7 +97,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	// Rotate priority to avoid systematic alphabetical advantage.
 	for i:=0;i<len(order);i++{
 		id:=order[(i+s.Round)%len(order)];d:=byID[id];m:=out.Minds[id]
-		if d.Action=="move"{continue}
+		if d.Action=="move"||(j.Version>=WorldVersion&&isWorldAction(d.Action)){continue}
 		if m.Activity!=nil&&m.Activity.Kind=="listen"{
 			if d.Action=="talk"&&d.Target!=m.Activity.Target{appendEvent(&out,Event{Kind:"obstacle",Actor:id,Text:"A conversa pretendida foi adiada por outra interação.",Audience:[]string{id}})}
 			continue
@@ -112,8 +114,10 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 			if j.Version>=ConversationVersion{
 				started,turns:=s.Minute,0
 				if m.Conversation!=nil{started=m.Conversation.Started;turns=m.Conversation.Turns}
-				m.Conversation=&Conversation{Peer:d.Target,Turn:id,Started:started,Turns:turns}
-				target.Conversation=&Conversation{Peer:id,Turn:id,Started:started,Turns:turns}
+				stale:=0
+				if j.Version>=WorldVersion&&m.Conversation!=nil{stale=m.Conversation.Stale}
+				m.Conversation=&Conversation{Peer:d.Target,Turn:id,Started:started,Turns:turns,Stale:stale}
+				target.Conversation=&Conversation{Peer:id,Turn:id,Started:started,Turns:turns,Stale:stale}
 			}
 			m.Activity=&Activity{Kind:"talk",Target:d.Target,Text:d.Text,Until:until}
 			target.Activity=&Activity{Kind:"listen",Target:id,Until:until};target.WakeReason=""
@@ -121,7 +125,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		case "observe":
 			m.Activity=&Activity{Kind:"observe",Until:s.Minute+1}
 		case "wait":
-			until:=nextWorld(s)
+			until:=nextDue(j,s)
 			if d.WaitMinutes>0&&s.Minute+int64(d.WaitMinutes)<until{until=s.Minute+int64(d.WaitMinutes)}
 			m.Activity=&Activity{Kind:"wait",Until:until}
 		}
@@ -137,7 +141,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	// simulated minute. Publish this cycle before advancing any clock.
 	if len(eligibleActors(j,out))>0{return out,nil}
 	// Next actual due time, not the longest action in the cohort.
-	minute:=nextWorld(s)
+	minute:=nextDue(j,s)
 	for _,m:=range out.Minds{if m.Activity!=nil&&m.Activity.Until<minute{minute=m.Activity.Until}}
 	if minute<=s.Minute{return State{},errors.New("invalid scheduled advance")}
 	cs:=clock.State{Instant:domain.SimulationInstant(s.Minute),Revision:domain.WorldRevision(s.Round),LastOrdinal:0}
@@ -165,19 +169,30 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 		case "talk":appendEvent(&out,Event{Kind:"claim",Actor:id,Target:a.Target,Text:a.Text,Audience:[]string{id,a.Target}});m.WakeReason="Conversa concluída"
 			if j.Version>=ConversationVersion&&m.Conversation!=nil{
 				m.Conversation.Turn=a.Target;m.Conversation.Turns++
-				peer:=out.Minds[a.Target];if peer.Conversation!=nil{peer.Conversation.Turn=a.Target;peer.Conversation.Turns=m.Conversation.Turns;out.Minds[a.Target]=peer}
-				m.Activity=&Activity{Kind:"conversation_hold",Target:a.Target,Until:nextWorld(out)}
+				if j.Version>=WorldVersion{
+					m.Conversation.Stale=dialogueStale(out.Events,id,a.Target,a.Text,m.Conversation.Stale)
+					if m.Conversation.Turns>=12||m.Conversation.Stale>=2||out.Minute-m.Conversation.Started>=25{
+						out.Minds[id]=m;closeConversation(&out,id);m=out.Minds[id]
+						appendEvent(&out,Event{Kind:"conversation_end",Actor:id,Target:a.Target,Text:"Conversa encerrada por duração ou repetição; reavalie a abordagem.",Audience:[]string{id,a.Target}})
+						m.WakeReason="Conversa encerrada";break
+					}
+				}
+				peer:=out.Minds[a.Target];if peer.Conversation!=nil{peer.Conversation.Turn=a.Target;peer.Conversation.Turns=m.Conversation.Turns;peer.Conversation.Stale=m.Conversation.Stale;out.Minds[a.Target]=peer}
+				m.Activity=&Activity{Kind:"conversation_hold",Target:a.Target,Until:nextDue(j,out)}
 				m.WakeReason="";out.Minds[id]=m;continue
 			}
 		case "listen":m.WakeReason="Recebeu uma fala"
+		case "task":completeTask(j,&out,id,&m,a)
+		case "world_action":m.WakeReason="Ação concluída"
 		case "observe":text:=roster(out,id);if observationChanged(out,id,text){appendEvent(&out,Event{Kind:"observation",Actor:id,Text:text,Audience:[]string{id}})};m.WakeReason="Observação concluída"
-		case "wait":m.WakeReason="Prazo de reavaliação atingido";if minute==nextWorld(s){m.WakeReason="Novo anúncio escolar"}
+		case "wait":m.WakeReason="Prazo de reavaliação atingido";if minute==nextDue(j,s){m.WakeReason="Novo anúncio escolar"}
 		case "retry":m.WakeReason="Interlocutor indisponível"
 		case "conversation_hold":
 			closeConversation(&out,id);m=out.Minds[id];m.WakeReason="Conversa expirou"
 		}
 		m.Activity=nil;out.Minds[id]=m
 	}
+	if j.Version>=WorldVersion{advanceWorld(j,&out);return out,nil}
 	for _,e:=range schoolAgenda{if e.Minute==minute{
 		appendEvent(&out,Event{Kind:"announcement",Actor:"school",Text:e.Text,Audience:ids(j.Profiles)})
 		for _,id:=range ids(j.Profiles){wakeWaiting(&out,id,"Novo anúncio escolar")}

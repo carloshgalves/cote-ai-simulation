@@ -69,7 +69,7 @@ type Snapshot struct {
 	LastChoices []Chosen `json:"last_choices"`
  Population map[string]PublicMember `json:"population,omitempty"`
  Identities map[string]CharacterIdentity `json:"identities,omitempty"`
- NeedsInference bool `json:"needs_inference"`
+ NeedsInference bool `json:"needs_inference,omitempty"`
 }
 
 func Open(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,Version)}

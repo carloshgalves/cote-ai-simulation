@@ -104,7 +104,7 @@ func schoolView(j Journal,s State,id string)*SchoolView{
  v.Period=periodAt(s.Minute);v.NextAnnouncement=nextPublicSchedule(s.Minute)
  if j.Version>=PopulationVersion&&!isStudent(j,id){
   v.Rules=[]string{"Equipe escolar. Não recebe PP de estudante, não participa do exame VIP e não pode criar sanções ou regras. A autoridade institucional permanece com o motor."}
-  if j.Version>=CognitionVersion{v.Rules=append(v.Rules,classGuarantee,"A renda mensal estudantil é CP × 100. A revelação institucional aos ingressantes está prevista para o segundo mês; cumpra a confidencialidade.")}
+  if j.Version>=CognitionVersion&&j.Population[id].Role=="teacher"{v.Rules=append(v.Rules,classGuarantee,"A renda mensal estudantil é CP × 100. A revelação institucional aos ingressantes está prevista para o segundo mês; cumpra a confidencialidade.")}
   if m.Location==staffStation(j,id){add("work","")}
   return v
  }
@@ -145,6 +145,7 @@ func schoolView(j Journal,s State,id string)*SchoolView{
   outcome:=0;if s.Minute>=examBase(j.Version)+960{outcome=e.Outcome}
   v.Exam=&ExamView{e.Phase,clone(e.Group),e.VIP==id,e.Submitted[id],outcome}
   v.Rules=append(v.Rules,"Zodiac/VIP adaptado: um VIP secreto no grupo; uma submissão por não VIP. Fase antecipada: acerto recompensa 500.000 PP ao autor e transfere 50 CP da classe VIP à dele; erro recompensa VIP e inverte CP. Janela final: acerto 1.000.000 PP ao VIP e 500.000 aos demais; erro ou omissão 500.000 ao VIP. Submissão da classe do VIP não produz resultado. O resultado não revela identidades.")
+  if j.Version>=CognitionVersion&&e.Phase=="final"{v.Rules=append(v.Rules,"Na janela final não há perda nem transferência de CP por erro ou omissão. A penalidade em CP pertence exclusivamente à fase antecipada.")}
   if (e.Phase=="early"||e.Phase=="final")&&!e.Submitted[id]&&e.VIP!=id&&e.Outcome==0{for _,other:=range e.Group{if other!=id{add("guess",other)}}}
  }
  return v

@@ -2,6 +2,7 @@ package pilot
 
 import (
  "errors"
+ "crypto/sha256"
  "sort"
  "strings"
 )
@@ -43,8 +44,8 @@ func initializeIdentities(j *Journal){
   case "hirata":p.Goals=[]string{"Integrar os colegas","Evitar conflitos e exclusão"}
   }
   j.Profiles[i]=p
-  ident:=CharacterIdentity{Values:clone(p.Traits),Motivations:clone(p.Goals),Vulnerabilities:[]string{},Capacities:[]string{"Capacidade específica não estabelecida; não presumir desempenho excepcional."},Background:[]BackgroundFact{},Memory:MemoryCapabilityProfile{Encoding:65,RetentionDays:7,Accessibility:65,Retrieval:65,WorkingMemory:12,Reasoning:"Contextual, compatível com a identidade."},Status:"PROVISIONAL: perfil inicial; parâmetros de memória são escolhas do simulador, não medidas canônicas."}
-  ident.Values=append(ident.Values,canonFor(p.ID).Dispositions...)
+  ident:=CharacterIdentity{Values:clone(p.Traits),Motivations:clone(p.Goals),Vulnerabilities:[]string{},Capacities:[]string{"Capacidade específica não estabelecida; não presumir desempenho excepcional."},Background:[]BackgroundFact{},Memory:memoryPrior(p.ID),Status:"PROVISIONAL: perfil inicial; parâmetros de memória são escolhas do simulador, não medidas canônicas."}
+  for _,v:=range canonFor(p.ID).Dispositions{if !strings.Contains(v,"hidden-rule")&&!strings.Contains(v,"hidden-role"){ident.Values=append(ident.Values,v)}}
   for i,x:=range p.Background{if !strings.Contains(x,"Perfil provisório"){ident.Background=append(ident.Background,BackgroundFact{ID:"bio-"+p.ID+"-"+string(rune('a'+i)),Text:x,Source:j.Population[p.ID].Source})}}
   switch p.ID{
   case "ayanokoji":
@@ -76,7 +77,25 @@ func initializeIdentities(j *Journal){
   case "ichinose":
    ident.Background=append(ident.Background,BackgroundFact{"bio-ichinose-hairclip","No ensino fundamental furtei uma presilha para minha irmã e sinto culpa pelo episódio; não é conhecimento público.","evt.pre-y1.ichinose-hairclip-shoplifting",""})
    ident.Vulnerabilities=[]string{"Culpa pelo episódio anterior; valoriza proteger colegas."}
+  case "rokusuke-koenji":
+   ident.Memory=MemoryCapabilityProfile{88,40,85,86,24,"Autônomo, seletivo e capaz de avaliação complexa."}
+   ident.Capacities=[]string{"Condição física e intelectual notáveis; desempenho específico deve ser demonstrado na simulação."}
+   ident.Motivations=clone(p.Goals)
+  case "kei-karuizawa":
+   ident.Memory=MemoryCapabilityProfile{78,21,80,84,18,"Inteligência social e atenção à segurança interpessoal."}
+   ident.Vulnerabilities=[]string{"Evita exposição de fraquezas; necessidade de segurança social."}
+  case "katsuragi":
+   ident.Memory=MemoryCapabilityProfile{83,30,82,84,22,"Cauteloso, organizado e atento aos custos de decisões."}
+  case "ryuji-kanzaki":
+   ident.Memory=MemoryCapabilityProfile{83,30,80,84,22,"Analítico e seletivo; pondera interesses individuais e coletivos."}
+  case "nagumo":
+   ident.Memory=MemoryCapabilityProfile{90,45,87,90,26,"Estratégico e competitivo; acompanha redes e interesses."}
+  case "sae-chiyabashira":
+   ident.Memory=MemoryCapabilityProfile{80,35,80,84,22,"Experiência pedagógica e conhecimento institucional."}
+  case "ken-sudo":
+   ident.Capacities=[]string{"Interesse e aptidão esportiva; desempenho acadêmico e físico precisam de avaliação."}
   case "manabu-horikita":
+   ident.Memory=MemoryCapabilityProfile{90,45,88,90,26,"Disciplinado, organizado e capaz de raciocínio estratégico."}
    ident.Background=append(ident.Background,BackgroundFact{"bio-manabu-suzune","Suzune Horikita é minha irmã mais nova.","data/canon/characters/suzune-horikita.yaml","horikita"})
   }
   if j.Population[p.ID].Year==1&&p.ID!="horikita"&&p.ID!="ryuen"&&p.ID!="ichinose"&&p.ID!="hirata"{
@@ -90,7 +109,7 @@ func initializeIdentities(j *Journal){
 func validateIdentities(j Journal)error{
  if len(j.Identities)!=len(j.Profiles){return errors.New("missing character identities")}
  for _,p:=range j.Profiles{
-  x,ok:=j.Identities[p.ID];if !ok||x.Memory.WorkingMemory<1||x.Memory.WorkingMemory>64||x.Memory.RetentionDays<1||x.Memory.RetentionDays>365||len(x.Background)>16{return errors.New("invalid identity")}
+  x,ok:=j.Identities[p.ID];if !ok||x.Memory.WorkingMemory<1||x.Memory.WorkingMemory>64||x.Memory.RetentionDays<1||x.Memory.RetentionDays>365||x.Memory.Encoding<1||x.Memory.Encoding>100||x.Memory.Accessibility<1||x.Memory.Accessibility>100||x.Memory.Retrieval<1||x.Memory.Retrieval>100||len(x.Background)>16{return errors.New("invalid identity")}
   for _,f:=range x.Background{if !validText(f.ID,200)||!validText(f.Text,1000)||!validText(f.Source,500)||f.Person!=""&&!known(j.Profiles,f.Person){return errors.New("invalid background fact")}}
  }
  return nil
@@ -135,4 +154,10 @@ func retrieveMemory(j Journal,s State,id string,events []Event,keep map[string]b
  for i,x:=range pool{if i>=p.WorkingMemory{break};out=append(out,clone(x.e))}
  sort.Slice(out,func(i,k int)bool{return out[i].ID<out[k].ID})
  return out
+}
+
+func memoryPrior(id string)MemoryCapabilityProfile{
+ // Authored heterogeneous priors, not inferred IQ or canon scores.
+ h:=sha256.Sum256([]byte("v7-memory/"+id))
+ return MemoryCapabilityProfile{Encoding:55+int(h[0])%21,RetentionDays:int64(5+h[1]%10),Accessibility:55+int(h[2])%21,Retrieval:55+int(h[3])%21,WorkingMemory:10+int(h[4])%8,Reasoning:"Perfil provisório; raciocínio condicionado por experiências e capacidades conhecidas."}
 }

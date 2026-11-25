@@ -211,7 +211,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 				d=Decision{Action:"wait",Reason:"Sem decisão válida do modelo",Beliefs:[]Belief{}}
 			}
 		}
-		} 
+		}
   chosen:=Chosen{Actor:id,Decision:clone(d),Failure:failure}
 		r.Choices=append(r.Choices,chosen)
 		s.pending=append(s.pending,chosen)

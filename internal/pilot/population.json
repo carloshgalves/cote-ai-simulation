@@ -17,7 +17,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/kei-karuizawa.json"
     }
   },
@@ -39,7 +39,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/ken-sudo.json"
     }
   },
@@ -61,7 +61,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/kanji-ike.json"
     }
   },
@@ -83,7 +83,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/haruki-yamauchi.json"
     }
   },
@@ -105,7 +105,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/airi-sakura.json"
     }
   },
@@ -127,7 +127,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/rokusuke-koenji.json"
     }
   },
@@ -149,7 +149,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/katsuragi.json"
     }
   },
@@ -171,7 +171,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/hashimoto.json"
     }
   },
@@ -193,7 +193,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/arisu-sakayanagi.json"
     }
   },
@@ -215,7 +215,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/masumi-kamuro.json"
     }
   },
@@ -237,7 +237,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/mio-ibuki.json"
     }
   },
@@ -259,7 +259,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/ishizaki.json"
     }
   },
@@ -281,7 +281,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/yamada-albert.json"
     }
   },
@@ -303,7 +303,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/hiyori-shiina.json"
     }
   },
@@ -325,7 +325,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/kaneda.json"
     }
   },
@@ -347,7 +347,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/ryuji-kanzaki.json"
     }
   },
@@ -369,7 +369,7 @@
     "member": {
       "role": "student",
       "year": 1,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/shibata-so.json"
     }
   },
@@ -391,7 +391,7 @@
     "member": {
       "role": "student",
       "year": 3,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/manabu-horikita.json"
     }
   },
@@ -413,7 +413,7 @@
     "member": {
       "role": "student",
       "year": 2,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/nagumo.json"
     }
   },
@@ -435,7 +435,7 @@
     "member": {
       "role": "student",
       "year": 3,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/tachibana.json"
     }
   },
@@ -457,7 +457,7 @@
     "member": {
       "role": "teacher",
       "year": 0,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/sae-chiyabashira.json",
       "station": "class-d"
     }
@@ -480,7 +480,7 @@
     "member": {
       "role": "teacher",
       "year": 0,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/chie-hoshinomiya.json",
       "station": "class-b"
     }
@@ -503,7 +503,7 @@
     "member": {
       "role": "teacher",
       "year": 0,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/mashima.json",
       "station": "class-a"
     }
@@ -526,7 +526,7 @@
     "member": {
       "role": "teacher",
       "year": 0,
-      "initial_tier": "LIGHTWEIGHT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/sakagami.json",
       "station": "class-c"
     }
@@ -549,7 +549,7 @@
     "member": {
       "role": "staff",
       "year": 0,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "data/canon/consolidated/characters/unidentified-electronics-clerk.json",
       "station": "shop"
     }
@@ -572,7 +572,7 @@
     "member": {
       "role": "staff",
       "year": 0,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "SIMULATION_AUTHORED",
       "station": "library"
     }
@@ -595,7 +595,7 @@
     "member": {
       "role": "staff",
       "year": 0,
-      "initial_tier": "LATENT",
+      "initial_tier": "FULL",
       "source": "SIMULATION_AUTHORED",
       "station": "cafeteria"
     }

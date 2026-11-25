@@ -12,7 +12,7 @@ const FullTier="FULL"
 const LightTier="LIGHTWEIGHT"
 const LatentTier="LATENT"
 const CohortTier="COHORT"
-const maxFull=12
+const maxFull=33
 const routineSource="motor/rotina"
 //go:embed population.json
 var populationData []byte
@@ -149,7 +149,7 @@ func engage(j Journal,s *State,from,to string){
 func updatePopulation(j Journal,s *State){
  for _,id:=range ids(j.Profiles){
   a,m:=j.Population[id],s.Minds[id]
-  if a.Core||m.Conversation!=nil{continue}
+  if a.Core||a.InitialTier==FullTier||m.Conversation!=nil{continue}
   old:=m.Tier
   if m.Tier==FullTier&&s.Minute-m.LastEngagement>=2880{m.Tier=LightTier;m.Engagements=0}
   if m.Tier==LightTier&&a.InitialTier==LatentTier&&s.Minute-m.LastEngagement>=1440{m.Tier=LatentTier;m.Engagements=0}

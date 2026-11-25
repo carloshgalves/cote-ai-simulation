@@ -1,0 +1,863 @@
+{
+  "schema_version": "tg-character-corpus-v0",
+  "characters": [
+    {
+      "character_id": "tg.actor.yuuichi-katagiri",
+      "display_name": "Yuuichi Katagiri",
+      "group": "Group C",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Friendship is a professed priority; impoverished upbringing and prior experience with exploitative transactions"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Reads incentives, conceals plans, reframes dilemmas"
+        },
+        "strategy": {
+          "description": "Selective disclosure, strategic deception, willingness to bear costs for allies"
+        },
+        "limitations": {
+          "description": "Physical vulnerability and attachment can constrain choices"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Yuuichi_Katagiri"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "Do not grant omniscience or automatic victory"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.tenji-mikasa",
+      "display_name": "Tenji Mikasa",
+      "group": "Group C",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Academic excellence; prior game experience and suspicion surrounding father's death"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Analytical observation, long-horizon investigation"
+        },
+        "strategy": {
+          "description": "Initially isolates Shiho and conceals motives; later cooperates with Yuuichi"
+        },
+        "limitations": {
+          "description": "Fixation and mistaken attribution"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Tenji_Mikasa"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "Do not initialize later trust in Yuuichi"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.shiho-sawaragi",
+      "display_name": "Shiho Sawaragi",
+      "group": "Group C",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Class vice-president; police family; strong justice orientation"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Direct moral judgment and interpersonal resolve"
+        },
+        "strategy": {
+          "description": "Protects friends, challenges unfairness"
+        },
+        "limitations": {
+          "description": "Can be exploited through straightforward trust"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Shiho_Sawaragi"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "Do not equate honesty with knowledge of hidden actors"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.makoto-shibe",
+      "display_name": "Makoto Shibe",
+      "group": "Group C",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Class president from wealthy family"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Social confidence and athletic background"
+        },
+        "strategy": {
+          "description": "Impulsive disclosure, seeks approval, offers material help"
+        },
+        "limitations": {
+          "description": "Naivety and family loyalty"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Makoto_Shibe"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "Do not reveal father's role at start"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.yutori-kokorogi",
+      "display_name": "Yutori Kokorogi",
+      "group": "Group C",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Initially presents as vulnerable former bullying victim"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Concealment and social impression management (later characterization)"
+        },
+        "strategy": {
+          "description": "Public vulnerability and private motives must remain distinct"
+        },
+        "limitations": {
+          "description": "Attachment and fixation may distort judgment"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Yutori_Kokorogi"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "Do not reveal later alignment to peers"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.kei-shinomiya",
+      "display_name": "Kei Shinomiya",
+      "group": "Group K",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Younger strategic talent in opposing team"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Deduction, contingency planning, coordination"
+        },
+        "strategy": {
+          "description": "Can revise alliances after observing competence"
+        },
+        "limitations": {
+          "description": "Limited information and dependence on teammates"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Kei_Shinomiya"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "No automatic knowledge of Yuuichi's intentions"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.shinji-shiba",
+      "display_name": "Shinji Shiba",
+      "group": "Adult participants",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Son of Taizen; adult-game participant"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Strategic opposition; links to Yuuichi's history"
+        },
+        "strategy": {
+          "description": "Instrumental cooperation"
+        },
+        "limitations": {
+          "description": "Specific capabilities require further evidence"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Shinji_Shiba"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "No public knowledge of family history"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.satone-kaidou",
+      "display_name": "Satone Kaidou",
+      "group": "Adult participants",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Adult-game participant"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Intuitive judgment in uncertain contests (provisional)"
+        },
+        "strategy": {
+          "description": "Acts on impressions rather than exclusively explicit deduction"
+        },
+        "limitations": {
+          "description": "Intuition is fallible"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Satone_Kaidou"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "No supernatural truth oracle"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.maria-mizuse",
+      "display_name": "Maria Mizuse",
+      "group": "Administration",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Observer and staff member"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Observes contestants and manages social presentation"
+        },
+        "strategy": {
+          "description": "Can participate under cover; institutional role is private"
+        },
+        "limitations": {
+          "description": "Curiosity and role constraints"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Maria_Mizuse"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "No unrestricted access outside assigned role"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.tsukino",
+      "display_name": "Tsukino",
+      "group": "Administration",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Observer and staff member"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Monitors games and contestant behavior"
+        },
+        "strategy": {
+          "description": "Administrative rather than contestant incentives"
+        },
+        "limitations": {
+          "description": "Bound by role and disclosed rules"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Tsukino"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "No arbitrary outcome override"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.taizen-shiba",
+      "display_name": "Taizen Shiba",
+      "group": "Historical",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Father of Shinji; part of Yuuichi's formative past"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Experience with exploitative transactions"
+        },
+        "strategy": {
+          "description": "Historical influence on Yuuichi"
+        },
+        "limitations": {
+          "description": "Not a default live contestant"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Taizen_Shiba"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "Biography only"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.masakazu-shibe",
+      "display_name": "Masakazu Shibe",
+      "group": "Historical / administration",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Makoto's father; concealed involvement in organization"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Control of institutional information"
+        },
+        "strategy": {
+          "description": "False accounts and concealment"
+        },
+        "limitations": {
+          "description": "Personal motives may conflict with management"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Masakazu_Shibe"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "Boss identity restricted until acquired"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.yutaka-mikasa",
+      "display_name": "Yutaka Mikasa",
+      "group": "Historical",
+      "modeling_tier": "PROFILE_CANDIDATE",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "identity": {
+        "role_summary": "Tenji's father"
+      },
+      "domains": {
+        "cognition": {
+          "description": "Historical relationship with investigation"
+        },
+        "strategy": {
+          "description": "Family connection"
+        },
+        "limitations": {
+          "description": "Deceased before initial scenario according to Tenji's account"
+        },
+        "body": {
+          "description": "No calibrated physical measurements; use population prior."
+        }
+      },
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Yutaka_Mikasa"
+      ],
+      "knowledge_time_policy": {
+        "initial": "Only own biography and pregame observations",
+        "later": "Require actor-specific acquisition; no canonical future memory"
+      },
+      "fidelity_eval": {
+        "anti_case": "Biography only"
+      },
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.juuzou-kadokura",
+      "display_name": "Juuzou Kadokura",
+      "group": "Group K",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.banri-niwa",
+      "display_name": "Banri Niwa",
+      "group": "Group K",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.hyakutarou-onigawara",
+      "display_name": "Hyakutarou Onigawara",
+      "group": "Group K",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.chisato-hashiratani",
+      "display_name": "Chisato Hashiratani",
+      "group": "Group K",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.manabu",
+      "display_name": "Manabu",
+      "group": "Administration",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.reiko-tamae",
+      "display_name": "Reiko Tamae",
+      "group": "Administration",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.kuroki",
+      "display_name": "Kuroki",
+      "group": "Unofficial game",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.ryusei-taneda",
+      "display_name": "Ryusei Taneda",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.saori-miyabe",
+      "display_name": "Saori Miyabe",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.kenji-yamashita",
+      "display_name": "Kenji Yamashita",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.wataru-ushiroda",
+      "display_name": "Wataru Ushiroda",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.minami-hudo",
+      "display_name": "Minami Hudo",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.genzou-tagami",
+      "display_name": "Genzou Tagami",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.keiko-mizutani",
+      "display_name": "Keiko Mizutani",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.minami-kawakami",
+      "display_name": "Minami Kawakami",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.tsukasa-kaidou",
+      "display_name": "Tsukasa Kaidou",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.yasushi-mishima",
+      "display_name": "Yasushi Mishima",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.michiru-kawashita",
+      "display_name": "Michiru Kawashita",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.umeko-shirasuna",
+      "display_name": "Umeko Shirasuna",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.momona-hashimoto",
+      "display_name": "Momona Hashimoto",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.gaku-subaru",
+      "display_name": "Gaku Subaru",
+      "group": "Adult participants",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.nagi-araya",
+      "display_name": "Nagi Araya",
+      "group": "Final game",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.reika-araya",
+      "display_name": "Reika Araya",
+      "group": "Final game",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.rihito-gouri",
+      "display_name": "Rihito Gouri",
+      "group": "Final game",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.hokuto-taneda",
+      "display_name": "Hokuto Taneda",
+      "group": "Final game",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.sora-namiragawa",
+      "display_name": "Sora Namiragawa",
+      "group": "Final game",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.kimiko-kyouguchi",
+      "display_name": "Kimiko Kyouguchi",
+      "group": "Final game",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.kawauchi-tarou",
+      "display_name": "Kawauchi Tarou",
+      "group": "Final game",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.akira-nishizawa",
+      "display_name": "Akira Nishizawa",
+      "group": "Final game",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.ren-toujou",
+      "display_name": "Ren Toujou",
+      "group": "External",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    },
+    {
+      "character_id": "tg.actor.wataru-sawaragi",
+      "display_name": "Wataru Sawaragi",
+      "group": "External",
+      "modeling_tier": "ROSTER_STUB",
+      "source_status": "OPERATOR_ADMITTED_SECONDARY",
+      "source_documents": [
+        "https://tomodachi-game.fandom.com/wiki/Characters",
+        "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+        "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+      ],
+      "runtime_ready": false
+    }
+  ]
+}

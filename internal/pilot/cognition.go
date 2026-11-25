@@ -103,6 +103,7 @@ func initializeIdentities(j *Journal){
    for k,g:=range p.Goals{if strings.Contains(strings.ToLower(g),"oportunidades da classe")||strings.Contains(strings.ToLower(g),"riscos e oportunidades da classe"){p.Goals[k]="Avaliar oportunidades acadêmicas e sociais concretas"}}
    j.Profiles[i]=p;ident.Motivations=clone(p.Goals)
   }
+  if j.Version>=VeteranVersion{seedVeteranIdentity(*j,p.ID,&ident)}
   j.Identities[p.ID]=ident
  }
 }

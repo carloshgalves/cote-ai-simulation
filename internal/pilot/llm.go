@@ -192,6 +192,7 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
  choices:=[]string{}
 	for _, option:=range offeredActions(view){choices=append(choices,option.ID)}
 	if view.Version>=MotivationVersion&&view.Opportunity!=nil{prompt+=" opportunity indica uma ocasião concreta para um objetivo seu, não uma obrigação de agir. Considere agir mesmo sem ameaça ou novidade estratégica; se decidir esperar, fundamente em obstáculos concretos. Não invente resultados ou conhecimentos. "}
+	if view.Version>=VeteranVersion&&view.SchoolYear>1{prompt+=" Você é veterano; a chegada de ingressantes não é sua própria matrícula. Use a experiência institucional disponível, sem inventar episódios, relações ou resultados de anos anteriores. "}
 	prompt+=" IDs autorizados, copie exatamente um: "+strings.Join(choices," | ")+"."
 	if problem=="" {
 		prompt+=" Opcionalmente adicione beliefs [{text,evidence,confidence (0-100)}], goal {replace,with,evidence}, plan {steps,evidence} ou relation {person,delta (-1 ou 1),evidence}. Evidência deve ser ID da própria memória; omita campos sem fundamento. Uma fala recebida é alegação, não fato."

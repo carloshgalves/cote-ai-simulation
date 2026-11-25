@@ -1,7 +1,12 @@
-# Tomodachi Game external-world corpus V0
+# Tomodachi Game external world
 
-Operator-admitted secondary sources, not direct manga verification. Fan wiki, chapter summaries and community arc index are admissible as descriptive candidates; no scans or copied prose. Distinguish reported facts from behavioral inference. Small numeric differences can be normalized with provenance; rules affecting incentives or terminal outcomes require explicit model choices. No fan speculation becomes world truth merely through repetition.
+Secondary source corpus admitted by the operator, not primary manga verification. Direct Fandom access was blocked; indexed excerpts and supplementary analyses were used. No scans or copied manga prose. Disagreement and inference remain labeled.
 
-This namespace is isolated from COTE canonical loaders. Character, institution and exam records are corpus seeds, not native validated consolidated V2 records or executable ExamSpecs. No runtime registration, canon winner or post-divergence memory import. Individual actor knowledge requires acquisition. Unknown physical capacity uses the engine population prior, not invented scores. Roster stubs need substantive enrichment; character profiles need atomic evidence, behavioral cases and positive/contrast evals. Exam records need full rules and deterministic resolvers before execution. Source pages were available through indexed search excerpts; direct Fandom access was blocked. Chapter boundaries are approximate community indexing, not game transitions.
+## Current delivery
+- 60 consolidated V2 character packs (6 full candidates, 20 intermediate, 34 minimal entities); 59 behavioral cases, 126 evidence records and 86 authored counterfactual evaluation scenarios. Counts are not evidence of LLM quality.
+- Institution pack and ten consolidated exam rule/model packs; standalone deterministic resolver and scenario runner in runtime/.
+- 20 curated actor priors; 7 actors have manually abstracted, case-linked runtime guidance. Canonical episodes and outcomes are not runtime memories. Guidance is actor- and game-filtered; case IDs and raw cases are not sent to the model.
+- Root V0 files are historical discovery indexes, not the consolidated source of truth. Character topic index resolves the individual packs. No native RAG approval or CSF registration has been granted.
 
-Validation: remote read-back JSON parsing, unique identifiers per file, nonempty source references and no runtime-ready records. No native schema validation, CI or independent review was performed.
+## Execution and limitations
+See runtime/README.md. The ten reference fixtures reach terminal state and replay; host-supplied adjudications are trusted fixture inputs, not a fully autonomous world. Fake game is a symbolic unofficial scenario. Rule reconstructions are not claims of exact canon. Physical engine, native Go CSF, full conversation/action environment and native RAG integration are not implemented. LLM provider calls and strategy evaluations have not been run. Same-session adversarial review is not independent review. CI has not been observed to run.

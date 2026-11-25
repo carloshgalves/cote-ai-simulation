@@ -2892,6 +2892,150 @@
       "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
       "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
       "verified": false
+    },
+    {
+      "id": "tg.ev.institution.initial-debt",
+      "domain": "economy",
+      "summary": "Initial group debt of 20 million yen is allocated as 4 million to each of five participants.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Chapter_1",
+        "locator": "KOKKURI",
+        "source_status": "SECONDARY_OPERATOR_ADMITTED",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "KOKKURI",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.tomodachi-game"
+      ],
+      "topics": [
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.institution.secret-question-incentive",
+      "domain": "information",
+      "summary": "Question cards can disclose individual incentives privately; public outcomes need not identify individual votes.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/%22Kokkuri-San%22_Game",
+        "locator": "KOKKURI",
+        "source_status": "SECONDARY_OPERATOR_ADMITTED",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "KOKKURI",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.tomodachi-game"
+      ],
+      "topics": [
+        "information"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.institution.audience-judgment",
+      "domain": "governance",
+      "summary": "Audience evaluation influences board movement in Backbiting Sugoroku.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Backbiting_Sugoroku",
+        "locator": "SUGOROKU",
+        "source_status": "SECONDARY_OPERATOR_ADMITTED",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "SUGOROKU",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.tomodachi-game"
+      ],
+      "topics": [
+        "governance"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.institution.team-discovery",
+      "domain": "roles",
+      "summary": "Hide-and-seek has distinct hider and seeker roles; discovery and surrender affect results.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/Friendship_Hide-And-Seek",
+        "locator": "HIDE_SEEK",
+        "source_status": "SECONDARY_OPERATOR_ADMITTED",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "HIDE_SEEK",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.tomodachi-game"
+      ],
+      "topics": [
+        "roles"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.institution.contract-wagers",
+      "domain": "economy",
+      "summary": "All Bet allows wagers between contestants under mutually agreed terms.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/All_Bet",
+        "locator": "ALL_BET",
+        "source_status": "SECONDARY_OPERATOR_ADMITTED",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "ALL_BET",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.tomodachi-game"
+      ],
+      "topics": [
+        "economy"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
+    },
+    {
+      "id": "tg.ev.institution.private-passwords",
+      "domain": "information",
+      "summary": "The final game uses private passwords and reports that can exclude contestants.",
+      "source": {
+        "work_id": "tg.secondary.2026-11-25",
+        "url": "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game",
+        "locator": "FRIENDLESS",
+        "source_status": "SECONDARY_OPERATOR_ADMITTED",
+        "verification": "UNVERIFIED_SECONDARY"
+      },
+      "source_mode": "SECONDARY_REPORTED",
+      "story_time": "FRIENDLESS",
+      "mention_actor_ids": [],
+      "mention_organization_ids": [
+        "org.tomodachi-game"
+      ],
+      "topics": [
+        "information"
+      ],
+      "assertion_status": "OPERATOR_ADMITTED_SECONDARY",
+      "subject_assertion": "MENTION_IS_NOT_PROOF_OF_ACTOR_BEHAVIOR",
+      "verified": false
     }
   ]
 }

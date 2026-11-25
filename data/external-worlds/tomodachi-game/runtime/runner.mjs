@@ -171,6 +171,127 @@ Object.assign(priors,{
     ]
   }
 });
+const guidance={
+  "actor.yuuichi-katagiri": [
+    {
+      "ref": "tg.case.yuuichi-katagiri.minority-inference",
+      "game": "kokkuri-san",
+      "lesson": "When public outcomes contradict stated intentions, form competing hypotheses about incentives. Do not identify a dissenter without observations."
+    },
+    {
+      "ref": "tg.case.yuuichi-katagiri.verify-incentive",
+      "game": "kokkuri-san",
+      "lesson": "Compare collective payoff and personal payoff using only rules disclosed to you."
+    },
+    {
+      "ref": "tg.case.yuuichi-katagiri.failed-early-accusation",
+      "game": "backbiting-sugoroku",
+      "lesson": "Treat an accusation as a hypothesis; test it before staking credibility. A wrong accusation can fail."
+    },
+    {
+      "ref": "tg.case.yuuichi-katagiri.sequential-trust-tests",
+      "game": "backbiting-sugoroku",
+      "lesson": "Prefer small reversible tests of reliability over irreversible commitments when evidence is thin."
+    },
+    {
+      "ref": "tg.case.yuuichi-katagiri.support-isolated-ally",
+      "game": "hide-and-seek",
+      "lesson": "Compare the cost of maintaining a fragile alliance with the cost of losing it; check access constraints."
+    },
+    {
+      "ref": "tg.case.yuuichi-katagiri.documented-wager",
+      "game": "all-bet",
+      "lesson": "Seek mutually acknowledged terms before risking resources; enforcement and consent must actually exist."
+    },
+    {
+      "ref": "tg.case.yuuichi-katagiri.lose-direct-gamble",
+      "game": "all-bet",
+      "lesson": "Allow for a loss in direct competition; do not treat confidence or past success as probability one."
+    },
+    {
+      "ref": "tg.case.yuuichi-katagiri.friendship-priority-conflict",
+      "game": "*",
+      "lesson": "Consider the tradeoff between protecting friends and individual advantage; neither objective guarantees a fixed decision."
+    }
+  ],
+  "actor.tenji-mikasa": [
+    {
+      "ref": "tg.case.tenji-mikasa.secret-investigation",
+      "game": "*",
+      "lesson": "Protect private motives, and distinguish suspicions from established facts."
+    },
+    {
+      "ref": "tg.case.tenji-mikasa.resist-first-bluff",
+      "game": "backbiting-sugoroku",
+      "lesson": "Evaluate whether an opponent's claim is supported before conceding or exposing a private motive."
+    },
+    {
+      "ref": "tg.case.tenji-mikasa.endure-uncertainty",
+      "game": "hide-and-seek",
+      "lesson": "Continue a commitment only while its expected value and personal costs remain tolerable."
+    }
+  ],
+  "actor.shiho-sawaragi": [
+    {
+      "ref": "tg.case.shiho-sawaragi.refuse-initial-suspicion",
+      "game": "*",
+      "lesson": "Do not infer culpability from rumor alone; favor fairness while allowing trust to change."
+    },
+    {
+      "ref": "tg.case.shiho-sawaragi.challenge-reputational-judgment",
+      "game": "backbiting-sugoroku",
+      "lesson": "Separate reputation judgments from evidence of the particular accusation."
+    }
+  ],
+  "actor.makoto-shibe": [
+    {
+      "ref": "tg.case.makoto-shibe.seek-social-approval",
+      "game": "*",
+      "lesson": "Give interpersonal approval genuine weight, but consider the consequences of an impulsive commitment."
+    }
+  ],
+  "actor.yutori-kokorogi": [
+    {
+      "ref": "tg.case.yutori-kokorogi.concealed-alignment",
+      "game": "*",
+      "lesson": "Distinguish outward demeanor from personal objectives; do not invent other people's private beliefs."
+    },
+    {
+      "ref": "tg.case.yutori-kokorogi.private-knowledge-separation",
+      "game": "*",
+      "lesson": "Disclose information selectively according to current trust and available incentives."
+    }
+  ],
+  "actor.kei-shinomiya": [
+    {
+      "ref": "tg.case.kei-shinomiya.exploit-opponent-observation",
+      "game": "hide-and-seek",
+      "lesson": "Reason from the opponent's observable information channels rather than their hidden state."
+    },
+    {
+      "ref": "tg.case.kei-shinomiya.underestimate-team-values",
+      "game": "*",
+      "lesson": "Test whether teammates value the same outcome as you; account for loyalty even when it appears strategically costly."
+    },
+    {
+      "ref": "tg.case.kei-shinomiya.revise-after-ambush",
+      "game": "*",
+      "lesson": "Update the plan after surprising evidence; prior competence does not prevent error."
+    }
+  ],
+  "actor.satone-kaidou": [
+    {
+      "ref": "tg.case.satone-kaidou.intuition-wager",
+      "game": "all-bet",
+      "lesson": "Use observable behavioral cues and accept that an intuitive judgment can fail."
+    },
+    {
+      "ref": "tg.case.satone-kaidou.seek-risk",
+      "game": "all-bet",
+      "lesson": "Challenge may have intrinsic value, but losses remain binding."
+    }
+  ]
+};
 const allowed={
   "kokkuri-san": [
     "answer",
@@ -216,7 +337,7 @@ const allowed={
 function actorInput(m,s,actor,priors,allowed){
  const observation=m.view(s,actor);
  const p=Object.hasOwn(priors,actor)?priors[actor]:{public:"Contestant; individual behavioral evidence insufficient.",private:"No additional background supplied.",tendencies:["Choose legal actions from available observations; no automatic superior capacity."]};
- return {actor,identity:p.public,privateBiography:p.private,tendencies:p.tendencies,observation,allowedActionKeys:allowed[s.game]};
+ return {actor,identity:p.public,privateBiography:p.private,tendencies:p.tendencies,behavioralGuidance:(Object.hasOwn(guidance,actor)?guidance[actor]:[]).filter(x=>x.game==='*'||x.game===s.game).map(x=>x.lesson),observation,allowedActionKeys:allowed[s.game]};
 }
 
 function validateAction(action,keys){

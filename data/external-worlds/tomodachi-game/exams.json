@@ -20,7 +20,8 @@
       "unresolved_mechanics": "Exact coin movement and penalty table require reconstruction.",
       "source_status": "OPERATOR_ADMITTED_SECONDARY",
       "runtime_ready": false,
-      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution"
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
     },
     {
       "exam_id": "tg.exam.backbiting-sugoroku",
@@ -41,7 +42,8 @@
       "unresolved_mechanics": "Exact movement and false accusation rules require extraction.",
       "source_status": "OPERATOR_ADMITTED_SECONDARY",
       "runtime_ready": false,
-      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution"
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
     },
     {
       "exam_id": "tg.exam.hide-and-seek",
@@ -62,7 +64,8 @@
       "unresolved_mechanics": "Source reports 2 million yen prize; full transfer/deadline rules pending.",
       "source_status": "OPERATOR_ADMITTED_SECONDARY",
       "runtime_ready": false,
-      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution"
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
     },
     {
       "exam_id": "tg.exam.fake-game",
@@ -82,7 +85,8 @@
       "unresolved_mechanics": "Do not place in official progression.",
       "source_status": "OPERATOR_ADMITTED_SECONDARY",
       "runtime_ready": false,
-      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution"
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
     },
     {
       "exam_id": "tg.exam.friend-sin-trial",
@@ -103,7 +107,8 @@
       "unresolved_mechanics": "Exact financial and voting thresholds pending.",
       "source_status": "OPERATOR_ADMITTED_SECONDARY",
       "runtime_ready": false,
-      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution"
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
     },
     {
       "exam_id": "tg.exam.friends-prison",
@@ -124,7 +129,8 @@
       "unresolved_mechanics": "Exact labor, voting and escape rules pending.",
       "source_status": "OPERATOR_ADMITTED_SECONDARY",
       "runtime_ready": false,
-      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution"
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
     },
     {
       "exam_id": "tg.exam.all-bet",
@@ -145,7 +151,8 @@
       "unresolved_mechanics": "Each subgame needs separate deterministic rule contract.",
       "source_status": "OPERATOR_ADMITTED_SECONDARY",
       "runtime_ready": false,
-      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution"
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
     },
     {
       "exam_id": "tg.exam.friend-murder",
@@ -166,7 +173,8 @@
       "unresolved_mechanics": "Exact elimination and scoring mechanisms pending.",
       "source_status": "OPERATOR_ADMITTED_SECONDARY",
       "runtime_ready": false,
-      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution"
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
     },
     {
       "exam_id": "tg.exam.friendless",
@@ -174,7 +182,7 @@
       "stage": "adult",
       "chapter_range": [
         88,
-        125
+        127
       ],
       "participants": "Final contestants",
       "source_documents": [
@@ -187,7 +195,8 @@
       "unresolved_mechanics": "Source reports 4.5 billion yen prize; full phase and task contract pending.",
       "source_status": "OPERATOR_ADMITTED_SECONDARY",
       "runtime_ready": false,
-      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution"
+      "terminal_policy": "No canon winner imposed; unresolved rules require model configuration before execution",
+      "reference_runtime": "runtime/resolver.mjs"
     },
     {
       "exam_id": "tg.exam.friendship-janken",
@@ -199,7 +208,9 @@
       "source_status": "OPERATOR_ADMITTED_SECONDARY",
       "runtime_ready": false,
       "mechanic_summary": "Bonus chapter game, separate from main sequence.",
-      "unresolved_mechanics": "Full rules and provenance pending."
+      "unresolved_mechanics": "Full rules and provenance pending.",
+      "reference_runtime": "runtime/resolver.mjs"
     }
-  ]
+  ],
+  "status": "LEGACY_DISCOVERY_INDEX; consolidated/exams and runtime are authoritative for reference execution"
 }

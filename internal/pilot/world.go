@@ -102,11 +102,16 @@ func schoolView(j Journal,s State,id string)*SchoolView{
  v.Period=periodAt(s.Minute);v.NextAnnouncement=nextPublicSchedule(s.Minute)
  if j.Version>=PopulationVersion&&!isStudent(j,id){
   v.Rules=[]string{"Equipe escolar. Não recebe PP de estudante, não participa do exame VIP e não pode criar sanções ou regras. A autoridade institucional permanece com o motor."}
+  if j.Version>=CognitionVersion{v.Rules=append(v.Rules,classGuarantee,"A renda mensal estudantil é CP × 100. A revelação institucional aos ingressantes está prevista para o segundo mês; cumpra a confidencialidade.")}
   if m.Location==staffStation(j,id){add("work","")}
   return v
  }
  if s.Minute>=540{v.Rules[1]="Transferências voluntárias de 1.000 PP são permitidas; sem saldo negativo. Subsistência gratuita disponível. A fórmula mensal de pontos ainda não foi revelada."}
+ if j.Version>=CognitionVersion&&j.Population[id].Year==1&&s.Minute<schoolDisclosure{
+  v.Rules=[]string{"O cartão permite usar PP no campus. A escola anunciou boas perspectivas de emprego e universidade.","Compras e transferências dependem de saldo; existem refeições gratuitas."}
+ }
  if s.Minute>=30*1440+480{v.Rules[1]="Renda mensal = CP atuais da classe × 100; saldo anterior permanece. Transferências voluntárias de 1.000 PP permitidas."}
+ if j.Version>=CognitionVersion&&(j.Population[id].Year>1||s.Minute>=schoolDisclosure){v.Rules=append(v.Rules,classGuarantee)}
  v.Rules=append(v.Rules,"Convites são para daqui a 30 minutos, no local atual. O destinatário deve aceitar e os dois devem comparecer. Estudar ocupa 25 minutos, refeição 20, descanso 60.")
  if m.Location=="shop"{
   v.Catalog=clone(shopPrices)
@@ -135,7 +140,7 @@ func schoolView(j Journal,s State,id string)*SchoolView{
   if mt.Status=="accepted"&&s.Minute>=mt.At&&s.Minute+5<=mt.At+15&&m.Location==mt.Location&&((mt.Host==id&&!mt.HostAttended)||(mt.Guest==id&&!mt.GuestAttended)){add("attend",mt.ID)}
  }
  if e:=s.World.Exam;e!=nil&&(j.Version<PopulationVersion||has(e.Group,id)){
-  outcome:=0;if s.Minute>=1440+960{outcome=e.Outcome}
+  outcome:=0;if s.Minute>=examBase(j.Version)+960{outcome=e.Outcome}
   v.Exam=&ExamView{e.Phase,clone(e.Group),e.VIP==id,e.Submitted[id],outcome}
   v.Rules=append(v.Rules,"Zodiac/VIP adaptado: um VIP secreto no grupo; uma submissão por não VIP. Fase antecipada: acerto recompensa 500.000 PP ao autor e transfere 50 CP da classe VIP à dele; erro recompensa VIP e inverte CP. Janela final: acerto 1.000.000 PP ao VIP e 500.000 aos demais; erro ou omissão 500.000 ao VIP. Submissão da classe do VIP não produz resultado. O resultado não revela identidades.")
   if (e.Phase=="early"||e.Phase=="final")&&!e.Submitted[id]&&e.VIP!=id&&e.Outcome==0{for _,other:=range e.Group{if other!=id{add("guess",other)}}}
@@ -152,7 +157,8 @@ func nextDue(j Journal,s State)int64{
  next:=WorldEnd
  // Fixed authored schedule, disclosure at time of event only.
  for day:=int64(0);day<=32;day++{for _,at:=range []int64{480,540,720,780,900,1080,1320,1440}{n:=day*1440+at;if n>s.Minute&&n<next{next=n}}}
- for _,n:=range []int64{1440+600,1440+840,1440+870,1440+900,1440+960}{if n>s.Minute&&n<next{next=n}}
+ base:=examBase(j.Version)
+ for _,n:=range []int64{base+600,base+840,base+870,base+900,base+960}{if n>s.Minute&&n<next{next=n}}
  for _,mt:=range s.World.Meetings{if mt.Status=="pending"||mt.Status=="accepted"{for _,n:=range []int64{mt.At,mt.At+15}{if n>s.Minute&&n<next{next=n}}}}
  return next
 }
@@ -266,8 +272,9 @@ func advanceWorld(j Journal,s *State){
   s.World.Meetings[i]=mt
  }
  announce:=func(t string){appendEvent(s,Event{Kind:"announcement",Actor:"school",Text:t,Audience:ids(j.Profiles)});for _,id:=range ids(j.Profiles){wakeWaiting(s,id,"Novo anúncio escolar")}}
+ base:=examBase(j.Version)
  switch now{
- case 1440+600:
+ case base+600:
   group:=ids(j.Profiles)
   if j.Version>=PopulationVersion{group=[]string{};for _,id:=range ids(j.Profiles){if j.Population[id].Core{group=append(group,id)}}}
   // Assignment is deterministic for replay, not exposed in actor context.
@@ -276,16 +283,19 @@ func advanceWorld(j Journal,s *State){
   s.World.Exam=&VIPExam{Phase:"early",Group:group,VIP:vip,Submitted:map[string]bool{}}
   if j.Version>=PopulationVersion{announce("Início do Zodiac/VIP experimental, restrito aos seis participantes designados. Publicação às 16:00.")}else{announce("Início do Zodiac/VIP adaptado: grupo único. Janela antecipada até 14:30; janela final 14:30–15:00; publicação às 16:00. Consulte as regras privadas.")}
   for _,id:=range group{appendEvent(s,Event{Kind:"exam",Actor:"school",Text:fmt.Sprintf("Sua função VIP: %t",id==vip),Audience:[]string{id}})}
- case 1440+840:announce("Fim do período ativo do exame; submissões antecipadas continuam até 14:30.")
- case 1440+870:if e:=s.World.Exam;e!=nil&&e.Outcome==0{e.Phase="final"};announce("Janela final de submissões do exame aberta.")
- case 1440+900:if e:=s.World.Exam;e!=nil&&e.Outcome==0{settleExam(j,s,2,"")};announce("Submissões encerradas.")
- case 1440+960:if e:=s.World.Exam;e!=nil{announce(fmt.Sprintf("Resultado do grupo Zodiac/VIP: Outcome %d. Variações de CP desde o início: A=%+d B=%+d C=%+d D=%+d.",e.Outcome,s.World.ClassPoints["A"]-1000,s.World.ClassPoints["B"]-1000,s.World.ClassPoints["C"]-1000,s.World.ClassPoints["D"]-1000))}
+ case base+840:announce("Fim do período ativo do exame; submissões antecipadas continuam até 14:30.")
+ case base+870:if e:=s.World.Exam;e!=nil&&e.Outcome==0{e.Phase="final"};announce("Janela final de submissões do exame aberta.")
+ case base+900:if e:=s.World.Exam;e!=nil&&e.Outcome==0{settleExam(j,s,2,"")};announce("Submissões encerradas.")
+ case base+960:if e:=s.World.Exam;e!=nil{announce(fmt.Sprintf("Resultado do grupo Zodiac/VIP: Outcome %d. Variações de CP desde o início: A=%+d B=%+d C=%+d D=%+d.",e.Outcome,s.World.ClassPoints["A"]-1000,s.World.ClassPoints["B"]-1000,s.World.ClassPoints["C"]-1000,s.World.ClassPoints["D"]-1000))}
  default:
   switch now%1440{
   case 480:
    if now==30*1440+480{
     for _,id:=range ids(j.Profiles){if j.Version>=PopulationVersion&&(!isStudent(j,id)||j.Population[id].Year!=1){continue};income:=s.World.ClassPoints[classOf(j,id)]*100;if income>0{pay(s,"school",id,income,"monthly","Renda mensal")}}
-    announce("A escola revela a fórmula: cada aluno recebe mensalmente CP atuais da classe × 100. O saldo anterior permanece.")
+    if j.Version>=CognitionVersion{
+     announce("A escola revela as regras de classificação: os CP determinam a posição das turmas e a renda mensal (CP × 100). "+classGuarantee)
+     appendEvent(s,Event{Kind:"revelation",Actor:"school",Text:classGuarantee,Audience:ids(j.Profiles)})
+    }else{announce("A escola revela a fórmula: cada aluno recebe mensalmente CP atuais da classe × 100. O saldo anterior permanece.")}
    }else{announce("Novo dia escolar. Confira seus compromissos e recursos.")}
   case 540:announce("Orientação e aulas da manhã; as transferências voluntárias de PP e compras são permitidas.")
   case 720:announce("Intervalo de almoço. Refeição essencial gratuita disponível no refeitório.")

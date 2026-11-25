@@ -75,7 +75,9 @@ func worldLocations(id string)[]string{return append(clone(locations),"shop","ca
 func initializeWorld(j Journal,s *State){
  s.World=&SchoolWorld{ClassPoints:map[string]int64{"A":1000,"B":1000,"C":1000,"D":1000},Ledger:[]LedgerEntry{},Meetings:[]Meeting{}}
  for _,id:=range ids(j.Profiles){
-  m:=s.Minds[id];m.Inventory=map[string]int{"student-id":1,"phone":1};s.Minds[id]=m
+  m:=s.Minds[id]
+  if j.Version>=PopulationVersion&&!isStudent(j,id){m.Inventory=map[string]int{"staff-id":1};s.Minds[id]=m;continue}
+  m.Inventory=map[string]int{"student-id":1,"phone":1};s.Minds[id]=m
   pay(s,"school",id,100000,"initial","Depósito inicial")
  }
  appendEvent(s,Event{Kind:"announcement",Actor:"school",Text:"Cada aluno recebeu 100.000 PP no cartão. Há loja, refeitório, biblioteca e dormitório. Regras de uso serão divulgadas na orientação às 09:00.",Audience:ids(j.Profiles)})
@@ -92,12 +94,17 @@ func pay(s *State,from,to string,amount int64,category,cause string)bool{
  return true
 }
 var shopPrices=map[string]int64{"notebook":300,"pen":100,"snack":200,"water":100}
-func isWorldAction(a string)bool{return has([]string{"buy","transfer","study","lesson","eat","rest","sleep","exercise","recreation","use","invite","accept","decline","attend","guess"},a)}
+func isWorldAction(a string)bool{return has([]string{"buy","transfer","study","lesson","eat","rest","sleep","exercise","recreation","use","work","invite","accept","decline","attend","guess"},a)}
 func schoolView(j Journal,s State,id string)*SchoolView{
  m:=s.Minds[id]
  v:=&SchoolView{Wallet:m.Wallet,Inventory:clone(m.Inventory),Meetings:[]Meeting{},Rules:[]string{"PP próprios persistem; o motor é autoridade sobre transações. Não há despesa obrigatória.","Regras completas da escola ainda não foram divulgadas."},Options:[]offeredAction{}}
  add:=func(a,target string){k:=a;if target!=""{k+=":"+target};v.Options=append(v.Options,offeredAction{k,a,target})}
  v.Period=periodAt(s.Minute);v.NextAnnouncement=nextPublicSchedule(s.Minute)
+ if j.Version>=PopulationVersion&&!isStudent(j,id){
+  v.Rules=[]string{"Equipe escolar. Não recebe PP de estudante, não participa do exame VIP e não pode criar sanções ou regras. A autoridade institucional permanece com o motor."}
+  if m.Location==staffStation(j,id){add("work","")}
+  return v
+ }
  if s.Minute>=540{v.Rules[1]="Transferências voluntárias de 1.000 PP são permitidas; sem saldo negativo. Subsistência gratuita disponível. A fórmula mensal de pontos ainda não foi revelada."}
  if s.Minute>=30*1440+480{v.Rules[1]="Renda mensal = CP atuais da classe × 100; saldo anterior permanece. Transferências voluntárias de 1.000 PP permitidas."}
  v.Rules=append(v.Rules,"Convites são para daqui a 30 minutos, no local atual. O destinatário deve aceitar e os dois devem comparecer. Estudar ocupa 25 minutos, refeição 20, descanso 60.")
@@ -116,9 +123,9 @@ func schoolView(j Journal,s State,id string)*SchoolView{
   if other==id{continue}
   p:=s.Minds[other]
   if p.Location==m.Location&&canContact(m,other,p,id)&& (p.Activity==nil||p.Activity.Kind!="move"){
-   if s.Minute>=540&&m.Wallet>=1000{add("transfer",other)}
+   if s.Minute>=540&&m.Wallet>=1000&&(j.Version<PopulationVersion||isStudent(j,other)){add("transfer",other)}
    pending:=false;for _,meeting:=range s.World.Meetings{if (meeting.Status=="pending"||meeting.Status=="accepted")&&((meeting.Host==id&&meeting.Guest==other)||(meeting.Host==other&&meeting.Guest==id)){pending=true}}
-   if !pending&&s.Minute+60<WorldEnd{add("invite",other)}
+   if !pending&&s.Minute+60<WorldEnd&&(j.Version<PopulationVersion||isStudent(j,other)){add("invite",other)}
   }
  }
  for _,mt:=range s.World.Meetings{
@@ -127,7 +134,7 @@ func schoolView(j Journal,s State,id string)*SchoolView{
   if mt.Status=="pending"&&mt.Guest==id&&s.Minute<mt.At{add("accept",mt.ID);add("decline",mt.ID)}
   if mt.Status=="accepted"&&s.Minute>=mt.At&&s.Minute+5<=mt.At+15&&m.Location==mt.Location&&((mt.Host==id&&!mt.HostAttended)||(mt.Guest==id&&!mt.GuestAttended)){add("attend",mt.ID)}
  }
- if e:=s.World.Exam;e!=nil{
+ if e:=s.World.Exam;e!=nil&&(j.Version<PopulationVersion||has(e.Group,id)){
   outcome:=0;if s.Minute>=1440+960{outcome=e.Outcome}
   v.Exam=&ExamView{e.Phase,clone(e.Group),e.VIP==id,e.Submitted[id],outcome}
   v.Rules=append(v.Rules,"Zodiac/VIP adaptado: um VIP secreto no grupo; uma submissão por não VIP. Fase antecipada: acerto recompensa 500.000 PP ao autor e transfere 50 CP da classe VIP à dele; erro recompensa VIP e inverte CP. Janela final: acerto 1.000.000 PP ao VIP e 500.000 aos demais; erro ou omissão 500.000 ao VIP. Submissão da classe do VIP não produz resultado. O resultado não revela identidades.")
@@ -164,6 +171,7 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
    }
   case "transfer":pay(s,id,d.Target,1000,"transfer","Transferência voluntária");m=s.Minds[id]
   case "study":duration=25;kind="task"
+  case "work":duration=50;kind="task"
   case "lesson":duration=50;kind="task"
   case "eat":duration=20;kind="task";if d.Target=="paid"{pay(s,id,"school",500,"ordinary","Refeição paga");m=s.Minds[id]}
   case "rest":duration=60;kind="task"
@@ -260,6 +268,7 @@ func advanceWorld(j Journal,s *State){
  switch now{
  case 1440+600:
   group:=ids(j.Profiles)
+  if j.Version>=PopulationVersion{group=[]string{};for _,id:=range ids(j.Profiles){if j.Population[id].Core{group=append(group,id)}}}
   // Assignment is deterministic for replay, not exposed in actor context.
   h:=sha256.Sum256([]byte(j.WorldSeed+"/vip"))
   vip:=group[int(h[0])%len(group)]
@@ -274,7 +283,7 @@ func advanceWorld(j Journal,s *State){
   switch now%1440{
   case 480:
    if now==30*1440+480{
-    for _,id:=range ids(j.Profiles){income:=s.World.ClassPoints[classOf(j,id)]*100;if income>0{pay(s,"school",id,income,"monthly","Renda mensal")}}
+    for _,id:=range ids(j.Profiles){if j.Version>=PopulationVersion&&(!isStudent(j,id)||j.Population[id].Year!=1){continue};income:=s.World.ClassPoints[classOf(j,id)]*100;if income>0{pay(s,"school",id,income,"monthly","Renda mensal")}}
     announce("A escola revela a fórmula: cada aluno recebe mensalmente CP atuais da classe × 100. O saldo anterior permanece.")
    }else{announce("Novo dia escolar. Confira seus compromissos e recursos.")}
   case 540:announce("Orientação e aulas da manhã; as transferências voluntárias de PP e compras são permitidas.")

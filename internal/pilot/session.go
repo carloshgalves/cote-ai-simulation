@@ -67,11 +67,13 @@ type Snapshot struct {
 	Done bool `json:"done"`
 	Version int `json:"version"`
 	LastChoices []Chosen `json:"last_choices"`
+ Population map[string]PublicMember `json:"population,omitempty"`
 }
 
 func Open(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,Version)}
 // OpenScheduled creates v5 saves; existing saves retain their original semantics.
 func OpenScheduled(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,WorldVersion)}
+func OpenPopulation(path,name string,model Model)(*Session,error){return openVersion(path,name,model,PopulationVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
@@ -88,6 +90,7 @@ func openVersion(path,name string,model Model,version int) (*Session,error) {
 	case errors.Is(err,os.ErrNotExist):
 		profiles,err:=decodeStrict[[]Profile](defaultProfiles);if err!=nil{return nil,err}
 		j=Journal{Version:version,Profiles:profiles,Model:name,Rounds:[]Round{}}
+  if version>=PopulationVersion{if err:=expandPopulation(&j);err!=nil{return nil,err}}
 		if version>=WorldVersion{seed,err:=randomSecret();if err!=nil{return nil,err};sum:=sha256.Sum256([]byte(seed));j.WorldSeed=fmt.Sprintf("%x",sum)}
 		if _,err:=Replay(j);err!=nil{return nil,err}
 		if err:=createJournal(path,j);err!=nil{return nil,err}
@@ -141,7 +144,7 @@ func (s *Session) snapshot() Snapshot {
 	for _, p:=range s.journal.Profiles {people=append(people,Person{p.ID,p.Name,p.Class})}
 	last:=[]Chosen{}
 	if n:=len(s.journal.Rounds);n>0{last=clone(s.journal.Rounds[n-1].Choices)}
-	return Snapshot{LastChoices:last,State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:roundLimit(s.journal.Version),Done:s.state.Round>=roundLimit(s.journal.Version)||(s.journal.Version>=Version&&s.state.Minute>=endMinute(s.journal.Version)),Version:s.journal.Version}
+	return Snapshot{Population:publicPopulation(s.journal,s.state),LastChoices:last,State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:roundLimit(s.journal.Version),Done:s.state.Round>=roundLimit(s.journal.Version)||(s.journal.Version>=Version&&s.state.Minute>=endMinute(s.journal.Version)),Version:s.journal.Version}
 }
 func (s *Session) Snapshot() Snapshot {
 	s.mu.Lock();defer s.mu.Unlock();return s.snapshot()
@@ -178,6 +181,10 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 		var problem string
 		var d Decision
 		failure:=""
+  if journal.Version>=PopulationVersion&&!needsModel(state,id){
+   d=routineDecision(journal,state,id)
+   if err:=validateDecision(view,d);err!=nil{return Snapshot{},fmt.Errorf("rotina %s: %w",id,err)}
+  }else{
 		for attempt:=1;attempt<=3;attempt++ {
 			if err:=ctx.Err();err!=nil{return Snapshot{},err}
 			s.mu.Lock()
@@ -203,7 +210,8 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 				d=Decision{Action:"wait",Reason:"Sem decisão válida do modelo",Beliefs:[]Belief{}}
 			}
 		}
-		chosen:=Chosen{Actor:id,Decision:clone(d),Failure:failure}
+		} 
+  chosen:=Chosen{Actor:id,Decision:clone(d),Failure:failure}
 		r.Choices=append(r.Choices,chosen)
 		s.pending=append(s.pending,chosen)
 		s.mu.Lock();s.progress.Completed=len(r.Choices);s.progress.Choices=clone(r.Choices);s.progress.LastError="";s.mu.Unlock()

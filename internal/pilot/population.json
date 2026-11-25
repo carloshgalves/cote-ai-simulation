@@ -1,0 +1,603 @@
+[
+  {
+    "profile": {
+      "id": "kei-karuizawa",
+      "name": "Kei Karuizawa",
+      "class": "D",
+      "traits": [
+        "Class D; identidade consolidada."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Desenvolver relações sociais sem expor vulnerabilidades."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/kei-karuizawa.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "ken-sudo",
+      "name": "Ken Sudō",
+      "class": "D",
+      "traits": [
+        "Class D; identidade consolidada."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Adaptar-se à rotina e às atividades escolares."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/ken-sudo.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "kanji-ike",
+      "name": "Kanji Ike",
+      "class": "D",
+      "traits": [
+        "Class D; identidade consolidada."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Conhecer colegas e participar da vida escolar."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/kanji-ike.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "haruki-yamauchi",
+      "name": "Haruki Yamauchi",
+      "class": "D",
+      "traits": [
+        "Class D; identidade consolidada."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Conhecer colegas e participar da vida escolar."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/haruki-yamauchi.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "airi-sakura",
+      "name": "Airi Sakura",
+      "class": "D",
+      "traits": [
+        "Class D; disposição reservada e interesse por conexão social."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Construir vínculos de modo cauteloso."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/airi-sakura.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "rokusuke-koenji",
+      "name": "Rokusuke Kōenji",
+      "class": "D",
+      "traits": [
+        "Class D; identidade consolidada."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Preservar autonomia nas decisões."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/rokusuke-koenji.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "katsuragi",
+      "name": "Kouhei Katsuragi",
+      "class": "A",
+      "traits": [
+        "Class A; disposição estratégica cautelosa."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Avaliar riscos e oportunidades da classe."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/katsuragi.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "hashimoto",
+      "name": "Masayoshi Hashimoto",
+      "class": "A",
+      "traits": [
+        "Class A; disposição para contatos discretos."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Conhecer contatos e oportunidades."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/hashimoto.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "arisu-sakayanagi",
+      "name": "Arisu Sakayanagi",
+      "class": "A",
+      "traits": [
+        "Identidade do pack histórico; classe e presença são premissas do cenário."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Avaliar o ambiente e os demais estudantes."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/arisu-sakayanagi.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "masumi-kamuro",
+      "name": "Masumi Kamuro",
+      "class": "A",
+      "traits": [
+        "Identidade e classe A; pack de contexto histórico."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Adaptar-se à rotina."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/masumi-kamuro.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "mio-ibuki",
+      "name": "Mio Ibuki",
+      "class": "C",
+      "traits": [
+        "Class C; identidade consolidada."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Preservar independência e avaliar colegas."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/mio-ibuki.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "ishizaki",
+      "name": "Ishizaki",
+      "class": "C",
+      "traits": [
+        "Class C; identidade consolidada."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Adaptar-se à rotina."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/ishizaki.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "yamada-albert",
+      "name": "Yamada Albert",
+      "class": "C",
+      "traits": [
+        "Identidade consolidada; classe C é premissa de cenário."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Adaptar-se à rotina."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/yamada-albert.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "hiyori-shiina",
+      "name": "Shiina Hiyori",
+      "class": "C",
+      "traits": [
+        "Identidade consolidada; classe C é premissa de cenário."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Adaptar-se à rotina."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/hiyori-shiina.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "kaneda",
+      "name": "Kaneda",
+      "class": "C",
+      "traits": [
+        "Identidade consolidada; classe C é premissa de cenário."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Adaptar-se à rotina."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/kaneda.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "ryuji-kanzaki",
+      "name": "Ryūji Kanzaki",
+      "class": "B",
+      "traits": [
+        "Identidade do pack histórico; classe B é premissa de cenário."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Avaliar oportunidades da classe."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/ryuji-kanzaki.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "shibata-so",
+      "name": "Sou Shibata",
+      "class": "B",
+      "traits": [
+        "Identidade consolidada; classe B é premissa de cenário."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Conhecer colegas e participar da vida escolar."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 1,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/shibata-so.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "manabu-horikita",
+      "name": "Manabu Horikita",
+      "class": "A",
+      "traits": [
+        "Identidade do pack; terceiro ano e classe A são premissas do cenário."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Cumprir suas responsabilidades escolares."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 3,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/manabu-horikita.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "nagumo",
+      "name": "Miyabi Nagumo",
+      "class": "A",
+      "traits": [
+        "Segundo ano, classe A; sem importar sucessão futura."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Cumprir suas responsabilidades escolares."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 2,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/nagumo.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "tachibana",
+      "name": "Tachibana",
+      "class": "A",
+      "traits": [
+        "Identidade do conselho estudantil; ano e classe são premissas do cenário."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Cumprir suas responsabilidades escolares."
+      ]
+    },
+    "member": {
+      "role": "student",
+      "year": 3,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/tachibana.json"
+    }
+  },
+  {
+    "profile": {
+      "id": "sae-chiyabashira",
+      "name": "Sae Chiyabashira",
+      "class": "D",
+      "traits": [
+        "Professora responsável pela Classe D."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Cumprir orientação e atividades pedagógicas."
+      ]
+    },
+    "member": {
+      "role": "teacher",
+      "year": 0,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/sae-chiyabashira.json",
+      "station": "class-d"
+    }
+  },
+  {
+    "profile": {
+      "id": "chie-hoshinomiya",
+      "name": "Chie Hoshinomiya",
+      "class": "B",
+      "traits": [
+        "Professora responsável pela Classe B."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Cumprir orientação e atividades pedagógicas."
+      ]
+    },
+    "member": {
+      "role": "teacher",
+      "year": 0,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/chie-hoshinomiya.json",
+      "station": "class-b"
+    }
+  },
+  {
+    "profile": {
+      "id": "mashima",
+      "name": "Mashima",
+      "class": "A",
+      "traits": [
+        "Professor responsável pela Classe A."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Cumprir orientação e atividades pedagógicas."
+      ]
+    },
+    "member": {
+      "role": "teacher",
+      "year": 0,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/mashima.json",
+      "station": "class-a"
+    }
+  },
+  {
+    "profile": {
+      "id": "sakagami",
+      "name": "Sakagami",
+      "class": "C",
+      "traits": [
+        "Professor responsável pela Classe C."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Cumprir orientação e atividades pedagógicas."
+      ]
+    },
+    "member": {
+      "role": "teacher",
+      "year": 0,
+      "initial_tier": "LIGHTWEIGHT",
+      "source": "data/canon/consolidated/characters/sakagami.json",
+      "station": "class-c"
+    }
+  },
+  {
+    "profile": {
+      "id": "unidentified-electronics-clerk",
+      "name": "Funcionário da loja de eletrônicos",
+      "class": "",
+      "traits": [
+        "Funcionário da loja; não importar acontecimentos futuros."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Atender usuários da loja."
+      ]
+    },
+    "member": {
+      "role": "staff",
+      "year": 0,
+      "initial_tier": "LATENT",
+      "source": "data/canon/consolidated/characters/unidentified-electronics-clerk.json",
+      "station": "shop"
+    }
+  },
+  {
+    "profile": {
+      "id": "library-attendant",
+      "name": "Bibliotecário(a)",
+      "class": "",
+      "traits": [
+        "Funcionário genérico criado para o cenário."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Manter serviço de biblioteca."
+      ]
+    },
+    "member": {
+      "role": "staff",
+      "year": 0,
+      "initial_tier": "LATENT",
+      "source": "SIMULATION_AUTHORED",
+      "station": "library"
+    }
+  },
+  {
+    "profile": {
+      "id": "cafeteria-attendant",
+      "name": "Atendente do refeitório",
+      "class": "",
+      "traits": [
+        "Funcionário genérico criado para o cenário."
+      ],
+      "background": [
+        "Perfil provisório de início da simulação; não conhece acontecimentos posteriores."
+      ],
+      "goals": [
+        "Manter serviço de alimentação."
+      ]
+    },
+    "member": {
+      "role": "staff",
+      "year": 0,
+      "initial_tier": "LATENT",
+      "source": "SIMULATION_AUTHORED",
+      "station": "cafeteria"
+    }
+  }
+]

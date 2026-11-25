@@ -131,7 +131,7 @@ func schoolView(j Journal,s State,id string)*SchoolView{
  if m.Location=="class-"+strings.ToLower(classOf(j,id))&&(v.Period=="aulas da manhã"||v.Period=="aulas da tarde"){add("lesson","")}
  if m.Location=="cafeteria"{add("eat","free");if m.Wallet>=500{add("eat","paid")}}
  if m.Location=="dormitory-"+id{add("rest","");if v.Period=="repouso"{add("sleep","")}}
- if m.Location=="gym"||m.Location=="park"{add("exercise","")}
+ if (m.Location=="gym"||m.Location=="park")&&(j.Version<PhysicalVersion||allowsVigorousExercise(j,id)){add("exercise","")}
  if j.Version>=AutonomyVersion{
   if m.Location=="library"{add("read","")}
   if m.Location=="park"||m.Location=="courtyard"{add("relax","")}

@@ -1,0 +1,3 @@
+# V15 physical policy adapter
+
+A typed persisted pilot constraint uses source-linked descriptive records for Arisu and Sudo. Arisu's vigorous-exercise option is unavailable; ordinary mobility remains allowed. This is a conservative provisional admission inference from later descriptive evidence, not a future memory or universal medical claim. The motor rejects restricted actions through its offer validator. No capacity score, combat result, diagnosis, maximum-effort inference or numeric ability is invented. Other profiles retain default priors; the full Embodiment integration is not delivered by this adapter.

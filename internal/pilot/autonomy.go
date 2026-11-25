@@ -157,7 +157,9 @@ func autonomousRoutine(j Journal,s State,id string) Decision {
   if m.LastRoutinePurchaseDay!=day&&m.Wallet>=10000&&h[0]%7==0&&s.Minute%1440<1020&&(meeting==nil||meeting.At-s.Minute>60){
    return goOr("mall","recreation","")
   }
-  switch personalPrior(j,s,id).leisure{
+  leisure:=personalPrior(j,s,id).leisure
+  if j.Version>=PhysicalVersion&&leisure=="exercise"&&!allowsVigorousExercise(j,id){leisure="relax"}
+  switch leisure{
   case "read":return goOr("library","read","")
   case "exercise":
    if m.Body!=nil&&(m.Body.Energy<600||m.Body.Hydration<600||m.Body.Fatigue>500){return goOr("park","relax","")}

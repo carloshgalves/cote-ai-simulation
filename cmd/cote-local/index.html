@@ -16,7 +16,7 @@
 </div>
 <footer id="model"></footer>
 </main>
-<dialog class="modal" id="settings-dialog"><div class="panel-head"><div><div class="eyebrow">Configuração local</div><h2>Modelos e APIs</h2></div><button id="close-settings">Fechar</button></div><div class="panel-body"><p>As rotas são tentadas na ordem abaixo. Falhas de cota, credencial, modelo ou resposta ativam outra rota disponível. O contexto ficcional será enviado ao provedor selecionado.</p><p class="muted">Adicionar rotas pagas pode gerar cobranças. Chaves da mesma conta podem compartilhar cotas; o roteador não promete cota independente.</p><div id="routes"></div><h3>Adicionar rota</h3><form id="route-form"><div class="formgrid"><label>Provedor<select id="provider"></select></label><label>Modelo (ID exato)<input id="route-model" required maxlength="200" placeholder="qwen/qwen3.8-27b"></label><label class="full">Endpoint base<input id="endpoint" required maxlength="500" placeholder="https://api.exemplo.com/v1"></label><label class="full">Chave API<input type="password" id="key" autocomplete="off" maxlength="4096" placeholder="Não exibida após cadastro"></label><label>Formato<select id="format"><option value="auto">Automático</option><option value="json">Objeto JSON</option><option value="schema">JSON Schema</option><option value="plain">Texto JSON sem parâmetro de formato</option></select></label></div><div class="form-actions"><button type="submit" class="primary">Adicionar rota</button><span id="settings-error" role="status"></span></div></form><h3>Persistência</h3><p class="muted">Por padrão, novas alterações ficam somente em memória. Salvar no computador grava as chaves em arquivo local privado (permissão 0600), sem criptografia. Não salve se compartilhar a conta do sistema.</p><div class="form-actions"><button id="save-routes">Salvar configuração neste computador</button><small id="save-status"></small></div></div></dialog>
+<dialog class="modal" id="settings-dialog"><div class="panel-head"><div><div class="eyebrow">Configuração local</div><h2>Modelos e APIs</h2></div><button id="close-settings">Fechar</button></div><div class="panel-body"><p>As rotas são tentadas na ordem abaixo. Falhas de cota, credencial, modelo ou resposta ativam outra rota disponível. O contexto ficcional será enviado ao provedor selecionado.</p><p class="muted">Adicionar rotas pagas pode gerar cobranças. Chaves da mesma conta podem compartilhar cotas; o roteador não promete cota independente.</p><div id="routes"></div><h3>Adicionar rota</h3><form id="route-form"><div class="formgrid"><label>Provedor<select id="provider"></select></label><label>Chave API<input type="password" id="key" autocomplete="off" maxlength="4096" placeholder="Cole a chave do provedor"></label><label class="full">Endpoint base<input id="endpoint" required maxlength="500" placeholder="https://api.exemplo.com/v1"></label><div class="full"><div class="form-actions"><button type="button" id="discover">Carregar modelos</button><small id="catalog-status" role="status">Selecione o provedor e informe a chave.</small></div><label style="margin-top:12px">Modelo<select id="catalog-model" required disabled><option value="">Carregue os modelos</option></select></label><label style="margin-top:8px;display:flex;flex-direction:row;align-items:center"><input type="checkbox" id="manual-model"> Informar modelo manualmente</label><label class="hidden" id="manual-label">ID do modelo<input id="route-model" maxlength="200" disabled placeholder="ID informado pelo provedor"></label></div><label>Formato<select id="format"><option value="auto">Automático</option><option value="json">Objeto JSON</option><option value="schema">JSON Schema</option><option value="plain">Texto JSON sem parâmetro de formato</option></select></label></div><div class="form-actions"><button type="submit" class="primary" id="add-route" disabled>Adicionar rota</button><span id="settings-error" role="status"></span></div></form><h3>Persistência</h3><p class="muted">Por padrão, novas alterações ficam somente em memória. Salvar no computador grava as chaves em arquivo local privado (permissão 0600), sem criptografia. Não salve se compartilhar a conta do sistema.</p><div class="form-actions"><button id="save-routes">Salvar configuração neste computador</button><small id="save-status"></small></div></div></dialog>
 <script>
 "use strict";
 const $=id=>document.getElementById(id);
@@ -89,7 +89,7 @@ function renderRoutes(){
  }
  if(!routes.length)$("routes").append(node("p","Adicione pelo menos um modelo para iniciar.","muted"))
 }
-async function routeAction(data){if(routeBusy)return;routeBusy=true;routeRevision++;$("settings-error").textContent="";try{routes=await post("/api/routes",data);if(data.action==="save")$("save-status").textContent="Configuração gravada localmente.";else $("save-status").textContent="Alterações em memória.";if(data.action==="add")$("key").value=""}catch(e){$("settings-error").textContent=e.message;$("settings-error").className="error"}finally{routeBusy=false;renderRoutes();controls()}}
+async function routeAction(data){if(routeBusy)return;routeBusy=true;routeRevision++;modelControls();$("settings-error").textContent="";try{routes=await post("/api/routes",data);if(data.action==="save")$("save-status").textContent="Configuração gravada localmente.";else $("save-status").textContent="Alterações em memória.";if(data.action==="add"){$("key").value="";invalidateCatalog("Chave cadastrada. Informe uma chave para consultar outro catálogo.")}}catch(e){$("settings-error").textContent=e.message;$("settings-error").className="error"}finally{routeBusy=false;renderRoutes();controls();modelControls()}}
 async function poll(){if(polling)return;polling=true;const revision=routeRevision;try{const [p,r]=await Promise.all([api("/api/progress"),api("/api/routes")]);progress=p;if(!routeBusy&&revision===routeRevision)routes=r;renderProgress();renderRoutes()}catch{}finally{polling=false}}
 setInterval(poll,1000);
 async function step(){if(busy||!snapshot)return false;busy=true;controls();status("Consultando personagens…");try{snapshot=await post("/api/step",{round:snapshot.state.round});render();status(snapshot.done?"Manhã concluída.":"Ciclo salvo.");return true}catch(e){running=false;try{snapshot=await api("/api/state");render()}catch{}status(e.message,e.message!=="context canceled");return false}finally{busy=false;await poll();controls()}}
@@ -97,10 +97,55 @@ $("run").onclick=async()=>{if(running||busy)return;running=true;controls();while
 $("step").onclick=()=>step();$("pause").onclick=()=>{running=false;controls();status("Pausa solicitada.")};$("cancel").onclick=async()=>{running=false;try{await post("/api/cancel",{round:progress.round});status("Cancelamento solicitado.")}catch(e){status(e.message,true)}await poll()};
 $("who").onchange=e=>{selected=e.target.value;render()};$("technical").onchange=render;
 for(const [id,preset] of Object.entries(presets)){const o=node("option",preset[0]);o.value=id;$("provider").append(o)}
-function preset(){const p=presets[$("provider").value];$("endpoint").value=p[1];$("endpoint").readOnly=!["ollama","openai-compatible"].includes($("provider").value);$("route-model").value=p[2];$("format").value="auto"}
+let catalogRevision=0,catalogController=null,catalogTimer=null,catalogModels=[];
+function catalogInput(){return {provider:$("provider").value,endpoint:$("endpoint").value,model:"",key:$("key").value,format:$("format").value}}
+function catalogReady(){const i=catalogInput();return !!i.endpoint.trim()&&(["ollama","openai-compatible"].includes(i.provider)||!!i.key.trim())}
+function selectedModel(){return $("manual-model").checked?$("route-model").value.trim():$("catalog-model").value}
+function modelControls(){
+ const manual=$("manual-model").checked;
+ $("manual-label").classList.toggle("hidden",!manual);$("route-model").disabled=!manual;$("route-model").required=manual;
+ $("catalog-model").disabled=manual||!catalogModels.length;$("catalog-model").required=!manual;
+ $("add-route").disabled=!catalogReady()||!selectedModel()||routeBusy;
+ $("discover").disabled=!catalogReady()||!!catalogController;
+}
+function invalidateCatalog(message="Informe a chave para consultar os modelos."){
+ catalogRevision++;if(catalogController){catalogController.abort();catalogController=null}clearTimeout(catalogTimer);
+ catalogModels=[];$("catalog-model").replaceChildren(new Option("Selecione um modelo",""));$("route-model").value="";
+ $("catalog-status").textContent=message;$("catalog-status").className="muted";modelControls()
+}
+function scheduleCatalog(){if(catalogReady()&&!$("manual-model").checked)catalogTimer=setTimeout(discover,400)}
+async function discover(){
+ if(!catalogReady()||catalogController)return;
+ clearTimeout(catalogTimer);const rev=++catalogRevision,controller=new AbortController();catalogController=controller;
+ $("catalog-status").textContent="Consultando catálogo…";$("catalog-status").className="muted";modelControls();
+ try{
+ const result=await api("/api/models",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(catalogInput()),signal:controller.signal});
+ if(rev!==catalogRevision)return;
+ catalogModels=result.models||[];$("catalog-model").replaceChildren(new Option("Selecione um modelo",""));
+ for(const m of catalogModels){
+  const label=(m.name===m.id?m.id:m.name+" · "+m.id)+(m.price_hint?" · "+m.price_hint:"");
+  $("catalog-model").append(new Option(label,m.id))
+ }
+ $("catalog-status").textContent=catalogModels.length?catalogModels.length+" modelos encontrados"+(result.partial?" (catálogo parcial)":"")+". Listagem não confirma cota nem gratuidade.":"Nenhum modelo de texto encontrado. Use o modo manual se necessário.";
+ }catch(e){if(rev===catalogRevision&&e.name!=="AbortError"){$("catalog-status").textContent=e.message;$("catalog-status").className="error"}}
+ finally{if(rev===catalogRevision){catalogController=null;modelControls()}}
+}
+function preset(){
+ const p=presets[$("provider").value];$("endpoint").value=p[1];$("endpoint").readOnly=!["ollama","openai-compatible"].includes($("provider").value);
+ // Never silently send the previous provider's key to a different provider.
+ $("key").value="";$("format").value="auto";$("manual-model").checked=false;invalidateCatalog();scheduleCatalog()
+}
 $("provider").onchange=preset;$("provider").value="groq";preset();
+$("discover").onclick=discover;
+$("key").oninput=()=>invalidateCatalog("Chave alterada. Carregue os modelos.");
+$("key").onchange=scheduleCatalog;
+$("key").addEventListener("paste",()=>setTimeout(scheduleCatalog,0));
+$("endpoint").oninput=()=>invalidateCatalog("Endpoint alterado. Carregue os modelos.");
+$("endpoint").onchange=scheduleCatalog;
+$("catalog-model").onchange=modelControls;$("route-model").oninput=modelControls;
+$("manual-model").onchange=modelControls;
 $("settings").onclick=()=>{$("settings-dialog").showModal();routeSignature="";renderRoutes();poll()};$("close-settings").onclick=()=>$("settings-dialog").close();
-$("route-form").onsubmit=e=>{e.preventDefault();routeAction({action:"add",route:{provider:$("provider").value,endpoint:$("endpoint").value,model:$("route-model").value,key:$("key").value,format:$("format").value}})};
+$("route-form").onsubmit=e=>{e.preventDefault();const model=selectedModel();if(!model||!catalogReady())return;routeAction({action:"add",route:{...catalogInput(),model}})};
 $("save-routes").onclick=()=>{if(confirm("Salvar também as chaves em arquivo local privado, sem criptografia?"))routeAction({action:"save"})};
 (async()=>{try{[snapshot,routes,progress]=await Promise.all([api("/api/state"),api("/api/routes"),api("/api/progress")]);for(const p of snapshot.people){const o=node("option",p.name);o.value=p.id;$("who").append(o)}render();renderRoutes();status(routes.some(r=>r.enabled)?"Pronto para simular.":"Configure Modelos e APIs para iniciar.")}catch(e){status(e.message,true)}})();
 </script></body></html>

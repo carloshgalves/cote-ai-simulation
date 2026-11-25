@@ -34,5 +34,4 @@ jobs:
       - name: Fixed-seed longitudinal autonomy evaluation
         env:
           COTE_AUTONOMY_EVAL: "1"
-        run: go test -v -count=1 -timeout=8m ./internal/pilot -run '^TestAutonomyLongitudinalEvaluation
-
+        run: go test -v -count=1 -timeout=8m ./internal/pilot -run '^TestAutonomyLongitudinalEvaluation$'

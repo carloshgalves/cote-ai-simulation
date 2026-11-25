@@ -4,7 +4,7 @@ Delivery 3/9. This is an evaluation harness, not a change in simulation semantic
 
 ## Evidence classes
 
-1. **Deterministic integrity:** bounded full-population, fixed-seed trajectories with a wait-only provider substitute; validate causal ordering, balances against ledger deltas, CP conservation, body bounds, expiration of activities, social symmetry, private memory and chronology. Replay full final state; check source-forgery negative control.
+1. **Deterministic integrity:** bounded full-population, fixed-seed trajectories with a wait-only provider substitute; validate causal ordering, append-only event and ledger history, balances against ledger deltas, CP conservation, body bounds, expiration of activities, social symmetry, private memory and chronology. Replay full final state; check source-forgery negative control.
 2. **Behavioral proxies:** controlled positive/contrast/anti-cases for routine selection, need priority, independence of resolution tier and private identity. These assess policy behavior, not model reasoning.
 3. **Model fidelity:** real model outputs under a fixed scenario/configuration, multiple independent runs and blinded human ratings. Not equivalent to the synthetic checks; no score without recorded outputs and source review.
 
@@ -36,5 +36,5 @@ Review the same opportunity for at least two actors and vary goals, information,
 
 - The CI synthetic fixture is a 24-hour trajectory rather than the whole first month or VIP exam. Separate existing exam tests remain required.
 - Actual LLM reasoning, strategic initiative quality, emergence of friendships and long-term canonical fidelity are **NOT_RUN** without real-model trajectories and independent review. Co-presence is not dialogue or trust. The routine priors are provisional.
-- The real-journal command is a replay and aggregate decision counter, not an independent human fidelity evaluator. No provider call is performed.
+- The real-journal command is a replay, transition-integrity audit and aggregate decision counter, not an independent human fidelity evaluator. No provider call is performed.
 - Tomodachi Game has its own corpus branch; no changes to that branch or content.

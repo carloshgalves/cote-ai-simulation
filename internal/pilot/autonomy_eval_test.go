@@ -68,34 +68,47 @@ func (m *autonomyMetrics) observe(j Journal,before,after State,choices []Chosen)
 
 // Check independent observable invariants across transitions. The reducer
 // validates decisions, but this additionally checks its resulting effects.
-func checkAutonomyTransition(t *testing.T,j Journal,before,after State){
- t.Helper()
- if after.Round!=before.Round+1||after.Minute<before.Minute{t.Fatal("non-monotonic logical coordinates")}
+func autonomyTransitionError(before,after State)error{
+ if after.Round!=before.Round+1||after.Minute<before.Minute{return fmt.Errorf("non-monotonic logical coordinates")}
+ if before.World==nil||after.World==nil{return fmt.Errorf("world absent")}
+ if len(after.Events)<len(before.Events)||len(before.Events)>0&&!reflect.DeepEqual(before.Events,after.Events[:len(before.Events)]){return fmt.Errorf("event history rewritten")}
+ if len(after.World.Ledger)<len(before.World.Ledger)||len(before.World.Ledger)>0&&!reflect.DeepEqual(before.World.Ledger,after.World.Ledger[:len(before.World.Ledger)]){return fmt.Errorf("ledger history rewritten")}
+ if len(before.Minds)!=len(after.Minds){return fmt.Errorf("population changed unexpectedly")}
  lastMinute:=before.Minute
- for _,e:=range after.Events[len(before.Events):]{
-  if e.Minute<lastMinute||e.Minute>after.Minute||e.Round!=after.Round{t.Fatal("event outside transition",e.ID)}
+ for i,e:=range after.Events[len(before.Events):]{
+  if e.Minute<lastMinute||e.Minute>after.Minute||e.Round!=after.Round{return fmt.Errorf("event outside transition")}
+  if e.ID!=fmt.Sprintf("e%06d",len(before.Events)+i+1){return fmt.Errorf("noncanonical event ID")}
   lastMinute=e.Minute
-  for _,id:=range e.Audience{if _,ok:=after.Minds[id];!ok{t.Fatal("unknown event audience",e.ID)}}
-  if e.Kind=="claim"&&(!has(e.Audience,e.Actor)||!has(e.Audience,e.Target)||len(e.Audience)!=2){t.Fatal("dialogue audience",e.ID)}
-  if e.Kind=="body_alert"&&(len(e.Audience)!=1||e.Audience[0]!=e.Actor){t.Fatal("body alert leaked",e.ID)}
+  for _,id:=range e.Audience{if _,ok:=after.Minds[id];!ok{return fmt.Errorf("unknown event audience")}}
+  if e.Kind=="claim"&&(!has(e.Audience,e.Actor)||!has(e.Audience,e.Target)||len(e.Audience)!=2){return fmt.Errorf("dialogue audience")}
+  if e.Kind=="body_alert"&&(len(e.Audience)!=1||e.Audience[0]!=e.Actor){return fmt.Errorf("body alert leaked")}
  }
  delta:=map[string]int64{}
  for _,entry:=range after.World.Ledger[len(before.World.Ledger):]{
-  if entry.Amount<=0||entry.From==entry.To||entry.Minute<before.Minute||entry.Minute>after.Minute{t.Fatal("invalid ledger entry")}
+  if entry.Amount<=0||entry.From==entry.To||entry.Minute<before.Minute||entry.Minute>after.Minute{return fmt.Errorf("invalid ledger entry")}
+  if _,ok:=after.Minds[entry.From];!ok&&entry.From!="school"{return fmt.Errorf("unknown ledger payer")}
+  if _,ok:=after.Minds[entry.To];!ok&&entry.To!="school"{return fmt.Errorf("unknown ledger recipient")}
   delta[entry.From]-=entry.Amount;delta[entry.To]+=entry.Amount
  }
  for id,a:=range after.Minds{
-  if a.Wallet<0||a.Wallet!=before.Minds[id].Wallet+delta[id]{t.Fatal("wallet/ledger mismatch",id)}
-  if a.Body!=nil{for _,v:=range []int{a.Body.Energy,a.Body.Hydration,a.Body.Fatigue}{if v<0||v>1000{t.Fatal("body outside bounds",id)}}}
-  if a.Activity!=nil&&a.Activity.Until<=after.Minute{t.Fatal("expired activity retained",id)}
+  prior,ok:=before.Minds[id];if !ok{return fmt.Errorf("unexpected actor")}
+  if a.Wallet<0||a.Wallet!=prior.Wallet+delta[id]{return fmt.Errorf("wallet/ledger mismatch")}
+  if a.Body!=nil{for _,v:=range []int{a.Body.Energy,a.Body.Hydration,a.Body.Fatigue}{if v<0||v>1000{return fmt.Errorf("body outside bounds")}}}
+  if a.Activity!=nil&&a.Activity.Until<=after.Minute{return fmt.Errorf("expired activity retained")}
   for peer,bond:=range a.Social{
-   reverse:=after.Minds[peer].Social[id]
-   if bond.SharedLeisureDays!=reverse.SharedLeisureDays{t.Fatal("asymmetric shared leisure",id,peer)}
+   other,ok:=after.Minds[peer];if !ok{return fmt.Errorf("unknown social peer")}
+   if bond.SharedLeisureDays!=other.Social[id].SharedLeisureDays{return fmt.Errorf("asymmetric shared leisure")}
   }
  }
  var cp int64
- for _,n:=range after.World.ClassPoints{if n<0{t.Fatal("negative class points")};cp+=n}
- if cp!=4000{t.Fatal("class points not conserved")}
+ for _,n:=range after.World.ClassPoints{if n<0{return fmt.Errorf("negative class points")};cp+=n}
+ if cp!=4000{return fmt.Errorf("class points not conserved")}
+ return nil
+}
+
+func checkAutonomyTransition(t *testing.T,before,after State){
+ t.Helper()
+ if err:=autonomyTransitionError(before,after);err!=nil{t.Fatalf("cycle %d minute %d: %v",after.Round,after.Minute,err)}
 }
 
 func checkAutonomyView(t *testing.T,j Journal,s State,id string){
@@ -129,7 +142,7 @@ func TestAutonomyLongitudinalEvaluation(t *testing.T){
      choices=append(choices,Chosen{Actor:id,Decision:d})
     }
     next,err:=scheduledAdvance(j,s,choices);if err!=nil{t.Fatalf("cycle %d minute %d: %v",s.Round,s.Minute,err)}
-    checkAutonomyTransition(t,j,s,next)
+    checkAutonomyTransition(t,s,next)
     m.observe(j,s,next,choices)
     j.Rounds=append(j.Rounds,Round{Number:next.Round,Minute:next.Minute,Choices:choices})
     s=next
@@ -200,7 +213,7 @@ func TestAutonomyNegativeControlForgedRoutine(t *testing.T){
 func TestAutonomyEvaluateLocalJournal(t *testing.T){
  path:=os.Getenv("COTE_AUTONOMY_JOURNAL")
  if path==""{t.Skip("set COTE_AUTONOMY_JOURNAL to a local V9 journal")}
- info,err:=os.Stat(path);if err!=nil||info.Size()>32<<20{t.Fatal("journal unavailable or exceeds pilot size limit")}
+ info,err:=os.Stat(path);if err!=nil||!info.Mode().IsRegular()||info.Size()>32<<20{t.Fatal("journal unavailable or exceeds pilot size limit")}
  raw,err:=os.ReadFile(path);if err!=nil{t.Fatal("cannot read journal")}
  j,err:=decodeStrict[Journal](raw);if err!=nil||j.Version!=AutonomyVersion{t.Fatal("expected valid V9 journal")}
  if len(j.Rounds)==0||len(j.Rounds)>roundLimit(j.Version){t.Fatal("invalid evaluation horizon")}
@@ -210,8 +223,33 @@ func TestAutonomyEvaluateLocalJournal(t *testing.T){
   next,err:=apply(j,s,r);if err!=nil{t.Fatalf("invalid replay at cycle %d",r.Number)}
   // Unlike CI synthetic fixtures, avoid leaking actor identifiers or event
   // contents from an operator's real journal into test output.
+  if err:=autonomyTransitionError(s,next);err!=nil{t.Fatalf("invalid effects at cycle %d: %v",r.Number,err)}
   m.observe(j,s,next,r.Choices);s=next
  }
  if m.End<=m.Start{t.Fatal("journal contains no elapsed simulated time")}
  t.Log(fmt.Sprintf("V9_JOURNAL cycles=%d minutes=%d routine=%d deliberative=%d world_only=%d",m.Cycles,m.End-m.Start,m.Routine,m.Deliberative,m.WorldOnly))
+}
+
+func TestAutonomyAuditDetectsRewrittenHistory(t *testing.T){
+ j:=autonomyJournal(t);before,err:=initial(j);if err!=nil{t.Fatal(err)}
+ choices:=[]Chosen{}
+ for _,id:=range eligibleActors(j,before){
+  d:=routineDecision(j,before,id)
+  if decisionNeedsModel(j,before,id){d=Decision{Action:"wait",Source:"eval/wait-only"}}
+  choices=append(choices,Chosen{Actor:id,Decision:d})
+ }
+ good,err:=scheduledAdvance(j,before,choices);if err!=nil{t.Fatal(err)}
+ if err:=autonomyTransitionError(before,good);err!=nil{t.Fatal("unmodified transition rejected",err)}
+ for _,tc:=range []struct{name,want string;mutate func(*State)}{
+  {"event-rewrite","event history rewritten",func(s *State){s.Events[0].Text="rewritten"}},
+  {"event-truncate","event history rewritten",func(s *State){s.Events=nil}},
+  {"ledger-rewrite","ledger history rewritten",func(s *State){s.World.Ledger[0].Amount++}},
+  {"wallet","wallet/ledger mismatch",func(s *State){m:=s.Minds["hirata"];m.Wallet++;s.Minds["hirata"]=m}},
+  {"event-id","noncanonical event ID",func(s *State){appendEvent(s,Event{Kind:"task",Actor:"hirata",Audience:[]string{"hirata"}});s.Events[len(s.Events)-1].ID="forged"}},
+ }{
+  t.Run(tc.name,func(t *testing.T){
+   bad:=clone(good);tc.mutate(&bad)
+   if err:=autonomyTransitionError(before,bad);err==nil||err.Error()!=tc.want{t.Fatal("mutation survived or wrong rejection",err)}
+  })
+ }
 }

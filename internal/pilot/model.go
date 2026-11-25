@@ -191,11 +191,16 @@ func actorContext(j Journal,s State,id string) Context {
 	for _, b:=range m.Beliefs {keep[b.Evidence]=true}
 	if m.Plan!=nil {keep[m.Plan.Evidence]=true}
 	// Keep only the most recent goal-change evidence for each active goal.
+	pinnedGoals:=map[string]bool{}
 	for i:=len(all)-1;i>=0;i-- {
 		e:=all[i]
 		if e.Kind=="goal"&&e.Evidence!="" {
 			for _, goal:=range m.Goals {
-				if strings.HasSuffix(e.Text," → "+goal) {keep[e.Evidence]=true;break}
+				if !pinnedGoals[goal]&&strings.HasSuffix(e.Text," → "+goal) {
+					keep[e.Evidence]=true
+					pinnedGoals[goal]=true
+					break
+				}
 			}
 		}
 	}

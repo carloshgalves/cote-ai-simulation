@@ -1,0 +1,23 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.tg.friendship-janken",
+  "name": "friendship-janken",
+  "authority": "SECONDARY_REFERENCE_WITH_SEPARATE_EXECUTABLE_MODEL",
+  "source_coverage": [
+    "https://tomodachi-game.fandom.com/wiki/Friendship_Janken"
+  ],
+  "runtime_model": "data/external-worlds/tomodachi-game/runtime/resolver.mjs",
+  "parameters": {
+    "source": "Friendship_Janken",
+    "rounds": 3,
+    "prize": 2000000,
+    "model": [
+      "two-player three-card variant; draw defined by aggregate score; extra rule reconstruction, not full manga reproduction"
+    ]
+  },
+  "not_canon": [
+    "two-player three-card variant; draw defined by aggregate score; extra rule reconstruction, not full manga reproduction"
+  ],
+  "execution_scope": "STANDALONE_REFERENCE_ONLY",
+  "native_csf_registered": false
+}

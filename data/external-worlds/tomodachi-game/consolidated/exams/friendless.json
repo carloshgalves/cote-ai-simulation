@@ -1,0 +1,23 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.tg.friendless",
+  "name": "friendless",
+  "authority": "SECONDARY_REFERENCE_WITH_SEPARATE_EXECUTABLE_MODEL",
+  "source_coverage": [
+    "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+  ],
+  "runtime_model": "data/external-worlds/tomodachi-game/runtime/resolver.mjs",
+  "parameters": {
+    "source": "The_Friendless_Game",
+    "days": 14,
+    "prize": 4500000000,
+    "model": [
+      "wrong-password penalty configured as exclusion; ties share prize; individualized tasks adjudicated by environment and do not invent canon task consequences"
+    ]
+  },
+  "not_canon": [
+    "wrong-password penalty configured as exclusion; ties share prize; individualized tasks adjudicated by environment and do not invent canon task consequences"
+  ],
+  "execution_scope": "STANDALONE_REFERENCE_ONLY",
+  "native_csf_registered": false
+}

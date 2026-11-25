@@ -26,6 +26,7 @@ const AutonomyVersion = 9
 const StaffCareVersion = 10
 const ContactVersion = 11
 const MotivationVersion = 12
+const ObservationVersion = 13
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -226,7 +227,7 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion&&j.Version!=ObservationVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
 	if j.Version>=WorldVersion&&len(j.WorldSeed)!=64{return State{},errors.New("invalid world seed")}
  if j.Version>=CognitionVersion{if err:=validateIdentities(j);err!=nil{return State{},err}}
  s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
@@ -301,7 +302,7 @@ func actorContext(j Journal,s State,id string) Context {
 	for _, e:=range all {
 		if (j.Version>=WorldVersion&&has([]string{"resource","exam","meeting","task","conversation_end","revelation","body_alert","plan_end","social"},e.Kind))||j.Version==LegacyVersion||e.Kind=="announcement"||e.Kind=="claim"||e.Kind=="move"||e.Kind=="departure"||e.Kind=="arrival"||e.Kind=="obstacle"||e.Kind=="observation"||keep[e.ID]{recent=append(recent,e)}
 	}
-	if j.Version>=CognitionVersion{c.Memory=retrieveMemory(j,s,id,recent,keep)}else{for i,e:=range recent {if i>=len(recent)-20 || keep[e.ID] || (j.Version<WorldVersion&&e.Kind=="announcement") {c.Memory=append(c.Memory,clone(e))}}}
+	if j.Version>=CognitionVersion{c.Memory=retrieveMemory(j,s,id,recent,keep);if j.Version>=ObservationVersion{for i:=range c.Memory{if c.Memory[i].Kind=="observation"{c.Memory[i].Audience=[]string{id}}}}}else{for i,e:=range recent {if i>=len(recent)-20 || keep[e.ID] || (j.Version<WorldVersion&&e.Kind=="announcement") {c.Memory=append(c.Memory,clone(e))}}}
 	return c
 }
 func evidence(c Context,id string) (Event,bool) {

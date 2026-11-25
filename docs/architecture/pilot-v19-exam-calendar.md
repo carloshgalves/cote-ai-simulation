@@ -1,0 +1,5 @@
+# V19 generated exams
+
+18 deterministic synthetic exam dates on days 3,23,...343 of a 360-day logical year. Two executable templates: private minority ballot (Tomodachi-style coordination / asymmetric incentives, no canon reproduction) and existing Zodiac/VIP adaptation (only after class rules disclosure). Rotating seeded groups of 8–10 first-year individualized students; every individual student appears at least once under current population. No NPC/cohort participation or all-class event yet. Each exam has a published schedule, private role/ballot and deterministic settlement, archived group result. Results are not strategic fidelity scores; use repeated matched exams and blinded evaluation. Additional island, paper-shuffle, event-selection and team templates require their own rules and validation.
+
+Logical horizon extends to 360 days with an explicit 200,000-round safety limit. The existing JSON journal remains bounded at 32 MiB and snapshot/replay cost scales with history; a full-year run is not qualified and may hit storage/performance limits. Do not remove limits without implementing scalable persistence. Prior versions retain their original schedules.

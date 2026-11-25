@@ -57,7 +57,7 @@ type offeredAction struct {
 }
 func offeredActions(view Context) []offeredAction {
 	out:=[]offeredAction{{ID:"wait",Action:"wait"}}
-	if view.Version!=Version||view.CanObserve{out=append(out,offeredAction{ID:"observe",Action:"observe"})}
+	if view.Version<Version||view.CanObserve{out=append(out,offeredAction{ID:"observe",Action:"observe"})}
 	for _, location:=range view.Locations {
 		if location!=view.Location {out=append(out,offeredAction{"move:"+location,"move",location})}
 	}
@@ -87,6 +87,7 @@ func localDecisionSchema(view Context) (json.RawMessage,error) {
 		"plan":optionalObject([]string{"steps","evidence"},map[string]any{"steps":map[string]any{"type":"array","items":map[string]string{"type":"string"}},"evidence":map[string]string{"type":"string"}}),
 		"relation":optionalObject([]string{"person","delta","evidence"},map[string]any{"person":map[string]string{"type":"string"},"delta":map[string]string{"type":"integer"},"evidence":map[string]string{"type":"string"}}),
 	}
+	if view.Version==ScheduledVersion{props["wait_minutes"]=map[string]any{"type":"integer","minimum":1,"maximum":60}}
 	raw,err:=json.Marshal(map[string]any{"type":"object","properties":props,"required":[]string{"choice"},"additionalProperties":false})
 	return json.RawMessage(raw),err
 }
@@ -110,9 +111,10 @@ func decodeLocalChoice(view Context,raw []byte)(Decision,error) {
 	if !found{return Decision{},responseError{"ação não consta nas opções disponíveis"}}
 	if validText(c.Reason,300){d.Reason=c.Reason}else if c.Reason!=""{d.Ignored=append(d.Ignored,"reason")}
 	if d.Action=="talk"{d.Text=c.Text}else if c.Text!=""{
-		if view.Version==Version&&validText(c.Text,500){d.Note=c.Text}else{d.Ignored=append(d.Ignored,"text")}
+		if view.Version>=Version&&validText(c.Text,500){d.Note=c.Text}else{d.Ignored=append(d.Ignored,"text")}
 	}
 	d.Beliefs=[]Belief{}
+	if view.Version==ScheduledVersion&&d.Action=="wait"{var n int;if json.Unmarshal(fields["wait_minutes"],&n)==nil&&n>=1&&n<=60{d.WaitMinutes=n}}
 	if d.Action=="talk"&&invalidPeerAddress(d.Text,d.Target){return Decision{},responseError{"destinatário é colega do primeiro ano, não senpai; reformule a fala"}}
 	if err:=validateDecision(view,d);err!=nil{return Decision{},responseError{err.Error()}}
 	for _, key:=range []string{"beliefs","goal","relation","plan"} {
@@ -129,7 +131,7 @@ func decodeLocalChoice(view Context,raw []byte)(Decision,error) {
 	}
 	// Do not interpret extra fields as actions or world facts.
 	for key:=range fields {
-		if !has([]string{"choice","text","reason","beliefs","goal","relation","plan"},key){d.Ignored=append(d.Ignored,"campo extra");break}
+		if !has([]string{"choice","text","reason","beliefs","goal","relation","plan","wait_minutes"},key){d.Ignored=append(d.Ignored,"campo extra");break}
 	}
 	sort.Strings(d.Ignored)
 	return d,nil
@@ -164,6 +166,8 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	raw,err:=json.Marshal(struct{Context;Options []offeredAction `json:"options"`}{view,offeredActions(view)});if err!=nil{return zero,err}
 	prompt:="Interprete somente self em Classroom of the Elite. Use personalidade, objetivos atuais, plano, fatos vividos e hipóteses. Não use acontecimentos futuros nem segredos alheios. Escolha um ID de options que ajude um objetivo ou responda a uma novidade; não repita observação sem informação nova. Esperar é legítimo se não houver motivo para agir. Explique em reason, em primeira pessoa e uma ou duas frases, a intenção ficcional específica do personagem: o que deseja obter, testar, evitar ou descobrir. Não narre fatos novos nem raciocínio detalhado. Se talk, text é a fala real dirigida ao destinatário; para outras ações deixe text vazio. Responda JSON com choice, reason, text. Não copie exemplos nem invente IDs."
 	prompt+=" Todos os seis alunos deste cenário são do primeiro ano, colegas da mesma série; a classe não indica senioridade. Não chame o destinatário de senpai, sempai, veterano ou superior por ser de outra turma. Use nome, sobrenome, -san ou -kun conforme a personalidade. Não introduza relações de autoridade não estabelecidas."
+	prompt+=" Escreva reason, text e toda cognição em português brasileiro. Não presuma materiais, reuniões, cargos ou presença de pessoas que o contexto não estabelece."
+	if view.Version==ScheduledVersion{prompt+=" wake_reason indica por que você voltou a decidir. Se escolher wait, pode indicar wait_minutes (1 a 60) para reavaliar; sem esse campo, aguarda até um estímulo ou o próximo anúncio. Conversas e deslocamentos levam tempo e só ocorrem após validação pelo motor. Uma intenção não executa uma tarefa automaticamente. Não repita um plano que depende de alguém ausente."}
 	choices:=[]string{}
 	for _, option:=range offeredActions(view){choices=append(choices,option.ID)}
 	prompt+=" IDs autorizados, copie exatamente um: "+strings.Join(choices," | ")+"."

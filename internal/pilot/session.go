@@ -68,7 +68,10 @@ type Snapshot struct {
 	LastChoices []Chosen `json:"last_choices"`
 }
 
-func Open(path,name string,model Model) (*Session,error) {
+func Open(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,Version)}
+// OpenScheduled creates v3 saves; existing saves retain their original semantics.
+func OpenScheduled(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,ScheduledVersion)}
+func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
 	parent,err:=filepath.EvalSymlinks(filepath.Dir(path));if err!=nil{return nil,err}
@@ -83,7 +86,7 @@ func Open(path,name string,model Model) (*Session,error) {
 	switch {
 	case errors.Is(err,os.ErrNotExist):
 		profiles,err:=decodeStrict[[]Profile](defaultProfiles);if err!=nil{return nil,err}
-		j=Journal{Version:Version,Profiles:profiles,Model:name,Rounds:[]Round{}}
+		j=Journal{Version:version,Profiles:profiles,Model:name,Rounds:[]Round{}}
 		if _,err:=Replay(j);err!=nil{return nil,err}
 		if err:=createJournal(path,j);err!=nil{return nil,err}
 	case err!=nil:
@@ -136,7 +139,7 @@ func (s *Session) snapshot() Snapshot {
 	for _, p:=range s.journal.Profiles {people=append(people,Person{p.ID,p.Name,p.Class})}
 	last:=[]Chosen{}
 	if n:=len(s.journal.Rounds);n>0{last=clone(s.journal.Rounds[n-1].Choices)}
-	return Snapshot{LastChoices:last,State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:MaxRounds,Done:s.state.Round>=MaxRounds||(s.journal.Version==Version&&s.state.Minute>=EndMinute),Version:s.journal.Version}
+	return Snapshot{LastChoices:last,State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:MaxRounds,Done:s.state.Round>=MaxRounds||(s.journal.Version>=Version&&s.state.Minute>=EndMinute),Version:s.journal.Version}
 }
 func (s *Session) Snapshot() Snapshot {
 	s.mu.Lock();defer s.mu.Unlock();return s.snapshot()
@@ -152,10 +155,11 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 	s.mu.Lock()
 	if s.lock==nil{s.mu.Unlock();return Snapshot{},errors.New("sessão encerrada")}
 	if s.state.Round!=expected{s.mu.Unlock();return Snapshot{},errors.New("rodada já alterada; atualize o estado")}
-	if expected>=MaxRounds||(s.journal.Version==Version&&s.state.Minute>=EndMinute){s.mu.Unlock();return Snapshot{},errors.New("manhã do piloto concluída")}
+	if expected>=MaxRounds||(s.journal.Version>=Version&&s.state.Minute>=EndMinute){s.mu.Unlock();return Snapshot{},errors.New("manhã do piloto concluída")}
 	ctx,cancel:=context.WithCancel(ctx)
 	s.cancel=cancel
-	s.progress=Progress{Active:true,Round:expected+1,Total:len(s.journal.Profiles),Completed:len(s.pending),StartedAt:time.Now(),Phase:"thinking",Choices:clone(s.pending)}
+	order:=eligibleActors(s.journal,s.state)
+	s.progress=Progress{Active:true,Round:expected+1,Total:len(order),Completed:len(s.pending),StartedAt:time.Now(),Phase:"thinking",Choices:clone(s.pending)}
 	journal,state:=s.journal,s.state
 	s.mu.Unlock()
 	defer func(){
@@ -166,7 +170,6 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 	}()
 	var err error
 	r:=Round{Number:expected+1,Choices:append([]Chosen{},s.pending...)}
-	order:=ids(journal.Profiles)
 	for _, id:=range order[len(r.Choices):] {
 		if err:=ctx.Err();err!=nil{return Snapshot{},err}
 		view:=actorContext(journal,state,id)
@@ -193,6 +196,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 			_,repairable:=s.model.(interface{Repair(context.Context,Context,string)(Decision,error)})
 			if !repairable||!retryable{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
 			if attempt==3 {
+				if journal.Version==ScheduledVersion{return Snapshot{},fmt.Errorf("%s: %w",id,err)}
 				failure="Modelo não produziu uma ação válida após três tentativas: "+problem
 				d=Decision{Action:"wait",Reason:"Sem decisão válida do modelo",Beliefs:[]Belief{}}
 			}
@@ -204,7 +208,7 @@ func (s *Session) Step(ctx context.Context,expected int) (result Snapshot,retErr
 	}
 	valid:=0
 	for _,x:=range r.Choices{if x.Failure==""{valid++}}
-	if valid==0 {
+	if valid==0&&len(order)>0 {
 		s.mu.Lock();s.pending=nil;s.mu.Unlock()
 		return Snapshot{},errors.New("nenhum agente produziu decisão válida; rodada não avançou")
 	}

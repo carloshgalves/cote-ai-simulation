@@ -13,7 +13,24 @@ Simulação multiagente inspirada em *Classroom of the Elite*, com personagens p
 7. **O primeiro ano é o escopo inicial.** Ao final, fazemos snapshot/pause antes de introduzir o elenco do segundo ano.
 8. **A simulação pode divergir do cânone.** O cânone fornece pessoas, regras e antecedentes; não força resultados que já deixaram de ser causalmente possíveis.
 
-## Estado atual (apurado em 2026-11-12; `main@78bfd267`)
+## Executar o piloto de personagens localmente
+
+A prioridade do produto é uma simulação observável com seis personagens, LLM real e estado persistente. O piloto Go local é experimental, reutiliza o relógio lógico CSF, e tem um journal próprio — ainda não publica ações livres no CommitCoordinator canônico. Não exige login, servidor remoto ou banco vetorial.
+
+Com um provedor compatível com Chat Completions já instalado (por exemplo, Ollama local), no checkout:
+
+```sh
+# Escolha o nome de um modelo que já esteja instalado no seu provedor.
+export COTE_MODEL="qwen2.5:7b"
+# Opcional: export COTE_LLM_URL="http://127.0.0.1:11434/v1"
+go run ./cmd/cote-local --save "$HOME/cote-pilot.json"
+```
+
+Abra **http://127.0.0.1:8765**. Clique em Executar, Pausar ou Avançar uma rodada. O exemplo de modelo é configurável, não é instalado automaticamente. Para um provedor remoto HTTPS, configure `COTE_LLM_URL` e `COTE_API_KEY`; o contexto privado do personagem será enviado ao provedor escolhido. O comando `--steps 1` permite executar no terminal. Use um novo arquivo de save para iniciar outro cenário.
+
+[Escopo, limitações e testes do piloto](docs/pilot-local.md).
+
+## Estado histórico (apurado em 2026-11-12; `main@78bfd267`)
 
 **Fundação causal relevante integrada; First Real Run ainda NÃO executável.** A `main` contém CSFRV1-1–8 (incluindo replay/snapshot/resume/fork da PR #25), as melhorias de autoridade, bootstrap e snapshot das PRs #61–#71 e o contrato de checkpoint cognitivo S0 da [PR #72](https://github.com/carloshgalves/cote-ai-simulation/pull/72). S0 possui interface/gate `internal/csf/ownercheckpoint/` e testes com owner injetado, **não** um serviço de memória real nem prova de durabilidade remota; a [issue #58](https://github.com/carloshgalves/cote-ai-simulation/issues/58) segue aberta como gate P0.
 

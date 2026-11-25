@@ -1,0 +1,33 @@
+name: Local character simulation
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'internal/pilot/**'
+      - 'cmd/cote-local/**'
+      - '.github/workflows/local-character-simulation.yml'
+      - 'internal/csf/clock/**'
+      - 'go.mod'
+      - 'go.sum'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: local-character-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.27.2'
+          cache: true
+      - run: go test -count=1 ./internal/pilot ./cmd/cote-local
+      - run: go test -race -count=1 ./internal/pilot ./cmd/cote-local
+      - run: go build -o "$RUNNER_TEMP/cote-local" ./cmd/cote-local

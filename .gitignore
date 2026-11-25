@@ -20,3 +20,9 @@ data/canon/index/
 runs/
 traces/
 logs/
+
+# Local cognitive pilot private saves
+cote-local*.json
+cote-local*.json.lock
+.cote-new-*
+.cote-save-*

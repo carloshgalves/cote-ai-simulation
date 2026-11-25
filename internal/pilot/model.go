@@ -158,7 +158,7 @@ func initial(j Journal) (State,error) {
 	if j.Version!=Version || !validText(j.Model,200) || validateProfiles(j.Profiles)!=nil {return State{},errors.New("unsupported journal")}
 	s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
 	for _, p:=range j.Profiles { s.Minds[p.ID]=Mind{Location:"hall",Goals:clone(p.Goals),Beliefs:[]Belief{},Relations:map[string]int{}} }
-	appendEvent(&s,Event{Kind:"announcement",Actor:"school",Text:"Primeiro dia. A escola abriu o hall, as salas, a biblioteca e o pátio. Os estudantes têm um período livre para conhecer o ambiente e os colegas. As regras detalhadas serão anunciadas depois.",Audience:ids(j.Profiles)})
+	appendEvent(&s,Event{Kind:"announcement",Actor:"school",Text:"Primeiro dia. A escola abriu o hall, as salas, a biblioteca e o pátio. Os estudantes têm um período livre para conhecer o ambiente e os colegas. A lista de nomes e classes dos seis participantes está disponível a todos. As regras detalhadas serão anunciadas depois.",Audience:ids(j.Profiles)})
 	return s,nil
 }
 func ids(p []Profile) []string {
@@ -190,7 +190,15 @@ func actorContext(j Journal,s State,id string) Context {
 	keep:=map[string]bool{}
 	for _, b:=range m.Beliefs {keep[b.Evidence]=true}
 	if m.Plan!=nil {keep[m.Plan.Evidence]=true}
-	for _, e:=range all {if e.Kind=="goal"&&e.Evidence!="" {keep[e.Evidence]=true}}
+	// Keep only the most recent goal-change evidence for each active goal.
+	for i:=len(all)-1;i>=0;i-- {
+		e:=all[i]
+		if e.Kind=="goal"&&e.Evidence!="" {
+			for _, goal:=range m.Goals {
+				if strings.HasSuffix(e.Text," → "+goal) {keep[e.Evidence]=true;break}
+			}
+		}
+	}
 	for i,e:=range all {if i>=len(all)-20 || keep[e.ID] || e.Kind=="announcement" {c.Memory=append(c.Memory,clone(e))}}
 	return c
 }
@@ -274,9 +282,15 @@ func apply(j Journal,s State,r Round) (State,error) {
 		case "move":
 			// Movement is visible to people present at the origin or destination
 			// at the beginning of the round. No same-round arrival advantage.
-			audience:=[]string{x.Actor}
-			for _, id:=range order {if id!=x.Actor && (s.Minds[id].Location==m.Location||s.Minds[id].Location==d.Target){audience=append(audience,id)}}
-			appendEvent(&out,Event{Kind:"move",Actor:x.Actor,Target:d.Target,Text:"Deslocou-se de "+m.Location+" para "+d.Target,Audience:audience})
+			appendEvent(&out,Event{Kind:"move",Actor:x.Actor,Target:d.Target,Text:"Deslocou-se de "+m.Location+" para "+d.Target,Audience:[]string{x.Actor}})
+			for _, id:=range order {
+				if id==x.Actor {continue}
+				if s.Minds[id].Location==m.Location {
+					appendEvent(&out,Event{Kind:"observation",Actor:x.Actor,Text:"Saiu de "+m.Location,Audience:[]string{id}})
+				} else if s.Minds[id].Location==d.Target {
+					appendEvent(&out,Event{Kind:"observation",Actor:x.Actor,Text:"Chegou a "+d.Target,Audience:[]string{id}})
+				}
+			}
 			m.Location=d.Target
 		case "observe":
 			names:=[]string{};for _, id:=range order {if id!=x.Actor&&s.Minds[id].Location==m.Location {names=append(names,id)}}

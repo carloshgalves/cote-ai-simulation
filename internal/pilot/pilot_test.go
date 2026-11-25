@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"strings"
+	"sync/atomic"
 	"testing"
 )
 
@@ -38,6 +39,9 @@ func TestRealRoundsPrivacyAndReplay(t *testing.T) {
 				d.Relation=&RelationChange{Person:"ayanokoji",Delta:1,Evidence:eID}
 			}
 			if c.Self.ID=="ryuen"&&len(c.Present)!=0{t.Fatal("movement did not persist")}
+			if c.Self.ID!="ryuen" {
+				for _, e:=range c.Memory {if e.Actor=="ryuen"&&strings.Contains(e.Text,"library"){t.Fatal("departure revealed unseen destination")}}
+			}
 		}
 		return d,nil
 	})
@@ -80,9 +84,9 @@ func TestInvalidOrFailedDecisionNeverCommitsPartialRound(t *testing.T) {
 }
 
 func TestHTTPModelSendsOnlyActorContextAndParsesRealWire(t *testing.T) {
-	calls:=0
+	var calls atomic.Int32
 	server:=httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter,r *http.Request){
-		calls++
+		calls.Add(1)
 		if r.Method!="POST"||r.URL.Path!="/v1/chat/completions"{t.Error("wrong model endpoint")}
 		var req struct{Model string;Messages []struct{Role,Content string}}
 		if err:=json.NewDecoder(r.Body).Decode(&req);err!=nil||len(req.Messages)!=2{t.Error("wrong request");w.WriteHeader(400);return}
@@ -95,5 +99,5 @@ func TestHTTPModelSendsOnlyActorContextAndParsesRealWire(t *testing.T) {
 	model,err:=NewHTTPModel(server.URL+"/v1","test","");if err!=nil{t.Fatal(err)}
 	s,err:=Open(filepath.Join(t.TempDir(),"run.json"),"test",model);if err!=nil{t.Fatal(err)};defer s.Close()
 	snap,err:=s.Step(context.Background(),0);if err!=nil{t.Fatal(err)}
-	if calls!=6||snap.State.Round!=1{t.Fatal("not six actual HTTP decisions")}
+	if calls.Load()!=6||snap.State.Round!=1{t.Fatal("not six actual HTTP decisions")}
 }

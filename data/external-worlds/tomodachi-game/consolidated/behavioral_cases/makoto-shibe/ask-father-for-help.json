@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.makoto-shibe.ask-father-for-help",
+  "actor_id": "actor.makoto-shibe",
+  "primary_actor_id": "actor.makoto-shibe",
+  "title": "ask father for help",
+  "context": "TRIAL; secondary-source account",
+  "observed_actions": "Discusses the game with his father when seeking money.",
+  "observed_result": "Family dependence affects the group's situation.",
+  "epistemic_limits": "He cannot know the concealed role of his father from this alone.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_11",
+    "locator": "TRIAL",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "economy",
+    "trust"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. He cannot know the concealed role of his father from this alone. Allow failure.",
+  "topics": [
+    "economy",
+    "trust"
+  ],
+  "evidence_refs": [
+    "tg.ev.makoto-shibe.ask-father-for-help"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

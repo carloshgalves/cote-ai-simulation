@@ -1,0 +1,41 @@
+{
+  "id": "tg.case.kenji-yamashita.choose-trust-after-loss",
+  "actor_id": "actor.kenji-yamashita",
+  "primary_actor_id": "actor.kenji-yamashita",
+  "title": "choose trust after loss",
+  "context": "After losing, peers propose a plan that could compensate him or betray him again.",
+  "observed_actions": "Chooses the proposed cooperative action despite suspicion.",
+  "observed_result": "Suffers another adverse outcome.",
+  "epistemic_limits": "Do not assume friends always betray in a new run.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Friendship_Janken",
+    "locator": "JANKEN",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "risk_management",
+    "trust"
+  ],
+  "information_available": "After losing, peers propose a plan that could compensate him or betray him again.",
+  "counterfactual_test": "A prior opponent offers a compensating but unverifiable agreement. Weighs relationship trust against downside exposure. Do not assume friends always betray in a new run.",
+  "topics": [
+    "risk_management",
+    "trust"
+  ],
+  "evidence_refs": [
+    "tg.ev.kenji-yamashita.choose-trust-after-loss"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "transfer": {
+    "scenario": "A prior opponent offers a compensating but unverifiable agreement.",
+    "expected_tendency": "Weighs relationship trust against downside exposure.",
+    "anti_case": "Do not assume friends always betray in a new run.",
+    "canon_outcome_as_instruction": false
+  }
+}

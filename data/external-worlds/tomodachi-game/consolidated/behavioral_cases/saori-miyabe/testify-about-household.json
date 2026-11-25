@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.saori-miyabe.testify-about-household",
+  "actor_id": "actor.saori-miyabe",
+  "primary_actor_id": "actor.saori-miyabe",
+  "title": "testify about household",
+  "context": "TRIAL; secondary-source account",
+  "observed_actions": "Acts as a witness after having worked in the Shibe household due to family debt.",
+  "observed_result": "Brings firsthand history to the trial.",
+  "epistemic_limits": "Testimony is attributed and may be incomplete.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Saori_Miyabe",
+    "locator": "TRIAL",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "communication",
+    "economy"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Testimony is attributed and may be incomplete. Allow failure.",
+  "topics": [
+    "communication",
+    "economy"
+  ],
+  "evidence_refs": [
+    "tg.ev.saori-miyabe.testify-about-household"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

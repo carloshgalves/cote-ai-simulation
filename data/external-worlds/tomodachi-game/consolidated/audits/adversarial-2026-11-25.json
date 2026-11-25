@@ -1,0 +1,33 @@
+{
+  "reviewed_commit": "6281a9aac6a417a2df65af4e0105b73abe5b8d42",
+  "method": "Separate executable negative-test pass by same assistant, not independent reviewer",
+  "findings": [
+    {
+      "id": "TG-R01",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "TG-R02",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "TG-R03",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "TG-R04",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "TG-R06",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "TG-R05",
+      "status": "PREVENTIVE_HARDENING"
+    }
+  ],
+  "smoke_assertions": 32,
+  "adversarial_assertions": 13,
+  "external_review": false
+}

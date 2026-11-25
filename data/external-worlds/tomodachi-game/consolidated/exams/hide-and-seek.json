@@ -1,0 +1,24 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.tg.hide-and-seek",
+  "name": "hide-and-seek",
+  "authority": "SECONDARY_REFERENCE_WITH_SEPARATE_EXECUTABLE_MODEL",
+  "source_coverage": [
+    "https://tomodachi-game.fandom.com/wiki/Friendship_Hide-And-Seek"
+  ],
+  "runtime_model": "data/external-worlds/tomodachi-game/runtime/resolver.mjs",
+  "parameters": {
+    "source": "Friendship_Hide-And-Seek",
+    "prize": 2000000,
+    "deadline": 30,
+    "loserPenalty": 2000000,
+    "model": [
+      "deadline and loss debt chosen for bounded simulation; trusted environment resolves discovery, supply and prohibited conduct; transfer liability modeled separately"
+    ]
+  },
+  "not_canon": [
+    "deadline and loss debt chosen for bounded simulation; trusted environment resolves discovery, supply and prohibited conduct; transfer liability modeled separately"
+  ],
+  "execution_scope": "STANDALONE_REFERENCE_ONLY",
+  "native_csf_registered": false
+}

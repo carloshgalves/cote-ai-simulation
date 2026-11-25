@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.juuzou-kadokura.accept-hider-role",
+  "actor_id": "actor.juuzou-kadokura",
+  "primary_actor_id": "actor.juuzou-kadokura",
+  "title": "accept hider role",
+  "context": "HIDE_SEEK; secondary-source account",
+  "observed_actions": "Takes responsibility as Group K's hider.",
+  "observed_result": "Relies on teammates for supplies and security.",
+  "epistemic_limits": "Role choice is not a guaranteed decision in future runs.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Juuzou_Kadokura",
+    "locator": "HIDE_SEEK",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "cooperation",
+    "risk_management"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Role choice is not a guaranteed decision in future runs. Allow failure.",
+  "topics": [
+    "cooperation",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "tg.ev.juuzou-kadokura.accept-hider-role"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

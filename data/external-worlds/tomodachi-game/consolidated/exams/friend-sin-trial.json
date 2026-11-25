@@ -1,0 +1,26 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.tg.friend-sin-trial",
+  "name": "friend-sin-trial",
+  "authority": "SECONDARY_REFERENCE_WITH_SEPARATE_EXECUTABLE_MODEL",
+  "source_coverage": [
+    "https://tomodachi-game.fandom.com/wiki/Friend-Sin_Trial"
+  ],
+  "runtime_model": "data/external-worlds/tomodachi-game/runtime/resolver.mjs",
+  "parameters": {
+    "source": "Friend-Sin_Trial",
+    "days": 7,
+    "jurors": 28,
+    "jurorFunds": 70000,
+    "target": 1960000,
+    "accusedDebt": 500000000,
+    "model": [
+      "jury decisions supplied by independent juror agents, no direct player payments; all-or-nothing threshold; debt divided among configured group"
+    ]
+  },
+  "not_canon": [
+    "jury decisions supplied by independent juror agents, no direct player payments; all-or-nothing threshold; debt divided among configured group"
+  ],
+  "execution_scope": "STANDALONE_REFERENCE_ONLY",
+  "native_csf_registered": false
+}

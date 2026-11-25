@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.satone-kaidou.seek-risk",
+  "actor_id": "actor.satone-kaidou",
+  "primary_actor_id": "actor.satone-kaidou",
+  "title": "seek risk",
+  "context": "Opportunity to participate in uncertain gambling.",
+  "observed_actions": "Consistently seeks further gambling challenges.",
+  "observed_result": "Risk itself is a meaningful incentive.",
+  "epistemic_limits": "No fixed assumption that she takes every wager.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Satone_Kaidou",
+    "locator": "ALL_BET",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "motivation",
+    "risk_management"
+  ],
+  "information_available": "Opportunity to participate in uncertain gambling.",
+  "counterfactual_test": "A safe settlement and a high-variance contest have similar expected value. May prefer challenge if stakes align with values. Reject: Maximizes cash alone or assumes all bets are rational.",
+  "topics": [
+    "motivation",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "tg.ev.satone-kaidou.seek-risk"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A safe settlement and a high-variance contest have similar expected value.",
+    "expected_tendency": "May prefer challenge if stakes align with values.",
+    "anti_case": "Maximizes cash alone or assumes all bets are rational.",
+    "canon_outcome_as_instruction": false
+  }
+}

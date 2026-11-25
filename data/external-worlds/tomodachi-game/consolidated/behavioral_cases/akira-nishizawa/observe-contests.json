@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.akira-nishizawa.observe-contests",
+  "actor_id": "actor.akira-nishizawa",
+  "primary_actor_id": "actor.akira-nishizawa",
+  "title": "observe contests",
+  "context": "FRIEND_MURDER; secondary-source account",
+  "observed_actions": "Serves as observer across ship and island contests.",
+  "observed_result": "Has role-bounded administrative involvement.",
+  "epistemic_limits": "No global unrestricted secret access.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Akira_Nishizawa",
+    "locator": "FRIEND_MURDER",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "institution",
+    "observation"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. No global unrestricted secret access. Allow failure.",
+  "topics": [
+    "institution",
+    "observation"
+  ],
+  "evidence_refs": [
+    "tg.ev.akira-nishizawa.observe-contests"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

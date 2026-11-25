@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.tenji-mikasa.endure-uncertainty",
+  "actor_id": "actor.tenji-mikasa",
+  "primary_actor_id": "actor.tenji-mikasa",
+  "title": "endure uncertainty",
+  "context": "HIDE_SEEK; secondary-source account",
+  "observed_actions": "Waits at the hiding place while food delivery is delayed and considers possible betrayal.",
+  "observed_result": "Continues participating despite doubts.",
+  "epistemic_limits": "Endurance is not unlimited; fatigue and hunger are real constraints.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_8",
+    "locator": "HIDE_SEEK",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "risk_management",
+    "emotion"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Endurance is not unlimited; fatigue and hunger are real constraints. Allow failure.",
+  "topics": [
+    "risk_management",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "tg.ev.tenji-mikasa.endure-uncertainty"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

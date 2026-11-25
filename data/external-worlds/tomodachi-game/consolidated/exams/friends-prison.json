@@ -1,0 +1,27 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.tg.friends-prison",
+  "name": "friends-prison",
+  "authority": "SECONDARY_REFERENCE_WITH_SEPARATE_EXECUTABLE_MODEL",
+  "source_coverage": [
+    "https://tomodachi-game.fandom.com/wiki/Friend%27s_Prison_Game"
+  ],
+  "runtime_model": "data/external-worlds/tomodachi-game/runtime/resolver.mjs",
+  "parameters": {
+    "source": "Friend%27s_Prison_Game",
+    "days": 7300,
+    "dominoes": 120000,
+    "clearPrize": 100000000,
+    "exilePenalty": 100000000,
+    "escapePrize": 200000000,
+    "escapePenalty": 400000000,
+    "model": [
+      "one day per transition, work amounts supplied by environment; key acquisition and guard absence adjudicated by environment; no automatic escape"
+    ]
+  },
+  "not_canon": [
+    "one day per transition, work amounts supplied by environment; key acquisition and guard absence adjudicated by environment; no automatic escape"
+  ],
+  "execution_scope": "STANDALONE_REFERENCE_ONLY",
+  "native_csf_registered": false
+}

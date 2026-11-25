@@ -1,0 +1,31 @@
+name: Tomodachi Go and native RAG checkpoint
+on:
+  pull_request:
+    paths:
+      - 'internal/csf/reducer/tomodachi/**'
+      - 'internal/tomodachi/**'
+      - 'cmd/tomodachi-local/**'
+      - 'tools/tomodachi_rag_v2.py'
+      - 'tests/canon_rag/**'
+      - 'data/external-worlds/tomodachi-game/**'
+      - '.github/workflows/tomodachi-go.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  checkpoint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install "pytest>=8,<10" "jsonschema>=4.21,<5" "PyYAML>=6,<7"
+      - run: python -m pytest tests/canon_rag -q
+      - run: go test ./internal/csf/reducer/tomodachi ./internal/tomodachi ./cmd/tomodachi-local
+      - run: |
+          go run ./cmd/tomodachi-local --scripted --out /tmp/tg-go-owner.json
+          go run ./cmd/tomodachi-local --replay /tmp/tg-go-owner.json

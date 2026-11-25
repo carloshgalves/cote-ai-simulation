@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.banri-niwa.recruit-junior",
+  "actor_id": "actor.banri-niwa",
+  "primary_actor_id": "actor.banri-niwa",
+  "title": "recruit junior",
+  "context": "PRE_GAME; secondary-source account",
+  "observed_actions": "Invites Kei to attend his high school after graduation.",
+  "observed_result": "Shows an existing interpersonal tie.",
+  "epistemic_limits": "Not evidence of unconditional obedience.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Banri_Niwa",
+    "locator": "PRE_GAME",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social",
+    "cooperation"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Not evidence of unconditional obedience. Allow failure.",
+  "topics": [
+    "social",
+    "cooperation"
+  ],
+  "evidence_refs": [
+    "tg.ev.banri-niwa.recruit-junior"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

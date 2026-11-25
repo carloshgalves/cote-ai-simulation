@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.kei-shinomiya.detect-side-change",
+  "actor_id": "actor.kei-shinomiya",
+  "primary_actor_id": "actor.kei-shinomiya",
+  "title": "detect side change",
+  "context": "HIDE_SEEK; secondary-source account",
+  "observed_actions": "Recognizes that Maria's behavior indicates betrayal of his side.",
+  "observed_result": "Updates his assessment of the contest.",
+  "epistemic_limits": "Recognition after observation is not knowledge before the event.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_10",
+    "locator": "HIDE_SEEK",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "observation",
+    "strategy"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Recognition after observation is not knowledge before the event. Allow failure.",
+  "topics": [
+    "observation",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "tg.ev.kei-shinomiya.detect-side-change"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

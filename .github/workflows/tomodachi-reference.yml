@@ -1,0 +1,25 @@
+name: Tomodachi Game reference validation
+on:
+  pull_request:
+    paths:
+      - 'data/external-worlds/tomodachi-game/**'
+      - '.github/workflows/tomodachi-reference.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          cd data/external-worlds/tomodachi-game/runtime
+          node validate-corpus.mjs
+          node smoke.mjs
+          node adversarial.mjs
+          node full-runs.mjs
+          node cli.mjs --out /tmp/tg-owner-run.json
+          node cli.mjs --replay /tmp/tg-owner-run.json

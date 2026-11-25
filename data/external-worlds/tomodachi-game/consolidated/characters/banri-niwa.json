@@ -1,0 +1,74 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.banri-niwa",
+  "display_name": "Banri Niwa",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "Group K roster entry; individual characterization not established.",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "social": {
+      "behavioral_case_refs": [
+        "tg.case.banri-niwa.recruit-junior"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.banri-niwa.recruit-junior"
+      ]
+    },
+    "cooperation": {
+      "behavioral_case_refs": [
+        "tg.case.banri-niwa.recruit-junior"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.banri-niwa.recruit-junior"
+      ]
+    },
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.banri-niwa.identity"
+      ]
+    },
+    "leadership": {
+      "behavioral_case_refs": [
+        "tg.case.banri-niwa.correct-overconfidence"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.banri-niwa.correct-overconfidence"
+      ]
+    },
+    "reasoning": {
+      "behavioral_case_refs": [
+        "tg.case.banri-niwa.correct-overconfidence"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.banri-niwa.correct-overconfidence"
+      ]
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Characters",
+    "https://tomodachi-game.fandom.com/wiki/Friend_Murder_Game",
+    "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+  ],
+  "historical_context_only": false,
+  "uncertainties": [
+    "No direct manga audit; behavioral transfer is probabilistic"
+  ],
+  "generation_policy": "One pack per actor; append sourced cases",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only; strip narrative details before agent context",
+    "contextual_facts": "require acquisition",
+    "post_divergence_memory": "simulation events only"
+  },
+  "fidelity_eval": null
+}

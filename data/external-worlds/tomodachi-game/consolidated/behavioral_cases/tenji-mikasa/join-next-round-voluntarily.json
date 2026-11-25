@@ -1,0 +1,48 @@
+{
+  "id": "tg.case.tenji-mikasa.join-next-round-voluntarily",
+  "actor_id": "actor.tenji-mikasa",
+  "primary_actor_id": "actor.tenji-mikasa",
+  "title": "join next round voluntarily",
+  "context": "Yuuichi accepts adverse placement; Tenji faces a choice whether to continue.",
+  "observed_actions": "Reports his own false statement and accompanies Yuuichi.",
+  "observed_result": "Accepts further exposure rather than ending his involvement.",
+  "epistemic_limits": "Motive includes investigation and evolving interpersonal trust; not unconditional loyalty.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_6",
+    "locator": "SUGOROKU",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "motivation",
+    "trust",
+    "risk_management"
+  ],
+  "information_available": "Yuuichi accepts adverse placement; Tenji faces a choice whether to continue.",
+  "counterfactual_test": "A rival who uncovered your secret chooses a risky continuation and offers no guarantee of protection. Weighs investigation goals against safety and conditional trust. Reject: Treats later alliance as guaranteed at initial setup.",
+  "topics": [
+    "motivation",
+    "trust",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "tg.ev.tenji-mikasa.join-next-round-voluntarily"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A rival who uncovered your secret chooses a risky continuation and offers no guarantee of protection.",
+    "expected_tendency": "Weighs investigation goals against safety and conditional trust.",
+    "anti_case": "Treats later alliance as guaranteed at initial setup.",
+    "canon_outcome_as_instruction": false
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "tg.case.hyakutarou-onigawara.assist-vulnerable-person",
+  "actor_id": "actor.hyakutarou-onigawara",
+  "primary_actor_id": "actor.hyakutarou-onigawara",
+  "title": "assist vulnerable person",
+  "context": "An apparent rival needs help.",
+  "observed_actions": "Assists Maria and becomes socially invested in her welfare.",
+  "observed_result": "Changes relationship dynamics and exposure to the other team's strategy.",
+  "epistemic_limits": "Appearance of vulnerability may be misleading.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_10",
+    "locator": "HIDE_SEEK",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social",
+    "ethics"
+  ],
+  "information_available": "An apparent rival needs help.",
+  "counterfactual_test": "A competitor unexpectedly needs help during a contest. May prioritize helping while balancing existing team obligations. Appearance of vulnerability may be misleading.",
+  "topics": [
+    "social",
+    "ethics"
+  ],
+  "evidence_refs": [
+    "tg.ev.hyakutarou-onigawara.assist-vulnerable-person"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "transfer": {
+    "scenario": "A competitor unexpectedly needs help during a contest.",
+    "expected_tendency": "May prioritize helping while balancing existing team obligations.",
+    "anti_case": "Appearance of vulnerability may be misleading.",
+    "canon_outcome_as_instruction": false
+  }
+}

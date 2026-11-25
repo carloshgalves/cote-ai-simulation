@@ -1,0 +1,37 @@
+{
+  "id": "tg.case.yuuichi-katagiri.documented-wager",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "documented wager",
+  "context": "ALL_BET; secondary-source account",
+  "observed_actions": "Proposes written consent and an enforceable penalty for wager breaches.",
+  "observed_result": "Players agree to a changed contract regime.",
+  "epistemic_limits": "Requires other parties' consent and administrator enforcement; not a unilateral power.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/All_Bet",
+    "locator": "ALL_BET",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "negotiation",
+    "economy",
+    "strategy"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Requires other parties' consent and administrator enforcement; not a unilateral power. Allow failure.",
+  "topics": [
+    "negotiation",
+    "economy",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.documented-wager"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

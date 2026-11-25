@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.shiho-sawaragi.class-organizer",
+  "actor_id": "actor.shiho-sawaragi",
+  "primary_actor_id": "actor.shiho-sawaragi",
+  "title": "class organizer",
+  "context": "PRE_GAME; secondary-source account",
+  "observed_actions": "Serves as class vice-president and informal organizer.",
+  "observed_result": "Other students rely on her organizational role.",
+  "epistemic_limits": "Does not imply authority in private contests.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Shiho_Sawaragi",
+    "locator": "PRE_GAME",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "leadership",
+    "social"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Does not imply authority in private contests. Allow failure.",
+  "topics": [
+    "leadership",
+    "social"
+  ],
+  "evidence_refs": [
+    "tg.ev.shiho-sawaragi.class-organizer"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

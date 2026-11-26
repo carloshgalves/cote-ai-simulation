@@ -39,6 +39,7 @@ const HierarchicalVersion = 22
 const SegmentedVersion = 23
 const WholeGradeVersion = 24
 const SocialVersion = 25
+const FidelityVersion = 26
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -144,6 +145,7 @@ type Mind struct {
  LastDeliberationMinute int64 `json:"last_deliberation_minute,omitempty"`
  OpportunityDay int64 `json:"opportunity_day,omitempty"`
  OpportunityCount int `json:"opportunity_count,omitempty"`
+ PracticeMinutes map[string]int64 `json:"practice_minutes,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -163,6 +165,8 @@ type Journal struct {
  WorldSeed string `json:"world_seed,omitempty"`
  Population map[string]PopulationMember `json:"population,omitempty"`
  Identities map[string]CharacterIdentity `json:"identities,omitempty"`
+ Guidance map[string][]BehaviorGuidance `json:"guidance,omitempty"`
+ PackInventory []PackCoverage `json:"pack_inventory,omitempty"`
 }
 type State struct {
 	Round int `json:"round"`
@@ -207,6 +211,8 @@ type Context struct {
  Body *PilotBody `json:"body,omitempty"`
  Social map[string]SocialBond `json:"social,omitempty"`
  Plans map[string]PlanChange `json:"plans,omitempty"`
+ BehaviorGuidance []string `json:"behavior_guidance,omitempty"`
+ PracticeMinutes map[string]int64 `json:"practice_minutes,omitempty"`
 }
 type Model interface {
 	Decide(context.Context, Context) (Decision,error)
@@ -244,7 +250,7 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion&&j.Version!=ObservationVersion&&j.Version!=VeteranVersion&&j.Version!=PhysicalVersion&&j.Version!=CompactContextVersion&&j.Version!=CalibratedVersion&&j.Version!=CrossoverVersion&&j.Version!=CalendarVersion&&j.Version!=PortfolioVersion&&j.Version!=MultiresolutionVersion&&j.Version!=HierarchicalVersion&&j.Version!=SegmentedVersion&&j.Version!=WholeGradeVersion&&j.Version!=SocialVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion&&j.Version!=ObservationVersion&&j.Version!=VeteranVersion&&j.Version!=PhysicalVersion&&j.Version!=CompactContextVersion&&j.Version!=CalibratedVersion&&j.Version!=CrossoverVersion&&j.Version!=CalendarVersion&&j.Version!=PortfolioVersion&&j.Version!=MultiresolutionVersion&&j.Version!=HierarchicalVersion&&j.Version!=SegmentedVersion&&j.Version!=WholeGradeVersion&&j.Version!=SocialVersion&&j.Version!=FidelityVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
 	if j.Version>=WorldVersion&&len(j.WorldSeed)!=64{return State{},errors.New("invalid world seed")}
  if j.Version>=CognitionVersion{if err:=validateIdentities(j);err!=nil{return State{},err}}
  s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}

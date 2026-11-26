@@ -106,7 +106,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 	if j.Version>=ConversationVersion{
 		for _,x:=range choices{
 			m:=out.Minds[x.Actor]
-			if m.Conversation!=nil&&(x.Decision.Action!="talk"||x.Decision.Target!=m.Conversation.Peer){closeConversation(&out,x.Actor)}
+			if m.Conversation!=nil&&(x.Decision.Action!="talk"||x.Decision.Target!=m.Conversation.Peer){if j.Version>=SocialVersion{appendEvent(&out,Event{Kind:"conversation_end",Actor:x.Actor,Target:m.Conversation.Peer,Text:"Encerrou a conversa para realizar outra ação.",Audience:[]string{x.Actor,m.Conversation.Peer}})};closeConversation(&out,x.Actor)}
 		}
 	}
 	executed:=choices
@@ -206,7 +206,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 				m.Conversation.Turn=a.Target;m.Conversation.Turns++
 				if j.Version>=WorldVersion{
 					m.Conversation.Stale=dialogueStale(out.Events,id,a.Target,a.Text,m.Conversation.Stale)
-					if m.Conversation.Turns>=12||m.Conversation.Stale>=2||out.Minute-m.Conversation.Started>=25{
+					if shouldEndDialogue(j,out,id,a.Target,m.Conversation){
 						out.Minds[id]=m;closeConversation(&out,id);m=out.Minds[id]
 						appendEvent(&out,Event{Kind:"conversation_end",Actor:id,Target:a.Target,Text:"Conversa encerrada por duração ou repetição; reavalie a abordagem.",Audience:[]string{id,a.Target}})
 						m.WakeReason="Conversa encerrada";break

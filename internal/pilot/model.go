@@ -38,6 +38,7 @@ const MultiresolutionVersion = 21
 const HierarchicalVersion = 22
 const SegmentedVersion = 23
 const WholeGradeVersion = 24
+const SocialVersion = 25
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -100,6 +101,7 @@ type Decision struct {
 	Source string `json:"source,omitempty"`
 	WaitMinutes int `json:"wait_minutes,omitempty"`
 	Discovery *Discovery `json:"discovery,omitempty"`
+ Assessment *SocialAssessment `json:"assessment,omitempty"`
 
 }
 type Event struct {
@@ -242,7 +244,7 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion&&j.Version!=ObservationVersion&&j.Version!=VeteranVersion&&j.Version!=PhysicalVersion&&j.Version!=CompactContextVersion&&j.Version!=CalibratedVersion&&j.Version!=CrossoverVersion&&j.Version!=CalendarVersion&&j.Version!=PortfolioVersion&&j.Version!=MultiresolutionVersion&&j.Version!=HierarchicalVersion&&j.Version!=SegmentedVersion&&j.Version!=WholeGradeVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion&&j.Version!=ObservationVersion&&j.Version!=VeteranVersion&&j.Version!=PhysicalVersion&&j.Version!=CompactContextVersion&&j.Version!=CalibratedVersion&&j.Version!=CrossoverVersion&&j.Version!=CalendarVersion&&j.Version!=PortfolioVersion&&j.Version!=MultiresolutionVersion&&j.Version!=HierarchicalVersion&&j.Version!=SegmentedVersion&&j.Version!=WholeGradeVersion&&j.Version!=SocialVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
 	if j.Version>=WorldVersion&&len(j.WorldSeed)!=64{return State{},errors.New("invalid world seed")}
  if j.Version>=CognitionVersion{if err:=validateIdentities(j);err!=nil{return State{},err}}
  s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
@@ -329,7 +331,7 @@ func evidence(c Context,id string) (Event,bool) {
 func validateDecision(c Context,d Decision) error {
 	if (d.Source!=""&&!validText(d.Source,300)) || (d.Note!=""&&!validText(d.Note,500)) || (d.Reason!=""&&!validText(d.Reason,300)) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
 	if len(d.Ignored)>8 {return errors.New("invalid ignored field count")}
-	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","discovery","campo extra"},key){return errors.New("invalid ignored field")}}
+	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","discovery","assessment","campo extra"},key){return errors.New("invalid ignored field")}}
 	if d.WaitMinutes!=0&&(c.Version<ScheduledVersion||d.Action!="wait"||d.WaitMinutes<1||d.WaitMinutes>60){return errors.New("invalid wait duration")}
 	worldAction:=c.Version>=WorldVersion&&isWorldAction(d.Action)
 	if d.Action!="wait" && d.Action!="observe" && d.Action!="move" && d.Action!="talk"&&!worldAction {return errors.New("unsupported action")}
@@ -372,6 +374,7 @@ func validateDecision(c Context,d Decision) error {
   if c.Version>=ConversationVersion&&previous!=nil&&strings.Join(previous.Steps,"\x00")!=strings.Join(d.Plan.Steps,"\x00")&&!validText(d.Plan.ProgressNote,240){return errors.New("explique a mudança ou conclusão do plano")}
 		for _, step:=range d.Plan.Steps {if !validText(step,180){return errors.New("invalid plan step")}}
 	}
+	if d.Assessment!=nil{if c.Version<SocialVersion{return errors.New("social assessment requires v25")};if err:=validateAssessment(c,*d.Assessment);err!=nil{return err}}
 	if d.Relation!=nil {
 		r:=d.Relation;e,ok:=evidence(c,r.Evidence)
 		if !ok||r.Person==c.Self.ID||r.Delta < -1||r.Delta>1||r.Delta==0||
@@ -510,6 +513,7 @@ func Digest(j Journal) string {
 func applyCognition(j Journal,out *State,actor string,m Mind,d Decision)Mind {
 		if len(d.Ignored)>0{appendEvent(out,Event{Kind:"ignored_cognition",Actor:actor,Text:strings.Join(d.Ignored,", "),Audience:[]string{}})}
 		oldMind:=clone(m)
+  if j.Version>=SocialVersion&&d.Assessment!=nil{applyAssessment(out,actor,&m,*d.Assessment)}
 		if j.Version>=WorldVersion&&d.Discovery!=nil{
 			found:=false;for _,old:=range m.Discoveries{if old.Evidence==d.Discovery.Evidence&&old.Text==d.Discovery.Text{found=true}}
 			if !found{m.Discoveries=append(m.Discoveries,*d.Discovery);if len(m.Discoveries)>24{m.Discoveries=m.Discoveries[len(m.Discoveries)-24:]};appendEvent(out,Event{Kind:"discovery",Actor:actor,Text:d.Discovery.Text,Evidence:d.Discovery.Evidence,Audience:[]string{actor}})}

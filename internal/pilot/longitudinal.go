@@ -75,7 +75,8 @@ func auditYear(j Journal,state State)(YearAudit,error){
   slot,ok:=slots[res.ID];if !ok||seenExams[res.ID]{return a,fmt.Errorf("unexpected exam result %s",res.ID)};seenExams[res.ID]=true
   expected:=map[string]bool{};for _,id:=range slot.Group{expected[id]=true;if known(j.Profiles,id){a.NamedParticipantSlots++}}
   actual:=map[string]bool{};submitted:=map[string]bool{};valid:=len(expected)==160&&len(res.GroupResults)==len(slot.Groups)
-  for _,g:=range res.GroupResults{if j.Version>=ClassPollVersion&&(g.Outcome==0||g.Poll!=nil&&g.Poll.Status!="resolved"){valid=false};for _,id:=range g.Group{if actual[id]||!expected[id]{valid=false};actual[id]=true};for _,id:=range g.Submitted{if submitted[id]||!has(g.Group,id){valid=false;continue};submitted[id]=true;if known(j.Profiles,id){a.NamedSubmissions++}else{a.GenericSubmissions++}}}
+  if j.Version>=ClassPollVersion&&res.Kind!=slot.Kind{valid=false}
+  for i,g:=range res.GroupResults{if j.Version>=ClassPollVersion&&!qualifiedV29Group(slot,i,g){valid=false};for _,id:=range g.Group{if actual[id]||!expected[id]{valid=false};actual[id]=true};for _,id:=range g.Submitted{if submitted[id]||!has(g.Group,id){valid=false;continue};submitted[id]=true;if known(j.Profiles,id){a.NamedSubmissions++}else{a.GenericSubmissions++}}}
   if valid&&len(actual)==len(expected){a.CompleteGradeExams++}
  }
  a.YearComplete=j.Version>=WholeGradeVersion&&state.Minute>=endMinute(j.Version)&&a.PlannedExams==18&&a.PublishedExams==18
@@ -84,4 +85,37 @@ func auditYear(j Journal,state State)(YearAudit,error){
  // academic performance and independent review are separate gates.
  a.TransitionAllowed=false
  return a,nil
+}
+
+// A published result is not necessarily a qualified exam. In particular,
+// Kokkuri uses outcome 2 for both terminal failures and omitted ballots;
+// the annual audit must distinguish complete play from invalid rounds.
+// This is an audit-only check; old journals and scoring are unchanged.
+func qualifiedV29Group(slot ExamSlot,index int,g GroupResult)bool{
+ if index<0||index>=len(slot.Groups)||g.ID!=fmt.Sprintf("%s-g%02d",slot.ID,index+1)||!sameParticipantSet(slot.Groups[index],g.Group){return false}
+ switch slot.Kind{
+ case "kokkuri":
+  if g.Poll!=nil||len(g.Rounds)<1||len(g.Rounds)>5||!sameParticipantSet(g.Group,g.Submitted){return false}
+  for i,rd:=range g.Rounds{
+   if rd.Number!=i+1||i+1>=len(slot.Boundaries)||rd.At!=slot.Boundaries[i+1]||!sameParticipantSet(g.Group,rd.Submitted){return false}
+   if rd.Answer=="yes"{return i==len(g.Rounds)-1&&g.Outcome==1}
+   if rd.Answer!="no"{return false}
+  }
+  return len(g.Rounds)==5&&g.Outcome==2
+ case "poll":
+  if g.Outcome!=1||g.Poll==nil||g.Poll.Status!="resolved"||!sameParticipantSet(g.Group,g.Submitted){return false}
+  for _,id:=range g.Group{if len(g.Poll.Votes[id])!=7{return false}}
+  return g.Poll.Winner!=g.Poll.Loser&&has(g.Group,g.Poll.Winner)&&has(g.Group,g.Poll.Loser)
+ case "vip":
+  // Omission is a legal terminal outcome in Zodiac, unlike Kokkuri.
+  return g.Poll==nil&&g.Outcome>=1&&g.Outcome<=4
+ default:return false
+ }
+}
+func sameParticipantSet(expected,actual []string)bool{
+ if len(expected)==0||len(expected)!=len(actual){return false}
+ seen:=map[string]bool{}
+ for _,id:=range expected{if seen[id]{return false};seen[id]=true}
+ for _,id:=range actual{if !seen[id]{return false};delete(seen,id)}
+ return len(seen)==0
 }

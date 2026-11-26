@@ -42,6 +42,7 @@ const SocialVersion = 25
 const FidelityVersion = 26
 const SchoolExamVersion = 27
 const InstitutionalVersion = 28
+const ClassPollVersion = 29
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -252,7 +253,7 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion&&j.Version!=ObservationVersion&&j.Version!=VeteranVersion&&j.Version!=PhysicalVersion&&j.Version!=CompactContextVersion&&j.Version!=CalibratedVersion&&j.Version!=CrossoverVersion&&j.Version!=CalendarVersion&&j.Version!=PortfolioVersion&&j.Version!=MultiresolutionVersion&&j.Version!=HierarchicalVersion&&j.Version!=SegmentedVersion&&j.Version!=WholeGradeVersion&&j.Version!=SocialVersion&&j.Version!=FidelityVersion&&j.Version!=SchoolExamVersion&&j.Version!=InstitutionalVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion&&j.Version!=ObservationVersion&&j.Version!=VeteranVersion&&j.Version!=PhysicalVersion&&j.Version!=CompactContextVersion&&j.Version!=CalibratedVersion&&j.Version!=CrossoverVersion&&j.Version!=CalendarVersion&&j.Version!=PortfolioVersion&&j.Version!=MultiresolutionVersion&&j.Version!=HierarchicalVersion&&j.Version!=SegmentedVersion&&j.Version!=WholeGradeVersion&&j.Version!=SocialVersion&&j.Version!=FidelityVersion&&j.Version!=SchoolExamVersion&&j.Version!=InstitutionalVersion&&j.Version!=ClassPollVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
 	if j.Version>=WorldVersion&&len(j.WorldSeed)!=64{return State{},errors.New("invalid world seed")}
  if j.Version>=CognitionVersion{if err:=validateIdentities(j);err!=nil{return State{},err}}
  s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
@@ -286,6 +287,7 @@ func actorContext(j Journal,s State,id string) Context {
 	c:=Context{OwnCanon:canonFor(id),SchoolYear:1,PeerRelationship:"Todos os participantes são alunos do primeiro ano; nenhuma senioridade decorre da classe.",Version:j.Version,CanObserve:true,Thought:m.Thought,LastAction:m.LastAction,Round:s.Round+1,Minute:s.Minute,Location:m.Location,Locations:clone(locations),Goals:clone(m.Goals),Beliefs:clone(m.Beliefs),Relations:clone(m.Relations),Plan:clone(m.Plan),Memory:[]Event{},People:[]Person{},Present:[]Presence{}}
 	for _, p:=range j.Profiles {
 		if p.ID==id {c.Self=clone(p);continue}
+  if expelled(s,p.ID){continue}
 		person:=Person{p.ID,p.Name,p.Class}
 		c.People=append(c.People,person)
 		if s.Minds[p.ID].Location==m.Location{

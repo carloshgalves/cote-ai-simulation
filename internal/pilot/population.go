@@ -77,7 +77,7 @@ func initializePopulation(j Journal,s *State){
 func publicPopulation(j Journal,s State)map[string]PublicMember{
  if j.Version<PopulationVersion{return nil}
  out:=map[string]PublicMember{}
- for id,a:=range j.Population{out[id]=PublicMember{Role:a.Role,Year:a.Year,Tier:s.Minds[id].Tier}}
+ for id,a:=range j.Population{role:=a.Role;if expelled(s,id){role="former-student"};out[id]=PublicMember{Role:role,Year:a.Year,Tier:s.Minds[id].Tier}}
  return out
 }
 func projectPopulation(j Journal,s State,id string,c *Context){
@@ -174,6 +174,7 @@ func engage(j Journal,s *State,from,to string){
 func updatePopulation(j Journal,s *State){
  for _,id:=range ids(j.Profiles){
   a,m:=j.Population[id],s.Minds[id]
+  if expelled(*s,id){continue}
   if a.Core||a.InitialTier==FullTier||m.Conversation!=nil{continue}
   old:=m.Tier
   if m.Tier==FullTier&&s.Minute-m.LastEngagement>=2880{m.Tier=LightTier;m.Engagements=0}

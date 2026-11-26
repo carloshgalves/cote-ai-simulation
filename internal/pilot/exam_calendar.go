@@ -54,6 +54,9 @@ func recordGeneratedVotes(s *State,choices []Chosen){
  e:=s.World.Exam;if e==nil||e.Kind!="minority"||e.Outcome!=0||e.Phase=="settled"{return}
  for _,c:=range choices{
   if c.Decision.Action!="vote"||!has(e.Group,c.Actor)||e.Submitted[c.Actor]||!has([]string{"a","b"},c.Decision.Target){continue}
+  // JSON cloning omits an empty Ballots map; initialize only on an accepted vote.
+  if e.Ballots==nil{e.Ballots=make(map[string]string)}
+  if e.Submitted==nil{e.Submitted=make(map[string]bool)}
   e.Submitted[c.Actor]=true;e.Ballots[c.Actor]=c.Decision.Target
   appendEvent(s,Event{Kind:"exam",Actor:c.Actor,Text:"Voto privado recebido pela escola.",Audience:[]string{c.Actor}})
  }

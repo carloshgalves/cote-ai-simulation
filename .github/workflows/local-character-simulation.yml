@@ -13,7 +13,7 @@ on:
       - 'data/canon/catalog.go'
       - 'data/external-worlds/tomodachi-game/**'
   push:
-    branches: ['feat/pilot-v29-class-poll']
+    branches: ['feat/pilot-v29-class-poll', 'experiment/zodiac-day2']
     paths:
       - 'internal/pilot/**'
       - 'cmd/cote-local/**'

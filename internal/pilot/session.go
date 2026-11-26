@@ -29,6 +29,7 @@ type Session struct {
 	state State
 	model Model
 	lock *os.File
+ segmentHead string
 }
 
 type Progress struct {
@@ -97,6 +98,7 @@ func OpenCalendar(path,name string,model Model)(*Session,error){return openVersi
 func OpenPortfolio(path,name string,model Model)(*Session,error){return openVersion(path,name,model,PortfolioVersion)}
 func OpenMultiresolution(path,name string,model Model)(*Session,error){return openVersion(path,name,model,MultiresolutionVersion)}
 func OpenHierarchical(path,name string,model Model)(*Session,error){return openVersion(path,name,model,HierarchicalVersion)}
+func OpenSegmented(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SegmentedVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
@@ -129,9 +131,10 @@ func openVersion(path,name string,model Model,version int) (*Session,error) {
 		j,err=decodeStrict[Journal](raw);if err!=nil{return nil,errors.New("invalid save JSON")}
 		if _,routed:=model.(*Router);j.Model!=name&&!routed{return nil,errors.New("save uses a different model; select its original model or a new save")}
 	}
-	s,err:=Replay(j);if err!=nil{return nil,err}
+	var state State;var head string
+ if j.Version>=SegmentedVersion{j,state,head,err=loadSegments(path,j)}else{state,err=Replay(j)};if err!=nil{return nil,err}
 	opened=true
-	return &Session{path:path,journal:j,state:s,model:model,lock:lock},nil
+	return &Session{path:path,journal:j,state:state,model:model,lock:lock,segmentHead:head},nil
 }
 
 func (s *Session) Close() error {
@@ -206,6 +209,7 @@ func (s *Session) step(ctx context.Context,expected int,allowModel bool) (result
 	}()
 	var err error
 	r:=Round{Number:expected+1,Choices:append([]Chosen{},s.pending...)}
+ if journal.Version>=SegmentedVersion{if rt,ok:=s.model.(*Router);ok&&rt.parallelEligible(){choices,e:=s.parallelChoices(ctx,journal,state,order[len(r.Choices):]);r.Choices=append(r.Choices,choices...);s.mu.Lock();s.pending=clone(r.Choices);s.progress.Completed=len(r.Choices);s.progress.Choices=clone(r.Choices);s.mu.Unlock();if e!=nil{return Snapshot{},e}}}
 	for _, id:=range order[len(r.Choices):] {
 		if err:=ctx.Err();err!=nil{return Snapshot{},err}
 		var view Context
@@ -264,7 +268,7 @@ func (s *Session) step(ctx context.Context,expected int,allowModel bool) (result
 	defer s.mu.Unlock()
 	if err:=ctx.Err();err!=nil{return Snapshot{},err}
 	s.progress.Phase="saving"
-	if err:=replaceJournal(s.path,j);err!=nil{return Snapshot{},errors.New("falha ao salvar rodada; estado não publicado")}
+	if err:=s.commitRounds(j,next,[]Round{r});err!=nil{return Snapshot{},fmt.Errorf("falha ao salvar rodada: %w",err)}
 	s.journal=j;s.state=next;s.pending=nil
 	return s.snapshot(),nil
 }

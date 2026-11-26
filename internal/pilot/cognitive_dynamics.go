@@ -17,6 +17,11 @@ type SocialBond struct{
  LastMinute int64 `json:"last_minute"`
  SharedLeisureDays int `json:"shared_leisure_days,omitempty"`
  LastSharedLeisureDay int64 `json:"last_shared_leisure_day,omitempty"`
+ Affinity int `json:"affinity,omitempty"`
+ Rivalry int `json:"rivalry,omitempty"`
+ Esteem int `json:"esteem,omitempty"`
+ Affection int `json:"affection,omitempty"`
+ AssessmentEvidence map[string]bool `json:"assessment_evidence,omitempty"`
 }
 func clampMeter(x int)int{if x<0{return 0};if x>1000{return 1000};return x}
 func recognizes(j Journal,id,other string)bool{for _,f:=range j.Identities[id].Background{if f.Person==other{return true}};return false}
@@ -79,7 +84,7 @@ func recordMeeting(s *State,mt Meeting){
 func planHorizon(p PlanChange)string{if p.Horizon==""{return "short"};return p.Horizon}
 func validateHorizon(c Context,p PlanChange)error{
  if !has([]string{"immediate","short","medium","long"},planHorizon(p)){return fmt.Errorf("invalid plan horizon")}
- if p.Deadline!=0&&(p.Deadline<=c.Minute||p.Deadline>WorldEnd){return fmt.Errorf("invalid plan deadline")}
+ if p.Deadline!=0&&(p.Deadline<=c.Minute||p.Deadline>endMinute(c.Version)){return fmt.Errorf("invalid plan deadline")}
  if p.Scope!=""&&p.Scope!="general"&&p.Scope!="vip"{return fmt.Errorf("invalid plan scope")}
  if p.Scope=="vip"&&(c.School==nil||c.School.Exam==nil||c.School.Exam.Phase=="settled"){return fmt.Errorf("VIP plan requires an active exam")}
  return nil

@@ -101,6 +101,7 @@ func OpenMultiresolution(path,name string,model Model)(*Session,error){return op
 func OpenHierarchical(path,name string,model Model)(*Session,error){return openVersion(path,name,model,HierarchicalVersion)}
 func OpenSegmented(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SegmentedVersion)}
 func OpenWholeGrade(path,name string,model Model)(*Session,error){return openVersion(path,name,model,WholeGradeVersion)}
+func OpenSocial(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SocialVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}

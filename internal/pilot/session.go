@@ -104,6 +104,7 @@ func OpenWholeGrade(path,name string,model Model)(*Session,error){return openVer
 func OpenSocial(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SocialVersion)}
 func OpenFidelity(path,name string,model Model)(*Session,error){return openVersion(path,name,model,FidelityVersion)}
 func OpenSchoolExams(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SchoolExamVersion)}
+func OpenInstitutional(path,name string,model Model)(*Session,error){return openVersion(path,name,model,InstitutionalVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}

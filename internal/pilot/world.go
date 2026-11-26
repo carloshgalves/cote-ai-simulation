@@ -67,6 +67,7 @@ type SchoolWorld struct{
  ExamGroups []*VIPExam `json:"exam_groups,omitempty"`
  GradePoints map[string]int64 `json:"grade_points,omitempty"`
  GenericWallets map[string]int64 `json:"generic_wallets,omitempty"`
+ Institutions *InstitutionalState `json:"institutions,omitempty"`
 }
 type ExamView struct{
  Phase string `json:"phase"`
@@ -90,6 +91,7 @@ func worldLocations(id string)[]string{return append(clone(locations),"shop","ca
 func initializeWorld(j Journal,s *State){
  s.World=&SchoolWorld{ClassPoints:map[string]int64{"A":1000,"B":1000,"C":1000,"D":1000},Ledger:[]LedgerEntry{},Meetings:[]Meeting{}}
  if j.Version>=WholeGradeVersion{initializeGradeEconomy(j,s)}
+ if j.Version>=InstitutionalVersion{s.World.Institutions=newInstitutionalState()}
  if j.Version>=CalendarVersion{s.World.Calendar=generateExamCalendar(j)}
  for _,id:=range ids(j.Profiles){
   m:=s.Minds[id]
@@ -341,7 +343,8 @@ func advanceWorld(j Journal,s *State){
   s.World.Meetings[i]=mt
  }
  announce:=func(t string){appendEvent(s,Event{Kind:"announcement",Actor:"school",Text:t,Audience:ids(j.Profiles)});for _,id:=range ids(j.Profiles){wakeWaiting(s,id,"Novo anúncio escolar")}}
- if j.Version>=WholeGradeVersion{if advanceWholeGradeExam(j,s,announce){return}}else if j.Version>=CalendarVersion&&advanceGeneratedExam(j,s,announce){return}
+ if j.Version>=InstitutionalVersion&&now%1440==480{advanceInstitutions(j,s)}
+ if j.Version>=WholeGradeVersion{if advanceWholeGradeExam(j,s,announce)&&j.Version<InstitutionalVersion{return}}else if j.Version>=CalendarVersion&&advanceGeneratedExam(j,s,announce){return}
  base:=examBase(j.Version)
  if j.Version>=CalendarVersion{base=-10000}
  switch now{

@@ -1,0 +1,5 @@
+# V28 external institutions and annual plan
+
+Nine provisional external actors receive bounded resources and a daily deterministic decision policy, propose requests and respond to addressed requests. No school enrollment, authority transfer, student record access or automatic canonical event. The owner snapshot exposes the institutional state; a narrow perspective projection is defined and tested. Resources and influence are experimental units, not canon measurements; these policies are not LLM cognition and do not enact policy/funding/meeting consequences beyond the request ledger. Actors with uncertain current status are assumed active in this alternate timeline only for this experiment.
+
+Annual calendar returns 18 non-overlapping slots, six per grade, deterministic seed selection among Kokkuri and Zodiac; new year scope and generic final VIP participation. Only two admitted adaptations are scheduled; additional reference resolvers remain unintegrated. Calendar and institution tests authored, not run. V28 processes school announcements alongside exam boundaries; old journals preserve original semantics. No full-year or fidelity qualification claim.

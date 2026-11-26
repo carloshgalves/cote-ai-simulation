@@ -15,6 +15,7 @@ type ExamSlot struct {
  Title string `json:"title,omitempty"`
  Source string `json:"source,omitempty"`
  Years []int `json:"years,omitempty"`
+ Groups [][]string `json:"groups,omitempty"`
 }
 type ExamResult struct {
  ID string `json:"id"`
@@ -24,12 +25,14 @@ type ExamResult struct {
  Outcome int `json:"outcome"`
  Submitted []string `json:"submitted"`
  PublishedAt int64 `json:"published_at"`
+ GroupResults []GroupResult `json:"group_results,omitempty"`
 }
 
 // A deterministic synthetic academic-year calendar. Early events cannot
 // disclose the school's class-point mechanics. Participants rotate across
 // all first-year individualized students rather than only the six core.
 func generateExamCalendar(j Journal)[]ExamSlot{
+ if j.Version>=WholeGradeVersion{return generateWholeGradeCalendar(j)}
  if j.Version>=PortfolioVersion{return generatePortfolioCalendar(j)}
  students:=[]string{}
  for _,id:=range ids(j.Profiles){if isStudent(j,id)&&j.Population[id].Year==1{students=append(students,id)}}

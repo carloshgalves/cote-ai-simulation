@@ -12,7 +12,7 @@ import (
 func quietRestDuration(j Journal,s State,id string)int64{
  m:=s.Minds[id]
  if m.Location!="dormitory-"+id||m.Body==nil||m.PendingStimulus!=""||m.Conversation!=nil||m.NextDeliberation>0||m.Plan!=nil||len(m.Plans)>0{return 60}
- if e:=s.World.Exam;e!=nil&&e.Outcome==0&&has(e.Group,id){return 60}
+ if e:=examFor(s,id);e!=nil&&e.Outcome==0&&has(e.Group,id){return 60}
  for _,mt:=range s.World.Meetings{if (mt.Status=="pending"||mt.Status=="accepted")&&(mt.Host==id||mt.Guest==id){return 60}}
  for _,peer:=range ids(j.Profiles){if peer==id{continue};p:=s.Minds[peer];if p.Location==m.Location||p.Activity!=nil&&p.Activity.Kind=="move"&&p.Activity.Target==m.Location{return 60}}
  n:=int64(120)

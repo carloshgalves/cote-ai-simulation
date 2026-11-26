@@ -20,6 +20,17 @@ func annualSchoolCalendar(j Journal)[]ExamSlot{
   counts[year][kind]++
   slot:=buildAnnualSlot(j,fmt.Sprintf("exam-%02d",i+1),kind,year,day);out=append(out,slot)
  }
+ if j.Scenario==ScenarioZodiacDay2{
+  // Keep 18 nonoverlapping slots and six exams per grade. Swap the
+  // first grade-one allocation into slot 1; leave the old slot 1 grade
+  // at the displaced slot's original date. All later slots are unchanged.
+  for i,slot:=range out{
+   if len(slot.Years)!=1||slot.Years[0]!=1{continue}
+   if i!=0{first:=out[0];out[i]=buildAnnualSlot(j,slot.ID,first.Kind,first.Years[0],slot.Day)}
+   out[0]=buildAnnualSlot(j,out[0].ID,"vip",1,2)
+   break
+  }
+ }
  return out
 }
 func buildAnnualSlot(j Journal,id,kind string,year int,day int64)ExamSlot{

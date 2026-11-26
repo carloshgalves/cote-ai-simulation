@@ -149,6 +149,7 @@ func main() {
 	})
 	catalog,packs,err:=loadTomodachiCatalog();if err!=nil{log.Fatal(err)}
 	registerTomodachiEndpoints(mux,catalog,packs)
+ if err:=registerUniverseCatalog(mux);err!=nil{log.Fatal(err)}
 	mux.HandleFunc("GET /api/year-audit",func(w http.ResponseWriter,r *http.Request){audit,err:=session.AuditYear();if err!=nil{fail(w,409,err);return};reply(w,200,audit)})
  mux.HandleFunc("GET /api/state",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Snapshot())})
 	mux.HandleFunc("GET /api/progress",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Progress())})

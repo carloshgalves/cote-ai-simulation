@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-//go:embed consolidated/characters/*.json
+//go:embed consolidated/characters/*.json consolidated/exams/*.json
 var corpus embed.FS
 
 //go:embed rag/abstract-guidance-v1.json
@@ -61,4 +61,14 @@ func Load() (map[string]Pack, error) {
 		out[p.ID]=p
 	}
 	return out,nil
+}
+
+type ExamReference struct{
+ ID string `json:"exam_id"`
+ Name string `json:"name"`
+ Authority string `json:"authority"`
+}
+func ExamReferences()([]ExamReference,error){
+ files,err:=fs.Glob(corpus,"consolidated/exams/*.json");if err!=nil{return nil,err}
+ out:=[]ExamReference{};for _,file:=range files{raw,err:=corpus.ReadFile(file);if err!=nil{return nil,err};var x ExamReference;if err:=json.Unmarshal(raw,&x);err!=nil{return nil,err};if x.ID==""||x.Name==""{return nil,fmt.Errorf("invalid exam reference: %s",file)};out=append(out,x)};return out,nil
 }

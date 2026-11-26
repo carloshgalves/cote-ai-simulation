@@ -40,7 +40,10 @@ func main() {
  until:=flag.String("until","","first-exam, first-result, year-end (may call configured models)")
  auditOnly:=flag.Bool("audit-only",false,"verify current journal and emit longitudinal audit without model calls")
  admissions:=flag.String("admissions","","optional private next-year candidate file for eligibility validation only")
-	flag.Parse()
+ scenario:=flag.String("scenario","","optional experiment: zodiac-day2 (new save or matching experiment)")
+ seed:=flag.String("seed","","optional repeatable seed label for the selected experiment")
+ 	flag.Parse()
+ if *seed!=""&&*scenario==""{log.Fatal("-seed requires -scenario")}
 	key:=os.Getenv("COTE_API_KEY")
 	switch *provider {
 	case "ollama":
@@ -67,7 +70,9 @@ func main() {
 		kind:=*provider;if kind=="custom"{kind="openai-compatible"}
 		if _,err:=router.Add(pilot.RouteInput{Provider:kind,Endpoint:*endpoint,Model:*modelName,Key:key,Format:"auto"});err!=nil{log.Fatal(err)}
 	}
-	session,err:=pilot.OpenClassPoll(*save,"router",router);if err!=nil{log.Fatal(err)}
+ var session *pilot.Session
+ if *scenario!=""{session,err=pilot.OpenClassPollScenario(*save,"router",router,*scenario,*seed)}else{session,err=pilot.OpenClassPoll(*save,"router",router)}
+ if err!=nil{log.Fatal(err)}
 	defer session.Close()
 	ctx,cancel:=signal.NotifyContext(context.Background(),os.Interrupt,syscall.SIGTERM);defer cancel()
 	if *admissions!=""{if err:=pilot.ValidateNextAdmissions(*admissions,session.Snapshot());err!=nil{log.Fatal(err)};fmt.Fprintln(os.Stderr,"Private admissions validated; not admitted before annual acceptance.")}

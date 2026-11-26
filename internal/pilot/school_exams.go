@@ -14,6 +14,7 @@ type SchoolExamRound struct{
  Submitted []string `json:"submitted"`
 }
 func schoolExamCalendar(j Journal)[]ExamSlot{
+ if j.Version>=InstitutionalVersion{return annualSchoolCalendar(j)}
  out:=[]ExamSlot{}
  for i,kind:=range []string{"kokkuri","vip"}{
   day:=int64(3);year:=1;size:=5;title:="Kokkuri — incentivos e confiança";source:="Tomodachi Game: modelo de referência adaptado à escola"
@@ -98,7 +99,7 @@ func advanceSchoolExam(j Journal,s *State,announce func(string))bool{
   }
   if slot.Kind=="kokkuri"{for _,e:=range s.World.ExamGroups{resolveSchoolKokkuri(j,s,e)};return true}
   if idx==len(bs)-3{for _,e:=range s.World.ExamGroups{if e.Outcome==0{e.Phase="final";for _,id:=range e.Group{if known(j.Profiles,id){stimulate(s,id,"Janela final Zodiac/VIP")}}}};announce("Janela final Zodiac/VIP");return true}
-  if idx==len(bs)-2{for _,e:=range s.World.ExamGroups{if e.Outcome==0{s.World.Exam=e;settleExam(j,s,2,"")}};s.World.Exam=nil;announce("Submissões encerradas: "+slot.ID);return true}
+  if idx==len(bs)-2{for _,e:=range s.World.ExamGroups{if e.Outcome==0{s.World.Exam=e;if j.Version>=InstitutionalVersion{applyGenericVIPFinal(j,s,e)};if e.Outcome==0{settleExam(j,s,2,"")}}};s.World.Exam=nil;announce("Submissões encerradas: "+slot.ID);return true}
   // Discussions are scheduled reminders. Physical attendance/channel
   // enforcement needs a separate adapter; never fabricate a conversation.
   if s.Minute%1440==780||s.Minute%1440==1200{for _,e:=range s.World.ExamGroups{if e.Outcome==0{for _,id:=range e.Group{if known(j.Profiles,id){stimulate(s,id,"Janela de discussão Zodiac/VIP")}}}};announce("Janela de discussão Zodiac/VIP")}

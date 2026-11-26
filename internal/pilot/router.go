@@ -52,7 +52,8 @@ type route struct {
 type cooldown struct {until time.Time; message string}
 type Router struct {
 	mu sync.Mutex
-	callMu sync.Mutex
+	callMu sync.RWMutex
+ busyScopes map[string]bool
 	next int
 	routes []*route
 	cooldowns map[string]cooldown
@@ -153,7 +154,8 @@ func (r *Router) Change(id,action string)error{
 func (r *Router) Decide(ctx context.Context,view Context)(Decision,error){return r.decide(ctx,view,"")}
 func (r *Router) Repair(ctx context.Context,view Context,problem string)(Decision,error){return r.decide(ctx,view,problem)}
 func (r *Router) decide(ctx context.Context,view Context,problem string)(Decision,error){
-	r.callMu.Lock();defer r.callMu.Unlock()
+	if view.Version>=SegmentedVersion{return r.decideConcurrent(ctx,view,problem)}
+ r.callMu.Lock();defer r.callMu.Unlock()
 	r.mu.Lock();routes:=append([]*route{},r.routes...);r.mu.Unlock()
 	for _,rt:=range routes{
 		if err:=ctx.Err();err!=nil{return Decision{},err}

@@ -64,7 +64,7 @@ func(s *Session) advanceRoutineMacro(ctx context.Context,expected int,target int
  if len(rounds)>0{
   j.Rounds=append(append([]Round(nil),j.Rounds...),rounds...)
   s.progress.Phase="saving"
-  if err:=replaceJournal(s.path,j);err!=nil{return result,errors.New("falha ao salvar lote; nenhum ciclo do lote publicado")}
+  if err:=s.commitRounds(j,next,rounds);err!=nil{return result,err}
   s.journal=j;s.state=next
  }
  return AdvanceResult{Snapshot:s.snapshot(),Cycles:len(rounds),Reason:reason},nil

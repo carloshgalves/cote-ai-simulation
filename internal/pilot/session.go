@@ -74,6 +74,7 @@ type Snapshot struct {
  Population map[string]PublicMember `json:"population,omitempty"`
  Identities map[string]CharacterIdentity `json:"identities,omitempty"`
  NeedsInference bool `json:"needs_inference,omitempty"`
+ SaveName string `json:"save_name"`
 }
 
 func Open(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,Version)}
@@ -170,10 +171,10 @@ func replaceJournal(path string,j Journal) error {
 }
 func (s *Session) snapshot() Snapshot {
 	people:=[]Person{}
-	for _, p:=range s.journal.Profiles {people=append(people,Person{p.ID,p.Name,p.Class})}
+	for _, p:=range s.journal.Profiles {people=append(people,Person{p.ID,p.Name,classOf(s.journal,p.ID)})}
 	last:=[]Chosen{}
 	if n:=len(s.journal.Rounds);n>0{last=clone(s.journal.Rounds[n-1].Choices)}
-	return Snapshot{Identities:clone(s.journal.Identities),NeedsInference:s.needsInferenceLocked(),Population:publicPopulation(s.journal,s.state),LastChoices:last,State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:roundLimit(s.journal.Version),Done:s.state.Round>=roundLimit(s.journal.Version)||(s.journal.Version>=Version&&s.state.Minute>=endMinute(s.journal.Version)),Version:s.journal.Version}
+	return Snapshot{SaveName:filepath.Base(s.path),Identities:clone(s.journal.Identities),NeedsInference:s.needsInferenceLocked(),Population:publicPopulation(s.journal,s.state),LastChoices:last,State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:roundLimit(s.journal.Version),Done:s.state.Round>=roundLimit(s.journal.Version)||(s.journal.Version>=Version&&s.state.Minute>=endMinute(s.journal.Version)),Version:s.journal.Version}
 }
 func (s *Session) Snapshot() Snapshot {
 	s.mu.Lock();defer s.mu.Unlock();return s.snapshot()

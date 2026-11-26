@@ -1,0 +1,3 @@
+# Narrative observatory
+
+Read-only WhatsApp-like rendering of committed claim events. Pair/day/session separation by explicit conversation_end or 45-minute gap (presentation heuristic, not causal fact). Chronological messages, operator or participant perspective, public mode excludes all private dialogue. Search, day filter, stable thread selection. Directional relationship bars from recorded social bonds; no inferred relationship. Header exposes save basename, version and next exam. Grade-aware CP/cohorts and group result summaries. Local operator has access to the underlying full snapshot; this is a view filter, not a remote authorization boundary. No browser validation yet.

@@ -97,6 +97,9 @@ func recordPortfolioVotes(j Journal,before State,s *State,choices []Chosen){
   if c.Decision.Action!="vote"||e.Submitted[c.Actor]{continue}
   _,opts:=portfolioOffers(j,before,c.Actor,before.World.Exam)
   if !has(opts,c.Decision.Target){continue}
+  // JSON cloning omits an empty Ballots map; initialize only on an accepted vote.
+  if e.Ballots==nil{e.Ballots=make(map[string]string)}
+  if e.Submitted==nil{e.Submitted=make(map[string]bool)}
   e.Submitted[c.Actor]=true;e.Ballots[c.Actor]=c.Decision.Target
   appendEvent(s,Event{Kind:"exam",Actor:c.Actor,Text:"Escolha privada registrada.",Audience:[]string{c.Actor}})
  }

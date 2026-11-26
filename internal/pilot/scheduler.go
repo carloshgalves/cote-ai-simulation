@@ -17,6 +17,8 @@ type Activity struct {
 	Text string `json:"text,omitempty"`
 	Until int64 `json:"until"`
  SpanMinutes int64 `json:"span_minutes,omitempty"`
+ Started int64 `json:"started,omitempty"`
+ Coarse bool `json:"coarse,omitempty"`
 }
 func eligibleActors(j Journal,s State)[]string{
 	order:=ids(j.Profiles)
@@ -47,7 +49,7 @@ func closeConversation(s *State,id string){
   s.Minds[peer]=p
  }
 }
-func availableForContact(m Mind)bool{return m.Activity==nil||m.Activity.Kind=="wait"||m.Activity.Kind=="observe"||m.Activity.Kind=="conversation_hold"||(m.Tier!=""&&m.Activity.Kind=="task"&&m.Activity.Target=="work:")}
+func availableForContact(m Mind)bool{return m.Activity==nil||m.Activity.Coarse&&has([]string{"socialize:","relax:"},m.Activity.Target)||m.Activity.Kind=="wait"||m.Activity.Kind=="observe"||m.Activity.Kind=="conversation_hold"||(m.Tier!=""&&m.Activity.Kind=="task"&&m.Activity.Target=="work:")}
 func walkMinutes(from,to string)int64{
 	if strings.HasPrefix(from,"dormitory-")||strings.HasPrefix(to,"dormitory-"){return 12}
 	if has([]string{"shop","mall","seafront","park","gym","cafeteria"},from)||has([]string{"shop","mall","seafront","park","gym","cafeteria"},to){return 8}
@@ -76,7 +78,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
    local:=!decisionNeedsModel(j,s,x.Actor)
    if local&&!equalDecision(x.Decision,routineDecision(j,s,x.Actor))||!local&&x.Decision.Source==routineSource{return State{},errors.New("invalid decision provenance")}
   }
-  if err:=validateDecision(actorContext(j,s,x.Actor),x.Decision);err!=nil{return State{},fmt.Errorf("%s: %w",x.Actor,err)}
+  if err:=validateScheduledChoice(j,s,x);err!=nil{return State{},fmt.Errorf("%s: %w",x.Actor,err)}
 	}
 	out:=clone(s);out.Round++
 	// All cognition uses the frozen pre-cycle context. Resolve competing
@@ -93,7 +95,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
     switch x.Decision.Action{
     case "wait":if x.Decision.WaitMinutes>0{m.NextDeliberation=s.Minute+int64(x.Decision.WaitMinutes)}
     case "move":if j.Version<CalibratedVersion||x.Decision.Plan!=nil||m.Plan!=nil{m.NextDeliberation=s.Minute+walkMinutes(m.Location,x.Decision.Target)}
-    case "observe":m.NextDeliberation=s.Minute+1
+    case "observe":if j.Version<HierarchicalVersion||m.Plan!=nil||x.Decision.Plan!=nil||len(m.Plans)>0{m.NextDeliberation=s.Minute+1}
     }
    }
    m=applyCognition(j,&out,x.Actor,m,x.Decision)
@@ -137,6 +139,7 @@ func scheduledAdvance(j Journal,s State,choices []Chosen)(State,error){
 				appendEvent(&out,Event{Kind:"obstacle",Actor:id,Target:d.Target,Text:"Interlocutor indisponível; reavalie a abordagem.",Audience:[]string{id}})
 				break
 			}
+			if j.Version>=HierarchicalVersion&&target.Activity!=nil&&target.Activity.Coarse{interruptCoarse(&out,d.Target,"Abordagem presencial");target=out.Minds[d.Target]}
 			until:=s.Minute+talkMinutes(d.Text)
 			if j.Version>=ConversationVersion{
 				started,turns:=s.Minute,0

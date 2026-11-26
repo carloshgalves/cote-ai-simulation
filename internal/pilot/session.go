@@ -43,11 +43,14 @@ type Progress struct {
 	Phase string `json:"phase"`
 	LastError string `json:"last_error,omitempty"`
 	Choices []Chosen `json:"choices"`
+ ModelCalls uint64 `json:"model_calls"`
 }
 func (s *Session) Progress() Progress {
-	s.mu.Lock();defer s.mu.Unlock()
+	s.mu.Lock()
 	p:=s.progress
 	p.Choices=clone(p.Choices)
+	s.mu.Unlock()
+ if r,ok:=s.model.(*Router);ok{p.ModelCalls=r.SimulationAttempts()}
 	return p
 }
 func (s *Session) Cancel(round int) bool {
@@ -93,6 +96,7 @@ func OpenCrossover(path,name string,model Model)(*Session,error){return openVers
 func OpenCalendar(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CalendarVersion)}
 func OpenPortfolio(path,name string,model Model)(*Session,error){return openVersion(path,name,model,PortfolioVersion)}
 func OpenMultiresolution(path,name string,model Model)(*Session,error){return openVersion(path,name,model,MultiresolutionVersion)}
+func OpenHierarchical(path,name string,model Model)(*Session,error){return openVersion(path,name,model,HierarchicalVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
@@ -204,13 +208,15 @@ func (s *Session) step(ctx context.Context,expected int,allowModel bool) (result
 	r:=Round{Number:expected+1,Choices:append([]Chosen{},s.pending...)}
 	for _, id:=range order[len(r.Choices):] {
 		if err:=ctx.Err();err!=nil{return Snapshot{},err}
-		view:=actorContext(journal,state,id)
+		var view Context
+		if journal.Version<HierarchicalVersion||decisionNeedsModel(journal,state,id){view=actorContext(journal,state,id)}
 		var problem string
 		var d Decision
 		failure:=""
   if journal.Version>=PopulationVersion&&!decisionNeedsModel(journal,state,id){
    s.mu.Lock();s.progress.Actor=id;s.progress.Attempt=0;s.progress.ActorStartedAt=time.Now();s.progress.LastError="";s.mu.Unlock()
    d=routineDecision(journal,state,id)
+   if journal.Version>=HierarchicalVersion{view=routineValidationContext(journal,state,id)}
    if err:=validateDecision(view,d);err!=nil{return Snapshot{},fmt.Errorf("rotina %s: %w",id,err)}
   }else{
 		for attempt:=1;attempt<=3;attempt++ {
@@ -250,8 +256,8 @@ func (s *Session) step(ctx context.Context,expected int,allowModel bool) (result
 		s.mu.Lock();s.pending=nil;s.mu.Unlock()
 		return Snapshot{},errors.New("nenhum agente produziu decisão válida; rodada não avançou")
 	}
-	r.Minute,err=nextEventMinute(journal,state,r.Choices);if err!=nil{return Snapshot{},err}
-	next,err:=apply(journal,state,r);if err!=nil{return Snapshot{},err}
+	var next State
+	if journal.Version>=HierarchicalVersion{next,err=scheduledAdvance(journal,state,r.Choices);if err!=nil{return Snapshot{},err};r.Minute=next.Minute}else{r.Minute,err=nextEventMinute(journal,state,r.Choices);if err!=nil{return Snapshot{},err};next,err=apply(journal,state,r);if err!=nil{return Snapshot{},err}}
 	j:=journal
 	j.Rounds=append(append([]Round(nil),j.Rounds...),r)
 	s.mu.Lock()

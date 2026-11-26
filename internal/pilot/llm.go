@@ -193,6 +193,7 @@ func (m *HTTPModel) decide(ctx context.Context, view Context, problem string) (D
 	for _, option:=range offeredActions(view){choices=append(choices,option.ID)}
 	if view.Version>=MotivationVersion&&view.Opportunity!=nil{prompt+=" opportunity indica uma ocasião concreta para um objetivo seu, não uma obrigação de agir. Considere agir mesmo sem ameaça ou novidade estratégica; se decidir esperar, fundamente em obstáculos concretos. Não invente resultados ou conhecimentos. "}
 	if view.Version>=VeteranVersion&&view.SchoolYear>1{prompt+=" Você é veterano; a chegada de ingressantes não é sua própria matrícula. Use a experiência institucional disponível, sem inventar episódios, relações ou resultados de anos anteriores. "}
+	if view.Version>=HierarchicalVersion{prompt+=" Rotinas, estudo e convivência simples têm resolução local. Quando consultado, decida sobre o acontecimento concreto. Evite perguntas de cortesia repetidas, reobservações sem informação nova e espera temporizada sem motivo específico; não encerre uma negociação relevante artificialmente."}
 	if view.Version>=CompactContextVersion{
   prompt=strings.ReplaceAll(prompt,"population contém função e ano; consulte a função de self antes de decidir.","people contém cadastro com função e ano (self também consta da lista); consulte sua função antes de decidir.")
   prompt=strings.ReplaceAll(prompt,"body contém energia, hidratação e fadiga (0–1000), não poderes ou desempenho garantido.","interoception contém sensações corporais qualitativas próprias, não telemetria, poderes ou desempenho garantido.")

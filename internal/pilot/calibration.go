@@ -26,6 +26,7 @@ func calibratedNeedsModel(j Journal,s State,id string)bool{
  if essentialCognition(j,s,id){return true}
  if m.NextDeliberation>0&&s.Minute>=m.NextDeliberation{return true}
  if m.NextDeliberation>s.Minute{return false}
+ if j.Version>=HierarchicalVersion{return strategicOpportunity(j,s,id)}
  return personalOpportunity(j,s,id)!=nil
 }
 func rotatedOpportunityPeers(j Journal,s State,id string,peers []string)[]string{

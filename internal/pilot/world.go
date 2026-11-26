@@ -249,7 +249,9 @@ func applyImmediateWorld(j Journal,before State,s *State,choices []Chosen){
   }
   span:=int64(0)
   if j.Version>=MultiresolutionVersion&&c.Decision.Source==routineSource&&d.Action=="rest"&&duration==60{if n:=quietRestDuration(j,before,id);n>duration{duration=n;span=n}}
-  m.Activity=&Activity{Kind:kind,Target:d.Action+":"+d.Target,Until:s.Minute+duration,SpanMinutes:span};s.Minds[id]=m
+  coarse:=false;started:=int64(0)
+  if j.Version>=HierarchicalVersion&&kind=="task"{started=s.Minute;if c.Decision.Source==routineSource{if n:=hierarchicalDuration(j,before,id,d.Action,duration);n>duration{duration=n;span=n;coarse=true}else if span>0{coarse=true}}}
+  m.Activity=&Activity{Kind:kind,Target:d.Action+":"+d.Target,Until:s.Minute+duration,SpanMinutes:span,Started:started,Coarse:coarse};s.Minds[id]=m
  }
  if j.Version>=PortfolioVersion&&s.World.Exam!=nil&&s.World.Exam.Kind!="vip"&&s.World.Exam.Kind!="minority"{recordPortfolioVotes(j,before,s,choices)}else if j.Version>=CalendarVersion&&s.World.Exam!=nil&&s.World.Exam.Kind=="minority"{recordGeneratedVotes(s,choices)}else{settleGuesses(j,before,s,choices)}
 }
@@ -258,7 +260,7 @@ func completeTask(j Journal,s *State,id string,m *Mind,a *Activity){
  if j.Version>=CognitionVersion&&m.Body!=nil&&strings.HasPrefix(a.Target,"eat:"){m.Body.Energy=clampMeter(m.Body.Energy+450);m.Body.Hydration=clampMeter(m.Body.Hydration+350)}
  text:="Concluiu "+a.Target
  if j.Version>=MultiresolutionVersion&&a.SpanMinutes>0{text+=fmt.Sprintf(" (sessão contínua de %d min)",a.SpanMinutes)}
- if j.Version>=AutonomyVersion&&a.Target=="socialize:"{text="Permaneceu em área de convivência"}
+ if j.Version>=AutonomyVersion&&a.Target=="socialize:"{text="Permaneceu em área de convivência";if j.Version>=HierarchicalVersion&&a.Started>0{text+=fmt.Sprintf(" (%d min)",s.Minute-a.Started)}}
  appendEvent(s,Event{Kind:"task",Actor:id,Text:text,Audience:[]string{id}})
  if strings.HasPrefix(a.Target,"attend:"){
   for i,mt:=range s.World.Meetings{if mt.ID==strings.TrimPrefix(a.Target,"attend:")&&mt.Status=="accepted"&&s.Minute<=mt.At+15&&m.Location==mt.Location{

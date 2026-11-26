@@ -166,6 +166,7 @@ type Journal struct {
 	Model string `json:"model"`
 	Rounds []Round `json:"rounds"`
  WorldSeed string `json:"world_seed,omitempty"`
+ Scenario string `json:"scenario,omitempty"`
  Population map[string]PopulationMember `json:"population,omitempty"`
  Identities map[string]CharacterIdentity `json:"identities,omitempty"`
  Guidance map[string][]BehaviorGuidance `json:"guidance,omitempty"`
@@ -253,6 +254,7 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
+ if j.Scenario!=""&&(j.Version!=ClassPollVersion||j.Scenario!=ScenarioZodiacDay2){return State{},errors.New("unsupported journal scenario")}
 	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion&&j.Version!=ObservationVersion&&j.Version!=VeteranVersion&&j.Version!=PhysicalVersion&&j.Version!=CompactContextVersion&&j.Version!=CalibratedVersion&&j.Version!=CrossoverVersion&&j.Version!=CalendarVersion&&j.Version!=PortfolioVersion&&j.Version!=MultiresolutionVersion&&j.Version!=HierarchicalVersion&&j.Version!=SegmentedVersion&&j.Version!=WholeGradeVersion&&j.Version!=SocialVersion&&j.Version!=FidelityVersion&&j.Version!=SchoolExamVersion&&j.Version!=InstitutionalVersion&&j.Version!=ClassPollVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
 	if j.Version>=WorldVersion&&len(j.WorldSeed)!=64{return State{},errors.New("invalid world seed")}
  if j.Version>=CognitionVersion{if err:=validateIdentities(j);err!=nil{return State{},err}}

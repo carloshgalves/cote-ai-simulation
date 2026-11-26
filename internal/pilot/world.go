@@ -51,6 +51,7 @@ type VIPExam struct{
  RoundHistory []SchoolExamRound `json:"round_history,omitempty"`
  VirtualDebt map[string]int64 `json:"virtual_debt,omitempty"`
  Deadline int64 `json:"deadline,omitempty"`
+ Poll *PollState `json:"poll,omitempty"`
  Phase string `json:"phase"`
  Group []string `json:"group"`
  VIP string `json:"vip"`
@@ -68,6 +69,8 @@ type SchoolWorld struct{
  GradePoints map[string]int64 `json:"grade_points,omitempty"`
  GenericWallets map[string]int64 `json:"generic_wallets,omitempty"`
  Institutions *InstitutionalState `json:"institutions,omitempty"`
+ Expelled map[string]bool `json:"expelled,omitempty"`
+ Protection map[string]int `json:"protection,omitempty"`
 }
 type ExamView struct{
  Phase string `json:"phase"`
@@ -175,6 +178,7 @@ func schoolView(j Journal,s State,id string)*SchoolView{
  if e:=examFor(s,id);e!=nil&&(j.Version<PopulationVersion||has(e.Group,id)){
   outcome:=0;publishAt:=examBase(j.Version)+960;if j.Version>=CalendarVersion{publishAt=e.PublishedAt};if s.Minute>=publishAt{outcome=e.Outcome}
   v.Exam=&ExamView{e.Phase,clone(e.Group),e.VIP==id,e.Submitted[id],outcome}
+  if j.Version>=ClassPollVersion&&e.Kind=="poll"{rules,opts:=pollOffers(j,s,id,e);v.Rules=append(v.Rules,rules...);for _,o:=range opts{add("vote",o)};return v}
   if j.Version>=SchoolExamVersion&&e.Kind=="kokkuri"{rules,opts:=schoolKokkuriOffers(s,id,e);v.Rules=append(v.Rules,rules...);for _,o:=range opts{add("vote",o)};return v}
   if j.Version>=PortfolioVersion&&e.Kind!="minority"&&e.Kind!="vip"{
    rules,options:=portfolioOffers(j,s,id,e);v.Rules=append(v.Rules,rules...);for _,o:=range options{add("vote",o)};return v

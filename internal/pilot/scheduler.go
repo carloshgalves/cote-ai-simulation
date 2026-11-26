@@ -24,7 +24,7 @@ func eligibleActors(j Journal,s State)[]string{
 	order:=ids(j.Profiles)
 	if j.Version<ScheduledVersion{return order}
 	out:=[]string{}
-	for _,id:=range order{if s.Minds[id].Activity==nil{out=append(out,id)}}
+	for _,id:=range order{if !expelled(s,id)&&s.Minds[id].Activity==nil{out=append(out,id)}}
 	return out
 }
 type Conversation struct{

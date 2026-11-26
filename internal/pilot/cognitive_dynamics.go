@@ -42,7 +42,7 @@ func stimulateExam(s *State,reason string){if s.World.Exam!=nil{for _,id:=range 
 func advanceBodies(j Journal,s *State,previous int64){
  dt:=int(s.Minute-previous);if dt<=0{return}
  for _,id:=range ids(j.Profiles){
-  m:=s.Minds[id];if m.Body==nil{continue};old:=*m.Body
+  m:=s.Minds[id];if m.Body==nil||expelled(*s,id){continue};old:=*m.Body
   kind,target:="","";if m.Activity!=nil{kind=m.Activity.Kind;target=m.Activity.Target}
   // Integer rates make clock subdivision deterministic; food is applied
   // only on completed meal, sleep/rest only over elapsed time.

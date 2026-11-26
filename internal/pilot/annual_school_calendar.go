@@ -16,6 +16,7 @@ func annualSchoolCalendar(j Journal)[]ExamSlot{
   year:=years[i%3];day:=int64(3+20*i);kind:="kokkuri"
   if counts[year]==nil{counts[year]=map[string]int{}}
   if day>=32&&(counts[year]["vip"]<counts[year]["kokkuri"]||counts[year]["vip"]==counts[year]["kokkuri"]&&examKey(j,fmt.Sprintf("annual-kind/%d/vip",i))<examKey(j,fmt.Sprintf("annual-kind/%d/kokkuri",i))){kind="vip"}
+  if j.Version>=ClassPollVersion&&i>=15{kind="poll"}
   counts[year][kind]++
   slot:=buildAnnualSlot(j,fmt.Sprintf("exam-%02d",i+1),kind,year,day);out=append(out,slot)
  }
@@ -24,10 +25,12 @@ func annualSchoolCalendar(j Journal)[]ExamSlot{
 func buildAnnualSlot(j Journal,id,kind string,year int,day int64)ExamSlot{
  title,source:="Kokkuri — incentivos e confiança","Tomodachi Game: adaptação escolar com créditos virtuais"
  if kind=="vip"{title="Zodiac/VIP — três dias";source="COTE: y1-zodiac-cruise.json; adaptação escolar por ano"}
+ if kind=="poll"{title="Class Poll — votação e proteção";source="COTE: y1-class-poll.json; regras de desempate e janelas escolares declaradas"}
  roster:=gradeRoster(j,year);mixed:=[]string{}
  for _,c:=range []string{"A","B","C","D"}{g:=roster[c];sort.Slice(g,func(a,b int)bool{return examKey(j,id+g[a])<examKey(j,id+g[b])});roster[c]=g}
  for k:=0;k<40;k++{for _,c:=range []string{"A","B","C","D"}{mixed=append(mixed,roster[c][k])}}
  slot:=ExamSlot{ID:id,Kind:kind,Day:day,Start:(day-1)*1440+480,Group:clone(mixed),Title:title,Source:source,Years:[]int{year}}
+ if kind=="poll"{for _,c:=range []string{"A","B","C","D"}{slot.Groups=append(slot.Groups,clone(roster[c]))};for _,offset:=range []int64{0,4*1440,5*1440,6*1440,6*1440+360,6*1440+720,7*1440+720,7*1440+780}{slot.Boundaries=append(slot.Boundaries,slot.Start+offset)};return slot}
  if kind=="kokkuri"{for k:=0;k<len(mixed);k+=5{slot.Groups=append(slot.Groups,clone(mixed[k:k+5]))};for k:=int64(0);k<=6;k++{slot.Boundaries=append(slot.Boundaries,slot.Start+k*60)}}else{
   at:=0;for k:=0;k<12;k++{n:=len(mixed)/12;if k<len(mixed)%12{n++};slot.Groups=append(slot.Groups,clone(mixed[at:at+n]));at+=n}
   slot.Boundaries=append(slot.Boundaries,slot.Start);for d:=int64(0);d<3;d++{base:=(day-1+d)*1440;slot.Boundaries=append(slot.Boundaries,base+780,base+840,base+1200,base+1260)};last:=(day+1)*1440;slot.Boundaries=append(slot.Boundaries,last+1290,last+1320,last+1380)

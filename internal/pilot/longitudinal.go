@@ -75,7 +75,7 @@ func auditYear(j Journal,state State)(YearAudit,error){
   slot,ok:=slots[res.ID];if !ok||seenExams[res.ID]{return a,fmt.Errorf("unexpected exam result %s",res.ID)};seenExams[res.ID]=true
   expected:=map[string]bool{};for _,id:=range slot.Group{expected[id]=true;if known(j.Profiles,id){a.NamedParticipantSlots++}}
   actual:=map[string]bool{};submitted:=map[string]bool{};valid:=len(expected)==160&&len(res.GroupResults)==len(slot.Groups)
-  for _,g:=range res.GroupResults{for _,id:=range g.Group{if actual[id]||!expected[id]{valid=false};actual[id]=true};for _,id:=range g.Submitted{if submitted[id]||!has(g.Group,id){valid=false;continue};submitted[id]=true;if known(j.Profiles,id){a.NamedSubmissions++}else{a.GenericSubmissions++}}}
+  for _,g:=range res.GroupResults{if j.Version>=ClassPollVersion&&(g.Outcome==0||g.Poll!=nil&&g.Poll.Status!="resolved"){valid=false};for _,id:=range g.Group{if actual[id]||!expected[id]{valid=false};actual[id]=true};for _,id:=range g.Submitted{if submitted[id]||!has(g.Group,id){valid=false;continue};submitted[id]=true;if known(j.Profiles,id){a.NamedSubmissions++}else{a.GenericSubmissions++}}}
   if valid&&len(actual)==len(expected){a.CompleteGradeExams++}
  }
  a.YearComplete=j.Version>=WholeGradeVersion&&state.Minute>=endMinute(j.Version)&&a.PlannedExams==18&&a.PublishedExams==18

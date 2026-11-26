@@ -83,6 +83,7 @@ func advanceSchoolExam(j Journal,s *State,announce func(string))bool{
  for _,slot:=range s.World.Calendar{
   bs:=examBoundaries(slot);if len(bs)==0||s.Minute<bs[0]||s.Minute>bs[len(bs)-1]{continue}
   idx:=-1;for i,n:=range bs{if n==s.Minute{idx=i;break}};if idx<0{return false}
+  if j.Version>=ClassPollVersion&&slot.Kind=="poll"{return advanceClassPoll(j,s,slot,idx,announce)}
   if idx==0{
    s.World.Exam=nil;s.World.ExamGroups=nil
    for i,group:=range slot.Groups{

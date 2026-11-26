@@ -12,6 +12,7 @@ type GroupResult struct{
  Submitted []string `json:"submitted"`
  Rounds []SchoolExamRound `json:"rounds,omitempty"`
  VirtualDebt map[string]int64 `json:"virtual_debt,omitempty"`
+ Poll *PollState `json:"poll,omitempty"`
 }
 func gradeKey(y int,c string)string{return fmt.Sprintf("%d-%s",y,c)}
 // Unclassified named veterans get an explicit stable balancing prior;
@@ -35,14 +36,14 @@ func initializeGradeEconomy(j Journal,s *State){
  s.World.GradePoints=map[string]int64{};s.World.GenericWallets=map[string]int64{}
  for y:=1;y<=3;y++{roster:=gradeRoster(j,y);for _,c:=range []string{"A","B","C","D"}{s.World.GradePoints[gradeKey(y,c)]=1000;for _,id:=range roster[c]{if !known(j.Profiles,id){s.World.GenericWallets[id]=0;pay(s,"school",id,100000,"initial","Depósito inicial")}}}}
 }
-func payGradeIncome(j Journal,s *State){for y:=1;y<=3;y++{roster:=gradeRoster(j,y);for _,c:=range []string{"A","B","C","D"}{for _,id:=range roster[c]{pay(s,"school",id,s.World.GradePoints[gradeKey(y,c)]*100,"monthly","Renda mensal")}}}}
+func payGradeIncome(j Journal,s *State){for y:=1;y<=3;y++{roster:=gradeRoster(j,y);for _,c:=range []string{"A","B","C","D"}{for _,id:=range roster[c]{if expelled(*s,id){continue};pay(s,"school",id,s.World.GradePoints[gradeKey(y,c)]*100,"monthly","Renda mensal")}}}}
 func transferGradePoints(j Journal,s *State,id,loser,winner string){
  y:=rosterYear(j,id);l,w:=gradeKey(y,loser),gradeKey(y,winner);delta:=int64(50);if s.World.GradePoints[l]<delta{delta=s.World.GradePoints[l]};s.World.GradePoints[l]-=delta;s.World.GradePoints[w]+=delta
  if y==1{s.World.ClassPoints[loser]=s.World.GradePoints[l];s.World.ClassPoints[winner]=s.World.GradePoints[w]}
 }
 func updateGradeCohorts(j Journal,s *State){
  s.Cohorts=[]Cohort{}
- for y:=1;y<=3;y++{roster:=gradeRoster(j,y);for _,c:=range []string{"A","B","C","D"}{n:=0;for _,id:=range roster[c]{if !known(j.Profiles,id){n++}};if n==0{continue};loc:="class-"+strings.ToLower(c);if y>1{loc=seniorClassroom(c)};switch periodAt(s.Minute){case "almoço":loc="cafeteria";case "repouso","jantar e repouso":loc="residential-area";case "atividades livres":loc="courtyard"};s.Cohorts=append(s.Cohorts,Cohort{ID:fmt.Sprintf("cohort-y%d-%s",y,strings.ToLower(c)),Class:c,Count:n,Location:loc,Tier:CohortTier,Year:y})}}
+ for y:=1;y<=3;y++{roster:=gradeRoster(j,y);for _,c:=range []string{"A","B","C","D"}{n:=0;for _,id:=range roster[c]{if !known(j.Profiles,id)&&!expelled(*s,id){n++}};if n==0{continue};loc:="class-"+strings.ToLower(c);if y>1{loc=seniorClassroom(c)};switch periodAt(s.Minute){case "almoço":loc="cafeteria";case "repouso","jantar e repouso":loc="residential-area";case "atividades livres":loc="courtyard"};s.Cohorts=append(s.Cohorts,Cohort{ID:fmt.Sprintf("cohort-y%d-%s",y,strings.ToLower(c)),Class:c,Count:n,Location:loc,Tier:CohortTier,Year:y})}}
 }
 func generateWholeGradeCalendar(j Journal)[]ExamSlot{
  if j.Version>=SchoolExamVersion{return schoolExamCalendar(j)}
@@ -72,7 +73,7 @@ func resolveGradeChoices(j Journal,before State,s *State,choices []Chosen){
  for _,e:=range s.World.ExamGroups{
   if e.Outcome!=0{continue};scoped:=[]Chosen{};for _,c:=range choices{if has(e.Group,c.Actor){scoped=append(scoped,c)}}
   s.World.Exam=e;b:=before;b.World=&SchoolWorld{Exam:examFor(before,e.Group[0])}
-  if j.Version>=SchoolExamVersion&&e.Kind=="kokkuri"{recordSchoolKokkuri(j,b,s,scoped)}else if e.Kind=="vip"{settleGuesses(j,b,s,scoped)}else if e.Kind=="minority"{recordGeneratedVotes(s,scoped)}else{recordPortfolioVotes(j,b,s,scoped)}
+  if j.Version>=ClassPollVersion&&e.Kind=="poll"{recordClassPoll(j,b,s,scoped)}else if j.Version>=SchoolExamVersion&&e.Kind=="kokkuri"{recordSchoolKokkuri(j,b,s,scoped)}else if e.Kind=="vip"{settleGuesses(j,b,s,scoped)}else if e.Kind=="minority"{recordGeneratedVotes(s,scoped)}else{recordPortfolioVotes(j,b,s,scoped)}
  }
 }
 // Generic students have stable IDs and balances. Their baseline policy

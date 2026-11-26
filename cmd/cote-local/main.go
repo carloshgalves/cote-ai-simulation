@@ -37,6 +37,9 @@ func main() {
 	save:=flag.String("save","cote-local.json","local simulation journal")
 	port:=flag.Int("port",8765,"loopback HTTP port")
 	steps:=flag.Int("steps",0,"run N rounds in terminal instead of browser")
+ until:=flag.String("until","","first-exam, first-result, year-end (may call configured models)")
+ auditOnly:=flag.Bool("audit-only",false,"verify current journal and emit longitudinal audit without model calls")
+ admissions:=flag.String("admissions","","optional private next-year candidate file for eligibility validation only")
 	flag.Parse()
 	key:=os.Getenv("COTE_API_KEY")
 	switch *provider {
@@ -55,7 +58,7 @@ func main() {
 		*modelName=""
 	default:log.Fatal("unknown provider")
 	}
-	if *steps<0||*steps>pilot.MaxRounds||*port<1||*port>65535 {log.Fatal("invalid rounds or port")}
+	if *steps<0||*steps>pilot.MaxRounds||*port<1||*port>65535||(*until!=""&&*steps>0)||(*auditOnly&&(*steps>0||*until!="")){log.Fatal("invalid rounds or port")}
 	router,err:=pilot.LoadRouter(*routesPath);if err!=nil{log.Fatal(err)}
 	chat,err:=pilot.OpenChatGPT(filepath.Join(configDir,"cote-ai-simulation","chatgpt.json"));if err!=nil{log.Fatal(err)}
 	defer chat.Close()
@@ -67,7 +70,13 @@ func main() {
 	session,err:=pilot.OpenFidelity(*save,"router",router);if err!=nil{log.Fatal(err)}
 	defer session.Close()
 	ctx,cancel:=signal.NotifyContext(context.Background(),os.Interrupt,syscall.SIGTERM);defer cancel()
-	if *steps>0 {
+	if *admissions!=""{if err:=pilot.ValidateNextAdmissions(*admissions,session.Snapshot());err!=nil{log.Fatal(err)};fmt.Fprintln(os.Stderr,"Private admissions validated; not admitted before annual acceptance.")}
+ if *auditOnly||*until!=""{
+  var run *pilot.LongitudinalRun
+  if *until!=""{r,err:=session.RunUntil(ctx,*until);run=&r;if err!=nil{fmt.Fprintln(os.Stderr,err)}}
+  audit,err:=session.AuditYear();if err!=nil{log.Fatal(err)};output:=struct{Run *pilot.LongitudinalRun `json:"run,omitempty"`;Audit pilot.YearAudit `json:"audit"`}{run,audit};enc:=json.NewEncoder(os.Stdout);enc.SetIndent("","  ");if err:=enc.Encode(output);err!=nil{log.Fatal(err)};if run!=nil&&!run.Reached{os.Exit(2)};return
+ }
+ if *steps>0 {
 		for i:=0;i<*steps;i++ {
 			s,err:=session.Step(ctx,session.Snapshot().State.Round);if err!=nil{log.Fatal(err)}
 			fmt.Printf("Rodada %d | %02d:%02d | %d eventos\n",s.State.Round,s.State.Minute/60,s.State.Minute%60,len(s.State.Events))
@@ -140,7 +149,8 @@ func main() {
 	})
 	catalog,packs,err:=loadTomodachiCatalog();if err!=nil{log.Fatal(err)}
 	registerTomodachiEndpoints(mux,catalog,packs)
-	mux.HandleFunc("GET /api/state",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Snapshot())})
+	mux.HandleFunc("GET /api/year-audit",func(w http.ResponseWriter,r *http.Request){audit,err:=session.AuditYear();if err!=nil{fail(w,409,err);return};reply(w,200,audit)})
+ mux.HandleFunc("GET /api/state",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Snapshot())})
 	mux.HandleFunc("GET /api/progress",func(w http.ResponseWriter,r *http.Request){reply(w,200,session.Progress())})
 	mux.HandleFunc("POST /api/cancel",func(w http.ResponseWriter,r *http.Request){
 		if r.Header.Get("Origin")!="http://"+addr||!strings.HasPrefix(r.Header.Get("Content-Type"),"application/json"){fail(w,403,errors.New("local browser request required"));return}

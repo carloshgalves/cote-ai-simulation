@@ -52,7 +52,7 @@ func(s *Session) advanceRoutineMacro(ctx context.Context,expected int,target int
  if !s.stepMu.TryLock(){return result,errors.New("uma rodada já está em execução")};defer s.stepMu.Unlock()
  s.mu.Lock()
  if s.lock==nil||s.state.Round!=expected||len(s.pending)>0{s.mu.Unlock();return result,errors.New("sessão alterada ou decisão pendente")}
- if target<=s.state.Minute||target>endMinute(s.journal.Version)||target%1440!=480{s.mu.Unlock();return result,errors.New("data de destino inválida")}
+ if target<=s.state.Minute||target>endMinute(s.journal.Version)||(s.journal.Version<FidelityVersion&&target%1440!=480){s.mu.Unlock();return result,errors.New("data de destino inválida")}
  ctx,cancel:=context.WithCancel(ctx);s.cancel=cancel
  j,state:=s.journal,s.state
  s.progress=Progress{Active:true,Round:expected+1,StartedAt:time.Now(),Phase:"routine-batch"}

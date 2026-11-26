@@ -12,6 +12,13 @@ on:
       - 'data/canon/runtime/**'
       - 'data/canon/catalog.go'
       - 'data/external-worlds/tomodachi-game/**'
+  push:
+    branches: ['feat/pilot-v29-class-poll']
+    paths:
+      - 'internal/pilot/**'
+      - 'cmd/cote-local/**'
+      - 'data/canon/runtime/**'
+      - '.github/workflows/local-character-simulation.yml'
   workflow_dispatch:
 permissions:
   contents: read

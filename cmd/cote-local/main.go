@@ -64,7 +64,7 @@ func main() {
 		kind:=*provider;if kind=="custom"{kind="openai-compatible"}
 		if _,err:=router.Add(pilot.RouteInput{Provider:kind,Endpoint:*endpoint,Model:*modelName,Key:key,Format:"auto"});err!=nil{log.Fatal(err)}
 	}
-	session,err:=pilot.OpenSegmented(*save,"router",router);if err!=nil{log.Fatal(err)}
+	session,err:=pilot.OpenWholeGrade(*save,"router",router);if err!=nil{log.Fatal(err)}
 	defer session.Close()
 	ctx,cancel:=signal.NotifyContext(context.Background(),os.Interrupt,syscall.SIGTERM);defer cancel()
 	if *steps>0 {

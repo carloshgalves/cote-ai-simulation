@@ -16,7 +16,7 @@ func essentialCognition(j Journal,s State,id string)bool{
  if m.Conversation!=nil&&m.Conversation.Turn==id{return true}
  if m.PendingStimulus!=""{return true}
  if s.World!=nil{
-  if e:=s.World.Exam;e!=nil&&has(e.Group,id)&&(e.Phase=="early"||e.Phase=="final")&&!e.Submitted[id]&&!m.AwaitEvent&&(j.Version<CalendarVersion||m.LastDeliberationMinute==0||s.Minute-m.LastDeliberationMinute>=20){return true}
+  if e:=examFor(s,id);e!=nil&&has(e.Group,id)&&(e.Phase=="early"||e.Phase=="final")&&!e.Submitted[id]&&!m.AwaitEvent&&(j.Version<CalendarVersion||m.LastDeliberationMinute==0||s.Minute-m.LastDeliberationMinute>=20){return true}
   for _,mt:=range s.World.Meetings{if mt.Guest==id&&mt.Status=="pending"&&s.Minute<mt.At{return true}}
  }
  return false

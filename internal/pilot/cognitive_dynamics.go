@@ -99,7 +99,7 @@ func expirePlans(j Journal,s *State){
   m:=s.Minds[id];changed:=false
   for _,h:=range []string{"immediate","short","medium","long"}{
    p,ok:=m.Plans[h];if !ok{continue}
-   if p.Deadline>0&&p.Deadline<=s.Minute||p.Scope=="vip"&&s.World.Exam!=nil&&s.World.Exam.Phase=="settled"{
+   if p.Deadline>0&&p.Deadline<=s.Minute||p.Scope=="vip"&&examFor(*s,id)!=nil&&examFor(*s,id).Phase=="settled"{
     delete(m.Plans,h);changed=true
     appendEvent(s,Event{Kind:"plan_end",Actor:id,Text:"Plano "+h+" encerrado por prazo ou fim do exame.",Audience:[]string{id},Evidence:p.Evidence})
    }

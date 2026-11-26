@@ -36,6 +36,7 @@ type Cohort struct{
  Count int `json:"count"`
  Location string `json:"location"`
  Tier string `json:"tier"`
+ Year int `json:"year,omitempty"`
 }
 func expandPopulation(j *Journal)error{
  var entries []PopulationEntry
@@ -183,6 +184,7 @@ func updatePopulation(j Journal,s *State){
  updateCohorts(j,s)
 }
 func updateCohorts(j Journal,s *State){
+ if j.Version>=WholeGradeVersion{updateGradeCohorts(j,s);return}
  s.Cohorts=[]Cohort{}
  for _,class:=range []string{"A","B","C","D"}{
   n:=40

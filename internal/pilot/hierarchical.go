@@ -35,7 +35,7 @@ func hierarchicalDuration(j Journal,s State,id,action string,current int64)int64
  if !has([]string{"lesson","study","work","read","relax","socialize","rest"},action){return current}
  m:=s.Minds[id]
  if m.Body==nil||m.PendingStimulus!=""||m.Conversation!=nil||m.Plan!=nil||len(m.Plans)>0||m.NextDeliberation>0{return current}
- if e:=s.World.Exam;e!=nil&&e.Outcome==0&&has(e.Group,id){return current}
+ if e:=examFor(s,id);e!=nil&&e.Outcome==0&&has(e.Group,id){return current}
  for _,mt:=range s.World.Meetings{if (mt.Status=="pending"||mt.Status=="accepted")&&(mt.Host==id||mt.Guest==id){return current}}
  // Study and work may run until the end of a school period; free-time
  // activities return at least hourly so new social opportunities persist.

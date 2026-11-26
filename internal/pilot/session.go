@@ -102,6 +102,7 @@ func OpenHierarchical(path,name string,model Model)(*Session,error){return openV
 func OpenSegmented(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SegmentedVersion)}
 func OpenWholeGrade(path,name string,model Model)(*Session,error){return openVersion(path,name,model,WholeGradeVersion)}
 func OpenSocial(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SocialVersion)}
+func OpenFidelity(path,name string,model Model)(*Session,error){return openVersion(path,name,model,FidelityVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
@@ -121,6 +122,7 @@ func openVersion(path,name string,model Model,version int) (*Session,error) {
   if version>=PopulationVersion{if err:=expandPopulation(&j);err!=nil{return nil,err}}
   if version>=CrossoverVersion{if err:=admitExternalStudents(&j);err!=nil{return nil,err}}
   if version>=CognitionVersion{initializeIdentities(&j)}
+  if version>=FidelityVersion{if err:=attachCorpus(&j);err!=nil{return nil,err}}
 		if version>=WorldVersion{seed,err:=randomSecret();if err!=nil{return nil,err};sum:=sha256.Sum256([]byte(seed));j.WorldSeed=fmt.Sprintf("%x",sum)}
 		if _,err:=Replay(j);err!=nil{return nil,err}
 		if err:=createJournal(path,j);err!=nil{return nil,err}

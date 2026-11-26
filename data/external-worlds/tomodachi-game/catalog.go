@@ -14,6 +14,10 @@ import (
 //go:embed consolidated/characters/*.json
 var corpus embed.FS
 
+//go:embed rag/abstract-guidance-v1.json
+var abstractGuidance []byte
+func GuidanceJSON()[]byte{return append([]byte(nil),abstractGuidance...)}
+
 type Domain struct {
 	Description string   `json:"description,omitempty"`
 	DescriptionStatus string `json:"description_status,omitempty"`

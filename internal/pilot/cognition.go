@@ -134,6 +134,7 @@ func projectIdentity(j Journal,s State,id string,c *Context){
  if m.PendingStimulus!=""{c.WakeReason=m.PendingStimulus}
  c.OwnCanon.PrivateKnowledge=nil;c.OwnCanon.Dispositions=nil
  c.OwnCanon.Status="Perfil inicial em identity; não recuperar acontecimentos futuros."
+ if j.Version>=FidelityVersion{c.BehaviorGuidance=selectBehaviorGuidance(j,s,id);c.PracticeMinutes=clone(m.PracticeMinutes)}
  // Do not expose old self.goals or background fields containing redundant
  // knowledge; use the frozen identity instead.
  c.Self.Background=nil
@@ -151,7 +152,8 @@ func retrieveMemory(j Journal,s State,id string,events []Event,keep map[string]b
   if age>p.RetentionDays*1440{continue}
   score:=-age*int64(101-p.Accessibility)/60
   if has([]string{"claim","meeting","exam","resource","social"},e.Kind){score+=int64(p.Encoding)*2}
-  if other,ok:=s.Minds[e.Actor];ok&&e.Actor!=id&&other.Location==s.Minds[id].Location{score+=int64(p.Retrieval)}
+  if other,ok:=s.Minds[e.Actor];ok&&e.Actor!=id&&other.Location==s.Minds[id].Location&&(j.Version<FidelityVersion||other.Activity==nil||other.Activity.Kind!="move"){score+=int64(p.Retrieval)}
+  if j.Version>=FidelityVersion{score+=contextualMemoryScore(s,id,e,p)}
   if age<120{score+=int64(p.Accessibility)}
   pool=append(pool,candidate{e,score})
  }

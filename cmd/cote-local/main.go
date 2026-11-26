@@ -67,7 +67,7 @@ func main() {
 		kind:=*provider;if kind=="custom"{kind="openai-compatible"}
 		if _,err:=router.Add(pilot.RouteInput{Provider:kind,Endpoint:*endpoint,Model:*modelName,Key:key,Format:"auto"});err!=nil{log.Fatal(err)}
 	}
-	session,err:=pilot.OpenFidelity(*save,"router",router);if err!=nil{log.Fatal(err)}
+	session,err:=pilot.OpenSchoolExams(*save,"router",router);if err!=nil{log.Fatal(err)}
 	defer session.Close()
 	ctx,cancel:=signal.NotifyContext(context.Background(),os.Interrupt,syscall.SIGTERM);defer cancel()
 	if *admissions!=""{if err:=pilot.ValidateNextAdmissions(*admissions,session.Snapshot());err!=nil{log.Fatal(err)};fmt.Fprintln(os.Stderr,"Private admissions validated; not admitted before annual acceptance.")}

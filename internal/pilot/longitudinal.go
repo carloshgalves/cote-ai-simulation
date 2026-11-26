@@ -47,7 +47,7 @@ func(s *Session) RunUntil(ctx context.Context,target string)(run LongitudinalRun
  defer func(){end:=s.Snapshot();run.EndMinute=end.State.Minute;run.EndRound=end.State.Round;run.WallMillis=time.Since(start).Milliseconds();run.ModelAttempts=s.Progress().ModelCalls-calls}()
  if snap.State.World==nil||len(snap.State.World.Calendar)==0{return run,errors.New("calendar missing")}
  var at int64
- switch target{case "first-exam":at=snap.State.World.Calendar[0].Start;case "first-result":at=snap.State.World.Calendar[0].Start+360;case "year-end":at=endMinute(snap.Version);default:return run,errors.New("unknown longitudinal target")}
+ switch target{case "first-exam":at=snap.State.World.Calendar[0].Start;case "first-result":at=snap.State.World.Calendar[0].Start+360;if bs:=snap.State.World.Calendar[0].Boundaries;len(bs)>0{at=bs[len(bs)-1]};case "year-end":at=endMinute(snap.Version);default:return run,errors.New("unknown longitudinal target")}
  for snap.State.Minute<at{
   if err:=ctx.Err();err!=nil{return run,err}
   if snap.Done{return run,errors.New("simulation limit before target")}

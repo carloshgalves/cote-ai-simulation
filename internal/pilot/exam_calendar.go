@@ -16,6 +16,7 @@ type ExamSlot struct {
  Source string `json:"source,omitempty"`
  Years []int `json:"years,omitempty"`
  Groups [][]string `json:"groups,omitempty"`
+ Boundaries []int64 `json:"boundaries,omitempty"`
 }
 type ExamResult struct {
  ID string `json:"id"`
@@ -49,7 +50,7 @@ func generateExamCalendar(j Journal)[]ExamSlot{
  }
  return result
 }
-func examBoundaries(s ExamSlot)[]int64{return []int64{s.Start,s.Start+240,s.Start+270,s.Start+300,s.Start+360}}
+func examBoundaries(s ExamSlot)[]int64{if len(s.Boundaries)>0{return clone(s.Boundaries)};return []int64{s.Start,s.Start+240,s.Start+270,s.Start+300,s.Start+360}}
 func recordGeneratedVotes(s *State,choices []Chosen){
  e:=s.World.Exam;if e==nil||e.Kind!="minority"||e.Outcome!=0||e.Phase=="settled"{return}
  for _,c:=range choices{

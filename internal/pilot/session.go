@@ -106,7 +106,21 @@ func OpenFidelity(path,name string,model Model)(*Session,error){return openVersi
 func OpenSchoolExams(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SchoolExamVersion)}
 func OpenInstitutional(path,name string,model Model)(*Session,error){return openVersion(path,name,model,InstitutionalVersion)}
 func OpenClassPoll(path,name string,model Model)(*Session,error){return openVersion(path,name,model,ClassPollVersion)}
+// OpenClassPollScenario creates or resumes a V29 experimental journal.
+ // Scenario and seed are operator configuration, never actor knowledge.
+func OpenClassPollScenario(path,name string,model Model,scenario,seedLabel string)(*Session,error){
+ if scenario!=ScenarioZodiacDay2{return nil,errors.New("unknown experimental scenario")}
+ if seedLabel!=""&&!validText(seedLabel,200){return nil,errors.New("invalid seed label")}
+ return openVersionConfigured(path,name,model,ClassPollVersion,scenario,seedLabel)
+}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
+ return openVersionConfigured(path,name,model,version,"","")
+}
+func experimentSeed(label string)string{
+ sum:=sha256.Sum256([]byte("cote-experiment/v1/"+label))
+ return fmt.Sprintf("%x",sum)
+}
+func openVersionConfigured(path,name string,model Model,version int,scenario,seedLabel string) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
 	parent,err:=filepath.EvalSymlinks(filepath.Dir(path));if err!=nil{return nil,err}
@@ -121,12 +135,15 @@ func openVersion(path,name string,model Model,version int) (*Session,error) {
 	switch {
 	case errors.Is(err,os.ErrNotExist):
 		profiles,err:=decodeStrict[[]Profile](defaultProfiles);if err!=nil{return nil,err}
-		j=Journal{Version:version,Profiles:profiles,Model:name,Rounds:[]Round{}}
+		j=Journal{Version:version,Profiles:profiles,Model:name,Rounds:[]Round{},Scenario:scenario}
   if version>=PopulationVersion{if err:=expandPopulation(&j);err!=nil{return nil,err}}
   if version>=CrossoverVersion{if err:=admitExternalStudents(&j);err!=nil{return nil,err}}
   if version>=CognitionVersion{initializeIdentities(&j)}
   if version>=FidelityVersion{if err:=attachCorpus(&j);err!=nil{return nil,err}}
-		if version>=WorldVersion{seed,err:=randomSecret();if err!=nil{return nil,err};sum:=sha256.Sum256([]byte(seed));j.WorldSeed=fmt.Sprintf("%x",sum)}
+		if scenario!=""{
+   label:=seedLabel;if label==""{label=ScenarioZodiacDay2}
+   j.WorldSeed=experimentSeed(label)
+  }else if version>=WorldVersion{seed,err:=randomSecret();if err!=nil{return nil,err};sum:=sha256.Sum256([]byte(seed));j.WorldSeed=fmt.Sprintf("%x",sum)}
 		if _,err:=Replay(j);err!=nil{return nil,err}
 		if err:=createJournal(path,j);err!=nil{return nil,err}
 	case err!=nil:
@@ -138,6 +155,8 @@ func openVersion(path,name string,model Model,version int) (*Session,error) {
 		if err!=nil||closeErr!=nil||len(raw)>32<<20{return nil,errors.New("cannot read save")}
 		j,err=decodeStrict[Journal](raw);if err!=nil{return nil,errors.New("invalid save JSON")}
 		if _,routed:=model.(*Router);j.Model!=name&&!routed{return nil,errors.New("save uses a different model; select its original model or a new save")}
+  if scenario!=""&&(j.Version!=version||j.Scenario!=scenario){return nil,errors.New("save belongs to a different scenario; use a new save")}
+  if seedLabel!=""&&j.WorldSeed!=experimentSeed(seedLabel){return nil,errors.New("save uses a different seed; use a new save")}
 	}
 	var state State;var head string
  if j.Version>=SegmentedVersion{j,state,head,err=loadSegments(path,j)}else{state,err=Replay(j)};if err!=nil{return nil,err}

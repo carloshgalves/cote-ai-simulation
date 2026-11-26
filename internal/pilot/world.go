@@ -47,6 +47,10 @@ type VIPExam struct{
  Kind string `json:"kind,omitempty"`
  PublishedAt int64 `json:"published_at,omitempty"`
  Ballots map[string]string `json:"ballots,omitempty"`
+ ExamRound int `json:"exam_round,omitempty"`
+ RoundHistory []SchoolExamRound `json:"round_history,omitempty"`
+ VirtualDebt map[string]int64 `json:"virtual_debt,omitempty"`
+ Deadline int64 `json:"deadline,omitempty"`
  Phase string `json:"phase"`
  Group []string `json:"group"`
  VIP string `json:"vip"`
@@ -169,6 +173,7 @@ func schoolView(j Journal,s State,id string)*SchoolView{
  if e:=examFor(s,id);e!=nil&&(j.Version<PopulationVersion||has(e.Group,id)){
   outcome:=0;publishAt:=examBase(j.Version)+960;if j.Version>=CalendarVersion{publishAt=e.PublishedAt};if s.Minute>=publishAt{outcome=e.Outcome}
   v.Exam=&ExamView{e.Phase,clone(e.Group),e.VIP==id,e.Submitted[id],outcome}
+  if j.Version>=SchoolExamVersion&&e.Kind=="kokkuri"{rules,opts:=schoolKokkuriOffers(s,id,e);v.Rules=append(v.Rules,rules...);for _,o:=range opts{add("vote",o)};return v}
   if j.Version>=PortfolioVersion&&e.Kind!="minority"&&e.Kind!="vip"{
    rules,options:=portfolioOffers(j,s,id,e);v.Rules=append(v.Rules,rules...);for _,o:=range options{add("vote",o)};return v
   }
@@ -178,6 +183,7 @@ func schoolView(j Journal,s State,id string)*SchoolView{
    return v
   }
   v.Rules=append(v.Rules,"Zodiac/VIP adaptado: um VIP secreto no grupo; uma submissão por não VIP. Fase antecipada: acerto recompensa 500.000 PP ao autor e transfere 50 CP da classe VIP à dele; erro recompensa VIP e inverte CP. Janela final: acerto 1.000.000 PP ao VIP e 500.000 aos demais; erro ou omissão 500.000 ao VIP. Submissão da classe do VIP não produz resultado. O resultado não revela identidades.")
+  if j.Version>=SchoolExamVersion{v.Rules=append(v.Rules,"Calendário desta adaptação: três dias de prova, sessões às 13h e 20h; janela final 21h30–22h no terceiro dia; resultado às 23h. Identidade e respostas alheias privadas.")}
   if j.Version>=CognitionVersion&&e.Phase=="final"{v.Rules=append(v.Rules,"Na janela final não há perda nem transferência de CP por erro ou omissão. A penalidade em CP pertence exclusivamente à fase antecipada.")}
   if (e.Phase=="early"||e.Phase=="final")&&!e.Submitted[id]&&e.VIP!=id&&e.Outcome==0{for _,other:=range e.Group{if other!=id{add("guess",other)}}}
  }
@@ -289,6 +295,7 @@ func settleGuesses(j Journal,before State,s *State,choices []Chosen){
   if e.Submitted[id]{continue};e.Submitted[id]=true
   appendEvent(s,Event{Kind:"exam",Actor:id,Text:"Submissão recebida pela escola.",Audience:[]string{id}})
   if id==e.VIP||classOf(j,id)==classOf(j,e.VIP){continue}
+  if j.Version>=SchoolExamVersion&&!has(e.Group,c.Decision.Target){continue}
   h:=sha256.Sum256([]byte(fmt.Sprintf("pilot-v5/%d/%d/%s",before.Minute,before.Round,id)))
   cs=append(cs,candidate{id,c.Decision.Target,fmt.Sprintf("%x",h)})
  }

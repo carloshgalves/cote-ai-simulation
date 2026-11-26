@@ -10,6 +10,8 @@ type GroupResult struct{
  Group []string `json:"group"`
  Outcome int `json:"outcome"`
  Submitted []string `json:"submitted"`
+ Rounds []SchoolExamRound `json:"rounds,omitempty"`
+ VirtualDebt map[string]int64 `json:"virtual_debt,omitempty"`
 }
 func gradeKey(y int,c string)string{return fmt.Sprintf("%d-%s",y,c)}
 // Unclassified named veterans get an explicit stable balancing prior;
@@ -43,6 +45,7 @@ func updateGradeCohorts(j Journal,s *State){
  for y:=1;y<=3;y++{roster:=gradeRoster(j,y);for _,c:=range []string{"A","B","C","D"}{n:=0;for _,id:=range roster[c]{if !known(j.Profiles,id){n++}};if n==0{continue};loc:="class-"+strings.ToLower(c);if y>1{loc=seniorClassroom(c)};switch periodAt(s.Minute){case "almoço":loc="cafeteria";case "repouso","jantar e repouso":loc="residential-area";case "atividades livres":loc="courtyard"};s.Cohorts=append(s.Cohorts,Cohort{ID:fmt.Sprintf("cohort-y%d-%s",y,strings.ToLower(c)),Class:c,Count:n,Location:loc,Tier:CohortTier,Year:y})}}
 }
 func generateWholeGradeCalendar(j Journal)[]ExamSlot{
+ if j.Version>=SchoolExamVersion{return schoolExamCalendar(j)}
  // Choose template order from the seeded portfolio, but replace sampling
  // with the full grade roster. All 160 seats participate, independently of tier.
  old:=j;old.Version=PortfolioVersion;slots:=generatePortfolioCalendar(old)
@@ -69,7 +72,7 @@ func resolveGradeChoices(j Journal,before State,s *State,choices []Chosen){
  for _,e:=range s.World.ExamGroups{
   if e.Outcome!=0{continue};scoped:=[]Chosen{};for _,c:=range choices{if has(e.Group,c.Actor){scoped=append(scoped,c)}}
   s.World.Exam=e;b:=before;b.World=&SchoolWorld{Exam:examFor(before,e.Group[0])}
-  if e.Kind=="vip"{settleGuesses(j,b,s,scoped)}else if e.Kind=="minority"{recordGeneratedVotes(s,scoped)}else{recordPortfolioVotes(j,b,s,scoped)}
+  if j.Version>=SchoolExamVersion&&e.Kind=="kokkuri"{recordSchoolKokkuri(j,b,s,scoped)}else if e.Kind=="vip"{settleGuesses(j,b,s,scoped)}else if e.Kind=="minority"{recordGeneratedVotes(s,scoped)}else{recordPortfolioVotes(j,b,s,scoped)}
  }
 }
 // Generic students have stable IDs and balances. Their baseline policy
@@ -86,6 +89,7 @@ func genericGradeChoices(j Journal,s *State,e *VIPExam)[]Chosen{
  return out
 }
 func advanceWholeGradeExam(j Journal,s *State,announce func(string))bool{
+ if j.Version>=SchoolExamVersion{return advanceSchoolExam(j,s,announce)}
  for _,slot:=range s.World.Calendar{
   switch s.Minute{
   case slot.Start:

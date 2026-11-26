@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.kei-shinomiya.enter-adult-game",
+  "actor_id": "actor.kei-shinomiya",
+  "primary_actor_id": "actor.kei-shinomiya",
+  "title": "enter adult game",
+  "context": "PRISON; secondary-source account",
+  "observed_actions": "Returns to the game after the earlier team contest; secondary profile attributes participation partly to boredom.",
+  "observed_result": "Chooses exposure to a new contest.",
+  "epistemic_limits": "Motivation attribution is provisional, not a fixed objective.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Kei_Shinomiya",
+    "locator": "PRISON",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "motivation",
+    "risk_management"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Motivation attribution is provisional, not a fixed objective. Allow failure.",
+  "topics": [
+    "motivation",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "tg.ev.kei-shinomiya.enter-adult-game"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.tenji-mikasa.disclose-prior-game",
+  "actor_id": "actor.tenji-mikasa",
+  "primary_actor_id": "actor.tenji-mikasa",
+  "title": "disclose prior game",
+  "context": "HIDE_SEEK; secondary-source account",
+  "observed_actions": "Tells Yuuichi about a previous contest and the collapse of his prior friendships.",
+  "observed_result": "Reveals private experience to a selected ally.",
+  "epistemic_limits": "Other characters do not learn the disclosure automatically.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_7",
+    "locator": "HIDE_SEEK",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "trust",
+    "communication"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Other characters do not learn the disclosure automatically. Allow failure.",
+  "topics": [
+    "trust",
+    "communication"
+  ],
+  "evidence_refs": [
+    "tg.ev.tenji-mikasa.disclose-prior-game"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

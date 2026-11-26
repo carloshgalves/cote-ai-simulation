@@ -1,0 +1,26 @@
+{
+  "schema_version": "canon-exam-reference-v1",
+  "exam_id": "exam.tg.backbiting-sugoroku",
+  "name": "backbiting-sugoroku",
+  "authority": "SECONDARY_REFERENCE_WITH_SEPARATE_EXECUTABLE_MODEL",
+  "source_coverage": [
+    "https://tomodachi-game.fandom.com/wiki/Backbiting_Sugoroku"
+  ],
+  "runtime_model": "data/external-worlds/tomodachi-game/runtime/resolver.mjs",
+  "parameters": {
+    "source": "Backbiting_Sugoroku",
+    "players": 5,
+    "boardLength": 20,
+    "prize": 2000000,
+    "nonFinisherBonus": 1000000,
+    "maxRounds": 20,
+    "model": [
+      "board length and tile table scenario parameters; audience rankings and false-card rulings are trusted adjudicator facts; tied finishers share accumulated game debt"
+    ]
+  },
+  "not_canon": [
+    "board length and tile table scenario parameters; audience rankings and false-card rulings are trusted adjudicator facts; tied finishers share accumulated game debt"
+  ],
+  "execution_scope": "STANDALONE_REFERENCE_ONLY",
+  "native_csf_registered": false
+}

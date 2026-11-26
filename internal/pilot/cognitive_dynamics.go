@@ -17,11 +17,17 @@ type SocialBond struct{
  LastMinute int64 `json:"last_minute"`
  SharedLeisureDays int `json:"shared_leisure_days,omitempty"`
  LastSharedLeisureDay int64 `json:"last_shared_leisure_day,omitempty"`
+ Affinity int `json:"affinity,omitempty"`
+ Rivalry int `json:"rivalry,omitempty"`
+ Esteem int `json:"esteem,omitempty"`
+ Affection int `json:"affection,omitempty"`
+ AssessmentEvidence map[string]bool `json:"assessment_evidence,omitempty"`
 }
 func clampMeter(x int)int{if x<0{return 0};if x>1000{return 1000};return x}
 func recognizes(j Journal,id,other string)bool{for _,f:=range j.Identities[id].Background{if f.Person==other{return true}};return false}
 func stimulate(s *State,id,reason string){
  m,ok:=s.Minds[id];if !ok{return}
+ if m.Activity!=nil&&m.Activity.Coarse{interruptCoarse(s,id,reason);m=s.Minds[id]}
  m.PendingStimulus=reason
  if m.Activity!=nil&&m.Activity.Kind=="wait"{m.Activity=nil;m.WakeReason=reason}
  s.Minds[id]=m
@@ -36,7 +42,7 @@ func stimulateExam(s *State,reason string){if s.World.Exam!=nil{for _,id:=range 
 func advanceBodies(j Journal,s *State,previous int64){
  dt:=int(s.Minute-previous);if dt<=0{return}
  for _,id:=range ids(j.Profiles){
-  m:=s.Minds[id];if m.Body==nil{continue};old:=*m.Body
+  m:=s.Minds[id];if m.Body==nil||expelled(*s,id){continue};old:=*m.Body
   kind,target:="","";if m.Activity!=nil{kind=m.Activity.Kind;target=m.Activity.Target}
   // Integer rates make clock subdivision deterministic; food is applied
   // only on completed meal, sleep/rest only over elapsed time.
@@ -48,7 +54,8 @@ func advanceBodies(j Journal,s *State,previous int64){
   m.Body.Energy=clampMeter(old.Energy-e*dt)
   m.Body.Hydration=clampMeter(old.Hydration-h*dt)
   m.Body.Fatigue=clampMeter(old.Fatigue+f*dt)
-  alert:=isStudent(j,id)&&(old.Energy>=250&&m.Body.Energy<250||old.Hydration>=250&&m.Body.Hydration<250||old.Fatigue<=850&&m.Body.Fatigue>850)
+  if j.Version>=FidelityVersion{accountPractice(&m,previous,s.Minute)}
+  alert:=(isStudent(j,id)||j.Version>=StaffCareVersion)&&(old.Energy>=250&&m.Body.Energy<250||old.Hydration>=250&&m.Body.Hydration<250||old.Fatigue<=850&&m.Body.Fatigue>850)
   s.Minds[id]=m
   if alert{appendEvent(s,Event{Kind:"body_alert",Actor:id,Text:"Percebe necessidade de alimentação, hidratação ou repouso.",Audience:[]string{id}});if j.Version<SelectiveVersion{stimulate(s,id,"Necessidade corporal relevante")}}
  }
@@ -78,7 +85,7 @@ func recordMeeting(s *State,mt Meeting){
 func planHorizon(p PlanChange)string{if p.Horizon==""{return "short"};return p.Horizon}
 func validateHorizon(c Context,p PlanChange)error{
  if !has([]string{"immediate","short","medium","long"},planHorizon(p)){return fmt.Errorf("invalid plan horizon")}
- if p.Deadline!=0&&(p.Deadline<=c.Minute||p.Deadline>WorldEnd){return fmt.Errorf("invalid plan deadline")}
+ if p.Deadline!=0&&(p.Deadline<=c.Minute||p.Deadline>endMinute(c.Version)){return fmt.Errorf("invalid plan deadline")}
  if p.Scope!=""&&p.Scope!="general"&&p.Scope!="vip"{return fmt.Errorf("invalid plan scope")}
  if p.Scope=="vip"&&(c.School==nil||c.School.Exam==nil||c.School.Exam.Phase=="settled"){return fmt.Errorf("VIP plan requires an active exam")}
  return nil
@@ -98,7 +105,7 @@ func expirePlans(j Journal,s *State){
   m:=s.Minds[id];changed:=false
   for _,h:=range []string{"immediate","short","medium","long"}{
    p,ok:=m.Plans[h];if !ok{continue}
-   if p.Deadline>0&&p.Deadline<=s.Minute||p.Scope=="vip"&&s.World.Exam!=nil&&s.World.Exam.Phase=="settled"{
+   if p.Deadline>0&&p.Deadline<=s.Minute||p.Scope=="vip"&&examFor(*s,id)!=nil&&examFor(*s,id).Phase=="settled"{
     delete(m.Plans,h);changed=true
     appendEvent(s,Event{Kind:"plan_end",Actor:id,Text:"Plano "+h+" encerrado por prazo ou fim do exame.",Audience:[]string{id},Evidence:p.Evidence})
    }

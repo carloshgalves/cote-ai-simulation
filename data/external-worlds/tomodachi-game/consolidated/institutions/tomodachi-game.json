@@ -1,0 +1,75 @@
+{
+  "schema_version": "consolidated-institution-v2",
+  "institution_id": "org.tomodachi-game",
+  "display_name": "Tomodachi Game",
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Tomodachi_Game",
+    "https://tomodachi-game.fandom.com/wiki/Chapter_1",
+    "https://tomodachi-game.fandom.com/wiki/Masakazu_Shibe",
+    "https://tomodachi-game.fandom.com/wiki/%22Kokkuri-San%22_Game",
+    "https://tomodachi-game.fandom.com/wiki/Backbiting_Sugoroku",
+    "https://tomodachi-game.fandom.com/wiki/Friendship_Hide-And-Seek",
+    "https://tomodachi-game.fandom.com/wiki/All_Bet",
+    "https://tomodachi-game.fandom.com/wiki/The_Friendless_Game"
+  ],
+  "domains": {
+    "governance": {
+      "description": "Secretive commercial game operation administered through staff and Manabu persona; audience funding creates spectator incentives.",
+      "context_evidence_refs": [
+        "tg.ev.institution.audience-judgment"
+      ]
+    },
+    "economy": {
+      "currency": "JPY",
+      "initial_group_c_debt": 20000000,
+      "initial_equal_share": 4000000,
+      "participant_count": 5,
+      "participation_fee_rate": {
+        "value": 0.1,
+        "status": "provisional"
+      },
+      "description": "Debt ledger and rewards must be conserved under explicitly configured transfer rules.",
+      "context_evidence_refs": [
+        "tg.ev.institution.initial-debt",
+        "tg.ev.institution.contract-wagers"
+      ]
+    },
+    "roles": {
+      "description": "Management, observers, contestants, funding audience and external investigators have separate permissions.",
+      "context_evidence_refs": [
+        "tg.ev.institution.team-discovery"
+      ]
+    },
+    "information": {
+      "description": "Rules can vary by game and be individually disclosed; staff identity, player secrets and leadership are not public by default.",
+      "context_evidence_refs": [
+        "tg.ev.institution.secret-question-incentive",
+        "tg.ev.institution.private-passwords"
+      ]
+    },
+    "progression": {
+      "description": "Regular games followed by adult games; unofficial and bonus games are not required progression."
+    }
+  },
+  "private_truth_candidates": [
+    {
+      "fact": "Masakazu Shibe is associated with concealed leadership",
+      "visibility": "owner_only_until_acquisition"
+    }
+  ],
+  "owner_truth_boundary": "Institutional truth is never agent knowledge by default",
+  "runtime_ready": false,
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "evidence_refs": [
+    "tg.ev.institution.initial-debt",
+    "tg.ev.institution.secret-question-incentive",
+    "tg.ev.institution.audience-judgment",
+    "tg.ev.institution.team-discovery",
+    "tg.ev.institution.contract-wagers",
+    "tg.ev.institution.private-passwords"
+  ],
+  "operational_migration": "Explicit scenario selection only, no COTE canon import"
+}

@@ -29,6 +29,7 @@ type Session struct {
 	state State
 	model Model
 	lock *os.File
+ segmentHead string
 }
 
 type Progress struct {
@@ -43,11 +44,14 @@ type Progress struct {
 	Phase string `json:"phase"`
 	LastError string `json:"last_error,omitempty"`
 	Choices []Chosen `json:"choices"`
+ ModelCalls uint64 `json:"model_calls"`
 }
 func (s *Session) Progress() Progress {
-	s.mu.Lock();defer s.mu.Unlock()
+	s.mu.Lock()
 	p:=s.progress
 	p.Choices=clone(p.Choices)
+	s.mu.Unlock()
+ if r,ok:=s.model.(*Router);ok{p.ModelCalls=r.SimulationAttempts()}
 	return p
 }
 func (s *Session) Cancel(round int) bool {
@@ -70,6 +74,7 @@ type Snapshot struct {
  Population map[string]PublicMember `json:"population,omitempty"`
  Identities map[string]CharacterIdentity `json:"identities,omitempty"`
  NeedsInference bool `json:"needs_inference,omitempty"`
+ SaveName string `json:"save_name"`
 }
 
 func Open(path,name string,model Model) (*Session,error) {return openVersion(path,name,model,Version)}
@@ -81,6 +86,26 @@ func OpenCognition(path,name string,model Model)(*Session,error){return openVers
 func OpenSelective(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SelectiveVersion)}
 // OpenAutonomy creates v9 journals; earlier journals are replayed unchanged.
 func OpenAutonomy(path,name string,model Model)(*Session,error){return openVersion(path,name,model,AutonomyVersion)}
+func OpenStaffCare(path,name string,model Model)(*Session,error){return openVersion(path,name,model,StaffCareVersion)}
+func OpenContact(path,name string,model Model)(*Session,error){return openVersion(path,name,model,ContactVersion)}
+func OpenMotivation(path,name string,model Model)(*Session,error){return openVersion(path,name,model,MotivationVersion)}
+func OpenObservation(path,name string,model Model)(*Session,error){return openVersion(path,name,model,ObservationVersion)}
+func OpenVeteran(path,name string,model Model)(*Session,error){return openVersion(path,name,model,VeteranVersion)}
+func OpenPhysical(path,name string,model Model)(*Session,error){return openVersion(path,name,model,PhysicalVersion)}
+func OpenCompactContext(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CompactContextVersion)}
+func OpenCalibrated(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CalibratedVersion)}
+func OpenCrossover(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CrossoverVersion)}
+func OpenCalendar(path,name string,model Model)(*Session,error){return openVersion(path,name,model,CalendarVersion)}
+func OpenPortfolio(path,name string,model Model)(*Session,error){return openVersion(path,name,model,PortfolioVersion)}
+func OpenMultiresolution(path,name string,model Model)(*Session,error){return openVersion(path,name,model,MultiresolutionVersion)}
+func OpenHierarchical(path,name string,model Model)(*Session,error){return openVersion(path,name,model,HierarchicalVersion)}
+func OpenSegmented(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SegmentedVersion)}
+func OpenWholeGrade(path,name string,model Model)(*Session,error){return openVersion(path,name,model,WholeGradeVersion)}
+func OpenSocial(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SocialVersion)}
+func OpenFidelity(path,name string,model Model)(*Session,error){return openVersion(path,name,model,FidelityVersion)}
+func OpenSchoolExams(path,name string,model Model)(*Session,error){return openVersion(path,name,model,SchoolExamVersion)}
+func OpenInstitutional(path,name string,model Model)(*Session,error){return openVersion(path,name,model,InstitutionalVersion)}
+func OpenClassPoll(path,name string,model Model)(*Session,error){return openVersion(path,name,model,ClassPollVersion)}
 func openVersion(path,name string,model Model,version int) (*Session,error) {
 	if model==nil||!validText(name,200){return nil,errors.New("model required")}
 	path,err:=filepath.Abs(path);if err!=nil{return nil,err}
@@ -98,7 +123,9 @@ func openVersion(path,name string,model Model,version int) (*Session,error) {
 		profiles,err:=decodeStrict[[]Profile](defaultProfiles);if err!=nil{return nil,err}
 		j=Journal{Version:version,Profiles:profiles,Model:name,Rounds:[]Round{}}
   if version>=PopulationVersion{if err:=expandPopulation(&j);err!=nil{return nil,err}}
+  if version>=CrossoverVersion{if err:=admitExternalStudents(&j);err!=nil{return nil,err}}
   if version>=CognitionVersion{initializeIdentities(&j)}
+  if version>=FidelityVersion{if err:=attachCorpus(&j);err!=nil{return nil,err}}
 		if version>=WorldVersion{seed,err:=randomSecret();if err!=nil{return nil,err};sum:=sha256.Sum256([]byte(seed));j.WorldSeed=fmt.Sprintf("%x",sum)}
 		if _,err:=Replay(j);err!=nil{return nil,err}
 		if err:=createJournal(path,j);err!=nil{return nil,err}
@@ -112,9 +139,10 @@ func openVersion(path,name string,model Model,version int) (*Session,error) {
 		j,err=decodeStrict[Journal](raw);if err!=nil{return nil,errors.New("invalid save JSON")}
 		if _,routed:=model.(*Router);j.Model!=name&&!routed{return nil,errors.New("save uses a different model; select its original model or a new save")}
 	}
-	s,err:=Replay(j);if err!=nil{return nil,err}
+	var state State;var head string
+ if j.Version>=SegmentedVersion{j,state,head,err=loadSegments(path,j)}else{state,err=Replay(j)};if err!=nil{return nil,err}
 	opened=true
-	return &Session{path:path,journal:j,state:s,model:model,lock:lock},nil
+	return &Session{path:path,journal:j,state:state,model:model,lock:lock,segmentHead:head},nil
 }
 
 func (s *Session) Close() error {
@@ -149,10 +177,10 @@ func replaceJournal(path string,j Journal) error {
 }
 func (s *Session) snapshot() Snapshot {
 	people:=[]Person{}
-	for _, p:=range s.journal.Profiles {people=append(people,Person{p.ID,p.Name,p.Class})}
+	for _, p:=range s.journal.Profiles {people=append(people,Person{p.ID,p.Name,classOf(s.journal,p.ID)})}
 	last:=[]Chosen{}
 	if n:=len(s.journal.Rounds);n>0{last=clone(s.journal.Rounds[n-1].Choices)}
-	return Snapshot{Identities:clone(s.journal.Identities),NeedsInference:s.needsInferenceLocked(),Population:publicPopulation(s.journal,s.state),LastChoices:last,State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:roundLimit(s.journal.Version),Done:s.state.Round>=roundLimit(s.journal.Version)||(s.journal.Version>=Version&&s.state.Minute>=endMinute(s.journal.Version)),Version:s.journal.Version}
+	return Snapshot{SaveName:filepath.Base(s.path),Identities:clone(s.journal.Identities),NeedsInference:s.needsInferenceLocked(),Population:publicPopulation(s.journal,s.state),LastChoices:last,State:clone(s.state),People:people,Model:s.journal.Model,Digest:Digest(s.journal),Limit:roundLimit(s.journal.Version),Done:s.state.Round>=roundLimit(s.journal.Version)||(s.journal.Version>=Version&&s.state.Minute>=endMinute(s.journal.Version)),Version:s.journal.Version}
 }
 func (s *Session) Snapshot() Snapshot {
 	s.mu.Lock();defer s.mu.Unlock();return s.snapshot()
@@ -189,15 +217,18 @@ func (s *Session) step(ctx context.Context,expected int,allowModel bool) (result
 	}()
 	var err error
 	r:=Round{Number:expected+1,Choices:append([]Chosen{},s.pending...)}
+ if journal.Version>=SegmentedVersion{if rt,ok:=s.model.(*Router);ok&&rt.parallelEligible(){choices,e:=s.parallelChoices(ctx,journal,state,order[len(r.Choices):]);r.Choices=append(r.Choices,choices...);s.mu.Lock();s.pending=clone(r.Choices);s.progress.Completed=len(r.Choices);s.progress.Choices=clone(r.Choices);s.mu.Unlock();if e!=nil{return Snapshot{},e}}}
 	for _, id:=range order[len(r.Choices):] {
 		if err:=ctx.Err();err!=nil{return Snapshot{},err}
-		view:=actorContext(journal,state,id)
+		var view Context
+		if journal.Version<HierarchicalVersion||decisionNeedsModel(journal,state,id){view=actorContext(journal,state,id)}
 		var problem string
 		var d Decision
 		failure:=""
   if journal.Version>=PopulationVersion&&!decisionNeedsModel(journal,state,id){
    s.mu.Lock();s.progress.Actor=id;s.progress.Attempt=0;s.progress.ActorStartedAt=time.Now();s.progress.LastError="";s.mu.Unlock()
    d=routineDecision(journal,state,id)
+   if journal.Version>=HierarchicalVersion{view=routineValidationContext(journal,state,id)}
    if err:=validateDecision(view,d);err!=nil{return Snapshot{},fmt.Errorf("rotina %s: %w",id,err)}
   }else{
 		for attempt:=1;attempt<=3;attempt++ {
@@ -237,15 +268,15 @@ func (s *Session) step(ctx context.Context,expected int,allowModel bool) (result
 		s.mu.Lock();s.pending=nil;s.mu.Unlock()
 		return Snapshot{},errors.New("nenhum agente produziu decisão válida; rodada não avançou")
 	}
-	r.Minute,err=nextEventMinute(journal,state,r.Choices);if err!=nil{return Snapshot{},err}
-	next,err:=apply(journal,state,r);if err!=nil{return Snapshot{},err}
+	var next State
+	if journal.Version>=HierarchicalVersion{next,err=scheduledAdvance(journal,state,r.Choices);if err!=nil{return Snapshot{},err};r.Minute=next.Minute}else{r.Minute,err=nextEventMinute(journal,state,r.Choices);if err!=nil{return Snapshot{},err};next,err=apply(journal,state,r);if err!=nil{return Snapshot{},err}}
 	j:=journal
 	j.Rounds=append(append([]Round(nil),j.Rounds...),r)
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	if err:=ctx.Err();err!=nil{return Snapshot{},err}
 	s.progress.Phase="saving"
-	if err:=replaceJournal(s.path,j);err!=nil{return Snapshot{},errors.New("falha ao salvar rodada; estado não publicado")}
+	if err:=s.commitRounds(j,next,[]Round{r});err!=nil{return Snapshot{},fmt.Errorf("falha ao salvar rodada: %w",err)}
 	s.journal=j;s.state=next;s.pending=nil
 	return s.snapshot(),nil
 }
@@ -274,3 +305,23 @@ func(s *Session) AdvanceUntilEvent(ctx context.Context,expected int)(AdvanceResu
  result.Reason="Rotinas avançadas; nenhum acontecimento novo neste lote"
  return result,nil
 }
+
+ // AdvanceRoutineTo advances only the normal, committed scheduler cycles.
+ // It stops before an inference request and never creates substitute dialogue.
+ func(s *Session) AdvanceRoutineTo(ctx context.Context,expected int,target int64)(AdvanceResult,error){
+  result:=AdvanceResult{Snapshot:s.Snapshot()}
+  if result.Snapshot.Version<CognitionVersion{return result,errors.New("avanço por data requer v7")}
+  if result.Snapshot.State.Round!=expected{return result,errors.New("rodada já alterada")}
+  if result.Snapshot.Version>=MultiresolutionVersion{return s.advanceRoutineMacro(ctx,expected,target)}
+  if target<=result.Snapshot.State.Minute||target>result.Snapshot.State.Minute+7*1440+480||target>endMinute(result.Snapshot.Version)||target%1440!=480{return result,errors.New("data de destino inválida")}
+  for i:=0;i<64;i++{
+   if err:=ctx.Err();err!=nil{return result,err}
+   if result.Snapshot.State.Minute>=target{result.Reason="Data de destino atingida";return result,nil}
+   if result.Snapshot.Done{result.Reason="Limite do piloto atingido";return result,nil}
+   if result.Snapshot.NeedsInference{result.Reason="Decisão cognitiva necessária; nenhuma decisão substituída";return result,nil}
+   next,err:=s.step(ctx,result.Snapshot.State.Round,false);if err!=nil{return result,err}
+   result.Snapshot=next;result.Cycles++
+  }
+  if result.Snapshot.State.Minute>=target{result.Reason="Data de destino atingida"}else{result.Reason="Lote de rotinas concluído"}
+  return result,nil
+ }

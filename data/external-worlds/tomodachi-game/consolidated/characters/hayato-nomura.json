@@ -1,0 +1,54 @@
+{
+  "schema_version": "consolidated-character-v2",
+  "character_id": "actor.hayato-nomura",
+  "display_name": "Hayato Nomura",
+  "modeling_tier": "INTERMEDIATE_CANDIDATE",
+  "source_coverage": [
+    "tg.secondary.2026-11-25"
+  ],
+  "source_status": "OPERATOR_ADMITTED_SECONDARY",
+  "identity": {
+    "role_summary": "Friendship Janken participant, childhood acquaintance of Kenji",
+    "aliases": []
+  },
+  "knowledge_time_policy": {
+    "canonical_after_divergence_is_not_actor_memory": true,
+    "actor_knowledge_requires_acquisition_event": true
+  },
+  "domains": {
+    "identity": {
+      "behavioral_case_refs": [],
+      "context_evidence_refs": [
+        "tg.ev.hayato-nomura.identity"
+      ]
+    },
+    "strategy": {
+      "behavioral_case_refs": [
+        "tg.case.hayato-nomura.propose-coordinated-hand"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.hayato-nomura.propose-coordinated-hand"
+      ]
+    },
+    "communication": {
+      "behavioral_case_refs": [
+        "tg.case.hayato-nomura.propose-coordinated-hand"
+      ],
+      "context_evidence_refs": [
+        "tg.ev.hayato-nomura.propose-coordinated-hand"
+      ]
+    }
+  },
+  "source_documents": [
+    "https://tomodachi-game.fandom.com/wiki/Friendship_Janken"
+  ],
+  "historical_context_only": false,
+  "uncertainties": [
+    "Limited secondary evidence"
+  ],
+  "generation_policy": "One pack per actor",
+  "retrieval_policy": {
+    "behavioral_demonstration": "owner-side capability prior only",
+    "contextual_facts": "require acquisition"
+  }
+}

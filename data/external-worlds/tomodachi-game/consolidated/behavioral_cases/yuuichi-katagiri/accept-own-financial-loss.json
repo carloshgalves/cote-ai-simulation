@@ -1,0 +1,48 @@
+{
+  "id": "tg.case.yuuichi-katagiri.accept-own-financial-loss",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "accept own financial loss",
+  "context": "A board rule shifts accumulated debt onto the first finisher; a proven falsehood can change placement.",
+  "observed_actions": "Admits a false statement and accepts an adverse position to let others avoid the next game.",
+  "observed_result": "Prioritizes friends' release over immediate individual finances.",
+  "epistemic_limits": "Requires a legal adjudication and actual resources; future participants need not follow.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_6",
+    "locator": "SUGOROKU",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "motivation",
+    "strategy",
+    "risk_management"
+  ],
+  "information_available": "A board rule shifts accumulated debt onto the first finisher; a proven falsehood can change placement.",
+  "counterfactual_test": "An alternate game lets one contestant absorb a group penalty to release others. Evaluates whether taking the loss advances a chosen objective. Reject: Always takes the loss regardless of severity or relationship.",
+  "topics": [
+    "motivation",
+    "strategy",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.accept-own-financial-loss"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": true,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "An alternate game lets one contestant absorb a group penalty to release others.",
+    "expected_tendency": "Evaluates whether taking the loss advances a chosen objective.",
+    "anti_case": "Always takes the loss regardless of severity or relationship.",
+    "canon_outcome_as_instruction": false
+  }
+}

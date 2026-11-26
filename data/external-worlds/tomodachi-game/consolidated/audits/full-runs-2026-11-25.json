@@ -1,0 +1,105 @@
+{
+  "method": "Executed resolver and runner source in V8 using scripted decision policies; each terminal result replayed; host facts are trusted fixture inputs",
+  "results": [
+    {
+      "game": "kokkuri-san",
+      "rounds": 2,
+      "terminal": true,
+      "winners": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "game": "backbiting-sugoroku",
+      "rounds": 20,
+      "terminal": true,
+      "winners": []
+    },
+    {
+      "game": "hide-and-seek",
+      "rounds": 1,
+      "terminal": true,
+      "winners": [
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "game": "friend-sin-trial",
+      "rounds": 1,
+      "terminal": true,
+      "winners": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "game": "friends-prison",
+      "rounds": 1,
+      "terminal": true,
+      "winners": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    {
+      "game": "all-bet",
+      "rounds": 7,
+      "terminal": true,
+      "winners": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "game": "friend-murder",
+      "rounds": 10,
+      "terminal": true,
+      "winners": [
+        "a"
+      ]
+    },
+    {
+      "game": "friendless",
+      "rounds": 14,
+      "terminal": true,
+      "winners": [
+        "a"
+      ]
+    },
+    {
+      "game": "friendship-janken",
+      "rounds": 3,
+      "terminal": true,
+      "winners": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "game": "fake-game",
+      "rounds": 1,
+      "terminal": true,
+      "winners": [
+        "a"
+      ]
+    }
+  ],
+  "private_rule_projection": "PASS",
+  "native_csf": false,
+  "llm_api": false,
+  "external_review": false
+}

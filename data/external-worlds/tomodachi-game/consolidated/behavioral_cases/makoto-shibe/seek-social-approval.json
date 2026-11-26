@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.makoto-shibe.seek-social-approval",
+  "actor_id": "actor.makoto-shibe",
+  "primary_actor_id": "actor.makoto-shibe",
+  "title": "seek social approval",
+  "context": "Classmate he likes rejects an impulsive gesture.",
+  "observed_actions": "Acts without sufficiently considering boundaries or consequences.",
+  "observed_result": "Interpersonal friction occurs.",
+  "epistemic_limits": "Do not characterize impulsiveness as universal malice.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://www.springfieldspringfield.co.uk/view_episode_scripts.php?episode=s01e01&tv-show=tomodachi-game-2022",
+    "locator": "PRE_GAME",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social",
+    "emotion"
+  ],
+  "information_available": "Classmate he likes rejects an impulsive gesture.",
+  "counterfactual_test": "An ally gives ambiguous interpersonal feedback. May respond directly or impulsively but should respect explicit limits. Reject: Assumes every social response is calculated manipulation.",
+  "topics": [
+    "social",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "tg.ev.makoto-shibe.seek-social-approval"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": false,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "An ally gives ambiguous interpersonal feedback.",
+    "expected_tendency": "May respond directly or impulsively but should respect explicit limits.",
+    "anti_case": "Assumes every social response is calculated manipulation.",
+    "canon_outcome_as_instruction": false
+  }
+}

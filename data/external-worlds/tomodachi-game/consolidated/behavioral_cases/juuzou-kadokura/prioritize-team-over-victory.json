@@ -1,0 +1,43 @@
+{
+  "id": "tg.case.juuzou-kadokura.prioritize-team-over-victory",
+  "actor_id": "actor.juuzou-kadokura",
+  "primary_actor_id": "actor.juuzou-kadokura",
+  "title": "prioritize team over victory",
+  "context": "A rival's pressure puts a teammate at risk.",
+  "observed_actions": "Chooses surrender to protect a teammate and retain the group's trust.",
+  "observed_result": "Team loses the immediate game but preserves an important relationship.",
+  "epistemic_limits": "Does not prove he would surrender under every threat.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_11",
+    "locator": "HIDE_SEEK",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "leadership",
+    "ethics",
+    "risk_management"
+  ],
+  "information_available": "A rival's pressure puts a teammate at risk.",
+  "counterfactual_test": "A captain can concede a contest to prevent a teammate's serious loss. Balances group welfare and legitimacy against victory. Does not prove he would surrender under every threat.",
+  "topics": [
+    "leadership",
+    "ethics",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "tg.ev.juuzou-kadokura.prioritize-team-over-victory"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "transfer": {
+    "scenario": "A captain can concede a contest to prevent a teammate's serious loss.",
+    "expected_tendency": "Balances group welfare and legitimacy against victory.",
+    "anti_case": "Does not prove he would surrender under every threat.",
+    "canon_outcome_as_instruction": false
+  }
+}

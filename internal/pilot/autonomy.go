@@ -41,6 +41,7 @@ func personalPrior(j Journal,s State,id string) routinePrior {
 }
 
 func initiativeDue(j Journal,s State,id string) bool {
+ if j.Version>=MotivationVersion{return personalOpportunity(j,s,id)!=nil}
  if j.Version<AutonomyVersion{return isStudent(j,id)&&lightInitiativeDue(s,id)}
  if !isStudent(j,id){return false}
  m:=s.Minds[id]
@@ -89,6 +90,7 @@ func autonomousRoutine(j Journal,s State,id string) Decision {
   if minutes<1{minutes=1};if minutes>60{minutes=60}
   d.WaitMinutes=int(minutes);return d
  }
+ if j.Version>=StaffCareVersion&&a.Role!="student"{return staffCareDecision(j,s,id)}
  if m.NextDeliberation>s.Minute{return waitFor(m.NextDeliberation-s.Minute)}
  if at:=nextCommitmentDeparture(j,s,id);at>s.Minute&&at-s.Minute<60{d.WaitMinutes=int(at-s.Minute)}
  v:=Context{Location:m.Location,Locations:worldLocations(id),School:schoolView(j,s,id)}
@@ -147,15 +149,18 @@ func autonomousRoutine(j Journal,s State,id string) Decision {
  case "jantar e repouso":
   if m.Body==nil||m.Body.Energy<550||m.Body.Hydration<550{return goOr("cafeteria","eat","free")}
   return goOr("dormitory-"+id,"rest","")
- case "atividades livres":
+ case "atividades livres","período livre":
+  if j.Version<HierarchicalVersion&&period=="período livre"{return goOr(classroom,"study","")}
   // A modest, infrequent discretionary purchase is a versioned fallback
   // prior, not a canonical spending habit. Preserve an ample balance.
   day:=s.Minute/1440+1
   h:=sha256.Sum256([]byte(fmt.Sprintf("%s/pilot-v9/leisure/%s/%d",j.WorldSeed,id,day)))
-  if m.LastRoutinePurchaseDay!=day&&m.Wallet>=10000&&h[0]%7==0&&s.Minute%1440<1020&&(meeting==nil||meeting.At-s.Minute>60){
+  if (j.Version<HierarchicalVersion||period=="atividades livres")&&m.LastRoutinePurchaseDay!=day&&m.Wallet>=10000&&h[0]%7==0&&s.Minute%1440<1020&&(meeting==nil||meeting.At-s.Minute>60){
    return goOr("mall","recreation","")
   }
-  switch personalPrior(j,s,id).leisure{
+  leisure:=personalPrior(j,s,id).leisure
+  if j.Version>=PhysicalVersion&&leisure=="exercise"&&!allowsVigorousExercise(j,id){leisure="relax"}
+  switch leisure{
   case "read":return goOr("library","read","")
   case "exercise":
    if m.Body!=nil&&(m.Body.Energy<600||m.Body.Hydration<600||m.Body.Fatigue>500){return goOr("park","relax","")}
@@ -171,6 +176,7 @@ func autonomousRoutine(j Journal,s State,id string) Decision {
 // Only simultaneous, completed and co-located leisure sessions create a
 // shared encounter. No scripted speech, inferred trust or forced friendship.
 func completeSharedLeisure(j Journal,s *State){
+ if j.Version>=HierarchicalVersion{recordOverlappingLeisure(j,s);return}
  groups:=[]string{}
  for _,id:=range ids(j.Profiles){
   m:=s.Minds[id]

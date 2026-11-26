@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.yuuichi-katagiri.support-isolated-ally",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "support isolated ally",
+  "context": "HIDE_SEEK; secondary-source account",
+  "observed_actions": "Eventually supplies Tenji after shaking off opposing surveillance.",
+  "observed_result": "Maintains the hider's participation despite prior distrust.",
+  "epistemic_limits": "Success depended on particular opponent behavior and access to food.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Episode_10",
+    "locator": "HIDE_SEEK",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "cooperation",
+    "strategy"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Success depended on particular opponent behavior and access to food. Allow failure.",
+  "topics": [
+    "cooperation",
+    "strategy"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.support-isolated-ally"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

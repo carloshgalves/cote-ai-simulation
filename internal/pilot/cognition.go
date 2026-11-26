@@ -32,6 +32,7 @@ type CharacterIdentity struct{
  Background []BackgroundFact `json:"background"`
  Memory MemoryCapabilityProfile `json:"memory_profile"`
  Status string `json:"status"`
+ Physical *PilotPhysicalPolicy `json:"physical_policy,omitempty"`
 }
 func initializeIdentities(j *Journal){
  j.Identities=map[string]CharacterIdentity{}
@@ -103,6 +104,9 @@ func initializeIdentities(j *Journal){
    for k,g:=range p.Goals{if strings.Contains(strings.ToLower(g),"oportunidades da classe")||strings.Contains(strings.ToLower(g),"riscos e oportunidades da classe"){p.Goals[k]="Avaliar oportunidades acadêmicas e sociais concretas"}}
    j.Profiles[i]=p;ident.Motivations=clone(p.Goals)
   }
+  if j.Version>=VeteranVersion{seedVeteranIdentity(*j,p.ID,&ident)}
+  if j.Version>=PhysicalVersion{ident.Physical=physicalPolicyFor(p.ID)}
+  if j.Version>=CrossoverVersion{applyExternalIdentity(*j,p.ID,&ident)}
   j.Identities[p.ID]=ident
  }
 }
@@ -126,9 +130,11 @@ func initializeCognition(j Journal,s *State){
 func projectIdentity(j Journal,s State,id string,c *Context){
  x:=clone(j.Identities[id]);c.Identity=&x
  m:=s.Minds[id];c.Body=clone(m.Body);c.Social=clone(m.Social);c.Plans=clone(m.Plans)
+ if j.Version>=CompactContextVersion{c.Interoception=qualitativeBody(m.Body);c.Body=nil}
  if m.PendingStimulus!=""{c.WakeReason=m.PendingStimulus}
  c.OwnCanon.PrivateKnowledge=nil;c.OwnCanon.Dispositions=nil
  c.OwnCanon.Status="Perfil inicial em identity; não recuperar acontecimentos futuros."
+ if j.Version>=FidelityVersion{c.BehaviorGuidance=selectBehaviorGuidance(j,s,id);c.PracticeMinutes=clone(m.PracticeMinutes)}
  // Do not expose old self.goals or background fields containing redundant
  // knowledge; use the frozen identity instead.
  c.Self.Background=nil
@@ -146,7 +152,8 @@ func retrieveMemory(j Journal,s State,id string,events []Event,keep map[string]b
   if age>p.RetentionDays*1440{continue}
   score:=-age*int64(101-p.Accessibility)/60
   if has([]string{"claim","meeting","exam","resource","social"},e.Kind){score+=int64(p.Encoding)*2}
-  if other,ok:=s.Minds[e.Actor];ok&&e.Actor!=id&&other.Location==s.Minds[id].Location{score+=int64(p.Retrieval)}
+  if other,ok:=s.Minds[e.Actor];ok&&e.Actor!=id&&other.Location==s.Minds[id].Location&&(j.Version<FidelityVersion||other.Activity==nil||other.Activity.Kind!="move"){score+=int64(p.Retrieval)}
+  if j.Version>=FidelityVersion{score+=contextualMemoryScore(s,id,e,p)}
   if age<120{score+=int64(p.Accessibility)}
   pool=append(pool,candidate{e,score})
  }

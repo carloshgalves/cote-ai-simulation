@@ -36,6 +36,7 @@ type Cohort struct{
  Count int `json:"count"`
  Location string `json:"location"`
  Tier string `json:"tier"`
+ Year int `json:"year,omitempty"`
 }
 func expandPopulation(j *Journal)error{
  var entries []PopulationEntry
@@ -76,7 +77,7 @@ func initializePopulation(j Journal,s *State){
 func publicPopulation(j Journal,s State)map[string]PublicMember{
  if j.Version<PopulationVersion{return nil}
  out:=map[string]PublicMember{}
- for id,a:=range j.Population{out[id]=PublicMember{Role:a.Role,Year:a.Year,Tier:s.Minds[id].Tier}}
+ for id,a:=range j.Population{role:=a.Role;if expelled(s,id){role="former-student"};out[id]=PublicMember{Role:role,Year:a.Year,Tier:s.Minds[id].Tier}}
  return out
 }
 func projectPopulation(j Journal,s State,id string,c *Context){
@@ -87,7 +88,7 @@ func projectPopulation(j Journal,s State,id string,c *Context){
  if !a.Core{c.OwnCanon=CanonProjection{Source:a.Source,SchoolYear:a.Year,Status:"Identidade provisória; sem episódios posteriores à divergência"}}
  c.Locations=append(c.Locations,"class-a","staffroom","senior-class-a","senior-class-b","senior-class-c","senior-class-d","senior-common")
  if a.Role!="student"{
-  filtered:=[]string{};for _,loc:=range c.Locations{if !strings.HasPrefix(loc,"dormitory-"){filtered=append(filtered,loc)}};c.Locations=filtered
+  filtered:=[]string{};for _,loc:=range c.Locations{if !strings.HasPrefix(loc,"dormitory-")||j.Version>=StaffCareVersion&&loc=="dormitory-"+id{filtered=append(filtered,loc)}};c.Locations=filtered
  }else{
   filtered:=[]string{};for _,loc:=range c.Locations{if loc!="staffroom"{filtered=append(filtered,loc)}};c.Locations=filtered
  }
@@ -152,7 +153,7 @@ func routineDecision(j Journal,s State,id string)Decision{
 }
 func wakeOnMovement(j Journal,s *State,id,actor,reason string){
  if j.Version>=CognitionVersion{
-  if strings.Contains(reason,"chegou")&&recognizes(j,id,actor)&&s.Minds[id].Social[actor].Interactions==0{stimulate(s,id,"Presença de pessoa conhecida antes da matrícula");return}
+  if strings.Contains(reason,"chegou")&&recognizes(j,id,actor)&&s.Minds[id].Social[actor].Interactions==0&&(j.Version<CalibratedVersion||s.Minds[id].LastDeliberationMinute==0||s.Minute-s.Minds[id].LastDeliberationMinute>=180){stimulate(s,id,"Presença de pessoa conhecida antes da matrícula");return}
   if j.Version>=SelectiveVersion||s.Minds[id].AwaitEvent{return}
  }
  if j.Version>=PopulationVersion&&(s.Minds[actor].Tier!=FullTier||s.Minds[id].Tier!=FullTier){return}
@@ -173,6 +174,7 @@ func engage(j Journal,s *State,from,to string){
 func updatePopulation(j Journal,s *State){
  for _,id:=range ids(j.Profiles){
   a,m:=j.Population[id],s.Minds[id]
+  if expelled(*s,id){continue}
   if a.Core||a.InitialTier==FullTier||m.Conversation!=nil{continue}
   old:=m.Tier
   if m.Tier==FullTier&&s.Minute-m.LastEngagement>=2880{m.Tier=LightTier;m.Engagements=0}
@@ -183,6 +185,7 @@ func updatePopulation(j Journal,s *State){
  updateCohorts(j,s)
 }
 func updateCohorts(j Journal,s *State){
+ if j.Version>=WholeGradeVersion{updateGradeCohorts(j,s);return}
  s.Cohorts=[]Cohort{}
  for _,class:=range []string{"A","B","C","D"}{
   n:=40

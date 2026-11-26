@@ -1,0 +1,20 @@
+{
+  "game": "kokkuri-san",
+  "players": [
+    "actor.makoto-shibe",
+    "actor.shiho-sawaragi",
+    "actor.tenji-mikasa",
+    "actor.yuuichi-katagiri",
+    "actor.yutori-kokorogi"
+  ],
+  "hostRounds": [
+    {},
+    {},
+    {},
+    {},
+    {
+      "finalAnswer": "yes"
+    }
+  ],
+  "maxRounds": 5
+}

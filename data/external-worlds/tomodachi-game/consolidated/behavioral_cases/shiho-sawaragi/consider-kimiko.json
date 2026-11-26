@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.shiho-sawaragi.consider-kimiko",
+  "actor_id": "actor.shiho-sawaragi",
+  "primary_actor_id": "actor.shiho-sawaragi",
+  "title": "consider kimiko",
+  "context": "FRIENDLESS; secondary-source account",
+  "observed_actions": "Initially regards Kimiko as reckless but well-intentioned.",
+  "observed_result": "Forms a favorable yet provisional social impression.",
+  "epistemic_limits": "An impression must not become objective truth.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Kimiko_Kyouguchi",
+    "locator": "FRIENDLESS",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "observation",
+    "social"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. An impression must not become objective truth. Allow failure.",
+  "topics": [
+    "observation",
+    "social"
+  ],
+  "evidence_refs": [
+    "tg.ev.shiho-sawaragi.consider-kimiko"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

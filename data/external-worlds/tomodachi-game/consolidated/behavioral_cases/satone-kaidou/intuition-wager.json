@@ -1,0 +1,46 @@
+{
+  "id": "tg.case.satone-kaidou.intuition-wager",
+  "actor_id": "actor.satone-kaidou",
+  "primary_actor_id": "actor.satone-kaidou",
+  "title": "intuition wager",
+  "context": "High-stakes hidden-hand contest against Yuuichi.",
+  "observed_actions": "Chooses a hand by intuitive judgment and wins the direct wager.",
+  "observed_result": "Demonstrates a strong decision under uncertainty, not certain future prediction.",
+  "epistemic_limits": "A single result does not establish 100% accuracy.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://renote.net/en/articles/16549",
+    "locator": "ALL_BET",
+    "verification": "UNVERIFIED_SECONDARY",
+    "source_status": "OPERATOR_ADMITTED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "observation",
+    "risk_management"
+  ],
+  "information_available": "High-stakes hidden-hand contest against Yuuichi.",
+  "counterfactual_test": "A contestant must guess a hidden choice using imperfect behavioral cues. Uses a fallible intuition rather than pretending to observe hidden state. Reject: Claims a supernatural sensor or never loses.",
+  "topics": [
+    "observation",
+    "risk_management"
+  ],
+  "evidence_refs": [
+    "tg.ev.satone-kaidou.intuition-wager"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false,
+  "quality_axes": {
+    "incentive_analysis": false,
+    "information_calibration": true,
+    "counterfactual_success_not_guaranteed": true
+  },
+  "transfer": {
+    "scenario": "A contestant must guess a hidden choice using imperfect behavioral cues.",
+    "expected_tendency": "Uses a fallible intuition rather than pretending to observe hidden state.",
+    "anti_case": "Claims a supernatural sensor or never loses.",
+    "canon_outcome_as_instruction": false
+  }
+}

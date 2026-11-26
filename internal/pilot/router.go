@@ -52,12 +52,14 @@ type route struct {
 type cooldown struct {until time.Time; message string}
 type Router struct {
 	mu sync.Mutex
-	callMu sync.Mutex
+	callMu sync.RWMutex
+ busyScopes map[string]bool
 	next int
 	routes []*route
 	cooldowns map[string]cooldown
 	telemetry []CallTelemetry
 	telemetryDropped int
+ simulationAttempts uint64
 	chat *ChatGPTAccount
 	budgets map[string]minuteBudget
 }
@@ -152,7 +154,8 @@ func (r *Router) Change(id,action string)error{
 func (r *Router) Decide(ctx context.Context,view Context)(Decision,error){return r.decide(ctx,view,"")}
 func (r *Router) Repair(ctx context.Context,view Context,problem string)(Decision,error){return r.decide(ctx,view,problem)}
 func (r *Router) decide(ctx context.Context,view Context,problem string)(Decision,error){
-	r.callMu.Lock();defer r.callMu.Unlock()
+	if view.Version>=SegmentedVersion{return r.decideConcurrent(ctx,view,problem)}
+ r.callMu.Lock();defer r.callMu.Unlock()
 	r.mu.Lock();routes:=append([]*route{},r.routes...);r.mu.Unlock()
 	for _,rt:=range routes{
 		if err:=ctx.Err();err!=nil{return Decision{},err}
@@ -245,7 +248,7 @@ func (r *Router) callRoute(ctx context.Context,rt *route,view Context,problem st
 		r.mu.Unlock()
 		t:=CallTelemetry{StartedAt:start,Actor:view.Self.ID,Cycle:view.Round,Provider:rt.view.Provider,Model:rt.view.Model,RouteID:rt.view.ID,Repair:repair!="",Format:m.Format}
 		m.telemetry=&t
-		r.mu.Lock();rt.view.Attempts++;r.mu.Unlock()
+		r.mu.Lock();rt.view.Attempts++;if view.Round>0{r.simulationAttempts++};r.mu.Unlock()
 		d,err:=m.decide(ctx,view,repair)
 		if err==nil{if validation:=validateDecision(view,d);validation!=nil{err=responseError{validation.Error()}}}
 		r.mu.Lock()

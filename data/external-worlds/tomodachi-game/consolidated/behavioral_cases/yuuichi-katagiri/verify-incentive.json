@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.yuuichi-katagiri.verify-incentive",
+  "actor_id": "actor.yuuichi-katagiri",
+  "primary_actor_id": "actor.yuuichi-katagiri",
+  "title": "verify incentive",
+  "context": "KOKKURI; secondary-source account",
+  "observed_actions": "Examines the rule that a negative result can reduce the questioner's personal debt.",
+  "observed_result": "Identifies a conflict between group completion and individual gain.",
+  "epistemic_limits": "Only knows instructions actually seen; cannot read another person's debt.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/%22Kokkuri-San%22_Game",
+    "locator": "KOKKURI",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "reasoning",
+    "economy"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Only knows instructions actually seen; cannot read another person's debt. Allow failure.",
+  "topics": [
+    "reasoning",
+    "economy"
+  ],
+  "evidence_refs": [
+    "tg.ev.yuuichi-katagiri.verify-incentive"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}

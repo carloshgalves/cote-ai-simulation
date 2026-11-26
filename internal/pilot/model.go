@@ -23,6 +23,26 @@ const PopulationVersion = 6
 const CognitionVersion = 7
 const SelectiveVersion = 8
 const AutonomyVersion = 9
+const StaffCareVersion = 10
+const ContactVersion = 11
+const MotivationVersion = 12
+const ObservationVersion = 13
+const VeteranVersion = 14
+const PhysicalVersion = 15
+const CompactContextVersion = 16
+const CalibratedVersion = 17
+const CrossoverVersion = 18
+const CalendarVersion = 19
+const PortfolioVersion = 20
+const MultiresolutionVersion = 21
+const HierarchicalVersion = 22
+const SegmentedVersion = 23
+const WholeGradeVersion = 24
+const SocialVersion = 25
+const FidelityVersion = 26
+const SchoolExamVersion = 27
+const InstitutionalVersion = 28
+const ClassPollVersion = 29
 const LegacyVersion = 1
 const EndMinute = 540
 const MaxRounds = 200
@@ -85,6 +105,7 @@ type Decision struct {
 	Source string `json:"source,omitempty"`
 	WaitMinutes int `json:"wait_minutes,omitempty"`
 	Discovery *Discovery `json:"discovery,omitempty"`
+ Assessment *SocialAssessment `json:"assessment,omitempty"`
 
 }
 type Event struct {
@@ -123,6 +144,11 @@ type Mind struct {
  PendingStimulus string `json:"pending_stimulus,omitempty"`
  NextDeliberation int64 `json:"next_deliberation,omitempty"`
  LastRoutinePurchaseDay int64 `json:"last_routine_purchase_day,omitempty"`
+ LastOpportunityMinute int64 `json:"last_opportunity_minute,omitempty"`
+ LastDeliberationMinute int64 `json:"last_deliberation_minute,omitempty"`
+ OpportunityDay int64 `json:"opportunity_day,omitempty"`
+ OpportunityCount int `json:"opportunity_count,omitempty"`
+ PracticeMinutes map[string]int64 `json:"practice_minutes,omitempty"`
 }
 type Chosen struct {
 	Actor string `json:"actor"`
@@ -142,6 +168,8 @@ type Journal struct {
  WorldSeed string `json:"world_seed,omitempty"`
  Population map[string]PopulationMember `json:"population,omitempty"`
  Identities map[string]CharacterIdentity `json:"identities,omitempty"`
+ Guidance map[string][]BehaviorGuidance `json:"guidance,omitempty"`
+ PackInventory []PackCoverage `json:"pack_inventory,omitempty"`
 }
 type State struct {
 	Round int `json:"round"`
@@ -181,9 +209,13 @@ type Context struct {
  NearbyCohorts []Cohort `json:"nearby_cohorts,omitempty"`
  Identity *CharacterIdentity `json:"identity,omitempty"`
  Recognized []string `json:"recognized,omitempty"`
+ Opportunity *PersonalOpportunity `json:"opportunity,omitempty"`
+ Interoception *PilotInteroception `json:"interoception,omitempty"`
  Body *PilotBody `json:"body,omitempty"`
  Social map[string]SocialBond `json:"social,omitempty"`
  Plans map[string]PlanChange `json:"plans,omitempty"`
+ BehaviorGuidance []string `json:"behavior_guidance,omitempty"`
+ PracticeMinutes map[string]int64 `json:"practice_minutes,omitempty"`
 }
 type Model interface {
 	Decide(context.Context, Context) (Decision,error)
@@ -221,7 +253,7 @@ func validateProfiles(p []Profile) error {
 	return nil
 }
 func initial(j Journal) (State,error) {
-	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
+	if (j.Version!=Version&&j.Version!=LegacyVersion&&j.Version!=ScheduledVersion&&j.Version!=ConversationVersion&&j.Version!=WorldVersion&&j.Version!=PopulationVersion&&j.Version!=CognitionVersion&&j.Version!=SelectiveVersion&&j.Version!=AutonomyVersion&&j.Version!=StaffCareVersion&&j.Version!=ContactVersion&&j.Version!=MotivationVersion&&j.Version!=ObservationVersion&&j.Version!=VeteranVersion&&j.Version!=PhysicalVersion&&j.Version!=CompactContextVersion&&j.Version!=CalibratedVersion&&j.Version!=CrossoverVersion&&j.Version!=CalendarVersion&&j.Version!=PortfolioVersion&&j.Version!=MultiresolutionVersion&&j.Version!=HierarchicalVersion&&j.Version!=SegmentedVersion&&j.Version!=WholeGradeVersion&&j.Version!=SocialVersion&&j.Version!=FidelityVersion&&j.Version!=SchoolExamVersion&&j.Version!=InstitutionalVersion&&j.Version!=ClassPollVersion) || !validText(j.Model,200) || validateJournalProfiles(j)!=nil {return State{},errors.New("unsupported journal")}
 	if j.Version>=WorldVersion&&len(j.WorldSeed)!=64{return State{},errors.New("invalid world seed")}
  if j.Version>=CognitionVersion{if err:=validateIdentities(j);err!=nil{return State{},err}}
  s:=State{Minute:480,Minds:map[string]Mind{},Events:[]Event{}}
@@ -232,6 +264,7 @@ func initial(j Journal) (State,error) {
  }else{	appendEvent(&s,Event{Kind:"announcement",Actor:"school",Text:"Primeiro dia. A escola abriu o hall, as salas, a biblioteca e o pátio. Os estudantes têm um período livre para conhecer o ambiente e os colegas. A lista de nomes e classes dos seis participantes está disponível a todos. As regras detalhadas serão anunciadas depois.",Audience:ids(j.Profiles)})}
 	if j.Version>=WorldVersion{initializeWorld(j,&s)}
  if j.Version>=CognitionVersion{initializeCognition(j,&s)}
+ if j.Version>=VeteranVersion{initializeVeteranState(j,&s)}
  if j.Version>=SelectiveVersion{initializeSelectiveStimuli(j,&s)}
 	return s,nil
 }
@@ -254,6 +287,7 @@ func actorContext(j Journal,s State,id string) Context {
 	c:=Context{OwnCanon:canonFor(id),SchoolYear:1,PeerRelationship:"Todos os participantes são alunos do primeiro ano; nenhuma senioridade decorre da classe.",Version:j.Version,CanObserve:true,Thought:m.Thought,LastAction:m.LastAction,Round:s.Round+1,Minute:s.Minute,Location:m.Location,Locations:clone(locations),Goals:clone(m.Goals),Beliefs:clone(m.Beliefs),Relations:clone(m.Relations),Plan:clone(m.Plan),Memory:[]Event{},People:[]Person{},Present:[]Presence{}}
 	for _, p:=range j.Profiles {
 		if p.ID==id {c.Self=clone(p);continue}
+  if expelled(s,p.ID){continue}
 		person:=Person{p.ID,p.Name,p.Class}
 		c.People=append(c.People,person)
 		if s.Minds[p.ID].Location==m.Location{
@@ -269,6 +303,7 @@ func actorContext(j Journal,s State,id string) Context {
 	if j.Version>=WorldVersion{c.School=schoolView(j,s,id);c.Locations=worldLocations(id);c.Discoveries=clone(m.Discoveries)}
 	if j.Version>=PopulationVersion{projectPopulation(j,s,id,&c)}
  if j.Version>=CognitionVersion{projectIdentity(j,s,id,&c)}
+ if j.Version>=MotivationVersion{c.Opportunity=personalOpportunity(j,s,id)}
  // Recent lived memories plus older evidence currently referenced by cognition.
 	// Do not retrieve any event outside the actor's audience.
 	all:=visible(s,id)
@@ -295,7 +330,7 @@ func actorContext(j Journal,s State,id string) Context {
 	for _, e:=range all {
 		if (j.Version>=WorldVersion&&has([]string{"resource","exam","meeting","task","conversation_end","revelation","body_alert","plan_end","social"},e.Kind))||j.Version==LegacyVersion||e.Kind=="announcement"||e.Kind=="claim"||e.Kind=="move"||e.Kind=="departure"||e.Kind=="arrival"||e.Kind=="obstacle"||e.Kind=="observation"||keep[e.ID]{recent=append(recent,e)}
 	}
-	if j.Version>=CognitionVersion{c.Memory=retrieveMemory(j,s,id,recent,keep)}else{for i,e:=range recent {if i>=len(recent)-20 || keep[e.ID] || (j.Version<WorldVersion&&e.Kind=="announcement") {c.Memory=append(c.Memory,clone(e))}}}
+	if j.Version>=CognitionVersion{c.Memory=retrieveMemory(j,s,id,recent,keep);if j.Version>=ObservationVersion{for i:=range c.Memory{if c.Memory[i].Kind=="observation"{c.Memory[i].Audience=[]string{id}}}}}else{for i,e:=range recent {if i>=len(recent)-20 || keep[e.ID] || (j.Version<WorldVersion&&e.Kind=="announcement") {c.Memory=append(c.Memory,clone(e))}}}
 	return c
 }
 func evidence(c Context,id string) (Event,bool) {
@@ -306,7 +341,7 @@ func evidence(c Context,id string) (Event,bool) {
 func validateDecision(c Context,d Decision) error {
 	if (d.Source!=""&&!validText(d.Source,300)) || (d.Note!=""&&!validText(d.Note,500)) || (d.Reason!=""&&!validText(d.Reason,300)) || len(d.Beliefs)>3 {return errors.New("invalid intention or belief count")}
 	if len(d.Ignored)>8 {return errors.New("invalid ignored field count")}
-	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","discovery","campo extra"},key){return errors.New("invalid ignored field")}}
+	for _, key:=range d.Ignored{if !has([]string{"reason","text","beliefs","goal","relation","plan","discovery","assessment","campo extra"},key){return errors.New("invalid ignored field")}}
 	if d.WaitMinutes!=0&&(c.Version<ScheduledVersion||d.Action!="wait"||d.WaitMinutes<1||d.WaitMinutes>60){return errors.New("invalid wait duration")}
 	worldAction:=c.Version>=WorldVersion&&isWorldAction(d.Action)
 	if d.Action!="wait" && d.Action!="observe" && d.Action!="move" && d.Action!="talk"&&!worldAction {return errors.New("unsupported action")}
@@ -349,6 +384,7 @@ func validateDecision(c Context,d Decision) error {
   if c.Version>=ConversationVersion&&previous!=nil&&strings.Join(previous.Steps,"\x00")!=strings.Join(d.Plan.Steps,"\x00")&&!validText(d.Plan.ProgressNote,240){return errors.New("explique a mudança ou conclusão do plano")}
 		for _, step:=range d.Plan.Steps {if !validText(step,180){return errors.New("invalid plan step")}}
 	}
+	if d.Assessment!=nil{if c.Version<SocialVersion{return errors.New("social assessment requires v25")};if err:=validateAssessment(c,*d.Assessment);err!=nil{return err}}
 	if d.Relation!=nil {
 		r:=d.Relation;e,ok:=evidence(c,r.Evidence)
 		if !ok||r.Person==c.Self.ID||r.Delta < -1||r.Delta>1||r.Delta==0||
@@ -487,6 +523,7 @@ func Digest(j Journal) string {
 func applyCognition(j Journal,out *State,actor string,m Mind,d Decision)Mind {
 		if len(d.Ignored)>0{appendEvent(out,Event{Kind:"ignored_cognition",Actor:actor,Text:strings.Join(d.Ignored,", "),Audience:[]string{}})}
 		oldMind:=clone(m)
+  if j.Version>=SocialVersion&&d.Assessment!=nil{applyAssessment(out,actor,&m,*d.Assessment)}
 		if j.Version>=WorldVersion&&d.Discovery!=nil{
 			found:=false;for _,old:=range m.Discoveries{if old.Evidence==d.Discovery.Evidence&&old.Text==d.Discovery.Text{found=true}}
 			if !found{m.Discoveries=append(m.Discoveries,*d.Discovery);if len(m.Discoveries)>24{m.Discoveries=m.Discoveries[len(m.Discoveries)-24:]};appendEvent(out,Event{Kind:"discovery",Actor:actor,Text:d.Discovery.Text,Evidence:d.Discovery.Evidence,Audience:[]string{actor}})}

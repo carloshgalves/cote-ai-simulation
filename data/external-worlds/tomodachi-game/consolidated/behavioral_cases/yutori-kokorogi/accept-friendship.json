@@ -1,0 +1,35 @@
+{
+  "id": "tg.case.yutori-kokorogi.accept-friendship",
+  "actor_id": "actor.yutori-kokorogi",
+  "primary_actor_id": "actor.yutori-kokorogi",
+  "title": "accept friendship",
+  "context": "PRE_GAME; secondary-source account",
+  "observed_actions": "Receives support from classmates after bullying and expresses closeness to Yuuichi.",
+  "observed_result": "Establishes an apparently trusting relationship.",
+  "epistemic_limits": "Public presentation does not expose hidden motives.",
+  "source": {
+    "work_id": "tg.secondary.2026-11-25",
+    "url": "https://tomodachi-game.fandom.com/wiki/Chapter_2",
+    "locator": "PRE_GAME",
+    "source_status": "SECONDARY_OPERATOR_ADMITTED",
+    "verification": "UNVERIFIED_SECONDARY"
+  },
+  "other_actors": [],
+  "capabilities_supported": [
+    "social",
+    "emotion"
+  ],
+  "information_available": "Only own observations and explicitly acquired information; no canonical event history after divergence.",
+  "counterfactual_test": "Alter incentives, available clues and counterpart behavior. Public presentation does not expose hidden motives. Allow failure.",
+  "topics": [
+    "social",
+    "emotion"
+  ],
+  "evidence_refs": [
+    "tg.ev.yutori-kokorogi.accept-friendship"
+  ],
+  "case_kind": "BEHAVIORAL_DEMONSTRATION",
+  "epistemic_status": "OPERATOR_ADMITTED_SECONDARY",
+  "behavioral_policy": "DESCRIPTIVE_NOT_PRESCRIPTIVE",
+  "runtime_memory": false
+}
